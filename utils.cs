@@ -30,6 +30,7 @@ namespace MacroViewer
 
         private void btnClip_Click(object sender, EventArgs e)
         {
+            if (tbResult.Text == "") return;
             Clipboard.SetText(tbResult.Text);
         }
     }

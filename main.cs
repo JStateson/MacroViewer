@@ -187,6 +187,12 @@ namespace MacroViewer
                 ShowPage MyShowPage = new ShowPage(strTemp);
                 MyShowPage.Show();
             }
+            else
+            {
+                WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);
+                MyShowPage.Show();
+            }
+ 
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

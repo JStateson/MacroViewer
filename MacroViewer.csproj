@@ -109,6 +109,12 @@
     <Compile Include="utils.Designer.cs">
       <DependentUpon>utils.cs</DependentUpon>
     </Compile>
+    <Compile Include="WebBrowserPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebBrowserPage.Designer.cs">
+      <DependentUpon>WebBrowserPage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="help.resx">
       <DependentUpon>help.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="utils.resx">
       <DependentUpon>utils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebBrowserPage.resx">
+      <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

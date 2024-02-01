@@ -209,8 +209,9 @@ namespace MacroViewer
         private void utilsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             utils MyUtils = new utils();
-            MyUtils.ShowDialog();
-            MyUtils.Dispose();
+            MyUtils.Show();
+            //MyUtils.ShowDialog();
+            //MyUtils.Dispose();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

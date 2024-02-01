@@ -33,5 +33,20 @@ namespace MacroViewer
             if (tbResult.Text == "") return;
             Clipboard.SetText(tbResult.Text);
         }
+
+        private void btnClrHREF_Click(object sender, EventArgs e)
+        {
+            tbTEXT.Text = "";
+        }
+
+        private void btnClearURL_Click(object sender, EventArgs e)
+        {
+            tbURL.Text = "";
+        }
+
+        private void btnClrScratch_Click(object sender, EventArgs e)
+        {
+            tbScratch.Text = "";
+        }
     }
 }

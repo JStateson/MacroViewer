@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using Microsoft.Web.WebView2.Core;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using Microsoft.Web.WebView2.Core;
 /*
  * webbrowser did not work with some HP sites so I read this
  * https://stackoverflow.com/questions/790542/replacing-net-webbrowser-control-with-a-better-browser-like-chrome

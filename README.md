@@ -4,6 +4,6 @@
 
 Log in and access your macros page using chrome
 
-Expose the source code of the page and save it as an html page
+Expose the source code of the page and save it as an html file
 
-Run this app and open the page.
+Run this app and open the file.

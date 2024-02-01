@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace MacroViewer
 {
@@ -25,11 +26,33 @@ namespace MacroViewer
 
 
         OpenFileDialog ofd;
+        bool UseWebView = false;
+        private bool WebViewIsInstalled()
+        {
+            string regKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";
+            using (RegistryKey edgeKey = Registry.LocalMachine.OpenSubKey(regKey))
+            {
+                if (edgeKey != null)
+                {
+                    string[] productKeys = edgeKey.GetSubKeyNames();
+                    if (productKeys.Any())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
 
         public main()
         {
             InitializeComponent();
+            UseWebView = WebViewIsInstalled();
         }
+
+
 
 
         private static string GetDownloadsPath()
@@ -159,8 +182,11 @@ namespace MacroViewer
         private void btnGo_Click(object sender, EventArgs e)
         {
             string strTemp = "<!DOCTYPE html>\r\n<html>\r\n<head>" + tbBody.Text + "\r\n</body>\r\n</html>";
-            ShowPage MyShowPage = new ShowPage(strTemp);
-            MyShowPage.Show();
+            if (UseWebView)
+            {
+                ShowPage MyShowPage = new ShowPage(strTemp);
+                MyShowPage.Show();
+            }
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

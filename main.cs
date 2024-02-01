@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace MacroViewer
 {
@@ -30,11 +31,46 @@ namespace MacroViewer
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+
+        private static string GetDownloadsPath()
         {
+            if (Environment.OSVersion.Version.Major < 6) throw new NotSupportedException();
+            IntPtr pathPtr = IntPtr.Zero;
+            try
+            {
+                SHGetKnownFolderPath(ref FolderDownloads, 0, IntPtr.Zero, out pathPtr);
+                return Marshal.PtrToStringUni(pathPtr);
+            }
+            finally
+            {
+                Marshal.FreeCoTaskMem(pathPtr);
+            }
+        }
+
+
+        private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        private static extern int SHGetKnownFolderPath(ref Guid id, int flags, IntPtr token, out IntPtr path);
+
+        private string GetLastFolder()
+        {
+            string LastFolder = Properties.Settings.Default.LastFolder;
+            if (LastFolder == null || LastFolder == "")
+            {
+                LastFolder = GetDownloadsPath();
+                if(!Directory.Exists(LastFolder))
+                    LastFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+            return LastFolder;
+        }
+
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
             ofd = new OpenFileDialog();
             ofd.DefaultExt = "*.html";
-            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ofd.InitialDirectory = GetLastFolder();
         }
 
 
@@ -106,9 +142,13 @@ namespace MacroViewer
 
         private void ReadMacroHTML()
         {
-            int nLength, n;
+            int nLength;
+            string LastFolder = "";
             ofd.ShowDialog();
             string strFileName = ofd.FileName;
+            if (!File.Exists(strFileName)) return;
+            LastFolder = Path.GetDirectoryName(ofd.FileName);
+            Properties.Settings.Default.LastFolder = LastFolder;
             aPage = File.ReadAllText(strFileName);
             nLength = aPage.Length;
             ParsePage();
@@ -119,15 +159,14 @@ namespace MacroViewer
         private void btnGo_Click(object sender, EventArgs e)
         {
             string strTemp = "<!DOCTYPE html>\r\n<html>\r\n<head>" + tbBody.Text + "\r\n</body>\r\n</html>";
-            webBrowser1.DocumentText = strTemp;
+            ShowPage MyShowPage = new ShowPage(strTemp);
+            MyShowPage.Show();
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int i = e.RowIndex;
             tbBody.Text = Body[i];
-            string strTemp = "<!DOCTYPE html>\r\n<html>\r\n<head>" + tbBody.Text + "\r\n</body>\r\n</html>";
-            webBrowser1.DocumentText = strTemp;
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,6 +186,21 @@ namespace MacroViewer
             help MyHelp = new help();
             MyHelp.ShowDialog();
             MyHelp.Dispose();
+        }
+
+        private void btnClearEM_Click(object sender, EventArgs e)
+        {
+            tbBody.Clear();
+        }
+
+        private void btnCopyTo_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbBody.Text);
+        }
+
+        private void btnCopyFrom_Click(object sender, EventArgs e)
+        {
+            tbBody.Text = Clipboard.GetText();
         }
     }
 }

@@ -117,34 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>MACRO HELP
-
-1 - You must save the macros page so it can be access by this app. 
-      To do this you log into your HP account and select the macros page.
-      Right click anywhere on the page and select "source".  I assume chrome.
-      Then click the save feature and save as HTML in the download folder.
-2- Click the FILE menu and open the file.  The macro table will be filled in
-3 - Double click on any row to select the body of the macro
-     The text can be editied.  Note that a new line is "&lt;br&gt;"
-4 - Click the "GO" button to view what the macro will show.
-
-UTIL HELP
-
-1 - This dialog box make it easy to configure an instructional link. 
-      You have a url that points to a site with useful informaton.
-      You have some instructions and you want the user to click on a phrase
-2 -  Enter the url in the url box
-3 - Enter the phrase in the phrase box. 
-4 - click "GO" and the url and phrase will be combined to form the correect HTML
-
-For example
-
-The phrase: "Product ID"
-The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
-=== The result is ===
-&lt;a href="https://support.hp.com/us-en/document/ish_2039298-1862169-16" target="_blank"&gt;Product ID&lt;/a&gt; 
-
-This result can be copied and pasted into your macro page.</value>
-  </data>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>179, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>341, 17</value>
+  </metadata>
 </root>

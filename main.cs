@@ -108,6 +108,7 @@ namespace MacroViewer
                 strFind = "<span class=\"html-attribute-value\">profilemacro_" + (i + 1).ToString() + "</span>\"&gt;</span>";
                 j = aPage.Substring(MacBody[i]).IndexOf(strFind);
                 if (j < 0) return false;
+                if (MacBody[i] == 0) continue;  // empty body
                 n = MacBody[i] + j + strFind.Length;
                 k = aPage.Substring(n).IndexOf(strEnd);
                 if (k < 0) return false;
@@ -120,6 +121,7 @@ namespace MacroViewer
         private bool FindNames()
         {
             int j, k, n;
+            string strName = "";
             string strFind = "<span class=\"html-attribute-name\">value</span>=\"<span class=\"html-attribute-value\">";
             lbName.Rows.Clear();
             for (int i = 0; i < NumMacros; i++)
@@ -127,10 +129,18 @@ namespace MacroViewer
                 j = aPage.Substring(StartMac[i]).IndexOf(strFind);
                 if (j < 0) return false;
                 n = StartMac[i] + j + strFind.Length;
-                k = aPage.Substring(n).IndexOf("</span>");
-                if(k < 0) return false;
-                string strName = aPage.Substring(n, k);
-                MacBody[i] = n+k+1;
+                if (n > StopMac[i]) // must be empty
+                {
+                    strName = "";
+                    MacBody[i] = 0;
+                }
+                else
+                {
+                    k = aPage.Substring(n).IndexOf("</span>");
+                    if (k < 0) return false;
+                    strName = aPage.Substring(n, k);
+                    MacBody[i] = n + k + 1;
+                }
                 lbName.Rows.Add(i+1,strName);
             }
             return true;

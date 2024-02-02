@@ -145,6 +145,8 @@ The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
 === The result is ===
 &lt;a href="https://support.hp.com/us-en/document/ish_2039298-1862169-16" target="_blank"&gt;Product ID&lt;/a&gt; 
 
-This result can be copied and pasted into your macro page.</value>
+This result can be copied to the clipboard.  You can then paste it back into the macro edit
+page. Once in the main edit box you can add more instructions and click the "Show as page"
+to see if it works in a web page.</value>
   </data>
 </root>

@@ -26,30 +26,10 @@ namespace MacroViewer
 
 
         OpenFileDialog ofd;
-        bool UseWebView = false;
-        private bool WebViewIsInstalled()
-        {
-            string regKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";
-            using (RegistryKey edgeKey = Registry.LocalMachine.OpenSubKey(regKey))
-            {
-                if (edgeKey != null)
-                {
-                    string[] productKeys = edgeKey.GetSubKeyNames();
-                    if (productKeys.Any())
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
 
         public main()
         {
             InitializeComponent();
-            UseWebView = WebViewIsInstalled();
         }
 
 
@@ -191,18 +171,11 @@ namespace MacroViewer
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            string strTemp = "<!DOCTYPE html>\r\n<html>\r\n<head>" + tbBody.Text + "\r\n</body>\r\n</html>";
-            if (UseWebView)
-            {
-                ShowPage MyShowPage = new ShowPage(strTemp);
-                MyShowPage.Show();
-            }
-            else
-            {
-                WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);
-                MyShowPage.Show();
-            }
- 
+            string strTemp = tbBody.Text;
+            if (strTemp == "") return;
+            CShowBrowser MyBrowser = new CShowBrowser();
+            MyBrowser.Init();
+            MyBrowser.ShowInBrowser(strTemp);
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

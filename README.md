@@ -6,4 +6,7 @@ Log in and access your macros page using chrome
 
 Expose the source code of the page and save it as an html file
 
-Run this app and open the file.
+Run this app and open the file.  There is a demo macro file.
+
+There is a demo video at http://stateson.net/images/Demo-HP-Macros.mp4
+

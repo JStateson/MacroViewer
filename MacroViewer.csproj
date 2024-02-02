@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="global.cs" />
     <Compile Include="help.cs">
       <SubType>Form</SubType>
     </Compile>

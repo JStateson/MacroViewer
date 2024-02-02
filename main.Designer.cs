@@ -45,6 +45,7 @@
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -90,18 +91,20 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(31, 37);
+            this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnGo.Location = new System.Drawing.Point(57, 62);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(48, 23);
+            this.btnGo.Size = new System.Drawing.Size(121, 31);
             this.btnGo.TabIndex = 7;
-            this.btnGo.Text = "GO";
-            this.toolTip1.SetToolTip(this.btnGo, "Pops up form in web  broswer");
+            this.btnGo.Text = "Show as page";
+            this.toolTip1.SetToolTip(this.btnGo, "Pops up form using Edge or Chrome");
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // tbBody
             // 
-            this.tbBody.Location = new System.Drawing.Point(211, 37);
+            this.tbBody.Location = new System.Drawing.Point(210, 62);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -143,34 +146,37 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnCopyFrom);
             this.groupBox1.Controls.Add(this.btnCopyTo);
             this.groupBox1.Controls.Add(this.btnClearEM);
             this.groupBox1.Controls.Add(this.tbBody);
             this.groupBox1.Controls.Add(this.btnGo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(477, 61);
+            this.groupBox1.Location = new System.Drawing.Point(477, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(633, 478);
+            this.groupBox1.Size = new System.Drawing.Size(633, 496);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Macro";
             // 
             // btnCopyFrom
             // 
-            this.btnCopyFrom.Location = new System.Drawing.Point(21, 357);
+            this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyFrom.Location = new System.Drawing.Point(17, 358);
             this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(146, 23);
+            this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
             this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Paste From clipboard";
+            this.btnCopyFrom.Text = "Copy from clipboard";
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
             // btnCopyTo
             // 
-            this.btnCopyTo.Location = new System.Drawing.Point(21, 288);
+            this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyTo.Location = new System.Drawing.Point(32, 288);
             this.btnCopyTo.Name = "btnCopyTo";
-            this.btnCopyTo.Size = new System.Drawing.Size(146, 23);
+            this.btnCopyTo.Size = new System.Drawing.Size(146, 29);
             this.btnCopyTo.TabIndex = 9;
             this.btnCopyTo.Text = "Copy to clipboard";
             this.btnCopyTo.UseVisualStyleBackColor = true;
@@ -178,9 +184,10 @@
             // 
             // btnClearEM
             // 
-            this.btnClearEM.Location = new System.Drawing.Point(21, 121);
+            this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEM.Location = new System.Drawing.Point(92, 224);
             this.btnClearEM.Name = "btnClearEM";
-            this.btnClearEM.Size = new System.Drawing.Size(75, 23);
+            this.btnClearEM.Size = new System.Drawing.Size(75, 28);
             this.btnClearEM.TabIndex = 8;
             this.btnClearEM.Text = "Clear";
             this.btnClearEM.UseVisualStyleBackColor = true;
@@ -195,7 +202,19 @@
             this.groupBox2.Size = new System.Drawing.Size(418, 478);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Double click any row";
+            this.groupBox2.Text = "Double click any row to transfer to editor";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Info;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(207, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(364, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "You may enter HTML below and click to see it in a web page";
             // 
             // main
             // 
@@ -239,6 +258,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
+        private System.Windows.Forms.Label label1;
     }
 }
 

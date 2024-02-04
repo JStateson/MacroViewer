@@ -10,6 +10,6 @@ Run this app and open the file.  There is a demo macro file.
 
 There is a demo video at http://stateson.net/images/Demo-HP-Macros.mp4
 
-A sample macro file can be downloaded 'macro-src'
+A sample macro file can be downloaded and un-zipped 'macro-src'
 
 A zip with binaries can be downloaded if you do not wish to build the app

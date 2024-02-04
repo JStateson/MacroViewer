@@ -167,9 +167,7 @@ namespace MacroViewer
             ParsePage();
         }
 
-
-
-        private void btnGo_Click(object sender, EventArgs e)
+        private void RunBrowser()
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
@@ -178,10 +176,17 @@ namespace MacroViewer
             MyBrowser.ShowInBrowser(strTemp);
         }
 
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+            RunBrowser();
+        }
+
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int i = e.RowIndex;
             tbBody.Text = Body[i];
+            if (cbLaunchPage.Checked)
+                RunBrowser();
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)

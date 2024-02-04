@@ -124,6 +124,14 @@ Then Click "GO" to create the proper url.
 Try the "Run Example" to see what is doen,
 then click the "Show in browser"</value>
   </data>
+  <data name="tbScratch.Text" xml:space="preserve">
+    <value>Use this area for scratch work.  Do not press return: Use &lt;br&gt;, for a new line.  
+use &lt;img src="https://example.com/xyzzy.jpg" border="1"&gt; for images
+
+When in the HP support community you can just select the words you want 
+linked and then press CTRL-V to paste the url and the phrase will be assembled
+correctly.</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

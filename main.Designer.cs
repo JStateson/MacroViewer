@@ -40,13 +40,14 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLaunchPage = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -70,7 +71,7 @@
             this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Inx,
             this.MacName});
-            this.lbName.Location = new System.Drawing.Point(16, 58);
+            this.lbName.Location = new System.Drawing.Point(16, 76);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(360, 388);
@@ -146,6 +147,13 @@
             this.utilsToolStripMenuItem.Text = "Utils";
             this.utilsToolStripMenuItem.Click += new System.EventHandler(this.utilsToolStripMenuItem_Click);
             // 
+            // testSignatureToolStripMenuItem
+            // 
+            this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
+            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.testSignatureToolStripMenuItem.Text = "Test Signature";
+            this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
@@ -209,21 +217,27 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbLaunchPage);
             this.groupBox2.Controls.Add(this.lbName);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 61);
+            this.groupBox2.Location = new System.Drawing.Point(12, 43);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(418, 478);
+            this.groupBox2.Size = new System.Drawing.Size(418, 496);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Double click any row to transfer to editor";
             // 
-            // testSignatureToolStripMenuItem
+            // cbLaunchPage
             // 
-            this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
-            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.testSignatureToolStripMenuItem.Text = "Test Signature";
-            this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
+            this.cbLaunchPage.AutoSize = true;
+            this.cbLaunchPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbLaunchPage.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbLaunchPage.Location = new System.Drawing.Point(63, 28);
+            this.cbLaunchPage.Name = "cbLaunchPage";
+            this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
+            this.cbLaunchPage.TabIndex = 5;
+            this.cbLaunchPage.Text = "Launch Page";
+            this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
             // main
             // 
@@ -245,6 +259,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +284,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem testSignatureToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbLaunchPage;
     }
 }
 

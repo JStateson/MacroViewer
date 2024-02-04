@@ -35,6 +35,7 @@
             this.btnClrScratch = new System.Windows.Forms.Button();
             this.tbScratch = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnShowBrowser = new System.Windows.Forms.Button();
             this.tbResult = new System.Windows.Forms.TextBox();
             this.btnClip = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -45,7 +46,6 @@
             this.btnClrHREF = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.showExampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnShowBrowser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -86,7 +86,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(34, 38);
+            this.label1.Location = new System.Drawing.Point(26, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(214, 65);
             this.label1.TabIndex = 9;
@@ -111,8 +111,7 @@
             this.tbScratch.Name = "tbScratch";
             this.tbScratch.Size = new System.Drawing.Size(634, 168);
             this.tbScratch.TabIndex = 7;
-            this.tbScratch.Text = "Use this area for scratch work.  Do not press return: Use <br>, for a new line.  " +
-    "\r\nuse <img src=\"https://example.com/xyzzy.jpg\" border=\"1\"> for images";
+            this.tbScratch.Text = resources.GetString("tbScratch.Text");
             // 
             // groupBox4
             // 
@@ -125,6 +124,18 @@
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Result";
+            // 
+            // btnShowBrowser
+            // 
+            this.btnShowBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowBrowser.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowBrowser.Location = new System.Drawing.Point(335, 47);
+            this.btnShowBrowser.Name = "btnShowBrowser";
+            this.btnShowBrowser.Size = new System.Drawing.Size(135, 24);
+            this.btnShowBrowser.TabIndex = 3;
+            this.btnShowBrowser.Text = "Show in browser";
+            this.btnShowBrowser.UseVisualStyleBackColor = true;
+            this.btnShowBrowser.Click += new System.EventHandler(this.btnShowBrowser_Click);
             // 
             // tbResult
             // 
@@ -222,18 +233,6 @@
             this.showExampleToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.showExampleToolStripMenuItem.Text = "Run Example";
             this.showExampleToolStripMenuItem.Click += new System.EventHandler(this.showExampleToolStripMenuItem_Click);
-            // 
-            // btnShowBrowser
-            // 
-            this.btnShowBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowBrowser.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowBrowser.Location = new System.Drawing.Point(335, 47);
-            this.btnShowBrowser.Name = "btnShowBrowser";
-            this.btnShowBrowser.Size = new System.Drawing.Size(135, 24);
-            this.btnShowBrowser.TabIndex = 3;
-            this.btnShowBrowser.Text = "Show in browser";
-            this.btnShowBrowser.UseVisualStyleBackColor = true;
-            this.btnShowBrowser.Click += new System.EventHandler(this.btnShowBrowser_Click);
             // 
             // utils
             // 

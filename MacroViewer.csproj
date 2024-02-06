@@ -107,6 +107,12 @@
     <Compile Include="ShowPage.Designer.cs">
       <DependentUpon>ShowPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="CSignature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSignature.Designer.cs">
+      <DependentUpon>CSignature.cs</DependentUpon>
+    </Compile>
     <Compile Include="utils.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     <Compile Include="WebBrowserPage.Designer.cs">
       <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CSignature.resx">
+      <DependentUpon>CSignature.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="help.resx">
       <DependentUpon>help.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,4 +183,9 @@
     <Error Condition="!Exists('packages\cef.redist.x64.120.2.7\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.120.2.7\build\cef.redist.x64.props'))" />
     <Error Condition="!Exists('packages\cef.redist.x86.120.2.7\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.120.2.7\build\cef.redist.x86.props'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == "Release" (
+call "$(SolutionDir)MakeBin.bat" $(SolutionDir) $(TargetDir)  $(TargetName) $(TargetPath)
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
@@ -74,6 +75,7 @@ namespace MacroViewer
             ofd = new OpenFileDialog();
             ofd.DefaultExt = "*.html";
             ofd.InitialDirectory = GetLastFolder();
+     
         }
 
 
@@ -229,8 +231,9 @@ namespace MacroViewer
         // can be tiny thumb small large 
         private void testSignatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string strSig = "<hr /><blockquote><div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a retired Principal Analyst, and a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div></blockquote><hr />";
-            tbBody.Text = strSig;
+            CSignature MySigTest = new CSignature();
+            MySigTest.ShowDialog();
+            MySigTest.Dispose();
         }
     }
 }

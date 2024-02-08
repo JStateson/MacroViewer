@@ -37,6 +37,7 @@ namespace MacroViewer
 
         private void ShowSig(int iRow)
         {
+            if (iRow < 0) return;
             CurrentRowSelected = iRow;
             tbBody.Text = sSigListBody[CurrentRowSelected].ToString();
         }
@@ -159,6 +160,12 @@ namespace MacroViewer
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadXML();
+        }
+
+        private void btnToNote_Click(object sender, EventArgs e)
+        {
+            CSendNotepad SendNotepad = new CSendNotepad();
+            SendNotepad.PasteToNotepad(tbBody.Text);
         }
     }
 }

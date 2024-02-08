@@ -13,6 +13,11 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
+using System.Xml.Linq;
 
 namespace MacroViewer
 {
@@ -24,7 +29,6 @@ namespace MacroViewer
         int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
         string[] Body = new string[NumMacros];
-
 
         OpenFileDialog ofd;
 
@@ -62,7 +66,7 @@ namespace MacroViewer
             if (LastFolder == null || LastFolder == "")
             {
                 LastFolder = GetDownloadsPath();
-                if(!Directory.Exists(LastFolder))
+                if (!Directory.Exists(LastFolder))
                     LastFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
             return LastFolder;
@@ -75,7 +79,7 @@ namespace MacroViewer
             ofd = new OpenFileDialog();
             ofd.DefaultExt = "*.html";
             ofd.InitialDirectory = GetLastFolder();
-     
+
         }
 
 
@@ -95,7 +99,7 @@ namespace MacroViewer
                 k = aPage.Substring(n).IndexOf(strEnd);
                 if (k < 0) return false;
                 string strBody = aPage.Substring(n, k).Replace("lt;", "<");
-                Body[i] = strBody.Replace("&amp;", "").Replace("gt;",">");
+                Body[i] = strBody.Replace("&amp;", "").Replace("gt;", ">");
             }
             return true;
         }
@@ -123,7 +127,7 @@ namespace MacroViewer
                     strName = aPage.Substring(n, k);
                     MacBody[i] = n + k + 1;
                 }
-                lbName.Rows.Add(i+1,strName);
+                lbName.Rows.Add(i + 1, strName);
             }
             return true;
         }
@@ -133,23 +137,23 @@ namespace MacroViewer
         private bool FindMacros()
         {
             int j, k;
-            for(int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < NumMacros; i++)
             {
-                string strFind = "Macro " + (i+1).ToString();
+                string strFind = "Macro " + (i + 1).ToString();
                 j = aPage.IndexOf(strFind);
                 if (j < 0) return false;
                 StartMac[i] = j;
                 j += strFind.Length;
                 k = aPage.Substring(j).IndexOf(strFind);
-                if(k < 0) return false;
-                StopMac[i] = k+j;
-            }   
+                if (k < 0) return false;
+                StopMac[i] = k + j;
+            }
             return true;
         }
 
         private void ParsePage()
         {
-            
+
             FindMacros();
             FindNames();
             FindBody();
@@ -234,6 +238,19 @@ namespace MacroViewer
             CSignature MySigTest = new CSignature();
             MySigTest.ShowDialog();
             MySigTest.Dispose();
+        }
+
+
+        const uint WM_PASTE = 0x302;
+        const int WM_SETTEXT = 0x000C;
+
+
+
+
+        private void btnToNotepad_Click(object sender, EventArgs e)
+        {
+            CSendNotepad SendNotepad = new CSendNotepad();
+            SendNotepad.PasteToNotepad(tbBody.Text);
         }
     }
 }

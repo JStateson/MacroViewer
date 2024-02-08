@@ -48,6 +48,7 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
+            this.btnToNotepad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -156,6 +157,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnToNotepad);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnCopyFrom);
             this.groupBox1.Controls.Add(this.btnCopyTo);
@@ -185,7 +187,7 @@
             // btnCopyFrom
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(17, 358);
+            this.btnCopyFrom.Location = new System.Drawing.Point(17, 294);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
             this.btnCopyFrom.TabIndex = 10;
@@ -196,9 +198,9 @@
             // btnCopyTo
             // 
             this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(32, 288);
+            this.btnCopyTo.Location = new System.Drawing.Point(17, 234);
             this.btnCopyTo.Name = "btnCopyTo";
-            this.btnCopyTo.Size = new System.Drawing.Size(146, 29);
+            this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
             this.btnCopyTo.Text = "Copy to clipboard";
             this.btnCopyTo.UseVisualStyleBackColor = true;
@@ -207,7 +209,7 @@
             // btnClearEM
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearEM.Location = new System.Drawing.Point(92, 224);
+            this.btnClearEM.Location = new System.Drawing.Point(103, 170);
             this.btnClearEM.Name = "btnClearEM";
             this.btnClearEM.Size = new System.Drawing.Size(75, 28);
             this.btnClearEM.TabIndex = 8;
@@ -238,6 +240,17 @@
             this.cbLaunchPage.TabIndex = 5;
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
+            // 
+            // btnToNotepad
+            // 
+            this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToNotepad.Location = new System.Drawing.Point(17, 387);
+            this.btnToNotepad.Name = "btnToNotepad";
+            this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
+            this.btnToNotepad.TabIndex = 12;
+            this.btnToNotepad.Text = "Copy to notepad";
+            this.btnToNotepad.UseVisualStyleBackColor = true;
+            this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
             // 
             // main
             // 
@@ -285,6 +298,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem testSignatureToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbLaunchPage;
+        private System.Windows.Forms.Button btnToNotepad;
     }
 }
 

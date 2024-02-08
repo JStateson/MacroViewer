@@ -184,8 +184,6 @@
     <Error Condition="!Exists('packages\cef.redist.x86.120.2.7\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.120.2.7\build\cef.redist.x86.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == "Release" (
-call "$(SolutionDir)MakeBin.bat" $(SolutionDir) $(TargetDir)  $(TargetName) $(TargetPath)
-)</PostBuildEvent>
+    <PostBuildEvent>if  "$(ConfigurationName)"=="Release"  call "$(SolutionDir)MakeBin.cmd" $(SolutionDir) $(TargetDir)  $(TargetName) $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
 </Project>

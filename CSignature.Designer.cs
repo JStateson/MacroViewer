@@ -39,11 +39,12 @@
             this.blnAdd = new System.Windows.Forms.Button();
             this.dgvSigList = new System.Windows.Forms.DataGridView();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnToNote = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnToNote = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -146,6 +147,7 @@
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.btnClear);
             this.gbEditSig.Controls.Add(this.btnToNote);
             this.gbEditSig.Controls.Add(this.label2);
             this.gbEditSig.Controls.Add(this.btnShowBrowser);
@@ -158,6 +160,19 @@
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // btnToNote
+            // 
+            this.btnToNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToNote.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnToNote.Location = new System.Drawing.Point(406, 61);
+            this.btnToNote.Name = "btnToNote";
+            this.btnToNote.Size = new System.Drawing.Size(141, 23);
+            this.btnToNote.TabIndex = 16;
+            this.btnToNote.Text = "Copy to notepad";
+            this.toolTip1.SetToolTip(this.btnToNote, "Copy the signatur to notepad");
+            this.btnToNote.UseVisualStyleBackColor = true;
+            this.btnToNote.Click += new System.EventHandler(this.btnToNote_Click);
             // 
             // label2
             // 
@@ -187,7 +202,7 @@
             // 
             this.bltnSaveBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bltnSaveBack.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.bltnSaveBack.Location = new System.Drawing.Point(43, 41);
+            this.bltnSaveBack.Location = new System.Drawing.Point(43, 21);
             this.bltnSaveBack.Name = "bltnSaveBack";
             this.bltnSaveBack.Size = new System.Drawing.Size(113, 23);
             this.bltnSaveBack.TabIndex = 2;
@@ -196,18 +211,18 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // btnToNote
+            // btnClear
             // 
-            this.btnToNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNote.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnToNote.Location = new System.Drawing.Point(406, 61);
-            this.btnToNote.Name = "btnToNote";
-            this.btnToNote.Size = new System.Drawing.Size(141, 23);
-            this.btnToNote.TabIndex = 16;
-            this.btnToNote.Text = "Copy to notepad";
-            this.toolTip1.SetToolTip(this.btnToNote, "Copy the signatur to notepad");
-            this.btnToNote.UseVisualStyleBackColor = true;
-            this.btnToNote.Click += new System.EventHandler(this.btnToNote_Click);
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClear.Location = new System.Drawing.Point(43, 61);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(113, 23);
+            this.btnClear.TabIndex = 17;
+            this.btnClear.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnClear, "Copy the signature back to the list table");
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // CSignature
             // 
@@ -249,5 +264,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnToNote;
+        private System.Windows.Forms.Button btnClear;
     }
 }

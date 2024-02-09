@@ -167,5 +167,10 @@ namespace MacroViewer
             CSendNotepad SendNotepad = new CSendNotepad();
             SendNotepad.PasteToNotepad(tbBody.Text);
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            tbBody.Text = "";
+        }
     }
 }

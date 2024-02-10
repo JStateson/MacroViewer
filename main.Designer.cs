@@ -42,13 +42,16 @@
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnToNotepad = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.btnToNotepad = new System.Windows.Forms.Button();
+            this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFromXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -129,10 +132,13 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readHTMLToolStripMenuItem,
+            this.loadFromXMLToolStripMenuItem,
+            this.saveToXMLToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -171,6 +177,17 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Macro";
+            // 
+            // btnToNotepad
+            // 
+            this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToNotepad.Location = new System.Drawing.Point(17, 387);
+            this.btnToNotepad.Name = "btnToNotepad";
+            this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
+            this.btnToNotepad.TabIndex = 12;
+            this.btnToNotepad.Text = "Copy to notepad";
+            this.btnToNotepad.UseVisualStyleBackColor = true;
+            this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
             // 
             // label1
             // 
@@ -241,16 +258,26 @@
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
-            // btnToNotepad
+            // readHTMLToolStripMenuItem
             // 
-            this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNotepad.Location = new System.Drawing.Point(17, 387);
-            this.btnToNotepad.Name = "btnToNotepad";
-            this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
-            this.btnToNotepad.TabIndex = 12;
-            this.btnToNotepad.Text = "Copy to notepad";
-            this.btnToNotepad.UseVisualStyleBackColor = true;
-            this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
+            this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readHTMLToolStripMenuItem.Text = "Read HTML";
+            this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
+            // 
+            // loadFromXMLToolStripMenuItem
+            // 
+            this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFromXMLToolStripMenuItem.Text = "Load from text";
+            this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
+            // 
+            // saveToXMLToolStripMenuItem
+            // 
+            this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToXMLToolStripMenuItem.Text = "Save to text";
+            this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -299,6 +326,9 @@
         private System.Windows.Forms.ToolStripMenuItem testSignatureToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbLaunchPage;
         private System.Windows.Forms.Button btnToNotepad;
+        private System.Windows.Forms.ToolStripMenuItem readHTMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadFromXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToXMLToolStripMenuItem;
     }
 }
 

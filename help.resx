@@ -148,6 +148,10 @@ The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
 This result can be copied to the clipboard.  You can then paste it back into the macro edit
 page. Once in the main edit box you can add more instructions and click the "Show as page"
 to see if it works in a web page.  Note that this is not needed when in the community as you
-can just paste the url into the selected text.</value>
+can just paste the url into the selected text.
+
+The menu items Load from and Save to read and write from a macro.txt file.  That file and the 
+signatuers.xml file are located in the same folder as the executable program.  Macros.txt
+allows you to create a second set of 30 macros or make backups.</value>
   </data>
 </root>

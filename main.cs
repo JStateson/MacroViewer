@@ -18,6 +18,9 @@ using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using System.Xml.Linq;
+using System.Xml;
+using static MacroViewer.CSignature;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MacroViewer
 {
@@ -29,12 +32,15 @@ namespace MacroViewer
         int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
         string[] Body = new string[NumMacros];
-
+        string TXTmacs;
+        string TXTmacName;
         OpenFileDialog ofd;
 
         public main()
         {
             InitializeComponent();
+            TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            TXTmacName = TXTmacs + "\\macros.txt";
         }
 
 
@@ -99,7 +105,8 @@ namespace MacroViewer
                 k = aPage.Substring(n).IndexOf(strEnd);
                 if (k < 0) return false;
                 string strBody = aPage.Substring(n, k).Replace("lt;", "<");
-                Body[i] = strBody.Replace("&amp;", "").Replace("gt;", ">");
+                strBody = strBody.Replace("&nbsp;", " ");
+                Body[i] = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
             }
             return true;
         }
@@ -195,11 +202,6 @@ namespace MacroViewer
                 RunBrowser();
         }
 
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReadMacroHTML();
-        }
-
         private void utilsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             utils MyUtils = new utils();
@@ -251,6 +253,59 @@ namespace MacroViewer
         {
             CSendNotepad SendNotepad = new CSendNotepad();
             SendNotepad.PasteToNotepad(tbBody.Text);
+        }
+
+        private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadMacroHTML();
+        }
+
+
+
+        private void LoadFromTXT()
+        {
+            lbName.Rows.Clear();
+            if (File.Exists(TXTmacName))
+            {
+                StreamReader sr = new StreamReader(TXTmacName);
+                int i = 0;
+                string line = sr.ReadLine();
+                string sBody;
+                while(line != null)
+                {
+                    lbName.Rows.Add(i + 1, line);
+                    sBody = sr.ReadLine();
+                    Body[i] = sBody;
+                    i++;
+                    line = sr.ReadLine();
+                }
+                sr.Close();
+            }
+        }
+
+        private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromTXT();
+        }
+
+        private void SaveAsTXT()
+        {
+            int i = 0;
+            string strOut = "";
+            foreach (DataGridViewRow row in lbName.Rows)
+            {
+                string strName = row.Cells[1].Value.ToString();
+                if (strName == "") continue;
+                string strBody = Body[i];
+                strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
+                i++;
+            }
+            File.WriteAllText(TXTmacName, strOut);
+        }
+
+        private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveAsTXT();
         }
     }
 }

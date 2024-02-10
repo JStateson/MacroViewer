@@ -12,4 +12,4 @@ There is a demo video at http://stateson.net/images/Demo-HP-Macros.mp4
 
 A tar with latest binaries can be downloaded if you do not wish to build the app
 
-The tar also has the sample macro html and a sample signature xml
+The tar also has the sample macro html, txt and a sample signature xml

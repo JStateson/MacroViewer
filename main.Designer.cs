@@ -38,6 +38,9 @@
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFromXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,13 +52,19 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFromXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbSupp = new System.Windows.Forms.GroupBox();
+            this.btnAddM = new System.Windows.Forms.Button();
+            this.btnDelM = new System.Windows.Forms.Button();
+            this.btnSaveM = new System.Windows.Forms.Button();
+            this.tbMacName = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbNumMac = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gbSupp.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -99,7 +108,7 @@
             // 
             this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnGo.Location = new System.Drawing.Point(57, 62);
+            this.btnGo.Location = new System.Drawing.Point(33, 28);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(121, 31);
             this.btnGo.TabIndex = 7;
@@ -110,7 +119,7 @@
             // 
             // tbBody
             // 
-            this.tbBody.Location = new System.Drawing.Point(210, 62);
+            this.tbBody.Location = new System.Drawing.Point(289, 65);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -140,6 +149,27 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // readHTMLToolStripMenuItem
+            // 
+            this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.readHTMLToolStripMenuItem.Text = "Read HTML";
+            this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
+            // 
+            // loadFromXMLToolStripMenuItem
+            // 
+            this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadFromXMLToolStripMenuItem.Text = "Load from text";
+            this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
+            // 
+            // saveToXMLToolStripMenuItem
+            // 
+            this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToXMLToolStripMenuItem.Text = "Save to text";
+            this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -163,6 +193,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbSupp);
             this.groupBox1.Controls.Add(this.btnToNotepad);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnCopyFrom);
@@ -171,9 +202,9 @@
             this.groupBox1.Controls.Add(this.tbBody);
             this.groupBox1.Controls.Add(this.btnGo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(477, 43);
+            this.groupBox1.Location = new System.Drawing.Point(434, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(633, 496);
+            this.groupBox1.Size = new System.Drawing.Size(705, 496);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Macro";
@@ -181,7 +212,7 @@
             // btnToNotepad
             // 
             this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNotepad.Location = new System.Drawing.Point(17, 387);
+            this.btnToNotepad.Location = new System.Drawing.Point(112, 435);
             this.btnToNotepad.Name = "btnToNotepad";
             this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
             this.btnToNotepad.TabIndex = 12;
@@ -195,7 +226,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(207, 28);
+            this.label1.Location = new System.Drawing.Point(286, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(364, 16);
             this.label1.TabIndex = 11;
@@ -204,7 +235,7 @@
             // btnCopyFrom
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(17, 294);
+            this.btnCopyFrom.Location = new System.Drawing.Point(112, 392);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
             this.btnCopyFrom.TabIndex = 10;
@@ -215,7 +246,7 @@
             // btnCopyTo
             // 
             this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(17, 234);
+            this.btnCopyTo.Location = new System.Drawing.Point(112, 343);
             this.btnCopyTo.Name = "btnCopyTo";
             this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
@@ -226,7 +257,7 @@
             // btnClearEM
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearEM.Location = new System.Drawing.Point(103, 170);
+            this.btnClearEM.Location = new System.Drawing.Point(198, 295);
             this.btnClearEM.Name = "btnClearEM";
             this.btnClearEM.Size = new System.Drawing.Size(75, 28);
             this.btnClearEM.TabIndex = 8;
@@ -241,7 +272,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 43);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(418, 496);
+            this.groupBox2.Size = new System.Drawing.Size(404, 496);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Double click any row to transfer to editor";
@@ -258,26 +289,75 @@
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
-            // readHTMLToolStripMenuItem
+            // gbSupp
             // 
-            this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
-            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.readHTMLToolStripMenuItem.Text = "Read HTML";
-            this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
+            this.gbSupp.Controls.Add(this.groupBox3);
+            this.gbSupp.Controls.Add(this.tbMacName);
+            this.gbSupp.Controls.Add(this.btnSaveM);
+            this.gbSupp.Controls.Add(this.btnDelM);
+            this.gbSupp.Controls.Add(this.btnAddM);
+            this.gbSupp.Location = new System.Drawing.Point(15, 76);
+            this.gbSupp.Name = "gbSupp";
+            this.gbSupp.Size = new System.Drawing.Size(250, 198);
+            this.gbSupp.TabIndex = 13;
+            this.gbSupp.TabStop = false;
+            this.gbSupp.Text = "Supplemental Table";
             // 
-            // loadFromXMLToolStripMenuItem
+            // btnAddM
             // 
-            this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadFromXMLToolStripMenuItem.Text = "Load from text";
-            this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
+            this.btnAddM.Location = new System.Drawing.Point(137, 99);
+            this.btnAddM.Name = "btnAddM";
+            this.btnAddM.Size = new System.Drawing.Size(91, 23);
+            this.btnAddM.TabIndex = 0;
+            this.btnAddM.Text = "Add Macro";
+            this.btnAddM.UseVisualStyleBackColor = true;
+            this.btnAddM.Click += new System.EventHandler(this.btnAddM_Click);
             // 
-            // saveToXMLToolStripMenuItem
+            // btnDelM
             // 
-            this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
-            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToXMLToolStripMenuItem.Text = "Save to text";
-            this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
+            this.btnDelM.Location = new System.Drawing.Point(137, 128);
+            this.btnDelM.Name = "btnDelM";
+            this.btnDelM.Size = new System.Drawing.Size(91, 23);
+            this.btnDelM.TabIndex = 1;
+            this.btnDelM.Text = "Delete";
+            this.btnDelM.UseVisualStyleBackColor = true;
+            this.btnDelM.Click += new System.EventHandler(this.btnDelM_Click);
+            // 
+            // btnSaveM
+            // 
+            this.btnSaveM.Location = new System.Drawing.Point(137, 157);
+            this.btnSaveM.Name = "btnSaveM";
+            this.btnSaveM.Size = new System.Drawing.Size(91, 23);
+            this.btnSaveM.TabIndex = 2;
+            this.btnSaveM.Text = "Save Macro";
+            this.btnSaveM.UseVisualStyleBackColor = true;
+            this.btnSaveM.Click += new System.EventHandler(this.btnSaveM_Click);
+            // 
+            // tbMacName
+            // 
+            this.tbMacName.Location = new System.Drawing.Point(18, 21);
+            this.tbMacName.Name = "tbMacName";
+            this.tbMacName.Size = new System.Drawing.Size(190, 22);
+            this.tbMacName.TabIndex = 3;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tbNumMac);
+            this.groupBox3.Location = new System.Drawing.Point(18, 64);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(104, 72);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Count";
+            // 
+            // tbNumMac
+            // 
+            this.tbNumMac.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbNumMac.Location = new System.Drawing.Point(21, 30);
+            this.tbNumMac.Name = "tbNumMac";
+            this.tbNumMac.ReadOnly = true;
+            this.tbNumMac.Size = new System.Drawing.Size(54, 22);
+            this.tbNumMac.TabIndex = 5;
             // 
             // main
             // 
@@ -300,6 +380,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.gbSupp.ResumeLayout(false);
+            this.gbSupp.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,6 +413,13 @@
         private System.Windows.Forms.ToolStripMenuItem readHTMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadFromXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToXMLToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbSupp;
+        private System.Windows.Forms.Button btnAddM;
+        private System.Windows.Forms.Button btnSaveM;
+        private System.Windows.Forms.Button btnDelM;
+        private System.Windows.Forms.TextBox tbMacName;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox tbNumMac;
     }
 }
 

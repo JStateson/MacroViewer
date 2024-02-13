@@ -34,6 +34,7 @@ namespace MacroViewer
         string[] Body = new string[NumMacros];
         string TXTmacs;
         string TXTmacName;
+        int CurrentRowSelected = 0;
         OpenFileDialog ofd;
 
         public main()
@@ -41,6 +42,7 @@ namespace MacroViewer
             InitializeComponent();
             TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
             TXTmacName = TXTmacs + "\\macros.txt";
+            EnableMacEdits(false);
         }
 
 
@@ -196,8 +198,9 @@ namespace MacroViewer
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = e.RowIndex;
-            tbBody.Text = Body[i];
+            CurrentRowSelected = e.RowIndex;
+            tbBody.Text = Body[CurrentRowSelected];
+            tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             if (cbLaunchPage.Checked)
                 RunBrowser();
         }
@@ -258,17 +261,18 @@ namespace MacroViewer
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadMacroHTML();
+            EnableMacEdits(false);
         }
 
 
 
         private void LoadFromTXT()
         {
+            int i = 0;
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
             {
                 StreamReader sr = new StreamReader(TXTmacName);
-                int i = 0;
                 string line = sr.ReadLine();
                 string sBody;
                 while(line != null)
@@ -281,11 +285,13 @@ namespace MacroViewer
                 }
                 sr.Close();
             }
+            tbNumMac.Text = i.ToString();
         }
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromTXT();
+            EnableMacEdits(true);
         }
 
         private void SaveAsTXT()
@@ -305,6 +311,72 @@ namespace MacroViewer
 
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult Res1 = MessageBox.Show("This will overwrite your supplemental macros",
+                    "Possible loss of macros",     MessageBoxButtons.YesNoCancel,     MessageBoxIcon.Question);
+            if(Res1 == DialogResult.Yes)
+            {
+                SaveAsTXT();
+            }
+        }
+
+
+        private void RemoveMacro()
+        {
+            for (int i = 0; i < lbName.Rows.Count-1; i++)
+            {
+                if (i >= CurrentRowSelected)
+                {
+                    lbName.Rows[i].Cells[1].Value = lbName.Rows[i+1].Cells[1].Value;
+                    Body[i] = Body[i + 1];
+                }
+            }
+            lbName.Rows.RemoveAt(lbName.Rows.Count-1);
+        }
+
+        private void EnableMacEdits(bool enable)
+        {
+            tbMacName.Enabled = enable;
+            tbNumMac.Enabled = enable;
+            btnAddM.Enabled = enable;
+            btnDelM.Enabled = enable;
+            btnSaveM.Enabled = enable;
+        }
+
+        private void btnDelM_Click(object sender, EventArgs e)
+        {
+            RemoveMacro();
+            SaveAsTXT();
+            LoadFromTXT();
+            tbMacName.Text = "";
+            tbBody.Text = "";
+        }
+
+        private void btnSaveM_Click(object sender, EventArgs e)
+        {
+            lbName.Rows[CurrentRowSelected].Cells[1].Value = tbMacName.Text;
+            Body[CurrentRowSelected] = tbBody.Text;
+            SaveAsTXT();
+        }
+
+        private void btnAddM_Click(object sender, EventArgs e)
+        {
+            string strNewName = tbMacName.Text.Trim();
+            if(lbName.Rows.Count == 30)
+            {
+                MessageBox.Show("Can only hold 30 macros");
+                return;
+            }
+            for(int i = 0; i < lbName.Rows.Count; i++)
+            {
+                if (lbName.Rows[i].Cells[1].Value.ToString() == strNewName)
+                {
+                    MessageBox.Show("Macro name must be unique: " + (i+1).ToString());
+                    return;
+                }
+            }
+            CurrentRowSelected = lbName.Rows.Count;
+            lbName.Rows.Add(CurrentRowSelected,tbMacName.Text);
+            Body[CurrentRowSelected] = tbBody.Text;
             SaveAsTXT();
         }
     }

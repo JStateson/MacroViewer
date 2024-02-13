@@ -120,19 +120,15 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>MACRO HELP
 
-1 - You must save the macros page so it can be access by this app. 
-      To do this you log into your HP account and select the macros page.
-      Right click anywhere on the page and select "source".  I assume chrome.
-      Then click the save feature and save as HTML in the download folder.
+1 - You must save the macros page so it can be access by this app.  To do this you log into your HP account and select the macros page.
+      Right click anywhere on the page and select "source".  I assume chrome.  Then click the save feature and save as HTML in the download folder.
 2- Click the FILE menu and open the file.  The macro table will be filled in
-3 - Double click on any row to select the body of the macro
-     The text can be editied.  Note that a new line is "&lt;br&gt;"
+3 - Double click on any row to select the body of the macro.  The text can be editied.  Note that a new line is "&lt;br&gt;"
 4 - Click the "GO" button to view what the macro will show.
 
 UTIL HELP
 
-1 - This dialog box make it easy to configure an instructional link. 
-      You have a url that points to a site with useful informaton.
+1 - This dialog box make it easy to configure an instructional link.   You have a url that points to a site with useful informaton.
       You have some instructions and you want the user to click on a phrase
 2 -  Enter the url in the url box
 3 - Enter the phrase in the phrase box. 
@@ -145,13 +141,14 @@ The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
 === The result is ===
 &lt;a href="https://support.hp.com/us-en/document/ish_2039298-1862169-16" target="_blank"&gt;Product ID&lt;/a&gt; 
 
-This result can be copied to the clipboard.  You can then paste it back into the macro edit
-page. Once in the main edit box you can add more instructions and click the "Show as page"
-to see if it works in a web page.  Note that this is not needed when in the community as you
-can just paste the url into the selected text.
+This result can be copied to the clipboard.  You can then paste it back into the macro edit page. Once in the main edit box you
+can add more instructions and click the "Show as page" to see if it works in a web page.  Note that this is not needed when in
+the community as you can just paste the url into the selected text.
 
-The menu items Load from and Save to read and write from a macro.txt file.  That file and the 
-signatuers.xml file are located in the same folder as the executable program.  Macros.txt
-allows you to create a second set of 30 macros or make backups.</value>
+The menu items Load from and Save to read and write from a macro.txt file.  That file and the signatuers.xml file are located in
+the same folder as the executable program.  Macros.txt allows you to create a second set of 30 macros or make backups.
+
+Supplemental macros:  Another 30 macros are avaialble for use but they are not writtent to the HP macros website
+You can create additional macros, test them, and then use windows copy and paste to reply to a user.</value>
   </data>
 </root>

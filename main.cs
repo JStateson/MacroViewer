@@ -379,5 +379,55 @@ namespace MacroViewer
             Body[CurrentRowSelected] = tbBody.Text;
             SaveAsTXT();
         }
+
+        private void btnAddImg_Click(object sender, EventArgs e)
+        {
+            //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
+            string strImgUrl = "<img src=\"" + tbImgUrl.Text.Trim() + "\" border=\"2\">";
+            tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnAddURL_Click(object sender, EventArgs e)
+        {
+            //<a href="h ttps://h30434.www3.hp.com/t5/image/serverpage/image-id/363370i5BE16BA39E85139E/image-size/large/is-moderation-mode/true?v=v2&px=999" target="_blank">
+            string strOver = "";
+            string strUrl = "<a href=\"" + tbImgUrl.Text.Trim() + " target=\"_blank\">";
+            int i = tbBody.SelectionStart;
+            int n = tbBody.SelectionLength;
+            if(n > 0)
+                strOver = tbBody.Text.Substring(i, n).Trim();
+            if (strOver == "") n = 0;
+            if(n == 0)
+            {
+                strUrl += "</a>";
+                tbBody.Text = tbBody.Text.Insert(i, strUrl);
+            }
+            else
+            {
+                tbBody.Text = tbBody.Text.Remove(i, n);
+                strUrl+= strOver + "</a>";
+                tbBody.Text = tbBody.Text.Insert(i, strUrl);
+            }
+        }
+
+        private void btnAdd1New_Click(object sender, EventArgs e)
+        {
+            int i = tbBody.SelectionStart;
+            tbBody.Text = tbBody.Text.Insert(i, "<br>");
+            i += 4;
+            tbBody.SelectionStart = i;
+        }
+
+        private void btnAdd2New_Click(object sender, EventArgs e)
+        {
+            int i = tbBody.SelectionStart;
+            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
+            i += 8;
+            tbBody.SelectionStart = i;
+        }
     }
 }

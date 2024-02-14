@@ -232,7 +232,12 @@ namespace MacroViewer
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            tbBody.Text = Clipboard.GetText();
+            bool bChanged = false;
+            tbBody.Text = RemoveNL(ref bChanged, Clipboard.GetText());
+            if (bChanged)
+            {
+                MessageBox.Show("One or more spaces or newlines were removed");
+            }
         }
 
         // notice to anyone reading this: Feel free to copy the signature and change it
@@ -354,9 +359,29 @@ namespace MacroViewer
         private void btnSaveM_Click(object sender, EventArgs e)
         {
             lbName.Rows[CurrentRowSelected].Cells[1].Value = tbMacName.Text;
+            VerifyBody();
             Body[CurrentRowSelected] = tbBody.Text;
             SaveAsTXT();
         }
+
+        private string RemoveNL(ref bool bChanged, string strIn)
+        {
+            string strOut = strIn.Replace("\r", "");
+            strOut = strOut.Replace("\n", "").Trim();
+            bChanged = (strOut.Length != strIn.Length);
+            return strOut;
+        }
+
+        private void VerifyBody()
+        {
+            bool bChanged = false;
+            tbBody.Text = RemoveNL(ref bChanged, tbBody.Text);
+            if(bChanged)
+            {
+                MessageBox.Show("One or more spaces or newlines were removed");
+            }
+        }
+
 
         private void btnAddM_Click(object sender, EventArgs e)
         {
@@ -375,7 +400,8 @@ namespace MacroViewer
                 }
             }
             CurrentRowSelected = lbName.Rows.Count;
-            lbName.Rows.Add(CurrentRowSelected,tbMacName.Text);
+            lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
+            VerifyBody();
             Body[CurrentRowSelected] = tbBody.Text;
             SaveAsTXT();
         }
@@ -387,9 +413,7 @@ namespace MacroViewer
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
+
 
         private void btnAddURL_Click(object sender, EventArgs e)
         {
@@ -428,6 +452,11 @@ namespace MacroViewer
             tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
             i += 8;
             tbBody.SelectionStart = i;
+        }
+
+        private void btnCLrUrl_Click(object sender, EventArgs e)
+        {
+            tbImgUrl.Text = "";
         }
     }
 }

@@ -65,6 +65,8 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
+            this.btnCLrUrl = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,22 +183,22 @@
             // readHTMLToolStripMenuItem
             // 
             this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
-            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.readHTMLToolStripMenuItem.Text = "Read HTML";
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.readHTMLToolStripMenuItem.Text = "Read HTML file";
             this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
             // 
             // loadFromXMLToolStripMenuItem
             // 
             this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadFromXMLToolStripMenuItem.Text = "Load from text";
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.loadFromXMLToolStripMenuItem.Text = "Load supplemental macro";
             this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
             // 
             // saveToXMLToolStripMenuItem
             // 
             this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
-            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveToXMLToolStripMenuItem.Text = "Save to text";
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.saveToXMLToolStripMenuItem.Text = "Save supplemental macro";
             this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -241,6 +243,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnCLrUrl);
             this.groupBox4.Controls.Add(this.btnAdd2New);
             this.groupBox4.Controls.Add(this.btnAddURL);
             this.groupBox4.Controls.Add(this.btnAdd1New);
@@ -283,14 +286,15 @@
             // 
             // gbSupp
             // 
+            this.gbSupp.Controls.Add(this.label2);
             this.gbSupp.Controls.Add(this.groupBox3);
             this.gbSupp.Controls.Add(this.tbMacName);
             this.gbSupp.Controls.Add(this.btnSaveM);
             this.gbSupp.Controls.Add(this.btnDelM);
             this.gbSupp.Controls.Add(this.btnAddM);
-            this.gbSupp.Location = new System.Drawing.Point(15, 76);
+            this.gbSupp.Location = new System.Drawing.Point(6, 76);
             this.gbSupp.Name = "gbSupp";
-            this.gbSupp.Size = new System.Drawing.Size(250, 198);
+            this.gbSupp.Size = new System.Drawing.Size(250, 213);
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
@@ -298,7 +302,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tbNumMac);
-            this.groupBox3.Location = new System.Drawing.Point(18, 64);
+            this.groupBox3.Location = new System.Drawing.Point(18, 81);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(104, 72);
             this.groupBox3.TabIndex = 5;
@@ -313,17 +317,19 @@
             this.tbNumMac.ReadOnly = true;
             this.tbNumMac.Size = new System.Drawing.Size(54, 22);
             this.tbNumMac.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.tbNumMac, "total number of macros");
             // 
             // tbMacName
             // 
-            this.tbMacName.Location = new System.Drawing.Point(18, 21);
+            this.tbMacName.Location = new System.Drawing.Point(18, 48);
             this.tbMacName.Name = "tbMacName";
             this.tbMacName.Size = new System.Drawing.Size(190, 22);
             this.tbMacName.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.tbMacName, "Name the the macro you are adding or editing");
             // 
             // btnSaveM
             // 
-            this.btnSaveM.Location = new System.Drawing.Point(137, 157);
+            this.btnSaveM.Location = new System.Drawing.Point(137, 174);
             this.btnSaveM.Name = "btnSaveM";
             this.btnSaveM.Size = new System.Drawing.Size(91, 23);
             this.btnSaveM.TabIndex = 2;
@@ -333,7 +339,7 @@
             // 
             // btnDelM
             // 
-            this.btnDelM.Location = new System.Drawing.Point(137, 128);
+            this.btnDelM.Location = new System.Drawing.Point(137, 145);
             this.btnDelM.Name = "btnDelM";
             this.btnDelM.Size = new System.Drawing.Size(91, 23);
             this.btnDelM.TabIndex = 1;
@@ -343,7 +349,7 @@
             // 
             // btnAddM
             // 
-            this.btnAddM.Location = new System.Drawing.Point(137, 99);
+            this.btnAddM.Location = new System.Drawing.Point(137, 116);
             this.btnAddM.Name = "btnAddM";
             this.btnAddM.Size = new System.Drawing.Size(91, 23);
             this.btnAddM.TabIndex = 0;
@@ -431,6 +437,26 @@
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
+            // btnCLrUrl
+            // 
+            this.btnCLrUrl.Location = new System.Drawing.Point(235, 77);
+            this.btnCLrUrl.Name = "btnCLrUrl";
+            this.btnCLrUrl.Size = new System.Drawing.Size(70, 23);
+            this.btnCLrUrl.TabIndex = 19;
+            this.btnCLrUrl.Text = "Clear";
+            this.btnCLrUrl.UseVisualStyleBackColor = true;
+            this.btnCLrUrl.Click += new System.EventHandler(this.btnCLrUrl_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(45, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "New Mac Name";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -500,6 +526,8 @@
         private System.Windows.Forms.Button btnAddURL;
         private System.Windows.Forms.Button btnAddImg;
         private System.Windows.Forms.Button btnAdd2New;
+        private System.Windows.Forms.Button btnCLrUrl;
+        private System.Windows.Forms.Label label2;
     }
 }
 

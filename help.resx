@@ -149,6 +149,9 @@ The menu items Load from and Save to read and write from a macro.txt file.  That
 the same folder as the executable program.  Macros.txt allows you to create a second set of 30 macros or make backups.
 
 Supplemental macros:  Another 30 macros are avaialble for use but they are not writtent to the HP macros website
-You can create additional macros, test them, and then use windows copy and paste to reply to a user.</value>
+You can create additional macros, test them, and then use windows copy and paste to reply to a user.
+
+The supplemental macros cannot be pasted directly into a thread.  You must use the "Show As Page" and then copy and paste
+the text and images into your reply.</value>
   </data>
 </root>

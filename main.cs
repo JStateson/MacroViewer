@@ -21,6 +21,7 @@ using System.Xml.Linq;
 using System.Xml;
 using static MacroViewer.CSignature;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Ink;
 
 namespace MacroViewer
 {
@@ -116,9 +117,11 @@ namespace MacroViewer
         private bool FindNames()
         {
             int j, k, n;
+            int NumUsed = 0;
             string strName = "";
             string strFind = "<span class=\"html-attribute-name\">value</span>=\"<span class=\"html-attribute-value\">";
             lbName.Rows.Clear();
+            tbNumMac.Text = "0";
             for (int i = 0; i < NumMacros; i++)
             {
                 j = aPage.Substring(StartMac[i]).IndexOf(strFind);
@@ -135,9 +138,11 @@ namespace MacroViewer
                     if (k < 0) return false;
                     strName = aPage.Substring(n, k);
                     MacBody[i] = n + k + 1;
+                    NumUsed++;
                 }
                 lbName.Rows.Add(i + 1, strName);
             }
+            tbNumMac.Text = NumUsed.ToString();
             return true;
         }
 
@@ -225,19 +230,30 @@ namespace MacroViewer
             tbBody.Clear();
         }
 
+        private void SwitchToMarkup(bool bEnable)
+        {
+            string strOut = "";
+            if (bEnable)
+            {
+                strOut = tbBody.Text.Replace(Environment.NewLine, "<br>");
+            }
+            else
+            {
+                strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
+            }
+            tbBody.Text = strOut;
+        }
+
         private void btnCopyTo_Click(object sender, EventArgs e)
         {
+            string strOut = "";
+            if (tbBody.Text == "") return;
             Clipboard.SetText(tbBody.Text);
         }
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            bool bChanged = false;
-            tbBody.Text = RemoveNL(ref bChanged, Clipboard.GetText());
-            if (bChanged)
-            {
-                MessageBox.Show("One or more spaces or newlines were removed");
-            }
+            tbBody.Text =  Clipboard.GetText();
         }
 
         // notice to anyone reading this: Feel free to copy the signature and change it
@@ -267,6 +283,7 @@ namespace MacroViewer
         {
             ReadMacroHTML();
             EnableMacEdits(false);
+            UsingMarkup(true);
         }
 
 
@@ -297,6 +314,7 @@ namespace MacroViewer
         {
             LoadFromTXT();
             EnableMacEdits(true);
+            UsingMarkup(false);
         }
 
         private void SaveAsTXT()
@@ -358,34 +376,34 @@ namespace MacroViewer
 
         private void btnSaveM_Click(object sender, EventArgs e)
         {
-            lbName.Rows[CurrentRowSelected].Cells[1].Value = tbMacName.Text;
-            VerifyBody();
-            Body[CurrentRowSelected] = tbBody.Text;
-            SaveAsTXT();
+            bool bChanged = false;
+            string strName = tbMacName.Text;
+            if(strName != lbName.Rows[CurrentRowSelected].Cells[1].Value)
+            {
+                DialogResult Res1 = MessageBox.Show("This will overwrite an existing macro. Did you mean to Add instead",
+        "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (Res1 == DialogResult.Yes)
+                {
+                    lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
+                    Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
+                    SaveAsTXT();
+                }
+            }
+
         }
 
-        private string RemoveNL(ref bool bChanged, string strIn)
+        private string RemoveNewLine(ref bool bChanged, string strIn)
         {
-            string strOut = strIn.Replace("\r", "");
-            strOut = strOut.Replace("\n", "").Trim();
+            string strOut = strIn.Replace(Environment.NewLine, "<br>").Trim();
             bChanged = (strOut.Length != strIn.Length);
             return strOut;
-        }
-
-        private void VerifyBody()
-        {
-            bool bChanged = false;
-            tbBody.Text = RemoveNL(ref bChanged, tbBody.Text);
-            if(bChanged)
-            {
-                MessageBox.Show("One or more spaces or newlines were removed");
-            }
         }
 
 
         private void btnAddM_Click(object sender, EventArgs e)
         {
             string strNewName = tbMacName.Text.Trim();
+            bool bChanged = false;
             if(lbName.Rows.Count == 30)
             {
                 MessageBox.Show("Can only hold 30 macros");
@@ -401,8 +419,7 @@ namespace MacroViewer
             }
             CurrentRowSelected = lbName.Rows.Count;
             lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
-            VerifyBody();
-            Body[CurrentRowSelected] = tbBody.Text;
+            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
             SaveAsTXT();
         }
 
@@ -457,6 +474,26 @@ namespace MacroViewer
         private void btnCLrUrl_Click(object sender, EventArgs e)
         {
             tbImgUrl.Text = "";
+        }
+
+        private void UsingMarkup(bool bEnable)
+        {
+            btnAddURL.Enabled = bEnable;
+            btnAddImg.Enabled = bEnable;
+            tbImgUrl.Enabled = bEnable;
+            btnCLrUrl.Enabled = bEnable;
+            btnAdd1New.Enabled = bEnable;
+            btnAdd2New.Enabled = bEnable;
+        }
+
+        private void btnToMark_Click(object sender, EventArgs e)
+        {
+            SwitchToMarkup(true);
+        }
+
+        private void btnNoMark_Click(object sender, EventArgs e)
+        {
+            SwitchToMarkup(false);
         }
     }
 }

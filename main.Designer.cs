@@ -37,6 +37,8 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
             this.btnAdd2New = new System.Windows.Forms.Button();
+            this.tbNumMac = new System.Windows.Forms.TextBox();
+            this.tbMacName = new System.Windows.Forms.TextBox();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,29 +49,31 @@
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnToNotepad = new System.Windows.Forms.Button();
+            this.btnCopyTo = new System.Windows.Forms.Button();
+            this.btnCopyFrom = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnCLrUrl = new System.Windows.Forms.Button();
             this.btnAddURL = new System.Windows.Forms.Button();
             this.tbImgUrl = new System.Windows.Forms.TextBox();
             this.btnAddImg = new System.Windows.Forms.Button();
             this.gbSupp = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tbNumMac = new System.Windows.Forms.TextBox();
-            this.tbMacName = new System.Windows.Forms.TextBox();
             this.btnSaveM = new System.Windows.Forms.Button();
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnAddM = new System.Windows.Forms.Button();
-            this.btnToNotepad = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCopyFrom = new System.Windows.Forms.Button();
-            this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.btnCLrUrl = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnToMark = new System.Windows.Forms.Button();
+            this.btnNoMark = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbSupp.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,7 +121,7 @@
             // 
             this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnGo.Location = new System.Drawing.Point(33, 28);
+            this.btnGo.Location = new System.Drawing.Point(307, 60);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(121, 31);
             this.btnGo.TabIndex = 7;
@@ -148,9 +152,27 @@
             this.btnAdd2New.UseVisualStyleBackColor = true;
             this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
             // 
+            // tbNumMac
+            // 
+            this.tbNumMac.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbNumMac.Location = new System.Drawing.Point(21, 30);
+            this.tbNumMac.Name = "tbNumMac";
+            this.tbNumMac.ReadOnly = true;
+            this.tbNumMac.Size = new System.Drawing.Size(54, 22);
+            this.tbNumMac.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.tbNumMac, "total number of macros");
+            // 
+            // tbMacName
+            // 
+            this.tbMacName.Location = new System.Drawing.Point(18, 48);
+            this.tbMacName.Name = "tbMacName";
+            this.tbMacName.Size = new System.Drawing.Size(190, 22);
+            this.tbMacName.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.tbMacName, "Name the the macro you are adding or editing");
+            // 
             // tbBody
             // 
-            this.tbBody.Location = new System.Drawing.Point(289, 65);
+            this.tbBody.Location = new System.Drawing.Point(462, 65);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -166,7 +188,7 @@
             this.testSignatureToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1151, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1327, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -224,22 +246,67 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.gbSupp);
-            this.groupBox1.Controls.Add(this.btnToNotepad);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btnCopyFrom);
-            this.groupBox1.Controls.Add(this.btnCopyTo);
             this.groupBox1.Controls.Add(this.btnClearEM);
             this.groupBox1.Controls.Add(this.tbBody);
             this.groupBox1.Controls.Add(this.btnGo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(434, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(705, 630);
+            this.groupBox1.Size = new System.Drawing.Size(881, 630);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Macro";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnNoMark);
+            this.groupBox5.Controls.Add(this.btnToMark);
+            this.groupBox5.Controls.Add(this.btnToNotepad);
+            this.groupBox5.Controls.Add(this.btnCopyTo);
+            this.groupBox5.Controls.Add(this.btnCopyFrom);
+            this.groupBox5.Location = new System.Drawing.Point(24, 297);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(376, 166);
+            this.groupBox5.TabIndex = 16;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Markup Editing";
+            // 
+            // btnToNotepad
+            // 
+            this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToNotepad.Location = new System.Drawing.Point(195, 127);
+            this.btnToNotepad.Name = "btnToNotepad";
+            this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
+            this.btnToNotepad.TabIndex = 12;
+            this.btnToNotepad.Text = "Copy to notepad";
+            this.btnToNotepad.UseVisualStyleBackColor = true;
+            this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
+            // 
+            // btnCopyTo
+            // 
+            this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyTo.Location = new System.Drawing.Point(195, 35);
+            this.btnCopyTo.Name = "btnCopyTo";
+            this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
+            this.btnCopyTo.TabIndex = 9;
+            this.btnCopyTo.Text = "Copy to clipboard";
+            this.btnCopyTo.UseVisualStyleBackColor = true;
+            this.btnCopyTo.Click += new System.EventHandler(this.btnCopyTo_Click);
+            // 
+            // btnCopyFrom
+            // 
+            this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyFrom.Location = new System.Drawing.Point(195, 84);
+            this.btnCopyFrom.Name = "btnCopyFrom";
+            this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
+            this.btnCopyFrom.TabIndex = 10;
+            this.btnCopyFrom.Text = "Copy from clipboard";
+            this.btnCopyFrom.UseVisualStyleBackColor = true;
+            this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
             // groupBox4
             // 
@@ -255,6 +322,16 @@
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Add image, url or newlines";
+            // 
+            // btnCLrUrl
+            // 
+            this.btnCLrUrl.Location = new System.Drawing.Point(235, 77);
+            this.btnCLrUrl.Name = "btnCLrUrl";
+            this.btnCLrUrl.Size = new System.Drawing.Size(70, 23);
+            this.btnCLrUrl.TabIndex = 19;
+            this.btnCLrUrl.Text = "Clear";
+            this.btnCLrUrl.UseVisualStyleBackColor = true;
+            this.btnCLrUrl.Click += new System.EventHandler(this.btnCLrUrl_Click);
             // 
             // btnAddURL
             // 
@@ -292,12 +369,22 @@
             this.gbSupp.Controls.Add(this.btnSaveM);
             this.gbSupp.Controls.Add(this.btnDelM);
             this.gbSupp.Controls.Add(this.btnAddM);
-            this.gbSupp.Location = new System.Drawing.Point(6, 76);
+            this.gbSupp.Location = new System.Drawing.Point(24, 50);
             this.gbSupp.Name = "gbSupp";
-            this.gbSupp.Size = new System.Drawing.Size(250, 213);
+            this.gbSupp.Size = new System.Drawing.Size(250, 228);
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(45, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "New Mac Name";
             // 
             // groupBox3
             // 
@@ -308,24 +395,6 @@
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Count";
-            // 
-            // tbNumMac
-            // 
-            this.tbNumMac.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tbNumMac.Location = new System.Drawing.Point(21, 30);
-            this.tbNumMac.Name = "tbNumMac";
-            this.tbNumMac.ReadOnly = true;
-            this.tbNumMac.Size = new System.Drawing.Size(54, 22);
-            this.tbNumMac.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.tbNumMac, "total number of macros");
-            // 
-            // tbMacName
-            // 
-            this.tbMacName.Location = new System.Drawing.Point(18, 48);
-            this.tbMacName.Name = "tbMacName";
-            this.tbMacName.Size = new System.Drawing.Size(190, 22);
-            this.tbMacName.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.tbMacName, "Name the the macro you are adding or editing");
             // 
             // btnSaveM
             // 
@@ -357,57 +426,25 @@
             this.btnAddM.UseVisualStyleBackColor = true;
             this.btnAddM.Click += new System.EventHandler(this.btnAddM_Click);
             // 
-            // btnToNotepad
-            // 
-            this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNotepad.Location = new System.Drawing.Point(112, 435);
-            this.btnToNotepad.Name = "btnToNotepad";
-            this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
-            this.btnToNotepad.TabIndex = 12;
-            this.btnToNotepad.Text = "Copy to notepad";
-            this.btnToNotepad.UseVisualStyleBackColor = true;
-            this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(286, 28);
+            this.label1.Location = new System.Drawing.Point(459, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(364, 16);
             this.label1.TabIndex = 11;
             this.label1.Text = "You may enter HTML below and click to see it in a web page";
             // 
-            // btnCopyFrom
-            // 
-            this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(112, 392);
-            this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
-            this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Copy from clipboard";
-            this.btnCopyFrom.UseVisualStyleBackColor = true;
-            this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
-            // 
-            // btnCopyTo
-            // 
-            this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(112, 343);
-            this.btnCopyTo.Name = "btnCopyTo";
-            this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
-            this.btnCopyTo.TabIndex = 9;
-            this.btnCopyTo.Text = "Copy to clipboard";
-            this.btnCopyTo.UseVisualStyleBackColor = true;
-            this.btnCopyTo.Click += new System.EventHandler(this.btnCopyTo_Click);
-            // 
             // btnClearEM
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearEM.Location = new System.Drawing.Point(198, 295);
+            this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnClearEM.Location = new System.Drawing.Point(353, 118);
             this.btnClearEM.Name = "btnClearEM";
-            this.btnClearEM.Size = new System.Drawing.Size(75, 28);
+            this.btnClearEM.Size = new System.Drawing.Size(75, 32);
             this.btnClearEM.TabIndex = 8;
             this.btnClearEM.Text = "Clear";
             this.btnClearEM.UseVisualStyleBackColor = true;
@@ -437,31 +474,35 @@
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
-            // btnCLrUrl
+            // btnToMark
             // 
-            this.btnCLrUrl.Location = new System.Drawing.Point(235, 77);
-            this.btnCLrUrl.Name = "btnCLrUrl";
-            this.btnCLrUrl.Size = new System.Drawing.Size(70, 23);
-            this.btnCLrUrl.TabIndex = 19;
-            this.btnCLrUrl.Text = "Clear";
-            this.btnCLrUrl.UseVisualStyleBackColor = true;
-            this.btnCLrUrl.Click += new System.EventHandler(this.btnCLrUrl_Click);
+            this.btnToMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToMark.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnToMark.Location = new System.Drawing.Point(6, 52);
+            this.btnToMark.Name = "btnToMark";
+            this.btnToMark.Size = new System.Drawing.Size(155, 29);
+            this.btnToMark.TabIndex = 13;
+            this.btnToMark.Text = "Switch to markup";
+            this.btnToMark.UseVisualStyleBackColor = true;
+            this.btnToMark.Click += new System.EventHandler(this.btnToMark_Click);
             // 
-            // label2
+            // btnNoMark
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(45, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "New Mac Name";
+            this.btnNoMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoMark.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNoMark.Location = new System.Drawing.Point(6, 100);
+            this.btnNoMark.Name = "btnNoMark";
+            this.btnNoMark.Size = new System.Drawing.Size(155, 29);
+            this.btnNoMark.TabIndex = 14;
+            this.btnNoMark.Text = "Remove markup";
+            this.btnNoMark.UseVisualStyleBackColor = true;
+            this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 685);
+            this.ClientSize = new System.Drawing.Size(1327, 685);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
@@ -476,6 +517,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.gbSupp.ResumeLayout(false);
@@ -528,6 +570,9 @@
         private System.Windows.Forms.Button btnAdd2New;
         private System.Windows.Forms.Button btnCLrUrl;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnNoMark;
+        private System.Windows.Forms.Button btnToMark;
     }
 }
 

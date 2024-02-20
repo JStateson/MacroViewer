@@ -83,4 +83,35 @@ namespace MacroViewer
             SendKeys.Send("^V");
         }
     }
+
+    internal class CSendCloud
+    {
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool BringWindowToTop(IntPtr hWnd);
+        private Process HPprocess;
+        public void Init()
+        {
+            HPprocess = new Process();
+            HPprocess.StartInfo.Verb = "runas";
+            HPprocess.StartInfo.FileName ="C:\\Program Files\\WindowsApps\\AD2F1837.HPCloudRecoveryTool_2.7.8.0_x64__v10z8vjag6ke6\\CloudRecovery\\CloudRecovery.exe";
+            HPprocess.Start();
+        }
+        public void PasteToCloud(string strText)
+        {
+
+            // Copy the text in the datafield to Clipboard
+            Clipboard.SetText(strText);
+
+            // Get the HP cloud Handle
+            IntPtr hWnd = HPprocess.Handle;
+            
+
+            // Activate the Notepad Window
+            BringWindowToTop(hWnd);
+
+            // Use SendKeys to Paste
+            SendKeys.Send("^V");
+        }
+    }
 }

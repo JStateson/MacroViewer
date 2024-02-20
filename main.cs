@@ -37,6 +37,7 @@ namespace MacroViewer
         string TXTmacName;
         int CurrentRowSelected = 0;
         OpenFileDialog ofd;
+        //CSendCloud SendToCloud = new CSendCloud();
 
         public main()
         {
@@ -44,6 +45,7 @@ namespace MacroViewer
             TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
             TXTmacName = TXTmacs + "\\macros.txt";
             EnableMacEdits(false);
+            //SendToCloud.Init();
         }
 
 
@@ -177,6 +179,7 @@ namespace MacroViewer
         {
             int nLength;
             string LastFolder = "";
+            ofd.Filter = "HTML Files|macros.html";
             ofd.ShowDialog();
             string strFileName = ofd.FileName;
             if (!File.Exists(strFileName)) return;
@@ -242,6 +245,7 @@ namespace MacroViewer
                 strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
             }
             tbBody.Text = strOut;
+            UsingMarkup(bEnable);
         }
 
         private void btnCopyTo_Click(object sender, EventArgs e)
@@ -277,6 +281,8 @@ namespace MacroViewer
         {
             CSendNotepad SendNotepad = new CSendNotepad();
             SendNotepad.PasteToNotepad(tbBody.Text);
+ 
+            //SendToCloud.PasteToCloud("7L4H9UA#ABA");
         }
 
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -395,6 +401,8 @@ namespace MacroViewer
         private string RemoveNewLine(ref bool bChanged, string strIn)
         {
             string strOut = strIn.Replace(Environment.NewLine, "<br>").Trim();
+            // the above does not work for html as it has a newline
+            strOut = strOut.Replace("\n", "<br>");
             bChanged = (strOut.Length != strIn.Length);
             return strOut;
         }

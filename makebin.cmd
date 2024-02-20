@@ -11,7 +11,7 @@ xcopy %2macros.txt %1temp
 xcopy %2signatures.xml %1temp
 xcopy %4 %1temp
 xcopy %1packages\Microsoft.Web.WebView2.1.0.2210.55\runtimes\win-x64\native\WebView2Loader.dll %1temp
-xcopy %userprofile%\Downloads\macro-src.html %1temp
+xcopy %userprofile%\Downloads\macros.html %1temp
 cd %1
 tar -z -cf %1%ARC%  temp
 ) else (

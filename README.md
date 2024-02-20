@@ -4,7 +4,7 @@
 
 Log in and access your macros page using chrome
 
-Expose the source code of the page and save it as an html file
+Expose the source code of the page and save it as "macros.html"
 
 Run this app and open the file.  There is a demo macro file in the tar.
 

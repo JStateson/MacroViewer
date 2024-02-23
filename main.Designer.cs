@@ -50,6 +50,8 @@
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnNoMark = new System.Windows.Forms.Button();
+            this.btnToMark = new System.Windows.Forms.Button();
             this.btnToNotepad = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnCopyFrom = new System.Windows.Forms.Button();
@@ -68,8 +70,6 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.btnToMark = new System.Windows.Forms.Button();
-            this.btnNoMark = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -273,7 +273,31 @@
             this.groupBox5.Size = new System.Drawing.Size(376, 166);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Markup Editing";
+            this.groupBox5.Text = "Markup Editing (enable for images)";
+            // 
+            // btnNoMark
+            // 
+            this.btnNoMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoMark.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNoMark.Location = new System.Drawing.Point(6, 100);
+            this.btnNoMark.Name = "btnNoMark";
+            this.btnNoMark.Size = new System.Drawing.Size(155, 29);
+            this.btnNoMark.TabIndex = 14;
+            this.btnNoMark.Text = "Remove markup";
+            this.btnNoMark.UseVisualStyleBackColor = true;
+            this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
+            // 
+            // btnToMark
+            // 
+            this.btnToMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToMark.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnToMark.Location = new System.Drawing.Point(6, 52);
+            this.btnToMark.Name = "btnToMark";
+            this.btnToMark.Size = new System.Drawing.Size(155, 29);
+            this.btnToMark.TabIndex = 13;
+            this.btnToMark.Text = "Switch to markup";
+            this.btnToMark.UseVisualStyleBackColor = true;
+            this.btnToMark.Click += new System.EventHandler(this.btnToMark_Click);
             // 
             // btnToNotepad
             // 
@@ -321,7 +345,7 @@
             this.groupBox4.Size = new System.Drawing.Size(619, 119);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Add image, url or newlines";
+            this.groupBox4.Text = "Add image or newlines. For URLs use the Utils menu item";
             // 
             // btnCLrUrl
             // 
@@ -473,30 +497,6 @@
             this.cbLaunchPage.TabIndex = 5;
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
-            // 
-            // btnToMark
-            // 
-            this.btnToMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToMark.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnToMark.Location = new System.Drawing.Point(6, 52);
-            this.btnToMark.Name = "btnToMark";
-            this.btnToMark.Size = new System.Drawing.Size(155, 29);
-            this.btnToMark.TabIndex = 13;
-            this.btnToMark.Text = "Switch to markup";
-            this.btnToMark.UseVisualStyleBackColor = true;
-            this.btnToMark.Click += new System.EventHandler(this.btnToMark_Click);
-            // 
-            // btnNoMark
-            // 
-            this.btnNoMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoMark.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnNoMark.Location = new System.Drawing.Point(6, 100);
-            this.btnNoMark.Name = "btnNoMark";
-            this.btnNoMark.Size = new System.Drawing.Size(155, 29);
-            this.btnNoMark.TabIndex = 14;
-            this.btnNoMark.Text = "Remove markup";
-            this.btnNoMark.UseVisualStyleBackColor = true;
-            this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
             // main
             // 

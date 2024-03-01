@@ -398,24 +398,26 @@ namespace MacroViewer
         {
             bool bChanged = false;
             string strName = tbMacName.Text;
+            string strOld = "";
             if(lbName.RowCount == 0)
             {
                 // must have wanted to add a row
                 btnAddM_Click(sender, e);
                 return;
             }
-            if(strName != lbName.Rows[CurrentRowSelected].Cells[1].Value)
+            strOld = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
+            if (strName != strOld)
             {
-                DialogResult Res1 = MessageBox.Show("This will overwrite an existing macro. Did you mean to Add instead",
+                DialogResult Res1 = MessageBox.Show("This will overwrite " + strOld + " with " + strName,
         "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Res1 == DialogResult.Yes)
+                if (Res1 != DialogResult.Yes)
                 {
-                    lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
-                    Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
-                    SaveAsTXT(TXTName);
+                    return;
                 }
             }
-
+            lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
+            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
+            SaveAsTXT(TXTName);
         }
 
         private string RemoveNewLine(ref bool bChanged, string strIn)

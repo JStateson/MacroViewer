@@ -211,15 +211,28 @@ namespace MacroViewer
             btnDelM.Enabled = bVal;
         }
 
-        private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void ShowSelectedRow(int e)
         {
-            if(e.RowIndex < 0) return;
-            CurrentRowSelected = e.RowIndex;
+            CurrentRowSelected = e;
+            if(lbName.Rows.Count == 0)
+            {
+                tbBody.Text = "";
+                tbMacName.Text = "";
+                return;
+            }
             HaveSelected(true);
             tbBody.Text = Body[CurrentRowSelected];
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
+            lbName.ClearSelection();
+            lbName.Rows[CurrentRowSelected].Selected = true; 
             if (cbLaunchPage.Checked)
                 RunBrowser();
+        }
+
+        private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex < 0) return;
+            ShowSelectedRow(e.RowIndex);
         }
 
         private void utilsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,6 +343,7 @@ namespace MacroViewer
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromTXT("PCmacros");
+            ShowSelectedRow(0);
             EnableMacEdits(true);
             UsingMarkup(false);
         }
@@ -362,8 +376,11 @@ namespace MacroViewer
         }
 
 
-        private void RemoveMacro()
+        private int RemoveMacro()
         {
+            int j = CurrentRowSelected;
+            if (j >= lbName.Rows.Count - 1) j = CurrentRowSelected - 1;
+            if (j < 0) j = 0;
             for (int i = 0; i < lbName.Rows.Count-1; i++)
             {
                 if (i >= CurrentRowSelected)
@@ -374,6 +391,7 @@ namespace MacroViewer
             }
             lbName.Rows.RemoveAt(lbName.Rows.Count-1);
             HaveSelected(lbName.RowCount > 0);
+            return j;
         }
 
         private void EnableMacEdits(bool enable)
@@ -387,11 +405,17 @@ namespace MacroViewer
 
         private void btnDelM_Click(object sender, EventArgs e)
         {
-            RemoveMacro();
+            string strName = tbMacName.Text;
+            DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
+"Deleting a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (Res1 != DialogResult.Yes)
+            {
+                return;
+            }
+            CurrentRowSelected = RemoveMacro();
             SaveAsTXT(TXTName);
             LoadFromTXT(TXTName);
-            tbMacName.Text = "";
-            tbBody.Text = "";
+            ShowSelectedRow(CurrentRowSelected);
         }
 
         private void btnSaveM_Click(object sender, EventArgs e)
@@ -452,11 +476,14 @@ namespace MacroViewer
                     return;
                 }
             }
+            if (CurrentRowSelected >= 0 && CurrentRowSelected < lbName.Rows.Count)
+                lbName.Rows[CurrentRowSelected].Selected = false;
             CurrentRowSelected = lbName.Rows.Count;
             lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
             SaveAsTXT(TXTName);
             HaveSelected(true);
+            lbName.Rows[CurrentRowSelected].Selected = true;
         }
 
         private void btnAddImg_Click(object sender, EventArgs e)
@@ -535,6 +562,7 @@ namespace MacroViewer
         private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromTXT("PRNmacros");
+            ShowSelectedRow(0);
             EnableMacEdits(true);
             UsingMarkup(false);
         }

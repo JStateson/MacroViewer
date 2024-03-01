@@ -34,8 +34,8 @@ namespace MacroViewer
         int[] MacBody = new int[NumMacros];
         string[] Body = new string[NumMacros];
         string TXTmacs;
-        string TXTmacName;
-        int CurrentRowSelected = 0;
+        string TXTName = "";
+        int CurrentRowSelected = -1;
         OpenFileDialog ofd;
         //CSendCloud SendToCloud = new CSendCloud();
 
@@ -43,7 +43,7 @@ namespace MacroViewer
         {
             InitializeComponent();
             TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            TXTmacName = TXTmacs + "\\macros.txt";
+            //TXTmacName = TXTmacs + "\\macros.txt";
             EnableMacEdits(false);
             //SendToCloud.Init();
         }
@@ -204,9 +204,18 @@ namespace MacroViewer
             RunBrowser();
         }
 
+
+        private void HaveSelected( bool bVal)
+        {
+            btnSaveM.Enabled = bVal;
+            btnDelM.Enabled = bVal;
+        }
+
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(e.RowIndex < 0) return;
             CurrentRowSelected = e.RowIndex;
+            HaveSelected(true);
             tbBody.Text = Body[CurrentRowSelected];
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             if (cbLaunchPage.Checked)
@@ -294,9 +303,11 @@ namespace MacroViewer
 
 
 
-        private void LoadFromTXT()
+        private void LoadFromTXT(string strFN)
         {
             int i = 0;
+            TXTName = strFN;
+            string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
             {
@@ -318,15 +329,17 @@ namespace MacroViewer
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadFromTXT();
+            LoadFromTXT("PCmacros");
             EnableMacEdits(true);
             UsingMarkup(false);
         }
 
-        private void SaveAsTXT()
+        private void SaveAsTXT(string strFN)
         {
             int i = 0;
             string strOut = "";
+            TXTName = strFN;
+            string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 string strName = row.Cells[1].Value.ToString();
@@ -344,7 +357,7 @@ namespace MacroViewer
                     "Possible loss of macros",     MessageBoxButtons.YesNoCancel,     MessageBoxIcon.Question);
             if(Res1 == DialogResult.Yes)
             {
-                SaveAsTXT();
+                SaveAsTXT("PCmacros");
             }
         }
 
@@ -360,22 +373,23 @@ namespace MacroViewer
                 }
             }
             lbName.Rows.RemoveAt(lbName.Rows.Count-1);
+            HaveSelected(lbName.RowCount > 0);
         }
 
         private void EnableMacEdits(bool enable)
         {
             tbMacName.Enabled = enable;
             tbNumMac.Enabled = enable;
-            btnAddM.Enabled = enable;
-            btnDelM.Enabled = enable;
-            btnSaveM.Enabled = enable;
+            btnAddM.Enabled = enable && lbName.RowCount < 30;
+            btnDelM.Enabled = enable && CurrentRowSelected >= 0;
+            btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
         }
 
         private void btnDelM_Click(object sender, EventArgs e)
         {
             RemoveMacro();
-            SaveAsTXT();
-            LoadFromTXT();
+            SaveAsTXT(TXTName);
+            LoadFromTXT(TXTName);
             tbMacName.Text = "";
             tbBody.Text = "";
         }
@@ -384,6 +398,12 @@ namespace MacroViewer
         {
             bool bChanged = false;
             string strName = tbMacName.Text;
+            if(lbName.RowCount == 0)
+            {
+                // must have wanted to add a row
+                btnAddM_Click(sender, e);
+                return;
+            }
             if(strName != lbName.Rows[CurrentRowSelected].Cells[1].Value)
             {
                 DialogResult Res1 = MessageBox.Show("This will overwrite an existing macro. Did you mean to Add instead",
@@ -392,7 +412,7 @@ namespace MacroViewer
                 {
                     lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
                     Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
-                    SaveAsTXT();
+                    SaveAsTXT(TXTName);
                 }
             }
 
@@ -417,6 +437,11 @@ namespace MacroViewer
                 MessageBox.Show("Can only hold 30 macros");
                 return;
             }
+            if(tbBody.Text == "" || tbMacName.Text == "")
+            {
+                MessageBox.Show("Must have a name and data");
+                return;
+            }
             for(int i = 0; i < lbName.Rows.Count; i++)
             {
                 if (lbName.Rows[i].Cells[1].Value.ToString() == strNewName)
@@ -428,7 +453,7 @@ namespace MacroViewer
             CurrentRowSelected = lbName.Rows.Count;
             lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
-            SaveAsTXT();
+            SaveAsTXT(TXTName);
         }
 
         private void btnAddImg_Click(object sender, EventArgs e)
@@ -502,6 +527,23 @@ namespace MacroViewer
         private void btnNoMark_Click(object sender, EventArgs e)
         {
             SwitchToMarkup(false);
+        }
+
+        private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromTXT("PRNmacros");
+            EnableMacEdits(true);
+            UsingMarkup(false);
+        }
+
+        private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult Res1 = MessageBox.Show("This will overwrite your supplemental macros",
+        "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (Res1 == DialogResult.Yes)
+            {
+                SaveAsTXT("PRNmacros");
+            }
         }
     }
 }

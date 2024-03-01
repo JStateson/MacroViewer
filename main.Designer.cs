@@ -44,7 +44,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFromXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savePrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +72,7 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -197,7 +200,10 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readHTMLToolStripMenuItem,
             this.loadFromXMLToolStripMenuItem,
-            this.saveToXMLToolStripMenuItem});
+            this.loadPrinterMacsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.saveToXMLToolStripMenuItem,
+            this.savePrinterMacsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -205,23 +211,37 @@
             // readHTMLToolStripMenuItem
             // 
             this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
-            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.readHTMLToolStripMenuItem.Text = "Read HTML file";
             this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
             // 
             // loadFromXMLToolStripMenuItem
             // 
             this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.loadFromXMLToolStripMenuItem.Text = "Load supplemental macro";
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFromXMLToolStripMenuItem.Text = "Load PC macro";
             this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
+            // 
+            // loadPrinterMacsToolStripMenuItem
+            // 
+            this.loadPrinterMacsToolStripMenuItem.Name = "loadPrinterMacsToolStripMenuItem";
+            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadPrinterMacsToolStripMenuItem.Text = "Load Printer macs";
+            this.loadPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.loadPrinterMacsToolStripMenuItem_Click);
             // 
             // saveToXMLToolStripMenuItem
             // 
             this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
-            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.saveToXMLToolStripMenuItem.Text = "Save supplemental macro";
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToXMLToolStripMenuItem.Text = "Save PC macro";
             this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
+            // 
+            // savePrinterMacsToolStripMenuItem
+            // 
+            this.savePrinterMacsToolStripMenuItem.Name = "savePrinterMacsToolStripMenuItem";
+            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.savePrinterMacsToolStripMenuItem.Text = "Save Printer macs";
+            this.savePrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.savePrinterMacsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -422,6 +442,7 @@
             // 
             // btnSaveM
             // 
+            this.btnSaveM.Enabled = false;
             this.btnSaveM.Location = new System.Drawing.Point(137, 174);
             this.btnSaveM.Name = "btnSaveM";
             this.btnSaveM.Size = new System.Drawing.Size(91, 23);
@@ -432,6 +453,7 @@
             // 
             // btnDelM
             // 
+            this.btnDelM.Enabled = false;
             this.btnDelM.Location = new System.Drawing.Point(137, 145);
             this.btnDelM.Name = "btnDelM";
             this.btnDelM.Size = new System.Drawing.Size(91, 23);
@@ -497,6 +519,11 @@
             this.cbLaunchPage.TabIndex = 5;
             this.cbLaunchPage.Text = "Launch Page";
             this.cbLaunchPage.UseVisualStyleBackColor = true;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // main
             // 
@@ -573,6 +600,9 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnNoMark;
         private System.Windows.Forms.Button btnToMark;
+        private System.Windows.Forms.ToolStripMenuItem loadPrinterMacsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem savePrinterMacsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

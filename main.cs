@@ -353,7 +353,7 @@ namespace MacroViewer
 
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult Res1 = MessageBox.Show("This will overwrite your supplemental macros",
+            DialogResult Res1 = MessageBox.Show("This will overwrite PCmacros",
                     "Possible loss of macros",     MessageBoxButtons.YesNoCancel,     MessageBoxIcon.Question);
             if(Res1 == DialogResult.Yes)
             {
@@ -454,6 +454,7 @@ namespace MacroViewer
             lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
             SaveAsTXT(TXTName);
+            HaveSelected(true);
         }
 
         private void btnAddImg_Click(object sender, EventArgs e)
@@ -538,7 +539,7 @@ namespace MacroViewer
 
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult Res1 = MessageBox.Show("This will overwrite your supplemental macros",
+            DialogResult Res1 = MessageBox.Show("This will overwrite PRNmacros ",
         "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 == DialogResult.Yes)
             {

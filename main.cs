@@ -1,27 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
-using System.Threading;
-using System.Xml.Linq;
-using System.Xml;
-using static MacroViewer.CSignature;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Ink;
+
 
 namespace MacroViewer
 {
@@ -37,18 +19,19 @@ namespace MacroViewer
         string TXTName = "";
         int CurrentRowSelected = -1;
         OpenFileDialog ofd;
+        CMacImages MacroImages;
+
         //CSendCloud SendToCloud = new CSendCloud();
 
         public main()
         {
             InitializeComponent();
             TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            //TXTmacName = TXTmacs + "\\macros.txt";
             EnableMacEdits(false);
+            SwitchToMarkup(true);
             //SendToCloud.Init();
+            gbManageImages.Enabled = System.Diagnostics.Debugger.IsAttached;
         }
-
-
 
 
         private static string GetDownloadsPath()
@@ -86,11 +69,9 @@ namespace MacroViewer
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
             ofd = new OpenFileDialog();
             ofd.DefaultExt = "*.html";
             ofd.InitialDirectory = GetLastFolder();
-
         }
 
 
@@ -205,7 +186,7 @@ namespace MacroViewer
         }
 
 
-        private void HaveSelected( bool bVal)
+        private void HaveSelected(bool bVal)
         {
             btnSaveM.Enabled = bVal;
             btnDelM.Enabled = bVal;
@@ -214,7 +195,7 @@ namespace MacroViewer
         private void ShowSelectedRow(int e)
         {
             CurrentRowSelected = e;
-            if(lbName.Rows.Count == 0)
+            if (lbName.Rows.Count == 0)
             {
                 tbBody.Text = "";
                 tbMacName.Text = "";
@@ -224,14 +205,15 @@ namespace MacroViewer
             tbBody.Text = Body[CurrentRowSelected];
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             lbName.ClearSelection();
-            lbName.Rows[CurrentRowSelected].Selected = true; 
+            lbName.Rows[CurrentRowSelected].Selected = true;
             if (cbLaunchPage.Checked)
                 RunBrowser();
+            LoadMacroImages(e);
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex < 0) return;
+            if (e.RowIndex < 0) return;
             ShowSelectedRow(e.RowIndex);
         }
 
@@ -267,6 +249,8 @@ namespace MacroViewer
                 strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
             }
             tbBody.Text = strOut;
+            lbM.Visible = bEnable;
+            lbNotM.Visible = !bEnable;
             UsingMarkup(bEnable);
         }
 
@@ -279,7 +263,7 @@ namespace MacroViewer
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            tbBody.Text =  Clipboard.GetText();
+            tbBody.Text = Clipboard.GetText();
         }
 
         // notice to anyone reading this: Feel free to copy the signature and change it
@@ -303,7 +287,7 @@ namespace MacroViewer
         {
             CSendNotepad SendNotepad = new CSendNotepad();
             SendNotepad.PasteToNotepad(tbBody.Text);
- 
+
             //SendToCloud.PasteToCloud("7L4H9UA#ABA");
         }
 
@@ -314,20 +298,39 @@ namespace MacroViewer
             UsingMarkup(true);
         }
 
+        private void AllocateMacroImages(string strLoc)
+        {
+            MacroImages = new CMacImages();
+            MacroImages.strFileLocation = strLoc;
+        }
+
+        private void LoadMacroImages(int n)
+        {
+            MacroImages.MacNum = n;
+            MacroImages.Init(tbMacName.Text);
+            MacroImages.ReadMacroImages();
+        }
+
+        private void RemoveMacroImages()
+        {
+            MacroImages.RemoveAll();
+        }
 
 
         private void LoadFromTXT(string strFN)
         {
             int i = 0;
             TXTName = strFN;
+            gpMainEdit.Enabled = true;
             string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
+            AllocateMacroImages(TXTmacs + "\\" + strFN);
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
             {
                 StreamReader sr = new StreamReader(TXTmacName);
                 string line = sr.ReadLine();
                 string sBody;
-                while(line != null)
+                while (line != null)
                 {
                     lbName.Rows.Add(i + 1, line);
                     sBody = sr.ReadLine();
@@ -338,6 +341,7 @@ namespace MacroViewer
                 sr.Close();
             }
             tbNumMac.Text = i.ToString();
+            btnNew.Enabled = lbName.RowCount < 30;
         }
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -368,8 +372,8 @@ namespace MacroViewer
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult Res1 = MessageBox.Show("This will overwrite PCmacros",
-                    "Possible loss of macros",     MessageBoxButtons.YesNoCancel,     MessageBoxIcon.Question);
-            if(Res1 == DialogResult.Yes)
+                    "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (Res1 == DialogResult.Yes)
             {
                 SaveAsTXT("PCmacros");
             }
@@ -381,15 +385,15 @@ namespace MacroViewer
             int j = CurrentRowSelected;
             if (j >= lbName.Rows.Count - 1) j = CurrentRowSelected - 1;
             if (j < 0) j = 0;
-            for (int i = 0; i < lbName.Rows.Count-1; i++)
+            for (int i = 0; i < lbName.Rows.Count - 1; i++)
             {
                 if (i >= CurrentRowSelected)
                 {
-                    lbName.Rows[i].Cells[1].Value = lbName.Rows[i+1].Cells[1].Value;
+                    lbName.Rows[i].Cells[1].Value = lbName.Rows[i + 1].Cells[1].Value;
                     Body[i] = Body[i + 1];
                 }
             }
-            lbName.Rows.RemoveAt(lbName.Rows.Count-1);
+            lbName.Rows.RemoveAt(lbName.Rows.Count - 1);
             HaveSelected(lbName.RowCount > 0);
             return j;
         }
@@ -398,16 +402,18 @@ namespace MacroViewer
         {
             tbMacName.Enabled = enable;
             tbNumMac.Enabled = enable;
-            btnAddM.Enabled = enable && lbName.RowCount < 30;
             btnDelM.Enabled = enable && CurrentRowSelected >= 0;
             btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
         }
 
+
         private void btnDelM_Click(object sender, EventArgs e)
         {
             string strName = tbMacName.Text;
+            int i = CurrentRowSelected + 1;
+            RemoveMacroImages();
             DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
-"Deleting a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 != DialogResult.Yes)
             {
                 return;
@@ -423,7 +429,7 @@ namespace MacroViewer
             bool bChanged = false;
             string strName = tbMacName.Text;
             string strOld = "";
-            if(lbName.RowCount == 0)
+            if (lbName.RowCount == 0)
             {
                 // must have wanted to add a row
                 btnAddM_Click(sender, e);
@@ -454,42 +460,53 @@ namespace MacroViewer
         }
 
 
-        private void btnAddM_Click(object sender, EventArgs e)
+        private bool AddNew(string strNewName, string strBody)
         {
-            string strNewName = tbMacName.Text.Trim();
             bool bChanged = false;
-            if(lbName.Rows.Count == 30)
+            if (lbName.Rows.Count == 30)
             {
                 MessageBox.Show("Can only hold 30 macros");
-                return;
+                return false;
             }
-            if(tbBody.Text == "" || tbMacName.Text == "")
+            if (strNewName == "")
             {
-                MessageBox.Show("Must have a name and data");
-                return;
+                MessageBox.Show("Must have a name for the macro");
+                return false;
             }
-            for(int i = 0; i < lbName.Rows.Count; i++)
+            for (int i = 0; i < lbName.Rows.Count; i++)
             {
                 if (lbName.Rows[i].Cells[1].Value.ToString() == strNewName)
                 {
-                    MessageBox.Show("Macro name must be unique: " + (i+1).ToString());
-                    return;
+                    MessageBox.Show("Macro name must be unique: " + (i + 1).ToString());
+                    return false;
                 }
             }
             if (CurrentRowSelected >= 0 && CurrentRowSelected < lbName.Rows.Count)
                 lbName.Rows[CurrentRowSelected].Selected = false;
             CurrentRowSelected = lbName.Rows.Count;
-            lbName.Rows.Add(CurrentRowSelected+1,tbMacName.Text);
-            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
+            lbName.Rows.Add(CurrentRowSelected+1, strNewName);
+            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, strBody);
+            tbBody.Text = strBody;
             SaveAsTXT(TXTName);
             HaveSelected(true);
             lbName.Rows[CurrentRowSelected].Selected = true;
+            tbMacName.Text = strNewName;
+            tbNumMac.Text = lbName.Rows.Count.ToString();
+            EnableMacEdits(true);
+            return true;
+        }
+
+        private void btnAddM_Click(object sender, EventArgs e)
+        {
+            string strNewName = tbMacName.Text.Trim();
+            AddNew(tbMacName.Text.Trim(),tbBody.Text.Trim());
         }
 
         private void btnAddImg_Click(object sender, EventArgs e)
         {
             //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
-            string strImgUrl = "<img src=\"" + tbImgUrl.Text.Trim() + "\" border=\"2\">";
+            string strTmp = tbImgUrl.Text.Trim().Replace("\"", "");
+            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\">";
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
 
@@ -502,10 +519,10 @@ namespace MacroViewer
             string strUrl = "<a href=\"" + tbImgUrl.Text.Trim() + " target=\"_blank\">";
             int i = tbBody.SelectionStart;
             int n = tbBody.SelectionLength;
-            if(n > 0)
+            if (n > 0)
                 strOver = tbBody.Text.Substring(i, n).Trim();
             if (strOver == "") n = 0;
-            if(n == 0)
+            if (n == 0)
             {
                 strUrl += "</a>";
                 tbBody.Text = tbBody.Text.Insert(i, strUrl);
@@ -513,7 +530,7 @@ namespace MacroViewer
             else
             {
                 tbBody.Text = tbBody.Text.Remove(i, n);
-                strUrl+= strOver + "</a>";
+                strUrl += strOver + "</a>";
                 tbBody.Text = tbBody.Text.Insert(i, strUrl);
             }
         }
@@ -575,6 +592,69 @@ namespace MacroViewer
             {
                 SaveAsTXT("PRNmacros");
             }
+        }
+
+        private void ReplaceText(int iStart, int iLen, string strText)
+        {
+            string sPrefix = tbBody.Text.Substring(0, iStart);
+            string sSuffix = tbBody.Text.Substring(iStart + iLen);
+            tbBody.Text = sPrefix + strText + sSuffix;
+        }
+
+        private void btnSetObj_Click(object sender, EventArgs e)
+        {
+            string strReturn = "";
+            bool bHaveHTML = false;
+            int i = tbBody.SelectionStart;
+            int j = tbBody.SelectionLength;
+            string strRaw = tbBody.SelectedText;
+            string strUC = strRaw.ToUpper();
+            bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
+            if (bHaveHTML)
+            {
+                if (j < 12) return; // http://a.com is smallest
+                LinkObject MyLO = new LinkObject(strRaw);
+                MyLO.ShowDialog();
+                strReturn = MyLO.strResultOut;
+                if (strReturn == null) return;
+                if (strReturn == "") return;
+                ReplaceText(i, j, strReturn);
+                MyLO.Dispose();
+            }
+            else
+            {
+                SetText MySET = new SetText(strRaw);
+                MySET.ShowDialog();
+                strReturn = MySET.strResultOut;
+                if (strReturn == null) return;
+                if (strReturn == "") return;
+                if (j > 0)
+                {
+                    ReplaceText(i, j, strReturn);
+                }
+                else
+                {
+                    tbBody.Text = tbBody.Text.Insert(i, strReturn);
+                }
+                MySET.Dispose();
+            }
+        }
+
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            SwitchToMarkup(true);
+            AddNew("Need Name","");
+        }
+
+        private void btnCreateMac_Click(object sender, EventArgs e)
+        {
+            CreateMacro MyCM = new CreateMacro(ref MacroImages);
+            MyCM.ShowDialog();
+            string strReturn = MyCM.strResultOut;
+            if (strReturn == null) return;
+            if (strReturn == "") return;
+            tbBody.Text += strReturn;
         }
     }
 }

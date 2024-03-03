@@ -47,6 +47,8 @@
             this.ClientSize = new System.Drawing.Size(845, 541);
             this.Controls.Add(this.richTextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "help";
             this.Text = "help";
             this.ResumeLayout(false);

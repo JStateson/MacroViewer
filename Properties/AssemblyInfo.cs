@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MacroViewer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Create and edit help macros: adding links and images")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("This program is only useful for HP community forum volunteeers")]
 [assembly: AssemblyProduct("MacroViewer")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]

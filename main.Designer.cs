@@ -39,6 +39,7 @@
             this.btnAdd2New = new System.Windows.Forms.Button();
             this.tbNumMac = new System.Windows.Forms.TextBox();
             this.tbMacName = new System.Windows.Forms.TextBox();
+            this.btnChangeUrls = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,8 +55,10 @@
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnCreateMac = new System.Windows.Forms.Button();
+            this.gbManageImages = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnCreateMac = new System.Windows.Forms.Button();
             this.btnSetObj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -79,19 +82,17 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.gbManageImages = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnChangeUrls = new System.Windows.Forms.Button();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.gbManageImages.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbSupp.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.gbManageImages.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -116,6 +117,7 @@
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             // 
             // Inx
@@ -184,6 +186,18 @@
             this.tbMacName.TabIndex = 3;
             this.toolTip1.SetToolTip(this.tbMacName, "Name the the macro you are adding or editing");
             // 
+            // btnChangeUrls
+            // 
+            this.btnChangeUrls.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangeUrls.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnChangeUrls.Location = new System.Drawing.Point(253, 88);
+            this.btnChangeUrls.Name = "btnChangeUrls";
+            this.btnChangeUrls.Size = new System.Drawing.Size(138, 25);
+            this.btnChangeUrls.TabIndex = 9;
+            this.btnChangeUrls.Text = "Change URLS";
+            this.toolTip1.SetToolTip(this.btnChangeUrls, "You must upload images to your\r\nHP community picture folder first.");
+            this.btnChangeUrls.UseVisualStyleBackColor = true;
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -200,7 +214,8 @@
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.utilsToolStripMenuItem,
-            this.testSignatureToolStripMenuItem});
+            this.testSignatureToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
@@ -326,6 +341,39 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Enter text or html and click to Show As Page";
             // 
+            // gbManageImages
+            // 
+            this.gbManageImages.Controls.Add(this.label4);
+            this.gbManageImages.Controls.Add(this.btnChangeUrls);
+            this.gbManageImages.Controls.Add(this.label3);
+            this.gbManageImages.Controls.Add(this.btnCreateMac);
+            this.gbManageImages.Location = new System.Drawing.Point(18, 563);
+            this.gbManageImages.Name = "gbManageImages";
+            this.gbManageImages.Size = new System.Drawing.Size(397, 131);
+            this.gbManageImages.TabIndex = 8;
+            this.gbManageImages.TabStop = false;
+            this.gbManageImages.Text = "Manage Images";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.Location = new System.Drawing.Point(6, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(199, 32);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Location = new System.Drawing.Point(6, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(225, 32);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "This can create an entire macro\r\none image at a time";
+            // 
             // btnCreateMac
             // 
             this.btnCreateMac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -337,16 +385,6 @@
             this.btnCreateMac.Text = "Append Image";
             this.btnCreateMac.UseVisualStyleBackColor = true;
             this.btnCreateMac.Click += new System.EventHandler(this.btnCreateMac_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Info;
-            this.label3.Location = new System.Drawing.Point(6, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 32);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "This can create an entire macro\r\none image at a time";
             // 
             // btnSetObj
             // 
@@ -456,6 +494,8 @@
             this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
             this.btnCopyTo.Text = "Copy to clipboard";
+            this.toolTip1.SetToolTip(this.btnCopyTo, "Change to markup and copy to clipboard then\r\nlog into your HP Community page, sel" +
+        "ect your\r\nmacro list, edit the macro and past into the\r\nmacro too update it.");
             this.btnCopyTo.UseVisualStyleBackColor = true;
             this.btnCopyTo.Click += new System.EventHandler(this.btnCopyTo_Click);
             // 
@@ -611,42 +651,15 @@
             this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
             this.cbLaunchPage.TabIndex = 5;
             this.cbLaunchPage.Text = "Launch Page";
+            this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
-            // gbManageImages
+            // aboutToolStripMenuItem
             // 
-            this.gbManageImages.Controls.Add(this.label4);
-            this.gbManageImages.Controls.Add(this.btnChangeUrls);
-            this.gbManageImages.Controls.Add(this.label3);
-            this.gbManageImages.Controls.Add(this.btnCreateMac);
-            this.gbManageImages.Location = new System.Drawing.Point(18, 563);
-            this.gbManageImages.Name = "gbManageImages";
-            this.gbManageImages.Size = new System.Drawing.Size(397, 131);
-            this.gbManageImages.TabIndex = 8;
-            this.gbManageImages.TabStop = false;
-            this.gbManageImages.Text = "Manage Images";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Info;
-            this.label4.Location = new System.Drawing.Point(6, 84);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(199, 32);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
-            // 
-            // btnChangeUrls
-            // 
-            this.btnChangeUrls.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangeUrls.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnChangeUrls.Location = new System.Drawing.Point(253, 88);
-            this.btnChangeUrls.Name = "btnChangeUrls";
-            this.btnChangeUrls.Size = new System.Drawing.Size(138, 25);
-            this.btnChangeUrls.TabIndex = 9;
-            this.btnChangeUrls.Text = "Change URLS";
-            this.toolTip1.SetToolTip(this.btnChangeUrls, "You must upload images to your\r\nHP community picture folder first.");
-            this.btnChangeUrls.UseVisualStyleBackColor = true;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -668,6 +681,8 @@
             this.gpMainEdit.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.gbManageImages.ResumeLayout(false);
+            this.gbManageImages.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -678,8 +693,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.gbManageImages.ResumeLayout(false);
-            this.gbManageImages.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -739,6 +752,7 @@
         private System.Windows.Forms.GroupBox gbManageImages;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnChangeUrls;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

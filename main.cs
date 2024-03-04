@@ -295,7 +295,8 @@ namespace MacroViewer
         {
             ReadMacroHTML();
             EnableMacEdits(false);
-            UsingMarkup(true);
+            gpMainEdit.Enabled = true;
+            gbSupp.Enabled = false;
         }
 
         private void AllocateMacroImages(string strLoc)
@@ -304,8 +305,10 @@ namespace MacroViewer
             MacroImages.strFileLocation = strLoc;
         }
 
+        //this reads local image files and is not used when working with HTML data from the HP Community macros list
         private void LoadMacroImages(int n)
         {
+            if (MacroImages == null) return; // original macros from HP do not have local image files
             MacroImages.MacNum = n;
             MacroImages.Init(tbMacName.Text);
             MacroImages.ReadMacroImages();
@@ -322,6 +325,7 @@ namespace MacroViewer
             int i = 0;
             TXTName = strFN;
             gpMainEdit.Enabled = true;
+            gbSupp.Enabled = true;
             string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
             AllocateMacroImages(TXTmacs + "\\" + strFN);
             lbName.Rows.Clear();
@@ -349,7 +353,6 @@ namespace MacroViewer
             LoadFromTXT("PCmacros");
             ShowSelectedRow(0);
             EnableMacEdits(true);
-            UsingMarkup(false);
         }
 
         private void SaveAsTXT(string strFN)
@@ -558,10 +561,6 @@ namespace MacroViewer
 
         private void UsingMarkup(bool bEnable)
         {
-            btnAddURL.Enabled = bEnable;
-            btnAddImg.Enabled = bEnable;
-            tbImgUrl.Enabled = bEnable;
-            btnCLrUrl.Enabled = bEnable;
             btnAdd1New.Enabled = bEnable;
             btnAdd2New.Enabled = bEnable;
         }
@@ -581,7 +580,6 @@ namespace MacroViewer
             LoadFromTXT("PRNmacros");
             ShowSelectedRow(0);
             EnableMacEdits(true);
-            UsingMarkup(false);
         }
 
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -655,6 +653,13 @@ namespace MacroViewer
             if (strReturn == null) return;
             if (strReturn == "") return;
             tbBody.Text += strReturn;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog();
+            aboutBox.Dispose();
         }
     }
 }

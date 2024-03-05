@@ -43,12 +43,12 @@ namespace MacroViewer
             string strTemp = strPrefix + strIn + strSuffix;
             if (bUseWebView)
             {
-                WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);
+                ShowPage MyShowPage = new ShowPage(strTemp);    // this is WebView2 stuff
                 MyShowPage.Show();
             }
             else
             {
-                ShowPage MyShowPage = new ShowPage(strTemp);
+                WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);    // ie11 old browser
                 MyShowPage.Show();
             }
         }

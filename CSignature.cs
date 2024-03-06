@@ -92,18 +92,18 @@ namespace MacroViewer
 
         }
 
-        private void RunBrowser()
+        private void RunBrowser(string sLoc)
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(sLoc, strTemp);
         }
 
         private void btnShowBrowser_Click(object sender, EventArgs e)
         {
-            RunBrowser();
+            RunBrowser(SigLoc);
         }
 
         private void blnAdd_Click(object sender, EventArgs e)

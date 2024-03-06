@@ -117,6 +117,12 @@
     <Compile Include="main.Designer.cs">
       <DependentUpon>main.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageMacros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageMacros.Designer.cs">
+      <DependentUpon>ManageMacros.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetText.cs">
@@ -124,6 +130,12 @@
     </Compile>
     <Compile Include="SetText.Designer.cs">
       <DependentUpon>SetText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowPage.cs">
       <SubType>Form</SubType>
@@ -167,6 +179,9 @@
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageMacros.resx">
+      <DependentUpon>ManageMacros.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -179,6 +194,9 @@
     </Compile>
     <EmbeddedResource Include="SetText.resx">
       <DependentUpon>SetText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowPage.resx">
       <DependentUpon>ShowPage.cs</DependentUpon>
@@ -205,6 +223,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="hp-macros-help.png" />
+    <Content Include="Resources\hp128.bmp" />
+    <Content Include="Resources\MEhelp1.png" />
     <None Include="Resources\favicon.ico" />
     <None Include="hp128.png" />
   </ItemGroup>

@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 
 namespace MacroViewer
@@ -15,11 +17,12 @@ namespace MacroViewer
         int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
         string[] Body = new string[NumMacros];
+        string strType = "";    // eithe PRN or PC for printer or pc macros
         string TXTmacs;
         string TXTName = "";
         int CurrentRowSelected = -1;
         OpenFileDialog ofd;
-        CMacImages MacroImages;
+
 
         //CSendCloud SendToCloud = new CSendCloud();
 
@@ -31,6 +34,8 @@ namespace MacroViewer
             SwitchToMarkup(true);
             //SendToCloud.Init();
             gbManageImages.Enabled = System.Diagnostics.Debugger.IsAttached;
+            Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
+            Utils.VolunteerUserID = Properties.Settings.Default.UserID;
         }
 
 
@@ -156,19 +161,20 @@ namespace MacroViewer
             FindBody();
         }
 
-        private void ReadMacroHTML()
+        private bool ReadMacroHTML()
         {
             int nLength;
             string LastFolder = "";
             ofd.Filter = "HTML Files|macros.html";
             ofd.ShowDialog();
             string strFileName = ofd.FileName;
-            if (!File.Exists(strFileName)) return;
+            if (!File.Exists(strFileName)) return false;
             LastFolder = Path.GetDirectoryName(ofd.FileName);
             Properties.Settings.Default.LastFolder = LastFolder;
             aPage = File.ReadAllText(strFileName);
             nLength = aPage.Length;
             ParsePage();
+            return true;
         }
 
         private void RunBrowser()
@@ -177,7 +183,7 @@ namespace MacroViewer
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(TXTmacs, strTemp);
         }
 
         private void btnGo_Click(object sender, EventArgs e)
@@ -208,7 +214,6 @@ namespace MacroViewer
             lbName.Rows[CurrentRowSelected].Selected = true;
             if (cbLaunchPage.Checked)
                 RunBrowser();
-            LoadMacroImages(e);
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -293,32 +298,14 @@ namespace MacroViewer
 
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadMacroHTML();
-            EnableMacEdits(false);
-            gpMainEdit.Enabled = true;
-            gbSupp.Enabled = false;
+            if(ReadMacroHTML())
+            {
+                EnableMacEdits(false);
+                gpMainEdit.Enabled = true;
+                gbSupp.Enabled = false;
+                strType = "";
+            }            
         }
-
-        private void AllocateMacroImages(string strLoc)
-        {
-            MacroImages = new CMacImages();
-            MacroImages.strFileLocation = strLoc;
-        }
-
-        //this reads local image files and is not used when working with HTML data from the HP Community macros list
-        private void LoadMacroImages(int n)
-        {
-            if (MacroImages == null) return; // original macros from HP do not have local image files
-            MacroImages.MacNum = n;
-            MacroImages.Init(tbMacName.Text);
-            MacroImages.ReadMacroImages();
-        }
-
-        private void RemoveMacroImages()
-        {
-            MacroImages.RemoveAll();
-        }
-
 
         private void LoadFromTXT(string strFN)
         {
@@ -327,7 +314,6 @@ namespace MacroViewer
             gpMainEdit.Enabled = true;
             gbSupp.Enabled = true;
             string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
-            AllocateMacroImages(TXTmacs + "\\" + strFN);
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
             {
@@ -351,6 +337,7 @@ namespace MacroViewer
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromTXT("PCmacros");
+            strType = "PC";
             ShowSelectedRow(0);
             EnableMacEdits(true);
         }
@@ -414,7 +401,6 @@ namespace MacroViewer
         {
             string strName = tbMacName.Text;
             int i = CurrentRowSelected + 1;
-            RemoveMacroImages();
             DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
 "Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 != DialogResult.Yes)
@@ -578,6 +564,7 @@ namespace MacroViewer
         private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromTXT("PRNmacros");
+            strType = "PRN";
             ShowSelectedRow(0);
             EnableMacEdits(true);
         }
@@ -645,9 +632,24 @@ namespace MacroViewer
             AddNew("Need Name","");
         }
 
-        private void btnCreateMac_Click(object sender, EventArgs e)
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateMacro MyCM = new CreateMacro(ref MacroImages);
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog();
+            aboutBox.Dispose();
+        }
+
+        private void btnChangeUrls_Click(object sender, EventArgs e)
+        {
+            ManageMacros MyManageMac = new ManageMacros(strType, ref Body);
+            MyManageMac.ShowDialog();
+            MyManageMac.Dispose();
+        }
+
+        private void btnAppendMac_Click(object sender, EventArgs e)
+        {
+            CreateMacro MyCM = new CreateMacro(strType);
             MyCM.ShowDialog();
             string strReturn = MyCM.strResultOut;
             if (strReturn == null) return;
@@ -655,11 +657,18 @@ namespace MacroViewer
             tbBody.Text += strReturn;
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void downloadMacrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox aboutBox = new AboutBox();
-            aboutBox.ShowDialog();
-            aboutBox.Dispose();
+            //https://h30434.www3.hp.com/t5/user/myprofilepage/tab/user-macros
+            string UserMacs = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/user-macros";
+            Process.Start("microsoft-edge:" + UserMacs);
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings MySettings = new Settings(ref Utils.BrowserWanted, ref Utils.VolunteerUserID);
+            MySettings.ShowDialog();
+            MySettings.Dispose();
         }
     }
 }

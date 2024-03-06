@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static MacroViewer.Utils;
+
+namespace MacroViewer
+{
+    public partial class Settings : Form
+    {
+        private eBrowserType eBrowser;
+        private string userid;
+        public Settings(ref eBrowserType reBrowser, ref string ruserid)
+        {
+            InitializeComponent();
+            userid = ruserid;
+            eBrowser = reBrowser;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (rbChrome.Checked) eBrowser = eBrowserType.eChrome;
+            if (rbEdge.Checked) eBrowser = eBrowserType.eEdge;
+            if (rbFirefox.Checked) eBrowser = eBrowserType.eFirefox;
+            Properties.Settings.Default.BrowserID = (int)eBrowser;
+            if (tbUserID.Text != "")
+            { 
+                userid = tbUserID.Text;
+                Properties.Settings.Default.UserID = userid;
+            }
+            Properties.Settings.Default.Save();
+        }
+
+    }
+}

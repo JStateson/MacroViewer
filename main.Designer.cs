@@ -40,6 +40,8 @@
             this.tbNumMac = new System.Windows.Forms.TextBox();
             this.tbMacName = new System.Windows.Forms.TextBox();
             this.btnChangeUrls = new System.Windows.Forms.Button();
+            this.btnCopyTo = new System.Windows.Forms.Button();
+            this.cbLaunchPage = new System.Windows.Forms.CheckBox();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,13 +54,14 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gbManageImages = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnCreateMac = new System.Windows.Forms.Button();
+            this.btnAppendMac = new System.Windows.Forms.Button();
             this.btnSetObj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -67,7 +70,6 @@
             this.btnNoMark = new System.Windows.Forms.Button();
             this.btnToMark = new System.Windows.Forms.Button();
             this.btnToNotepad = new System.Windows.Forms.Button();
-            this.btnCopyTo = new System.Windows.Forms.Button();
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnCLrUrl = new System.Windows.Forms.Button();
@@ -81,8 +83,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -197,6 +199,33 @@
             this.btnChangeUrls.Text = "Change URLS";
             this.toolTip1.SetToolTip(this.btnChangeUrls, "You must upload images to your\r\nHP community picture folder first.");
             this.btnChangeUrls.UseVisualStyleBackColor = true;
+            this.btnChangeUrls.Click += new System.EventHandler(this.btnChangeUrls_Click);
+            // 
+            // btnCopyTo
+            // 
+            this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyTo.Location = new System.Drawing.Point(235, 35);
+            this.btnCopyTo.Name = "btnCopyTo";
+            this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
+            this.btnCopyTo.TabIndex = 9;
+            this.btnCopyTo.Text = "Copy to clipboard";
+            this.toolTip1.SetToolTip(this.btnCopyTo, "Change to markup and copy to clipboard then\r\nlog into your HP Community page, sel" +
+        "ect your\r\nmacro list, edit the macro and past into the\r\nmacro too update it.");
+            this.btnCopyTo.UseVisualStyleBackColor = true;
+            this.btnCopyTo.Click += new System.EventHandler(this.btnCopyTo_Click);
+            // 
+            // cbLaunchPage
+            // 
+            this.cbLaunchPage.AutoSize = true;
+            this.cbLaunchPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbLaunchPage.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbLaunchPage.Location = new System.Drawing.Point(63, 28);
+            this.cbLaunchPage.Name = "cbLaunchPage";
+            this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
+            this.cbLaunchPage.TabIndex = 5;
+            this.cbLaunchPage.Text = "Launch Page";
+            this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
+            this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
             // tbBody
             // 
@@ -215,7 +244,8 @@
             this.helpToolStripMenuItem,
             this.utilsToolStripMenuItem,
             this.testSignatureToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
@@ -230,7 +260,8 @@
             this.loadPrinterMacsToolStripMenuItem,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
-            this.savePrinterMacsToolStripMenuItem});
+            this.savePrinterMacsToolStripMenuItem,
+            this.downloadMacrosToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -296,6 +327,13 @@
             this.testSignatureToolStripMenuItem.Text = "Test Signature";
             this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // gpMainEdit
             // 
             this.gpMainEdit.Controls.Add(this.btnNew);
@@ -346,7 +384,7 @@
             this.gbManageImages.Controls.Add(this.label4);
             this.gbManageImages.Controls.Add(this.btnChangeUrls);
             this.gbManageImages.Controls.Add(this.label3);
-            this.gbManageImages.Controls.Add(this.btnCreateMac);
+            this.gbManageImages.Controls.Add(this.btnAppendMac);
             this.gbManageImages.Location = new System.Drawing.Point(18, 563);
             this.gbManageImages.Name = "gbManageImages";
             this.gbManageImages.Size = new System.Drawing.Size(397, 131);
@@ -374,17 +412,17 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "This can create an entire macro\r\none image at a time";
             // 
-            // btnCreateMac
+            // btnAppendMac
             // 
-            this.btnCreateMac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateMac.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCreateMac.Location = new System.Drawing.Point(253, 28);
-            this.btnCreateMac.Name = "btnCreateMac";
-            this.btnCreateMac.Size = new System.Drawing.Size(138, 25);
-            this.btnCreateMac.TabIndex = 7;
-            this.btnCreateMac.Text = "Append Image";
-            this.btnCreateMac.UseVisualStyleBackColor = true;
-            this.btnCreateMac.Click += new System.EventHandler(this.btnCreateMac_Click);
+            this.btnAppendMac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAppendMac.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnAppendMac.Location = new System.Drawing.Point(253, 28);
+            this.btnAppendMac.Name = "btnAppendMac";
+            this.btnAppendMac.Size = new System.Drawing.Size(138, 25);
+            this.btnAppendMac.TabIndex = 7;
+            this.btnAppendMac.Text = "Append Image";
+            this.btnAppendMac.UseVisualStyleBackColor = true;
+            this.btnAppendMac.Click += new System.EventHandler(this.btnAppendMac_Click);
             // 
             // btnSetObj
             // 
@@ -485,19 +523,6 @@
             this.btnToNotepad.Text = "Copy to notepad";
             this.btnToNotepad.UseVisualStyleBackColor = true;
             this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
-            // 
-            // btnCopyTo
-            // 
-            this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(235, 35);
-            this.btnCopyTo.Name = "btnCopyTo";
-            this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
-            this.btnCopyTo.TabIndex = 9;
-            this.btnCopyTo.Text = "Copy to clipboard";
-            this.toolTip1.SetToolTip(this.btnCopyTo, "Change to markup and copy to clipboard then\r\nlog into your HP Community page, sel" +
-        "ect your\r\nmacro list, edit the macro and past into the\r\nmacro too update it.");
-            this.btnCopyTo.UseVisualStyleBackColor = true;
-            this.btnCopyTo.Click += new System.EventHandler(this.btnCopyTo_Click);
             // 
             // btnCopyFrom
             // 
@@ -641,25 +666,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Double click any row to transfer to editor";
             // 
-            // cbLaunchPage
+            // downloadMacrosToolStripMenuItem
             // 
-            this.cbLaunchPage.AutoSize = true;
-            this.cbLaunchPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbLaunchPage.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbLaunchPage.Location = new System.Drawing.Point(63, 28);
-            this.cbLaunchPage.Name = "cbLaunchPage";
-            this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
-            this.cbLaunchPage.TabIndex = 5;
-            this.cbLaunchPage.Text = "Launch Page";
-            this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
-            this.cbLaunchPage.UseVisualStyleBackColor = true;
+            this.downloadMacrosToolStripMenuItem.Name = "downloadMacrosToolStripMenuItem";
+            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadMacrosToolStripMenuItem.Text = "Download Macros";
+            this.downloadMacrosToolStripMenuItem.Click += new System.EventHandler(this.downloadMacrosToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -747,12 +766,14 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label lbM;
         private System.Windows.Forms.Label lbNotM;
-        private System.Windows.Forms.Button btnCreateMac;
+        private System.Windows.Forms.Button btnAppendMac;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox gbManageImages;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnChangeUrls;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadMacrosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

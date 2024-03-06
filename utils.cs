@@ -1,14 +1,17 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace MacroViewer
 {
     public partial class utils : Form
     {
-
+        private string sLoc;
         public utils()
         {
             InitializeComponent();
+            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
         }
 
         private void MakeResult()
@@ -62,7 +65,7 @@ namespace MacroViewer
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(sLoc, strTemp);
         }
     }
 }

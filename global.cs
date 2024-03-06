@@ -9,9 +9,94 @@ using System.Collections.Generic;
 using System.IO;
 using static System.Drawing.ImageConverter;
 using System.Drawing;
+using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.Core;
+using System.Text;
 
 namespace MacroViewer
-{
+{    
+    public static class Utils
+    {
+        public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 
+        public enum eBrowserType
+        {
+            eEdge = 0,
+            eChrome = 1,
+            eFirefox = 2
+        }
+
+        public static eBrowserType BrowserWanted = eBrowserType.eEdge;
+        public static string VolunteerUserID="";
+
+        public static void PurgeLocalImages(string strType,  string WhereExe)
+        {
+            var dir = new DirectoryInfo(WhereExe);
+            foreach (var file in dir.EnumerateFiles(AssignedImageName + "-" + strType +"-*.png"))
+            {
+                file.Delete();
+            }
+        }
+        public static string GetNextImageFile(string strType, string strExe)
+        {
+            int i = 0;
+            string strName, strPath;
+            while(true)
+            {
+                strName = AssignedImageName + "-" + strType + "-" + i.ToString() + ".png";
+                strPath = strExe + "/" + strName;
+                if(File.Exists(strPath))
+                {
+                    i++;
+                    if(i > 90)
+                    {
+                        MessageBox.Show("ERROR: over 90 images in " + strExe + "\r\nSave what you can as I am purging");
+                        Process.Start(strExe);
+                        PurgeLocalImages(strType, strExe);
+                    }
+                    continue;
+                }
+                return strName;
+            }
+        }
+
+        // paths returned from file explorer have quotes
+        public static string RemoveOuterQuotes(string strIn)
+        {
+            string strTmp = strIn.Trim();
+            if (strTmp.Substring(0, 1) == "\"")
+            {
+                strTmp = strTmp.Replace("\"", "");
+            }
+            return strTmp.Trim();
+        }
+
+        /*
+    // ext = "*.bmp;*.dib;*.rle"           descr = BMP
+    // ext = "*.jpg;*.jpeg;*.jpe;*.jfif"   descr = JPEG
+    // ext = "*.gif"                       descr = GIF
+    // ext = "*.tif;*.tiff"                descr = TIFF
+    // ext = "*.png"                       descr = PNG
+    */
+        public static bool IsUrlImage(string aLCase)
+        {
+            string[] ImgExt = new string[11]
+            {".bmp",".dib",".rle",".jpg",".jpeg",".jpe",".jfif",".gif",".tif",".tiff",".png" };
+            if (aLCase.Contains("image/serverpage"))
+                return true; // must be from HP server
+            foreach (string aImg in ImgExt)
+            {
+                if (aLCase.Contains(aImg)) return true;
+            }
+            return false;
+        }
+
+        public static bool bIsHTTP(string strIN)
+        {
+            string strUC = strIN.ToUpper();
+            return (strUC.Contains("HTTPS:") || strUC.Contains("HTTP:"));
+        }
+
+    }
     internal class CShowBrowser
     {
         private bool bUseWebView  = true;
@@ -38,12 +123,14 @@ namespace MacroViewer
         {
             bUseWebView = WebViewIsInstalled();
         }
-        public void ShowInBrowser(string strIn)
+
+
+        public void ShowInBrowser(string sLoc, string strIn)
         {
             string strTemp = strPrefix + strIn + strSuffix;
             if (bUseWebView)
             {
-                ShowPage MyShowPage = new ShowPage(strTemp);    // this is WebView2 stuff
+                ShowPage MyShowPage = new ShowPage(sLoc, strTemp);    // this is WebView2 stuff
                 MyShowPage.Show();
             }
             else
@@ -113,139 +200,6 @@ namespace MacroViewer
 
             // Use SendKeys to Paste
             SendKeys.Send("^V");
-        }
-    }
-
-    public class CMacroImage
-    {
-        public bool bIsRemote;         // if true then the url exists else the file is local only
-        public string sRemoteUrl;      // where file is located else it is folder with executable  
-        public int ImgNum;             // 0..number of images etc
-    }
-
-    public class CMacImages
-    {
-        public int MacNum;
-        public int NextAvailableImgIndex;
-        public string strFileLocation;  // path to the file but missing the number and extension
-        public string sMacName;
-        public List<CMacroImage> MacroImageL;
-        public void Init(string strMacname)
-        {
-            MacroImageL = new List<CMacroImage>();
-            sMacName = strMacname;
-            NextAvailableImgIndex = 0;
-        }
-        private string GetImageID(int iNum) // iNum is always 0..count-1
-        {
-            return strFileLocation + "-" + MacNum.ToString() + "-" + MacroImageL[iNum].ImgNum.ToString() + ".id";
-        }
-        private string GetFilenameID(int iNum) // iNum is always 0..count-1
-        {
-            return strFileLocation + "-" + MacNum.ToString() + "-" + iNum.ToString(); // + ".id";
-        }
-        public string GetImageLocation(int iNum)
-        {
-            return MacroImageL[iNum].sRemoteUrl;
-        }
-
-        public void SetNextIndex()
-        {
-            NextAvailableImgIndex = 0;
-            if(MacroImageL.Count == 0)
-            {
-                return;
-            }
-            foreach (CMacroImage img1 in MacroImageL)
-            {
-                NextAvailableImgIndex = Math.Max(NextAvailableImgIndex, img1.ImgNum);
-            }
-            NextAvailableImgIndex++;
-        }
-
-        public void ReadMacroImages()
-        {
-            int i = 0;
-            NextAvailableImgIndex = -1;
-            while (true)
-            {
-                string strFileN = GetFilenameID(i) + ".id";
-                if (File.Exists(strFileN))
-                {
-                    CMacroImage mi = new CMacroImage();
-                    string[] IDs = File.ReadAllLines(strFileN);
-                    mi.bIsRemote = IDs[0].Contains("REMOTE");
-                    mi.sRemoteUrl = IDs[1];
-                    mi.ImgNum = i;
-                    NextAvailableImgIndex = Math.Max(NextAvailableImgIndex, i);
-                    MacroImageL.Add(mi);
-                }
-                i++;
-                if (i > 20) break;
-            }
-            NextAvailableImgIndex++;
-        }
-
-        public string AssembleImage()
-        {
-            int n = NextAvailableImgIndex - 1;
-            return "<img src=\"" + MacroImageL[n].sRemoteUrl + "\" border=\"2\"  height=\"200\" width=\"200\">";
-        }
-
-        public string GetNextFilename()
-        {
-            return GetFilenameID(NextAvailableImgIndex);
-        }
-
-        public void RemoveAll()
-        {
-            int i = 0;
-            while (true)
-            {
-                string strFileN = GetFilenameID(i) + ".id";
-                if (File.Exists(strFileN))
-                {
-                    File.Delete(strFileN);
-                }
-                strFileN = GetFilenameID(i) + ".png";
-                if (File.Exists(strFileN))
-                {
-                    File.Delete(strFileN);
-                }
-                i++;
-                if (i > 20) break;
-            }
-            NextAvailableImgIndex = 0;
-            MacroImageL = null;
-        }
-
-        public void AddRemoteImage(string strUrl)
-        {
-            string strFN = GetFilenameID(NextAvailableImgIndex);
-            CMacroImage mi = new CMacroImage();
-            mi.sRemoteUrl = strUrl;
-            mi.bIsRemote = true;
-            mi.ImgNum = NextAvailableImgIndex;
-            string strOut = "REMOTE" + Environment.NewLine + strUrl;
-            File.WriteAllText(strFN + ".id", strOut);
-            NextAvailableImgIndex++;
-            MacroImageL.Add(mi);
-        }
-
-        public void AddLocalImage(ref PictureBox pb)
-        {
-            string strFN = GetFilenameID(NextAvailableImgIndex);
-            ImageConverter converter = new ImageConverter();
-            byte[] MyByteArray = (byte[])converter.ConvertTo(pb.Image, typeof(byte[]));
-            File.WriteAllBytes(strFN + ".png", MyByteArray);
-            string strOut = "LOCAL" + Environment.NewLine + strFN + ".png";
-            File.WriteAllText(strFN + ".id", strOut);
-            CMacroImage mi = new CMacroImage();
-            mi.sRemoteUrl = strFN + ".png";
-            mi.bIsRemote = false;
-            mi.ImgNum = NextAvailableImgIndex;
-            MacroImageL.Add(mi);
-            NextAvailableImgIndex++;
         }
     }
 }

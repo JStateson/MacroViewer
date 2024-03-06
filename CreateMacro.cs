@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,66 +29,65 @@ namespace MacroViewer
 {
     public partial class CreateMacro : Form
     {
-        public string strResultOut { get; set; }
-        private bool bLocal = false;
-        private CMacImages MyMacImg;
-        public CreateMacro(ref CMacImages MacImg)
+        public string strResultOut { get; set; }        public string strLocalOut { get; set; }
+        //private bool bIsServer = false; // is on the HP image server
+        private bool bIsPath = false;   // if a file on the disk then is true
+        private int dHeight = 200;
+        private int dWidth = 200;
+        private string ExeFolder;
+        string strType = "";
+        public CreateMacro(string rstrType)
         {
             InitializeComponent();
-            if(MacImg != null)
-            {
-                gbSelectType.Text = "Macro number " + (MacImg.MacNum + 1).ToString();
-            }
-            else
-            {
-                gbSelectType.Text = "";
-                tbImgCnt.Text = "0";
-                tbNextNum.Text = "0";
-                return;
-            }
-            if(MacImg.MacroImageL == null)
-            {
-                tbImgCnt.Text = "0";
-                tbNextNum.Text = "0";
-            }
-            else
-            {
-                tbImgCnt.Text = MacImg.MacroImageL.Count.ToString();
-                tbNextNum.Text = MacImg.NextAvailableImgIndex.ToString();
-            }
-            MyMacImg = MacImg;
-            tbMacName.Text = MacImg.sMacName;
+            ExeFolder = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            strLocalOut = "";
+            strType = rstrType;
         }
 
 
         private void btnFormRemote_Click(object sender, EventArgs e)
         {
-            if(tbUrlText.Text == "")
+            if (!Utils.IsUrlImage(tbUrlText.Text))
             {
-                return;
+                return; // needs to be an image
             }
-            pbImage.ImageLocation = tbUrlText.Text;
-            bLocal = true;
+
+            //bIsServer = tbUrlText.Text.Contains("image/serverpage");
+            bIsPath = !Utils.bIsHTTP(tbUrlText.Text);
+            pbImage.ImageLocation = Utils.RemoveOuterQuotes(tbUrlText.Text);
         }
 
 
+        public string AssembleImage(string strUrl, int Height, int Width)
+        {
+            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + " width=\"" + Width.ToString() + "\">";
+        }
+
         private void AddImage()
         {
-            if (bLocal)
+            string strImageName = "", strImagePath="";
+            int Width = 200, Height = 200;  //default
+            if (bIsPath) // do not know H or W so default is used
             {
-                MyMacImg.AddRemoteImage(tbUrlText.Text);
+                strImageName =  Utils.GetNextImageFile(strType, ExeFolder);
+                strImagePath = ExeFolder + "/" + strImageName;
+                ImageConverter converter = new ImageConverter();
+                byte[] MyByteArray = (byte[])converter.ConvertTo(pbImage.Image, typeof(byte[]));
+                File.WriteAllBytes(strImageName, MyByteArray);
+                Width = pbImage.Image.Width;
+                Height = pbImage.Image.Height;
             }
             else
             {
-                MyMacImg.AddLocalImage(ref pbImage);
+                strImageName = tbUrlText.Text;
             }
+            strResultOut = AssembleImage(strImageName, Width, Height);
         }
 
 
         private void btnApply_Click(object sender, EventArgs e)
         {
             AddImage();
-            strResultOut = MyMacImg.AssembleImage();
             this.Close();
         }
 
@@ -99,12 +100,10 @@ namespace MacroViewer
         {
             if (Clipboard.ContainsImage())
             {
-
                 pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 pbImage.Image = Clipboard.GetImage();
-                bLocal = false;
-                tbUrlText.Text = MyMacImg.GetNextFilename();
-
+                bIsPath = true;
+                btnApply.Enabled = true;
             }
             else
             {
@@ -117,6 +116,11 @@ namespace MacroViewer
         {
             pbImage.ImageLocation =null;
             pbImage.Image = null;
+        }
+
+        private void pbImage_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            btnApply.Enabled = true;
         }
     }
 }

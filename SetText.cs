@@ -1,10 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace MacroViewer
 {
     public partial class SetText : Form
     {
+        private string sLoc;
         public string strResultOut { get; set; }
         public SetText(string strIn)
         {
@@ -14,6 +17,7 @@ namespace MacroViewer
             tbSelectedItem.Text = strIn;
             tbResult.Text = "";
             tbRawUrl.Text = "";
+            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -57,18 +61,18 @@ namespace MacroViewer
             tbResult.Text = strResultOut;
     }
 
-        private void RunBrowser()
+        private void RunBrowser(string sLoc)
         {
             string strTemp = tbResult.Text;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(sLoc, strTemp);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            RunBrowser(); 
+            RunBrowser(sLoc); 
         }
     }
 }

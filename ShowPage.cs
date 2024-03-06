@@ -1,18 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Net;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Web.WebView2.Core;
-using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using Microsoft.Web.WebView2.WinForms;
 /*
  * webbrowser did not work with some HP sites so I read this
  * https://stackoverflow.com/questions/790542/replacing-net-webbrowser-control-with-a-better-browser-like-chrome
@@ -24,17 +15,48 @@ namespace MacroViewer
 {
     public partial class ShowPage : Form
     {
-
-        async void ShowStuff(string strIn)
+        WebView2 webview;
+        private int fHeight, fWidth;
+        private int x = 20, y = 20;
+        public async void ShowStuff(string sLoc, string strIn)
         {
-            await webView.EnsureCoreWebView2Async();
-            webView.NavigateToString(strIn);
+  
+            webview = new WebView2
+            {
+                // CreationProperties = new CoreWebView2CreationProperties(),
+                Location = new Point(x, y),
+                Size = new Size(fWidth, fHeight)
+            };
+
+            var promise = webview.EnsureCoreWebView2Async().GetAwaiter();
+            promise.OnCompleted(() =>
+            {
+                try
+                {
+                    promise.GetResult();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+                webview.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                    hostName: "myprivateapp", folderPath: sLoc,
+                    accessKind: CoreWebView2HostResourceAccessKind.Allow);
+                webview.CoreWebView2.Navigate("https://myprivateapp/MyHtml.html");
+            });
+
+            this.Controls.Add(webview);
+            //this.ShowDialog();
         }
 
-        public ShowPage(string ShowString)
+        public ShowPage(string sLoc, string ShowString)
         {
             InitializeComponent();
-            ShowStuff(ShowString);
+            fHeight = ShowPage.ActiveForm.Height - 2*y;
+            fWidth = ShowPage.ActiveForm.Width - 2*x;
+            File.WriteAllText(sLoc + "/MyHtml.html", ShowString);
+            ShowStuff(sLoc, ShowString);
         }
 
     }

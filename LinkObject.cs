@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -6,6 +8,7 @@ namespace MacroViewer
 {
     public partial class LinkObject : Form
     {
+        private string sLoc;
         private string strLC;
         public string strResultOut { get; set; }
         private bool bIsImage = false;
@@ -53,6 +56,7 @@ namespace MacroViewer
             rbNotImage.Checked = !bIsImage;
             tbSelectedItem.Text = rstrIn;
             RBsetContext();
+            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -83,18 +87,18 @@ namespace MacroViewer
             }
         }
 
-        private void RunBrowser()
+        private void RunBrowser(string sLoc)
         {
             string strTemp = tbImageUrl.Text;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(sLoc, strTemp);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            RunBrowser();
+            RunBrowser(sLoc);
         }
 
         private void rbNotImage_CheckedChanged(object sender, EventArgs e)

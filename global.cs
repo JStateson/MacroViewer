@@ -26,7 +26,24 @@ namespace MacroViewer
         }
 
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
-        public static string VolunteerUserID="";
+        public static string VolunteerUserID = "";
+        public static void LocalBrowser(string strUrl)
+        {
+            switch (BrowserWanted)
+            {
+                case Utils.eBrowserType.eFirefox:
+                    Process.Start("firefox.exe", "-new-window " + strUrl);
+                    break;
+                case Utils.eBrowserType.eEdge:
+                    Process.Start("microsoft-edge:" + strUrl);
+                    break;
+                case Utils.eBrowserType.eChrome:
+                    Process.Start("chrome.exe", strUrl);
+                    break;
+            }
+        }
+
+
 
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {
@@ -100,8 +117,9 @@ namespace MacroViewer
     internal class CShowBrowser
     {
         private bool bUseWebView  = true;
-        private string strPrefix = "<!DOCTYPE html><html><head>";
+        private string strPrefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
         private string strSuffix = "</body></html>";
+        
         private bool WebViewIsInstalled()
         {
             string regKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";

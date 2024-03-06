@@ -117,43 +117,110 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>MACRO HELP
+  <data name="rFILE.Text" xml:space="preserve">
+    <value>	Menu Items - File
+Read HTML file	This extracts macros from your HP macro settings page
+Load PC macro	This loads a set of 30 macros from your drive
+Load Printer macro	This loads another set of 30 macros
+Save macros	Can be used to create a copy of the HP macros.
+Download Macros	Bring up your macro settings page so you can download it.
 
-1 - You must save the macros page so it can be access by this app.  To do this you log into your HP account and select the macros page.
-      Right click anywhere on the page and select "source".  I assume chrome.  Then click the save feature and save as HTML in the download folder.
-2- Click the FILE menu and open the file.  The macro table will be filled in
-3 - Double click on any row to select the body of the macro.  The text can be editied.  Note that a new line is "&lt;br&gt;"
-4 - Click the "GO" button to view what the macro will show.
+The PC and PRN macros are stored in the same folder as the application.  Any local images are also stored there.  Note that local images must be uploaded to the HP album before any user can see them.  You must switch yuur macro page to "source" and then save the source.  Macros are extracted from the file you saved.
+These supplemental macros are stored as HTML-Markup but are displayed and can be edited as plain text for convenience.  A total of 60 are available for use but they are not written to the HP macros website.  They are local files.  You can create additional macros, test them, and then use windows copy and paste to reply to a user.  
 
-UTIL HELP
+	Menu Items - Utils
+This dialog box allows you to form URLs that optionally have a phrase can can be clcicked on.  Images urls can be added.
 
-1 - This dialog box make it easy to configure an instructional link.   You have a url that points to a site with useful informaton.
-      You have some instructions and you want the user to click on a phrase
-2 -  Enter the url in the url box
-3 - Enter the phrase in the phrase box. 
-4 - click "GO" and the url and phrase will be combined to form the correect HTML
+	Menu Item - Signature
+This dialog box allows you to create, test, and save variouis signatures
+
+	Menu Item - Editing
+Most of the widgits shown on the main menu screen will be explained.
+
+	Menu Item - Edit Link
+This dialog box allows URLs and image URLs to be added to the main menu EDIT BOX
+
+	Menu Item - Manage Images
+The dialog box APPEND allows a screen capture to be dropped into a macro
+The MANAGE dialog box allows the local image to be uploaded to the HP album server and the local file path to be replaced by the image URL</value>
+  </data>
+  <data name="rUTIL.Text" xml:space="preserve">
+    <value>		UTIL HELP
+1 - This dialog box makes it easy to configure an instructional link.   You have a URL that points to a site with useful information.        You have some instructions, and you want the user to click on a phrase
+2 -  Enter the URL in the URL box
+3 - Enter the phrase in the phrase box "HREF" 
+4 - click "GO" and the URL and phrase will be combined to form the correct HTML result
 
 For example
-
 The phrase: "Product ID"
 The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
 === The result is ===
 &lt;a href="https://support.hp.com/us-en/document/ish_2039298-1862169-16" target="_blank"&gt;Product ID&lt;/a&gt; 
 
-This result can be copied to the clipboard.  You can then paste it back into the macro edit page. Once in the main edit box you
-can add more instructions and click the "Show as page" to see if it works in a web page.  Note that this is not needed when in
-the community as you can just paste the url into the selected text.
+This result can be copied to the clipboard.  You can then paste it back into the macro edit page. Once in the main edit box you can add more instructions and click the "Show as page" to see if it works in a web page. </value>
+  </data>
+  <data name="rSIG.Text" xml:space="preserve">
+    <value>	Signature Help
 
-The menu items Load from and Save to read and write from a macro.txt file.  That file and the signatuers.xml file are located in
-the same folder as the executable program.  Macros.txt allows you to create a second set of 30 macros or make backups.
-There macros are stored in HTML-Markup but are displayed and edited as plain text as you would see on a web page.
+The signature file is stored in the same folder as the application.  It contains HTML which can be edited.
+Feel free to edit my signature to create your own. If you come up with some unique or unusual signature, please contribute them using the github issues tool.</value>
+  </data>
+  <data name="rEDIT.Text" xml:space="preserve">
+    <value>	Help with main screen (editing)
+The Macro List contains up to 30 macros.  There are three macro sources:  HP macros, local PC macros and local Printer macros.
 
-Those supplemental macros:  Another 30 macros are avaialble for use but they are not written to the HP macros website
-You can create additional macros, test them, and then use windows copy and paste to reply to a user.  Images are stored
-only as URLs so you must use screen capture and paste to show the image.  When editing supplemental macros, the
-clipboard copy and paste remove HTML Markup.  This allows you to copy a response to the edit dialog box and then
-save it for use a a reply macro.  Note that the supplemental macros cannot be pasted directly into a thread.  You must
-use the "Show As Page" and then copy and paste the text and images into your reply.</value>
+If you double click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you checked the "Launch Page" then the macro is displayed the way a user will see it.
+
+Note that only the PC and Printer macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard.
+
+	Supplemental Table group
+The group shows the name of the macro being edited and gives an option to SAVE or DELETE it. To create a macro click the NEW adjacent to the EDIT BOX and change the name of the macro.  Be sure to save it.
+
+	Markup Editing
+Remove markup to make it easy to read and edit.  If editing in markup mode, then you can add a newline or two instead of pressing enter.  You can copy the EDIT BOX to the windows clipboard or paste from the clipboard back to the EDIT BOX.  You can also save a copy to notepad for backup or scratch work.
+To see the effect of your edits, click the Show As Page button.
+
+	Adding images or urls
+You can add an image or url to the EDIT BOX.  The UTILS menu is another way to add URLS but you need to copy and paste. If the image you add is a local PNG or JPG file, it cannot be seen by users.  You will need to upload the local file to your HP album.  Tools to do this conveniently are in the Manage Images dialog box.</value>
+  </data>
+  <data name="rEDITLINK.Text" xml:space="preserve">
+    <value>		EDIT LINK dialog box
+
+This tool allows you to replace a phrase with an object such as a URL that can be clicked on.  You can select a word or phrase with the cursor or just position the cursor in a space.
+
+When you click on "EDIT LINK" the item you selected can be changed to an object such as a URL  If nothing is selected then an item can be inserted.
+
+		SET TEXT dialog box
+
+When this pops up, you will see the text you selcted, if any.  There is a place to enter the URL and you can selecte a phrase to preceed othe url and a phrase to follow it. Click "Form Object" to create the object and click "Test Object" to see it in the browser.
+Click "Apply and exit" to replace the text back it the main EDIT BOX with the new object
+
+For Example:, you positioned the cursor at the end of a paragraph in the  EDIT BOX and you want to form:
+"Click HERE to see if you have cloud support."
+
+Prefix:"Click"
+Suffix:"to see if you have cloud support"
+Selected Text:: "HERE"
+URL: "https://d34z73bbtpzgej.cloudfront.net/"
+
+The result will be
+Click &lt;a href="https://d34z73bbtpzgej.cloudfront.net/" target="_blank"&gt;HERE&lt;/a&gt; to see if you have cloud support
+</value>
+  </data>
+  <data name="rMANAGE.Text" xml:space="preserve">
+    <value>		Managing Images
+
+Local images on your disk cannot be views by users.  If the image is on a website and is public domain unless indicated otheerwise.  Remote images can be added to a maro but local images need to be uploaded to your HP album before a user can see it.
+
+		Append Image
+
+This dialog box shows an Image Location where you can enter the path to the image.  If you have a photo or image in your picture folder then right click on the image and select "copy as path".  Then paste into that location box.  Click on "User Above Image" to see what it look like.
+You can also take a screeen shot or use the windows key plus the S key to select a region of your display. Once selected, you can paste the images into the dialog box using the "Paste From Clipboard" button.
+If all looks good, then click the "Apply and exit" button.
+
+
+		Change URLs
+
+This dialog box provides a convient tool to upload local images to your HP album and to replace the path with a url that access the HP image.  Once you ahve done this the local image is no longer needed and a user can view the image.</value>
   </data>
 </root>

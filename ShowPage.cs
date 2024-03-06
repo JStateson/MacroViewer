@@ -8,6 +8,7 @@ using Microsoft.Web.WebView2.WinForms;
  * webbrowser did not work with some HP sites so I read this
  * https://stackoverflow.com/questions/790542/replacing-net-webbrowser-control-with-a-better-browser-like-chrome
  * https://stackoverflow.com/questions/72993370/how-to-access-document-property-in-webview2-control
+ * <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
  */
 
 
@@ -39,7 +40,7 @@ namespace MacroViewer
                 {
                     Console.WriteLine(e);
                 }
-
+                
                 webview.CoreWebView2.SetVirtualHostNameToFolderMapping(
                     hostName: "myprivateapp", folderPath: sLoc,
                     accessKind: CoreWebView2HostResourceAccessKind.Allow);

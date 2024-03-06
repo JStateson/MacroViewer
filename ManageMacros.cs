@@ -46,7 +46,7 @@ namespace MacroViewer
 
             dgManage.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            return;
+            
             while (true)
             {
                 if (i > 29) return;
@@ -122,6 +122,9 @@ namespace MacroViewer
             RunTest();
         }
 
+
+
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             //https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/all
@@ -130,15 +133,7 @@ namespace MacroViewer
             if (UserID == "") PhotoGallery = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/personal-profile:personal-info";
             else PhotoGallery = "https://h30434.www3.hp.com/t5/media/gallerypage/user-id/" + UserID + "/tab/albums";
             //string PhotoGallery = "https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/albums";
-            switch(Utils.BrowserWanted)
-            {
-                case Utils.eBrowserType.eFirefox: Process.Start("firefox.exe", "-new-window " + PhotoGallery);
-                    break;
-                case Utils.eBrowserType.eEdge: Process.Start("microsoft-edge:" + PhotoGallery);
-                    break;
-                case Utils.eBrowserType.eChrome: Process.Start("chrome.exe", PhotoGallery);
-                    break;
-            }
+            Utils.LocalBrowser(PhotoGallery);
         }
 
         private void dgManage_CellContentClick(object sender, DataGridViewCellEventArgs e)

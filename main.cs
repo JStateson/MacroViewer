@@ -33,7 +33,7 @@ namespace MacroViewer
             EnableMacEdits(false);
             SwitchToMarkup(true);
             //SendToCloud.Init();
-            gbManageImages.Enabled = System.Diagnostics.Debugger.IsAttached;
+            gbManageImages.Enabled = true;// System.Diagnostics.Debugger.IsAttached;
             Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
         }
@@ -232,9 +232,7 @@ namespace MacroViewer
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            help MyHelp = new help();
-            MyHelp.ShowDialog();
-            MyHelp.Dispose();
+
         }
 
         private void btnClearEM_Click(object sender, EventArgs e)
@@ -661,7 +659,7 @@ namespace MacroViewer
         {
             //https://h30434.www3.hp.com/t5/user/myprofilepage/tab/user-macros
             string UserMacs = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/user-macros";
-            Process.Start("microsoft-edge:" + UserMacs);
+            Utils.LocalBrowser(UserMacs);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -669,6 +667,41 @@ namespace MacroViewer
             Settings MySettings = new Settings(ref Utils.BrowserWanted, ref Utils.VolunteerUserID);
             MySettings.ShowDialog();
             MySettings.Dispose();
+        }
+
+        private void helpWithUtilsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("UTILS");
+        }
+
+        private void managingImagesHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("MANAGE");
+        }
+
+        private void helpWithFILEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("FILE");
+        }
+
+        private void helpWithSignaturesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("SIG");
+        }
+        private void ShowHelp(string sHelp)
+        {
+            help MyHelp = new help(sHelp);
+            MyHelp.Show();
+        }
+
+        private void helpWithEditingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("EDIT");
+        }
+
+        private void EDITLINKHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("EDITLINK");
         }
     }
 }

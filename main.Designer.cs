@@ -51,10 +51,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.savePrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -83,8 +85,12 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.downloadMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithUtilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithSignaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EDITLINKHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -306,8 +312,22 @@
             this.savePrinterMacsToolStripMenuItem.Text = "Save Printer macs";
             this.savePrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.savePrinterMacsToolStripMenuItem_Click);
             // 
+            // downloadMacrosToolStripMenuItem
+            // 
+            this.downloadMacrosToolStripMenuItem.Name = "downloadMacrosToolStripMenuItem";
+            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadMacrosToolStripMenuItem.Text = "Download Macros";
+            this.downloadMacrosToolStripMenuItem.Click += new System.EventHandler(this.downloadMacrosToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpWithFILEToolStripMenuItem,
+            this.helpWithUtilsToolStripMenuItem,
+            this.helpWithSignaturesToolStripMenuItem,
+            this.helpWithToolStripMenuItem,
+            this.EDITLINKHelpToolStripMenuItem,
+            this.managingImagesHelpToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -333,6 +353,13 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // gpMainEdit
             // 
@@ -377,7 +404,7 @@
             this.groupBox6.Size = new System.Drawing.Size(437, 709);
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Enter text or html and click to Show As Page";
+            this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
             // 
             // gbManageImages
             // 
@@ -546,7 +573,7 @@
             this.groupBox4.Size = new System.Drawing.Size(419, 119);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Add image or newlines. For URLs use the Utils menu item";
+            this.groupBox4.Text = "Add image or Urls";
             // 
             // btnCLrUrl
             // 
@@ -664,21 +691,49 @@
             this.groupBox2.Size = new System.Drawing.Size(404, 730);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Double click any row to transfer to editor";
+            this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
             // 
-            // downloadMacrosToolStripMenuItem
+            // helpWithFILEToolStripMenuItem
             // 
-            this.downloadMacrosToolStripMenuItem.Name = "downloadMacrosToolStripMenuItem";
-            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.downloadMacrosToolStripMenuItem.Text = "Download Macros";
-            this.downloadMacrosToolStripMenuItem.Click += new System.EventHandler(this.downloadMacrosToolStripMenuItem_Click);
+            this.helpWithFILEToolStripMenuItem.Name = "helpWithFILEToolStripMenuItem";
+            this.helpWithFILEToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithFILEToolStripMenuItem.Text = "Help with FILE";
+            this.helpWithFILEToolStripMenuItem.Click += new System.EventHandler(this.helpWithFILEToolStripMenuItem_Click);
             // 
-            // settingsToolStripMenuItem
+            // helpWithUtilsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.helpWithUtilsToolStripMenuItem.Name = "helpWithUtilsToolStripMenuItem";
+            this.helpWithUtilsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithUtilsToolStripMenuItem.Text = "Help with Utils";
+            this.helpWithUtilsToolStripMenuItem.Click += new System.EventHandler(this.helpWithUtilsToolStripMenuItem_Click);
+            // 
+            // helpWithSignaturesToolStripMenuItem
+            // 
+            this.helpWithSignaturesToolStripMenuItem.Name = "helpWithSignaturesToolStripMenuItem";
+            this.helpWithSignaturesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithSignaturesToolStripMenuItem.Text = "Help with Signatures";
+            this.helpWithSignaturesToolStripMenuItem.Click += new System.EventHandler(this.helpWithSignaturesToolStripMenuItem_Click);
+            // 
+            // helpWithToolStripMenuItem
+            // 
+            this.helpWithToolStripMenuItem.Name = "helpWithToolStripMenuItem";
+            this.helpWithToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithToolStripMenuItem.Text = "Help with Editing";
+            this.helpWithToolStripMenuItem.Click += new System.EventHandler(this.helpWithEditingToolStripMenuItem_Click);
+            // 
+            // EDITLINKHelpToolStripMenuItem
+            // 
+            this.EDITLINKHelpToolStripMenuItem.Name = "EDITLINKHelpToolStripMenuItem";
+            this.EDITLINKHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.EDITLINKHelpToolStripMenuItem.Text = "EDIT LINK help";
+            this.EDITLINKHelpToolStripMenuItem.Click += new System.EventHandler(this.EDITLINKHelpToolStripMenuItem_Click);
+            // 
+            // managingImagesHelpToolStripMenuItem
+            // 
+            this.managingImagesHelpToolStripMenuItem.Name = "managingImagesHelpToolStripMenuItem";
+            this.managingImagesHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.managingImagesHelpToolStripMenuItem.Text = "Managing Images help";
+            this.managingImagesHelpToolStripMenuItem.Click += new System.EventHandler(this.managingImagesHelpToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -691,6 +746,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "main";
             this.Text = " HP Macro Editor";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -774,6 +830,12 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadMacrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpWithFILEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpWithUtilsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpWithSignaturesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpWithToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EDITLINKHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem managingImagesHelpToolStripMenuItem;
     }
 }
 

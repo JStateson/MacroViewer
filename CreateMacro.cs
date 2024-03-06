@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 /*
  * macros-0-0.jpg is the first image of the first macro
@@ -121,6 +124,26 @@ namespace MacroViewer
         private void pbImage_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             btnApply.Enabled = true;
+        }
+
+      
+        private void btnBrowseImg_Click(object sender, EventArgs e)
+        {
+            var codecs = ImageCodecInfo.GetImageEncoders();
+            var codecFilter = "Image Files|";
+            string strFilename = "";
+            foreach (var codec in codecs)
+            {
+                codecFilter += codec.FilenameExtension + ";";
+            }
+            ofd.Filter = codecFilter;
+            ofd.DefaultExt = ".png";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                strFilename = ofd.FileName;
+                tbUrlText.Text = strFilename;
+            }
         }
     }
 }

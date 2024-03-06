@@ -19,6 +19,7 @@ namespace MacroViewer
         {
             InitializeComponent();
             userid = ruserid;
+            tbUserID.Text = userid;
             eBrowser = reBrowser;
         }
 
@@ -39,6 +40,7 @@ namespace MacroViewer
                 Properties.Settings.Default.UserID = userid;
             }
             Properties.Settings.Default.Save();
+            this.Close();
         }
 
     }

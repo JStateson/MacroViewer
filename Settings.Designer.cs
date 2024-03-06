@@ -29,20 +29,22 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbEdge = new System.Windows.Forms.RadioButton();
-            this.rbChrome = new System.Windows.Forms.RadioButton();
             this.rbFirefox = new System.Windows.Forms.RadioButton();
+            this.rbChrome = new System.Windows.Forms.RadioButton();
+            this.rbEdge = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tbUserID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbUserID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.rbFirefox);
             this.groupBox1.Controls.Add(this.rbChrome);
             this.groupBox1.Controls.Add(this.rbEdge);
@@ -52,6 +54,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Browser to use";
+            // 
+            // rbFirefox
+            // 
+            this.rbFirefox.AutoSize = true;
+            this.rbFirefox.Location = new System.Drawing.Point(26, 94);
+            this.rbFirefox.Name = "rbFirefox";
+            this.rbFirefox.Size = new System.Drawing.Size(56, 17);
+            this.rbFirefox.TabIndex = 2;
+            this.rbFirefox.Text = "Firefox";
+            this.rbFirefox.UseVisualStyleBackColor = true;
+            // 
+            // rbChrome
+            // 
+            this.rbChrome.AutoSize = true;
+            this.rbChrome.Location = new System.Drawing.Point(26, 62);
+            this.rbChrome.Name = "rbChrome";
+            this.rbChrome.Size = new System.Drawing.Size(61, 17);
+            this.rbChrome.TabIndex = 1;
+            this.rbChrome.Text = "Chrome";
+            this.rbChrome.UseVisualStyleBackColor = true;
             // 
             // rbEdge
             // 
@@ -65,26 +87,6 @@
             this.rbEdge.Text = "Microsoft Edge";
             this.rbEdge.UseVisualStyleBackColor = true;
             // 
-            // rbChrome
-            // 
-            this.rbChrome.AutoSize = true;
-            this.rbChrome.Location = new System.Drawing.Point(26, 74);
-            this.rbChrome.Name = "rbChrome";
-            this.rbChrome.Size = new System.Drawing.Size(61, 17);
-            this.rbChrome.TabIndex = 1;
-            this.rbChrome.Text = "Chrome";
-            this.rbChrome.UseVisualStyleBackColor = true;
-            // 
-            // rbFirefox
-            // 
-            this.rbFirefox.AutoSize = true;
-            this.rbFirefox.Location = new System.Drawing.Point(26, 114);
-            this.rbFirefox.Name = "rbFirefox";
-            this.rbFirefox.Size = new System.Drawing.Size(56, 17);
-            this.rbFirefox.TabIndex = 2;
-            this.rbFirefox.Text = "Firefox";
-            this.rbFirefox.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label1);
@@ -96,23 +98,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User ID";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(36, 113);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 52);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "The user ID is used to bring up\r\nYour photo album.  This only\r\nworks if you have " +
+    "logged on.\r\nOtherwise you will have to log in.";
+            // 
             // tbUserID
             // 
             this.tbUserID.Location = new System.Drawing.Point(65, 45);
             this.tbUserID.Name = "tbUserID";
             this.tbUserID.Size = new System.Drawing.Size(100, 20);
             this.tbUserID.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 39);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "The user ID is used to bring up\r\nYour photo album.  This only\r\nworks if you have " +
-    "logged on .";
             // 
             // btnSave
             // 
@@ -137,6 +139,16 @@
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 26);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Only Edge is used in\r\nthe dialog pages.";
             // 
             // Settings
             // 
@@ -171,5 +183,6 @@
         private System.Windows.Forms.TextBox tbUserID;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label2;
     }
 }

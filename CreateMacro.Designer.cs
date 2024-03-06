@@ -37,6 +37,8 @@
             this.tbUrlText = new System.Windows.Forms.TextBox();
             this.btnPaste = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnBrowseImg = new System.Windows.Forms.Button();
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +79,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBrowseImg);
             this.groupBox1.Controls.Add(this.btnFormRemote);
             this.groupBox1.Controls.Add(this.tbUrlText);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,7 +94,7 @@
             // 
             this.btnFormRemote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFormRemote.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFormRemote.Location = new System.Drawing.Point(15, 102);
+            this.btnFormRemote.Location = new System.Drawing.Point(15, 130);
             this.btnFormRemote.Name = "btnFormRemote";
             this.btnFormRemote.Size = new System.Drawing.Size(163, 36);
             this.btnFormRemote.TabIndex = 4;
@@ -101,7 +104,7 @@
             // 
             // tbUrlText
             // 
-            this.tbUrlText.Location = new System.Drawing.Point(15, 59);
+            this.tbUrlText.Location = new System.Drawing.Point(15, 39);
             this.tbUrlText.Name = "tbUrlText";
             this.tbUrlText.Size = new System.Drawing.Size(343, 22);
             this.tbUrlText.TabIndex = 0;
@@ -129,6 +132,22 @@
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnBrowseImg
+            // 
+            this.btnBrowseImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowseImg.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBrowseImg.Location = new System.Drawing.Point(15, 76);
+            this.btnBrowseImg.Name = "btnBrowseImg";
+            this.btnBrowseImg.Size = new System.Drawing.Size(163, 36);
+            this.btnBrowseImg.TabIndex = 5;
+            this.btnBrowseImg.Text = "Browse for image";
+            this.btnBrowseImg.UseVisualStyleBackColor = true;
+            this.btnBrowseImg.Click += new System.EventHandler(this.btnBrowseImg_Click);
+            // 
+            // ofd
+            // 
+            this.ofd.FileName = "openFileDialog1";
             // 
             // CreateMacro
             // 
@@ -163,5 +182,7 @@
         private System.Windows.Forms.Button btnFormRemote;
         private System.Windows.Forms.TextBox tbUrlText;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnBrowseImg;
+        private System.Windows.Forms.OpenFileDialog ofd;
     }
 }

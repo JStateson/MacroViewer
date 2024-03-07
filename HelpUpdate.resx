@@ -117,10 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>The local file needs to be uploaded to one of your HP photo albums.  I use my profile album as the global one has too many images.
+
+To do thiis you first log into your account and select the album you want to upload the image to.  You then click the Add Images button and then the Choose Files button as shown top right.
+
+After clicking the Choose Files, you can browse to the application folder and upload all the files.  Be sure to delete them after uploading.  If you do not know where the local images are then click the "Browse To Image File" button
+
+It may take some time for the files to upload. After uploading you must locate each image in the album, right click the image (shown at right) and "Copy Image Address".  This gets the file from the image server and has size information as shown below.  This is convenient as the size can be edited.
+
+https://h30434.www3.hp.com/t5/image/serverpage/image-id/364573i0DFC9BDABBF0AD5F/image-size/thumb/is-moderation-mode/true?v=v2&amp;px=150
+
+The uril above needs to be used in place of the path shown in the data view structure.  Click the button "Update Image URL" and follow instructions to replace the old path with the new server url.</value>
+  </data>
 </root>

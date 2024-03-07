@@ -34,7 +34,9 @@ namespace MacroViewer
             SwitchToMarkup(true);
             //SendToCloud.Init();
             gbManageImages.Enabled = true;// System.Diagnostics.Debugger.IsAttached;
-            Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
+            int iBrowser = Properties.Settings.Default.BrowserID;
+            if (iBrowser < 0) Utils.BrowserWanted = Utils.eBrowserType.eEdge;
+            else Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
         }
 

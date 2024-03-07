@@ -87,18 +87,13 @@ namespace MacroViewer
             dgManage.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgManage.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgManage.Refresh();
-        }
-
-        private void RunTest()
-        {
-            string strTest = "12345LOCALIMAGEFILE1.png6789012345LOCALIMAGEFILE2.png6789012345LOCALIMAGEFILE3.png";
-            sBody = strTest;
-            AddImages(0);
+            dgManage.Rows[0].Selected = true;
+            ShowRow(0);
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            Process.Start(WhereExe);
+
         }
 
 
@@ -117,13 +112,6 @@ namespace MacroViewer
        }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            RunTest();
-        }
-
-
-
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
@@ -136,12 +124,41 @@ namespace MacroViewer
             Utils.LocalBrowser(PhotoGallery);
         }
 
+        private void btnBrowseImage_Click(object sender, EventArgs e)
+        {
+            Process.Start(WhereExe);
+        }
+
+        private void btnUpdateURL_Click(object sender, EventArgs e)
+        {
+            string strOld = dgManage.Rows[iRow].Cells[0].Value.ToString();
+            string sBody1, strNew = strOld;
+            UpdateUrl uUrl = new UpdateUrl(ref strNew);
+            uUrl.ShowDialog();
+            uUrl.Dispose();
+            if (strNew == strOld) return;
+            sBody1 = sBody.Replace(strOld, strNew);
+            sBody = sBody1;
+            dgManage.Rows[iRow].Cells[0].Value = "";
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            HelpUpdate hu   = new HelpUpdate();
+            hu.Show();
+        }
+
+        private void ShowRow(int j)
+        {
+            string strTemp = sLoc + "/" + dgManage.Rows[j].Cells[0].Value.ToString();
+            pbImage.ImageLocation = strTemp;
+            for (int i = 0; i < 10; i++) Application.DoEvents();
+        }
+
         private void dgManage_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SetLocation();
-            string strTemp = sLoc + "/" + dgManage.Rows[iRow].Cells[0].Value.ToString();
-            pbImage.ImageLocation = strTemp;
-            for(int i = 0; i < 10; i++) Application.DoEvents();
+            ShowRow(iRow);
         }
     }
 }

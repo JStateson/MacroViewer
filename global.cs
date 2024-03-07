@@ -44,7 +44,6 @@ namespace MacroViewer
         }
 
 
-
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {
             var dir = new DirectoryInfo(WhereExe);

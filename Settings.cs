@@ -21,6 +21,12 @@ namespace MacroViewer
             userid = ruserid;
             tbUserID.Text = userid;
             eBrowser = reBrowser;
+            switch (eBrowser)
+            {
+                case eBrowserType.eChrome: rbChrome.Checked = true; break;
+                case eBrowserType.eFirefox: rbFirefox.Checked = true; break;
+                case eBrowserType.eEdge: rbEdge.Checked = true; break;  
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -34,11 +40,13 @@ namespace MacroViewer
             if (rbEdge.Checked) eBrowser = eBrowserType.eEdge;
             if (rbFirefox.Checked) eBrowser = eBrowserType.eFirefox;
             Properties.Settings.Default.BrowserID = (int)eBrowser;
+            Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")
             { 
                 userid = tbUserID.Text;
                 Properties.Settings.Default.UserID = userid;
             }
+            Utils.VolunteerUserID = userid;
             Properties.Settings.Default.Save();
             this.Close();
         }

@@ -105,6 +105,12 @@
     <Compile Include="help.Designer.cs">
       <DependentUpon>help.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelpUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelpUpdate.Designer.cs">
+      <DependentUpon>HelpUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="LinkObject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,7 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings1.cs" />
     <Compile Include="ShowPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +155,12 @@
     </Compile>
     <Compile Include="CSignature.Designer.cs">
       <DependentUpon>CSignature.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateUrl.Designer.cs">
+      <DependentUpon>UpdateUrl.cs</DependentUpon>
     </Compile>
     <Compile Include="utils.cs">
       <SubType>Form</SubType>
@@ -172,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="help.resx">
       <DependentUpon>help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpUpdate.resx">
+      <DependentUpon>HelpUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LinkObject.resx">
       <DependentUpon>LinkObject.cs</DependentUpon>
@@ -201,6 +217,9 @@
     <EmbeddedResource Include="ShowPage.resx">
       <DependentUpon>ShowPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpdateUrl.resx">
+      <DependentUpon>UpdateUrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="utils.resx">
       <DependentUpon>utils.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,11 +241,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="hp-macros-help.png" />
+    <None Include="Resources\AddImageAlb.png" />
+    <None Include="Resources\AddImageAlb2.png" />
     <Content Include="Resources\hp128.bmp" />
     <Content Include="Resources\MEhelp1.png" />
+    <None Include="Resources\UploadAlbum.bmp" />
     <None Include="Resources\favicon.ico" />
-    <None Include="hp128.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

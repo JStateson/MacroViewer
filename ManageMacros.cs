@@ -20,7 +20,7 @@ namespace MacroViewer
 {
     public partial class ManageMacros : Form
     { 
-        private string[] AllBody;
+        public string[] AllBody {  get; set; }
         private string WhereExe;
         private string strType;
         private string sBody;
@@ -29,6 +29,7 @@ namespace MacroViewer
         private class CImageItems
         {
             public string ImageLocation { get; set; }
+            public int iBody { get; set; }
         }
 
         List<CImageItems> MyItems;
@@ -60,10 +61,11 @@ namespace MacroViewer
             }
         }
 
-        private void AddRow(string strPath)
+        private void AddRow(string strPath, int r)
         {
             CImageItems c3i = new CImageItems();
             c3i.ImageLocation = strPath;
+            c3i.iBody = r+1;
             MyItems.Add(c3i);
         }
 
@@ -76,7 +78,7 @@ namespace MacroViewer
                 j = sBody.IndexOf(".png", i);
                 j += 4;
                 string strUrl = sBody.Substring(i, j - i);
-                AddRow(strUrl);
+                AddRow(strUrl,r);
                 k++;
                 i += (j-i);
                 i = sBody.IndexOf(Utils.AssignedImageName,i);
@@ -104,14 +106,6 @@ namespace MacroViewer
         }
 
 
-        private void SetLocation()
-        {
-            System.Drawing.Point ThisRC = dgManage.CurrentCellAddress;
-            iRow = ThisRC.Y;
-            iCol = ThisRC.X;
-       }
-
-
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
@@ -132,13 +126,15 @@ namespace MacroViewer
         private void btnUpdateURL_Click(object sender, EventArgs e)
         {
             string strOld = dgManage.Rows[iRow].Cells[0].Value.ToString();
-            string sBody1, strNew = strOld;
-            UpdateUrl uUrl = new UpdateUrl(ref strNew);
+            int r = -1 + (int)dgManage.Rows[iRow].Cells[1].Value;
+            string strNew;
+            UpdateUrl uUrl = new UpdateUrl(strOld);
             uUrl.ShowDialog();
+            strNew = uUrl.strResult;
             uUrl.Dispose();
             if (strNew == strOld) return;
-            sBody1 = sBody.Replace(strOld, strNew);
-            sBody = sBody1;
+            string sBodyEXC = AllBody[r].Replace(strOld, strNew);
+            AllBody[r] = sBodyEXC;
             dgManage.Rows[iRow].Cells[0].Value = "";
         }
 
@@ -153,6 +149,19 @@ namespace MacroViewer
             string strTemp = sLoc + "/" + dgManage.Rows[j].Cells[0].Value.ToString();
             pbImage.ImageLocation = strTemp;
             for (int i = 0; i < 10; i++) Application.DoEvents();
+        }
+
+
+        private void SetLocation()
+        {
+            System.Drawing.Point ThisRC = dgManage.CurrentCellAddress;
+            iRow = ThisRC.Y;
+            iCol = ThisRC.X;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void dgManage_CellContentClick(object sender, DataGridViewCellEventArgs e)

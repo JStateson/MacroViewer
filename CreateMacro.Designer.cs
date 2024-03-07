@@ -33,11 +33,11 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowseImg = new System.Windows.Forms.Button();
             this.btnFormRemote = new System.Windows.Forms.Button();
             this.tbUrlText = new System.Windows.Forms.TextBox();
             this.btnPaste = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnBrowseImg = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -57,6 +57,7 @@
             // 
             // btnApply
             // 
+            this.btnApply.Enabled = false;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnApply.Location = new System.Drawing.Point(204, 331);
@@ -89,6 +90,18 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Image Location";
+            // 
+            // btnBrowseImg
+            // 
+            this.btnBrowseImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowseImg.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBrowseImg.Location = new System.Drawing.Point(15, 76);
+            this.btnBrowseImg.Name = "btnBrowseImg";
+            this.btnBrowseImg.Size = new System.Drawing.Size(163, 36);
+            this.btnBrowseImg.TabIndex = 5;
+            this.btnBrowseImg.Text = "Browse for image";
+            this.btnBrowseImg.UseVisualStyleBackColor = true;
+            this.btnBrowseImg.Click += new System.EventHandler(this.btnBrowseImg_Click);
             // 
             // btnFormRemote
             // 
@@ -132,18 +145,6 @@
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnBrowseImg
-            // 
-            this.btnBrowseImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowseImg.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBrowseImg.Location = new System.Drawing.Point(15, 76);
-            this.btnBrowseImg.Name = "btnBrowseImg";
-            this.btnBrowseImg.Size = new System.Drawing.Size(163, 36);
-            this.btnBrowseImg.TabIndex = 5;
-            this.btnBrowseImg.Text = "Browse for image";
-            this.btnBrowseImg.UseVisualStyleBackColor = true;
-            this.btnBrowseImg.Click += new System.EventHandler(this.btnBrowseImg_Click);
             // 
             // ofd
             // 

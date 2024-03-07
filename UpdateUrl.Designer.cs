@@ -32,10 +32,10 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTest = new System.Windows.Forms.Button();
             this.tbInfo = new System.Windows.Forms.TextBox();
             this.btnApply = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbOld = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
@@ -91,6 +91,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "URL from HP album";
             // 
+            // btnTest
+            // 
+            this.btnTest.Enabled = false;
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTest.Location = new System.Drawing.Point(33, 245);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(106, 38);
+            this.btnTest.TabIndex = 12;
+            this.btnTest.Text = "TEST IMG";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // tbInfo
             // 
             this.tbInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -122,19 +135,6 @@
             this.label1.Size = new System.Drawing.Size(193, 20);
             this.label1.TabIndex = 9;
             this.label1.Text = "Paste URL and click apply";
-            // 
-            // btnTest
-            // 
-            this.btnTest.Enabled = false;
-            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(33, 245);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(106, 38);
-            this.btnTest.TabIndex = 12;
-            this.btnTest.Text = "TEST URL";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // groupBox2
             // 

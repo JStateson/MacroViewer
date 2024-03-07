@@ -54,7 +54,7 @@ namespace MacroViewer
             {
                 return; // needs to be an image
             }
-
+            btnApply.Enabled = true;
             //bIsServer = tbUrlText.Text.Contains("image/serverpage");
             bIsPath = !Utils.bIsHTTP(tbUrlText.Text);
             pbImage.ImageLocation = Utils.RemoveOuterQuotes(tbUrlText.Text);
@@ -76,7 +76,7 @@ namespace MacroViewer
                 strImagePath = ExeFolder + "/" + strImageName;
                 ImageConverter converter = new ImageConverter();
                 byte[] MyByteArray = (byte[])converter.ConvertTo(pbImage.Image, typeof(byte[]));
-                File.WriteAllBytes(strImageName, MyByteArray);
+                File.WriteAllBytes(strImagePath, MyByteArray);
                 Width = pbImage.Image.Width;
                 Height = pbImage.Image.Height;
             }
@@ -106,7 +106,7 @@ namespace MacroViewer
                 pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 pbImage.Image = Clipboard.GetImage();
                 bIsPath = true;
-                btnApply.Enabled = true;
+                btnApply.Enabled = true; 
             }
             else
             {

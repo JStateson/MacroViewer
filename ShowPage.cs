@@ -48,7 +48,6 @@ namespace MacroViewer
             });
 
             this.Controls.Add(webview);
-            //this.ShowDialog();
         }
 
         public ShowPage(string sLoc, string ShowString)

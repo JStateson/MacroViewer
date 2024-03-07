@@ -75,7 +75,7 @@ namespace MacroViewer
         {
             if(rbimage.Checked)
             {
-                strImgUrl = "<img src=\"" + tbSelectedItem.Text.Trim() + "\" border=\"2\">";
+                strImgUrl = Utils.AssembleIMG(tbSelectedItem.Text);
                 tbImageUrl.Text = strImgUrl;
             }
             else

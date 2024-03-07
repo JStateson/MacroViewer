@@ -413,16 +413,16 @@ namespace MacroViewer
             ShowSelectedRow(CurrentRowSelected);
         }
 
-        private void btnSaveM_Click(object sender, EventArgs e)
+        private void SaveCurrentMacros()
         {
-            bool bChanged = false;
+                        bool bChanged = false;
             string strName = tbMacName.Text;
             string strOld = "";
             if (lbName.RowCount == 0)
             {
                 // must have wanted to add a row
-                btnAddM_Click(sender, e);
-                return;
+                //btnAddM_Click(null, (System.EventArgs) e);
+                return; // sorry
             }
             strOld = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             if (strName != strOld)
@@ -437,6 +437,11 @@ namespace MacroViewer
             lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
             SaveAsTXT(TXTName);
+        }
+
+        private void btnSaveM_Click(object sender, EventArgs e)
+        {
+            SaveCurrentMacros();
         }
 
         private string RemoveNewLine(ref bool bChanged, string strIn)
@@ -644,6 +649,8 @@ namespace MacroViewer
         {
             ManageMacros MyManageMac = new ManageMacros(strType, ref Body);
             MyManageMac.ShowDialog();
+            Body = MyManageMac.AllBody;
+            SaveCurrentMacros();
             MyManageMac.Dispose();
         }
 
@@ -666,8 +673,10 @@ namespace MacroViewer
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings MySettings = new Settings(ref Utils.BrowserWanted, ref Utils.VolunteerUserID);
+            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID);
             MySettings.ShowDialog();
+            Utils.BrowserWanted = MySettings.eBrowser;
+            Utils.VolunteerUserID = MySettings.userid;
             MySettings.Dispose();
         }
 

@@ -16,8 +16,8 @@ namespace MacroViewer
 {
     public partial class UpdateUrl : Form
     {
-        private string strResult;
-        public UpdateUrl(ref string rstrResult)
+        public string strResult { get; set; }
+        public UpdateUrl(string rstrResult)
         {
             InitializeComponent();
             strResult = rstrResult;
@@ -48,12 +48,12 @@ namespace MacroViewer
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(TXTmacs, strTemp);
+            MyBrowser.ShowInBrowser(TXTmacs, Utils.AssembleIMG(strTemp));
         }
 
         private void btnSaveExit_Click(object sender, EventArgs e)
         {
-            strResult = tbUrl.Text;
+            strResult = tbUrl.Text.Trim();
             this.Close();
         }
 

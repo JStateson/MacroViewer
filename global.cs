@@ -25,6 +25,10 @@ namespace MacroViewer
             eFirefox = 2
         }
 
+        public static string AssembleIMG(string strURL)
+        {
+            return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
+        }
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
         public static string VolunteerUserID = "";
         public static void LocalBrowser(string strUrl)

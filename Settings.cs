@@ -13,9 +13,9 @@ namespace MacroViewer
 {
     public partial class Settings : Form
     {
-        private eBrowserType eBrowser;
-        private string userid;
-        public Settings(ref eBrowserType reBrowser, ref string ruserid)
+        public eBrowserType eBrowser {  get; set; }
+        public string userid { get; set; }
+        public Settings(eBrowserType reBrowser, string ruserid)
         {
             InitializeComponent();
             userid = ruserid;

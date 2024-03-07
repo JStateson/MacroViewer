@@ -7,7 +7,6 @@ set IS_64=%SRC:~-12,-9%
 if %IS_64% == x64 (
 set PGM=%2%364.exe
 xcopy %2*.dll %1temp
-xcopy %2macros.txt %1temp
 xcopy %2PCmacros.txt %1temp
 xcopy %2PRNmacros.txt %1temp
 xcopy %2signatures.xml %1temp

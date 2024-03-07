@@ -17,7 +17,7 @@ namespace MacroViewer
         int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
         string[] Body = new string[NumMacros];
-        string strType = "";    // eithe PRN or PC for printer or pc macros
+        string strType = "";    // either PRN or PC for printer or pc macros
         string TXTmacs;
         string TXTName = "";
         int CurrentRowSelected = -1;
@@ -266,9 +266,27 @@ namespace MacroViewer
             Clipboard.SetText(tbBody.Text);
         }
 
+        // below is for testing but I never got it to work
+        // trying to get BBCode from an HTML page
+        //https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767917(v=vs.85)?redirectedfrom=MSDN
+        private void RecoverBBCfromHTML()
+        {
+            RichTextBox rtb= new RichTextBox();
+            if (Clipboard.ContainsText(TextDataFormat.Html))
+            {                
+                string returnHtmlText = Clipboard.GetText(TextDataFormat.Html);
+                //Clipboard.SetText(replacementHtmlText, TextDataFormat.Html);
+                rtb.Text = (string)Clipboard.GetData(DataFormats.Html);
+                rtb.Text = "";
+                rtb.Paste();
+                string strTemp = (string)Clipboard.GetData(DataFormats.Html);
+            }
+        }
+
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
             tbBody.Text = Clipboard.GetText();
+            //RecoverBBCfromHTML();
         }
 
         // notice to anyone reading this: Feel free to copy the signature and change it

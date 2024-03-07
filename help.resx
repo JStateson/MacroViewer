@@ -181,7 +181,12 @@ Remove markup to make it easy to read and edit.  If editing in markup mode, then
 To see the effect of your edits, click the Show As Page button.
 
 	Adding images or urls
-You can add an image or url to the EDIT BOX.  The UTILS menu is another way to add URLS but you need to copy and paste. If the image you add is a local PNG or JPG file, it cannot be seen by users.  You will need to upload the local file to your HP album.  Tools to do this conveniently are in the Manage Images dialog box.</value>
+You can add an image or url to the EDIT BOX.  The UTILS menu is another way to add URLS but you need to copy and paste. If the image you add is a local PNG or JPG file, it cannot be seen by users.  You will need to upload the local file to your HP album.  Tools to do this conveniently are in the Manage Images dialog box.
+
+	Using your macro in the HP community
+You have a macro that looks good.  You remove markup and click the Show Page and the macros looks fine.  There are two things you can do with it.  You can add it to your own macro collection or just use it in a reply to a user.
+1 - Reply to user:  Just copy from the display page and paste into the user reply.  You can also copy the text from the EDIT BOX but you MUST NOT SELECT MARKUP.
+2 - Add to your macro list:  You close the display page as that is not used.  Select the markup option.  Copy the text in the EDIT BOX and paste it into one of the macro positions.  Text pasted into the HP macro list is BBCode or "markup"</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

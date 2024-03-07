@@ -53,6 +53,12 @@
             this.savePrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithUtilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithSignaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EDITLINKHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,12 +91,6 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.helpWithFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpWithUtilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpWithSignaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EDITLINKHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -240,7 +240,7 @@
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbBody.Size = new System.Drawing.Size(397, 441);
+            this.tbBody.Size = new System.Drawing.Size(391, 441);
             this.tbBody.TabIndex = 3;
             // 
             // menuStrip1
@@ -275,47 +275,47 @@
             // readHTMLToolStripMenuItem
             // 
             this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
-            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.readHTMLToolStripMenuItem.Text = "Read HTML file";
             this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
             // 
             // loadFromXMLToolStripMenuItem
             // 
             this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.loadFromXMLToolStripMenuItem.Text = "Load PC macro";
             this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
             // 
             // loadPrinterMacsToolStripMenuItem
             // 
             this.loadPrinterMacsToolStripMenuItem.Name = "loadPrinterMacsToolStripMenuItem";
-            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.loadPrinterMacsToolStripMenuItem.Text = "Load Printer macs";
             this.loadPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.loadPrinterMacsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // saveToXMLToolStripMenuItem
             // 
             this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
-            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.saveToXMLToolStripMenuItem.Text = "Save PC macro";
             this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
             // 
             // savePrinterMacsToolStripMenuItem
             // 
             this.savePrinterMacsToolStripMenuItem.Name = "savePrinterMacsToolStripMenuItem";
-            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.savePrinterMacsToolStripMenuItem.Text = "Save Printer macs";
             this.savePrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.savePrinterMacsToolStripMenuItem_Click);
             // 
             // downloadMacrosToolStripMenuItem
             // 
             this.downloadMacrosToolStripMenuItem.Name = "downloadMacrosToolStripMenuItem";
-            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.downloadMacrosToolStripMenuItem.Text = "Download Macros";
             this.downloadMacrosToolStripMenuItem.Click += new System.EventHandler(this.downloadMacrosToolStripMenuItem_Click);
             // 
@@ -332,6 +332,48 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // helpWithFILEToolStripMenuItem
+            // 
+            this.helpWithFILEToolStripMenuItem.Name = "helpWithFILEToolStripMenuItem";
+            this.helpWithFILEToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithFILEToolStripMenuItem.Text = "Help with FILE";
+            this.helpWithFILEToolStripMenuItem.Click += new System.EventHandler(this.helpWithFILEToolStripMenuItem_Click);
+            // 
+            // helpWithUtilsToolStripMenuItem
+            // 
+            this.helpWithUtilsToolStripMenuItem.Name = "helpWithUtilsToolStripMenuItem";
+            this.helpWithUtilsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithUtilsToolStripMenuItem.Text = "Help with Utils";
+            this.helpWithUtilsToolStripMenuItem.Click += new System.EventHandler(this.helpWithUtilsToolStripMenuItem_Click);
+            // 
+            // helpWithSignaturesToolStripMenuItem
+            // 
+            this.helpWithSignaturesToolStripMenuItem.Name = "helpWithSignaturesToolStripMenuItem";
+            this.helpWithSignaturesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithSignaturesToolStripMenuItem.Text = "Help with Signatures";
+            this.helpWithSignaturesToolStripMenuItem.Click += new System.EventHandler(this.helpWithSignaturesToolStripMenuItem_Click);
+            // 
+            // helpWithToolStripMenuItem
+            // 
+            this.helpWithToolStripMenuItem.Name = "helpWithToolStripMenuItem";
+            this.helpWithToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithToolStripMenuItem.Text = "Help with Editing";
+            this.helpWithToolStripMenuItem.Click += new System.EventHandler(this.helpWithEditingToolStripMenuItem_Click);
+            // 
+            // EDITLINKHelpToolStripMenuItem
+            // 
+            this.EDITLINKHelpToolStripMenuItem.Name = "EDITLINKHelpToolStripMenuItem";
+            this.EDITLINKHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.EDITLINKHelpToolStripMenuItem.Text = "EDIT LINK help";
+            this.EDITLINKHelpToolStripMenuItem.Click += new System.EventHandler(this.EDITLINKHelpToolStripMenuItem_Click);
+            // 
+            // managingImagesHelpToolStripMenuItem
+            // 
+            this.managingImagesHelpToolStripMenuItem.Name = "managingImagesHelpToolStripMenuItem";
+            this.managingImagesHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.managingImagesHelpToolStripMenuItem.Text = "Managing Images help";
+            this.managingImagesHelpToolStripMenuItem.Click += new System.EventHandler(this.managingImagesHelpToolStripMenuItem_Click);
             // 
             // utilsToolStripMenuItem
             // 
@@ -692,48 +734,6 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
-            // 
-            // helpWithFILEToolStripMenuItem
-            // 
-            this.helpWithFILEToolStripMenuItem.Name = "helpWithFILEToolStripMenuItem";
-            this.helpWithFILEToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithFILEToolStripMenuItem.Text = "Help with FILE";
-            this.helpWithFILEToolStripMenuItem.Click += new System.EventHandler(this.helpWithFILEToolStripMenuItem_Click);
-            // 
-            // helpWithUtilsToolStripMenuItem
-            // 
-            this.helpWithUtilsToolStripMenuItem.Name = "helpWithUtilsToolStripMenuItem";
-            this.helpWithUtilsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithUtilsToolStripMenuItem.Text = "Help with Utils";
-            this.helpWithUtilsToolStripMenuItem.Click += new System.EventHandler(this.helpWithUtilsToolStripMenuItem_Click);
-            // 
-            // helpWithSignaturesToolStripMenuItem
-            // 
-            this.helpWithSignaturesToolStripMenuItem.Name = "helpWithSignaturesToolStripMenuItem";
-            this.helpWithSignaturesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithSignaturesToolStripMenuItem.Text = "Help with Signatures";
-            this.helpWithSignaturesToolStripMenuItem.Click += new System.EventHandler(this.helpWithSignaturesToolStripMenuItem_Click);
-            // 
-            // helpWithToolStripMenuItem
-            // 
-            this.helpWithToolStripMenuItem.Name = "helpWithToolStripMenuItem";
-            this.helpWithToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithToolStripMenuItem.Text = "Help with Editing";
-            this.helpWithToolStripMenuItem.Click += new System.EventHandler(this.helpWithEditingToolStripMenuItem_Click);
-            // 
-            // EDITLINKHelpToolStripMenuItem
-            // 
-            this.EDITLINKHelpToolStripMenuItem.Name = "EDITLINKHelpToolStripMenuItem";
-            this.EDITLINKHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.EDITLINKHelpToolStripMenuItem.Text = "EDIT LINK help";
-            this.EDITLINKHelpToolStripMenuItem.Click += new System.EventHandler(this.EDITLINKHelpToolStripMenuItem_Click);
-            // 
-            // managingImagesHelpToolStripMenuItem
-            // 
-            this.managingImagesHelpToolStripMenuItem.Name = "managingImagesHelpToolStripMenuItem";
-            this.managingImagesHelpToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.managingImagesHelpToolStripMenuItem.Text = "Managing Images help";
-            this.managingImagesHelpToolStripMenuItem.Click += new System.EventHandler(this.managingImagesHelpToolStripMenuItem_Click);
             // 
             // main
             // 

@@ -120,7 +120,7 @@ namespace MacroViewer
     internal class CShowBrowser
     {
         private bool bUseWebView  = true;
-        private string strPrefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
+        private string strPrefix = "<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
         private string strSuffix = "</body></html>";
         
         private bool WebViewIsInstalled()

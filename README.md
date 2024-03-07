@@ -8,7 +8,7 @@ Expose the source code of the page and save it as "macros.html"
 
 Run this app and open the file.  There are demo macro files in the tar.
 
-Image of main page is here https://tinyurl.com/2p98ry3k
+Image of main page https://h30434.www3.hp.com/t5/media/gallerypage/image-id/364836iC71FFA1BC449061C
 
 A tar with latest binaries can be downloaded if you do not wish to build the app
 

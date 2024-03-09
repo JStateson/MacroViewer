@@ -11,17 +11,20 @@ namespace MacroViewer
 {
     public partial class main : Form
     {
-        string aPage;
-        const int NumMacros = 30;
-        int[] StartMac = new int[NumMacros];
-        int[] StopMac = new int[NumMacros];
+        private const int NumMacros = 30;
+        private string[] MacroErrors = new string[NumMacros];
+        private string[] MacroNames = new string[NumMacros];    
+        private string aPage;
+        private int[] StartMac = new int[NumMacros];
+        private int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
-        string[] Body = new string[NumMacros];
-        string strType = "";    // either PRN or PC for printer or pc macros
-        string TXTmacs;
-        string TXTName = "";
-        int CurrentRowSelected = -1;
-        OpenFileDialog ofd;
+        private string[] Body = new string[NumMacros];
+        private string strType = "";    // either PRN or PC for printer or pc macros
+        private string TXTmacs;
+        private string TXTName = "";
+        private int CurrentRowSelected = -1;
+        private OpenFileDialog ofd;
+        private bool bMacroErrors;
 
 
         //CSendCloud SendToCloud = new CSendCloud();
@@ -88,6 +91,7 @@ namespace MacroViewer
             string strFind; //<span class="html-attribute-value">profilemacro_2</span>"&gt;</span>
             string strEnd = "<span class=\"html-tag\">";
             int j, k, n;
+            bMacroErrors = false;
             for (int i = 0; i < NumMacros; i++)
             {
                 strFind = "<span class=\"html-attribute-value\">profilemacro_" + (i + 1).ToString() + "</span>\"&gt;</span>";
@@ -99,8 +103,13 @@ namespace MacroViewer
                 if (k < 0) return false;
                 string strBody = aPage.Substring(n, k).Replace("lt;", "<");
                 strBody = strBody.Replace("&nbsp;", " ");
-                Body[i] = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
+                strBody = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
+                Body[i] = strBody;
+                strFind = Utils.XmlParse(strBody);
+                MacroErrors[i] = strFind;
+                if (strFind != "")bMacroErrors = true;
             }
+            errorsToolStripMenuItem.Visible = bMacroErrors;
             return true;
         }
 
@@ -131,6 +140,7 @@ namespace MacroViewer
                     NumUsed++;
                 }
                 lbName.Rows.Add(i + 1, strName);
+                MacroNames[i] = strName;
             }
             tbNumMac.Text = NumUsed.ToString();
             return true;
@@ -232,10 +242,7 @@ namespace MacroViewer
             //MyUtils.Dispose();
         }
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnClearEM_Click(object sender, EventArgs e)
         {
@@ -247,11 +254,11 @@ namespace MacroViewer
             string strOut = "";
             if (bEnable)
             {
-                strOut = tbBody.Text.Replace(Environment.NewLine, "<br>");
+                strOut = tbBody.Text.Replace(Environment.NewLine, "<br />");
             }
             else
             {
-                strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
+                strOut = tbBody.Text.Replace("<br />", Environment.NewLine);
             }
             tbBody.Text = strOut;
             lbM.Visible = bEnable;
@@ -328,6 +335,8 @@ namespace MacroViewer
         private void LoadFromTXT(string strFN)
         {
             int i = 0;
+            bMacroErrors = false;
+            errorsToolStripMenuItem.Visible = false;
             TXTName = strFN;
             gpMainEdit.Enabled = true;
             gbSupp.Enabled = true;
@@ -341,8 +350,13 @@ namespace MacroViewer
                 while (line != null)
                 {
                     lbName.Rows.Add(i + 1, line);
+                    MacroNames[i] = line;
                     sBody = sr.ReadLine();
-                    Body[i] = sBody;
+                    Body[i] = sBody; // was a one time fix: .Replace("<br>","<br />");
+                    sBody = Utils.XmlParse(sBody);
+                    MacroErrors[i] = sBody;
+                    if (sBody != "") bMacroErrors = true;
+                    errorsToolStripMenuItem.Visible = bMacroErrors;
                     i++;
                     line = sr.ReadLine();
                 }
@@ -464,7 +478,7 @@ namespace MacroViewer
 
         private string RemoveNewLine(ref bool bChanged, string strIn)
         {
-            string strOut = strIn.Replace(Environment.NewLine, "<br>").Trim();
+            string strOut = strIn.Replace(Environment.NewLine, "<br />").Trim();
             // the above does not work for html as it has a newline
             strOut = strOut.Replace("\n", "<br>");
             bChanged = (strOut.Length != strIn.Length);
@@ -731,6 +745,17 @@ namespace MacroViewer
         private void EDITLINKHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowHelp("EDITLINK");
+        }
+
+        private void errorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors);
+            MySE.Show();
+        }
+
+        private void helpWithErrorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("XMLERRORS");
         }
     }
 }

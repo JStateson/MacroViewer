@@ -39,15 +39,15 @@
             this.blnAdd = new System.Windows.Forms.Button();
             this.dgvSigList = new System.Windows.Forms.DataGridView();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnAdd2New = new System.Windows.Forms.Button();
+            this.btnAdd1New = new System.Windows.Forms.Button();
+            this.btnTestXML = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnToNote = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTestXML = new System.Windows.Forms.Button();
-            this.btnAdd2New = new System.Windows.Forms.Button();
-            this.btnAdd1New = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -169,6 +169,41 @@
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
             // 
+            // btnAdd2New
+            // 
+            this.btnAdd2New.Location = new System.Drawing.Point(406, 157);
+            this.btnAdd2New.Name = "btnAdd2New";
+            this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
+            this.btnAdd2New.TabIndex = 20;
+            this.btnAdd2New.Text = "Add 2 newlines";
+            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br />");
+            this.btnAdd2New.UseVisualStyleBackColor = true;
+            this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
+            // 
+            // btnAdd1New
+            // 
+            this.btnAdd1New.Location = new System.Drawing.Point(406, 123);
+            this.btnAdd1New.Name = "btnAdd1New";
+            this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
+            this.btnAdd1New.TabIndex = 19;
+            this.btnAdd1New.Text = "Add newline";
+            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br />");
+            this.btnAdd1New.UseVisualStyleBackColor = true;
+            this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
+            // 
+            // btnTestXML
+            // 
+            this.btnTestXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestXML.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTestXML.Location = new System.Drawing.Point(43, 112);
+            this.btnTestXML.Name = "btnTestXML";
+            this.btnTestXML.Size = new System.Drawing.Size(113, 34);
+            this.btnTestXML.TabIndex = 18;
+            this.btnTestXML.Text = "Test";
+            this.toolTip1.SetToolTip(this.btnTestXML, "Copy the signature back to the list table");
+            this.btnTestXML.UseVisualStyleBackColor = true;
+            this.btnTestXML.Click += new System.EventHandler(this.btnTestXML_Click);
+            // 
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -232,41 +267,6 @@
             this.toolTip1.SetToolTip(this.bltnSaveBack, "Copy the signature back to the list table");
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
-            // 
-            // btnTestXML
-            // 
-            this.btnTestXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTestXML.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestXML.Location = new System.Drawing.Point(43, 112);
-            this.btnTestXML.Name = "btnTestXML";
-            this.btnTestXML.Size = new System.Drawing.Size(113, 34);
-            this.btnTestXML.TabIndex = 18;
-            this.btnTestXML.Text = "Test";
-            this.toolTip1.SetToolTip(this.btnTestXML, "Copy the signature back to the list table");
-            this.btnTestXML.UseVisualStyleBackColor = true;
-            this.btnTestXML.Click += new System.EventHandler(this.btnTestXML_Click);
-            // 
-            // btnAdd2New
-            // 
-            this.btnAdd2New.Location = new System.Drawing.Point(406, 157);
-            this.btnAdd2New.Name = "btnAdd2New";
-            this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
-            this.btnAdd2New.TabIndex = 20;
-            this.btnAdd2New.Text = "Add 2 newlines";
-            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br>");
-            this.btnAdd2New.UseVisualStyleBackColor = true;
-            this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
-            // 
-            // btnAdd1New
-            // 
-            this.btnAdd1New.Location = new System.Drawing.Point(406, 123);
-            this.btnAdd1New.Name = "btnAdd1New";
-            this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
-            this.btnAdd1New.TabIndex = 19;
-            this.btnAdd1New.Text = "Add newline";
-            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br>");
-            this.btnAdd1New.UseVisualStyleBackColor = true;
-            this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
             // 
             // CSignature
             // 

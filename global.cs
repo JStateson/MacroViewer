@@ -12,11 +12,39 @@ using System.Drawing;
 using Microsoft.Web.WebView2.WinForms;
 using Microsoft.Web.WebView2.Core;
 using System.Text;
+using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Xml.Linq;
 
 namespace MacroViewer
 {    
     public static class Utils
     {
+        /*
+         * <!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>
+</div></blockquote></body></html>
+         * */
+
+        public static string XmlParse(string strIn)
+        {
+            string strPrefix = "<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>";
+            string strSuffix = "</div></blockquote></body></html>";
+            string strTmp = strPrefix + strIn + strSuffix;
+            try
+            {
+                XDocument xdoc = new XDocument();
+                xdoc = XDocument.Parse(strTmp);
+                return "";
+            }
+            catch (Exception e)
+            {
+                string strErr = e.Message + Environment.NewLine;
+                //DialogResult eRes = MessageBox.Show(strErr, "XML parse error");
+                return strErr;
+            }
+            return "";
+        }
+
         public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 
         public enum eBrowserType
         {

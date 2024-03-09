@@ -246,4 +246,15 @@ If all looks good, then click the "Apply and exit" button.
 
 This dialog box provides a convient tool to upload local images to your HP album and to replace the path with a url that access the HP image.  Once you ahve done this the local image is no longer needed and a user can view the image.</value>
   </data>
+  <data name="rXMLERR.Text" xml:space="preserve">
+    <value>	HTML and XML errors
+
+Images and url can be badly formed. For example the following might be missing a slash
+
+&lt;br&gt;   shoud be &lt;br /&gt;
+&lt;img src=" .......  /&gt;
+&lt;a   needs  &lt;/ a&gt;  or /&gt;
+
+there should be a space before the forward slash</value>
+  </data>
 </root>

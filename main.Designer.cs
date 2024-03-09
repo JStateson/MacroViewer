@@ -91,6 +91,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -161,7 +163,7 @@
             this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
             this.btnAdd1New.TabIndex = 16;
             this.btnAdd1New.Text = "Add newline";
-            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br>");
+            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br />");
             this.btnAdd1New.UseVisualStyleBackColor = true;
             this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
             // 
@@ -172,7 +174,7 @@
             this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
             this.btnAdd2New.TabIndex = 18;
             this.btnAdd2New.Text = "Add 2 newlines";
-            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br>");
+            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br />");
             this.btnAdd2New.UseVisualStyleBackColor = true;
             this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
             // 
@@ -251,7 +253,8 @@
             this.utilsToolStripMenuItem,
             this.testSignatureToolStripMenuItem,
             this.aboutToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.errorsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
@@ -327,11 +330,11 @@
             this.helpWithSignaturesToolStripMenuItem,
             this.helpWithToolStripMenuItem,
             this.EDITLINKHelpToolStripMenuItem,
-            this.managingImagesHelpToolStripMenuItem});
+            this.managingImagesHelpToolStripMenuItem,
+            this.helpWithErrorsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // helpWithFILEToolStripMenuItem
             // 
@@ -735,6 +738,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
             // 
+            // errorsToolStripMenuItem
+            // 
+            this.errorsToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.errorsToolStripMenuItem.Name = "errorsToolStripMenuItem";
+            this.errorsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.errorsToolStripMenuItem.Text = "ERRORS";
+            this.errorsToolStripMenuItem.Visible = false;
+            this.errorsToolStripMenuItem.Click += new System.EventHandler(this.errorsToolStripMenuItem_Click);
+            // 
+            // helpWithErrorsToolStripMenuItem
+            // 
+            this.helpWithErrorsToolStripMenuItem.Name = "helpWithErrorsToolStripMenuItem";
+            this.helpWithErrorsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithErrorsToolStripMenuItem.Text = "Help with errors";
+            this.helpWithErrorsToolStripMenuItem.Click += new System.EventHandler(this.helpWithErrorsToolStripMenuItem_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,6 +855,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpWithToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EDITLINKHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem managingImagesHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem errorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
     }
 }
 

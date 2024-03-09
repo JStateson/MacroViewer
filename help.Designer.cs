@@ -35,12 +35,15 @@
             this.rEDIT = new System.Windows.Forms.RichTextBox();
             this.rEDITLINK = new System.Windows.Forms.RichTextBox();
             this.rMANAGE = new System.Windows.Forms.RichTextBox();
+            this.rXMLERR = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // rFILE
             // 
-            this.rFILE.Location = new System.Drawing.Point(0, 0);
+            this.rFILE.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.rFILE.Location = new System.Drawing.Point(12, 26);
             this.rFILE.Name = "rFILE";
+            this.rFILE.ReadOnly = true;
             this.rFILE.Size = new System.Drawing.Size(266, 183);
             this.rFILE.TabIndex = 1;
             this.rFILE.Text = resources.GetString("rFILE.Text");
@@ -49,6 +52,7 @@
             // 
             this.rUTIL.Location = new System.Drawing.Point(329, 26);
             this.rUTIL.Name = "rUTIL";
+            this.rUTIL.ReadOnly = true;
             this.rUTIL.Size = new System.Drawing.Size(258, 172);
             this.rUTIL.TabIndex = 2;
             this.rUTIL.Text = resources.GetString("rUTIL.Text");
@@ -57,6 +61,7 @@
             // 
             this.rSIG.Location = new System.Drawing.Point(604, 26);
             this.rSIG.Name = "rSIG";
+            this.rSIG.ReadOnly = true;
             this.rSIG.Size = new System.Drawing.Size(197, 131);
             this.rSIG.TabIndex = 3;
             this.rSIG.Text = resources.GetString("rSIG.Text");
@@ -65,6 +70,7 @@
             // 
             this.rEDIT.Location = new System.Drawing.Point(12, 225);
             this.rEDIT.Name = "rEDIT";
+            this.rEDIT.ReadOnly = true;
             this.rEDIT.Size = new System.Drawing.Size(254, 228);
             this.rEDIT.TabIndex = 4;
             this.rEDIT.Text = resources.GetString("rEDIT.Text");
@@ -73,23 +79,35 @@
             // 
             this.rEDITLINK.Location = new System.Drawing.Point(281, 225);
             this.rEDITLINK.Name = "rEDITLINK";
+            this.rEDITLINK.ReadOnly = true;
             this.rEDITLINK.Size = new System.Drawing.Size(265, 228);
             this.rEDITLINK.TabIndex = 5;
             this.rEDITLINK.Text = resources.GetString("rEDITLINK.Text");
             // 
             // rMANAGE
             // 
-            this.rMANAGE.Location = new System.Drawing.Point(571, 225);
+            this.rMANAGE.Location = new System.Drawing.Point(571, 216);
             this.rMANAGE.Name = "rMANAGE";
+            this.rMANAGE.ReadOnly = true;
             this.rMANAGE.Size = new System.Drawing.Size(262, 218);
             this.rMANAGE.TabIndex = 6;
             this.rMANAGE.Text = resources.GetString("rMANAGE.Text");
+            // 
+            // rXMLERR
+            // 
+            this.rXMLERR.Location = new System.Drawing.Point(60, 469);
+            this.rXMLERR.Name = "rXMLERR";
+            this.rXMLERR.ReadOnly = true;
+            this.rXMLERR.Size = new System.Drawing.Size(197, 131);
+            this.rXMLERR.TabIndex = 7;
+            this.rXMLERR.Text = resources.GetString("rXMLERR.Text");
             // 
             // help
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 656);
+            this.Controls.Add(this.rXMLERR);
             this.Controls.Add(this.rMANAGE);
             this.Controls.Add(this.rEDITLINK);
             this.Controls.Add(this.rEDIT);
@@ -112,5 +130,6 @@
         private System.Windows.Forms.RichTextBox rEDIT;
         private System.Windows.Forms.RichTextBox rEDITLINK;
         private System.Windows.Forms.RichTextBox rMANAGE;
+        private System.Windows.Forms.RichTextBox rXMLERR;
     }
 }

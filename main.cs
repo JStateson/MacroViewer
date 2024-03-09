@@ -518,7 +518,7 @@ namespace MacroViewer
         {
             //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
             string strTmp = tbImgUrl.Text.Trim().Replace("\"", "");
-            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\">";
+            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\" />";
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
 
@@ -550,7 +550,7 @@ namespace MacroViewer
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br>");
+            tbBody.Text = tbBody.Text.Insert(i, "<br />");
             i += 4;
             tbBody.SelectionStart = i;
         }
@@ -558,7 +558,7 @@ namespace MacroViewer
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
+            tbBody.Text = tbBody.Text.Insert(i, "<br /><br />");
             i += 8;
             tbBody.SelectionStart = i;
         }

@@ -7,7 +7,7 @@ namespace MacroViewer
         public WebBrowserPage(string strIn)
         {
             InitializeComponent();
-            webBrowser1.DocumentText = strIn;
+            webBrowser.DocumentText = strIn;
         }
     }
 }

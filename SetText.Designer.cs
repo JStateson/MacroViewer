@@ -44,6 +44,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lbBoxed = new System.Windows.Forms.Label();
+            this.btnBoxIT = new System.Windows.Forms.Button();
+            this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -125,6 +128,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.lbBoxed);
+            this.groupBox4.Controls.Add(this.btnBoxIT);
             this.groupBox4.Controls.Add(this.btnTest);
             this.groupBox4.Controls.Add(this.btnApplyText);
             this.groupBox4.Controls.Add(this.tbResult);
@@ -140,7 +145,7 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(207, 46);
+            this.btnTest.Location = new System.Drawing.Point(592, 46);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(122, 36);
             this.btnTest.TabIndex = 7;
@@ -191,6 +196,36 @@
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
+            // lbBoxed
+            // 
+            this.lbBoxed.AutoSize = true;
+            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbBoxed.Location = new System.Drawing.Point(438, 56);
+            this.lbBoxed.Name = "lbBoxed";
+            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
+            this.lbBoxed.TabIndex = 9;
+            this.lbBoxed.Text = "BOXED";
+            this.lbBoxed.Visible = false;
+            // 
+            // btnBoxIT
+            // 
+            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBoxIT.Location = new System.Drawing.Point(222, 46);
+            this.btnBoxIT.Name = "btnBoxIT";
+            this.btnBoxIT.Size = new System.Drawing.Size(174, 36);
+            this.btnBoxIT.TabIndex = 8;
+            this.btnBoxIT.Text = "Put In Box";
+            this.btnBoxIT.UseVisualStyleBackColor = true;
+            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
+            // 
+            // BlinkTimer
+            // 
+            this.BlinkTimer.Interval = 500;
+            this.BlinkTimer.Tick += new System.EventHandler(this.BlinkTimer_Tick);
+            // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +244,7 @@
             this.MinimizeBox = false;
             this.Name = "SetText";
             this.Text = "SetText";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SetText_FormClosing);
             this.gbSelectType.ResumeLayout(false);
             this.gbSelectType.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -240,5 +276,8 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbBoxed;
+        private System.Windows.Forms.Button btnBoxIT;
+        private System.Windows.Forms.Timer BlinkTimer;
     }
 }

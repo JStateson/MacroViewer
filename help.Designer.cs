@@ -71,7 +71,7 @@
             // 
             // rEDITLINK
             // 
-            this.rEDITLINK.Location = new System.Drawing.Point(288, 225);
+            this.rEDITLINK.Location = new System.Drawing.Point(281, 225);
             this.rEDITLINK.Name = "rEDITLINK";
             this.rEDITLINK.Size = new System.Drawing.Size(265, 228);
             this.rEDITLINK.TabIndex = 5;
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 541);
+            this.ClientSize = new System.Drawing.Size(845, 656);
             this.Controls.Add(this.rMANAGE);
             this.Controls.Add(this.rEDITLINK);
             this.Controls.Add(this.rEDIT);

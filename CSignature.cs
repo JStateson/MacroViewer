@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace MacroViewer
 {
@@ -12,7 +13,7 @@ namespace MacroViewer
         private string SigLoc = "";
         private string SigFilename = "";
         private XmlDocument xmlDoc = new XmlDocument();
-        private string DefaultSig = "<hr /><blockquote><div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div></blockquote><hr />";
+        private string DefaultSig = "blockquote><div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div></blockquote>";
         public class CStringValue
         {
             public CStringValue(string s)
@@ -64,7 +65,15 @@ namespace MacroViewer
                 strDefault += "</xml>";
                 File.WriteAllText(SigFilename, strDefault);
             }
-            xmlDoc.Load(SigFilename);
+            try
+            {
+                xmlDoc.Load(SigFilename);
+            }
+            catch (Exception e)
+            {
+                string strErr = e.Message + Environment.NewLine;
+                DialogResult eRes = MessageBox.Show(strErr,"Corrupted file" + SigFilename);
+            }
             FillTable();
         }
 
@@ -87,11 +96,12 @@ namespace MacroViewer
             ShowSig(0);
         }
 
-        private void dgvSigList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            int i = e.RowIndex;
+            RunBrowser(SigLoc);
+            ShowSig(i);
         }
-
         private void RunBrowser(string sLoc)
         {
             string strTemp = tbBody.Text;
@@ -162,6 +172,43 @@ namespace MacroViewer
         private void btnClear_Click(object sender, EventArgs e)
         {
             tbBody.Text = "";
+        }
+
+        private void btnAdd1New_Click(object sender, EventArgs e)
+        {
+            int i = tbBody.SelectionStart;
+            tbBody.Text = tbBody.Text.Insert(i, "<br />");
+            i += 4;
+            tbBody.SelectionStart = i;
+        }
+
+        private void btnAdd2New_Click(object sender, EventArgs e)
+        {
+            int i = tbBody.SelectionStart;
+            tbBody.Text = tbBody.Text.Insert(i, "<br /><br />");
+            i += 8;
+            tbBody.SelectionStart = i;
+        }
+
+        private void TestXML()
+        {
+            btnSaveEdits.Enabled = false;
+            try
+            {
+                XDocument xdoc  = new XDocument();
+                xdoc = XDocument.Parse(tbBody.Text);
+                btnSaveEdits.Enabled = true;
+            }
+            catch (Exception e)
+            {
+                string strErr = e.Message + Environment.NewLine;
+                DialogResult eRes = MessageBox.Show(strErr, "XML parse error");
+            }
+        }
+
+        private void btnTestXML_Click(object sender, EventArgs e)
+        {
+            TestXML();
         }
     }
 }

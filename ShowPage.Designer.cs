@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(863, 755);
             this.Name = "ShowPage";
-            this.Text = "ShowPage";
+            this.Text = "ShowPage (WebView2)";
             this.ResumeLayout(false);
 
         }

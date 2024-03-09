@@ -39,12 +39,15 @@
             this.blnAdd = new System.Windows.Forms.Button();
             this.dgvSigList = new System.Windows.Forms.DataGridView();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnToNote = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnTestXML = new System.Windows.Forms.Button();
+            this.btnAdd2New = new System.Windows.Forms.Button();
+            this.btnAdd1New = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -70,7 +73,7 @@
             // 
             // tbBody
             // 
-            this.tbBody.Location = new System.Drawing.Point(43, 100);
+            this.tbBody.Location = new System.Drawing.Point(43, 203);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.Size = new System.Drawing.Size(504, 322);
@@ -86,7 +89,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(28, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 459);
+            this.groupBox1.Size = new System.Drawing.Size(418, 552);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sig List";
@@ -105,6 +108,7 @@
             // 
             // btnSaveEdits
             // 
+            this.btnSaveEdits.Enabled = false;
             this.btnSaveEdits.Location = new System.Drawing.Point(21, 271);
             this.btnSaveEdits.Name = "btnSaveEdits";
             this.btnSaveEdits.Size = new System.Drawing.Size(90, 23);
@@ -144,9 +148,13 @@
             this.dgvSigList.Size = new System.Drawing.Size(240, 384);
             this.dgvSigList.TabIndex = 0;
             this.dgvSigList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellClick);
+            this.dgvSigList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellContentDoubleClick);
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.btnAdd2New);
+            this.gbEditSig.Controls.Add(this.btnAdd1New);
+            this.gbEditSig.Controls.Add(this.btnTestXML);
             this.gbEditSig.Controls.Add(this.btnClear);
             this.gbEditSig.Controls.Add(this.btnToNote);
             this.gbEditSig.Controls.Add(this.label2);
@@ -156,18 +164,31 @@
             this.gbEditSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEditSig.Location = new System.Drawing.Point(491, 40);
             this.gbEditSig.Name = "gbEditSig";
-            this.gbEditSig.Size = new System.Drawing.Size(582, 459);
+            this.gbEditSig.Size = new System.Drawing.Size(582, 552);
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClear.Location = new System.Drawing.Point(43, 65);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(113, 34);
+            this.btnClear.TabIndex = 17;
+            this.btnClear.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnClear, "Copy the signature back to the list table");
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnToNote
             // 
             this.btnToNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToNote.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnToNote.Location = new System.Drawing.Point(406, 61);
+            this.btnToNote.Location = new System.Drawing.Point(406, 66);
             this.btnToNote.Name = "btnToNote";
-            this.btnToNote.Size = new System.Drawing.Size(141, 23);
+            this.btnToNote.Size = new System.Drawing.Size(141, 34);
             this.btnToNote.TabIndex = 16;
             this.btnToNote.Text = "Copy to notepad";
             this.toolTip1.SetToolTip(this.btnToNote, "Copy the signatur to notepad");
@@ -182,9 +203,10 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(202, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 48);
+            this.label2.Size = new System.Drawing.Size(171, 64);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Be sure to copy changes\r\nback to Sig List and be sure\r\nto save changes.";
+            this.label2.Text = "Be sure to copy changes\r\nback (Apply) to Sig List and\r\nbe sure to save changes.\r\n" +
+    "You must test before saving";
             // 
             // btnShowBrowser
             // 
@@ -192,7 +214,7 @@
             this.btnShowBrowser.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnShowBrowser.Location = new System.Drawing.Point(406, 21);
             this.btnShowBrowser.Name = "btnShowBrowser";
-            this.btnShowBrowser.Size = new System.Drawing.Size(141, 23);
+            this.btnShowBrowser.Size = new System.Drawing.Size(141, 34);
             this.btnShowBrowser.TabIndex = 3;
             this.btnShowBrowser.Text = "Show in Browser";
             this.btnShowBrowser.UseVisualStyleBackColor = true;
@@ -204,31 +226,53 @@
             this.bltnSaveBack.ForeColor = System.Drawing.SystemColors.Highlight;
             this.bltnSaveBack.Location = new System.Drawing.Point(43, 21);
             this.bltnSaveBack.Name = "bltnSaveBack";
-            this.bltnSaveBack.Size = new System.Drawing.Size(113, 23);
+            this.bltnSaveBack.Size = new System.Drawing.Size(113, 34);
             this.bltnSaveBack.TabIndex = 2;
-            this.bltnSaveBack.Text = "Copy back";
+            this.bltnSaveBack.Text = "Apply";
             this.toolTip1.SetToolTip(this.bltnSaveBack, "Copy the signature back to the list table");
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // btnClear
+            // btnTestXML
             // 
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(43, 61);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(113, 23);
-            this.btnClear.TabIndex = 17;
-            this.btnClear.Text = "Clear";
-            this.toolTip1.SetToolTip(this.btnClear, "Copy the signature back to the list table");
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnTestXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestXML.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTestXML.Location = new System.Drawing.Point(43, 112);
+            this.btnTestXML.Name = "btnTestXML";
+            this.btnTestXML.Size = new System.Drawing.Size(113, 34);
+            this.btnTestXML.TabIndex = 18;
+            this.btnTestXML.Text = "Test";
+            this.toolTip1.SetToolTip(this.btnTestXML, "Copy the signature back to the list table");
+            this.btnTestXML.UseVisualStyleBackColor = true;
+            this.btnTestXML.Click += new System.EventHandler(this.btnTestXML_Click);
+            // 
+            // btnAdd2New
+            // 
+            this.btnAdd2New.Location = new System.Drawing.Point(406, 157);
+            this.btnAdd2New.Name = "btnAdd2New";
+            this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
+            this.btnAdd2New.TabIndex = 20;
+            this.btnAdd2New.Text = "Add 2 newlines";
+            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br>");
+            this.btnAdd2New.UseVisualStyleBackColor = true;
+            this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
+            // 
+            // btnAdd1New
+            // 
+            this.btnAdd1New.Location = new System.Drawing.Point(406, 123);
+            this.btnAdd1New.Name = "btnAdd1New";
+            this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
+            this.btnAdd1New.TabIndex = 19;
+            this.btnAdd1New.Text = "Add newline";
+            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br>");
+            this.btnAdd1New.UseVisualStyleBackColor = true;
+            this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
             // 
             // CSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 540);
+            this.ClientSize = new System.Drawing.Size(1122, 622);
             this.Controls.Add(this.gbEditSig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -265,5 +309,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnToNote;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnTestXML;
+        private System.Windows.Forms.Button btnAdd2New;
+        private System.Windows.Forms.Button btnAdd1New;
     }
 }

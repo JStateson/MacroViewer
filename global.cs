@@ -27,7 +27,7 @@ namespace MacroViewer
 
         public static string AssembleIMG(string strURL)
         {
-            return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
+            return "<img src=\"" + strURL.Trim() + "\" border=\"2\" />";
         }
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
         public static string VolunteerUserID = "";
@@ -47,7 +47,10 @@ namespace MacroViewer
             }
         }
 
-
+        public static string Form1CellTable(string strIn)
+        {
+            return "<table border=\"1\" width=\"100%\"><tr><td width=\"100%\"><p>" + strIn + "</p></td></tr></table>";
+        }
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {
             var dir = new DirectoryInfo(WhereExe);
@@ -145,20 +148,37 @@ namespace MacroViewer
             bUseWebView = WebViewIsInstalled();
         }
 
-
-        public void ShowInBrowser(string sLoc, string strIn)
+        // had to add block as BlinkTimer was not working !?!?!? todo to do todo
+        public void ShowInBrowser(string sLoc, string strIn, bool bBlock)
         {
             string strTemp = strPrefix + strIn + strSuffix;
             if (bUseWebView)
             {
                 ShowPage MyShowPage = new ShowPage(sLoc, strTemp);    // this is WebView2 stuff
+                if(bBlock)
+                {
+                    MyShowPage.ShowDialog();
+                    MyShowPage.Dispose();
+                    return;
+                }
                 MyShowPage.Show();
             }
             else
             {
                 WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);    // ie11 old browser
+                if (bBlock)
+                {
+                    MyShowPage.ShowDialog();
+                    MyShowPage.Dispose();
+                    return;
+                }
                 MyShowPage.Show();
             }
+        }
+
+        public void ShowInBrowser(string sLoc, string strIn)
+        {
+            ShowInBrowser(sLoc, strIn, false);
         }
 
     }

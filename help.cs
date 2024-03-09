@@ -1,10 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MacroViewer
 {
     public partial class help : Form
     {
-        private static string[] strForms = { "FILE","SIG","EDIT","MANAGE", "UTILS", "EDITLINK" };
+        private static string[] strForms = { "FILE", "SIG", "EDIT", "MANAGE", "UTILS", "EDITLINK" };
         private void MakeVisible(string sHelp)
         {
             rFILE.Visible = (sHelp == "FILE");
@@ -15,10 +17,24 @@ namespace MacroViewer
             rMANAGE.Visible = (sHelp == "MANAGE");
         }
 
+        private int nLongest = 0;
+
+        private int ReduceSize(int nPixels, double Pct)
+        {
+            double x = Convert.ToDouble(nPixels) * Pct;
+            return Convert.ToInt32(x);
+        }
+
+        // assume font to be 9 points and guessing 7 across and 9 high
+        // 80 chars across is 560 pixels
         private void SetPosition(RichTextBox rBOX)
         {
+            double x = rBOX.Text.Length;
+            x = 0.9 *  x / nLongest;
+            int Width = Math.Max(560, ReduceSize(Size.Width, x));
+            int Height = ReduceSize(Size.Height, x);
             rBOX.Location = new System.Drawing.Point(20, 20);
-            rBOX.Size = new System.Drawing.Size(600, 400);
+            rBOX.Size = new System.Drawing.Size(Width, Height);
         }
 
         private void ShowHelp(string sHelp)
@@ -51,6 +67,11 @@ namespace MacroViewer
         public help(string sHelp)
         {
             InitializeComponent();
+            nLongest= 0;
+            foreach(RichTextBox rtb in this.Controls)
+            {
+                nLongest = Math.Max(rtb.Text.Length, nLongest);
+            }
             ShowHelp(sHelp);
         }
     }

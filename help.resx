@@ -194,12 +194,14 @@ You have a macro that looks good.  You remove markup and click the Show Page and
 This tool allows you to replace a phrase with an object such as a URL that can be clicked on.  You can select a word or phrase with the cursor or just position the cursor in a space.
 
 When you click on "EDIT LINK" the item you selected can be changed to an object such as a URL  If nothing is selected then an item can be inserted.
+A box can be placed about the resut as explained below.	
 
 		SET TEXT dialog box
 
-When this pops up, you will see the text you selcted, if any.  There is a place to enter the URL and you can selecte a phrase to preceed othe url and a phrase to follow it. Click "Form Object" to create the object and click "Test Object" to see it in the browser.
+When this pops up, you will see the text you selected, if any.  There is a place to enter the URL and you can select a phrase to preceed othe url and a phrase to follow it. Click "Form Object" to create the object and click "Test Object" to see it in the browser.  Optionaly you can surround your selection with a box.
 Click "Apply and exit" to replace the text back it the main EDIT BOX with the new object
 
+URLs -1---------------
 For Example:, you positioned the cursor at the end of a paragraph in the  EDIT BOX and you want to form:
 "Click HERE to see if you have cloud support."
 
@@ -208,9 +210,25 @@ Suffix:"to see if you have cloud support"
 Selected Text:: "HERE"
 URL: "https://d34z73bbtpzgej.cloudfront.net/"
 
-The result will be
+The result in markup will be
 Click &lt;a href="https://d34z73bbtpzgej.cloudfront.net/" target="_blank"&gt;HERE&lt;/a&gt; to see if you have cloud support
-</value>
+
+URLs-2----------------
+For example, you selected a url and you want to make it into a hyperlink.  All you need to do is just click "Form Object" and then click "Apply and exit".  Do not enter anything in the URL box as it will be filled in automatically.  When you return to the main form, if you view the page your URL will be "clickable".
+
+
+		Boxing the object
+
+URLs, IMGs and TEXT--
+Any text you select can be put into a table.  Click "Put In Box" to put the text you selected into a box. You can also form the object and put the new object into a box.
+Putting text into a box makes it easy for anyone to select the text in the box and to use. 
+
+For example:, the results in markup will be
+
+Copy the following command and enter it into the administrator command prompt
+&lt;table border="1" width="100%"&gt;&lt;tr&gt;&lt;td width="100%"&gt;&lt;p&gt;WMIC diskdrive get model, size, mediaType, status&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+The user can run the command "WMIC  diskdrive get model, size, mediaType, status" easily as it is distinguished from other information in the reply to their question.</value>
   </data>
   <data name="rMANAGE.Text" xml:space="preserve">
     <value>		Managing Images

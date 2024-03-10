@@ -167,11 +167,13 @@ Feel free to edit my signature to create your own. If you come up with some uniq
   </data>
   <data name="rEDIT.Text" xml:space="preserve">
     <value>	Help with main screen (editing)
-The Macro List contains up to 30 macros.  There are three macro sources:  HP macros, local PC macros and local Printer macros.
+The Macro List contains up to 30 macros.  There are three macro sources:  HP HTTP macros, local PC macros and local Printer macros.  A fourth source is the local copy of the HP HTTP macros.  If there are any HTML errors in the macros a red colored error menu item will appear. 
 
 If you double click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you checked the "Launch Page" then the macro is displayed the way a user will see it.
 
-Note that only the PC and Printer macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard.
+Note that only the PC and Printer macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard. This can be done using the local HP HTML macro file. 
+You create a local copy of the HP HTML macros and then edit those macros until there are no errors.  If there is an error the macro number will be red.  If the macro number is blue then the original HP HTML macro needs to be replaced wiht the local copy.  If the  macro number is not colored then there is not error
+To replace the HP HTML macro at the HP community, right click the BLUE colored macro number.  This copies the body of the macro to the clipboard.  You can then log into your account and paste the macro body thus replacing your HP community one.
 
 	Supplemental Table group
 The group shows the name of the macro being edited and gives an option to SAVE or DELETE it. To create a macro click the NEW adjacent to the EDIT BOX and change the name of the macro.  Be sure to save it.
@@ -186,7 +188,11 @@ You can add an image or url to the EDIT BOX.  The UTILS menu is another way to a
 	Using your macro in the HP community
 You have a macro that looks good.  You remove markup and click the Show Page and the macros looks fine.  There are two things you can do with it.  You can add it to your own macro collection or just use it in a reply to a user.
 1 - Reply to user:  Just copy from the display page and paste into the user reply.  You can also copy the text from the EDIT BOX but you MUST NOT SELECT MARKUP.
-2 - Add to your macro list:  You close the display page as that is not used.  Select the markup option.  Copy the text in the EDIT BOX and paste it into one of the macro positions.  Text pasted into the HP macro list is BBCode or "markup"</value>
+2 - Add to your macro list:  You close the display page as that is not used.  Select the markup option.  Copy the text in the EDIT BOX and paste it into one of the macro positions.  Text pasted into the HP macro list is BBCode or "markup"
+
+	Using the Error menu item
+Click the red ERROR menu item to bring up a list of macros that have errors.  The line number and the character offset will be shown and clicking on the name of the defectrive macro brings up notepad where you can look a the body of the macro and locate the line and character that thas the problem.
+You do not edit using notepad.  Editing of the defective macro is done in the main menu and once edited you can click on "Save and Reload".  There can be more than one error but only one at a time is shown in the error dialog box.</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

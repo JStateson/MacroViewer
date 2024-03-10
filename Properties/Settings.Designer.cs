@@ -58,5 +58,17 @@ namespace MacroViewer.Properties {
                 this["UserID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HTTP_HP {
+            get {
+                return ((string)(this["HTTP_HP"]));
+            }
+            set {
+                this["HTTP_HP"] = value;
+            }
+        }
     }
 }

@@ -13,8 +13,14 @@ namespace MacroViewer
     public partial class main : Form
     {
         private const int NumMacros = 30;
+        private bool bHaveBothHP = false; // have read both the HTML and the HPmacros for convenience uploading
+        // if true then at least one of the HTML had an error and the corresponding HPmacros is fixed
         private string[] MacroErrors = new string[NumMacros];
-        private string[] MacroNames = new string[NumMacros];    
+        private string[] MacroNames = new string[NumMacros]; 
+        private bool[] HTMLerr = new bool[NumMacros];   // if set then error at macro
+        private bool[] HPerr = new bool[NumMacros];     //if set then error at macro
+        // if HTMLerr set but HPerr is not set then can copy to clipboard with right click
+        private bool[] bHPcorrected = new bool[NumMacros];
         private string aPage;
         private int[] StartMac = new int[NumMacros];
         private int[] StopMac = new int[NumMacros];
@@ -42,9 +48,32 @@ namespace MacroViewer
             if (iBrowser < 0) Utils.BrowserWanted = Utils.eBrowserType.eEdge;
             else Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
+            string strFilename = Properties.Settings.Default.HTTP_HP;
+            if(strFilename != null)
+            {
+                this.Text = " HP Macro Editor: " + strFilename;
+            }
         }
 
-
+        private void LookForHTMLfix()
+        {
+            bool b = false;
+            for(int i = 0; i < NumMacros; i++)
+            {
+                bHPcorrected[i] = false;
+                if (HTMLerr[i]) // there is an HTML error
+                {
+                    if (!HPerr[i])  // it was fixed here
+                    {
+                        b = true;
+                        bHPcorrected[i] = true;
+                        SetErrorBlue(i);
+                    }
+                }
+            }
+            bHaveBothHP = b;
+            lbRCcopy.Visible = b;
+        }
         private static string GetDownloadsPath()
         {
             if (Environment.OSVersion.Version.Major < 6) throw new NotSupportedException();
@@ -87,7 +116,17 @@ namespace MacroViewer
 
         private void SetErrorRed(int r)
         {
+            lbName.Rows[r].Cells[0].Style.Font = new Font("Arial", 10, FontStyle.Bold);
             lbName.Rows[r].Cells[0].Style.ForeColor = Color.Red;
+        }
+
+        private void SetErrorBlue(int r)
+        {
+            //dataGridView1.Rows[rowIndex].Cells[columnIndex].Style.Font = new Font("Arial", 12, FontStyle.Bold);
+
+            //lbName.Rows[r].Cells[0].Style.ForeColor = Color.Blue; //default worked but just blue
+            lbName.Rows[r].Cells[0].Style.Font = new Font("Arial", 10, FontStyle.Bold);
+            lbName.Rows[r].Cells[0].Style.ForeColor = Color.Blue;
         }
 
         private bool FindBody()
@@ -112,7 +151,8 @@ namespace MacroViewer
                 Body[i] = strBody;//.Replace("<br>", "<br />"); // jys had to do this once
                 strFind = Utils.XmlParse(strBody);
                 MacroErrors[i] = strFind;
-                if (strFind != "")
+                HTMLerr[i] = (strFind != "");
+                if (HTMLerr[i])
                 {
                     bMacroErrors = true;
                     SetErrorRed(i);
@@ -192,8 +232,21 @@ namespace MacroViewer
             if (!File.Exists(strFileName)) return false;
             LastFolder = Path.GetDirectoryName(ofd.FileName);
             Properties.Settings.Default.LastFolder = LastFolder;
+            Properties.Settings.Default.HTTP_HP = strFileName;
+            Properties.Settings.Default.Save();
             aPage = File.ReadAllText(strFileName);
             nLength = aPage.Length;
+            ParsePage();
+            return true;
+        }
+
+        private bool ReadLastHTTP()
+        {
+            string strFilename = Properties.Settings.Default.HTTP_HP;
+            if (strFilename == null) return false;
+            aPage = File.ReadAllText(strFilename);
+            if(aPage == null) return false;
+            if (aPage.Length == 0) return false;
             ParsePage();
             return true;
         }
@@ -276,11 +329,15 @@ namespace MacroViewer
             UsingMarkup(bEnable);
         }
 
-        private void btnCopyTo_Click(object sender, EventArgs e)
+        private void CopyBodyToClipboard()
         {
             string strOut = "";
             if (tbBody.Text == "") return;
             Clipboard.SetText(tbBody.Text);
+        }
+        private void btnCopyTo_Click(object sender, EventArgs e)
+        {
+            CopyBodyToClipboard();
         }
 
         // below is for testing but I never got it to work
@@ -379,7 +436,8 @@ namespace MacroViewer
                     Body[i] = sBody;//.Replace("<br>","<br />"); // jys need to do this once
                     sBody = Utils.XmlParse(sBody);
                     MacroErrors[i] = sBody;
-                    if (sBody != "")
+                    HPerr[i] = (sBody != "");
+                    if (HPerr[i])
                     {
                         bMacroErrors = true;
                         SetErrorRed(i);
@@ -637,8 +695,11 @@ namespace MacroViewer
 
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadFromTXT("HPmacros");
+            bool bHaveHTTP = ReadLastHTTP();
+                                        //find any errors in the original HTML macro file
+            LoadFromTXT("HPmacros");    //find any errors in the local file
             strType = "HP";
+            if(bHaveHTTP)LookForHTMLfix();
             ShowSelectedRow(0);
             EnableMacEdits(true);
         }
@@ -791,6 +852,18 @@ namespace MacroViewer
             SaveCurrentMacros();
             LoadFromTXT(TXTName);
             ShowSelectedRow(r);
+        }
+
+        private void lbName_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (strType != "HP") return;
+                if (!bHaveBothHP) return;
+                int r = e.RowIndex;
+                if (r == -1) return;
+                CopyBodyToClipboard();
+            }
         }
     }
 }

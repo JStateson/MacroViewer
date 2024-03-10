@@ -42,6 +42,7 @@
             this.btnChangeUrls = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
+            this.btnUpdErr = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,7 +94,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnUpdErr = new System.Windows.Forms.Button();
+            this.lbRCcopy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -123,13 +124,14 @@
             this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Inx,
             this.MacName});
-            this.lbName.Location = new System.Drawing.Point(16, 76);
+            this.lbName.Location = new System.Drawing.Point(6, 76);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
+            this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             // 
             // Inx
             // 
@@ -228,13 +230,27 @@
             this.cbLaunchPage.AutoSize = true;
             this.cbLaunchPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLaunchPage.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbLaunchPage.Location = new System.Drawing.Point(63, 28);
+            this.cbLaunchPage.Location = new System.Drawing.Point(23, 31);
             this.cbLaunchPage.Name = "cbLaunchPage";
             this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
             this.cbLaunchPage.TabIndex = 5;
             this.cbLaunchPage.Text = "Launch Page";
             this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
             this.cbLaunchPage.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdErr
+            // 
+            this.btnUpdErr.Enabled = false;
+            this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnUpdErr.Location = new System.Drawing.Point(321, 219);
+            this.btnUpdErr.Name = "btnUpdErr";
+            this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
+            this.btnUpdErr.TabIndex = 19;
+            this.btnUpdErr.Text = "Save and Reload";
+            this.toolTip1.SetToolTip(this.btnUpdErr, "For errors only.  This saves changes\r\nand refreshes the error table");
+            this.btnUpdErr.UseVisualStyleBackColor = true;
+            this.btnUpdErr.Click += new System.EventHandler(this.btnUpdErr_Click);
             // 
             // tbBody
             // 
@@ -746,6 +762,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lbRCcopy);
             this.groupBox2.Controls.Add(this.cbLaunchPage);
             this.groupBox2.Controls.Add(this.lbName);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -756,19 +773,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
             // 
-            // btnUpdErr
+            // lbRCcopy
             // 
-            this.btnUpdErr.Enabled = false;
-            this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnUpdErr.Location = new System.Drawing.Point(321, 219);
-            this.btnUpdErr.Name = "btnUpdErr";
-            this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
-            this.btnUpdErr.TabIndex = 19;
-            this.btnUpdErr.Text = "Save and Reload";
-            this.toolTip1.SetToolTip(this.btnUpdErr, "For errors only.  This saves changes\r\nand refreshes the error table");
-            this.btnUpdErr.UseVisualStyleBackColor = true;
-            this.btnUpdErr.Click += new System.EventHandler(this.btnUpdErr_Click);
+            this.lbRCcopy.AutoSize = true;
+            this.lbRCcopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRCcopy.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbRCcopy.Location = new System.Drawing.Point(170, 33);
+            this.lbRCcopy.Name = "lbRCcopy";
+            this.lbRCcopy.Size = new System.Drawing.Size(162, 20);
+            this.lbRCcopy.TabIndex = 6;
+            this.lbRCcopy.Text = "Right-click enabled";
+            this.toolTip1.SetToolTip(this.lbRCcopy, "There is a corrected HTML available\r\nfor the corresponding HTML macro\r\nerror in y" +
+        "our HP community macro\r\nsettings.  Right click on the BLUE\r\nnumber to copy to th" +
+        "e clipboard");
+            this.lbRCcopy.Visible = false;
             // 
             // main
             // 
@@ -874,6 +892,7 @@
         private System.Windows.Forms.ToolStripMenuItem errorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdErr;
+        private System.Windows.Forms.Label lbRCcopy;
     }
 }
 

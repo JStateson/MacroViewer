@@ -13,7 +13,7 @@ namespace MacroViewer
         private string SigLoc = "";
         private string SigFilename = "";
         private XmlDocument xmlDoc = new XmlDocument();
-        private string DefaultSig = "blockquote><div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div></blockquote>";
+        private string DefaultSig = "<div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div>";
         public class CStringValue
         {
             public CStringValue(string s)
@@ -54,16 +54,20 @@ namespace MacroViewer
         }
 
 
+        private void CreateSigFromDefault()
+        {
+            string strDefault = "<xml>" + Environment.NewLine;
+            strDefault += FormNewSig("Default", DefaultSig);
+            strDefault += "</xml>";
+            File.WriteAllText(SigFilename, strDefault);
+        }
 
         private void ReadXML()
         {
             xmlDoc = new XmlDocument();
             if (!File.Exists(SigFilename))
             {
-                string strDefault = "<xml>" + Environment.NewLine;
-                strDefault += FormNewSig("Default", DefaultSig);
-                strDefault += "</xml>";
-                File.WriteAllText(SigFilename, strDefault);
+                CreateSigFromDefault();
             }
             try
             {
@@ -72,14 +76,17 @@ namespace MacroViewer
             catch (Exception e)
             {
                 string strErr = e.Message + Environment.NewLine;
-                DialogResult eRes = MessageBox.Show(strErr,"Corrupted file" + SigFilename);
+                DialogResult eRes = MessageBox.Show(strErr,"Corrupted sig file reading default");
+                CreateSigFromDefault();
+                xmlDoc.Load(SigFilename);
             }
             FillTable();
         }
 
-        private void FillTable()
+        private bool FillTable()
         {
             int i = 0;
+            if (xmlDoc.DocumentElement == null) return false;
             foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
             {
                 string sName = node.ChildNodes[0].InnerText;
@@ -93,7 +100,8 @@ namespace MacroViewer
             dgvSigList.Columns[0].Name = "Name";
             dgvSigList.Columns["Name"].HeaderText = "Name";
             dgvSigList.Columns[0].Width = dgvSigList.Width;
-            ShowSig(0);
+            ShowSig(0); 
+            return true;
         }
 
         private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

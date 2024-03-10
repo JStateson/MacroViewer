@@ -44,19 +44,19 @@ namespace MacroViewer
             string strPrefix = XMLprefix; //"<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><blockquote><div>";
             string strSuffix = XMLsuffix; //"</div></blockquote></html>";
             string strTmp = strPrefix + strIn + strSuffix;
+            string strRtn = "";
             try
             {
                 XDocument xdoc = new XDocument();
                 xdoc = XDocument.Parse(strTmp);
-                return "";
             }
             catch (Exception e)
             {
                 string strErr = e.Message + Environment.NewLine;
                 //DialogResult eRes = MessageBox.Show(strErr, "XML parse error");
-                return strErr;
+                strRtn = strErr;
             }
-            return "";
+            return strRtn;
         }
 
 

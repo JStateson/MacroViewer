@@ -18,7 +18,6 @@ namespace MacroViewer
         private string[] sErrors;   // length 30
         private int[] iErrors;      // where in sError the non-blank error message and length 30
         private int[] BodyFromRow;  // could be as small as 1 or as large as 30 but holds 30
-        private string strMyHtml = "";
         private string[] AllBody;   // length 30
         private string sLoc = "";
 

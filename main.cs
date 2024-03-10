@@ -235,6 +235,7 @@ namespace MacroViewer
             Properties.Settings.Default.HTTP_HP = strFileName;
             Properties.Settings.Default.Save();
             aPage = File.ReadAllText(strFileName);
+            this.Text = " HP Macro Editor: " + strFileName;
             nLength = aPage.Length;
             ParsePage();
             return true;
@@ -244,6 +245,7 @@ namespace MacroViewer
         {
             string strFilename = Properties.Settings.Default.HTTP_HP;
             if (strFilename == null) return false;
+            if (strFilename == "") return false;
             aPage = File.ReadAllText(strFilename);
             if(aPage == null) return false;
             if (aPage.Length == 0) return false;
@@ -331,7 +333,6 @@ namespace MacroViewer
 
         private void CopyBodyToClipboard()
         {
-            string strOut = "";
             if (tbBody.Text == "") return;
             Clipboard.SetText(tbBody.Text);
         }
@@ -693,15 +694,19 @@ namespace MacroViewer
             EnableMacEdits(true);
         }
 
-        private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReloadHP(int r)
         {
             bool bHaveHTTP = ReadLastHTTP();
-                                        //find any errors in the original HTML macro file
+            //find any errors in the original HTML macro file
             LoadFromTXT("HPmacros");    //find any errors in the local file
             strType = "HP";
-            if(bHaveHTTP)LookForHTMLfix();
-            ShowSelectedRow(0);
+            if (bHaveHTTP) LookForHTMLfix();
+            ShowSelectedRow(r);
             EnableMacEdits(true);
+        }
+        private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReloadHP(0);
         }
 
         private void ReplaceText(int iStart, int iLen, string strText)
@@ -850,7 +855,14 @@ namespace MacroViewer
         {
             int r = CurrentRowSelected;
             SaveCurrentMacros();
-            LoadFromTXT(TXTName);
+            if(bHaveBothHP)
+            {
+                ReloadHP(r);
+            }
+            else
+            {
+                LoadFromTXT(TXTName);
+            }
             ShowSelectedRow(r);
         }
 

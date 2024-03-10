@@ -15,20 +15,34 @@ using System.Text;
 using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using System.Xml.Linq;
+using System.Xml.Resolvers;
 
 namespace MacroViewer
 {    
     public static class Utils
     {
         /*
-         * <!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>
+         *
+<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>
 </div></blockquote></body></html>
-         * */
+         * 
+         
+         &px=999 is not defined, shows up an unknown "="
+         */
 
+        public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body>";
+        public static string XMLsuffix = "</body></html>";
+
+        public static void NotepadViewer(string strFile)
+        {
+            if (strFile == "") return;
+            Process process = new Process();
+            Process.Start("C:\\Windows\\Notepad.exe", strFile);
+        }
         public static string XmlParse(string strIn)
         {
-            string strPrefix = "<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>";
-            string strSuffix = "</div></blockquote></body></html>";
+            string strPrefix = XMLprefix; //"<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><blockquote><div>";
+            string strSuffix = XMLsuffix; //"</div></blockquote></html>";
             string strTmp = strPrefix + strIn + strSuffix;
             try
             {
@@ -44,6 +58,7 @@ namespace MacroViewer
             }
             return "";
         }
+
 
         public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 
         public enum eBrowserType
@@ -151,8 +166,8 @@ namespace MacroViewer
     internal class CShowBrowser
     {
         private bool bUseWebView  = true;
-        private string strPrefix = "<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
-        private string strSuffix = "</body></html>";
+        private string strPrefix = Utils.XMLprefix;  //"<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
+        private string strSuffix = Utils.XMLsuffix;  //"</body></html>";
         
         private bool WebViewIsInstalled()
         {
@@ -215,6 +230,7 @@ namespace MacroViewer
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool BringWindowToTop(IntPtr hWnd);
+
         public void PasteToNotepad(string strText)
         {
             if (strText == "") return;

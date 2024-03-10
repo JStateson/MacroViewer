@@ -10,7 +10,6 @@ namespace MacroViewer
     public partial class LinkObject : Form
     {
         private string sLoc;
-        private string strLC;
         private bool bBoxing = false;
         private bool bBlinking = false;
         string strBoxed = "";

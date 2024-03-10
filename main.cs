@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 
 
 namespace MacroViewer
@@ -25,7 +26,7 @@ namespace MacroViewer
         private int CurrentRowSelected = -1;
         private OpenFileDialog ofd;
         private bool bMacroErrors;
-
+        private bool bHaveHTML = false; // html macro was read in. this cannot be edited
 
         //CSendCloud SendToCloud = new CSendCloud();
 
@@ -84,6 +85,10 @@ namespace MacroViewer
             ofd.InitialDirectory = GetLastFolder();
         }
 
+        private void SetErrorRed(int r)
+        {
+            lbName.Rows[r].Cells[0].Style.ForeColor = Color.Red;
+        }
 
         private bool FindBody()
         {
@@ -104,10 +109,14 @@ namespace MacroViewer
                 string strBody = aPage.Substring(n, k).Replace("lt;", "<");
                 strBody = strBody.Replace("&nbsp;", " ");
                 strBody = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
-                Body[i] = strBody;
+                Body[i] = strBody;//.Replace("<br>", "<br />"); // jys had to do this once
                 strFind = Utils.XmlParse(strBody);
                 MacroErrors[i] = strFind;
-                if (strFind != "")bMacroErrors = true;
+                if (strFind != "")
+                {
+                    bMacroErrors = true;
+                    SetErrorRed(i);
+                }
             }
             errorsToolStripMenuItem.Visible = bMacroErrors;
             return true;
@@ -226,6 +235,7 @@ namespace MacroViewer
             lbName.Rows[CurrentRowSelected].Selected = true;
             if (cbLaunchPage.Checked)
                 RunBrowser();
+            AllowSaveRestore(CurrentRowSelected);
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -329,7 +339,20 @@ namespace MacroViewer
                 gpMainEdit.Enabled = true;
                 gbSupp.Enabled = false;
                 strType = "";
+                bHaveHTML = true;
             }            
+        }
+
+        private void AllowSaveRestore (int r)
+        {
+            btnUpdErr.Enabled = false;
+            if (bMacroErrors)
+            {
+                if (MacroErrors[CurrentRowSelected] == null) return;
+                if (MacroErrors[CurrentRowSelected] == "") return;
+                btnUpdErr.Enabled = true;
+            }
+
         }
 
         private void LoadFromTXT(string strFN)
@@ -347,15 +370,20 @@ namespace MacroViewer
                 StreamReader sr = new StreamReader(TXTmacName);
                 string line = sr.ReadLine();
                 string sBody;
+                bHaveHTML = false;
                 while (line != null)
                 {
                     lbName.Rows.Add(i + 1, line);
                     MacroNames[i] = line;
                     sBody = sr.ReadLine();
-                    Body[i] = sBody; // was a one time fix: .Replace("<br>","<br />");
+                    Body[i] = sBody;//.Replace("<br>","<br />"); // jys need to do this once
                     sBody = Utils.XmlParse(sBody);
                     MacroErrors[i] = sBody;
-                    if (sBody != "") bMacroErrors = true;
+                    if (sBody != "")
+                    {
+                        bMacroErrors = true;
+                        SetErrorRed(i);
+                    }
                     errorsToolStripMenuItem.Visible = bMacroErrors;
                     i++;
                     line = sr.ReadLine();
@@ -393,11 +421,12 @@ namespace MacroViewer
 
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult Res1 = MessageBox.Show("This will overwrite PCmacros",
+            if (!bHaveHTML) return;
+            DialogResult Res1 = MessageBox.Show("This will overwrite HPmacros",
                     "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 == DialogResult.Yes)
             {
-                SaveAsTXT("PCmacros");
+                SaveAsTXT("HPmacros");
             }
         }
 
@@ -447,7 +476,7 @@ namespace MacroViewer
 
         private void SaveCurrentMacros()
         {
-                        bool bChanged = false;
+            bool bChanged = false;
             string strName = tbMacName.Text;
             string strOld = "";
             if (lbName.RowCount == 0)
@@ -480,7 +509,7 @@ namespace MacroViewer
         {
             string strOut = strIn.Replace(Environment.NewLine, "<br />").Trim();
             // the above does not work for html as it has a newline
-            strOut = strOut.Replace("\n", "<br>");
+            strOut = strOut.Replace("\n", "<br />");
             bChanged = (strOut.Length != strIn.Length);
             return strOut;
         }
@@ -608,12 +637,10 @@ namespace MacroViewer
 
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult Res1 = MessageBox.Show("This will overwrite PRNmacros ",
-        "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (Res1 == DialogResult.Yes)
-            {
-                SaveAsTXT("PRNmacros");
-            }
+            LoadFromTXT("HPmacros");
+            strType = "HP";
+            ShowSelectedRow(0);
+            EnableMacEdits(true);
         }
 
         private void ReplaceText(int iStart, int iLen, string strText)
@@ -749,13 +776,21 @@ namespace MacroViewer
 
         private void errorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors);
+            ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors, ref Body);
             MySE.Show();
         }
 
         private void helpWithErrorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowHelp("XMLERRORS");
+        }
+
+        private void btnUpdErr_Click(object sender, EventArgs e)
+        {
+            int r = CurrentRowSelected;
+            SaveCurrentMacros();
+            LoadFromTXT(TXTName);
+            ShowSelectedRow(r);
         }
     }
 }

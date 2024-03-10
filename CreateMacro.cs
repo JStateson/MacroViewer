@@ -35,8 +35,6 @@ namespace MacroViewer
         public string strResultOut { get; set; }        public string strLocalOut { get; set; }
         //private bool bIsServer = false; // is on the HP image server
         private bool bIsPath = false;   // if a file on the disk then is true
-        private int dHeight = 200;
-        private int dWidth = 200;
         private string ExeFolder;
         string strType = "";
         public CreateMacro(string rstrType)

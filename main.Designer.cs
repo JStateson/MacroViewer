@@ -59,10 +59,12 @@
             this.helpWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EDITLINKHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -91,8 +93,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnUpdErr = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -278,47 +279,47 @@
             // readHTMLToolStripMenuItem
             // 
             this.readHTMLToolStripMenuItem.Name = "readHTMLToolStripMenuItem";
-            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.readHTMLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.readHTMLToolStripMenuItem.Text = "Read HTML file";
             this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
             // 
             // loadFromXMLToolStripMenuItem
             // 
             this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.loadFromXMLToolStripMenuItem.Text = "Load PC macro";
             this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
             // 
             // loadPrinterMacsToolStripMenuItem
             // 
             this.loadPrinterMacsToolStripMenuItem.Name = "loadPrinterMacsToolStripMenuItem";
-            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.loadPrinterMacsToolStripMenuItem.Text = "Load Printer macs";
             this.loadPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.loadPrinterMacsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
             // 
             // saveToXMLToolStripMenuItem
             // 
             this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
-            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.saveToXMLToolStripMenuItem.Text = "Save PC macro";
+            this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.saveToXMLToolStripMenuItem.Text = "Save HTML as local HP";
             this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
             // 
             // savePrinterMacsToolStripMenuItem
             // 
             this.savePrinterMacsToolStripMenuItem.Name = "savePrinterMacsToolStripMenuItem";
-            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.savePrinterMacsToolStripMenuItem.Text = "Save Printer macs";
+            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.savePrinterMacsToolStripMenuItem.Text = "Load local HP";
             this.savePrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.savePrinterMacsToolStripMenuItem_Click);
             // 
             // downloadMacrosToolStripMenuItem
             // 
             this.downloadMacrosToolStripMenuItem.Name = "downloadMacrosToolStripMenuItem";
-            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.downloadMacrosToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.downloadMacrosToolStripMenuItem.Text = "Download Macros";
             this.downloadMacrosToolStripMenuItem.Click += new System.EventHandler(this.downloadMacrosToolStripMenuItem_Click);
             // 
@@ -378,6 +379,13 @@
             this.managingImagesHelpToolStripMenuItem.Text = "Managing Images help";
             this.managingImagesHelpToolStripMenuItem.Click += new System.EventHandler(this.managingImagesHelpToolStripMenuItem_Click);
             // 
+            // helpWithErrorsToolStripMenuItem
+            // 
+            this.helpWithErrorsToolStripMenuItem.Name = "helpWithErrorsToolStripMenuItem";
+            this.helpWithErrorsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithErrorsToolStripMenuItem.Text = "Help with errors";
+            this.helpWithErrorsToolStripMenuItem.Click += new System.EventHandler(this.helpWithErrorsToolStripMenuItem_Click);
+            // 
             // utilsToolStripMenuItem
             // 
             this.utilsToolStripMenuItem.Name = "utilsToolStripMenuItem";
@@ -406,8 +414,18 @@
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
+            // errorsToolStripMenuItem
+            // 
+            this.errorsToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.errorsToolStripMenuItem.Name = "errorsToolStripMenuItem";
+            this.errorsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.errorsToolStripMenuItem.Text = "ERRORS";
+            this.errorsToolStripMenuItem.Visible = false;
+            this.errorsToolStripMenuItem.Click += new System.EventHandler(this.errorsToolStripMenuItem_Click);
+            // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnUpdErr);
             this.gpMainEdit.Controls.Add(this.btnNew);
             this.gpMainEdit.Controls.Add(this.groupBox6);
             this.gpMainEdit.Controls.Add(this.groupBox5);
@@ -738,21 +756,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
             // 
-            // errorsToolStripMenuItem
+            // btnUpdErr
             // 
-            this.errorsToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
-            this.errorsToolStripMenuItem.Name = "errorsToolStripMenuItem";
-            this.errorsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.errorsToolStripMenuItem.Text = "ERRORS";
-            this.errorsToolStripMenuItem.Visible = false;
-            this.errorsToolStripMenuItem.Click += new System.EventHandler(this.errorsToolStripMenuItem_Click);
-            // 
-            // helpWithErrorsToolStripMenuItem
-            // 
-            this.helpWithErrorsToolStripMenuItem.Name = "helpWithErrorsToolStripMenuItem";
-            this.helpWithErrorsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithErrorsToolStripMenuItem.Text = "Help with errors";
-            this.helpWithErrorsToolStripMenuItem.Click += new System.EventHandler(this.helpWithErrorsToolStripMenuItem_Click);
+            this.btnUpdErr.Enabled = false;
+            this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnUpdErr.Location = new System.Drawing.Point(321, 219);
+            this.btnUpdErr.Name = "btnUpdErr";
+            this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
+            this.btnUpdErr.TabIndex = 19;
+            this.btnUpdErr.Text = "Save and Reload";
+            this.toolTip1.SetToolTip(this.btnUpdErr, "For errors only.  This saves changes\r\nand refreshes the error table");
+            this.btnUpdErr.UseVisualStyleBackColor = true;
+            this.btnUpdErr.Click += new System.EventHandler(this.btnUpdErr_Click);
             // 
             // main
             // 
@@ -857,6 +873,7 @@
         private System.Windows.Forms.ToolStripMenuItem managingImagesHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem errorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
+        private System.Windows.Forms.Button btnUpdErr;
     }
 }
 

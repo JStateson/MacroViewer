@@ -1,9 +1,0 @@
-﻿<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-  </head>
-  <body>
-    Yes, you can upgrade to a new NVME.<br />The br here needs the slash as it is not html.<br />This video shows disassembly.<br /><br />If you get a SanDisk or Western Digital NVME then you can download their cloning software which is Acronis licensed. Possibly other vendors have or can recommend free cloning software. I use Acronis.<br /><br />You will need <a href="https://h30434.www3.hp.com/t5/image/serverpage/image-id/363370i5BE16BA39E85139E/image-size/large/is-moderation-mode/true?v=v2" target="_blank" />an NVME adapter like this</a> so you can clone your old NVME to the new one. Be sure to hold on to the old NVME for a few weeks in case the new one fails.<br /><br />Make sure is it "M+B" <br /><a href="https://www.amazon.com/s?k=usb3+to+nvme+m.2+adapter" target="_blank" >https://www.amazon.com/s?k=usb3+to+nvme+m.2+adapter</a>
-  </body>
-</html>

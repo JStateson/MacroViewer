@@ -89,123 +89,123 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox.cs">
+    <Compile Include="sources\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox.Designer.cs">
+    <Compile Include="sources\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateMacro.cs">
+    <Compile Include="sources\CreateMacro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateMacro.Designer.cs">
+    <Compile Include="sources\CreateMacro.Designer.cs">
       <DependentUpon>CreateMacro.cs</DependentUpon>
     </Compile>
-    <Compile Include="global.cs" />
-    <Compile Include="help.cs">
+    <Compile Include="sources\global.cs" />
+    <Compile Include="sources\help.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="help.Designer.cs">
+    <Compile Include="sources\help.Designer.cs">
       <DependentUpon>help.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelpUpdate.cs">
+    <Compile Include="sources\HelpUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelpUpdate.Designer.cs">
+    <Compile Include="sources\HelpUpdate.Designer.cs">
       <DependentUpon>HelpUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinkObject.cs">
+    <Compile Include="sources\LinkObject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LinkObject.Designer.cs">
+    <Compile Include="sources\LinkObject.Designer.cs">
       <DependentUpon>LinkObject.cs</DependentUpon>
     </Compile>
-    <Compile Include="main.cs">
+    <Compile Include="sources\main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main.Designer.cs">
+    <Compile Include="sources\main.Designer.cs">
       <DependentUpon>main.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageMacros.cs">
+    <Compile Include="sources\ManageMacros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageMacros.Designer.cs">
+    <Compile Include="sources\ManageMacros.Designer.cs">
       <DependentUpon>ManageMacros.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="sources\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetText.cs">
+    <Compile Include="sources\SetText.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SetText.Designer.cs">
+    <Compile Include="sources\SetText.Designer.cs">
       <DependentUpon>SetText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
+    <Compile Include="sources\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
+    <Compile Include="sources\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings1.cs" />
-    <Compile Include="ShowErrors.cs">
+    <Compile Include="sources\Settings1.cs" />
+    <Compile Include="sources\ShowErrors.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowErrors.Designer.cs">
+    <Compile Include="sources\ShowErrors.Designer.cs">
       <DependentUpon>ShowErrors.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowPage.cs">
+    <Compile Include="sources\ShowPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowPage.Designer.cs">
+    <Compile Include="sources\ShowPage.Designer.cs">
       <DependentUpon>ShowPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="CSignature.cs">
+    <Compile Include="sources\CSignature.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CSignature.Designer.cs">
+    <Compile Include="sources\CSignature.Designer.cs">
       <DependentUpon>CSignature.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateUrl.cs">
+    <Compile Include="sources\UpdateUrl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateUrl.Designer.cs">
+    <Compile Include="sources\UpdateUrl.Designer.cs">
       <DependentUpon>UpdateUrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="utils.cs">
+    <Compile Include="sources\utils.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="utils.Designer.cs">
+    <Compile Include="sources\utils.Designer.cs">
       <DependentUpon>utils.cs</DependentUpon>
     </Compile>
-    <Compile Include="WebBrowserPage.cs">
+    <Compile Include="sources\WebBrowserPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WebBrowserPage.Designer.cs">
+    <Compile Include="sources\WebBrowserPage.Designer.cs">
       <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AboutBox.resx">
+    <EmbeddedResource Include="sources\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateMacro.resx">
+    <EmbeddedResource Include="sources\CreateMacro.resx">
       <DependentUpon>CreateMacro.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CSignature.resx">
+    <EmbeddedResource Include="sources\CSignature.resx">
       <DependentUpon>CSignature.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="help.resx">
+    <EmbeddedResource Include="sources\help.resx">
       <DependentUpon>help.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelpUpdate.resx">
+    <EmbeddedResource Include="sources\HelpUpdate.resx">
       <DependentUpon>HelpUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LinkObject.resx">
+    <EmbeddedResource Include="sources\LinkObject.resx">
       <DependentUpon>LinkObject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main.resx">
+    <EmbeddedResource Include="sources\main.resx">
       <DependentUpon>main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageMacros.resx">
+    <EmbeddedResource Include="sources\ManageMacros.resx">
       <DependentUpon>ManageMacros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -218,28 +218,28 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SetText.resx">
+    <EmbeddedResource Include="sources\SetText.resx">
       <DependentUpon>SetText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
+    <EmbeddedResource Include="sources\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowErrors.resx">
+    <EmbeddedResource Include="sources\ShowErrors.resx">
       <DependentUpon>ShowErrors.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowPage.resx">
+    <EmbeddedResource Include="sources\ShowPage.resx">
       <DependentUpon>ShowPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateUrl.resx">
+    <EmbeddedResource Include="sources\UpdateUrl.resx">
       <DependentUpon>UpdateUrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="utils.resx">
+    <EmbeddedResource Include="sources\utils.resx">
       <DependentUpon>utils.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebBrowserPage.resx">
+    <EmbeddedResource Include="sources\WebBrowserPage.resx">
       <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="sources\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -251,10 +251,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="sources\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestXMLfile.xml" />
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />
     <Content Include="Resources\hp128.bmp" />

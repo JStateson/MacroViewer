@@ -187,7 +187,7 @@
             this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
             this.btnAdd1New.TabIndex = 19;
             this.btnAdd1New.Text = "Add newline";
-            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br />");
+            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br>");
             this.btnAdd1New.UseVisualStyleBackColor = true;
             this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
             // 

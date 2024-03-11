@@ -12,8 +12,7 @@ namespace MacroViewer
     {
         private string SigLoc = "";
         private string SigFilename = "";
-        private XmlDocument xmlDoc = new XmlDocument();
-        private string DefaultSig = "<div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br /><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\" />, someone who has the same query may find this solution and be helped by it.</font></div>";
+        private string DefaultSig = "<div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br/><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\">, someone who has the same query may find this solution and be helped by it.</font></div>";
         public class CStringValue
         {
             public CStringValue(string s)
@@ -38,70 +37,61 @@ namespace MacroViewer
         {
             InitializeComponent();
             SigLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            SigFilename = SigLoc + "\\signatures.xml";
-            ReadXML();
+            SigFilename = SigLoc + "\\signatures.txt";
+            ReadSIG();
         }
 
         private string FormNewSig(string sName, string sBody)
         {
-            string strDefault = "<hp_signature>" + Environment.NewLine;
-            strDefault+= "<name>" + sName + "</name>" + Environment.NewLine;
-            strDefault += "<body>" + Environment.NewLine;
+            string strDefault = sName + Environment.NewLine;
             strDefault += sBody + Environment.NewLine;
-            strDefault += "</body>" + Environment.NewLine;
-            strDefault += "</hp_signature>" + Environment.NewLine;
             return strDefault;
         }
 
 
         private void CreateSigFromDefault()
         {
-            string strDefault = "<xml>" + Environment.NewLine;
-            strDefault += FormNewSig("Default", DefaultSig);
-            strDefault += "</xml>";
+            string strDefault = FormNewSig("jys1", DefaultSig);
             File.WriteAllText(SigFilename, strDefault);
         }
 
-        private void ReadXML()
+        private void ReadSIG()
         {
-            xmlDoc = new XmlDocument();
             if (!File.Exists(SigFilename))
             {
                 CreateSigFromDefault();
             }
-            try
-            {
-                xmlDoc.Load(SigFilename);
-            }
-            catch (Exception e)
-            {
-                string strErr = e.Message + Environment.NewLine;
-                DialogResult eRes = MessageBox.Show(strErr,"Corrupted sig file reading default");
-                CreateSigFromDefault();
-                xmlDoc.Load(SigFilename);
-            }
             FillTable();
         }
 
-        private bool FillTable()
+        private int FillTable()
         {
             int i = 0;
-            if (xmlDoc.DocumentElement == null) return false;
-            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+            if (File.Exists(SigFilename))
             {
-                string sName = node.ChildNodes[0].InnerText;
-                string sBody = node.ChildNodes[1].InnerXml;
+                StreamReader sr = new StreamReader(SigFilename);
+                string sName = sr.ReadLine();
+                string sBody = sr.ReadLine();
                 sSigListBody.Add(sBody);
                 CStringValue sNew = new CStringValue(sName);
                 sSigListName.Add(sNew);
-                i++;
+                while(true)
+                {
+                    i++;
+                    sName = sr.ReadLine();
+                    if (sName == null) break;
+                    sBody = sr.ReadLine();
+                    sSigListBody.Add(sBody);
+                    sNew = new CStringValue(sName);
+                    sSigListName.Add(sNew);
+                }
             }
             dgvSigList.DataSource = sSigListName.ToArray();
             dgvSigList.Columns[0].Name = "Name";
             dgvSigList.Columns["Name"].HeaderText = "Name";
             dgvSigList.Columns[0].Width = dgvSigList.Width;
-            ShowSig(0); 
-            return true;
+            ShowSig(0);
+            return i;
         }
 
         private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -132,6 +122,7 @@ namespace MacroViewer
             CStringValue sNew = new  CStringValue("ChangeName");
             sSigListName.Add(sNew);
             dgvSigList.DataSource = sSigListName.ToArray();
+            btnSaveEdits.Enabled = false;
         }
 
         private void btnDelSig_Click(object sender, EventArgs e)
@@ -142,7 +133,7 @@ namespace MacroViewer
         private void btnSaveEdits_Click(object sender, EventArgs e)
         {
             int i = 0;
-            string strOut = "<xml>" + Environment.NewLine;
+            string strOut = "";
             foreach (DataGridViewRow row in dgvSigList.Rows)
             {
                 string Name = row.Cells["Name"].Value.ToString().Trim();
@@ -151,12 +142,12 @@ namespace MacroViewer
                 strOut += FormNewSig(Name, strBody);
                 i++;
             }
-            strOut += "</xml>";
             File.WriteAllText(SigFilename, strOut);
         }
 
         private void bltnSaveBack_Click(object sender, EventArgs e)
         {
+            tbBody.Text = Utils.RemoveNL(tbBody.Text);
             sSigListBody[CurrentRowSelected] = tbBody.Text;
         }
 
@@ -168,7 +159,7 @@ namespace MacroViewer
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadXML();
+            ReadSIG();
         }
 
         private void btnToNote_Click(object sender, EventArgs e)
@@ -185,7 +176,7 @@ namespace MacroViewer
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br />");
+            tbBody.Text = tbBody.Text.Insert(i, "<br>");
             i += 4;
             tbBody.SelectionStart = i;
         }
@@ -193,30 +184,27 @@ namespace MacroViewer
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br /><br />");
+            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
             i += 8;
             tbBody.SelectionStart = i;
         }
-
-        private void TestXML()
+        
+        private void TestBBC()
         {
             btnSaveEdits.Enabled = false;
-            try
+            string strTemp = Utils.RemoveNL(tbBody.Text);
+            string strErr = Utils.BBCparse(strTemp);
+            if (strErr == "")
             {
-                XDocument xdoc  = new XDocument();
-                xdoc = XDocument.Parse(tbBody.Text);
                 btnSaveEdits.Enabled = true;
+                return;
             }
-            catch (Exception e)
-            {
-                string strErr = e.Message + Environment.NewLine;
-                DialogResult eRes = MessageBox.Show(strErr, "XML parse error");
-            }
+            DialogResult Res1 = MessageBox.Show(strErr, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
+        
         private void btnTestXML_Click(object sender, EventArgs e)
         {
-            TestXML();
+            TestBBC();
         }
     }
 }

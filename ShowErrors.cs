@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
 {
@@ -26,7 +27,8 @@ namespace MacroViewer
         {
             if (i < 0) return;
             int j = BodyFromRow[i];
-            File.WriteAllText(sLoc + "/MyHtml.html", Utils.XMLprefix + AllBody[j] + Utils.XMLsuffix);
+            //File.WriteAllText(sLoc + "/MyHtml.html", Utils.XMLprefix + AllBody[j] + Utils.XMLsuffix);
+            File.WriteAllText(sLoc + "/MyHtml.txt", AllBody[j]);
         }
 
         public ShowErrors(ref string[] mName, ref string[] mErrors, ref string[] rAllBody)
@@ -53,10 +55,13 @@ namespace MacroViewer
             }
             btnFindErr.Text = lbMacNames.Items[0].ToString();
             MakeBodyAvailable(0);
+            lbMacNames.SelectedIndex = 0;
         }
 
         private void lbMacNames_MouseClick(object sender, MouseEventArgs e)
         {
+            int index = lbMacNames.IndexFromPoint(e.Location);
+            lbMacNames.SelectedIndex = index;
         }
 
         private void lbMacNames_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,8 +74,9 @@ namespace MacroViewer
 
         private void btnFindErr_Click(object sender, EventArgs e)
         {
+            string strLoc = sLoc + "\\MyHtml.txt";
             MakeBodyAvailable(lbMacNames.SelectedIndex);
-            Utils.NotepadViewer(sLoc + "\\MyHtml.html");
+            Utils.NotepadViewer(strLoc);
         }
     }
 }

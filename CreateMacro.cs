@@ -61,7 +61,7 @@ namespace MacroViewer
 
         public string AssembleImage(string strUrl, int Height, int Width)
         {
-            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + " width=\"" + Width.ToString() + "\" />";
+            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + " width=\"" + Width.ToString() + "\">";
         }
 
         private void AddImage()

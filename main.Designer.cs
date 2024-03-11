@@ -43,6 +43,7 @@
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
             this.btnUpdErr = new System.Windows.Forms.Button();
+            this.lbRCcopy = new System.Windows.Forms.Label();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +68,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
+            this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gbManageImages = new System.Windows.Forms.GroupBox();
@@ -94,7 +96,6 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbRCcopy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -132,6 +133,7 @@
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
+            this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
             // 
             // Inx
             // 
@@ -243,7 +245,7 @@
             this.btnUpdErr.Enabled = false;
             this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnUpdErr.Location = new System.Drawing.Point(321, 219);
+            this.btnUpdErr.Location = new System.Drawing.Point(321, 269);
             this.btnUpdErr.Name = "btnUpdErr";
             this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
             this.btnUpdErr.TabIndex = 19;
@@ -251,6 +253,21 @@
             this.toolTip1.SetToolTip(this.btnUpdErr, "For errors only.  This saves changes\r\nand refreshes the error table");
             this.btnUpdErr.UseVisualStyleBackColor = true;
             this.btnUpdErr.Click += new System.EventHandler(this.btnUpdErr_Click);
+            // 
+            // lbRCcopy
+            // 
+            this.lbRCcopy.AutoSize = true;
+            this.lbRCcopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRCcopy.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbRCcopy.Location = new System.Drawing.Point(170, 33);
+            this.lbRCcopy.Name = "lbRCcopy";
+            this.lbRCcopy.Size = new System.Drawing.Size(162, 20);
+            this.lbRCcopy.TabIndex = 6;
+            this.lbRCcopy.Text = "Right-click enabled";
+            this.toolTip1.SetToolTip(this.lbRCcopy, "There is a corrected HTML available\r\nfor the corresponding HTML macro\r\nerror in y" +
+        "our HP community macro\r\nsettings.  Right click on the BLUE\r\nnumber to copy to th" +
+        "e clipboard");
+            this.lbRCcopy.Visible = false;
             // 
             // tbBody
             // 
@@ -441,6 +458,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnTest);
             this.gpMainEdit.Controls.Add(this.btnUpdErr);
             this.gpMainEdit.Controls.Add(this.btnNew);
             this.gpMainEdit.Controls.Add(this.groupBox6);
@@ -457,6 +475,18 @@
             this.gpMainEdit.TabIndex = 8;
             this.gpMainEdit.TabStop = false;
             this.gpMainEdit.Text = "Edit Macro";
+            // 
+            // btnTest
+            // 
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnTest.Location = new System.Drawing.Point(399, 219);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 32);
+            this.btnTest.TabIndex = 20;
+            this.btnTest.Text = "TEST";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnNew
             // 
@@ -564,7 +594,7 @@
             this.groupBox5.Controls.Add(this.btnToNotepad);
             this.groupBox5.Controls.Add(this.btnCopyTo);
             this.groupBox5.Controls.Add(this.btnCopyFrom);
-            this.groupBox5.Location = new System.Drawing.Point(24, 276);
+            this.groupBox5.Location = new System.Drawing.Point(24, 359);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(425, 219);
             this.groupBox5.TabIndex = 16;
@@ -647,7 +677,7 @@
             this.groupBox4.Controls.Add(this.btnAddURL);
             this.groupBox4.Controls.Add(this.tbImgUrl);
             this.groupBox4.Controls.Add(this.btnAddImg);
-            this.groupBox4.Location = new System.Drawing.Point(24, 531);
+            this.groupBox4.Location = new System.Drawing.Point(24, 614);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(419, 119);
             this.groupBox4.TabIndex = 15;
@@ -701,7 +731,7 @@
             this.gbSupp.Controls.Add(this.btnDelM);
             this.gbSupp.Location = new System.Drawing.Point(24, 50);
             this.gbSupp.Name = "gbSupp";
-            this.gbSupp.Size = new System.Drawing.Size(250, 201);
+            this.gbSupp.Size = new System.Drawing.Size(250, 251);
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
@@ -740,7 +770,7 @@
             // btnDelM
             // 
             this.btnDelM.Enabled = false;
-            this.btnDelM.Location = new System.Drawing.Point(137, 150);
+            this.btnDelM.Location = new System.Drawing.Point(137, 169);
             this.btnDelM.Name = "btnDelM";
             this.btnDelM.Size = new System.Drawing.Size(91, 23);
             this.btnDelM.TabIndex = 1;
@@ -771,22 +801,7 @@
             this.groupBox2.Size = new System.Drawing.Size(404, 730);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Macro List:  Double click any row to transfer to editor";
-            // 
-            // lbRCcopy
-            // 
-            this.lbRCcopy.AutoSize = true;
-            this.lbRCcopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRCcopy.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbRCcopy.Location = new System.Drawing.Point(170, 33);
-            this.lbRCcopy.Name = "lbRCcopy";
-            this.lbRCcopy.Size = new System.Drawing.Size(162, 20);
-            this.lbRCcopy.TabIndex = 6;
-            this.lbRCcopy.Text = "Right-click enabled";
-            this.toolTip1.SetToolTip(this.lbRCcopy, "There is a corrected HTML available\r\nfor the corresponding HTML macro\r\nerror in y" +
-        "our HP community macro\r\nsettings.  Right click on the BLUE\r\nnumber to copy to th" +
-        "e clipboard");
-            this.lbRCcopy.Visible = false;
+            this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
             // main
             // 
@@ -893,6 +908,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdErr;
         private System.Windows.Forms.Label lbRCcopy;
+        private System.Windows.Forms.Button btnTest;
     }
 }
 

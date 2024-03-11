@@ -5,60 +5,51 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using System.IO;
-using static System.Drawing.ImageConverter;
-using System.Drawing;
-using Microsoft.Web.WebView2.WinForms;
-using Microsoft.Web.WebView2.Core;
-using System.Text;
-using System.Xml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using System.Xml.Linq;
-using System.Xml.Resolvers;
+using System.Text.RegularExpressions;
+using HtmlAgilityPack;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
+using System.Security;
 
 namespace MacroViewer
 {    
     public static class Utils
     {
-        /*
-         *
-<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /><blockquote><div>
-</div></blockquote></body></html>
-         * 
-         
-         &px=999 is not defined, shows up an unknown "="
-         */
-
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body>";
         public static string XMLsuffix = "</body></html>";
+        //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
+        public static string RemoveNL(string text)
+        {
+            string strRtn = text.Replace(Environment.NewLine, "<br");
+            return strRtn.Replace("\n", "<br>").Trim();
+        }
         public static void NotepadViewer(string strFile)
         {
             if (strFile == "") return;
             Process process = new Process();
             Process.Start("C:\\Windows\\Notepad.exe", strFile);
         }
-        public static string XmlParse(string strIn)
+        // BBCODE parse for bad tags
+        public static string BBCparse(string strIn)
         {
-            string strPrefix = XMLprefix; //"<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><blockquote><div>";
-            string strSuffix = XMLsuffix; //"</div></blockquote></html>";
-            string strTmp = strPrefix + strIn + strSuffix;
             string strRtn = "";
-            try
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(strIn);
+            foreach(var strErr in htmlDoc.ParseErrors)
             {
-                XDocument xdoc = new XDocument();
-                xdoc = XDocument.Parse(strTmp);
-            }
-            catch (Exception e)
-            {
-                string strErr = e.Message + Environment.NewLine;
-                //DialogResult eRes = MessageBox.Show(strErr, "XML parse error");
-                strRtn = strErr;
+                string strLine = " line:" + strErr.Line.ToString() + ", char:" + strErr.LinePosition.ToString();
+                strRtn += strErr.Reason + strLine + Environment.NewLine;
             }
             return strRtn;
         }
 
+        public static string FixImg(string strImg)
+        {
+
+            return strImg;
+        }
 
         public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 
         public enum eBrowserType
@@ -70,7 +61,7 @@ namespace MacroViewer
 
         public static string AssembleIMG(string strURL)
         {
-            return "<img src=\"" + strURL.Trim() + "\" border=\"2\" />";
+            return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
         }
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
         public static string VolunteerUserID = "";
@@ -238,22 +229,27 @@ namespace MacroViewer
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Windows\\Notepad.exe";
             process.Start();
-
-
-            // Give the process some time to startup
             Thread.Sleep(2000);
-
-            // Copy the text in the datafield to Clipboard
             Clipboard.SetText(strText);
-
-            // Get the Notepad Handle
             IntPtr hWnd = process.Handle;
-
-            // Activate the Notepad Window
             BringWindowToTop(hWnd);
-
-            // Use SendKeys to Paste
-            SendKeys.Send("^V");
+            SendKeys.SendWait("^V");
+        }
+        public void PasteToNotepad(string strText, string strFile)
+        {
+            if (strText == "") return;
+            // Let's start Notepad
+            Process process = new Process();
+            process.StartInfo.FileName = "C:\\Windows\\Notepad.exe";
+            process.StartInfo.Arguments = strFile;
+            process.Start();
+            Thread.Sleep(2000);
+            Clipboard.SetText(strText);
+            IntPtr hWnd = process.Handle;
+            BringWindowToTop(hWnd);
+            SendKeys.SendWait("^{end}");
+            SendKeys.SendWait("{ENTER}");
+            SendKeys.SendWait("^V");
         }
     }
 

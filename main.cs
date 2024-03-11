@@ -148,8 +148,8 @@ namespace MacroViewer
                 string strBody = aPage.Substring(n, k).Replace("lt;", "<");
                 strBody = strBody.Replace("&nbsp;", " ");
                 strBody = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
-                Body[i] = strBody;//.Replace("<br>", "<br />"); // jys had to do this once
-                strFind = Utils.XmlParse(strBody);
+                Body[i] = strBody;
+                strFind = Utils.BBCparse(strBody);
                 MacroErrors[i] = strFind;
                 HTMLerr[i] = (strFind != "");
                 if (HTMLerr[i])
@@ -319,11 +319,11 @@ namespace MacroViewer
             string strOut = "";
             if (bEnable)
             {
-                strOut = tbBody.Text.Replace(Environment.NewLine, "<br />");
+                strOut = tbBody.Text.Replace(Environment.NewLine, "<br>");
             }
             else
             {
-                strOut = tbBody.Text.Replace("<br />", Environment.NewLine);
+                strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
             }
             tbBody.Text = strOut;
             lbM.Visible = bEnable;
@@ -434,8 +434,8 @@ namespace MacroViewer
                     lbName.Rows.Add(i + 1, line);
                     MacroNames[i] = line;
                     sBody = sr.ReadLine();
-                    Body[i] = sBody;//.Replace("<br>","<br />"); // jys need to do this once
-                    sBody = Utils.XmlParse(sBody);
+                    Body[i] = sBody.Replace("<br />","<br>");
+                    sBody = Utils.BBCparse(sBody);
                     MacroErrors[i] = sBody;
                     HPerr[i] = (sBody != "");
                     if (HPerr[i])
@@ -566,9 +566,7 @@ namespace MacroViewer
 
         private string RemoveNewLine(ref bool bChanged, string strIn)
         {
-            string strOut = strIn.Replace(Environment.NewLine, "<br />").Trim();
-            // the above does not work for html as it has a newline
-            strOut = strOut.Replace("\n", "<br />");
+            string strOut = Utils.RemoveNL(strIn);
             bChanged = (strOut.Length != strIn.Length);
             return strOut;
         }
@@ -620,7 +618,7 @@ namespace MacroViewer
         {
             //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
             string strTmp = tbImgUrl.Text.Trim().Replace("\"", "");
-            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\" />";
+            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\">";
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
 
@@ -652,7 +650,7 @@ namespace MacroViewer
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br />");
+            tbBody.Text = tbBody.Text.Insert(i, "<br>");
             i += 4;
             tbBody.SelectionStart = i;
         }
@@ -660,7 +658,7 @@ namespace MacroViewer
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
             int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br /><br />");
+            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
             i += 8;
             tbBody.SelectionStart = i;
         }
@@ -876,6 +874,19 @@ namespace MacroViewer
                 if (r == -1) return;
                 CopyBodyToClipboard();
             }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            string strErr = Utils.BBCparse(tbBody.Text);
+            if (strErr == "") return;
+            DialogResult Res1 = MessageBox.Show(strErr,"ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            ShowSelectedRow(e.RowIndex);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace MacroViewer
         public static void NotepadViewer(string strFile)
         {
             if (strFile == "") return;
-            Process process = new Process();
             Process.Start("C:\\Windows\\Notepad.exe", strFile);
         }
         // BBCODE parse for bad tags
@@ -228,6 +227,7 @@ namespace MacroViewer
             // Let's start Notepad
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Windows\\Notepad.exe";
+
             process.Start();
             Thread.Sleep(2000);
             Clipboard.SetText(strText);

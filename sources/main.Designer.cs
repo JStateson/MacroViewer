@@ -67,6 +67,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDifferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
@@ -131,6 +132,7 @@
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
+            this.lbName.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellContentClick);
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
@@ -272,7 +274,7 @@
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBody.Location = new System.Drawing.Point(18, 33);
+            this.tbBody.Location = new System.Drawing.Point(18, 82);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -288,7 +290,8 @@
             this.testSignatureToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.errorsToolStripMenuItem});
+            this.errorsToolStripMenuItem,
+            this.showDifferenceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
@@ -455,6 +458,14 @@
             this.errorsToolStripMenuItem.Text = "ERRORS";
             this.errorsToolStripMenuItem.Visible = false;
             this.errorsToolStripMenuItem.Click += new System.EventHandler(this.errorsToolStripMenuItem_Click);
+            // 
+            // showDifferenceToolStripMenuItem
+            // 
+            this.showDifferenceToolStripMenuItem.Name = "showDifferenceToolStripMenuItem";
+            this.showDifferenceToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.showDifferenceToolStripMenuItem.Text = "Show Diff";
+            this.showDifferenceToolStripMenuItem.Visible = false;
+            this.showDifferenceToolStripMenuItem.Click += new System.EventHandler(this.showDifferenceToolStripMenuItem_Click);
             // 
             // gpMainEdit
             // 
@@ -909,6 +920,7 @@
         private System.Windows.Forms.Button btnUpdErr;
         private System.Windows.Forms.Label lbRCcopy;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.ToolStripMenuItem showDifferenceToolStripMenuItem;
     }
 }
 

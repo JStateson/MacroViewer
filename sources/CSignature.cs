@@ -165,7 +165,8 @@ namespace MacroViewer
         private void btnToNote_Click(object sender, EventArgs e)
         {
             CSendNotepad SendNotepad = new CSendNotepad();
-            SendNotepad.PasteToNotepad(tbBody.Text);
+            string npTitle = dgvSigList.CurrentRow.Cells[0].Value.ToString() + Environment.NewLine + tbBody.Text;
+            SendNotepad.PasteToNotepad(npTitle);
         }
 
         private void btnClear_Click(object sender, EventArgs e)

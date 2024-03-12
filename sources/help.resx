@@ -169,11 +169,12 @@ Feel free to edit my signature to create your own. If you come up with some uniq
     <value>	Help with main screen (editing)
 The Macro List contains up to 30 macros.  There are three macro sources:  HP HTTP macros, local PC macros and local Printer macros.  A fourth source is the local copy of the HP HTTP macros.  If there are any HTML errors in the macros a red colored error menu item will appear. 
 
-If you double click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you checked the "Launch Page" then the macro is displayed the way a user will see it.
+If you click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you double click then the macro is displayed the way a user will see it if markup is enabled.
 
 Note that only the PC and Printer macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard. This can be done using the local HP HTML macro file. 
 You create a local copy of the HP HTML macros and then edit those macros until there are no errors.  If there is an error the macro number will be red.  If the macro number is blue then the original HP HTML macro needs to be replaced wiht the local copy.  If the  macro number is not colored then there is not error
 To replace the HP HTML macro at the HP community, right click the BLUE colored macro number.  This copies the body of the macro to the clipboard.  You can then log into your account and paste the macro body thus replacing your HP community one.
+The macros downloaded from the HP community do not have errors.  If an HP HTML macro is marked red it is likely an error in this program or an un-caught error in your HP settings.
 
 	Supplemental Table group
 The group shows the name of the macro being edited and gives an option to SAVE or DELETE it. To create a macro click the NEW adjacent to the EDIT BOX and change the name of the macro.  Be sure to save it.
@@ -192,7 +193,10 @@ You have a macro that looks good.  You remove markup and click the Show Page and
 
 	Using the Error menu item
 Click the red ERROR menu item to bring up a list of macros that have errors.  The line number and the character offset will be shown and clicking on the name of the defectrive macro brings up notepad where you can look a the body of the macro and locate the line and character that thas the problem.
-You do not edit using notepad.  Editing of the defective macro is done in the main menu and once edited you can click on "Save and Reload".  There can be more than one error but only one at a time is shown in the error dialog box.</value>
+You do not edit using notepad.  Editing of the defective macro is done in the main menu and once edited you can click on "Save and Reload".  There can be more than one error but only one at a time is shown in the error dialog box.
+
+	Using the differences menu item
+Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

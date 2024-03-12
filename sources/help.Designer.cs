@@ -118,7 +118,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "help";
-            this.Text = "help";
+            this.Text = " ";
             this.ResumeLayout(false);
 
         }

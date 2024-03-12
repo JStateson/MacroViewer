@@ -13,12 +13,19 @@ namespace MacroViewer
     public partial class main : Form
     {
         private const int NumMacros = 30;
+        bool bHaveHTMLasLOCAL = false;      // if true then we just read in html 
+        private bool bShowingError = false; // if true then highlighting errors between HP and local
+        private bool bShowingDiff = false;  // if true then highlighting differences instead
         private bool bHaveBothHP = false; // have read both the HTML and the HPmacros for convenience uploading
+        private bool bHaveBothHPerr = false; // as above but found errors
+        private bool bHaveBothDIFF = false;  // HP and local have differences
         // if true then at least one of the HTML had an error and the corresponding HPmacros is fixed
         private string[] MacroErrors = new string[NumMacros];
         private string[] MacroNames = new string[NumMacros]; 
         private bool[] HTMLerr = new bool[NumMacros];   // if set then error at macro
-        private bool[] HPerr = new bool[NumMacros];     //if set then error at macro
+        private bool[] HPerr = new bool[NumMacros];     // if set then error at macro
+        private bool[] HP_HTML_NO_DIFF = new bool[NumMacros];   // if set then difference between them
+        private int [] OriginalColor = new int[NumMacros];  //0:was OK to start with, 1:red, 2:blue
         // if HTMLerr set but HPerr is not set then can copy to clipboard with right click
         private bool[] bHPcorrected = new bool[NumMacros];
         private string aPage;
@@ -26,6 +33,7 @@ namespace MacroViewer
         private int[] StopMac = new int[NumMacros];
         int[] MacBody = new int[NumMacros];
         private string[] Body = new string[NumMacros];
+        private string[] Body_HP_HTML = new string[NumMacros]; //local copy of ORIGINAL HP macros
         private string strType = "";    // either PRN or PC for printer or pc macros
         private string TXTmacs;
         private string TXTName = "";
@@ -49,31 +57,119 @@ namespace MacroViewer
             else Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
             string strFilename = Properties.Settings.Default.HTTP_HP;
-            if(strFilename != null)
-            {
-                this.Text = " HP Macro Editor: " + strFilename;
-            }
+            this.Text = " HP Macro Editor";
         }
 
+        private bool AnyHPdiff()
+        {
+            bool b = true;
+            for (int i = 0; i < NumMacros; i++)
+            {
+                if (bHaveHTMLasLOCAL)
+                {
+                    HP_HTML_NO_DIFF[i] = (Body[i] == Body_HP_HTML[i]);
+                    b = b && HP_HTML_NO_DIFF[i];
+                }
+            }
+            return !b;
+        }
         private void LookForHTMLfix()
         {
             bool b = false;
+            bool c = false;
             for(int i = 0; i < NumMacros; i++)
             {
+                OriginalColor[i] = 0;
                 bHPcorrected[i] = false;
                 if (HTMLerr[i]) // there is an HTML error
                 {
+                    OriginalColor[i] = 1;
                     if (!HPerr[i])  // it was fixed here
                     {
                         b = true;
                         bHPcorrected[i] = true;
                         SetErrorBlue(i);
+                        OriginalColor[i] = 2;
                     }
                 }
+                HTMLerr[i] |= HPerr[i];
+                c |= HTMLerr[i];
+                if(HTMLerr[i])
+                {
+                    if (OriginalColor[i] != 2)  //todo TODO to do need to clean this up
+                        OriginalColor[i] = 1;
+                }
             }
-            bHaveBothHP = b;
+            bHaveBothHPerr = c;
+            bShowingError = c;
+            bShowingDiff = false;
             lbRCcopy.Visible = b;
+            bHaveBothHP = true;
         }
+
+        private void BackupHP_HTML()
+        {
+            for(int i = 0; i<NumMacros; i++)
+            {
+                Body_HP_HTML[i] = Body[i];
+            }
+        }
+
+        private void ShowHighlights()
+        {
+            if (bHaveBothHP)
+            {
+                if(bShowingError && bHaveBothHPerr)
+                {
+                    showDifferenceToolStripMenuItem.Text = "Show Errors";
+                    bShowingError=false;
+                    bShowingDiff = true;
+                    HighlightDIF();
+                    return;
+                }
+                if(bShowingDiff && bHaveBothDIFF)
+                {
+                    showDifferenceToolStripMenuItem.Text = "Show Diff";
+                    bShowingError = true;
+                    bShowingDiff = false;
+                    //LookForHTMLfix();   // highlights errors TODO to do todo
+                    RestoreColors();
+                    return;
+                }
+                // there are no errors or no differences
+                bShowingError = false;
+                bShowingDiff = true;
+                HighlightDIF();
+            }
+        }
+
+        private void HighlightDIF()
+        {
+            for (int i = 0; i < NumMacros; i++)
+            {
+                if (HP_HTML_NO_DIFF[i])
+                    SetDefaultCellColor(i);
+                else SetErrorRed(i);
+            }
+        }
+
+        private void RestoreColors()
+        {
+            for (int i = 0; i < NumMacros; i++)
+            {
+                switch(OriginalColor[i])
+                {
+                    case 0: SetDefaultCellColor(i);
+                        break;
+                    case 1: SetErrorRed(i);
+                        break;
+                    case 2: SetErrorBlue(i);
+                        break;
+                }
+
+            }
+        }
+
         private static string GetDownloadsPath()
         {
             if (Environment.OSVersion.Version.Major < 6) throw new NotSupportedException();
@@ -122,11 +218,14 @@ namespace MacroViewer
 
         private void SetErrorBlue(int r)
         {
-            //dataGridView1.Rows[rowIndex].Cells[columnIndex].Style.Font = new Font("Arial", 12, FontStyle.Bold);
-
-            //lbName.Rows[r].Cells[0].Style.ForeColor = Color.Blue; //default worked but just blue
             lbName.Rows[r].Cells[0].Style.Font = new Font("Arial", 10, FontStyle.Bold);
             lbName.Rows[r].Cells[0].Style.ForeColor = Color.Blue;
+        }
+
+        private void SetDefaultCellColor(int r)
+        {
+            lbName.Rows[r].Cells[0].Style.Font = new Font("Arial", 10, FontStyle.Regular);
+            lbName.Rows[r].Cells[0].Style.ForeColor = Color.Black;
         }
 
         private bool FindBody()
@@ -159,6 +258,7 @@ namespace MacroViewer
                 }
             }
             errorsToolStripMenuItem.Visible = bMacroErrors;
+            bShowingError = bMacroErrors;
             return true;
         }
 
@@ -250,6 +350,7 @@ namespace MacroViewer
             if(aPage == null) return false;
             if (aPage.Length == 0) return false;
             ParsePage();
+            BackupHP_HTML();
             return true;
         }
 
@@ -296,7 +397,8 @@ namespace MacroViewer
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            ShowSelectedRow(e.RowIndex);
+            //ShowSelectedRow(e.RowIndex); already selected with the click
+            RunBrowser();
         }
 
         private void utilsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -379,19 +481,31 @@ namespace MacroViewer
         const int WM_SETTEXT = 0x000C;
 
 
-
+        private void PutOnNotepad(string strIn)
+        {
+            CSendNotepad SendNotepad = new CSendNotepad();
+            string npTitle =  strIn;
+            SendNotepad.PasteToNotepad(strIn);
+        }
 
         private void btnToNotepad_Click(object sender, EventArgs e)
         {
-            CSendNotepad SendNotepad = new CSendNotepad();
-            SendNotepad.PasteToNotepad(tbBody.Text);
-
+            string s = tbMacName.Text + Environment.NewLine;
+            PutOnNotepad(s + tbBody.Text);
             //SendToCloud.PasteToCloud("7L4H9UA#ABA");
+        }
+
+        // the below is never set true?: TODO to do todo
+        private void AccessDiffBoth(bool b)
+        {
+            bHaveBothHP = b;
+            bHaveHTMLasLOCAL = b;
         }
 
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(ReadMacroHTML())
+            AccessDiffBoth(false);
+            if (ReadMacroHTML())
             {
                 EnableMacEdits(false);
                 gpMainEdit.Enabled = true;
@@ -404,10 +518,10 @@ namespace MacroViewer
         private void AllowSaveRestore (int r)
         {
             btnUpdErr.Enabled = false;
-            if (bMacroErrors)
+            if (bMacroErrors || bHaveBothDIFF)
             {
-                if (MacroErrors[CurrentRowSelected] == null) return;
-                if (MacroErrors[CurrentRowSelected] == "") return;
+                if (MacroErrors[r] == null) return;
+                if (MacroErrors[r] == "" && (HP_HTML_NO_DIFF[r] || !bShowingDiff)) return;
                 btnUpdErr.Enabled = true;
             }
 
@@ -422,6 +536,7 @@ namespace MacroViewer
             gpMainEdit.Enabled = true;
             gbSupp.Enabled = true;
             string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
+            this.Text = " HP Macro Editor: " + TXTmacName;
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
             {
@@ -455,6 +570,7 @@ namespace MacroViewer
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AccessDiffBoth(false);
             LoadFromTXT("PCmacros");
             strType = "PC";
             ShowSelectedRow(0);
@@ -686,6 +802,7 @@ namespace MacroViewer
 
         private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AccessDiffBoth(false);
             LoadFromTXT("PRNmacros");
             strType = "PRN";
             ShowSelectedRow(0);
@@ -694,11 +811,17 @@ namespace MacroViewer
 
         private void ReloadHP(int r)
         {
-            bool bHaveHTTP = ReadLastHTTP();
+            bHaveHTMLasLOCAL = ReadLastHTTP();
             //find any errors in the original HTML macro file
-            LoadFromTXT("HPmacros");    //find any errors in the local file
+            LoadFromTXT("HPmacros");    //find any errors in the local file  HP Macro Editor
             strType = "HP";
-            if (bHaveHTTP) LookForHTMLfix();
+            if (bHaveHTMLasLOCAL)
+            {
+                LookForHTMLfix();
+                bHaveBothDIFF = AnyHPdiff();
+                showDifferenceToolStripMenuItem.Visible = bHaveBothDIFF;
+
+            }
             ShowSelectedRow(r);
             EnableMacEdits(true);
         }
@@ -853,7 +976,7 @@ namespace MacroViewer
         {
             int r = CurrentRowSelected;
             SaveCurrentMacros();
-            if(bHaveBothHP)
+            if(bHaveBothHPerr)
             {
                 ReloadHP(r);
             }
@@ -869,10 +992,18 @@ namespace MacroViewer
             if(e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 if (strType != "HP") return;
-                if (!bHaveBothHP) return;
                 int r = e.RowIndex;
                 if (r == -1) return;
-                CopyBodyToClipboard();
+                if (!HP_HTML_NO_DIFF[r])
+                {
+                    //CopyBodyToClipboard();
+                    string s = tbMacName.Text + Environment.NewLine;
+                    PutOnNotepad(s+Body_HP_HTML[r]);
+                    Application.DoEvents();
+                    MessageBox.Show("Original " + tbMacName.Text + " is on notepad");
+                }
+
+
             }
         }
 
@@ -887,6 +1018,19 @@ namespace MacroViewer
         {
             if (e.RowIndex < 0) return;
             ShowSelectedRow(e.RowIndex);
+        }
+
+        private void showDifferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bHaveBothHP)
+            {
+                ShowHighlights();
+            }
+        }
+
+        private void lbName_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

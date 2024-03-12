@@ -14,17 +14,12 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 /*
- * macros-0-0.jpg is the first image of the first macro
- * macros-0-1.jpg is the second images of the first macro
- * macros-1.0.jpg is the first image of the second marco
- * ====up to 30 macros
- * macros-0-0.id   is a two line text file where the first line is the word REMOTE or LOCAL
- *                 the second line is the url if remote or the name of the jpg if local
- *                 Any number of images can be associateed with each macro.  The local jpg must be 
- *                 uploaded to the HP server and once uploaded the url needs to be used
- *                 instead of the jpg name and LOCAL must change to REMOTE.
- *                 
- * The above macro names are prefix with PCmacros or PRNmacros (PC or PRN )
+Images used should be PNG but JPG should work
+if you paste an image into a macro it will be named LOCALIMAGEFILE-X-Y.PNG
+where X is PC, PRN or HP
+and Y is 0..29
+It's path will be the location of the executable program.  A tool (dialogbox "manage") can help
+with replacing the LOCALIMAGEFILE with one in the HP album after you upload the local file to your HP album
 */
 
 

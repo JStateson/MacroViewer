@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using System.Security;
+using System.Reflection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
 {    
@@ -19,6 +21,13 @@ namespace MacroViewer
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body>";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+
+        public static void ShowParseLocationErrors(string strText)
+        {
+            string strLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString() +  "\\MyHtml.txts";
+            File.WriteAllText(strLoc, strText);
+            Utils.NotepadViewer(strLoc);
+        }
 
         public static string RemoveNL(string text)
         {

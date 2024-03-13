@@ -40,7 +40,7 @@ namespace MacroViewer
         }
 
 
-        private void btnFormRemote_Click(object sender, EventArgs e)
+        private void TryUseImage()
         {
             if (!Utils.IsUrlImage(tbUrlText.Text))
             {
@@ -50,6 +50,11 @@ namespace MacroViewer
             //bIsServer = tbUrlText.Text.Contains("image/serverpage");
             bIsPath = !Utils.bIsHTTP(tbUrlText.Text);
             pbImage.ImageLocation = Utils.RemoveOuterQuotes(tbUrlText.Text);
+        }
+
+        private void btnFormRemote_Click(object sender, EventArgs e)
+        {
+            TryUseImage();
         }
 
 
@@ -136,6 +141,11 @@ namespace MacroViewer
                 strFilename = ofd.FileName;
                 tbUrlText.Text = strFilename;
             }
+        }
+
+        private void tbUrlText_TextChanged(object sender, EventArgs e)
+        {
+            TryUseImage();
         }
     }
 }

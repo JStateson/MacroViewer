@@ -244,9 +244,14 @@ namespace MacroViewer
                 n = MacBody[i] + j + strFind.Length;
                 k = aPage.Substring(n).IndexOf(strEnd);
                 if (k < 0) return false;
-                string strBody = aPage.Substring(n, k).Replace("lt;", "<");
+                string strBody = aPage.Substring(n, k);
+                while (strBody.Contains("&amp;"))
+                {
+                    strBody = strBody.Replace("&amp;", "&");
+                }
+
+                strBody = strBody.Replace("&lt;", "<").Replace("&gt;", ">");
                 strBody = strBody.Replace("&nbsp;", " ");
-                strBody = strBody.Replace("&amp;", "").Replace("gt;", ">");  // cannot use "'"
                 Body[i] = strBody;
                 strFind = Utils.BBCparse(strBody);
                 MacroErrors[i] = strFind;
@@ -505,6 +510,8 @@ namespace MacroViewer
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AccessDiffBoth(false);
+            showDifferenceToolStripMenuItem.Visible = false;
+            errorsToolStripMenuItem.Visible = false;
             if (ReadMacroHTML())
             {
                 EnableMacEdits(false);
@@ -512,6 +519,7 @@ namespace MacroViewer
                 gbSupp.Enabled = false;
                 strType = "";
                 bHaveHTML = true;
+                ShowSelectedRow(0);
             }            
         }
 
@@ -1003,8 +1011,6 @@ namespace MacroViewer
                     Application.DoEvents();
                     MessageBox.Show("Original macro is on notepad");
                 }
-
-
             }
         }
 
@@ -1012,7 +1018,12 @@ namespace MacroViewer
         {
             string strErr = Utils.BBCparse(tbBody.Text);
             if (strErr == "") return;
-            DialogResult Res1 = MessageBox.Show(strErr,"ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            DialogResult Res1 = MessageBox.Show(strErr,"Click OK to see where errors are",MessageBoxButtons.OKCancel,MessageBoxIcon.Error);
+            if(Res1 == DialogResult.OK)
+            {
+                Utils.ShowParseLocationErrors(tbBody.Text);
+                MessageBox.Show(strErr, "Errors are near locations listed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)

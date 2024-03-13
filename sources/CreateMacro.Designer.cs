@@ -121,6 +121,7 @@
             this.tbUrlText.Name = "tbUrlText";
             this.tbUrlText.Size = new System.Drawing.Size(343, 22);
             this.tbUrlText.TabIndex = 0;
+            this.tbUrlText.TextChanged += new System.EventHandler(this.tbUrlText_TextChanged);
             // 
             // btnPaste
             // 

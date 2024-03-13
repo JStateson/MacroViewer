@@ -894,8 +894,9 @@ namespace MacroViewer
         private void btnChangeUrls_Click(object sender, EventArgs e)
         {
             ManageMacros MyManageMac = new ManageMacros(strType, ref Body);
-            MyManageMac.ShowDialog();
+            MyManageMac.ShowDialog();            
             Body = MyManageMac.AllBody;
+            tbBody.Text = Body[CurrentRowSelected];
             SaveCurrentMacros();
             MyManageMac.Dispose();
         }
@@ -1000,7 +1001,7 @@ namespace MacroViewer
                     string s = tbMacName.Text + Environment.NewLine;
                     PutOnNotepad(s+Body_HP_HTML[r]);
                     Application.DoEvents();
-                    MessageBox.Show("Original " + tbMacName.Text + " is on notepad");
+                    MessageBox.Show("Original macro is on notepad");
                 }
 
 

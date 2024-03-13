@@ -274,11 +274,11 @@
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBody.Location = new System.Drawing.Point(18, 82);
+            this.tbBody.Location = new System.Drawing.Point(18, 45);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbBody.Size = new System.Drawing.Size(391, 441);
+            this.tbBody.Size = new System.Drawing.Size(391, 415);
             this.tbBody.TabIndex = 3;
             // 
             // menuStrip1
@@ -461,6 +461,7 @@
             // 
             // showDifferenceToolStripMenuItem
             // 
+            this.showDifferenceToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.showDifferenceToolStripMenuItem.Name = "showDifferenceToolStripMenuItem";
             this.showDifferenceToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.showDifferenceToolStripMenuItem.Text = "Show Diff";

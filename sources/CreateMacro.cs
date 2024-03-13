@@ -27,7 +27,7 @@ namespace MacroViewer
 {
     public partial class CreateMacro : Form
     {
-        public string strResultOut { get; set; }        public string strLocalOut { get; set; }
+        public string strResultOut { get; set; }  
         //private bool bIsServer = false; // is on the HP image server
         private bool bIsPath = false;   // if a file on the disk then is true
         private string ExeFolder;
@@ -36,7 +36,6 @@ namespace MacroViewer
         {
             InitializeComponent();
             ExeFolder = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            strLocalOut = "";
             strType = rstrType;
         }
 

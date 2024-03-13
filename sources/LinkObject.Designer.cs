@@ -36,6 +36,8 @@
             this.rbimage = new System.Windows.Forms.RadioButton();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbBoxed = new System.Windows.Forms.Label();
+            this.btnBoxIT = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnApplyText = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -45,8 +47,6 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCencel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnBoxIT = new System.Windows.Forms.Button();
-            this.lbBoxed = new System.Windows.Forms.Label();
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
             this.gbSelectType.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -126,6 +126,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compose URL or image";
             // 
+            // lbBoxed
+            // 
+            this.lbBoxed.AutoSize = true;
+            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbBoxed.Location = new System.Drawing.Point(388, 171);
+            this.lbBoxed.Name = "lbBoxed";
+            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
+            this.lbBoxed.TabIndex = 7;
+            this.lbBoxed.Text = "BOXED";
+            this.lbBoxed.Visible = false;
+            // 
+            // btnBoxIT
+            // 
+            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBoxIT.Location = new System.Drawing.Point(172, 161);
+            this.btnBoxIT.Name = "btnBoxIT";
+            this.btnBoxIT.Size = new System.Drawing.Size(174, 36);
+            this.btnBoxIT.TabIndex = 6;
+            this.btnBoxIT.Text = "Put In Box";
+            this.btnBoxIT.UseVisualStyleBackColor = true;
+            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
+            // 
             // btnTest
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -191,7 +216,7 @@
             // 
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(690, 331);
+            this.btnApply.Location = new System.Drawing.Point(690, 352);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 3;
@@ -203,38 +228,13 @@
             // 
             this.btnCencel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCencel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCencel.Location = new System.Drawing.Point(690, 397);
+            this.btnCencel.Location = new System.Drawing.Point(690, 407);
             this.btnCencel.Name = "btnCencel";
             this.btnCencel.Size = new System.Drawing.Size(122, 36);
             this.btnCencel.TabIndex = 4;
             this.btnCencel.Text = "Cancel and exit";
             this.btnCencel.UseVisualStyleBackColor = true;
             this.btnCencel.Click += new System.EventHandler(this.btnCencel_Click);
-            // 
-            // btnBoxIT
-            // 
-            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(172, 161);
-            this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(174, 36);
-            this.btnBoxIT.TabIndex = 6;
-            this.btnBoxIT.Text = "Put In Box";
-            this.btnBoxIT.UseVisualStyleBackColor = true;
-            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
-            // 
-            // lbBoxed
-            // 
-            this.lbBoxed.AutoSize = true;
-            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbBoxed.Location = new System.Drawing.Point(388, 171);
-            this.lbBoxed.Name = "lbBoxed";
-            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
-            this.lbBoxed.TabIndex = 7;
-            this.lbBoxed.Text = "BOXED";
-            this.lbBoxed.Visible = false;
             // 
             // BlinkTimer
             // 
@@ -245,7 +245,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 558);
+            this.ClientSize = new System.Drawing.Size(851, 558);
             this.Controls.Add(this.btnCencel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.pbImage);

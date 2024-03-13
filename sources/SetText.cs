@@ -20,6 +20,7 @@ namespace MacroViewer
             tbSelectedItem.Text = strIn;
             tbResult.Text = "";
             tbRawUrl.Text = "";
+            gpTable.Enabled = (strIn == "");
             sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
         }
 
@@ -115,6 +116,14 @@ namespace MacroViewer
         private void SetText_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private void btnApplyTab_Click(object sender, EventArgs e)
+        {
+            int r = Convert.ToInt32(tbRows.Text);
+            int c = Convert.ToInt32(tbCols.Text);
+            strResultOut = Utils.FormTable(r, c);
+            this.Close();
         }
     }
 }

@@ -38,20 +38,27 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbSuffix = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbBoxed = new System.Windows.Forms.Label();
+            this.btnBoxIT = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnApplyText = new System.Windows.Forms.Button();
             this.tbResult = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lbBoxed = new System.Windows.Forms.Label();
-            this.btnBoxIT = new System.Windows.Forms.Button();
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
+            this.gpTable = new System.Windows.Forms.GroupBox();
+            this.btnApplyTab = new System.Windows.Forms.Button();
+            this.tbCols = new System.Windows.Forms.TextBox();
+            this.tbRows = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.gpTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSelectType
@@ -94,7 +101,7 @@
             // 
             this.groupBox2.Controls.Add(this.tbPrefix);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(490, 25);
+            this.groupBox2.Location = new System.Drawing.Point(459, 25);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(278, 98);
             this.groupBox2.TabIndex = 3;
@@ -112,7 +119,7 @@
             // 
             this.groupBox3.Controls.Add(this.tbSuffix);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(490, 151);
+            this.groupBox3.Location = new System.Drawing.Point(459, 151);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(278, 98);
             this.groupBox3.TabIndex = 4;
@@ -136,16 +143,41 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(12, 279);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(756, 159);
+            this.groupBox4.Size = new System.Drawing.Size(654, 159);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
+            // 
+            // lbBoxed
+            // 
+            this.lbBoxed.AutoSize = true;
+            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbBoxed.Location = new System.Drawing.Point(376, 53);
+            this.lbBoxed.Name = "lbBoxed";
+            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
+            this.lbBoxed.TabIndex = 9;
+            this.lbBoxed.Text = "BOXED";
+            this.lbBoxed.Visible = false;
+            // 
+            // btnBoxIT
+            // 
+            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBoxIT.Location = new System.Drawing.Point(222, 46);
+            this.btnBoxIT.Name = "btnBoxIT";
+            this.btnBoxIT.Size = new System.Drawing.Size(106, 36);
+            this.btnBoxIT.TabIndex = 8;
+            this.btnBoxIT.Text = "Put In Box";
+            this.btnBoxIT.UseVisualStyleBackColor = true;
+            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
             // 
             // btnTest
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(592, 46);
+            this.btnTest.Location = new System.Drawing.Point(497, 45);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(122, 36);
             this.btnTest.TabIndex = 7;
@@ -169,14 +201,14 @@
             // 
             this.tbResult.Location = new System.Drawing.Point(36, 109);
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(678, 22);
+            this.tbResult.Size = new System.Drawing.Size(592, 22);
             this.tbResult.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(813, 345);
+            this.btnCancel.Location = new System.Drawing.Point(697, 374);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(122, 36);
             this.btnCancel.TabIndex = 7;
@@ -188,7 +220,7 @@
             // 
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(813, 279);
+            this.btnApply.Location = new System.Drawing.Point(697, 302);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 6;
@@ -196,42 +228,79 @@
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
-            // lbBoxed
-            // 
-            this.lbBoxed.AutoSize = true;
-            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbBoxed.Location = new System.Drawing.Point(438, 56);
-            this.lbBoxed.Name = "lbBoxed";
-            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
-            this.lbBoxed.TabIndex = 9;
-            this.lbBoxed.Text = "BOXED";
-            this.lbBoxed.Visible = false;
-            // 
-            // btnBoxIT
-            // 
-            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(222, 46);
-            this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(174, 36);
-            this.btnBoxIT.TabIndex = 8;
-            this.btnBoxIT.Text = "Put In Box";
-            this.btnBoxIT.UseVisualStyleBackColor = true;
-            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
-            // 
             // BlinkTimer
             // 
             this.BlinkTimer.Interval = 500;
             this.BlinkTimer.Tick += new System.EventHandler(this.BlinkTimer_Tick);
+            // 
+            // gpTable
+            // 
+            this.gpTable.Controls.Add(this.btnApplyTab);
+            this.gpTable.Controls.Add(this.tbCols);
+            this.gpTable.Controls.Add(this.tbRows);
+            this.gpTable.Controls.Add(this.label2);
+            this.gpTable.Controls.Add(this.label1);
+            this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpTable.Location = new System.Drawing.Point(825, 91);
+            this.gpTable.Name = "gpTable";
+            this.gpTable.Size = new System.Drawing.Size(250, 158);
+            this.gpTable.TabIndex = 8;
+            this.gpTable.TabStop = false;
+            this.gpTable.Text = "Create a table and exit";
+            // 
+            // btnApplyTab
+            // 
+            this.btnApplyTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplyTab.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnApplyTab.Location = new System.Drawing.Point(23, 104);
+            this.btnApplyTab.Name = "btnApplyTab";
+            this.btnApplyTab.Size = new System.Drawing.Size(122, 36);
+            this.btnApplyTab.TabIndex = 4;
+            this.btnApplyTab.Text = "Apply and exit";
+            this.btnApplyTab.UseVisualStyleBackColor = true;
+            this.btnApplyTab.Click += new System.EventHandler(this.btnApplyTab_Click);
+            // 
+            // tbCols
+            // 
+            this.tbCols.Location = new System.Drawing.Point(114, 68);
+            this.tbCols.Name = "tbCols";
+            this.tbCols.Size = new System.Drawing.Size(57, 22);
+            this.tbCols.TabIndex = 3;
+            this.tbCols.Text = "1";
+            // 
+            // tbRows
+            // 
+            this.tbRows.Location = new System.Drawing.Point(114, 23);
+            this.tbRows.Name = "tbRows";
+            this.tbRows.Size = new System.Drawing.Size(57, 22);
+            this.tbRows.TabIndex = 2;
+            this.tbRows.Text = "1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Columns";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Rows";
             // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(971, 482);
+            this.ClientSize = new System.Drawing.Size(1087, 482);
+            this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.groupBox4);
@@ -255,6 +324,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.gpTable.ResumeLayout(false);
+            this.gpTable.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -279,5 +350,11 @@
         private System.Windows.Forms.Label lbBoxed;
         private System.Windows.Forms.Button btnBoxIT;
         private System.Windows.Forms.Timer BlinkTimer;
+        private System.Windows.Forms.GroupBox gpTable;
+        private System.Windows.Forms.Button btnApplyTab;
+        private System.Windows.Forms.TextBox tbCols;
+        private System.Windows.Forms.TextBox tbRows;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

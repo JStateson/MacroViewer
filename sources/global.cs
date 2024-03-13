@@ -13,6 +13,8 @@ using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using System.Security;
 using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Text;
+using System.Drawing;
 
 namespace MacroViewer
 {    
@@ -161,7 +163,44 @@ namespace MacroViewer
             return (strUC.Contains("HTTPS:") || strUC.Contains("HTTP:"));
         }
 
+        private static string strFill(int i)
+        {
+            string strOut = "";
+            string sAlpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string sAlpha = sAlpha1 + sAlpha1.ToLower();
+            int k = i % 52;
+            for (int j = 0; j < 4; j++)
+                strOut += sAlpha.Substring(k, 1); 
+            return strOut;
+        }
+        public static string FormTable(int rows, int cols)
+        {
+            if (rows == 0 && cols == 0) return "";
+            if (rows == 0) rows = 1;
+            if (cols == 0) cols = 1;
+            int jChar = 0;
+
+            StringBuilder htmlBuilder = new StringBuilder();
+            htmlBuilder.Append("<table border='1'>");
+
+            for (int i = 0; i < rows; i++)
+            {
+                htmlBuilder.Append("<tr>");
+                for (int j = 0; j < cols; j++)
+                {
+                    htmlBuilder.Append("<td>");
+                    htmlBuilder.Append(strFill(jChar));
+                    htmlBuilder.Append("</td>");
+                    jChar++;
+                }
+
+                htmlBuilder.Append("</tr>");
+            }
+            htmlBuilder.Append("</table>");
+            return htmlBuilder.ToString();
+        }
     }
+
     internal class CShowBrowser
     {
         private bool bUseWebView  = true;
@@ -291,5 +330,7 @@ namespace MacroViewer
             // Use SendKeys to Paste
             SendKeys.Send("^V");
         }
+
     }
+
 }

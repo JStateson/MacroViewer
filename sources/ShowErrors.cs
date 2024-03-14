@@ -34,7 +34,7 @@ namespace MacroViewer
         public ShowErrors(ref string[] mName, ref string[] mErrors, ref string[] rAllBody)
         {
             InitializeComponent();
-            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            sLoc = Utils.WhereExe;
             AllBody = rAllBody;
             lbMacNames.Items.Clear();
             int i = 0, j = 0;

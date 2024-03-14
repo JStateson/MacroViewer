@@ -59,7 +59,7 @@ namespace MacroViewer
             rbNotImage.Checked = !bIsImage;
             tbSelectedItem.Text = rstrIn;
             RBsetContext();
-            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            sLoc = Utils.WhereExe;
         }
 
         private void btnApply_Click(object sender, EventArgs e)

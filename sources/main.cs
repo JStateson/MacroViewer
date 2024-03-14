@@ -6,6 +6,10 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.Remoting.Messaging;
+using System.Linq;
+using System.Windows.Ink;
+using System.ComponentModel;
 
 
 namespace MacroViewer
@@ -47,7 +51,8 @@ namespace MacroViewer
         public main()
         {
             InitializeComponent();
-            TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            Utils.WhereExe = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            TXTmacs = Utils.WhereExe;
             EnableMacEdits(false);
             SwitchToMarkup(true);
             //SendToCloud.Init();
@@ -58,6 +63,7 @@ namespace MacroViewer
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
             string strFilename = Properties.Settings.Default.HTTP_HP;
             this.Text = " HP Macro Editor";
+            settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
         }
 
         private bool AnyHPdiff()
@@ -380,7 +386,7 @@ namespace MacroViewer
             btnDelM.Enabled = bVal;
         }
 
-        private void ShowSelectedRow(int e)
+        private void ShowUneditedRow(int e)
         {
             CurrentRowSelected = e;
             if (lbName.Rows.Count == 0)
@@ -394,15 +400,23 @@ namespace MacroViewer
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             lbName.ClearSelection();
             lbName.Rows[CurrentRowSelected].Selected = true;
+            if (lbNotM.Visible) SwitchToMarkup(false);
             if (cbLaunchPage.Checked)
                 RunBrowser();
             AllowSaveRestore(CurrentRowSelected);
         }
 
+        private void ShowSelectedRow(int e)
+        {
+            if(bPageSaved())
+            {
+                ShowUneditedRow(e);
+            }
+        }
+
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            //ShowSelectedRow(e.RowIndex); already selected with the click
             RunBrowser();
         }
 
@@ -519,7 +533,7 @@ namespace MacroViewer
                 gbSupp.Enabled = false;
                 strType = "";
                 bHaveHTML = true;
-                ShowSelectedRow(0);
+                ShowUneditedRow(0);
             }            
         }
 
@@ -581,7 +595,7 @@ namespace MacroViewer
             AccessDiffBoth(false);
             LoadFromTXT("PCmacros");
             strType = "PC";
-            ShowSelectedRow(0);
+            ShowUneditedRow(0);
             EnableMacEdits(true);
         }
 
@@ -813,7 +827,7 @@ namespace MacroViewer
             AccessDiffBoth(false);
             LoadFromTXT("PRNmacros");
             strType = "PRN";
-            ShowSelectedRow(0);
+            ShowUneditedRow(0);     // show initial row
             EnableMacEdits(true);
         }
 
@@ -830,7 +844,7 @@ namespace MacroViewer
                 showDifferenceToolStripMenuItem.Visible = bHaveBothDIFF;
 
             }
-            ShowSelectedRow(r);
+            ShowUneditedRow(r);
             EnableMacEdits(true);
         }
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -899,12 +913,33 @@ namespace MacroViewer
             aboutBox.Dispose();
         }
 
+        private string tbBodyMarked()
+        {
+            return tbBody.Text.Replace(Environment.NewLine, "<br>");
+        }
+
+        private bool bPageSaved()
+        {
+            if (CurrentRowSelected < 0) return true; // nothing to save 
+            bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
+            if (bEdited)
+            {
+                DialogResult Res1 = MessageBox.Show("Macro was not saved", "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                if (Res1 == DialogResult.OK)
+                {
+                    SaveCurrentMacros();
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+
         private void btnChangeUrls_Click(object sender, EventArgs e)
         {
             ManageMacros MyManageMac = new ManageMacros(strType, ref Body);
-            MyManageMac.ShowDialog();            
-            Body = MyManageMac.AllBody;
-            tbBody.Text = Body[CurrentRowSelected];
+            MyManageMac.ShowDialog();
+            tbBody.Text = MyManageMac.AllBody[CurrentRowSelected];
             SaveCurrentMacros();
             MyManageMac.Dispose();
         }
@@ -1040,9 +1075,88 @@ namespace MacroViewer
             }
         }
 
-        private void lbName_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnCancelEdits_Click(object sender, EventArgs e)
         {
+            tbBody.Text = Body[CurrentRowSelected];
+        }
 
+
+        private class CMarkup
+        {
+            public class cFiller
+            {
+                public string sFiller;
+                public string OldUrl;
+                public string NewUrl;
+            }
+            public List<cFiller> cFillerList;
+            private void cReplace(int n, ref string sBody, int iLoc, int iLen)
+            {
+                cFiller cf = new cFiller();
+                cf.OldUrl = sBody.Substring(iLoc, iLen);
+                cf.sFiller = Utils.strFill(n, iLen);
+                sBody = sBody.Replace(cf.OldUrl, cf.sFiller);
+                cf.NewUrl = Utils.FormUrl(cf.OldUrl, "");
+                cFillerList.Add(cf);
+            }
+            
+            public void Init()
+            {
+                cFillerList = new List<cFiller>();  
+            }
+
+            private int LengthURL(ref string sBody, int iStart)
+            {
+                int n = -1;
+                string s = sBody.Substring(iStart);
+                foreach(char c in s)
+                {
+                    n++;
+                    if(c == ' ') return n;
+                    if(c == '\n') return n;
+                    if(c == '\r') return n;
+                    if(c == '\t') return n;
+                }
+                return s.Length;
+            }
+
+            public bool FindUrl(int nLooked, ref string s)
+            {
+
+                int iHTTP = 0, iLen = 0;
+                string sTMP = s.ToLower();
+                iHTTP = sTMP.IndexOf("http");
+                if (iHTTP < 0) return false;
+                iLen = LengthURL(ref s, iHTTP);
+                string strFound = s.Substring(iHTTP, iLen);
+                cReplace(nLooked, ref s, iHTTP, iLen);
+                return true;
+            }
+        }
+
+        private void btnLinkAll_Click(object sender, EventArgs e)
+        {
+            string sBody = tbBody.Text.ToLower();
+            bool bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
+            if (bHasHyper) return; // probably need to explain why
+            SwitchToMarkup(false);
+            sBody = tbBody.Text;
+            int n = 0;
+            CMarkup MyMarkup = new CMarkup();
+            MyMarkup.Init();
+            while(true)
+            {
+                bHasHyper = MyMarkup.FindUrl(n, ref sBody);
+                if (!bHasHyper) break;
+                n++;
+            }
+            while(n > 0)
+            {
+                n--;
+                CMarkup.cFiller cf = MyMarkup.cFillerList[n];
+                sBody = sBody.Replace(cf.sFiller,cf.NewUrl);
+            }
+            tbBody.Text = sBody;
         }
     }
 }

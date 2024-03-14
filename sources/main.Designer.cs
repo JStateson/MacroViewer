@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
             this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +45,8 @@
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
             this.btnUpdErr = new System.Windows.Forms.Button();
             this.lbRCcopy = new System.Windows.Forms.Label();
+            this.btnCancelEdits = new System.Windows.Forms.Button();
+            this.btnLinkAll = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,7 +135,6 @@
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
-            this.lbName.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellContentClick);
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
@@ -247,7 +249,7 @@
             this.btnUpdErr.Enabled = false;
             this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnUpdErr.Location = new System.Drawing.Point(321, 269);
+            this.btnUpdErr.Location = new System.Drawing.Point(321, 326);
             this.btnUpdErr.Name = "btnUpdErr";
             this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
             this.btnUpdErr.TabIndex = 19;
@@ -271,6 +273,32 @@
         "e clipboard");
             this.lbRCcopy.Visible = false;
             // 
+            // btnCancelEdits
+            // 
+            this.btnCancelEdits.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelEdits.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCancelEdits.Location = new System.Drawing.Point(353, 269);
+            this.btnCancelEdits.Name = "btnCancelEdits";
+            this.btnCancelEdits.Size = new System.Drawing.Size(121, 32);
+            this.btnCancelEdits.TabIndex = 21;
+            this.btnCancelEdits.Text = "Cancel Edits";
+            this.toolTip1.SetToolTip(this.btnCancelEdits, "For errors only.  This saves changes\r\nand refreshes the error table");
+            this.btnCancelEdits.UseVisualStyleBackColor = true;
+            this.btnCancelEdits.Click += new System.EventHandler(this.btnCancelEdits_Click);
+            // 
+            // btnLinkAll
+            // 
+            this.btnLinkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkAll.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnLinkAll.Location = new System.Drawing.Point(293, 499);
+            this.btnLinkAll.Name = "btnLinkAll";
+            this.btnLinkAll.Size = new System.Drawing.Size(122, 25);
+            this.btnLinkAll.TabIndex = 9;
+            this.btnLinkAll.Text = "LINK ALL";
+            this.toolTip1.SetToolTip(this.btnLinkAll, "Not avaialble if any hyperlihnks\r\nor images are present");
+            this.btnLinkAll.UseVisualStyleBackColor = true;
+            this.btnLinkAll.Click += new System.EventHandler(this.btnLinkAll_Click);
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -278,7 +306,7 @@
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbBody.Size = new System.Drawing.Size(391, 415);
+            this.tbBody.Size = new System.Drawing.Size(391, 376);
             this.tbBody.TabIndex = 3;
             // 
             // menuStrip1
@@ -470,6 +498,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnCancelEdits);
             this.gpMainEdit.Controls.Add(this.btnTest);
             this.gpMainEdit.Controls.Add(this.btnUpdErr);
             this.gpMainEdit.Controls.Add(this.btnNew);
@@ -515,6 +544,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnLinkAll);
             this.groupBox6.Controls.Add(this.gbManageImages);
             this.groupBox6.Controls.Add(this.btnSetObj);
             this.groupBox6.Controls.Add(this.label1);
@@ -576,9 +606,9 @@
             // 
             this.btnSetObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSetObj.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSetObj.Location = new System.Drawing.Point(293, 510);
+            this.btnSetObj.Location = new System.Drawing.Point(293, 456);
             this.btnSetObj.Name = "btnSetObj";
-            this.btnSetObj.Size = new System.Drawing.Size(138, 25);
+            this.btnSetObj.Size = new System.Drawing.Size(122, 25);
             this.btnSetObj.TabIndex = 5;
             this.btnSetObj.Text = "EDIT LINK";
             this.btnSetObj.UseVisualStyleBackColor = true;
@@ -588,12 +618,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(15, 497);
+            this.label1.Location = new System.Drawing.Point(15, 443);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(260, 48);
+            this.label1.Size = new System.Drawing.Size(260, 96);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Position cursor at any location, or\r\nhighlight (select) any text or URL and\r\nclic" +
-    "k EDIT LINK to create an object.";
+            this.label1.Text = resources.GetString("label1.Text");
             // 
             // groupBox5
             // 
@@ -606,7 +635,7 @@
             this.groupBox5.Controls.Add(this.btnToNotepad);
             this.groupBox5.Controls.Add(this.btnCopyTo);
             this.groupBox5.Controls.Add(this.btnCopyFrom);
-            this.groupBox5.Location = new System.Drawing.Point(24, 359);
+            this.groupBox5.Location = new System.Drawing.Point(24, 377);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(425, 219);
             this.groupBox5.TabIndex = 16;
@@ -819,7 +848,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1387, 785);
+            this.ClientSize = new System.Drawing.Size(1387, 820);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gpMainEdit);
             this.Controls.Add(this.panel2);
@@ -922,6 +951,8 @@
         private System.Windows.Forms.Label lbRCcopy;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ToolStripMenuItem showDifferenceToolStripMenuItem;
+        private System.Windows.Forms.Button btnCancelEdits;
+        private System.Windows.Forms.Button btnLinkAll;
     }
 }
 

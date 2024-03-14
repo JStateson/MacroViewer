@@ -44,7 +44,7 @@ namespace MacroViewer
         private void btnTest_Click(object sender, EventArgs e)
         {
             string strTemp = tbUrl.Text;
-            string TXTmacs = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            string TXTmacs = Utils.WhereExe;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();

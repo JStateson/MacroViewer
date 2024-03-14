@@ -38,7 +38,7 @@ namespace MacroViewer
         {
             InitializeComponent();
             AllBody = rBody;
-            WhereExe = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            WhereExe = Utils.WhereExe;
             strType = rstrType;
             MyItems = new List<CImageItems>();
             int i = 0;
@@ -46,7 +46,7 @@ namespace MacroViewer
 
 
             dgManage.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            sLoc = Utils.WhereExe;
             
             while (true)
             {

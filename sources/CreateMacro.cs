@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace MacroViewer
         public CreateMacro(string rstrType)
         {
             InitializeComponent();
-            ExeFolder = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            ExeFolder = Utils.WhereExe;
             strType = rstrType;
         }
 
@@ -67,6 +68,7 @@ namespace MacroViewer
         {
             string strImageName = "", strImagePath="";
             int Width = 200, Height = 200;  //default
+            int n = 0;
             if (bIsPath) // do not know H or W so default is used
             {
                 strImageName =  Utils.GetNextImageFile(strType, ExeFolder);

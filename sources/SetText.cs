@@ -21,7 +21,7 @@ namespace MacroViewer
             tbResult.Text = "";
             tbRawUrl.Text = "";
             gpTable.Enabled = (strIn == "");
-            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            sLoc = Utils.WhereExe;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -36,11 +36,7 @@ namespace MacroViewer
             this.Close();
         }
 
-        private string FormUrl(string strUrl,  string strIn)
-        {
-            if (strIn == "") strIn = strUrl;
-            return  "<a href=\"" + strUrl + "\" target=\"_blank\">" + strIn + "</a>";
-        }
+
 
         private void btnApplyText_Click(object sender, EventArgs e)
         {
@@ -55,7 +51,7 @@ namespace MacroViewer
             {
                 strOut = strTmp + " ";
             }
-            strOut += FormUrl(tbRawUrl.Text.Trim(), tbSelectedItem.Text.Trim());
+            strOut += Utils.FormUrl(tbRawUrl.Text.Trim(), tbSelectedItem.Text.Trim());
             strTmp = tbSuffix.Text.Trim();
             if(strTmp !="")
             {

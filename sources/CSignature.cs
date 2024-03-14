@@ -36,7 +36,7 @@ namespace MacroViewer
         public CSignature()
         {
             InitializeComponent();
-            SigLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            SigLoc = Utils.WhereExe;
             SigFilename = SigLoc + "\\signatures.txt";
             ReadSIG();
         }

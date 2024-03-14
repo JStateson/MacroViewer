@@ -11,7 +11,7 @@ namespace MacroViewer
         public utils()
         {
             InitializeComponent();
-            sLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+            sLoc = Utils.WhereExe;
         }
 
         private void MakeResult()

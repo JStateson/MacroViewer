@@ -15,18 +15,21 @@ using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using System.Text;
 using System.Drawing;
+using System.Windows.Ink;
+using System.Collections.Generic;
 
 namespace MacroViewer
-{    
+{
     public static class Utils
     {
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body>";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-
+        public static string WhereExe = "";
+        public static string[] LocalMacroPrefix = {"PRN","HP","PC"};
         public static void ShowParseLocationErrors(string strText)
         {
-            string strLoc = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString() +  "\\MyHtml.txts";
+            string strLoc = WhereExe +  "\\MyHtml.txts";
             File.WriteAllText(strLoc, strText);
             Utils.NotepadViewer(strLoc);
         }
@@ -53,6 +56,12 @@ namespace MacroViewer
                 strRtn += strErr.Reason + strLine + Environment.NewLine;
             }
             return strRtn;
+        }
+
+        public static string FormUrl(string strUrl, string strIn)
+        {
+            if (strIn == "") strIn = strUrl;
+            return "<a href=\"" + strUrl + "\" target=\"_blank\">" + strIn + "</a>";
         }
 
         public static string FixImg(string strImg)
@@ -103,6 +112,31 @@ namespace MacroViewer
                 file.Delete();
             }
         }
+
+        public static int CountImages()
+        {
+            string[] files = Directory.GetFiles(WhereExe, "*.png");
+            return files.Length;
+        }
+        public class CLocalFiles
+        {
+            public bool NotUsed { get; set; }
+            public string Name { get; set; }
+        }
+        public static List<CLocalFiles> NumLocalImageFiles() 
+        {
+            List<CLocalFiles> MyImages = new List<CLocalFiles>();
+            string[] files = Directory.GetFiles(WhereExe, "LOCALIMAGEFILE-*.png");
+            foreach(string s in files)
+            {
+                CLocalFiles cf = new CLocalFiles();
+                cf.Name = Path.GetFileName(s);
+                cf.NotUsed = true;
+                MyImages.Add(cf);
+            }
+            return MyImages;
+        }
+
         public static string GetNextImageFile(string strType, string strExe)
         {
             int i = 0;
@@ -163,13 +197,13 @@ namespace MacroViewer
             return (strUC.Contains("HTTPS:") || strUC.Contains("HTTP:"));
         }
 
-        private static string strFill(int i)
+        public static string strFill(int i, int n)
         {
             string strOut = "";
             string sAlpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string sAlpha = sAlpha1 + sAlpha1.ToLower();
             int k = i % 52;
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < n; j++)
                 strOut += sAlpha.Substring(k, 1); 
             return strOut;
         }
@@ -189,7 +223,7 @@ namespace MacroViewer
                 for (int j = 0; j < cols; j++)
                 {
                     htmlBuilder.Append("<td>");
-                    htmlBuilder.Append(strFill(jChar));
+                    htmlBuilder.Append(strFill(jChar,4));
                     htmlBuilder.Append("</td>");
                     jChar++;
                 }

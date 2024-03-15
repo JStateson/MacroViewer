@@ -44,11 +44,10 @@ namespace MacroViewer
         private void btnTest_Click(object sender, EventArgs e)
         {
             string strTemp = tbUrl.Text;
-            string TXTmacs = Utils.WhereExe;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(TXTmacs, Utils.AssembleIMG(strTemp));
+            MyBrowser.ShowInBrowser(Utils.AssembleIMG(strTemp));
         }
 
         private void btnSaveExit_Click(object sender, EventArgs e)

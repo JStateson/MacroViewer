@@ -26,7 +26,7 @@ namespace MacroViewer
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         public static string WhereExe = "";
-        public static string[] LocalMacroPrefix = {"PRN","HP","PC"};
+        public static string[] LocalMacroPrefix = {"PC","PRN", "HP"};
         public static void ShowParseLocationErrors(string strText)
         {
             string strLoc = WhereExe +  "\\MyHtml.txts";
@@ -264,12 +264,12 @@ namespace MacroViewer
         }
 
         // had to add block as BlinkTimer was not working !?!?!? todo to do todo
-        public void ShowInBrowser(string sLoc, string strIn, bool bBlock)
+        public void ShowInBrowser(string strIn, bool bBlock)
         {
             string strTemp = strPrefix + strIn + strSuffix;
             if (bUseWebView)
             {
-                ShowPage MyShowPage = new ShowPage(sLoc, strTemp);    // this is WebView2 stuff
+                ShowPage MyShowPage = new ShowPage(Utils.WhereExe, strTemp);    // this is WebView2 stuff
                 if(bBlock)
                 {
                     MyShowPage.ShowDialog();
@@ -291,9 +291,9 @@ namespace MacroViewer
             }
         }
 
-        public void ShowInBrowser(string sLoc, string strIn)
+        public void ShowInBrowser(string strIn)
         {
-            ShowInBrowser(sLoc, strIn, false);
+            ShowInBrowser(strIn, false);
         }
 
     }
@@ -309,7 +309,6 @@ namespace MacroViewer
             // Let's start Notepad
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Windows\\Notepad.exe";
-
             process.Start();
             Thread.Sleep(2000);
             Clipboard.SetText(strText);

@@ -68,7 +68,6 @@ namespace MacroViewer
         {
             string strImageName = "", strImagePath="";
             int Width = 200, Height = 200;  //default
-            int n = 0;
             if (bIsPath) // do not know H or W so default is used
             {
                 strImageName =  Utils.GetNextImageFile(strType, ExeFolder);

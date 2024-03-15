@@ -38,8 +38,7 @@ namespace MacroViewer
         int[] MacBody = new int[NumMacros];
         private string[] Body = new string[NumMacros];
         private string[] Body_HP_HTML = new string[NumMacros]; //local copy of ORIGINAL HP macros
-        private string strType = "";    // either PRN or PC for printer or pc macros
-        private string TXTmacs;
+        private string strType = "";    // either PRN or PC for printer or pc macros or HP 
         private string TXTName = "";
         private int CurrentRowSelected = -1;
         private OpenFileDialog ofd;
@@ -52,7 +51,6 @@ namespace MacroViewer
         {
             InitializeComponent();
             Utils.WhereExe = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
-            TXTmacs = Utils.WhereExe;
             EnableMacEdits(false);
             SwitchToMarkup(true);
             //SendToCloud.Init();
@@ -125,9 +123,9 @@ namespace MacroViewer
         {
             if (bHaveBothHP)
             {
-                if(bShowingError && bHaveBothHPerr)
+                if (bShowingError && bHaveBothHPerr)
                 {
-                    showDifferenceToolStripMenuItem.Text = "Show Errors";
+                    mShowDiff.Text = "Show Errors";
                     bShowingError=false;
                     bShowingDiff = true;
                     HighlightDIF();
@@ -135,7 +133,7 @@ namespace MacroViewer
                 }
                 if(bShowingDiff && bHaveBothDIFF)
                 {
-                    showDifferenceToolStripMenuItem.Text = "Show Diff";
+                    mShowDiff.Text = "Show Diff";
                     bShowingError = true;
                     bShowingDiff = false;
                     //LookForHTMLfix();   // highlights errors TODO to do todo
@@ -268,7 +266,7 @@ namespace MacroViewer
                     SetErrorRed(i);
                 }
             }
-            errorsToolStripMenuItem.Visible = bMacroErrors;
+            mShowErr.Visible = bMacroErrors;
             bShowingError = bMacroErrors;
             return true;
         }
@@ -371,7 +369,7 @@ namespace MacroViewer
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(TXTmacs, strTemp);
+            MyBrowser.ShowInBrowser(strTemp);
         }
 
         private void btnGo_Click(object sender, EventArgs e)
@@ -524,8 +522,8 @@ namespace MacroViewer
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AccessDiffBoth(false);
-            showDifferenceToolStripMenuItem.Visible = false;
-            errorsToolStripMenuItem.Visible = false;
+            mShowDiff.Visible = false;
+            mShowErr.Visible = false;
             if (ReadMacroHTML())
             {
                 EnableMacEdits(false);
@@ -534,7 +532,7 @@ namespace MacroViewer
                 strType = "";
                 bHaveHTML = true;
                 ShowUneditedRow(0);
-            }            
+            }
         }
 
         private void AllowSaveRestore (int r)
@@ -553,11 +551,11 @@ namespace MacroViewer
         {
             int i = 0;
             bMacroErrors = false;
-            errorsToolStripMenuItem.Visible = false;
+            mShowErr.Visible = false;
             TXTName = strFN;
             gpMainEdit.Enabled = true;
             gbSupp.Enabled = true;
-            string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
+            string TXTmacName = Utils.WhereExe + "\\" + strFN + ".txt";
             this.Text = " HP Macro Editor: " + TXTmacName;
             lbName.Rows.Clear();
             if (File.Exists(TXTmacName))
@@ -566,9 +564,10 @@ namespace MacroViewer
                 string line = sr.ReadLine();
                 string sBody;
                 bHaveHTML = false;
+                lbName.RowEnter -= lbName_RowEnter;
                 while (line != null)
                 {
-                    lbName.Rows.Add(i + 1, line);
+                    lbName.Rows.Add(i + 1, line);   // this triggers row enter callback
                     MacroNames[i] = line;
                     sBody = sr.ReadLine();
                     Body[i] = sBody.Replace("<br />","<br>");
@@ -580,10 +579,11 @@ namespace MacroViewer
                         bMacroErrors = true;
                         SetErrorRed(i);
                     }
-                    errorsToolStripMenuItem.Visible = bMacroErrors;
+                    mShowErr.Visible = bMacroErrors;
                     i++;
                     line = sr.ReadLine();
                 }
+                lbName.RowEnter += lbName_RowEnter;
                 sr.Close();
             }
             tbNumMac.Text = i.ToString();
@@ -592,11 +592,7 @@ namespace MacroViewer
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccessDiffBoth(false);
-            LoadFromTXT("PCmacros");
-            strType = "PC";
-            ShowUneditedRow(0);
-            EnableMacEdits(true);
+            SelectFileItem("PC");
         }
 
         private void SaveAsTXT(string strFN)
@@ -604,7 +600,7 @@ namespace MacroViewer
             int i = 0;
             string strOut = "";
             TXTName = strFN;
-            string TXTmacName = TXTmacs + "\\" + strFN + ".txt";
+            string TXTmacName = Utils.WhereExe + "\\" + strFN + ".txt";
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 string strName = row.Cells[1].Value.ToString();
@@ -668,7 +664,7 @@ namespace MacroViewer
             CurrentRowSelected = RemoveMacro();
             SaveAsTXT(TXTName);
             LoadFromTXT(TXTName);
-            ShowSelectedRow(CurrentRowSelected);
+            ShowUneditedRow(CurrentRowSelected);
         }
 
         private void SaveCurrentMacros()
@@ -824,32 +820,30 @@ namespace MacroViewer
 
         private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccessDiffBoth(false);
-            LoadFromTXT("PRNmacros");
-            strType = "PRN";
-            ShowUneditedRow(0);     // show initial row
-            EnableMacEdits(true);
+            SelectFileItem("PRN");
         }
 
         private void ReloadHP(int r)
         {
+            mShowDiff.Visible = false;
+            lbRCcopy.Visible = false;
             bHaveHTMLasLOCAL = ReadLastHTTP();
-            //find any errors in the original HTML macro file
-            LoadFromTXT("HPmacros");    //find any errors in the local file  HP Macro Editor
+            ShowUneditedRow(r);
+            LoadFromTXT("HPmacros");
             strType = "HP";
             if (bHaveHTMLasLOCAL)
             {
                 LookForHTMLfix();
                 bHaveBothDIFF = AnyHPdiff();
-                showDifferenceToolStripMenuItem.Visible = bHaveBothDIFF;
-
+                mShowDiff.Visible = bHaveBothDIFF;
+                lbRCcopy.Visible = bHaveBothDIFF;
             }
             ShowUneditedRow(r);
             EnableMacEdits(true);
         }
         private void savePrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReloadHP(0);
+            SelectFileItem("HP");
         }
 
         private void ReplaceText(int iStart, int iLen, string strText)
@@ -1005,12 +999,6 @@ namespace MacroViewer
             ShowHelp("EDITLINK");
         }
 
-        private void errorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors, ref Body);
-            MySE.Show();
-        }
-
         private void helpWithErrorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowHelp("XMLERRORS");
@@ -1044,7 +1032,8 @@ namespace MacroViewer
                     string s = tbMacName.Text + Environment.NewLine;
                     PutOnNotepad(s+Body_HP_HTML[r]);
                     Application.DoEvents();
-                    MessageBox.Show("Original macro is on notepad");
+                    MessageBox.Show("Original macro is on notepad",
+                            "Macro " + (r+1).ToString(),MessageBoxButtons.OKCancel);
                 }
             }
         }
@@ -1067,13 +1056,6 @@ namespace MacroViewer
             ShowSelectedRow(e.RowIndex);
         }
 
-        private void showDifferenceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (bHaveBothHP)
-            {
-                ShowHighlights();
-            }
-        }
 
         private void btnCancelEdits_Click(object sender, EventArgs e)
         {
@@ -1157,6 +1139,70 @@ namespace MacroViewer
                 sBody = sBody.Replace(cf.sFiller,cf.NewUrl);
             }
             tbBody.Text = sBody;
+        }
+
+        // find next file PC->PRN->HP and repeat back to PC
+        private void btnNextTable_Click(object sender, EventArgs e)
+        {
+            int n = Utils.LocalMacroPrefix.Length;
+            int i = 0;
+            foreach (string s in Utils.LocalMacroPrefix)
+            {
+                if(strType.Contains(s))
+                {
+                    i++;
+                    if (i == n) i = 0;
+                    SelectFileItem(Utils.LocalMacroPrefix[i]);
+                    return;
+                }
+                i++;
+            }
+            SelectFileItem("PC");
+        }
+
+        private void SelectFileItem(string sPrefix)
+        {
+            if(strType != sPrefix)
+            {
+                if(!bPageSaved())
+                {
+                    return;
+                }
+            }
+            switch (sPrefix)
+            {
+                case "PC":
+                    AccessDiffBoth(false);
+                    LoadFromTXT("PCmacros");
+                    strType = "PC";
+                    EnableMacEdits(true);
+                    ShowUneditedRow(0);
+                    break;
+                case "PRN":
+                    AccessDiffBoth(false);
+                    LoadFromTXT("PRNmacros");
+                    strType = "PRN";
+                    EnableMacEdits(true);
+                    ShowUneditedRow(0);
+                    break;
+                case "HP":
+                    ReloadHP(0);
+                    break;
+            }
+        }
+
+        private void mShowDiff_Click(object sender, EventArgs e)
+        {
+            if (bHaveBothHP)
+            {
+                ShowHighlights();
+            }
+        }
+
+        private void mShowErr_Click(object sender, EventArgs e)
+        {
+            ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors, ref Body);
+            MySE.Show();
         }
     }
 }

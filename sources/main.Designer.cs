@@ -47,6 +47,7 @@
             this.lbRCcopy = new System.Windows.Forms.Label();
             this.btnCancelEdits = new System.Windows.Forms.Button();
             this.btnLinkAll = new System.Windows.Forms.Button();
+            this.btnNextTable = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,8 +70,8 @@
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.errorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showDifferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
+            this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
@@ -129,7 +130,7 @@
             this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Inx,
             this.MacName});
-            this.lbName.Location = new System.Drawing.Point(6, 76);
+            this.lbName.Location = new System.Drawing.Point(23, 102);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(360, 639);
@@ -236,11 +237,11 @@
             this.cbLaunchPage.AutoSize = true;
             this.cbLaunchPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLaunchPage.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbLaunchPage.Location = new System.Drawing.Point(23, 31);
+            this.cbLaunchPage.Location = new System.Drawing.Point(27, 31);
             this.cbLaunchPage.Name = "cbLaunchPage";
-            this.cbLaunchPage.Size = new System.Drawing.Size(122, 24);
+            this.cbLaunchPage.Size = new System.Drawing.Size(178, 24);
             this.cbLaunchPage.TabIndex = 5;
-            this.cbLaunchPage.Text = "Launch Page";
+            this.cbLaunchPage.Text = "Launch Page on click";
             this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
             this.cbLaunchPage.UseVisualStyleBackColor = true;
             // 
@@ -261,11 +262,11 @@
             // lbRCcopy
             // 
             this.lbRCcopy.AutoSize = true;
-            this.lbRCcopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRCcopy.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbRCcopy.Location = new System.Drawing.Point(170, 33);
+            this.lbRCcopy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRCcopy.ForeColor = System.Drawing.Color.Red;
+            this.lbRCcopy.Location = new System.Drawing.Point(23, 66);
             this.lbRCcopy.Name = "lbRCcopy";
-            this.lbRCcopy.Size = new System.Drawing.Size(162, 20);
+            this.lbRCcopy.Size = new System.Drawing.Size(109, 15);
             this.lbRCcopy.TabIndex = 6;
             this.lbRCcopy.Text = "Right-click enabled";
             this.toolTip1.SetToolTip(this.lbRCcopy, "There is a corrected HTML available\r\nfor the corresponding HTML macro\r\nerror in y" +
@@ -299,6 +300,19 @@
             this.btnLinkAll.UseVisualStyleBackColor = true;
             this.btnLinkAll.Click += new System.EventHandler(this.btnLinkAll_Click);
             // 
+            // btnNextTable
+            // 
+            this.btnNextTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNextTable.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnNextTable.Location = new System.Drawing.Point(284, 38);
+            this.btnNextTable.Name = "btnNextTable";
+            this.btnNextTable.Size = new System.Drawing.Size(75, 32);
+            this.btnNextTable.TabIndex = 19;
+            this.btnNextTable.Text = "Next";
+            this.toolTip1.SetToolTip(this.btnNextTable, "Click to slect the next table");
+            this.btnNextTable.UseVisualStyleBackColor = true;
+            this.btnNextTable.Click += new System.EventHandler(this.btnNextTable_Click);
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -318,8 +332,8 @@
             this.testSignatureToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.errorsToolStripMenuItem,
-            this.showDifferenceToolStripMenuItem});
+            this.mShowErr,
+            this.mShowDiff});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
@@ -478,23 +492,23 @@
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
-            // errorsToolStripMenuItem
+            // mShowErr
             // 
-            this.errorsToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
-            this.errorsToolStripMenuItem.Name = "errorsToolStripMenuItem";
-            this.errorsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.errorsToolStripMenuItem.Text = "ERRORS";
-            this.errorsToolStripMenuItem.Visible = false;
-            this.errorsToolStripMenuItem.Click += new System.EventHandler(this.errorsToolStripMenuItem_Click);
+            this.mShowErr.ForeColor = System.Drawing.Color.Red;
+            this.mShowErr.Name = "mShowErr";
+            this.mShowErr.Size = new System.Drawing.Size(61, 20);
+            this.mShowErr.Text = "ERRORS";
+            this.mShowErr.Visible = false;
+            this.mShowErr.Click += new System.EventHandler(this.mShowErr_Click);
             // 
-            // showDifferenceToolStripMenuItem
+            // mShowDiff
             // 
-            this.showDifferenceToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
-            this.showDifferenceToolStripMenuItem.Name = "showDifferenceToolStripMenuItem";
-            this.showDifferenceToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.showDifferenceToolStripMenuItem.Text = "Show Diff";
-            this.showDifferenceToolStripMenuItem.Visible = false;
-            this.showDifferenceToolStripMenuItem.Click += new System.EventHandler(this.showDifferenceToolStripMenuItem_Click);
+            this.mShowDiff.ForeColor = System.Drawing.Color.Red;
+            this.mShowDiff.Name = "mShowDiff";
+            this.mShowDiff.Size = new System.Drawing.Size(70, 20);
+            this.mShowDiff.Text = "Show Diff";
+            this.mShowDiff.Visible = false;
+            this.mShowDiff.Click += new System.EventHandler(this.mShowDiff_Click);
             // 
             // gpMainEdit
             // 
@@ -833,13 +847,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnNextTable);
             this.groupBox2.Controls.Add(this.lbRCcopy);
             this.groupBox2.Controls.Add(this.cbLaunchPage);
             this.groupBox2.Controls.Add(this.lbName);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 43);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(404, 730);
+            this.groupBox2.Size = new System.Drawing.Size(404, 763);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
@@ -945,14 +960,15 @@
         private System.Windows.Forms.ToolStripMenuItem helpWithToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EDITLINKHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem managingImagesHelpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem errorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mShowErr;
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdErr;
         private System.Windows.Forms.Label lbRCcopy;
         private System.Windows.Forms.Button btnTest;
-        private System.Windows.Forms.ToolStripMenuItem showDifferenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mShowDiff;
         private System.Windows.Forms.Button btnCancelEdits;
         private System.Windows.Forms.Button btnLinkAll;
+        private System.Windows.Forms.Button btnNextTable;
     }
 }
 

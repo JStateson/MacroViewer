@@ -36,7 +36,7 @@ namespace MacroViewer
 
         public static string RemoveNL(string text)
         {
-            string strRtn = text.Replace(Environment.NewLine, "<br");
+            string strRtn = text.Replace(Environment.NewLine, "<br>");
             return strRtn.Replace("\n", "<br>").Trim();
         }
         public static void NotepadViewer(string strFile)

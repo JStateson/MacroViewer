@@ -683,6 +683,15 @@ namespace MacroViewer
             LoadFromTXT(TXTName);
         }
 
+        private bool FailsHTMLparse()
+        {
+            string strErr = Utils.BBCparse(tbBody.Text);
+            if (strErr == "") return false;
+            strErr = "Macro " + (CurrentRowSelected + 1).ToString() + " has HTML errors";
+            DialogResult Res1 = MessageBox.Show(strErr, "Errors needs to be fixed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return true;
+        }
+
         private void SaveCurrentMacros()
         {
             bool bChanged = false;
@@ -691,6 +700,10 @@ namespace MacroViewer
             if (lbName.RowCount == 0)
             {
                 return; // must have wanted to add a row: sorry
+            }
+            if(FailsHTMLparse())
+            {
+                return;
             }
             strOld = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
             if (strName != strOld && (Utils.UnNamedMacro != strOld))

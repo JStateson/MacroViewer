@@ -120,8 +120,8 @@
   <data name="rFILE.Text" xml:space="preserve">
     <value>	Menu Items - File
 Read HTML file	This extracts macros from your HP macro settings page
-Load PC macro	This loads a set of 30 macros from your drive
-Load Printer macro	This loads another set of 30 macros
+Load PC macro	This loads a set of 50 macros from your drive
+Load Printer macro	This loads another set of 50 macros
 Save macros	Can be used to create a copy of the HP macros.
 Download Macros	Bring up your macro settings page so you can download it.
 
@@ -167,7 +167,7 @@ Feel free to edit my signature to create your own. If you come up with some uniq
   </data>
   <data name="rEDIT.Text" xml:space="preserve">
     <value>	Help with main screen (editing)
-The Macro List contains up to 30 macros.  There are three macro sources:  HP HTTP macros, local PC macros and local Printer macros.  A fourth source is the local copy of the HP HTTP macros.  If there are any HTML errors in the macros a red colored error menu item will appear. 
+The Macro List contains up to 50 macros.  There are three macro sources:  HP HTTP macros, local PC macros and local Printer macros.  A fourth source is the local copy of the HP HTTP macros.  If there are any HTML errors in the macros a red colored error menu item will appear. 
 
 If you click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you double click then the macro is displayed the way a user will see it if markup is enabled.
 

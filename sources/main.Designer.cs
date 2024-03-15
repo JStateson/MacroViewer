@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
-            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnGo = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
@@ -43,7 +41,6 @@
             this.btnChangeUrls = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
             this.cbLaunchPage = new System.Windows.Forms.CheckBox();
-            this.btnUpdErr = new System.Windows.Forms.Button();
             this.lbRCcopy = new System.Windows.Forms.Label();
             this.btnCancelEdits = new System.Windows.Forms.Button();
             this.btnLinkAll = new System.Windows.Forms.Button();
@@ -101,6 +98,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -125,6 +124,7 @@
             this.lbName.AllowUserToAddRows = false;
             this.lbName.AllowUserToDeleteRows = false;
             this.lbName.AllowUserToOrderColumns = true;
+            this.lbName.AllowUserToResizeColumns = false;
             this.lbName.AllowUserToResizeRows = false;
             this.lbName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -133,25 +133,14 @@
             this.lbName.Location = new System.Drawing.Point(23, 102);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
+            this.lbName.ReadOnly = true;
+            this.lbName.RowHeadersVisible = false;
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
-            // 
-            // Inx
-            // 
-            this.Inx.HeaderText = "Macro";
-            this.Inx.Name = "Inx";
-            this.Inx.ReadOnly = true;
-            this.Inx.Width = 48;
-            // 
-            // MacName
-            // 
-            this.MacName.HeaderText = "Name";
-            this.MacName.Name = "MacName";
-            this.MacName.Width = 260;
             // 
             // btnGo
             // 
@@ -194,7 +183,7 @@
             this.tbNumMac.Location = new System.Drawing.Point(21, 30);
             this.tbNumMac.Name = "tbNumMac";
             this.tbNumMac.ReadOnly = true;
-            this.tbNumMac.Size = new System.Drawing.Size(54, 22);
+            this.tbNumMac.Size = new System.Drawing.Size(43, 22);
             this.tbNumMac.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tbNumMac, "total number of macros");
             // 
@@ -244,20 +233,6 @@
             this.cbLaunchPage.Text = "Launch Page on click";
             this.toolTip1.SetToolTip(this.cbLaunchPage, "If checked then a web page is \r\nlaunched when a row id double clicked");
             this.cbLaunchPage.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdErr
-            // 
-            this.btnUpdErr.Enabled = false;
-            this.btnUpdErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdErr.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnUpdErr.Location = new System.Drawing.Point(321, 326);
-            this.btnUpdErr.Name = "btnUpdErr";
-            this.btnUpdErr.Size = new System.Drawing.Size(153, 32);
-            this.btnUpdErr.TabIndex = 19;
-            this.btnUpdErr.Text = "Save and Reload";
-            this.toolTip1.SetToolTip(this.btnUpdErr, "For errors only.  This saves changes\r\nand refreshes the error table");
-            this.btnUpdErr.UseVisualStyleBackColor = true;
-            this.btnUpdErr.Click += new System.EventHandler(this.btnUpdErr_Click);
             // 
             // lbRCcopy
             // 
@@ -514,7 +489,6 @@
             // 
             this.gpMainEdit.Controls.Add(this.btnCancelEdits);
             this.gpMainEdit.Controls.Add(this.btnTest);
-            this.gpMainEdit.Controls.Add(this.btnUpdErr);
             this.gpMainEdit.Controls.Add(this.btnNew);
             this.gpMainEdit.Controls.Add(this.groupBox6);
             this.gpMainEdit.Controls.Add(this.groupBox5);
@@ -786,7 +760,7 @@
             this.gbSupp.Controls.Add(this.btnDelM);
             this.gbSupp.Location = new System.Drawing.Point(24, 50);
             this.gbSupp.Name = "gbSupp";
-            this.gbSupp.Size = new System.Drawing.Size(250, 251);
+            this.gbSupp.Size = new System.Drawing.Size(283, 251);
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
@@ -806,7 +780,7 @@
             this.groupBox3.Controls.Add(this.tbNumMac);
             this.groupBox3.Location = new System.Drawing.Point(18, 104);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 72);
+            this.groupBox3.Size = new System.Drawing.Size(82, 72);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Count";
@@ -814,9 +788,11 @@
             // btnSaveM
             // 
             this.btnSaveM.Enabled = false;
+            this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnSaveM.Location = new System.Drawing.Point(137, 112);
             this.btnSaveM.Name = "btnSaveM";
-            this.btnSaveM.Size = new System.Drawing.Size(91, 23);
+            this.btnSaveM.Size = new System.Drawing.Size(75, 32);
             this.btnSaveM.TabIndex = 2;
             this.btnSaveM.Text = "Save Macro";
             this.btnSaveM.UseVisualStyleBackColor = true;
@@ -825,9 +801,11 @@
             // btnDelM
             // 
             this.btnDelM.Enabled = false;
+            this.btnDelM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelM.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnDelM.Location = new System.Drawing.Point(137, 169);
             this.btnDelM.Name = "btnDelM";
-            this.btnDelM.Size = new System.Drawing.Size(91, 23);
+            this.btnDelM.Size = new System.Drawing.Size(75, 32);
             this.btnDelM.TabIndex = 1;
             this.btnDelM.Text = "Delete";
             this.btnDelM.UseVisualStyleBackColor = true;
@@ -858,6 +836,19 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
+            // 
+            // Inx
+            // 
+            this.Inx.HeaderText = "Macro";
+            this.Inx.Name = "Inx";
+            this.Inx.ReadOnly = true;
+            this.Inx.Width = 48;
+            // 
+            // MacName
+            // 
+            this.MacName.HeaderText = "Name";
+            this.MacName.Name = "MacName";
+            this.MacName.Width = 312;
             // 
             // main
             // 
@@ -912,8 +903,6 @@
         private System.Windows.Forms.Button btnCopyFrom;
         private System.Windows.Forms.Button btnCopyTo;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.ToolStripMenuItem testSignatureToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbLaunchPage;
         private System.Windows.Forms.Button btnToNotepad;
@@ -962,13 +951,14 @@
         private System.Windows.Forms.ToolStripMenuItem managingImagesHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mShowErr;
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
-        private System.Windows.Forms.Button btnUpdErr;
         private System.Windows.Forms.Label lbRCcopy;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ToolStripMenuItem mShowDiff;
         private System.Windows.Forms.Button btnCancelEdits;
         private System.Windows.Forms.Button btnLinkAll;
         private System.Windows.Forms.Button btnNextTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
     }
 }
 

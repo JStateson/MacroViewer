@@ -26,6 +26,7 @@ namespace MacroViewer
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         public static string WhereExe = "";
+        public static string UnNamedMacro = "Change Me";
         public static string[] LocalMacroPrefix = {"PC","PRN", "HP"};
         public static void ShowParseLocationErrors(string strText)
         {
@@ -49,7 +50,7 @@ namespace MacroViewer
         {
             string strRtn = "";
             HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(strIn);
+            htmlDoc.LoadHtml(strIn + " ");  // seems needed to catch trailing open tag
             foreach(var strErr in htmlDoc.ParseErrors)
             {
                 string strLine = " line:" + strErr.Line.ToString() + ", char:" + strErr.LinePosition.ToString();

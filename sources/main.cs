@@ -16,7 +16,8 @@ namespace MacroViewer
 {
     public partial class main : Form
     {
-        private const int NumMacros = 30;
+        private const int NumMacros = 50;   // only 30 for the HTML file
+        private int NumInBody = 0;  // probably should have used a List<string> instead of [NumMacros]
         bool bHaveHTMLasLOCAL = false;      // if true then we just read in html 
         private bool bShowingError = false; // if true then highlighting errors between HP and local
         private bool bShowingDiff = false;  // if true then highlighting differences instead
@@ -67,11 +68,12 @@ namespace MacroViewer
         private bool AnyHPdiff()
         {
             bool b = true;
-            for (int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < NumInBody; i++)
             {
                 if (bHaveHTMLasLOCAL)
                 {
                     HP_HTML_NO_DIFF[i] = (Body[i] == Body_HP_HTML[i]);
+                    HPerr[i] |= HP_HTML_NO_DIFF[i]; // jys todo TODO to do clean this up
                     b = b && HP_HTML_NO_DIFF[i];
                 }
             }
@@ -81,7 +83,7 @@ namespace MacroViewer
         {
             bool b = false;
             bool c = false;
-            for(int i = 0; i < NumMacros; i++)
+            for(int i = 0; i < NumInBody; i++)
             {
                 OriginalColor[i] = 0;
                 bHPcorrected[i] = false;
@@ -113,7 +115,7 @@ namespace MacroViewer
 
         private void BackupHP_HTML()
         {
-            for(int i = 0; i<NumMacros; i++)
+            for(int i = 0; i< NumInBody; i++)
             {
                 Body_HP_HTML[i] = Body[i];
             }
@@ -149,7 +151,7 @@ namespace MacroViewer
 
         private void HighlightDIF()
         {
-            for (int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < NumInBody; i++)
             {
                 if (HP_HTML_NO_DIFF[i])
                     SetDefaultCellColor(i);
@@ -159,7 +161,7 @@ namespace MacroViewer
 
         private void RestoreColors()
         {
-            for (int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < NumInBody; i++)
             {
                 switch(OriginalColor[i])
                 {
@@ -239,12 +241,12 @@ namespace MacroViewer
             string strEnd = "<span class=\"html-tag\">";
             int j, k, n;
             bMacroErrors = false;
-            for (int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < 30; i++)
             {
                 strFind = "<span class=\"html-attribute-value\">profilemacro_" + (i + 1).ToString() + "</span>\"&gt;</span>";
                 j = aPage.Substring(MacBody[i]).IndexOf(strFind);
                 if (j < 0) return false;
-                if (MacBody[i] == 0) continue;  // empty body
+                if (MacBody[i] == 0) continue;  // empty body is ok 
                 n = MacBody[i] + j + strFind.Length;
                 k = aPage.Substring(n).IndexOf(strEnd);
                 if (k < 0) return false;
@@ -279,7 +281,7 @@ namespace MacroViewer
             string strFind = "<span class=\"html-attribute-name\">value</span>=\"<span class=\"html-attribute-value\">";
             lbName.Rows.Clear();
             tbNumMac.Text = "0";
-            for (int i = 0; i < NumMacros; i++)
+            for (int i = 0; i < 30; i++)
             {
                 j = aPage.Substring(StartMac[i]).IndexOf(strFind);
                 if (j < 0) return false;
@@ -309,7 +311,8 @@ namespace MacroViewer
         private bool FindMacros()
         {
             int j, k;
-            for (int i = 0; i < NumMacros; i++)
+            NumInBody = 0;
+            for (int i = 0; i < 30; i++)
             {
                 string strFind = "Macro " + (i + 1).ToString();
                 j = aPage.IndexOf(strFind);
@@ -320,6 +323,7 @@ namespace MacroViewer
                 if (k < 0) return false;
                 StopMac[i] = k + j;
             }
+            NumInBody = 30;
             return true;
         }
 
@@ -401,7 +405,6 @@ namespace MacroViewer
             if (lbNotM.Visible) SwitchToMarkup(false);
             if (cbLaunchPage.Checked)
                 RunBrowser();
-            AllowSaveRestore(CurrentRowSelected);
         }
 
         private void ShowSelectedRow(int e)
@@ -524,6 +527,7 @@ namespace MacroViewer
             AccessDiffBoth(false);
             mShowDiff.Visible = false;
             mShowErr.Visible = false;
+            lbRCcopy.Visible = false;
             if (ReadMacroHTML())
             {
                 EnableMacEdits(false);
@@ -532,19 +536,8 @@ namespace MacroViewer
                 strType = "";
                 bHaveHTML = true;
                 ShowUneditedRow(0);
+                btnNew.Enabled = false;
             }
-        }
-
-        private void AllowSaveRestore (int r)
-        {
-            btnUpdErr.Enabled = false;
-            if (bMacroErrors || bHaveBothDIFF)
-            {
-                if (MacroErrors[r] == null) return;
-                if (MacroErrors[r] == "" && (HP_HTML_NO_DIFF[r] || !bShowingDiff)) return;
-                btnUpdErr.Enabled = true;
-            }
-
         }
 
         private void LoadFromTXT(string strFN)
@@ -558,6 +551,7 @@ namespace MacroViewer
             string TXTmacName = Utils.WhereExe + "\\" + strFN + ".txt";
             this.Text = " HP Macro Editor: " + TXTmacName;
             lbName.Rows.Clear();
+            NumInBody = 0;
             if (File.Exists(TXTmacName))
             {
                 StreamReader sr = new StreamReader(TXTmacName);
@@ -582,12 +576,14 @@ namespace MacroViewer
                     mShowErr.Visible = bMacroErrors;
                     i++;
                     line = sr.ReadLine();
+                    NumInBody++;
                 }
                 lbName.RowEnter += lbName_RowEnter;
                 sr.Close();
             }
             tbNumMac.Text = i.ToString();
-            btnNew.Enabled = lbName.RowCount < 30;
+            btnNew.Enabled = lbName.RowCount < NumMacros;
+            if (strFN == "HPmacros") btnNew.Enabled = false;
         }
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -615,7 +611,7 @@ namespace MacroViewer
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!bHaveHTML) return;
-            DialogResult Res1 = MessageBox.Show("This will overwrite HPmacros",
+                DialogResult Res1 = MessageBox.Show("This will overwrite HPmacros",
                     "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 == DialogResult.Yes)
             {
@@ -655,16 +651,36 @@ namespace MacroViewer
         {
             string strName = tbMacName.Text;
             int i = CurrentRowSelected + 1;
-            DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
-"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (Res1 != DialogResult.Yes)
+            if(strType != "HP")
             {
-                return;
+                DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
+"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (Res1 != DialogResult.Yes)
+                {
+                    return;
+                }
+                CurrentRowSelected = RemoveMacro();
             }
-            CurrentRowSelected = RemoveMacro();
+            else
+            {
+                DialogResult Res1 = MessageBox.Show("You are removing contents of the macro named " + strName,
+"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (Res1 != DialogResult.Yes)
+                {
+                    return;
+                }
+                Body[CurrentRowSelected] = "";
+                tbBody.Text = "";
+            }
+
+            ReSaveAsTXT(TXTName);
+            ShowUneditedRow(CurrentRowSelected);
+        }
+
+        private void ReSaveAsTXT(string TXTName)
+        {
             SaveAsTXT(TXTName);
             LoadFromTXT(TXTName);
-            ShowUneditedRow(CurrentRowSelected);
         }
 
         private void SaveCurrentMacros()
@@ -674,12 +690,10 @@ namespace MacroViewer
             string strOld = "";
             if (lbName.RowCount == 0)
             {
-                // must have wanted to add a row
-                //btnAddM_Click(null, (System.EventArgs) e);
-                return; // sorry
+                return; // must have wanted to add a row: sorry
             }
             strOld = lbName.Rows[CurrentRowSelected].Cells[1].Value.ToString();
-            if (strName != strOld)
+            if (strName != strOld && (Utils.UnNamedMacro != strOld))
             {
                 DialogResult Res1 = MessageBox.Show("This will overwrite " + strOld + " with " + strName,
         "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -690,7 +704,16 @@ namespace MacroViewer
             }
             lbName.Rows[CurrentRowSelected].Cells[1].Value = strName;
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
-            SaveAsTXT(TXTName);
+            if (TXTName == "HPmacros")
+            {
+                SaveAsTXT(TXTName);
+                ReloadHP(CurrentRowSelected);
+            }
+            else
+            {
+                ReSaveAsTXT(TXTName);
+            }
+            ShowUneditedRow(CurrentRowSelected);
         }
 
         private void btnSaveM_Click(object sender, EventArgs e)
@@ -709,9 +732,9 @@ namespace MacroViewer
         private bool AddNew(string strNewName, string strBody)
         {
             bool bChanged = false;
-            if (lbName.Rows.Count == 30)
+            if (lbName.Rows.Count == NumMacros)
             {
-                MessageBox.Show("Can only hold 30 macros");
+                MessageBox.Show("Can only hold " + NumMacros.ToString() + " macros");
                 return false;
             }
             if (strNewName == "")
@@ -723,7 +746,7 @@ namespace MacroViewer
             {
                 if (lbName.Rows[i].Cells[1].Value.ToString() == strNewName)
                 {
-                    MessageBox.Show("Macro name must be unique: " + (i + 1).ToString());
+                    MessageBox.Show("Macro " + (i + 1).ToString() + " name must be unique!");
                     return false;
                 }
             }
@@ -733,7 +756,7 @@ namespace MacroViewer
             lbName.Rows.Add(CurrentRowSelected+1, strNewName);
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, strBody);
             tbBody.Text = strBody;
-            SaveAsTXT(TXTName);
+            ReSaveAsTXT(TXTName);
             HaveSelected(true);
             lbName.Rows[CurrentRowSelected].Selected = true;
             tbMacName.Text = strNewName;
@@ -896,7 +919,7 @@ namespace MacroViewer
         private void btnNew_Click(object sender, EventArgs e)
         {
             SwitchToMarkup(true);
-            AddNew("Need Name","");
+            AddNew(Utils.UnNamedMacro,"");
         }
 
 
@@ -914,7 +937,7 @@ namespace MacroViewer
 
         private bool bPageSaved()
         {
-            if (CurrentRowSelected < 0) return true; // nothing to save 
+            if (CurrentRowSelected < 0 || strType == "") return true; // nothing to save 
             bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
             if (bEdited)
             {
@@ -1004,20 +1027,6 @@ namespace MacroViewer
             ShowHelp("XMLERRORS");
         }
 
-        private void btnUpdErr_Click(object sender, EventArgs e)
-        {
-            int r = CurrentRowSelected;
-            SaveCurrentMacros();
-            if(bHaveBothHPerr)
-            {
-                ReloadHP(r);
-            }
-            else
-            {
-                LoadFromTXT(TXTName);
-            }
-            ShowSelectedRow(r);
-        }
 
         private void lbName_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -1166,9 +1175,10 @@ namespace MacroViewer
             {
                 if(!bPageSaved())
                 {
-                    return;
+                    return; // user failed to save edits
                 }
             }
+            lbRCcopy.Visible = false;
             switch (sPrefix)
             {
                 case "PC":

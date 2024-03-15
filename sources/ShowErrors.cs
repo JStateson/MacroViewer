@@ -16,10 +16,10 @@ namespace MacroViewer
 {
     public partial class ShowErrors : Form
     {
-        private string[] sErrors;   // length 30
-        private int[] iErrors;      // where in sError the non-blank error message and length 30
-        private int[] BodyFromRow;  // could be as small as 1 or as large as 30 but holds 30
-        private string[] AllBody;   // length 30
+        private string[] sErrors;   // length 50
+        private int[] iErrors;      // where in sError the non-blank error message and length 50
+        private int[] BodyFromRow;  // could be as small as 1 or as large as 50 but holds 50
+        private string[] AllBody;   // length 50
         private string sLoc = "";
 
         //i is the row selected

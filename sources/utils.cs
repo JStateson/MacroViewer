@@ -16,9 +16,9 @@ namespace MacroViewer
 
         private void MakeResult()
         {
-            string strUrl = tbURL.Text;
+            string strUrl = Utils.dRef(tbURL.Text);
             string strTmp = tbTEXT.Text;
-            if (strTmp == "") strTmp = tbURL.Text;
+            if (strTmp == "") strTmp = strUrl;
             tbResult.Text = "<a href=\"" + strUrl + "\" target=\"_blank\">" + strTmp + "</a>";
         }
 

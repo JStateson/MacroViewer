@@ -51,7 +51,7 @@ namespace MacroViewer
             {
                 strOut = strTmp + " ";
             }
-            strOut += Utils.FormUrl(tbRawUrl.Text.Trim(), tbSelectedItem.Text.Trim());
+            strOut += Utils.FormUrl(Utils.dRef(tbRawUrl.Text), tbSelectedItem.Text.Trim());
             strTmp = tbSuffix.Text.Trim();
             if(strTmp !="")
             {

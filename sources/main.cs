@@ -1085,58 +1085,6 @@ namespace MacroViewer
         }
 
 
-        private class CMarkup
-        {
-            public class cFiller
-            {
-                public string sFiller;
-                public string OldUrl;
-                public string NewUrl;
-            }
-            public List<cFiller> cFillerList;
-            private void cReplace(int n, ref string sBody, int iLoc, int iLen)
-            {
-                cFiller cf = new cFiller();
-                cf.OldUrl = sBody.Substring(iLoc, iLen);
-                cf.sFiller = Utils.strFill(n, iLen);
-                sBody = sBody.Replace(cf.OldUrl, cf.sFiller);
-                cf.NewUrl = Utils.FormUrl(cf.OldUrl, "");
-                cFillerList.Add(cf);
-            }
-            
-            public void Init()
-            {
-                cFillerList = new List<cFiller>();  
-            }
-
-            private int LengthURL(ref string sBody, int iStart)
-            {
-                int n = -1;
-                string s = sBody.Substring(iStart);
-                foreach(char c in s)
-                {
-                    n++;
-                    if(c == ' ') return n;
-                    if(c == '\n') return n;
-                    if(c == '\r') return n;
-                    if(c == '\t') return n;
-                }
-                return s.Length;
-            }
-
-            public bool FindUrl(int nLooked, ref string s)
-            {
-
-                int iHTTP = 0, iLen = 0;
-                string sTMP = s.ToLower();
-                iHTTP = sTMP.IndexOf("http");
-                if (iHTTP < 0) return false;
-                iLen = LengthURL(ref s, iHTTP);
-                string strFound = s.Substring(iHTTP, iLen);
-                cReplace(nLooked, ref s, iHTTP, iLen);
-                return true;
-            }
-        }
 
         private void btnLinkAll_Click(object sender, EventArgs e)
         {
@@ -1145,21 +1093,7 @@ namespace MacroViewer
             if (bHasHyper) return; // probably need to explain why
             SwitchToMarkup(false);
             sBody = tbBody.Text;
-            int n = 0;
-            CMarkup MyMarkup = new CMarkup();
-            MyMarkup.Init();
-            while(true)
-            {
-                bHasHyper = MyMarkup.FindUrl(n, ref sBody);
-                if (!bHasHyper) break;
-                n++;
-            }
-            while(n > 0)
-            {
-                n--;
-                CMarkup.cFiller cf = MyMarkup.cFillerList[n];
-                sBody = sBody.Replace(cf.sFiller,cf.NewUrl);
-            }
+            Utils.ReplaceUrls(ref sBody, true);
             tbBody.Text = sBody;
         }
 
@@ -1226,6 +1160,13 @@ namespace MacroViewer
         {
             ShowErrors MySE = new ShowErrors(ref MacroNames, ref MacroErrors, ref Body);
             MySE.Show();
+        }
+
+        private void btnCleanUrl_Click(object sender, EventArgs e)
+        {
+            string sDirty = Clipboard.GetText();
+            Utils.ReplaceUrls(ref sDirty,false);
+            Clipboard.SetText(sDirty);
         }
     }
 }

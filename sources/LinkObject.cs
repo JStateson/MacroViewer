@@ -84,7 +84,7 @@ namespace MacroViewer
             else
             {
                 string strTmp = tbUrlText.Text;
-                string strUrl = tbSelectedItem.Text;
+                string strUrl = Utils.dRef(tbSelectedItem.Text);
                 if (strTmp == "") strTmp = strUrl;
                 tbImageUrl.Text = "<a href=\"" + strUrl + "\" target=\"_blank\">" + strTmp + "</a>";
             }
@@ -154,7 +154,7 @@ namespace MacroViewer
             string strUnBoxed = tbImageUrl.Text.Trim();
             if (strUnBoxed =="")
             {
-                strUnBoxed= tbSelectedItem.Text.Trim();
+                strUnBoxed = Utils.dRef(tbSelectedItem.Text);
             }
             if (strUnBoxed == "") return;
             strBoxed = Utils.Form1CellTable(strUnBoxed);

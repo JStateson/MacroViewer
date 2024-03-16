@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
+            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnGo = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
@@ -98,8 +100,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCleanUrl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -141,6 +142,20 @@
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
+            // 
+            // Inx
+            // 
+            this.Inx.HeaderText = "Macro";
+            this.Inx.Name = "Inx";
+            this.Inx.ReadOnly = true;
+            this.Inx.Width = 48;
+            // 
+            // MacName
+            // 
+            this.MacName.HeaderText = "Name";
+            this.MacName.Name = "MacName";
+            this.MacName.ReadOnly = true;
+            this.MacName.Width = 312;
             // 
             // btnGo
             // 
@@ -487,6 +502,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnCleanUrl);
             this.gpMainEdit.Controls.Add(this.btnCancelEdits);
             this.gpMainEdit.Controls.Add(this.btnTest);
             this.gpMainEdit.Controls.Add(this.btnNew);
@@ -837,18 +853,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // Inx
+            // btnCleanUrl
             // 
-            this.Inx.HeaderText = "Macro";
-            this.Inx.Name = "Inx";
-            this.Inx.ReadOnly = true;
-            this.Inx.Width = 48;
-            // 
-            // MacName
-            // 
-            this.MacName.HeaderText = "Name";
-            this.MacName.Name = "MacName";
-            this.MacName.Width = 312;
+            this.btnCleanUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleanUrl.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCleanUrl.Location = new System.Drawing.Point(280, 321);
+            this.btnCleanUrl.Name = "btnCleanUrl";
+            this.btnCleanUrl.Size = new System.Drawing.Size(194, 32);
+            this.btnCleanUrl.TabIndex = 22;
+            this.btnCleanUrl.Text = "Clean Clipboard URLs";
+            this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any\r\nURL in the clipboard.  Use\r\nbefore pasting or anytime.");
+            this.btnCleanUrl.UseVisualStyleBackColor = true;
+            this.btnCleanUrl.Click += new System.EventHandler(this.btnCleanUrl_Click);
             // 
             // main
             // 
@@ -959,6 +975,7 @@
         private System.Windows.Forms.Button btnNextTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
+        private System.Windows.Forms.Button btnCleanUrl;
     }
 }
 

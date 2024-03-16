@@ -55,11 +55,11 @@
             // 
             // btnCvt
             // 
-            this.btnCvt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCvt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCvt.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnCvt.Location = new System.Drawing.Point(137, 125);
             this.btnCvt.Name = "btnCvt";
-            this.btnCvt.Size = new System.Drawing.Size(127, 23);
+            this.btnCvt.Size = new System.Drawing.Size(127, 32);
             this.btnCvt.TabIndex = 1;
             this.btnCvt.Text = "GO - create result";
             this.btnCvt.UseVisualStyleBackColor = true;

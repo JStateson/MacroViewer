@@ -70,6 +70,7 @@
             // 
             // pbImage
             // 
+            this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImage.Image = ((System.Drawing.Image)(resources.GetObject("pbImage.Image")));
             this.pbImage.Location = new System.Drawing.Point(423, 12);
             this.pbImage.Name = "pbImage";
@@ -127,11 +128,11 @@
             // 
             this.btnPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPaste.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPaste.Location = new System.Drawing.Point(204, 258);
+            this.btnPaste.Location = new System.Drawing.Point(154, 261);
             this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(195, 36);
+            this.btnPaste.Size = new System.Drawing.Size(227, 36);
             this.btnPaste.TabIndex = 5;
-            this.btnPaste.Text = "Paste From Clipboard";
+            this.btnPaste.Text = "Paste Image From Clipboard";
             this.btnPaste.UseVisualStyleBackColor = true;
             this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
             // 

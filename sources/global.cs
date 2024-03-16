@@ -35,6 +35,8 @@ namespace MacroViewer
             Utils.NotepadViewer(strLoc);
         }
 
+
+
         public static string RemoveNL(string text)
         {
             string strRtn = text.Replace(Environment.NewLine, "<br>");
@@ -233,6 +235,121 @@ namespace MacroViewer
             }
             htmlBuilder.Append("</table>");
             return htmlBuilder.ToString();
+        }
+        /*
+         * https://www.google.com/search?q=hp+928511-001&sca_e  https://www.bing.com/search?q=sn570&qs=n
+         * https://www.amazon.com/s?k=sn570&crid=3U  https://www.aliexpress.us/w/wholesale-sn570.html?spm=a2g0o.home.search.0
+         * https://www.google.com/search?client=firefox-b-1-d&q=hp+50334-601
+         * https://www.amazon.com/Ediloca-Internal-Compatible-Ultrabooks-Computers/dp/B0B7QYZF9X/ref=sr_1
+         * 
+         */
+        private static string dStr(string strIn, string strRef)
+        {
+            int i = strIn.IndexOf(strRef);
+            return (i < 0) ? strIn.Trim() : strIn.Substring(i);
+        }
+        public static string dRef(string sUrl)
+        {
+            int i,j;
+            sUrl = dStr(sUrl,"/ref");
+            if (sUrl.Contains("youtube"))return sUrl;
+            string surl = sUrl.ToLower();
+            i = sUrl.IndexOf("search?");
+            if(i > 0)
+            {
+                j = sUrl.IndexOf("q=", i + 7);
+                if (j < 0) return sUrl;
+                i = sUrl.IndexOf('&', j);
+                if(i < 0) return sUrl;
+                return sUrl.Substring(i, i);
+            }
+            if(surl.Contains("amazon"))
+            {
+                i = sUrl.IndexOf('&');
+                return (i < 0) ? sUrl: sUrl.Substring(0, i);
+            }
+            if(surl.Contains("aliexpress"))
+            {
+                i = sUrl.IndexOf('?');
+                return (i < 0) ? sUrl : sUrl.Substring(0, i);
+            }
+            return sUrl;
+        }
+
+        public static void ReplaceUrls(ref string sBody, bool MakeHyper)
+        {
+            int n = 0;
+            bool b;
+            CMarkup MyMarkup = new CMarkup();
+            MyMarkup.Init(MakeHyper);
+            while (true)
+            {
+                b = MyMarkup.FindUrl(n, ref sBody);
+                if (!b) break;
+                n++;
+            }
+            while (n > 0)
+            {
+                n--;
+                CMarkup.cFiller cf = MyMarkup.cFillerList[n];
+                sBody = sBody.Replace(cf.sFiller, cf.NewUrl);
+            }
+        }
+    }
+
+    public class CMarkup
+    {
+        private bool MakeHyper;
+        public class cFiller
+        {
+            public string sFiller;
+            public string OldUrl;
+            public string NewUrl;
+        }
+        public List<cFiller> cFillerList;
+        private void cReplace(int n, ref string sBody, int iLoc, int iLen)
+        {
+            cFiller cf = new cFiller();
+            cf.OldUrl = sBody.Substring(iLoc, iLen);
+            cf.sFiller = Utils.strFill(n, iLen);
+            sBody = sBody.Replace(cf.OldUrl, cf.sFiller);
+            string strClean = Utils.dRef(cf.OldUrl);
+            cf.NewUrl = MakeHyper ? Utils.FormUrl(strClean, "") : strClean;
+            cFillerList.Add(cf);
+        }
+
+        public void Init(bool bMakeHyper)
+        {
+            cFillerList = new List<cFiller>();
+            MakeHyper = bMakeHyper;
+        }
+
+        private int LengthURL(ref string sBody, int iStart)
+        {
+            int n = -1;
+            string s = sBody.Substring(iStart);
+            foreach (char c in s)
+            {
+                n++;
+                if (c == ' ') return n;
+                if (c == '\n') return n;
+                if (c == '\r') return n;
+                if (c == '\t') return n;
+            }
+            return s.Length;
+        }
+
+        public bool FindUrl(int nLooked, ref string s)
+        {
+
+            int iHTTP = 0, iLen = 0;
+            string sTMP = s.ToLower();
+            iHTTP = sTMP.IndexOf("http");
+            if (iHTTP < 0) return false;
+            iLen = LengthURL(ref s, iHTTP);
+            string strFound = s.Substring(iHTTP, iLen);
+            cReplace(nLooked, ref s, iHTTP, iLen);
+            return true;
         }
     }
 

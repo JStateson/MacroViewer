@@ -196,7 +196,10 @@ Click the red ERROR menu item to bring up a list of macros that have errors.  Th
 You do not edit using notepad.  Editing of the defective macro is done in the main menu and once edited you can click on "Save and Reload".  There can be more than one error but only one at a time is shown in the error dialog box.
 
 	Using the differences menu item
-Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.</value>
+Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.
+
+	Pasting and working with URLs
+An attempt was made to remove tracking information from URLs.  The button "Clean Clipboard URLs" strips tracking from any URLs you have copied to the clipboard.   Any URLs pasted into URL fields are stripped before usage.</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

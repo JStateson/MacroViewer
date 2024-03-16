@@ -16,5 +16,5 @@ The tar also has a sample macro html, two supplemental macro txt's and sample si
 
 You may copy any of the sample macros into your own macros.
 
-Images that are not URLs must be uploaded to your HP photo album
+Images that are not URLs must be uploaded to your HP photo album and urls are cleaned of tracking
 

@@ -47,6 +47,7 @@
             this.btnCancelEdits = new System.Windows.Forms.Button();
             this.btnLinkAll = new System.Windows.Forms.Button();
             this.btnNextTable = new System.Windows.Forms.Button();
+            this.btnCleanUrl = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +101,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnCleanUrl = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -172,22 +173,22 @@
             // 
             // btnAdd1New
             // 
-            this.btnAdd1New.Location = new System.Drawing.Point(70, 133);
+            this.btnAdd1New.Location = new System.Drawing.Point(431, 106);
             this.btnAdd1New.Name = "btnAdd1New";
-            this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
+            this.btnAdd1New.Size = new System.Drawing.Size(70, 23);
             this.btnAdd1New.TabIndex = 16;
-            this.btnAdd1New.Text = "Add newline";
+            this.btnAdd1New.Text = "Add 1";
             this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br />");
             this.btnAdd1New.UseVisualStyleBackColor = true;
             this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
             // 
             // btnAdd2New
             // 
-            this.btnAdd2New.Location = new System.Drawing.Point(53, 174);
+            this.btnAdd2New.Location = new System.Drawing.Point(431, 144);
             this.btnAdd2New.Name = "btnAdd2New";
-            this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
+            this.btnAdd2New.Size = new System.Drawing.Size(70, 23);
             this.btnAdd2New.TabIndex = 18;
-            this.btnAdd2New.Text = "Add 2 newlines";
+            this.btnAdd2New.Text = "Add 2";
             this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br />");
             this.btnAdd2New.UseVisualStyleBackColor = true;
             this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
@@ -303,10 +304,23 @@
             this.btnNextTable.UseVisualStyleBackColor = true;
             this.btnNextTable.Click += new System.EventHandler(this.btnNextTable_Click);
             // 
+            // btnCleanUrl
+            // 
+            this.btnCleanUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleanUrl.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCleanUrl.Location = new System.Drawing.Point(280, 321);
+            this.btnCleanUrl.Name = "btnCleanUrl";
+            this.btnCleanUrl.Size = new System.Drawing.Size(194, 32);
+            this.btnCleanUrl.TabIndex = 22;
+            this.btnCleanUrl.Text = "Clean Clipboard URLs";
+            this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any\r\nURL in the clipboard.  Use\r\nbefore pasting or anytime.");
+            this.btnCleanUrl.UseVisualStyleBackColor = true;
+            this.btnCleanUrl.Click += new System.EventHandler(this.btnCleanUrl_Click);
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBody.Location = new System.Drawing.Point(18, 45);
+            this.tbBody.Location = new System.Drawing.Point(12, 44);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -326,7 +340,7 @@
             this.mShowDiff});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1387, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1467, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -516,7 +530,7 @@
             this.gpMainEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpMainEdit.Location = new System.Drawing.Point(434, 43);
             this.gpMainEdit.Name = "gpMainEdit";
-            this.gpMainEdit.Size = new System.Drawing.Size(927, 763);
+            this.gpMainEdit.Size = new System.Drawing.Size(1021, 763);
             this.gpMainEdit.TabIndex = 8;
             this.gpMainEdit.TabStop = false;
             this.gpMainEdit.Text = "Edit Macro";
@@ -548,15 +562,18 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.btnAdd2New);
             this.groupBox6.Controls.Add(this.btnLinkAll);
             this.groupBox6.Controls.Add(this.gbManageImages);
+            this.groupBox6.Controls.Add(this.btnAdd1New);
             this.groupBox6.Controls.Add(this.btnSetObj);
             this.groupBox6.Controls.Add(this.label1);
             this.groupBox6.Controls.Add(this.tbBody);
             this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.Location = new System.Drawing.Point(484, 21);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(437, 709);
+            this.groupBox6.Size = new System.Drawing.Size(531, 709);
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
@@ -631,17 +648,15 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.lbNotM);
-            this.groupBox5.Controls.Add(this.btnAdd2New);
             this.groupBox5.Controls.Add(this.lbM);
             this.groupBox5.Controls.Add(this.btnNoMark);
-            this.groupBox5.Controls.Add(this.btnAdd1New);
             this.groupBox5.Controls.Add(this.btnToMark);
             this.groupBox5.Controls.Add(this.btnToNotepad);
             this.groupBox5.Controls.Add(this.btnCopyTo);
             this.groupBox5.Controls.Add(this.btnCopyFrom);
-            this.groupBox5.Location = new System.Drawing.Point(24, 377);
+            this.groupBox5.Location = new System.Drawing.Point(24, 390);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(425, 219);
+            this.groupBox5.Size = new System.Drawing.Size(425, 183);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Markup Editing (enable for images)";
@@ -722,7 +737,7 @@
             this.groupBox4.Controls.Add(this.btnAddURL);
             this.groupBox4.Controls.Add(this.tbImgUrl);
             this.groupBox4.Controls.Add(this.btnAddImg);
-            this.groupBox4.Location = new System.Drawing.Point(24, 614);
+            this.groupBox4.Location = new System.Drawing.Point(24, 606);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(419, 119);
             this.groupBox4.TabIndex = 15;
@@ -751,7 +766,7 @@
             // 
             // tbImgUrl
             // 
-            this.tbImgUrl.Location = new System.Drawing.Point(6, 78);
+            this.tbImgUrl.Location = new System.Drawing.Point(18, 72);
             this.tbImgUrl.Name = "tbImgUrl";
             this.tbImgUrl.Size = new System.Drawing.Size(378, 22);
             this.tbImgUrl.TabIndex = 15;
@@ -774,7 +789,7 @@
             this.gbSupp.Controls.Add(this.tbMacName);
             this.gbSupp.Controls.Add(this.btnSaveM);
             this.gbSupp.Controls.Add(this.btnDelM);
-            this.gbSupp.Location = new System.Drawing.Point(24, 50);
+            this.gbSupp.Location = new System.Drawing.Point(30, 38);
             this.gbSupp.Name = "gbSupp";
             this.gbSupp.Size = new System.Drawing.Size(283, 251);
             this.gbSupp.TabIndex = 13;
@@ -853,24 +868,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // btnCleanUrl
+            // label5
             // 
-            this.btnCleanUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleanUrl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCleanUrl.Location = new System.Drawing.Point(280, 321);
-            this.btnCleanUrl.Name = "btnCleanUrl";
-            this.btnCleanUrl.Size = new System.Drawing.Size(194, 32);
-            this.btnCleanUrl.TabIndex = 22;
-            this.btnCleanUrl.Text = "Clean Clipboard URLs";
-            this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any\r\nURL in the clipboard.  Use\r\nbefore pasting or anytime.");
-            this.btnCleanUrl.UseVisualStyleBackColor = true;
-            this.btnCleanUrl.Click += new System.EventHandler(this.btnCleanUrl_Click);
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Location = new System.Drawing.Point(428, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "New Lines";
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1387, 820);
+            this.ClientSize = new System.Drawing.Size(1467, 820);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gpMainEdit);
             this.Controls.Add(this.panel2);
@@ -976,6 +988,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Button btnCleanUrl;
+        private System.Windows.Forms.Label label5;
     }
 }
 

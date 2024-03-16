@@ -787,8 +787,7 @@ namespace MacroViewer
         private void btnAddImg_Click(object sender, EventArgs e)
         {
             //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
-            string strTmp = tbImgUrl.Text.Trim().Replace("\"", "");
-            string strImgUrl = "<img src=\"" + strTmp + "\" border=\"2\">";
+            string strImgUrl = Utils.AssembleIMG(tbImgUrl.Text);
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
 

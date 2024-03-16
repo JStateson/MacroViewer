@@ -257,6 +257,7 @@
   <ItemGroup>
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />
+    <Content Include="Resources\HowToPasteImage.png" />
     <Content Include="Resources\hp128.bmp" />
     <Content Include="Resources\MEhelp1.png" />
     <None Include="Resources\UploadAlbum.bmp" />

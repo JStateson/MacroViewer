@@ -61,13 +61,17 @@ namespace MacroViewer
 
         public string AssembleImage(string strUrl, int Height, int Width)
         {
+            if(strUrl.Contains("image-size"))
+            {
+                return Utils.AssembleIMG(strUrl);   
+            }
             return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + " width=\"" + Width.ToString() + "\">";
         }
 
         private void AddImage()
         {
             string strImageName = "", strImagePath="";
-            int Width = 200, Height = 200;  //default
+            int Width = 200, Height = 200;  //default unless image-size is present
             if (bIsPath) // do not know H or W so default is used
             {
                 strImageName =  Utils.GetNextImageFile(strType, ExeFolder);
@@ -108,7 +112,7 @@ namespace MacroViewer
             }
             else
             {
-                MessageBox.Show("Clipboard is empty. Please Copy Image.");
+                MessageBox.Show("Empty clipboard: Please copy image using windows key + 'S'\r\nOr any screen capture tool such as snagit");
             }
             
         }

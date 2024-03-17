@@ -261,7 +261,7 @@ namespace MacroViewer
                 if (j < 0) return sUrl;
                 i = sUrl.IndexOf('&', j);
                 if(i < 0) return sUrl;
-                return sUrl.Substring(i, i);
+                return sUrl.Substring(0, i);
             }
             if(surl.Contains("amazon"))
             {

@@ -22,9 +22,12 @@ namespace MacroViewer
 {
     public static class Utils
     {
-        public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body>";
+        public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        public static int HPforumWidth = 825;   // seems like any response "box" never exceeds 825 pixels
+        //    <div style="width: 825px; background-color: lightblue; padding: 10px;">
+        //<body style="width: 800px; margin: 0 auto;">
         public static string WhereExe = "";
         public static string UnNamedMacro = "Change Me";
         public static string[] LocalMacroPrefix = {"PC","PRN", "HP"};
@@ -382,6 +385,7 @@ namespace MacroViewer
         }
 
         // had to add block as BlinkTimer was not working !?!?!? todo to do todo
+        //<body style="width: 800px; margin: 0 auto;">
         public void ShowInBrowser(string strIn, bool bBlock)
         {
             string strTemp = strPrefix + strIn + strSuffix;

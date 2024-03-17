@@ -61,7 +61,7 @@ namespace MacroViewer
 
         public string AssembleImage(string strUrl, int Height, int Width)
         {
-            if(strUrl.Contains("image-size"))
+            if(strUrl.Contains("image-id"))
             {
                 return Utils.AssembleIMG(strUrl);   
             }

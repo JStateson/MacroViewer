@@ -36,6 +36,7 @@
             this.rEDITLINK = new System.Windows.Forms.RichTextBox();
             this.rMANAGE = new System.Windows.Forms.RichTextBox();
             this.rXMLERR = new System.Windows.Forms.RichTextBox();
+            this.rSEARCH = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // rFILE
@@ -95,18 +96,28 @@
             // 
             // rXMLERR
             // 
-            this.rXMLERR.Location = new System.Drawing.Point(60, 469);
+            this.rXMLERR.Location = new System.Drawing.Point(69, 469);
             this.rXMLERR.Name = "rXMLERR";
             this.rXMLERR.ReadOnly = true;
             this.rXMLERR.Size = new System.Drawing.Size(197, 131);
             this.rXMLERR.TabIndex = 7;
             this.rXMLERR.Text = resources.GetString("rXMLERR.Text");
             // 
+            // rSEARCH
+            // 
+            this.rSEARCH.Location = new System.Drawing.Point(301, 469);
+            this.rSEARCH.Name = "rSEARCH";
+            this.rSEARCH.ReadOnly = true;
+            this.rSEARCH.Size = new System.Drawing.Size(197, 131);
+            this.rSEARCH.TabIndex = 8;
+            this.rSEARCH.Text = resources.GetString("rSEARCH.Text");
+            // 
             // help
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 656);
+            this.Controls.Add(this.rSEARCH);
             this.Controls.Add(this.rXMLERR);
             this.Controls.Add(this.rMANAGE);
             this.Controls.Add(this.rEDITLINK);
@@ -131,5 +142,6 @@
         private System.Windows.Forms.RichTextBox rEDITLINK;
         private System.Windows.Forms.RichTextBox rMANAGE;
         private System.Windows.Forms.RichTextBox rXMLERR;
+        private System.Windows.Forms.RichTextBox rSEARCH;
     }
 }

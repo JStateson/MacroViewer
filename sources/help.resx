@@ -270,4 +270,16 @@ Images and url can be badly formed. For example the following might be missing a
 
 there should be a space before the forward slash</value>
   </data>
+  <data name="rSEARCH.Text" xml:space="preserve">
+    <value>	Search for key words
+
+You can search for one or more words in all the macros.  The search returns
+- The file ID: PC, PRN or HP .
+- The macro number 1..30 for HP and 1..50 for PC and PRN.
+- The name of the macro.
+- The number of occurences.  If 3 keywords the number 1, 2 or 3 will be displayed.
+
+Selecting one of the macros in the view will show which of the keywords were found.
+Double clicking any row will bring up the body of the macro.</value>
+  </data>
 </root>

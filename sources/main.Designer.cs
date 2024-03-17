@@ -70,6 +70,7 @@
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
@@ -102,7 +103,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -416,7 +417,8 @@
             this.helpWithToolStripMenuItem,
             this.EDITLINKHelpToolStripMenuItem,
             this.managingImagesHelpToolStripMenuItem,
-            this.helpWithErrorsToolStripMenuItem});
+            this.helpWithErrorsToolStripMenuItem,
+            this.helpWithSearchToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -497,6 +499,13 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // WordSearch
+            // 
+            this.WordSearch.Name = "WordSearch";
+            this.WordSearch.Size = new System.Drawing.Size(54, 20);
+            this.WordSearch.Text = "Search";
+            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
             // 
             // mShowErr
             // 
@@ -880,12 +889,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // WordSearch
+            // helpWithSearchToolStripMenuItem
             // 
-            this.WordSearch.Name = "WordSearch";
-            this.WordSearch.Size = new System.Drawing.Size(54, 20);
-            this.WordSearch.Text = "Search";
-            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
+            this.helpWithSearchToolStripMenuItem.Name = "helpWithSearchToolStripMenuItem";
+            this.helpWithSearchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithSearchToolStripMenuItem.Text = "Help with search";
+            this.helpWithSearchToolStripMenuItem.Click += new System.EventHandler(this.helpWithSearchToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -999,6 +1008,7 @@
         private System.Windows.Forms.Button btnCleanUrl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem WordSearch;
+        private System.Windows.Forms.ToolStripMenuItem helpWithSearchToolStripMenuItem;
     }
 }
 

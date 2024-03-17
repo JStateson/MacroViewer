@@ -66,6 +66,7 @@ namespace MacroViewer
             string strFilename = Properties.Settings.Default.HTTP_HP;
             this.Text = " HP Macro Editor";
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
+            LoadAllFiles();
         }
 
         private bool AnyHPdiff()
@@ -1027,6 +1028,12 @@ namespace MacroViewer
         {
             ShowHelp("SIG");
         }
+
+        private void helpWithSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("SEARCH");
+        }
+
         private void ShowHelp(string sHelp)
         {
             help MyHelp = new help(sHelp);
@@ -1174,9 +1181,6 @@ namespace MacroViewer
                     ReloadHP(0);
                     break;
 
-                case "":
-                    LoadHTMLfile();
-                    break;
             }
         }
 
@@ -1221,7 +1225,7 @@ namespace MacroViewer
                         cBodies.Add(cb);
                     }
                 }
-                if (btnSaveM.Enabled)
+                if (btnSaveM.Enabled) // this is never true when LoadAllFiles is called from init
                 {
                     SelectFileItem(ostrType);
                 }
@@ -1230,10 +1234,10 @@ namespace MacroViewer
 
         private void WordSearch_Click(object sender, EventArgs e)
         {
-            LoadAllFiles();
             WordSearch ws = new WordSearch(ref cBodies);
             ws.ShowDialog();
             ws.Dispose();
         }
+
     }
 }

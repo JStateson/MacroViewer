@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Linq;
 using System.Windows.Ink;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 
 namespace MacroViewer
@@ -47,6 +48,8 @@ namespace MacroViewer
         private bool bHaveHTML = false; // html macro was read in. this cannot be edited
 
         //CSendCloud SendToCloud = new CSendCloud();
+
+        public List<CBody> cBodies;
 
         public main()
         {
@@ -522,7 +525,7 @@ namespace MacroViewer
             bHaveHTMLasLOCAL = b;
         }
 
-        private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadHTMLfile()
         {
             AccessDiffBoth(false);
             mShowDiff.Visible = false;
@@ -540,7 +543,12 @@ namespace MacroViewer
             }
         }
 
-        private void LoadFromTXT(string strFN)
+        private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadHTMLfile();
+        }
+
+        private int LoadFromTXT(string strFN)
         {
             int i = 0;
             bMacroErrors = false;
@@ -584,6 +592,7 @@ namespace MacroViewer
             tbNumMac.Text = i.ToString();
             btnNew.Enabled = lbName.RowCount < NumMacros;
             if (strFN == "HPmacros") btnNew.Enabled = false;
+            return i;
         }
 
         private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1115,6 +1124,24 @@ namespace MacroViewer
             SelectFileItem("PC");
         }
 
+        private int LoadFileItem(string sPrefix)
+        {
+            int n = 0;
+            switch (sPrefix)
+            {
+                case "PC":
+                    n = LoadFromTXT("PCmacros");
+                    break;
+                case "PRN":
+                    n = LoadFromTXT("PRNmacros");
+                    break;
+                case "HP":
+                    n = LoadFromTXT("HPmacros");
+                    break;
+            }
+            return n;
+        }
+
         private void SelectFileItem(string sPrefix)
         {
             if(strType != sPrefix)
@@ -1134,6 +1161,7 @@ namespace MacroViewer
                     EnableMacEdits(true);
                     ShowUneditedRow(0);
                     break;
+
                 case "PRN":
                     AccessDiffBoth(false);
                     LoadFromTXT("PRNmacros");
@@ -1141,8 +1169,13 @@ namespace MacroViewer
                     EnableMacEdits(true);
                     ShowUneditedRow(0);
                     break;
+
                 case "HP":
                     ReloadHP(0);
+                    break;
+
+                case "":
+                    LoadHTMLfile();
                     break;
             }
         }
@@ -1166,6 +1199,41 @@ namespace MacroViewer
             string sDirty = Clipboard.GetText();
             Utils.ReplaceUrls(ref sDirty,false);
             Clipboard.SetText(sDirty);
+        }
+
+        private void LoadAllFiles()
+        {
+            if (cBodies == null)
+            {
+                string ostrType = strType;
+                cBodies = new List<CBody>();
+                foreach (string s in Utils.LocalMacroPrefix)
+                {
+                    int i, n = LoadFileItem(s);
+                    for (i = 0; i < n; i++)
+                    {
+                        CBody cb = new CBody();
+                        cb.File = s;
+                        cb.Number = (i + 1).ToString();
+                        cb.Name = lbName.Rows[i].Cells[1].Value.ToString();
+                        cb.sBody = Body[i];
+                        cb.fKeys = "";
+                        cBodies.Add(cb);
+                    }
+                }
+                if (btnSaveM.Enabled)
+                {
+                    SelectFileItem(ostrType);
+                }
+            }
+        }
+
+        private void WordSearch_Click(object sender, EventArgs e)
+        {
+            LoadAllFiles();
+            WordSearch ws = new WordSearch(ref cBodies);
+            ws.ShowDialog();
+            ws.Dispose();
         }
     }
 }

@@ -53,8 +53,15 @@ namespace MacroViewer
         public ShowPage(string sLoc, string ShowString)
         {
             InitializeComponent();
-            fHeight = ShowPage.ActiveForm.Height - 2*y;
-            fWidth = ShowPage.ActiveForm.Width - 2*x;
+            /*
+            if(ShowPage.ActiveForm != null) { }
+            {
+                fHeight = ShowPage.ActiveForm.Height - 2 * y;
+                fWidth = ShowPage.ActiveForm.Width - 2 * x;
+            }
+            */
+            fWidth = 825;
+            fHeight = 600;
             File.WriteAllText(sLoc + "/MyHtml.html", ShowString);
             ShowStuff(sLoc, ShowString);
         }

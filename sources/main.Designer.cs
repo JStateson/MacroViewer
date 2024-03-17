@@ -76,6 +76,7 @@
             this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.gbManageImages = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -101,7 +102,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -336,6 +337,7 @@
             this.testSignatureToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
+            this.WordSearch,
             this.mShowErr,
             this.mShowDiff});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -577,6 +579,16 @@
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Location = new System.Drawing.Point(428, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "New Lines";
             // 
             // gbManageImages
             // 
@@ -868,15 +880,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // label5
+            // WordSearch
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Info;
-            this.label5.Location = new System.Drawing.Point(428, 70);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "New Lines";
+            this.WordSearch.Name = "WordSearch";
+            this.WordSearch.Size = new System.Drawing.Size(54, 20);
+            this.WordSearch.Text = "Search";
+            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
             // 
             // main
             // 
@@ -989,6 +998,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Button btnCleanUrl;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem WordSearch;
     }
 }
 

@@ -456,6 +456,24 @@ namespace MacroViewer
         }
     }
 
+    public class CBody
+    {
+        public string File;     //PC, PRN, HP  
+        public string Number;   //macro number 1..30 or more
+        public string Name;     //macro name
+        public string sBody;    //body of marco
+        public string fKeys;    //keywords found separated by a space
+    }
+    public class CFound
+    {
+        public string File { get; set; }
+        public string Number { get; set; }
+        public string Found { get; set; }    //number of keywords found
+        public string Name { get; set; }
+        public int WhereFound;
+    }
+
+
     internal class CSendCloud
     {
 

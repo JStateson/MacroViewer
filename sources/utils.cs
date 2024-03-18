@@ -19,7 +19,7 @@ namespace MacroViewer
             string strUrl = Utils.dRef(tbURL.Text);
             string strTmp = tbTEXT.Text;
             if (strTmp == "") strTmp = strUrl;
-            tbResult.Text = "<a href=\"" + strUrl + "\" target=\"_blank\">" + strTmp + "</a>";
+            tbResult.Text = Utils.FormUrl(strUrl, strTmp);
         }
 
         private void btnCvt_Click(object sender, EventArgs e)

@@ -86,7 +86,7 @@ namespace MacroViewer
                 string strTmp = tbUrlText.Text;
                 string strUrl = Utils.dRef(tbSelectedItem.Text);
                 if (strTmp == "") strTmp = strUrl;
-                tbImageUrl.Text = "<a href=\"" + strUrl + "\" target=\"_blank\">" + strTmp + "</a>";
+                tbImageUrl.Text = Utils.FormUrl(strUrl, strTmp);
             }
         }
 

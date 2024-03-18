@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
+            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MoveM = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnGo = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
@@ -46,6 +49,7 @@
             this.btnLinkAll = new System.Windows.Forms.Button();
             this.btnNextTable = new System.Windows.Forms.Button();
             this.btnCleanUrl = new System.Windows.Forms.Button();
+            this.btnPrev = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,10 +110,6 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnPrev = new System.Windows.Forms.Button();
-            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MoveM = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -151,6 +151,29 @@
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
+            // 
+            // Inx
+            // 
+            this.Inx.HeaderText = "N";
+            this.Inx.Name = "Inx";
+            this.Inx.ReadOnly = true;
+            this.Inx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Inx.Width = 32;
+            // 
+            // MoveM
+            // 
+            this.MoveM.HeaderText = "Move";
+            this.MoveM.Name = "MoveM";
+            this.MoveM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MoveM.Width = 48;
+            // 
+            // MacName
+            // 
+            this.MacName.HeaderText = "Name";
+            this.MacName.Name = "MacName";
+            this.MacName.ReadOnly = true;
+            this.MacName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MacName.Width = 312;
             // 
             // btnGo
             // 
@@ -310,6 +333,19 @@
             this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any\r\nURL in the clipboard.  Use\r\nbefore pasting or anytime.");
             this.btnCleanUrl.UseVisualStyleBackColor = true;
             this.btnCleanUrl.Click += new System.EventHandler(this.btnCleanUrl_Click);
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrev.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPrev.Location = new System.Drawing.Point(235, 38);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(67, 32);
+            this.btnPrev.TabIndex = 20;
+            this.btnPrev.Text = "Prev";
+            this.toolTip1.SetToolTip(this.btnPrev, "Click to slect the next table");
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // tbBody
             // 
@@ -820,7 +856,6 @@
             this.tbImgUrl.Name = "tbImgUrl";
             this.tbImgUrl.Size = new System.Drawing.Size(378, 22);
             this.tbImgUrl.TabIndex = 15;
-            this.tbImgUrl.Text = "enter URL here then click add or paste";
             // 
             // btnAddImg
             // 
@@ -918,42 +953,6 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrev.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnPrev.Location = new System.Drawing.Point(235, 38);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(67, 32);
-            this.btnPrev.TabIndex = 20;
-            this.btnPrev.Text = "Prev";
-            this.toolTip1.SetToolTip(this.btnPrev, "Click to slect the next table");
-            this.btnPrev.UseVisualStyleBackColor = true;
-            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
-            // 
-            // Inx
-            // 
-            this.Inx.HeaderText = "N";
-            this.Inx.Name = "Inx";
-            this.Inx.ReadOnly = true;
-            this.Inx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Inx.Width = 32;
-            // 
-            // MoveM
-            // 
-            this.MoveM.HeaderText = "Move";
-            this.MoveM.Name = "MoveM";
-            this.MoveM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MoveM.Width = 48;
-            // 
-            // MacName
-            // 
-            this.MacName.HeaderText = "Name";
-            this.MacName.Name = "MacName";
-            this.MacName.ReadOnly = true;
-            this.MacName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.MacName.Width = 312;
             // 
             // main
             // 

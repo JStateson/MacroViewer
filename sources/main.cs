@@ -12,6 +12,7 @@ using System.Windows.Ink;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
+using System.Windows.Media.Animation;
 
 
 namespace MacroViewer
@@ -842,7 +843,7 @@ namespace MacroViewer
 
         private void btnAddImg_Click(object sender, EventArgs e)
         {
-            //<img src="https://h30434.www3.hp.com/t5/image/serverpage/image-id/362710iC75893BC32089485" border="2">
+            if (tbImgUrl.Text == "") return;
             string strImgUrl = Utils.AssembleIMG(tbImgUrl.Text);
             tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
         }
@@ -851,7 +852,7 @@ namespace MacroViewer
 
         private void btnAddURL_Click(object sender, EventArgs e)
         {
-            //<a href="h ttps://h30434.www3.hp.com/t5/image/serverpage/image-id/363370i5BE16BA39E85139E/image-size/large/is-moderation-mode/true?v=v2&px=999" target="_blank">
+            if (tbImgUrl.Text == "") return;
             string strOver = "";
             string strUrl = "<a href=\"" + tbImgUrl.Text.Trim() + " target=\"_blank\">";
             int i = tbBody.SelectionStart;

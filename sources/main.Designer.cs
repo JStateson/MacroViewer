@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
-            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnGo = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
@@ -52,11 +50,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFromXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mPCload = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAIOload = new System.Windows.Forms.ToolStripMenuItem();
+            this.mLJload = new System.Windows.Forms.ToolStripMenuItem();
+            this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.savePrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mHPload = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +67,12 @@
             this.EDITLINKHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
             this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +106,10 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPrev = new System.Windows.Forms.Button();
+            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MoveM = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -127,38 +133,24 @@
             // 
             this.lbName.AllowUserToAddRows = false;
             this.lbName.AllowUserToDeleteRows = false;
-            this.lbName.AllowUserToOrderColumns = true;
             this.lbName.AllowUserToResizeColumns = false;
             this.lbName.AllowUserToResizeRows = false;
             this.lbName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Inx,
+            this.MoveM,
             this.MacName});
             this.lbName.Location = new System.Drawing.Point(23, 102);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
-            this.lbName.ReadOnly = true;
             this.lbName.RowHeadersVisible = false;
+            this.lbName.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
-            // 
-            // Inx
-            // 
-            this.Inx.HeaderText = "Macro";
-            this.Inx.Name = "Inx";
-            this.Inx.ReadOnly = true;
-            this.Inx.Width = 48;
-            // 
-            // MacName
-            // 
-            this.MacName.HeaderText = "Name";
-            this.MacName.Name = "MacName";
-            this.MacName.ReadOnly = true;
-            this.MacName.Width = 312;
             // 
             // btnGo
             // 
@@ -297,9 +289,9 @@
             // 
             this.btnNextTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNextTable.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNextTable.Location = new System.Drawing.Point(284, 38);
+            this.btnNextTable.Location = new System.Drawing.Point(308, 38);
             this.btnNextTable.Name = "btnNextTable";
-            this.btnNextTable.Size = new System.Drawing.Size(75, 32);
+            this.btnNextTable.Size = new System.Drawing.Size(67, 32);
             this.btnNextTable.TabIndex = 19;
             this.btnNextTable.Text = "Next";
             this.toolTip1.SetToolTip(this.btnNextTable, "Click to slect the next table");
@@ -338,6 +330,7 @@
             this.testSignatureToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
+            this.mMoveMacro,
             this.WordSearch,
             this.mShowErr,
             this.mShowDiff});
@@ -351,11 +344,14 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readHTMLToolStripMenuItem,
-            this.loadFromXMLToolStripMenuItem,
-            this.loadPrinterMacsToolStripMenuItem,
+            this.mPCload,
+            this.mAIOload,
+            this.mLJload,
+            this.mDJload,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
-            this.savePrinterMacsToolStripMenuItem,
+            this.mHPload,
+            this.toolStripSeparator2,
             this.downloadMacrosToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -368,19 +364,33 @@
             this.readHTMLToolStripMenuItem.Text = "Read HTML file";
             this.readHTMLToolStripMenuItem.Click += new System.EventHandler(this.readHTMLToolStripMenuItem_Click);
             // 
-            // loadFromXMLToolStripMenuItem
+            // mPCload
             // 
-            this.loadFromXMLToolStripMenuItem.Name = "loadFromXMLToolStripMenuItem";
-            this.loadFromXMLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadFromXMLToolStripMenuItem.Text = "Load PC macro";
-            this.loadFromXMLToolStripMenuItem.Click += new System.EventHandler(this.loadFromXMLToolStripMenuItem_Click);
+            this.mPCload.Name = "mPCload";
+            this.mPCload.Size = new System.Drawing.Size(194, 22);
+            this.mPCload.Text = "Load PC macro";
+            this.mPCload.Click += new System.EventHandler(this.mPCload_Click);
             // 
-            // loadPrinterMacsToolStripMenuItem
+            // mAIOload
             // 
-            this.loadPrinterMacsToolStripMenuItem.Name = "loadPrinterMacsToolStripMenuItem";
-            this.loadPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadPrinterMacsToolStripMenuItem.Text = "Load Printer macs";
-            this.loadPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.loadPrinterMacsToolStripMenuItem_Click);
+            this.mAIOload.Name = "mAIOload";
+            this.mAIOload.Size = new System.Drawing.Size(194, 22);
+            this.mAIOload.Text = "L:oad AIO macs";
+            this.mAIOload.Click += new System.EventHandler(this.mAIOload_Click);
+            // 
+            // mLJload
+            // 
+            this.mLJload.Name = "mLJload";
+            this.mLJload.Size = new System.Drawing.Size(194, 22);
+            this.mLJload.Text = "Load LJ printer macs";
+            this.mLJload.Click += new System.EventHandler(this.mLJload_Click);
+            // 
+            // mDJload
+            // 
+            this.mDJload.Name = "mDJload";
+            this.mDJload.Size = new System.Drawing.Size(194, 22);
+            this.mDJload.Text = "Load DJ printer macs";
+            this.mDJload.Click += new System.EventHandler(this.mDJload_Click);
             // 
             // toolStripSeparator1
             // 
@@ -394,12 +404,17 @@
             this.saveToXMLToolStripMenuItem.Text = "Save HTML as local HP";
             this.saveToXMLToolStripMenuItem.Click += new System.EventHandler(this.saveToXMLToolStripMenuItem_Click);
             // 
-            // savePrinterMacsToolStripMenuItem
+            // mHPload
             // 
-            this.savePrinterMacsToolStripMenuItem.Name = "savePrinterMacsToolStripMenuItem";
-            this.savePrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.savePrinterMacsToolStripMenuItem.Text = "Load local HP";
-            this.savePrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.savePrinterMacsToolStripMenuItem_Click);
+            this.mHPload.Name = "mHPload";
+            this.mHPload.Size = new System.Drawing.Size(194, 22);
+            this.mHPload.Text = "Load local HP";
+            this.mHPload.Click += new System.EventHandler(this.mHPload_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(191, 6);
             // 
             // downloadMacrosToolStripMenuItem
             // 
@@ -472,6 +487,13 @@
             this.helpWithErrorsToolStripMenuItem.Text = "Help with errors";
             this.helpWithErrorsToolStripMenuItem.Click += new System.EventHandler(this.helpWithErrorsToolStripMenuItem_Click);
             // 
+            // helpWithSearchToolStripMenuItem
+            // 
+            this.helpWithSearchToolStripMenuItem.Name = "helpWithSearchToolStripMenuItem";
+            this.helpWithSearchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithSearchToolStripMenuItem.Text = "Help with search";
+            this.helpWithSearchToolStripMenuItem.Click += new System.EventHandler(this.helpWithSearchToolStripMenuItem_Click);
+            // 
             // utilsToolStripMenuItem
             // 
             this.utilsToolStripMenuItem.Name = "utilsToolStripMenuItem";
@@ -499,6 +521,13 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // mMoveMacro
+            // 
+            this.mMoveMacro.Name = "mMoveMacro";
+            this.mMoveMacro.Size = new System.Drawing.Size(49, 20);
+            this.mMoveMacro.Text = "Move";
+            this.mMoveMacro.Click += new System.EventHandler(this.mMoveMacro_Click);
             // 
             // WordSearch
             // 
@@ -877,6 +906,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnPrev);
             this.groupBox2.Controls.Add(this.btnNextTable);
             this.groupBox2.Controls.Add(this.lbRCcopy);
             this.groupBox2.Controls.Add(this.cbLaunchPage);
@@ -889,12 +919,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // helpWithSearchToolStripMenuItem
+            // btnPrev
             // 
-            this.helpWithSearchToolStripMenuItem.Name = "helpWithSearchToolStripMenuItem";
-            this.helpWithSearchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.helpWithSearchToolStripMenuItem.Text = "Help with search";
-            this.helpWithSearchToolStripMenuItem.Click += new System.EventHandler(this.helpWithSearchToolStripMenuItem_Click);
+            this.btnPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrev.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPrev.Location = new System.Drawing.Point(235, 38);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(67, 32);
+            this.btnPrev.TabIndex = 20;
+            this.btnPrev.Text = "Prev";
+            this.toolTip1.SetToolTip(this.btnPrev, "Click to slect the next table");
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+            // 
+            // Inx
+            // 
+            this.Inx.HeaderText = "N";
+            this.Inx.Name = "Inx";
+            this.Inx.ReadOnly = true;
+            this.Inx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Inx.Width = 32;
+            // 
+            // MoveM
+            // 
+            this.MoveM.HeaderText = "Move";
+            this.MoveM.Name = "MoveM";
+            this.MoveM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MoveM.Width = 48;
+            // 
+            // MacName
+            // 
+            this.MacName.HeaderText = "Name";
+            this.MacName.Name = "MacName";
+            this.MacName.ReadOnly = true;
+            this.MacName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MacName.Width = 312;
             // 
             // main
             // 
@@ -953,7 +1012,7 @@
         private System.Windows.Forms.CheckBox cbLaunchPage;
         private System.Windows.Forms.Button btnToNotepad;
         private System.Windows.Forms.ToolStripMenuItem readHTMLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadFromXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mPCload;
         private System.Windows.Forms.ToolStripMenuItem saveToXMLToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbSupp;
         private System.Windows.Forms.Button btnSaveM;
@@ -972,8 +1031,8 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnNoMark;
         private System.Windows.Forms.Button btnToMark;
-        private System.Windows.Forms.ToolStripMenuItem loadPrinterMacsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem savePrinterMacsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mLJload;
+        private System.Windows.Forms.ToolStripMenuItem mHPload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label1;
@@ -1003,12 +1062,18 @@
         private System.Windows.Forms.Button btnCancelEdits;
         private System.Windows.Forms.Button btnLinkAll;
         private System.Windows.Forms.Button btnNextTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Button btnCleanUrl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem WordSearch;
         private System.Windows.Forms.ToolStripMenuItem helpWithSearchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mMoveMacro;
+        private System.Windows.Forms.ToolStripMenuItem mAIOload;
+        private System.Windows.Forms.ToolStripMenuItem mDJload;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn MoveM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
     }
 }
 

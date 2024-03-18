@@ -17,11 +17,26 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Ink;
 using System.Collections.Generic;
+using System.Security.Policy;
+using System.Windows.Automation;
 
 namespace MacroViewer
 {
+    public class CMoveSpace
+    {
+        public int nChecked;    // this many checked
+        public int nePC;        // number of empty slots for macros
+        public int neAIO;       // AIO or laptop as disassembly is different from PC
+        public int neLJ;        // laserjst
+        public int neDJ;       //   deskjst
+        public int neHP; 
+        public bool bRun;       // if true then perform move
+        public string strType;    // name of the "from" file
+        public string strDes;   // destination
+    }
     public static class Utils
     {
+        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "HP" };
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -30,15 +45,24 @@ namespace MacroViewer
         //<body style="width: 800px; margin: 0 auto;">
         public static string WhereExe = "";
         public static string UnNamedMacro = "Change Me";
-        public static string[] LocalMacroPrefix = {"PC","PRN", "HP"};
+
         public static void ShowParseLocationErrors(string strText)
         {
-            string strLoc = WhereExe +  "\\MyHtml.txts";
+            string strLoc = WhereExe +  "\\MyHtmlErr.txt";
             File.WriteAllText(strLoc, strText);
             Utils.NotepadViewer(strLoc);
         }
 
+        public static string FNtoPath(string strFN)
+        {
+            return WhereExe + "\\" + strFN + "macros.txt";
+        }
 
+        public static bool NoFileThere(string strFN)
+        {
+            if(File.Exists(FNtoPath(strFN))) return false;
+            return true;
+        }
 
         public static string RemoveNL(string text)
         {
@@ -266,7 +290,7 @@ namespace MacroViewer
                 if(i < 0) return sUrl;
                 return sUrl.Substring(0, i);
             }
-            if(surl.Contains("amazon"))
+            if (surl.Contains("amazon") || surl.Contains("newegg"))
             {
                 i = sUrl.IndexOf('&');
                 return (i < 0) ? sUrl: sUrl.Substring(0, i);
@@ -276,7 +300,49 @@ namespace MacroViewer
                 i = sUrl.IndexOf('?');
                 return (i < 0) ? sUrl : sUrl.Substring(0, i);
             }
-            return sUrl;
+
+
+            i = sUrl.IndexOf("#:~:text=");
+            if (i > 0) return sUrl.Substring(0, i);
+
+
+            i = sUrl.IndexOf("?utm_source=bing");
+            if (i > 0) return sUrl.Substring(0, i);
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            { 
+                // keep track of which urls cannot be untracked of de-referenced
+                using (StreamWriter writer = File.AppendText(WhereExe + "\\UrlDebug.txt"))
+                {
+                    writer.WriteLine(sUrl);
+                }
+            }
+            return sUrl;        
+        }
+
+        public static string NoTrailingNL(string s)
+        {
+            int i = s.Length - 1;
+            if (i < 2) return s;
+            string t = s.Substring(i - 2);
+            if (Environment.NewLine == t)
+            {
+                t = s.Substring(0, i);
+                return NoTrailingNL(t);
+            }
+            return s;
+        }
+
+        //If ends in NewLine remove it but to not use newline if no file exists
+        //files do not have trailing newline
+        public static void FileAppendText(string strFN, string text)
+        {
+            string sFilePath = FNtoPath(strFN);
+            string strGEnd = (NoFileThere(sFilePath) ? "" : Environment.NewLine) + NoTrailingNL(text);
+            using (StreamWriter writer = File.AppendText(sFilePath))
+            {
+                writer.WriteLine(strGEnd);
+            }
         }
 
         public static void ReplaceUrls(ref string sBody, bool MakeHyper)
@@ -299,6 +365,7 @@ namespace MacroViewer
             }
         }
     }
+
 
     public class CMarkup
     {

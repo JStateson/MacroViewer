@@ -65,7 +65,6 @@ namespace MacroViewer
                 {
                     KeyPresent[i] = true;
                     strRtn+= match.Value + " ";   
-                    //Console.WriteLine($"Found keyword '{keyword}' at index {match.Index}");
                 }
                 i++;
             }
@@ -79,10 +78,10 @@ namespace MacroViewer
             int n = keywords.Length;
             int i = 0;
             KeyPresent = new bool[n];
-            int[] cWidth = new int[4] { 32, 64, 64, 432 };
+            int[] cWidth = new int[4] { 48, 64, 64, 416 };
             foreach (CBody cb in cAll)
             {
-                string sKeys = DoSearch(cb.sBody);
+                string sKeys = DoSearch(cb.Name + " " + cb.sBody);
                 if (sKeys != "")
                 {
                     n = 0;

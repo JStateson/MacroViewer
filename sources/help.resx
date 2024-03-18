@@ -199,7 +199,8 @@ You do not edit using notepad.  Editing of the defective macro is done in the ma
 Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.
 
 	Pasting and working with URLs
-An attempt was made to remove tracking information from URLs.  The button "Clean Clipboard URLs" strips tracking from any URLs you have copied to the clipboard.   Any URLs pasted into URL fields are stripped before usage.</value>
+An attempt was made to remove tracking information from URLs.  The button "Clean Clipboard URLs" strips tracking from any URLs you have copied to the clipboard.   Any URLs pasted into URL fields are stripped before usage.
+It seems that BING cannot be de-referenced or untracked.  If you use BING to search you should select one of the objects search for and NOT use the BING search phrase itself.</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

@@ -2,17 +2,19 @@
  
 ## This app is only useful for HP Community Volunteers to help compose macro images and urls
 
-Log in and access your macros page using chrome
+Log in and access your macros page.  If using chrome then right click and "view page source"
 
-Expose the source code of the page and save it as "macros.html"
+Save the source code of the page and save it as "macros.html".  This was only tested in Chrome.
 
-Run this app and open the file.  There are demo macro files in the tar.
+Run MacroViewer and open the file.  If using demo files open "macros.html" first.
 
 Image of main page https://h30434.www3.hp.com/t5/media/gallerypage/image-id/364836iC71FFA1BC449061C
 
-A tar with latest binaries can be downloaded if you do not wish to build the app
+A tar with latest binaries can be downloaded if you do not wish to build the app.
 
-The tar also has a sample macro html, two supplemental macro txt's and sample signatures
+There is no install app so you must inform windows to keep the download and you may have to unblock MacroViewer
+
+The tar also has a sample macro html, five supplemental macro txt's and sample signatures
 
 You may copy any of the sample macros into your own macros.
 

@@ -1,5 +1,4 @@
-copy /y ..\bin\x64\release\PRNmacros.txt ..\bin\x64\debug\PRNmacros.txt
-copy /y ..\bin\x64\release\PCmacros.txt ..\bin\x64\debug\PCmacros.txt
-copy /y ..\bin\x64\release\HPmacros.txt ..\bin\x64\debug\HPmacros.txt
+del /q ..\bin\x64\debug\*macros.txt
+xcopy /y ..\bin\x64\release\*macros.txt ..\bin\x64\debug\*macros.txt
 copy /y ..\bin\x64\release\signatures.txt ..\bin\x64\debug\signatures.txt
-copy /y ..\bin\x64\release\*.png ..\bin\x64\debug\
+xcopy /y /I ..\bin\x64\release\*.png ..\bin\x64\debug\

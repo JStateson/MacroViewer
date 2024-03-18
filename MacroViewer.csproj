@@ -89,6 +89,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="sources\MoveMacro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sources\MoveMacro.Designer.cs">
+      <DependentUpon>MoveMacro.cs</DependentUpon>
+    </Compile>
     <Compile Include="sources\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,12 +189,15 @@
     <Compile Include="sources\WebBrowserPage.Designer.cs">
       <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="WordSearch.cs">
+    <Compile Include="sources\WordSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WordSearch.Designer.cs">
+    <Compile Include="sources\WordSearch.Designer.cs">
       <DependentUpon>WordSearch.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="sources\MoveMacro.resx">
+      <DependentUpon>MoveMacro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sources\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,7 +255,7 @@
     <EmbeddedResource Include="sources\WebBrowserPage.resx">
       <DependentUpon>WebBrowserPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WordSearch.resx">
+    <EmbeddedResource Include="sources\WordSearch.resx">
       <DependentUpon>WordSearch.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="sources\packages.config" />

@@ -213,6 +213,7 @@
             // tbNumMac
             // 
             this.tbNumMac.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbNumMac.Enabled = false;
             this.tbNumMac.Location = new System.Drawing.Point(21, 30);
             this.tbNumMac.Name = "tbNumMac";
             this.tbNumMac.ReadOnly = true;

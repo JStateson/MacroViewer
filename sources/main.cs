@@ -644,10 +644,6 @@ namespace MacroViewer
             return i;
         }
 
-        private void loadFromXMLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void SaveAsTXT(string strFN)
         {
             int i = 0;
@@ -657,7 +653,6 @@ namespace MacroViewer
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 string strName = row.Cells[2].Value.ToString();
-                if (strName == "") continue;
                 string strBody = Body[i];
                 strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
                 i++;
@@ -698,7 +693,6 @@ namespace MacroViewer
         private void EnableMacEdits(bool enable)
         {
             tbMacName.Enabled = enable;
-            tbNumMac.Enabled = enable;
             btnDelM.Enabled = enable && CurrentRowSelected >= 0;
             btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
         }
@@ -727,6 +721,7 @@ namespace MacroViewer
                     return;
                 }
                 Body[CurrentRowSelected] = "";
+                lbName.Rows[CurrentRowSelected].Cells[2].Value = "";
                 tbBody.Text = "";
             }
 

@@ -48,6 +48,7 @@
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -108,7 +109,6 @@
             // 
             // btnSaveEdits
             // 
-            this.btnSaveEdits.Enabled = false;
             this.btnSaveEdits.Location = new System.Drawing.Point(21, 271);
             this.btnSaveEdits.Name = "btnSaveEdits";
             this.btnSaveEdits.Size = new System.Drawing.Size(90, 23);
@@ -139,13 +139,18 @@
             // 
             // dgvSigList
             // 
+            this.dgvSigList.AllowUserToAddRows = false;
             this.dgvSigList.AllowUserToResizeColumns = false;
             this.dgvSigList.AllowUserToResizeRows = false;
             this.dgvSigList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSigList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sName});
             this.dgvSigList.Location = new System.Drawing.Point(151, 38);
             this.dgvSigList.MultiSelect = false;
             this.dgvSigList.Name = "dgvSigList";
-            this.dgvSigList.Size = new System.Drawing.Size(240, 384);
+            this.dgvSigList.RowHeadersVisible = false;
+            this.dgvSigList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSigList.Size = new System.Drawing.Size(243, 384);
             this.dgvSigList.TabIndex = 0;
             this.dgvSigList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellClick);
             this.dgvSigList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellContentDoubleClick);
@@ -238,10 +243,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(202, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 64);
+            this.label2.Size = new System.Drawing.Size(169, 48);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Be sure to copy changes\r\nback (Apply) to Sig List and\r\nbe sure to save changes.\r\n" +
-    "You must test before saving";
+            this.label2.Text = "Be sure to copy changes\r\nback (Apply) to Sig List and\r\nbe sure to save changes.";
             // 
             // btnShowBrowser
             // 
@@ -267,6 +271,12 @@
             this.toolTip1.SetToolTip(this.bltnSaveBack, "Copy the signature back to the list table");
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
+            // 
+            // sName
+            // 
+            this.sName.HeaderText = "Name";
+            this.sName.Name = "sName";
+            this.sName.Width = 240;
             // 
             // CSignature
             // 
@@ -312,5 +322,6 @@
         private System.Windows.Forms.Button btnTestXML;
         private System.Windows.Forms.Button btnAdd2New;
         private System.Windows.Forms.Button btnAdd1New;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sName;
     }
 }

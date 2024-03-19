@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
 {
@@ -13,18 +14,10 @@ namespace MacroViewer
         private string SigLoc = "";
         private string SigFilename = "";
         private string DefaultSig = "<div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br/><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\">, someone who has the same query may find this solution and be helped by it.</font></div>";
-        public class CStringValue
-        {
-            public CStringValue(string s)
-            {
-                _value = s;
-            }
-            public string Name { get { return _value; } set { _value = value; } }
-            string _value;
-        }
-        private List<string> sSigListBody = new List<string>();
-        private List<CStringValue> sSigListName = new List<CStringValue>();
-        private int CurrentRowSelected = 0; // this corresponds to the body of the text and the name selected
+
+
+        public List<string> sSigListBody = new List<string>();
+        public int CurrentRowSelected = 0; // this corresponds to the body of the text and the name selected
 
         private void ShowSig(int iRow)
         {
@@ -39,6 +32,10 @@ namespace MacroViewer
             SigLoc = Utils.WhereExe;
             SigFilename = SigLoc + "\\signatures.txt";
             ReadSIG();
+            foreach (DataGridViewColumn column in dgvSigList.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         private string FormNewSig(string sName, string sBody)
@@ -61,6 +58,8 @@ namespace MacroViewer
             {
                 CreateSigFromDefault();
             }
+            dgvSigList.Rows.Clear();
+            sSigListBody.Clear();
             FillTable();
         }
 
@@ -73,22 +72,22 @@ namespace MacroViewer
                 string sName = sr.ReadLine();
                 string sBody = sr.ReadLine();
                 sSigListBody.Add(sBody);
-                CStringValue sNew = new CStringValue(sName);
-                sSigListName.Add(sNew);
+                //DataGridViewRow row = new DataGridViewRow();
+                dgvSigList.Rows.Add(sName);
                 while(true)
                 {
                     i++;
                     sName = sr.ReadLine();
                     if (sName == null) break;
+                    if (sName == "") break;
                     sBody = sr.ReadLine();
+                    if(sBody == null) break;
+                    if (sBody == "") break;
+                    dgvSigList.Rows.Add(sName);
                     sSigListBody.Add(sBody);
-                    sNew = new CStringValue(sName);
-                    sSigListName.Add(sNew);
                 }
+                sr.Close();
             }
-            dgvSigList.DataSource = sSigListName.ToArray();
-            dgvSigList.Columns[0].Name = "Name";
-            dgvSigList.Columns["Name"].HeaderText = "Name";
             dgvSigList.Columns[0].Width = dgvSigList.Width;
             ShowSig(0);
             return i;
@@ -116,18 +115,17 @@ namespace MacroViewer
 
         private void blnAdd_Click(object sender, EventArgs e)
         {
-            int n = dgvSigList.RowCount;
-            sSigListBody.Add("ChangeMe");
+            dgvSigList.Rows.Add("ChangeMe");
             tbBody.Text = "ChangeMe";
-            CStringValue sNew = new  CStringValue("ChangeName");
-            sSigListName.Add(sNew);
-            dgvSigList.DataSource = sSigListName.ToArray();
-            btnSaveEdits.Enabled = false;
+            sSigListBody.Add(tbBody.Text);
         }
 
         private void btnDelSig_Click(object sender, EventArgs e)
         {
             int i = dgvSigList.CurrentRow.Index;
+//            sSigListName.RemoveAt(i);
+            dgvSigList.Rows.RemoveAt(i);
+            //dgvSigList.DataSource = sSigListName;
         }
 
         private void btnSaveEdits_Click(object sender, EventArgs e)
@@ -136,8 +134,7 @@ namespace MacroViewer
             string strOut = "";
             foreach (DataGridViewRow row in dgvSigList.Rows)
             {
-                string Name = row.Cells["Name"].Value.ToString().Trim();
-                sSigListName[i].Name = Name;
+                string Name = row.Cells[0].Value.ToString().Trim();
                 string strBody = sSigListBody[i].ToString().Trim();
                 strOut += FormNewSig(Name, strBody);
                 i++;
@@ -192,12 +189,12 @@ namespace MacroViewer
         
         private void TestBBC()
         {
-            btnSaveEdits.Enabled = false;
+            //btnSaveEdits.Enabled = false;
             string strTemp = Utils.RemoveNL(tbBody.Text);
             string strErr = Utils.BBCparse(strTemp);
             if (strErr == "")
             {
-                btnSaveEdits.Enabled = true;
+                //btnSaveEdits.Enabled = true;
                 return;
             }
             DialogResult Res1 = MessageBox.Show(strErr, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);

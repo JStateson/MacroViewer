@@ -364,11 +364,11 @@
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.utilsToolStripMenuItem,
-            this.testSignatureToolStripMenuItem,
-            this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.mMoveMacro,
             this.WordSearch,
+            this.mMoveMacro,
+            this.aboutToolStripMenuItem,
+            this.testSignatureToolStripMenuItem,
             this.mShowErr,
             this.mShowDiff});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);

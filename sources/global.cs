@@ -60,7 +60,8 @@ namespace MacroViewer
 
         public static bool NoFileThere(string strFN)
         {
-            if(File.Exists(FNtoPath(strFN))) return false;
+            string strPath = FNtoPath(strFN);
+            if (File.Exists(strPath)) return false;
             return true;
         }
 
@@ -68,6 +69,11 @@ namespace MacroViewer
         {
             string strRtn = text.Replace(Environment.NewLine, "<br>");
             return strRtn.Replace("\n", "<br>").Trim();
+        }
+
+        public static void WriteAllText(string strLoc, string strData)
+        {
+            File.WriteAllText(strLoc, NoTrailingNL(strData));
         }
         public static void NotepadViewer(string strFile)
         {
@@ -322,26 +328,27 @@ namespace MacroViewer
 
         public static string NoTrailingNL(string s)
         {
-            int i = s.Length - 1;
+            int i = s.Length;
             if (i < 2) return s;
             string t = s.Substring(i - 2);
             if (Environment.NewLine == t)
             {
-                t = s.Substring(0, i);
+                t = s.Substring(0, i-2);
                 return NoTrailingNL(t);
             }
             return s;
         }
 
-        //If ends in NewLine remove it but to not use newline if no file exists
-        //files do not have trailing newline
+        //If file does not exist then no need for newline on the append
         public static void FileAppendText(string strFN, string text)
         {
             string sFilePath = FNtoPath(strFN);
-            string strGEnd = (NoFileThere(sFilePath) ? "" : Environment.NewLine) + NoTrailingNL(text);
+            bool b = NoFileThere(strFN);
+            string strGEnd = (b ? "" : Environment.NewLine) + NoTrailingNL(text);
             using (StreamWriter writer = File.AppendText(sFilePath))
             {
                 writer.WriteLine(strGEnd);
+                writer.Close();
             }
         }
 

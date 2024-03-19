@@ -49,7 +49,7 @@ namespace MacroViewer
         private void CreateSigFromDefault()
         {
             string strDefault = FormNewSig("jys1", DefaultSig);
-            File.WriteAllText(SigFilename, strDefault);
+            Utils.WriteAllText(SigFilename, strDefault);
         }
 
         private void ReadSIG()
@@ -139,7 +139,7 @@ namespace MacroViewer
                 strOut += FormNewSig(Name, strBody);
                 i++;
             }
-            File.WriteAllText(SigFilename, strOut);
+            Utils.WriteAllText(SigFilename, strOut);
         }
 
         private void bltnSaveBack_Click(object sender, EventArgs e)

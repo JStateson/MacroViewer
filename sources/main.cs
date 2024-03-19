@@ -39,7 +39,7 @@ namespace MacroViewer
         private string aPage;
         private int[] StartMac = new int[NumMacros];
         private int[] StopMac = new int[NumMacros];
-        int[] MacBody = new int[NumMacros];
+        private int[] MacBody = new int[NumMacros];
         private string[] Body = new string[NumMacros];
         private string[] Body_HP_HTML = new string[NumMacros]; //local copy of ORIGINAL HP macros
         private string[] Name_HP_HTML = new string[NumMacros]; //local copy of ORIGINAL HP macro names
@@ -48,6 +48,8 @@ namespace MacroViewer
         private int CurrentRowSelected = -1;
         private OpenFileDialog ofd;
         private bool bMacroErrors;
+        private bool bInitialLoad = false;  // this is used with the bad ending to look for
+        private List<string> strBadEnding = new List<string>();
         private bool bHaveHTML = false; // html macro was read in. this cannot be edited
 
         //CSendCloud SendToCloud = new CSendCloud();
@@ -619,7 +621,7 @@ namespace MacroViewer
                     lbName.Rows.Add(i + 1, false, line);   // this triggers row enter callback
                     MacroNames[i] = line;
                     sBody = sr.ReadLine();
-                    Body[i] = sBody.Replace("<br />", "<br>");
+                    Body[i] = sBody; // not needed ?? .Replace("<br />", "<br>");
                     sBody = Utils.BBCparse(sBody);
                     MacroErrors[i] = sBody;
                     HPerr[i] = (sBody != "");
@@ -631,7 +633,18 @@ namespace MacroViewer
                     mShowErr.Visible = bMacroErrors;
                     i++;
                     line = sr.ReadLine();
-                    if (line == "" & bNoEmpty) break; // no more data
+                    if(line == null)
+                    {
+                        break;
+                    }
+                    if (line == "" & bNoEmpty)
+                    {
+                        if(bInitialLoad)
+                        {
+                            strBadEnding.Add(strFN);
+                        }
+                        break;  // if stop here then file has a trailing newline !!!
+                    }
                     NumInBody++;
                 }
                 lbName.RowEnter += lbName_RowEnter;
@@ -657,7 +670,7 @@ namespace MacroViewer
                 strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
                 i++;
             }
-            File.WriteAllText(TXTmacName, strOut);
+            Utils.WriteAllText(TXTmacName, strOut);
         }
 
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1257,6 +1270,7 @@ namespace MacroViewer
 
         private void LoadAllFiles()
         {
+            bInitialLoad = true;
             if (cBodies == null)
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();
@@ -1277,8 +1291,42 @@ namespace MacroViewer
                     if (n != 0) strType = s;
                 }
             }
-            if (strType != "") lbName.ReadOnly = false;
-                
+            bInitialLoad = false;
+            if(strBadEnding.Count > 0)
+            {
+                string strNames = "";
+                foreach(string s in strBadEnding)
+                {
+                    strNames += (s + " ");
+                }
+                MessageBox.Show("One or more files have trailing newline and will be re-written\r\nIf this happens repeatedly please create an issue",
+                    strNames, MessageBoxButtons.OK);
+                ReWriteBadFiles();
+            }
+            if (strType != "") lbName.ReadOnly = false;                
+        }
+
+        private void ReWriteBadFiles()
+        {
+            foreach(string strFN in strBadEnding)
+            {
+                string strOut = "";
+                bool bFound = false;
+                foreach(CBody cb in cBodies)
+                {
+                    if(cb.File == strFN)
+                    {
+                        if (bFound) strOut += Environment.NewLine;
+                        strOut += cb.Name + Environment.NewLine;
+                        strOut += cb.sBody;
+                        bFound = true;
+                    }
+                }
+                if(strOut != "") // probably should assert this
+                {
+                    File.WriteAllText(Utils.FNtoPath(strFN), strOut);
+                }
+            }
         }
 
         private void WordSearch_Click(object sender, EventArgs e)
@@ -1355,7 +1403,8 @@ namespace MacroViewer
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 i++;
-                if (!(bool)row.Cells[1].Value)  //this was set in above code
+                bool bWantDelete = ((bool)row.Cells[1].Value) || ((bool)row.Cells[1].EditedFormattedValue);
+                if (!bWantDelete) 
                 {
                     strAdded += row.Cells[2].Value.ToString() + Environment.NewLine;
                     strAdded += Body[i] + Environment.NewLine;
@@ -1365,7 +1414,7 @@ namespace MacroViewer
                     row.Cells[1].Value = false;
                 }
             }
-            File.WriteAllText(Utils.FNtoPath(strType), Utils.NoTrailingNL(strAdded));
+            Utils.WriteAllText(Utils.FNtoPath(strType), strAdded);
             LoadFromTXT(strType);
             ShowUneditedRow(0);
         }
@@ -1386,7 +1435,5 @@ namespace MacroViewer
                 PerformMove(cms);
             }
         }
-
-
     }
 }

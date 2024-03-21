@@ -41,7 +41,7 @@ namespace MacroViewer
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int n = cFound[SelectedRow].WhereFound;
+            int n = cSorted[SelectedRow].WhereFound;
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();

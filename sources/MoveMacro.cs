@@ -81,6 +81,9 @@ namespace MacroViewer
                     case "DJ":
                         tbNFree.Text = cms.neDJ.ToString();
                         break;
+                    case "OS":
+                        tbNFree.Text = cms.neOS.ToString();
+                        break;
                     case "HP":
                         tbNFree.Text = cms.neHP.ToString();
                         break;

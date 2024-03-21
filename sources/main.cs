@@ -416,6 +416,11 @@ namespace MacroViewer
             SelectFileItem("PC");
         }
 
+        private void mOSload_Click(object sender, EventArgs e)
+        {
+            SelectFileItem("OS");
+        }
+
         private void HaveSelected(bool bVal)
         {
             btnSaveM.Enabled = bVal;
@@ -1335,11 +1340,16 @@ namespace MacroViewer
             }
         }
 
-        private void WordSearch_Click(object sender, EventArgs e)
+        private void RaiseSearch()
         {
             WordSearch ws = new WordSearch(ref cBodies);
             ws.ShowDialog();
             ws.Dispose();
+        }
+
+        private void WordSearch_Click(object sender, EventArgs e)
+        {
+            RaiseSearch();
         }
 
         private int CountItems(string s)
@@ -1356,6 +1366,7 @@ namespace MacroViewer
             cms.neAIO = NumMacros - CountItems("AIO");
             cms.neLJ = NumMacros - CountItems("LJ");
             cms.neDJ = NumMacros - CountItems("DJ");
+            cms.neOS = NumMacros - CountItems("OS");
         }
         private int CountChecks()
         {
@@ -1371,13 +1382,16 @@ namespace MacroViewer
         {
             string strAdded = "";
             int i = -1;
+
             foreach (DataGridViewRow row in lbName.Rows)
             {
+                bool bWantSelect = ((bool)row.Cells[1].Value) || ((bool)row.Cells[1].EditedFormattedValue);
                 i++;
-                if ((bool)row.Cells[1].EditedFormattedValue)
+                if (bWantSelect)
                 {
                     strAdded += row.Cells[2].Value.ToString() + Environment.NewLine;
                     strAdded += Body[i] + Environment.NewLine;
+                    row.Cells[1].Value = true;
                 }
             }
             Utils.FileAppendText(cms.strDes, strAdded);  // has a pair of newlines at end
@@ -1409,7 +1423,7 @@ namespace MacroViewer
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 i++;
-                bool bWantDelete = ((bool)row.Cells[1].Value) || ((bool)row.Cells[1].EditedFormattedValue);
+                bool bWantDelete = (bool)row.Cells[1].Value; // || ((bool)row.Cells[1].EditedFormattedValue);
                 if (!bWantDelete) 
                 {
                     strAdded += row.Cells[2].Value.ToString() + Environment.NewLine;
@@ -1441,5 +1455,11 @@ namespace MacroViewer
                 PerformMove(cms);
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RaiseSearch();
+        }
+
     }
 }

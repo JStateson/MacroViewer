@@ -29,14 +29,18 @@ namespace MacroViewer
         public int neAIO;       // AIO or laptop as disassembly is different from PC
         public int neLJ;        // laserjst
         public int neDJ;       //   deskjst
-        public int neHP; 
+        public int neHP;
+        public int neOS;
         public bool bRun;       // if true then perform move
         public string strType;    // name of the "from" file
         public string strDes;   // destination
     }
+
+    // to add additional macro pages you need to mod the above cms to add an neXX and the below
+    // and add a file opening
     public static class Utils
     {
-        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "HP" };
+        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OS", "HP" };
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -49,7 +53,7 @@ namespace MacroViewer
 
         public static string FNtoHeader(string strFN)
         {
-            string[] LocalMacroFullname = { "Desktop", "AIO or Laptop", "LaserJet", "DeskJet", "HP from HTML" };
+            string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)", "DeskJet(DJ)", "OS related", "HP from HTML" };
             int i = 0;
             foreach (string s in LocalMacroPrefix)
             {

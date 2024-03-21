@@ -50,6 +50,7 @@
             this.btnNextTable = new System.Windows.Forms.Button();
             this.btnCleanUrl = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
+            this.btnCopyFrom = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,12 +93,12 @@
             this.btnSetObj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.lbNotM = new System.Windows.Forms.Label();
             this.lbM = new System.Windows.Forms.Label();
             this.btnNoMark = new System.Windows.Forms.Button();
             this.btnToMark = new System.Windows.Forms.Button();
             this.btnToNotepad = new System.Windows.Forms.Button();
-            this.btnCopyFrom = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnCLrUrl = new System.Windows.Forms.Button();
             this.btnAddURL = new System.Windows.Forms.Button();
@@ -110,7 +111,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -349,6 +351,18 @@
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
+            // btnCopyFrom
+            // 
+            this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyFrom.Location = new System.Drawing.Point(219, 130);
+            this.btnCopyFrom.Name = "btnCopyFrom";
+            this.btnCopyFrom.Size = new System.Drawing.Size(177, 27);
+            this.btnCopyFrom.TabIndex = 10;
+            this.btnCopyFrom.Text = "Paste from clipboard";
+            this.toolTip1.SetToolTip(this.btnCopyFrom, "Use this if CTRL-V or windows paste\r\ndoes not correctly paste new-lines");
+            this.btnCopyFrom.UseVisualStyleBackColor = true;
+            this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -386,6 +400,7 @@
             this.mAIOload,
             this.mLJload,
             this.mDJload,
+            this.mOSload,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
             this.mHPload,
@@ -594,6 +609,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnSearch);
             this.gpMainEdit.Controls.Add(this.btnCleanUrl);
             this.gpMainEdit.Controls.Add(this.btnCancelEdits);
             this.gpMainEdit.Controls.Add(this.btnTest);
@@ -750,6 +766,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Markup Editing (enable for images)";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Info;
+            this.label6.Location = new System.Drawing.Point(27, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(182, 32);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Unlike COPY, the PASTE tool\r\nuses the markup setting \r\n";
+            // 
             // lbNotM
             // 
             this.lbNotM.AutoEllipsis = true;
@@ -808,18 +834,6 @@
             this.btnToNotepad.Text = "Copy to notepad";
             this.btnToNotepad.UseVisualStyleBackColor = true;
             this.btnToNotepad.Click += new System.EventHandler(this.btnToNotepad_Click);
-            // 
-            // btnCopyFrom
-            // 
-            this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(219, 130);
-            this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(177, 27);
-            this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Paste from clipboard";
-            this.toolTip1.SetToolTip(this.btnCopyFrom, "Use this if CTRL-V or windows paste\r\ndoes not correctly paste new-lines");
-            this.btnCopyFrom.UseVisualStyleBackColor = true;
-            this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
             // groupBox4
             // 
@@ -958,15 +972,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // label6
+            // btnSearch
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Info;
-            this.label6.Location = new System.Drawing.Point(27, 138);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(182, 32);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Unlike COPY, the PASTE tool\r\nuses the markup setting \r\n";
+            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnSearch.FlatAppearance.BorderSize = 2;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.Location = new System.Drawing.Point(54, 312);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(137, 41);
+            this.btnSearch.TabIndex = 23;
+            this.btnSearch.Text = " SEARCH";
+            this.toolTip1.SetToolTip(this.btnSearch, "Click to search");
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // mOSload
+            // 
+            this.mOSload.Name = "mOSload";
+            this.mOSload.Size = new System.Drawing.Size(194, 22);
+            this.mOSload.Text = "Load OS related";
+            this.mOSload.Click += new System.EventHandler(this.mOSload_Click);
             // 
             // main
             // 
@@ -1088,6 +1115,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn MoveM;
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ToolStripMenuItem mOSload;
     }
 }
 

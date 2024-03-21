@@ -6,7 +6,7 @@ Log in and access your macros page.  If using chrome then right click, "view pag
 
 Run MacroViewer, open the file, and select the option to save as a local File.  All supplemental demo files found are loaded immediately.
 
-Image of main page https://h30434.www3.hp.com/t5/media/gallerypage/image-id/364836iC71FFA1BC449061C
+Image of main page https://h30434.www3.hp.com/t5/image/serverpage/image-id/365981i8646389DF0A0444B
 
 A tar with latest binaries can be downloaded if you do not wish to build the app.  There is no install app so you must unblock the app using the  app's properties.
 

@@ -46,6 +46,21 @@ namespace MacroViewer
         public static string WhereExe = "";
         public static string UnNamedMacro = "Change Me";
 
+
+        public static string FNtoHeader(string strFN)
+        {
+            string[] LocalMacroFullname = { "Desktop", "AIO or Laptop", "LaserJet", "DeskJet", "HP from HTML" };
+            int i = 0;
+            foreach (string s in LocalMacroPrefix)
+            {
+                if(s ==  strFN)
+                {
+                    return LocalMacroFullname[i];
+                }
+                i++;
+            }
+            return "HTML (uneditable)";
+        }
         public static void ShowParseLocationErrors(string strText)
         {
             string strLoc = WhereExe +  "\\MyHtmlErr.txt";
@@ -279,7 +294,7 @@ namespace MacroViewer
         private static string dStr(string strIn, string strRef)
         {
             int i = strIn.IndexOf(strRef);
-            return (i < 0) ? strIn.Trim() : strIn.Substring(i);
+            return (i < 0) ? strIn.Trim() : strIn.Substring(0,i);
         }
         public static string dRef(string sUrl)
         {
@@ -301,18 +316,17 @@ namespace MacroViewer
                 i = sUrl.IndexOf('&');
                 return (i < 0) ? sUrl: sUrl.Substring(0, i);
             }
-            if(surl.Contains("aliexpress"))
+            if(surl.Contains("aliexpress") || surl.Contains("ebay"))
             {
                 i = sUrl.IndexOf('?');
                 return (i < 0) ? sUrl : sUrl.Substring(0, i);
             }
 
-
             i = sUrl.IndexOf("#:~:text=");
             if (i > 0) return sUrl.Substring(0, i);
 
 
-            i = sUrl.IndexOf("?utm_source=bing");
+            i = sUrl.IndexOf("?utm_source=");  // gets bing and google
             if (i > 0) return sUrl.Substring(0, i);
 
             if (System.Diagnostics.Debugger.IsAttached)
@@ -537,6 +551,7 @@ namespace MacroViewer
         public string Name;     //macro name
         public string sBody;    //body of marco
         public string fKeys;    //keywords found separated by a space
+        public int nWdsfKey;    //number of words in fKeys is the number of unique hits
     }
     public class CFound
     {

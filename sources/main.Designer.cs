@@ -73,11 +73,11 @@
             this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
             this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
@@ -110,6 +110,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -245,7 +246,7 @@
             // btnCopyTo
             // 
             this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(235, 35);
+            this.btnCopyTo.Location = new System.Drawing.Point(235, 74);
             this.btnCopyTo.Name = "btnCopyTo";
             this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
@@ -538,26 +539,19 @@
             this.utilsToolStripMenuItem.Text = "Utils";
             this.utilsToolStripMenuItem.Click += new System.EventHandler(this.utilsToolStripMenuItem_Click);
             // 
-            // testSignatureToolStripMenuItem
-            // 
-            this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
-            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.testSignatureToolStripMenuItem.Text = "Test Signature";
-            this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // WordSearch
+            // 
+            this.WordSearch.Name = "WordSearch";
+            this.WordSearch.Size = new System.Drawing.Size(54, 20);
+            this.WordSearch.Text = "Search";
+            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
             // 
             // mMoveMacro
             // 
@@ -566,12 +560,19 @@
             this.mMoveMacro.Text = "Move";
             this.mMoveMacro.Click += new System.EventHandler(this.mMoveMacro_Click);
             // 
-            // WordSearch
+            // aboutToolStripMenuItem
             // 
-            this.WordSearch.Name = "WordSearch";
-            this.WordSearch.Size = new System.Drawing.Size(54, 20);
-            this.WordSearch.Text = "Search";
-            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // testSignatureToolStripMenuItem
+            // 
+            this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
+            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.testSignatureToolStripMenuItem.Text = "Test Signature";
+            this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
             // 
             // mShowErr
             // 
@@ -734,6 +735,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Controls.Add(this.lbNotM);
             this.groupBox5.Controls.Add(this.lbM);
             this.groupBox5.Controls.Add(this.btnNoMark);
@@ -799,7 +801,7 @@
             // btnToNotepad
             // 
             this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNotepad.Location = new System.Drawing.Point(235, 127);
+            this.btnToNotepad.Location = new System.Drawing.Point(235, 22);
             this.btnToNotepad.Name = "btnToNotepad";
             this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
             this.btnToNotepad.TabIndex = 12;
@@ -810,11 +812,12 @@
             // btnCopyFrom
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(235, 84);
+            this.btnCopyFrom.Location = new System.Drawing.Point(219, 130);
             this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(161, 27);
+            this.btnCopyFrom.Size = new System.Drawing.Size(177, 27);
             this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Copy from clipboard";
+            this.btnCopyFrom.Text = "Paste from clipboard";
+            this.toolTip1.SetToolTip(this.btnCopyFrom, "Use this if CTRL-V or windows paste\r\ndoes not correctly paste new-lines");
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
@@ -955,6 +958,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Info;
+            this.label6.Location = new System.Drawing.Point(27, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(182, 32);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Unlike COPY, the PASTE tool\r\nuses the markup setting \r\n";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1074,6 +1087,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MoveM;
         private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
+        private System.Windows.Forms.Label label6;
     }
 }
 

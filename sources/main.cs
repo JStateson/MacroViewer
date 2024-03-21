@@ -516,7 +516,13 @@ namespace MacroViewer
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            tbBody.Text = Clipboard.GetText();
+            string strTemp = Clipboard.GetText();
+            if (!strTemp.Contains(Environment.NewLine))
+            {
+                strTemp = strTemp.Replace("\n", Environment.NewLine);
+            }
+            if (lbM.Visible)strTemp = strTemp.Replace(Environment.NewLine, "<br>");
+            tbBody.Text = strTemp;
             //RecoverBBCfromHTML();
         }
 
@@ -648,7 +654,7 @@ namespace MacroViewer
                     NumInBody++;
                 }
                 lbName.RowEnter += lbName_RowEnter;
-                lbName.Columns[2].HeaderText = "Name " + strFN;
+                lbName.Columns[2].HeaderText = "Name: " + Utils.FNtoHeader(strFN);
                 sr.Close();
             }
             tbNumMac.Text = i.ToString();

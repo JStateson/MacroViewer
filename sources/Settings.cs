@@ -42,6 +42,7 @@ namespace MacroViewer
             foreach(string s in Utils.LocalMacroPrefix)
             {
                 strpath = Utils.FNtoPath(s);
+                if (!File.Exists(strpath)) continue;
                 strTotal += File.ReadAllText(strpath);
             }
             foreach(CLocalFiles cf in LocalImageFiles)

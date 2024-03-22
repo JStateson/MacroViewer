@@ -123,9 +123,8 @@ namespace MacroViewer
         private void btnDelSig_Click(object sender, EventArgs e)
         {
             int i = dgvSigList.CurrentRow.Index;
-//            sSigListName.RemoveAt(i);
+            sSigListBody.RemoveAt(i);
             dgvSigList.Rows.RemoveAt(i);
-            //dgvSigList.DataSource = sSigListName;
         }
 
         private void btnSaveEdits_Click(object sender, EventArgs e)

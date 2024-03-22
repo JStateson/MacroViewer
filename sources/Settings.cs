@@ -15,6 +15,7 @@ namespace MacroViewer
     public partial class Settings : Form
     {
         public eBrowserType eBrowser {  get; set; }
+        public bool bSupSigChanged { get; set; }
         public string userid { get; set; }
         public List<CLocalFiles> LocalImageFiles;
         public Settings(eBrowserType reBrowser, string ruserid)
@@ -30,6 +31,8 @@ namespace MacroViewer
                 case eBrowserType.eEdge: rbEdge.Checked = true; break;  
             }
             FillLocalImageTable();
+            tbSupSig.Text = Properties.Settings.Default.SupSig;
+            bSupSigChanged = false;
         }
 
         private void FillLocalImageTable()
@@ -104,6 +107,13 @@ namespace MacroViewer
                 LocalImageFiles.Clear();
                 FillLocalImageTable();
             }
+        }
+
+        private void btnAddSupSig_Click(object sender, EventArgs e)
+        {
+            bSupSigChanged = true;
+            Properties.Settings.Default.SupSig = tbSupSig.Text;
+            MessageBox.Show("The program must restarted to update the supplemental signature");
         }
     }
 }

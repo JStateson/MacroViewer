@@ -49,7 +49,8 @@ namespace MacroViewer
         //<body style="width: 800px; margin: 0 auto;">
         public static string WhereExe = "";
         public static string UnNamedMacro = "Change Me";
-
+        public static string SupSigPrefix = "<b><font color=\"#f80000\">====";
+        public static string SupSigSuffix = "====</font></b>";
 
         public static string FNtoHeader(string strFN)
         {
@@ -119,10 +120,24 @@ namespace MacroViewer
             return "<a href=\"" + strUrl + "\" target=\"_blank\">" + strIn + "</a>";
         }
 
-        public static string FixImg(string strImg)
+        public static string ReplaceSupSig(string sSup, ref string sBody)
         {
-
-            return strImg;
+            int i, j;
+            if (sBody == null) return "";
+            if (sBody == "") return "";
+            string sAdded = SupSigPrefix + sSup + SupSigSuffix;
+            string sRtn = "";
+            i = sBody.IndexOf(SupSigPrefix);
+            if(i < 0)
+            {
+                sRtn = sBody + "<br><br>" + sAdded;
+            }
+            else
+            {
+                j = sBody.IndexOf(SupSigSuffix);    // probably should assert j > 0
+                sRtn = sBody.Substring(0, i) + sAdded;
+            }
+            return sRtn;
         }
 
         public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 

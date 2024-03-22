@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,10 +44,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnDelUnused = new System.Windows.Forms.Button();
             this.dgvUsedImages = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnAddSupSig = new System.Windows.Forms.Button();
+            this.tbSupSig = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -138,7 +144,7 @@
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSave.Location = new System.Drawing.Point(197, 37);
+            this.btnSave.Location = new System.Drawing.Point(208, 84);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(101, 23);
             this.btnSave.TabIndex = 2;
@@ -150,7 +156,7 @@
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(197, 87);
+            this.btnCancel.Location = new System.Drawing.Point(208, 148);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(101, 23);
             this.btnCancel.TabIndex = 3;
@@ -163,9 +169,9 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnDelUnused);
             this.groupBox3.Controls.Add(this.dgvUsedImages);
-            this.groupBox3.Location = new System.Drawing.Point(338, 28);
+            this.groupBox3.Location = new System.Drawing.Point(338, 129);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(484, 430);
+            this.groupBox3.Size = new System.Drawing.Size(484, 322);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Advailable Image Files";
@@ -201,16 +207,49 @@
             this.dgvUsedImages.AllowUserToResizeColumns = false;
             this.dgvUsedImages.AllowUserToResizeRows = false;
             this.dgvUsedImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsedImages.Location = new System.Drawing.Point(157, 33);
+            this.dgvUsedImages.Location = new System.Drawing.Point(158, 19);
             this.dgvUsedImages.Name = "dgvUsedImages";
-            this.dgvUsedImages.Size = new System.Drawing.Size(292, 374);
+            this.dgvUsedImages.Size = new System.Drawing.Size(292, 294);
             this.dgvUsedImages.TabIndex = 0;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnAddSupSig);
+            this.groupBox4.Controls.Add(this.tbSupSig);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(338, 28);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(484, 79);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Add at end of every macro";
+            // 
+            // btnAddSupSig
+            // 
+            this.btnAddSupSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddSupSig.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnAddSupSig.Location = new System.Drawing.Point(16, 30);
+            this.btnAddSupSig.Name = "btnAddSupSig";
+            this.btnAddSupSig.Size = new System.Drawing.Size(75, 23);
+            this.btnAddSupSig.TabIndex = 1;
+            this.btnAddSupSig.Text = "Apply";
+            this.toolTip1.SetToolTip(this.btnAddSupSig, "This will replace any existing\r\nsupplemental signature");
+            this.btnAddSupSig.UseVisualStyleBackColor = true;
+            this.btnAddSupSig.Click += new System.EventHandler(this.btnAddSupSig_Click);
+            // 
+            // tbSupSig
+            // 
+            this.tbSupSig.Location = new System.Drawing.Point(116, 32);
+            this.tbSupSig.Name = "tbSupSig";
+            this.tbSupSig.Size = new System.Drawing.Size(334, 20);
+            this.tbSupSig.TabIndex = 0;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 470);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -228,6 +267,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -248,5 +289,9 @@
         private System.Windows.Forms.DataGridView dgvUsedImages;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDelUnused;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnAddSupSig;
+        private System.Windows.Forms.TextBox tbSupSig;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

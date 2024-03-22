@@ -1065,11 +1065,41 @@ namespace MacroViewer
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool bChangeSig = false;
             Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
+            bChangeSig = MySettings.bSupSigChanged;
             MySettings.Dispose();
+            if(bChangeSig)
+            {
+                ReWriteFiles();
+            }
+        }
+
+        private void ReWriteFiles()
+        {
+            string strSup = Properties.Settings.Default.SupSig;
+            foreach (string strFN in Utils.LocalMacroPrefix)
+            { 
+                string strOut = "";
+                bool bFound = false;
+                foreach (CBody cb in cBodies)
+                {
+                    if (cb.File == strFN)
+                    {
+                        if (bFound) strOut += Environment.NewLine;
+                        strOut += cb.Name + Environment.NewLine;
+                        strOut += Utils.ReplaceSupSig(strSup,ref cb.sBody);
+                        bFound = true;
+                    }
+                }
+                if (strOut != "") // probably should assert this
+                {
+                    File.WriteAllText(Utils.FNtoPath(strFN), strOut);
+                }
+            }
         }
 
         private void helpWithUtilsToolStripMenuItem_Click(object sender, EventArgs e)

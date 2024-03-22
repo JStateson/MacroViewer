@@ -51,6 +51,7 @@
             this.btnCleanUrl = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.btnCopyFrom = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +60,7 @@
             this.mAIOload = new System.Windows.Forms.ToolStripMenuItem();
             this.mLJload = new System.Windows.Forms.ToolStripMenuItem();
             this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
+            this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mHPload = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,8 +113,7 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelChecked = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -226,7 +227,7 @@
             // 
             // tbMacName
             // 
-            this.tbMacName.Location = new System.Drawing.Point(18, 53);
+            this.tbMacName.Location = new System.Drawing.Point(18, 48);
             this.tbMacName.Name = "tbMacName";
             this.tbMacName.Size = new System.Drawing.Size(190, 22);
             this.tbMacName.TabIndex = 3;
@@ -363,6 +364,22 @@
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnSearch.FlatAppearance.BorderSize = 2;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.Location = new System.Drawing.Point(54, 312);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(137, 41);
+            this.btnSearch.TabIndex = 23;
+            this.btnSearch.Text = " SEARCH";
+            this.toolTip1.SetToolTip(this.btnSearch, "Click to search");
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -444,6 +461,13 @@
             this.mDJload.Size = new System.Drawing.Size(194, 22);
             this.mDJload.Text = "Load DJ printer macs";
             this.mDJload.Click += new System.EventHandler(this.mDJload_Click);
+            // 
+            // mOSload
+            // 
+            this.mOSload.Name = "mOSload";
+            this.mOSload.Size = new System.Drawing.Size(194, 22);
+            this.mOSload.Text = "Load OS related";
+            this.mOSload.Click += new System.EventHandler(this.mOSload_Click);
             // 
             // toolStripSeparator1
             // 
@@ -887,6 +911,7 @@
             // 
             // gbSupp
             // 
+            this.gbSupp.Controls.Add(this.btnDelChecked);
             this.gbSupp.Controls.Add(this.label2);
             this.gbSupp.Controls.Add(this.groupBox3);
             this.gbSupp.Controls.Add(this.tbMacName);
@@ -903,7 +928,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(45, 29);
+            this.label2.Location = new System.Drawing.Point(45, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 6;
@@ -924,7 +949,7 @@
             this.btnSaveM.Enabled = false;
             this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSaveM.Location = new System.Drawing.Point(137, 112);
+            this.btnSaveM.Location = new System.Drawing.Point(177, 93);
             this.btnSaveM.Name = "btnSaveM";
             this.btnSaveM.Size = new System.Drawing.Size(75, 32);
             this.btnSaveM.TabIndex = 2;
@@ -937,7 +962,7 @@
             this.btnDelM.Enabled = false;
             this.btnDelM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelM.Location = new System.Drawing.Point(137, 169);
+            this.btnDelM.Location = new System.Drawing.Point(177, 144);
             this.btnDelM.Name = "btnDelM";
             this.btnDelM.Size = new System.Drawing.Size(75, 32);
             this.btnDelM.TabIndex = 1;
@@ -972,28 +997,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // btnSearch
+            // btnDelChecked
             // 
-            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.btnSearch.FlatAppearance.BorderSize = 2;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSearch.Location = new System.Drawing.Point(54, 312);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(137, 41);
-            this.btnSearch.TabIndex = 23;
-            this.btnSearch.Text = " SEARCH";
-            this.toolTip1.SetToolTip(this.btnSearch, "Click to search");
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // mOSload
-            // 
-            this.mOSload.Name = "mOSload";
-            this.mOSload.Size = new System.Drawing.Size(194, 22);
-            this.mOSload.Text = "Load OS related";
-            this.mOSload.Click += new System.EventHandler(this.mOSload_Click);
+            this.btnDelChecked.Enabled = false;
+            this.btnDelChecked.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelChecked.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelChecked.Location = new System.Drawing.Point(85, 196);
+            this.btnDelChecked.Name = "btnDelChecked";
+            this.btnDelChecked.Size = new System.Drawing.Size(167, 35);
+            this.btnDelChecked.TabIndex = 7;
+            this.btnDelChecked.Text = "Delete Checked Items";
+            this.btnDelChecked.UseVisualStyleBackColor = true;
+            this.btnDelChecked.Click += new System.EventHandler(this.btnDelChecked_Click);
             // 
             // main
             // 
@@ -1117,6 +1132,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ToolStripMenuItem mOSload;
+        private System.Windows.Forms.Button btnDelChecked;
     }
 }
 

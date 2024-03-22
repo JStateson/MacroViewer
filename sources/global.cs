@@ -32,8 +32,9 @@ namespace MacroViewer
         public int neHP;
         public int neOS;
         public bool bRun;       // if true then perform move
-        public string strType;    // name of the "from" file
+        public string strType;    // name of the "from" file ie: source
         public string strDes;   // destination
+        public bool bDelete;    // if true then just delete the item lfrom the source, no move
     }
 
     // to add additional macro pages you need to mod the above cms to add an neXX and the below
@@ -125,17 +126,27 @@ namespace MacroViewer
             int i, j;
             if (sBody == null) return "";
             if (sBody == "") return "";
-            string sAdded = SupSigPrefix + sSup + SupSigSuffix;
-            string sRtn = "";
-            i = sBody.IndexOf(SupSigPrefix);
-            if(i < 0)
+            string sAdded, sRtn = "";
+            if(sSup == "")
             {
-                sRtn = sBody + "<br><br>" + sAdded;
+                i = sBody.IndexOf(SupSigPrefix);
+                if (i > 0) sRtn = sBody.Substring(0, i);
+                else sRtn = sBody;
+                sRtn = NoTrailingNL(sRtn).Trim();
             }
             else
             {
-                j = sBody.IndexOf(SupSigSuffix);    // probably should assert j > 0
-                sRtn = sBody.Substring(0, i) + sAdded;
+                sAdded = SupSigPrefix + sSup + SupSigSuffix;
+                i = sBody.IndexOf(SupSigPrefix);
+                if (i < 0)
+                {
+                    sRtn = NoTrailingNL(sBody).Trim() + "<br><br>" + sAdded;
+                }
+                else
+                {
+                    j = sBody.IndexOf(SupSigSuffix);    // probably should assert j > 0
+                    sRtn = sBody.Substring(0, i) + sAdded;
+                }
             }
             return sRtn;
         }
@@ -367,6 +378,12 @@ namespace MacroViewer
             if (Environment.NewLine == t)
             {
                 t = s.Substring(0, i-2);
+                return NoTrailingNL(t);
+            }
+            t = s.Substring(i - 4);
+            if (t == "<br>")
+            {
+                t = s.Substring(0, i - 4);
                 return NoTrailingNL(t);
             }
             return s;

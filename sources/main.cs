@@ -74,6 +74,17 @@ namespace MacroViewer
             LoadAllFiles();
         }
 
+        private string IgnoreSupSig(string s)
+        {
+            string strRtn = s;
+            int i = s.IndexOf(Utils.SupSigPrefix);
+            if(i>0)
+            {
+                strRtn =Utils.NoTrailingNL( s.Substring(0, i));
+            }
+            return strRtn.Trim();
+        }
+
         private bool AnyHPdiff()
         {
             bool b = true;
@@ -81,7 +92,7 @@ namespace MacroViewer
             {
                 if (bHaveHTMLasLOCAL)
                 {
-                    HP_HTML_NO_DIFF[i] = (Body[i] == Body_HP_HTML[i]);
+                    HP_HTML_NO_DIFF[i] = (IgnoreSupSig(Body[i]) == Body_HP_HTML[i]);
                     HPerr[i] |= HP_HTML_NO_DIFF[i]; // jys todo TODO to do clean this up
                     b = b && HP_HTML_NO_DIFF[i];
                 }
@@ -339,10 +350,11 @@ namespace MacroViewer
 
         private void ParsePage()
         {
-
+            lbName.RowEnter -= lbName_RowEnter;
             FindMacros();
             FindNames();
             FindBody();
+            lbName.RowEnter += lbName_RowEnter;
         }
 
         private bool ReadMacroHTML()
@@ -425,6 +437,7 @@ namespace MacroViewer
         {
             btnSaveM.Enabled = bVal;
             btnDelM.Enabled = bVal;
+            btnDelChecked.Enabled = bVal;
         }
 
         private void ShowUneditedRow(int e)
@@ -643,6 +656,7 @@ namespace MacroViewer
                     }
                     mShowErr.Visible = bMacroErrors;
                     i++;
+                    NumInBody++;
                     line = sr.ReadLine();
                     if(line == null)
                     {
@@ -656,7 +670,6 @@ namespace MacroViewer
                         }
                         break;  // if stop here then file has a trailing newline !!!
                     }
-                    NumInBody++;
                 }
                 lbName.RowEnter += lbName_RowEnter;
                 lbName.Columns[2].HeaderText = "Name: " + Utils.FNtoHeader(strFN);
@@ -681,7 +694,9 @@ namespace MacroViewer
                 strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
                 i++;
             }
-            Utils.WriteAllText(TXTmacName, strOut);
+            if(i > 0)Utils.WriteAllText(TXTmacName, strOut);
+            else File.Delete(TXTmacName);
+            NumInBody = i;
         }
 
         private void saveToXMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -719,6 +734,7 @@ namespace MacroViewer
             tbMacName.Enabled = enable;
             btnDelM.Enabled = enable && CurrentRowSelected >= 0;
             btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
+            btnDelChecked.Enabled = enable && CurrentRowSelected >= 0;
         }
 
 
@@ -792,7 +808,7 @@ namespace MacroViewer
                 }
             }
             lbName.Rows[CurrentRowSelected].Cells[2].Value = strName;
-            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, tbBody.Text);
+            Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, Utils.NoTrailingNL(tbBody.Text).Trim());
             if (TXTName == "HP")
             {
                 SaveAsTXT(TXTName);
@@ -1022,14 +1038,14 @@ namespace MacroViewer
         private bool bPageSaved()
         {
             if (CurrentRowSelected < 0 || strType == "" || Body == null ||
-                Body[CurrentRowSelected] == null) return true; // nothing to save 
+                Body[CurrentRowSelected] == null || NumInBody == 0) return true; // nothing to save 
             bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
             if (bEdited)
             {
                 DialogResult Res1 = MessageBox.Show("Macro was not saved", "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (Res1 == DialogResult.OK)
                 {
-                    SaveCurrentMacros();
+                   SaveCurrentMacros();
                     return true;
                 }
                 return false;
@@ -1070,37 +1086,9 @@ namespace MacroViewer
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
-            bChangeSig = MySettings.bSupSigChanged;
             MySettings.Dispose();
-            if(bChangeSig)
-            {
-                ReWriteFiles();
-            }
         }
 
-        private void ReWriteFiles()
-        {
-            string strSup = Properties.Settings.Default.SupSig;
-            foreach (string strFN in Utils.LocalMacroPrefix)
-            { 
-                string strOut = "";
-                bool bFound = false;
-                foreach (CBody cb in cBodies)
-                {
-                    if (cb.File == strFN)
-                    {
-                        if (bFound) strOut += Environment.NewLine;
-                        strOut += cb.Name + Environment.NewLine;
-                        strOut += Utils.ReplaceSupSig(strSup,ref cb.sBody);
-                        bFound = true;
-                    }
-                }
-                if (strOut != "") // probably should assert this
-                {
-                    File.WriteAllText(Utils.FNtoPath(strFN), strOut);
-                }
-            }
-        }
 
         private void helpWithUtilsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1309,13 +1297,17 @@ namespace MacroViewer
             Clipboard.SetText(sDirty);
         }
 
+
         private void LoadAllFiles()
         {
             bInitialLoad = true;
+            bool bMustChange = Properties.Settings.Default.ChangeSig;
+            string nSig = Properties.Settings.Default.SupSig;           // the new supplemental signature
             if (cBodies == null)
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();
                 cBodies = new List<CBody>();
+
                 foreach (string s in Utils.LocalMacroPrefix)
                 {
                     int i, n = LoadFileItem(s);
@@ -1325,13 +1317,25 @@ namespace MacroViewer
                         cb.File = s;
                         cb.Number = (i + 1).ToString();
                         cb.Name = lbName.Rows[i].Cells[2].Value.ToString();
-                        cb.sBody = Body[i];
+                        if(bMustChange)
+                        {
+                            cb.sBody = Utils.ReplaceSupSig(nSig, ref Body[i]);
+                            Body[i] = cb.sBody;
+                        }
+                        else cb.sBody = Body[i];
                         cb.fKeys = "";
                         cBodies.Add(cb);
+                    }
+                    if(bMustChange && n > 0)
+                    {
+                        SaveAsTXT(s);
                     }
                     if (n != 0) strType = s;
                 }
             }
+            Properties.Settings.Default.ChangeSig = false;
+            Properties.Settings.Default.Save();
+
             bInitialLoad = false;
             if(strBadEnding.Count > 0)
             {
@@ -1408,11 +1412,11 @@ namespace MacroViewer
             return n;
         }
 
-        private void PerformMove(CMoveSpace cms)
+
+        private void MoveTheseRows(CMoveSpace cms)
         {
             string strAdded = "";
             int i = -1;
-
             foreach (DataGridViewRow row in lbName.Rows)
             {
                 bool bWantSelect = ((bool)row.Cells[1].Value) || ((bool)row.Cells[1].EditedFormattedValue);
@@ -1425,12 +1429,19 @@ namespace MacroViewer
                 }
             }
             Utils.FileAppendText(cms.strDes, strAdded);  // has a pair of newlines at end
+        }
+
+        private void PerformMove(CMoveSpace cms)
+        {
+            int i = -1;
+
+            if(!cms.bDelete)        // need to move them, not just delete them
+                MoveTheseRows(cms);
 
             //handle the ones left over.  if HP then just blank out the body and save
             //else replace the disk file and reload
             if (cms.strType == "HP")
             {
-                i = -1;
                 foreach (DataGridViewRow row in lbName.Rows)
                 {
                     i++;
@@ -1449,6 +1460,7 @@ namespace MacroViewer
         private void SaveWantedMacros(string strType)
         {
             string strAdded = "";
+            string strPath = Utils.FNtoPath(strType);
             int i = -1;
             foreach (DataGridViewRow row in lbName.Rows)
             {
@@ -1464,8 +1476,18 @@ namespace MacroViewer
                     row.Cells[1].Value = false;
                 }
             }
-            Utils.WriteAllText(Utils.FNtoPath(strType), strAdded);
-            LoadFromTXT(strType);
+            if (strAdded != "")
+            {
+                Utils.WriteAllText(strPath, strAdded);
+                LoadFromTXT(strType);
+                NumInBody = i+1;
+            }
+            else
+            {
+                File.Delete(strPath);
+                lbName.Rows.Clear();
+                NumInBody = 0;
+            }
             ShowUneditedRow(0);
         }
 
@@ -1475,6 +1497,7 @@ namespace MacroViewer
             CMoveSpace cms = new CMoveSpace();
             cms.strType = strType;
             cms.bRun = false;
+            cms.bDelete = false;
             CountEmpties(ref cms);
             cms.nChecked = CountChecks();
             MoveMacro mm = new MoveMacro(ref cms);
@@ -1491,5 +1514,12 @@ namespace MacroViewer
             RaiseSearch();
         }
 
+        private void btnDelChecked_Click(object sender, EventArgs e)
+        {
+            CMoveSpace cms = new CMoveSpace();
+            cms.strType = strType;
+            cms.bDelete = true;
+            PerformMove(cms);
+        }
     }
 }

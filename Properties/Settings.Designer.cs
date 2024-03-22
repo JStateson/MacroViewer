@@ -82,5 +82,17 @@ namespace MacroViewer.Properties {
                 this["SupSig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ChangeSig {
+            get {
+                return ((bool)(this["ChangeSig"]));
+            }
+            set {
+                this["ChangeSig"] = value;
+            }
+        }
     }
 }

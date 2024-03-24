@@ -33,6 +33,7 @@ namespace MacroViewer
         private bool[] HTMLerr = new bool[NumMacros];   // if set then error at macro
         private bool[] HPerr = new bool[NumMacros];     // if set then error at macro
         private bool[] HP_HTML_NO_DIFF = new bool[NumMacros];   // if set then difference between them
+        private int[] HP_HTML_DIF_LOC = new int[NumMacros]; // -1 is no dif. 0 is long and 1..x is first difference
         private int[] OriginalColor = new int[NumMacros];  //0:was OK to start with, 1:red, 2:blue
         // if HTMLerr set but HPerr is not set then can copy to clipboard with right click
         private bool[] bHPcorrected = new bool[NumMacros];
@@ -54,7 +55,7 @@ namespace MacroViewer
 
         //CSendCloud SendToCloud = new CSendCloud();
 
-        public List<CBody> cBodies;
+        public List<CBody> cBodies;  // this is only updated when the program starts
 
         public main()
         {
@@ -92,7 +93,8 @@ namespace MacroViewer
             {
                 if (bHaveHTMLasLOCAL)
                 {
-                    HP_HTML_NO_DIFF[i] = (IgnoreSupSig(Body[i]) == Body_HP_HTML[i]);
+                    HP_HTML_DIF_LOC[i] = Utils.FirstDifferenceIndex(IgnoreSupSig(Body[i]),Body_HP_HTML[i]);
+                    HP_HTML_NO_DIFF[i] = (HP_HTML_DIF_LOC[i] == -1);    //(IgnoreSupSig(Body[i]) == Body_HP_HTML[i]);
                     HPerr[i] |= HP_HTML_NO_DIFF[i]; // jys todo TODO to do clean this up
                     b = b && HP_HTML_NO_DIFF[i];
                 }
@@ -1162,8 +1164,16 @@ namespace MacroViewer
                 if (r == -1) return;
                 if (!HP_HTML_NO_DIFF[r])
                 {
-                    //CopyBodyToClipboard();
-                    string s ="Original Macro " + (r+1).ToString() + ": " + Name_HP_HTML[r] + Environment.NewLine + Body_HP_HTML[r];
+                    string sWhereErr = "";
+                    if (HP_HTML_DIF_LOC[r] == 0)
+                    {
+                        sWhereErr = " Diff is at end (or empty)";
+                    }
+                    else if (HP_HTML_DIF_LOC[r] > 0)
+                    {
+                        sWhereErr = " Diff at char " + HP_HTML_DIF_LOC[r].ToString();
+                    }
+                    string s ="Original Macro " + (r+1).ToString() + ": '" + Name_HP_HTML[r] + "'" + sWhereErr + Environment.NewLine + Body_HP_HTML[r];
                     PutOnNotepad(s);
                     /*
                     Application.DoEvents();
@@ -1414,12 +1424,21 @@ namespace MacroViewer
         {
             if (Utils.NoFileThere(s)) return 0;
             string[] sAll = File.ReadAllLines(Utils.FNtoPath(s));
+            if (s == "HP")
+            {
+                int j = 0;
+                for(int i = 0; i < sAll.Length;i+= 2)
+                {
+                    if (sAll[i].Length == 0) j++;
+                }
+                return j;
+            }
             return sAll.Length / 2;
         }
 
         private void CountEmpties(ref CMoveSpace cms)
         {
-            cms.neHP = 30 - CountItems("HP");
+            cms.neHP = CountItems("HP");
             cms.nePC = NumMacros - CountItems("PC");
             cms.neAIO = NumMacros - CountItems("AIO");
             cms.neLJ = NumMacros - CountItems("LJ");
@@ -1437,7 +1456,7 @@ namespace MacroViewer
         }
 
 
-        private void MoveTheseRows(CMoveSpace cms)
+        private void AppendTheseRows(CMoveSpace cms)
         {
             string strAdded = "";
             int i = -1;
@@ -1455,12 +1474,62 @@ namespace MacroViewer
             Utils.FileAppendText(cms.strDes, strAdded);  // has a pair of newlines at end
         }
 
+        private void InsertTheseRows(CMoveSpace cms)
+        {
+            List<CNewMac> cb = new List<CNewMac>();
+            string[] HPsaved;
+            string strOut = "";
+            string strLoc = "";
+            int i = -1;
+            foreach (DataGridViewRow row in lbName.Rows)
+            {
+                bool bWantSelect = ((bool)row.Cells[1].Value) || ((bool)row.Cells[1].EditedFormattedValue);
+                i++;
+                if (bWantSelect)
+                {
+                    CNewMac newMac = new CNewMac();
+                    newMac.AddNB(row.Cells[2].Value.ToString(), Body[i]);   // no newlines as added later
+                    row.Cells[1].Value = true;
+                    cb.Add(newMac);
+                }
+            }
+            // look through the HP file for a place to put them
+            strLoc = Utils.FNtoPath("HP");
+            HPsaved = File.ReadAllLines(strLoc);
+            i = -1;
+            foreach(string s in HPsaved)
+            {
+                i++;
+                if(s == "")
+                {
+                    if (cb.Count != 0)
+                    {
+                        HPsaved[i] = cb[0].sName;
+                        string t = cb[0].sBody;
+                        HPsaved[i + 1] = (t == "") ? "Body Missing" : t;
+                        cb.RemoveAt(0);
+                    }
+                }
+                strOut += HPsaved[i] + Environment.NewLine;
+            }
+            Utils.WriteAllText(strLoc,Utils.NoTrailingNL(strOut));
+        }
+
         private void PerformMove(CMoveSpace cms)
         {
             int i = -1;
 
             if(!cms.bDelete)        // need to move them, not just delete them
-                MoveTheseRows(cms);
+           {
+                if(cms.strDes != "HP")
+                {
+                    AppendTheseRows(cms);
+                }
+                else
+                {
+                    InsertTheseRows(cms);
+                }
+            }
 
             //handle the ones left over.  if HP then just blank out the body and save
             //else replace the disk file and reload

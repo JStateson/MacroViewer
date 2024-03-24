@@ -17,6 +17,16 @@ namespace MacroViewer
         int x = 30, y = 30;
         CMoveSpace cms;
         CheckBox cbFROMbox;
+
+        public MoveMacro(ref CMoveSpace rcms)
+        {
+            InitializeComponent();
+            cms = rcms;
+            FillFrom(ref gbFrom);
+            FillTo(ref gbTo);
+            tbNumMoving.Text = cms.nChecked.ToString();
+        }
+
         private void FillFrom(ref GroupBox gb)
         {
             int n = Utils.LocalMacroPrefix.Length;
@@ -36,6 +46,8 @@ namespace MacroViewer
                 if(cb.Enabled)
                 {
                     cb.Checked = cms.nChecked > 0;
+                    if (!cb.Checked)
+                        cb.Enabled = false; // do not let use check the box if none were checked originally
                     cbFROMbox = cb;
                     return;
                 }
@@ -126,13 +138,5 @@ namespace MacroViewer
             this.Close();
         }
 
-        public MoveMacro(ref CMoveSpace rcms)
-        {
-            InitializeComponent();
-            cms = rcms;
-            FillFrom(ref gbFrom);
-            FillTo(ref gbTo);
-            tbNumMoving.Text = cms.nChecked.ToString();
-        }
     }
 }

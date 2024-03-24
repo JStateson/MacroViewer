@@ -152,6 +152,28 @@ namespace MacroViewer
             return sRtn;
         }
 
+        public static int FirstDifferenceIndex(string str1, string str2)
+        {
+            int minLength = Math.Min(str1.Length, str2.Length);
+            for (int i = 0; i < minLength; i++)
+            {
+                if (str1[i] != str2[i])
+                {
+                    return i + 1;
+                }
+            }
+
+            // If all characters up to the length of the shorter string are the same
+            if (str1.Length != str2.Length)
+            {
+                return 0;
+            }
+
+            // If the strings are identical, return -1
+            return -1;
+        }
+
+
         public const string AssignedImageName = "LOCALIMAGEFILE"; // PRN and PC suffix 
         public enum eBrowserType
         {
@@ -600,6 +622,16 @@ namespace MacroViewer
         public int WhereFound;
     }
 
+    public class CNewMac
+    {
+        public string sName;
+        public string sBody;
+        public void AddNB (string sn, string sb)
+        {
+            sName = sn;
+            sBody = sb;
+        }
+    }
 
     internal class CSendCloud
     {

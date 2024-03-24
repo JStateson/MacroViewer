@@ -214,6 +214,7 @@ namespace MacroViewer
         private void btnExitToMac_Click(object sender, EventArgs e)
         {
             LastViewed = nUseLastViewed;
+            this.Close();
         }
     }
 }

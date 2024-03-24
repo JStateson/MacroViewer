@@ -331,9 +331,10 @@ namespace MacroViewer
         {
             int i,j;
             sUrl = dStr(sUrl,"/ref");
-            if (sUrl.Contains("youtube"))return sUrl;
             string surl = sUrl.ToLower();
-            i = sUrl.IndexOf("search?");
+            if (surl.Contains("youtube"))return sUrl;
+
+            i = surl.IndexOf("search?");
             if(i > 0)
             {
                 j = sUrl.IndexOf("q=", i + 7);
@@ -353,11 +354,11 @@ namespace MacroViewer
                 return (i < 0) ? sUrl : sUrl.Substring(0, i);
             }
 
-            i = sUrl.IndexOf("#:~:text=");
+            i = surl.IndexOf("#:~:text=");
             if (i > 0) return sUrl.Substring(0, i);
 
 
-            i = sUrl.IndexOf("?utm_source=");  // gets bing and google
+            i = surl.IndexOf("?utm_source=");  // gets bing and google
             if (i > 0) return sUrl.Substring(0, i);
 
             if (System.Diagnostics.Debugger.IsAttached)

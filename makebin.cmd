@@ -9,6 +9,7 @@ set PGM=%2%364.exe
 rem xcopy %2*.dll %1temp
 xcopy %2*agil*.dll %1temp
 xcopy %2*macros.txt %1temp
+xcopy /Y /I %2*macros.txt %2..\Debug
 xcopy %2signatures.txt %1temp
 xcopy %4 %1temp
 rem xcopy %1packages\Microsoft.Web.WebView2.1.0.2210.55\runtimes\win-x64\native\WebView2Loader.dll %1temp

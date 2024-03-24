@@ -107,13 +107,13 @@
             this.tbImgUrl = new System.Windows.Forms.TextBox();
             this.btnAddImg = new System.Windows.Forms.Button();
             this.gbSupp = new System.Windows.Forms.GroupBox();
+            this.btnDelChecked = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnSaveM = new System.Windows.Forms.Button();
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnDelChecked = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -870,7 +870,7 @@
             this.groupBox4.Size = new System.Drawing.Size(419, 119);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Add image or Urls";
+            this.groupBox4.Text = "Add image or Urls (a quick and easy EDIT LINK)";
             // 
             // btnCLrUrl
             // 
@@ -923,6 +923,19 @@
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
+            // 
+            // btnDelChecked
+            // 
+            this.btnDelChecked.Enabled = false;
+            this.btnDelChecked.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelChecked.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelChecked.Location = new System.Drawing.Point(85, 196);
+            this.btnDelChecked.Name = "btnDelChecked";
+            this.btnDelChecked.Size = new System.Drawing.Size(167, 35);
+            this.btnDelChecked.TabIndex = 7;
+            this.btnDelChecked.Text = "Delete Checked Items";
+            this.btnDelChecked.UseVisualStyleBackColor = true;
+            this.btnDelChecked.Click += new System.EventHandler(this.btnDelChecked_Click);
             // 
             // label2
             // 
@@ -996,19 +1009,6 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
-            // 
-            // btnDelChecked
-            // 
-            this.btnDelChecked.Enabled = false;
-            this.btnDelChecked.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelChecked.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelChecked.Location = new System.Drawing.Point(85, 196);
-            this.btnDelChecked.Name = "btnDelChecked";
-            this.btnDelChecked.Size = new System.Drawing.Size(167, 35);
-            this.btnDelChecked.TabIndex = 7;
-            this.btnDelChecked.Text = "Delete Checked Items";
-            this.btnDelChecked.UseVisualStyleBackColor = true;
-            this.btnDelChecked.Click += new System.EventHandler(this.btnDelChecked_Click);
             // 
             // main
             // 

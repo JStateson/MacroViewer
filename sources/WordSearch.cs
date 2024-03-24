@@ -28,6 +28,8 @@ namespace MacroViewer
         private bool[] KeyPresent;
         private int[] KeyCount;
         private int TotalMatches = 0;
+        public int LastViewed { get; set; }
+        int nUseLastViewed = -1;
 
         public WordSearch(ref List<CBody> Rcb)
         {
@@ -35,6 +37,7 @@ namespace MacroViewer
             cFound = new List<CFound>();
             cSorted = new List<CFound>();
             cAll = Rcb;
+            LastViewed = -1;            
         }
 
 
@@ -44,6 +47,7 @@ namespace MacroViewer
             int n = cSorted[SelectedRow].WhereFound;
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
+            nUseLastViewed = n;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
             MyBrowser.ShowInBrowser(strTemp);
@@ -53,6 +57,7 @@ namespace MacroViewer
         {
             SelectedRow = e.RowIndex;
             int n = cSorted[SelectedRow].WhereFound;
+            nUseLastViewed = n;
             string[] sEach = cAll[n].fKeys.Trim().Split(new char[] {' '});
             lbKeyFound.Items.Clear();
             foreach (string s in sEach)
@@ -204,6 +209,11 @@ namespace MacroViewer
         private void btnS1_Click(object sender, EventArgs e)
         {
             RunSearch();
+        }
+
+        private void btnExitToMac_Click(object sender, EventArgs e)
+        {
+            LastViewed = nUseLastViewed;
         }
     }
 }

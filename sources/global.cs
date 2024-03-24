@@ -28,20 +28,22 @@ namespace MacroViewer
         public int nePC;        // number of empty slots for macros
         public int neAIO;       // AIO or laptop as disassembly is different from PC
         public int neLJ;        // laserjst
-        public int neDJ;       //   deskjst
-        public int neHP;
-        public int neOS;
+        public int neDJ;        // deskjet
+        public int neOS;        // any general OS related help not specific to HP
+        public int neHP;        // local copy of the HP macros
         public bool bRun;       // if true then perform move
         public string strType;    // name of the "from" file ie: source
         public string strDes;   // destination
-        public bool bDelete;    // if true then just delete the item lfrom the source, no move
+        public bool bDelete;    // if true then just delete the item from the source, no move required
     }
 
     // to add additional macro pages you need to mod the above cms to add an neXX and the below
-    // and add a file opening
+    // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
         public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OS", "HP" };
+        private static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)", "DeskJet(DJ)", "OS related", "HP from HTML" };
+
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -55,7 +57,6 @@ namespace MacroViewer
 
         public static string FNtoHeader(string strFN)
         {
-            string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)", "DeskJet(DJ)", "OS related", "HP from HTML" };
             int i = 0;
             foreach (string s in LocalMacroPrefix)
             {

@@ -878,9 +878,13 @@ namespace MacroViewer
 
         private void btnAddImg_Click(object sender, EventArgs e)
         {
+            int i = tbBody.SelectionStart;
             if (tbImgUrl.Text == "") return;
             string strImgUrl = Utils.AssembleIMG(tbImgUrl.Text);
-            tbBody.Text = tbBody.Text.Insert(tbBody.SelectionStart, strImgUrl);
+            tbBody.Text = tbBody.Text.Insert(i, strImgUrl);
+            tbBody.SelectionStart = i + strImgUrl.Length;
+            tbBody.SelectionLength = 0;
+            tbBody.Focus();
         }
 
 
@@ -906,6 +910,9 @@ namespace MacroViewer
                 strUrl += strOver + "</a>";
                 tbBody.Text = tbBody.Text.Insert(i, strUrl);
             }
+            tbBody.SelectionStart = i + strUrl.Length;
+            tbBody.SelectionLength = 0;
+            tbBody.Focus();
         }
 
         private void btnAdd1New_Click(object sender, EventArgs e)
@@ -914,6 +921,8 @@ namespace MacroViewer
             tbBody.Text = tbBody.Text.Insert(i, "<br>");
             i += 4;
             tbBody.SelectionStart = i;
+            tbBody.SelectionLength = 0;
+            tbBody.Focus();
         }
 
         private void btnAdd2New_Click(object sender, EventArgs e)
@@ -922,6 +931,8 @@ namespace MacroViewer
             tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
             i += 8;
             tbBody.SelectionStart = i;
+            tbBody.SelectionLength = 0;
+            tbBody.Focus();
         }
 
         private void btnCLrUrl_Click(object sender, EventArgs e)
@@ -1035,22 +1046,27 @@ namespace MacroViewer
             return tbBody.Text.Replace(Environment.NewLine, "<br>");
         }
 
+        private bool bNothingToSave()
+        {
+            if (CurrentRowSelected < 0 || strType == "" || NumInBody == 0)
+            {
+                return true; // nothing to save 
+            }
+            bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
+            return !bEdited;
+        }
+
         private bool bPageSaved()
         {
-            if (CurrentRowSelected < 0 || strType == "" || Body == null ||
-                Body[CurrentRowSelected] == null || NumInBody == 0) return true; // nothing to save 
-            bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
-            if (bEdited)
+            if (bNothingToSave()) return true;
+
+            DialogResult Res1 = MessageBox.Show("Macro was not saved", "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.OK)
             {
-                DialogResult Res1 = MessageBox.Show("Macro was not saved", "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                if (Res1 == DialogResult.OK)
-                {
-                   SaveCurrentMacros();
-                    return true;
-                }
-                return false;
+                SaveCurrentMacros();
+                return true;
             }
-            return true;
+            return false;
         }
 
         private void btnChangeUrls_Click(object sender, EventArgs e)
@@ -1378,7 +1394,15 @@ namespace MacroViewer
         {
             WordSearch ws = new WordSearch(ref cBodies);
             ws.ShowDialog();
+            int i, n = ws.LastViewed;
             ws.Dispose();
+            if(n >= 0 && bNothingToSave())
+            {
+                CBody cb = cBodies[n];
+                LoadFromTXT(cb.File);
+                i = Convert.ToInt32(cb.Number);
+                ShowUneditedRow(i - 1);
+            }
         }
 
         private void WordSearch_Click(object sender, EventArgs e)

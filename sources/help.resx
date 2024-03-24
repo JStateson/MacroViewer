@@ -188,20 +188,20 @@ The Macro List contains up to 50 macros.  There are three macro sources:  HP HTT
 
 If you click a row then the macro is transferred to the EDIT BOX on the right side of the main display.  If you double click then the macro is displayed the way a user will see it if markup is enabled.
 
-Note that only the PC and Printer macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard. This can be done using the local HP HTML macro file. 
+Note that only the local macro collection can be saved.  If you wish to update the HP macros you need to copy the markup to the windows clipboard, log into your macro setting page and replace the macros with the one in the clipboard. This can be done using the local HP HTML macro file. 
 You create a local copy of the HP HTML macros and then edit those macros until there are no errors.  If there is an error the macro number will be red.  If the macro number is blue then the original HP HTML macro needs to be replaced wiht the local copy.  If the  macro number is not colored then there is not error
 To replace the HP HTML macro at the HP community, right click the BLUE colored macro number.  This copies the body of the macro to the clipboard.  You can then log into your account and paste the macro body thus replacing your HP community one.
 The macros downloaded from the HP community do not have errors.  If an HP HTML macro is marked red it is likely an error in this program or an un-caught error in your HP settings.
 
 	Supplemental Table group
-The group shows the name of the macro being edited and gives an option to SAVE or DELETE it. To create a macro click the NEW adjacent to the EDIT BOX and change the name of the macro.  Be sure to save it.
+This group shows the name of the macro being edited and gives an option to SAVE or DELETE it. To create a macro click the NEW adjacent to the EDIT BOX and change the name of the macro.  Be sure to save it.
 
 	Markup Editing
 Remove markup to make it easy to read and edit.  If editing in markup mode, then you can add a newline or two instead of pressing enter.  You can copy the EDIT BOX to the windows clipboard or paste from the clipboard back to the EDIT BOX.  You can also save a copy to notepad for backup or scratch work.
 To see the effect of your edits, click the Show As Page button.
 
 	Adding images or urls
-You can add an image or url to the EDIT BOX.  The UTILS menu is another way to add URLS but you need to copy and paste. If the image you add is a local PNG or JPG file, it cannot be seen by users.  You will need to upload the local file to your HP album.  Tools to do this conveniently are in the Manage Images dialog box.
+You can add an image or url to the EDIT BOX.  The UTILS menu is another way to add URLS but you need to manually copy and paste usign UTILS.  If the image you add is a local PNG or JPG file, it cannot be seen by users.  You will need to upload the local file to your HP album.  Tools to do this conveniently are in the Manage Images dialog box.
 
 	Using your macro in the HP community
 You have a macro that looks good.  You remove markup and click the Show Page and the macros looks fine.  There are two things you can do with it.  You can add it to your own macro collection or just use it in a reply to a user.
@@ -227,8 +227,11 @@ The MANAGE dialog box allows the local image to be uploaded to the HP album serv
 	Clean Clipboard URLs.
 If you ued Edge, Chrome, Firefox, etc. to copy a URL then the URL contains tracking information.  Clicking this button strips the tracking information from it.  This is on ongoing problem as sone website add tracking and referals and this tool might miss some items.  Please enter an issue and make a note of the site so that the program can be changed to remove the tracking.
 
-	Paste from  clipboard
-This strips newlines from your clipboard before pasting into the EDIT BOX.  This assume you selected Swith To Markup.  The newlines are replaced by markup.</value>
+	Paste from clipboard
+This strips newlines from your clipboard before pasting into the EDIT BOX.  This assume you selected Swith To Markup.  The newlines are replaced by markup.  If you created a response to a users question and want to ave the response, then use the mouse to copy the response and then paste it into the EDIT BOX but be sure toenable markup and use the "Paste from clipboard".  You may need to run LINK All after pasting.
+
+	SEARCH button
+This allows you to search for a word or phrase quickly.  All files are searched.   If you recently added some macros they will not show up it the search unless the program is restarted.</value>
   </data>
   <data name="rEDITLINK.Text" xml:space="preserve">
     <value>		EDIT LINK dialog box

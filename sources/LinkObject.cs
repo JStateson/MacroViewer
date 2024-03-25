@@ -10,7 +10,7 @@ namespace MacroViewer
     public partial class LinkObject : Form
     {
         private string sLoc;
-        private bool bBoxing = false;
+        private bool bBoxed = false;
         private bool bBlinking = false;
         string strBoxed = "";
         public string strResultOut { get; set; }
@@ -49,6 +49,8 @@ namespace MacroViewer
                 pbImage.ImageLocation = "";
                 tbUrlText.Enabled = true;
             }
+            StopTimer();
+            tbImageUrl.Text = "";
         }
         public LinkObject(string rstrIn)
         {
@@ -64,7 +66,7 @@ namespace MacroViewer
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            strResultOut = bBoxing ? strBoxed : tbImageUrl.Text;
+            strResultOut = bBoxed ? strBoxed : tbImageUrl.Text;
             this.Close();
         }
 
@@ -74,26 +76,34 @@ namespace MacroViewer
             this.Close();
         }
 
-        private void btnApplyText_Click(object sender, EventArgs e)
+        private string FormObject()
         {
-            if(rbimage.Checked)
+            string sTB = tbSelectedItem.Text;   // do not trim as space have be wanted
+            if (rbimage.Checked)
             {
-                strImgUrl = Utils.AssembleIMG(tbSelectedItem.Text);
+                strImgUrl = Utils.AssembleIMG(sTB);
                 tbImageUrl.Text = strImgUrl;
             }
             else
             {
                 string strTmp = tbUrlText.Text;
-                string strUrl = Utils.dRef(tbSelectedItem.Text);
+                string strUrl = Utils.dRef(sTB);
                 if (strTmp == "") strTmp = strUrl;
                 tbImageUrl.Text = Utils.FormUrl(strUrl, strTmp);
             }
+            return tbImageUrl.Text;
+        }
+
+        private void btnApplyText_Click(object sender, EventArgs e)
+        {
+            FormObject();
+            StopTimer();
         }
 
         private void RunBrowser(string sLoc)
         {
             string strTemp = tbImageUrl.Text;
-            if(strTemp == "")strTemp = strBoxed;
+            if(strTemp == "" || bBoxed)strTemp = strBoxed;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
@@ -118,7 +128,6 @@ namespace MacroViewer
 
         private void TimerControl(bool bEnable)
         {
-            bBoxing = bEnable;
             bBlinking = bEnable;
             BlinkTimer.Enabled = bEnable;
             if (bEnable) btnBoxIT.Text = "Remove from box";
@@ -131,8 +140,8 @@ namespace MacroViewer
 
         private void StartTimer()
         {
-            bBoxing = true;
             bBlinking = true;
+            bBoxed = true;
             btnBoxIT.Text = "Remove from box";
             BlinkTimer.Enabled = true;
             Application.DoEvents();
@@ -142,24 +151,20 @@ namespace MacroViewer
         {
             BlinkTimer.Enabled = false;
             Application.DoEvents();
-            bBoxing = false;
             bBlinking = false;
+            bBoxed = false;
             btnBoxIT.Text = "Put in box";
             strBoxed = "";
-
         }
 
         private void btnBoxIT_Click(object sender, EventArgs e)
         {
             string strUnBoxed = tbImageUrl.Text.Trim();
-            if (strUnBoxed =="")
-            {
-                strUnBoxed = Utils.dRef(tbSelectedItem.Text);
-            }
+            if (strUnBoxed == "") strUnBoxed = FormObject();
             if (strUnBoxed == "") return;
             strBoxed = Utils.Form1CellTable(strUnBoxed);
-            if (bBoxing) StopTimer(); // TimerControl(false);
-            else StartTimer(); // TimerControl(true);
+            if (bBoxed) StopTimer();
+            else StartTimer();
         }
 
         private void LinkObject_FormClosing(object sender, FormClosingEventArgs e)
@@ -170,8 +175,8 @@ namespace MacroViewer
 
         private void BlinkTimer_Tick(object sender, EventArgs e)
         {
-            lbBoxed.Visible = bBoxing;
-            bBoxing = !bBoxing;
+            lbBoxed.Visible = bBlinking;
+            bBlinking = !bBlinking;
         }
     }
 }

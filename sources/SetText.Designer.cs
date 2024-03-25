@@ -165,9 +165,9 @@
             // 
             this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(222, 46);
+            this.btnBoxIT.Location = new System.Drawing.Point(175, 46);
             this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(106, 36);
+            this.btnBoxIT.Size = new System.Drawing.Size(185, 36);
             this.btnBoxIT.TabIndex = 8;
             this.btnBoxIT.Text = "Put In Box";
             this.btnBoxIT.UseVisualStyleBackColor = true;
@@ -313,7 +313,6 @@
             this.MinimizeBox = false;
             this.Name = "SetText";
             this.Text = "SetText";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SetText_FormClosing);
             this.gbSelectType.ResumeLayout(false);
             this.gbSelectType.PerformLayout();
             this.groupBox1.ResumeLayout(false);

@@ -132,7 +132,7 @@
             this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbBoxed.Location = new System.Drawing.Point(388, 171);
+            this.lbBoxed.Location = new System.Drawing.Point(402, 168);
             this.lbBoxed.Name = "lbBoxed";
             this.lbBoxed.Size = new System.Drawing.Size(73, 22);
             this.lbBoxed.TabIndex = 7;
@@ -145,7 +145,7 @@
             this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnBoxIT.Location = new System.Drawing.Point(172, 161);
             this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(174, 36);
+            this.btnBoxIT.Size = new System.Drawing.Size(210, 36);
             this.btnBoxIT.TabIndex = 6;
             this.btnBoxIT.Text = "Put In Box";
             this.btnBoxIT.UseVisualStyleBackColor = true;

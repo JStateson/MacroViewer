@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -8,7 +9,7 @@ namespace MacroViewer
     public partial class SetText : Form
     {
         private string sLoc;
-        private bool bBoxing = false;
+        private bool bBoxed = false;
         private bool bBlinking = false;
         string strBoxed = "";
         public string strResultOut { get; set; }
@@ -26,7 +27,7 @@ namespace MacroViewer
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            strResultOut = bBoxing ? strBoxed : tbResult.Text;
+            strResultOut = bBoxed ? strBoxed : tbResult.Text;
             this.Close();
         }
 
@@ -36,16 +37,14 @@ namespace MacroViewer
             this.Close();
         }
 
-
-
-        private void btnApplyText_Click(object sender, EventArgs e)
+        private string FormObject()
         {
             string strOut = "";
             string strTmp = "";
             string strUC = tbRawUrl.Text.ToUpper();
-            if (strUC == "") return;
+            if (strUC == "") return "";
             bool bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
-            if (!bHaveHTML) return;
+            if (!bHaveHTML) return "";
             strTmp = tbPrefix.Text.Trim();
             if (strTmp != "")
             {
@@ -53,18 +52,25 @@ namespace MacroViewer
             }
             strOut += Utils.FormUrl(Utils.dRef(tbRawUrl.Text), tbSelectedItem.Text.Trim());
             strTmp = tbSuffix.Text.Trim();
-            if(strTmp !="")
+            if (strTmp != "")
             {
                 strOut += " " + strTmp;
             }
-            strResultOut = strOut;
+            strResultOut = strOut.Trim();
             tbResult.Text = strResultOut;
-    }
+            return strResultOut;
+        }
+
+        private void btnApplyText_Click(object sender, EventArgs e)
+        {
+            FormObject();
+            StopTimer();
+        }
 
         private void RunBrowser(string sLoc)
         {
             string strTemp = tbResult.Text;
-            if (strTemp == "") strTemp = strBoxed;
+            if (strTemp == "" || bBoxed) strTemp = strBoxed;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
@@ -78,7 +84,7 @@ namespace MacroViewer
 
         private void TimerControl(bool bEnable)
         {
-            bBoxing = bEnable;
+            bBoxed = bEnable;
             bBlinking = bEnable;
             BlinkTimer.Enabled = bEnable;
             if (bEnable) btnBoxIT.Text = "Remove from box";
@@ -89,30 +95,48 @@ namespace MacroViewer
             }
         }
 
+        private void StopTimer()
+        {
+            BlinkTimer.Enabled = false;
+            Application.DoEvents();
+            bBlinking = false;
+            bBoxed = false;
+            btnBoxIT.Text = "Put in box";
+            strBoxed = "";
+        }
+
+        private void StartTimer()
+        {
+            bBlinking = true;
+            bBoxed = true;
+            btnBoxIT.Text = "Remove from box";
+            BlinkTimer.Enabled = true;
+            Application.DoEvents();
+        }
+
+
         private void btnBoxIT_Click(object sender, EventArgs e)
         {
             string strUnBoxed = tbResult.Text.Trim();
+            if (strUnBoxed == "") strUnBoxed = FormObject();
             if (strUnBoxed == "")
             {
                 strUnBoxed = tbSelectedItem.Text.Trim();
             }
             if (strUnBoxed == "") return;
             strBoxed = Utils.Form1CellTable(strUnBoxed);
-            if (bBoxing) TimerControl(false);
-            else TimerControl(true);
+            if (bBoxed) StopTimer();
+            else StartTimer();
         }
 
 
         private void BlinkTimer_Tick(object sender, EventArgs e)
         {
-            lbBoxed.Visible = bBoxing;
-            bBoxing = !bBoxing;
+            lbBoxed.Visible = bBlinking;
+            bBlinking = !bBlinking;
         }
 
-        private void SetText_FormClosing(object sender, FormClosingEventArgs e)
-        {
 
-        }
 
         private void btnApplyTab_Click(object sender, EventArgs e)
         {

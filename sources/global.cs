@@ -311,6 +311,41 @@ namespace MacroViewer
                 strOut += sAlpha.Substring(k, 1); 
             return strOut;
         }
+
+        /*
+         *
+      x  https://www.amazon.com/s?k=wd+blue+sn570&hvadid=604496098449&hvdev=c&hvlocphy=9028097&hvnetw=g&hvqmt=e&hvrand=16170472703128286580&hvtargid=kwd-1440214831857&hydadcr=24329_13517663&tag=googhydr-20&ref=pd_sl_9paam7inoz_e
+        https://www.amazon.com/Western-Digital-SN580-Internal-Solid/dp/B0C8XMH264/ref=asc_df_B0C8XMH264?tag=bingshoppinga-20&linkCode=df0&hvadid=80401975313450&hvnetw=o&hvqmt=e&hvbmt=be&hvdev=c&hvlocint=&hvlocphy=&hvtargid=pla-4584001439821208&th=1
+        https://www.officedepot.com/a/products/6789792/Western-Digital-BLUE-SN570-Internal-NVMe/?mediacampaignid=71700000100485049_370762392&gclid=138b98ec20b212f5975afeedf0922222&gclsrc=3p.ds&msclkid=138b98ec20b212f5975afeedf0922222
+        https://www.bhphotovideo.com/c/product/1673383-REG/seagate_st4000dm004_barracuda_4tb_3_5_5400.html?ap=y&smp=y&msclkid=c6b55c6469861e7e5dfd3a65b9749523
+      x  https://www.seagate.com/products/nas-drives/ironwolf-pro-hard-drive/?sku=ST10000NTZ01&utm_campaign=nas-2024-shopping-global&utm_medium=sem&utm_source=google-shopping&utm_product=ironwolf-nas&utm_use_case=general&prodSrc=ironwolf-nas&use_case=general&gad_source=1&gclid=Cj0KCQjwwYSwBhDcARIsAOyL0fjBfMIzPXARUADRZgnhTNWFs4SOeDyf_vEmpeg1pimtKttTI1JuE_0aAqQ_EALw_wcB
+        https://www.newegg.com/crucial-2tb-t500/p/20-156-389?Item=20-156-389
+        https://www.westerndigital.com/products/internal-drives/wd-blue-sn580-nvme-ssd?cjdata=MXxOfDB8WXww&cjevent=e9592a2deadf11ee806c35760a1cb827&utm_medium=afl1&utm_source=cj&utm_content=Western+Digital+Clearance,+Canada&cp1=100357191&utm_campaign=ca-clearance&utm_term=02-03-2022&cp2=Microsoft+Shopping+(Bing+Rebates,+Coupons,+etc.)&sku=WDS250G3B0E
+         */
+
+        // can stop at ?
+        private static string[] QListVendors = {
+            ".westerndigital.",
+            ".officedepot.",
+            ".bhphotovideo.",
+            ".amazon.", // but  not s? so put after the ?& test
+            ".newegg."
+        };
+        private static string QVendor(string sUrl)
+        {
+            foreach(string s in QListVendors)
+            {
+                int i = sUrl.IndexOf(s);
+                if (i > 0)
+                {
+                    int j = s.IndexOf('?');
+                    if (j < 0) return sUrl;
+                    return sUrl.Substring(0, j);    
+                }
+            }
+            return "";
+        }
+
         public static string FormTable(int rows, int cols)
         {
             if (rows == 0 && cols == 0) return "";
@@ -340,9 +375,9 @@ namespace MacroViewer
         /*
          * https://www.google.com/search?q=hp+928511-001&sca_e  https://www.bing.com/search?q=sn570&qs=n
          * https://www.amazon.com/s?k=sn570&crid=3U  https://www.aliexpress.us/w/wholesale-sn570.html?spm=a2g0o.home.search.0
-         * https://www.google.com/search?client=firefox-b-1-d&q=hp+50334-601
+         * https://www.google.com/search?client=firefox-b-1-d&q=hp+50334-601  https://www.newegg.com/p/pl?d=wd+blue+sn570
          * https://www.amazon.com/Ediloca-Internal-Compatible-Ultrabooks-Computers/dp/B0B7QYZF9X/ref=sr_1
-         * 
+         * ? before & is used by amazon, wd, seagate, newegg but not google with that firefox
          */
         private static string dStr(string strIn, string strRef)
         {
@@ -365,11 +400,7 @@ namespace MacroViewer
                 if(i < 0) return sUrl;
                 return sUrl.Substring(0, i);
             }
-            if (surl.Contains("amazon") || surl.Contains("newegg"))
-            {
-                i = sUrl.IndexOf('&');
-                return (i < 0) ? sUrl: sUrl.Substring(0, i);
-            }
+
             if(surl.Contains("aliexpress") || surl.Contains("ebay"))
             {
                 i = sUrl.IndexOf('?');
@@ -382,6 +413,18 @@ namespace MacroViewer
 
             i = surl.IndexOf("?utm_source=");  // gets bing and google
             if (i > 0) return sUrl.Substring(0, i);
+
+            //if (surl.Contains("amazon") || surl.Contains("newegg") || surl.Contains("westerndigital"))
+            {
+                i = sUrl.IndexOf('&');
+                j = sUrl.IndexOf('?');
+                //return (i < 0) ? sUrl: sUrl.Substring(0, i);
+                if (j < i) return sUrl.Substring(0, i);
+                if (i < 0 && j < 0) return sUrl;    //nothing complicated so just return
+            }
+
+            surl = QVendor(sUrl);
+            if (surl != "") return surl;
 
             if (System.Diagnostics.Debugger.IsAttached)
             { 

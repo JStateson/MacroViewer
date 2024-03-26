@@ -612,6 +612,7 @@ namespace MacroViewer
                 bHaveHTML = true;
                 ShowUneditedRow(0);
                 btnNew.Enabled = false;
+                tbMacName.Enabled = false;
                 lbName.Columns[2].HeaderText = "Name HTML";
             }
         }
@@ -626,6 +627,7 @@ namespace MacroViewer
         {
             int i = 0;
             bool bNoEmpty = !(strFN == "HP" || strFN == "" || strFN == "HTML");
+            tbMacName.Enabled = bNoEmpty;
             bMacroErrors = false;
             mShowErr.Visible = false;
             TXTName = strFN;
@@ -733,7 +735,6 @@ namespace MacroViewer
 
         private void EnableMacEdits(bool enable)
         {
-            tbMacName.Enabled = enable;
             btnDelM.Enabled = enable && CurrentRowSelected >= 0;
             btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
             btnDelChecked.Enabled = enable && CurrentRowSelected >= 0;

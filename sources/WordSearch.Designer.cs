@@ -33,6 +33,7 @@
             this.tbNumMatches = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnExitToMac = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.cbIgnCase = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -44,8 +45,9 @@
             this.dgvSearched = new System.Windows.Forms.DataGridView();
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnExitToMac = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbHPKB = new System.Windows.Forms.CheckBox();
+            this.btnHPKB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -54,8 +56,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tbNumMatches);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cbHPKB);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label2);
@@ -65,14 +66,14 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(894, 651);
+            this.groupBox1.Size = new System.Drawing.Size(943, 651);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
             // 
             // tbNumMatches
             // 
-            this.tbNumMatches.Location = new System.Drawing.Point(377, 35);
+            this.tbNumMatches.Location = new System.Drawing.Point(222, 43);
             this.tbNumMatches.Name = "tbNumMatches";
             this.tbNumMatches.ReadOnly = true;
             this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
@@ -81,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(220, 41);
+            this.label3.Location = new System.Drawing.Point(65, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 20);
             this.label3.TabIndex = 4;
@@ -89,6 +90,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnHPKB);
             this.groupBox3.Controls.Add(this.btnExitToMac);
             this.groupBox3.Controls.Add(this.btnExit);
             this.groupBox3.Controls.Add(this.cbIgnCase);
@@ -97,15 +99,28 @@
             this.groupBox3.Controls.Add(this.rbExactMatch);
             this.groupBox3.Location = new System.Drawing.Point(497, 25);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(369, 258);
+            this.groupBox3.Size = new System.Drawing.Size(408, 259);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Keyword parameters";
             // 
+            // btnExitToMac
+            // 
+            this.btnExitToMac.ForeColor = System.Drawing.Color.Red;
+            this.btnExitToMac.Location = new System.Drawing.Point(112, 208);
+            this.btnExitToMac.Name = "btnExitToMac";
+            this.btnExitToMac.Size = new System.Drawing.Size(192, 31);
+            this.btnExitToMac.TabIndex = 9;
+            this.btnExitToMac.Text = "EXIT and show macro";
+            this.toolTip1.SetToolTip(this.btnExitToMac, "Bring up the selected macro after the form closes\r\nThis does not work if you have" +
+        " unfinised edits");
+            this.btnExitToMac.UseVisualStyleBackColor = true;
+            this.btnExitToMac.Click += new System.EventHandler(this.btnExitToMac_Click);
+            // 
             // btnExit
             // 
             this.btnExit.ForeColor = System.Drawing.Color.Red;
-            this.btnExit.Location = new System.Drawing.Point(222, 96);
+            this.btnExit.Location = new System.Drawing.Point(222, 149);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(92, 31);
             this.btnExit.TabIndex = 8;
@@ -161,10 +176,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.tbNumMatches);
+            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.lbKeyFound);
-            this.groupBox2.Location = new System.Drawing.Point(497, 289);
+            this.groupBox2.Location = new System.Drawing.Point(497, 312);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(369, 330);
+            this.groupBox2.Size = new System.Drawing.Size(408, 330);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Keywords found";
@@ -174,9 +191,9 @@
             this.lbKeyFound.FormattingEnabled = true;
             this.lbKeyFound.HorizontalScrollbar = true;
             this.lbKeyFound.ItemHeight = 20;
-            this.lbKeyFound.Location = new System.Drawing.Point(30, 49);
+            this.lbKeyFound.Location = new System.Drawing.Point(30, 109);
             this.lbKeyFound.Name = "lbKeyFound";
-            this.lbKeyFound.Size = new System.Drawing.Size(291, 264);
+            this.lbKeyFound.Size = new System.Drawing.Size(291, 204);
             this.lbKeyFound.TabIndex = 0;
             // 
             // label2
@@ -225,35 +242,47 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter to search)";
             // 
-            // btnExitToMac
+            // cbHPKB
             // 
-            this.btnExitToMac.ForeColor = System.Drawing.Color.Red;
-            this.btnExitToMac.Location = new System.Drawing.Point(122, 178);
-            this.btnExitToMac.Name = "btnExitToMac";
-            this.btnExitToMac.Size = new System.Drawing.Size(192, 31);
-            this.btnExitToMac.TabIndex = 9;
-            this.btnExitToMac.Text = "EXIT and show macro";
-            this.toolTip1.SetToolTip(this.btnExitToMac, "Bring up the selected macro after the form closes\r\nThis does not work if you have" +
-        " unfinised edits");
-            this.btnExitToMac.UseVisualStyleBackColor = true;
-            this.btnExitToMac.Click += new System.EventHandler(this.btnExitToMac_Click);
+            this.cbHPKB.AutoSize = true;
+            this.cbHPKB.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbHPKB.Location = new System.Drawing.Point(148, 41);
+            this.cbHPKB.Name = "cbHPKB";
+            this.cbHPKB.Size = new System.Drawing.Size(199, 24);
+            this.cbHPKB.TabIndex = 8;
+            this.cbHPKB.Text = "Include HP KB in search";
+            this.cbHPKB.UseVisualStyleBackColor = true;
+            // 
+            // btnHPKB
+            // 
+            this.btnHPKB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHPKB.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHPKB.Location = new System.Drawing.Point(222, 85);
+            this.btnHPKB.Name = "btnHPKB";
+            this.btnHPKB.Size = new System.Drawing.Size(140, 34);
+            this.btnHPKB.TabIndex = 10;
+            this.btnHPKB.Text = "Search HP KB";
+            this.btnHPKB.UseVisualStyleBackColor = true;
+            this.btnHPKB.Click += new System.EventHandler(this.btnHPKB_Click);
             // 
             // WordSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 675);
+            this.ClientSize = new System.Drawing.Size(995, 675);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WordSearch";
             this.Text = "WordSearch";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WordSearch_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).EndInit();
             this.ResumeLayout(false);
 
@@ -278,5 +307,7 @@
         private System.Windows.Forms.ListBox lbKeyFound;
         private System.Windows.Forms.Button btnExitToMac;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox cbHPKB;
+        private System.Windows.Forms.Button btnHPKB;
     }
 }

@@ -37,7 +37,8 @@ namespace MacroViewer
             cFound = new List<CFound>();
             cSorted = new List<CFound>();
             cAll = Rcb;
-            LastViewed = -1;            
+            LastViewed = -1;
+            cbHPKB.Checked = Properties.Settings.Default.IncludeHPKB;
         }
 
 
@@ -143,6 +144,9 @@ namespace MacroViewer
             int[] Unsorted = new int[n];
             int[] SortInx = new int[n];
             int CFcnt = 0;
+            if(cbHPKB.Checked)
+                HP_KB_find();
+
             foreach(CBody cb in cAll)
             { 
                 string sKeys = PerformSearch(cb.Name + " " + cb.sBody);
@@ -215,6 +219,29 @@ namespace MacroViewer
         {
             LastViewed = nUseLastViewed;
             this.Close();
+        }
+
+        private void WordSearch_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.IncludeHPKB = cbHPKB.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void HP_KB_find()
+        {
+            string s = tbKeywords.Text.Trim();
+            if (s == "") return;
+            string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
+
+            s = Utils.FormUrl(strUrl + s, "Lookup:'" + s + "'");
+            CShowBrowser MyBrowser = new CShowBrowser();
+            MyBrowser.Init();
+            MyBrowser.ShowInBrowser(s);
+        }
+
+        private void btnHPKB_Click(object sender, EventArgs e)
+        {
+            HP_KB_find();
         }
     }
 }

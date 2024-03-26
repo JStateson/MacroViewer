@@ -94,5 +94,17 @@ namespace MacroViewer.Properties {
                 this["ChangeSig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IncludeHPKB {
+            get {
+                return ((bool)(this["IncludeHPKB"]));
+            }
+            set {
+                this["IncludeHPKB"] = value;
+            }
+        }
     }
 }

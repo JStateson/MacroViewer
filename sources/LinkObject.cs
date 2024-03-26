@@ -178,5 +178,10 @@ namespace MacroViewer
             lbBoxed.Visible = bBlinking;
             bBlinking = !bBlinking;
         }
+
+        private void LinkObject_Shown(object sender, EventArgs e)
+        {
+            tbImageUrl.Focus();
+        }
     }
 }

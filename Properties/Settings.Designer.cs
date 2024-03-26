@@ -106,5 +106,17 @@ namespace MacroViewer.Properties {
                 this["IncludeHPKB"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FillAlpha {
+            get {
+                return ((bool)(this["FillAlpha"]));
+            }
+            set {
+                this["FillAlpha"] = value;
+            }
+        }
     }
 }

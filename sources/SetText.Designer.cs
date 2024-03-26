@@ -53,6 +53,7 @@
             this.tbRows = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbPreFill = new System.Windows.Forms.CheckBox();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -235,15 +236,16 @@
             // 
             // gpTable
             // 
+            this.gpTable.Controls.Add(this.cbPreFill);
             this.gpTable.Controls.Add(this.btnApplyTab);
             this.gpTable.Controls.Add(this.tbCols);
             this.gpTable.Controls.Add(this.tbRows);
             this.gpTable.Controls.Add(this.label2);
             this.gpTable.Controls.Add(this.label1);
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpTable.Location = new System.Drawing.Point(825, 91);
+            this.gpTable.Location = new System.Drawing.Point(825, 25);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(250, 158);
+            this.gpTable.Size = new System.Drawing.Size(250, 248);
             this.gpTable.TabIndex = 8;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table and exit";
@@ -252,7 +254,7 @@
             // 
             this.btnApplyTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplyTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApplyTab.Location = new System.Drawing.Point(23, 104);
+            this.btnApplyTab.Location = new System.Drawing.Point(23, 182);
             this.btnApplyTab.Name = "btnApplyTab";
             this.btnApplyTab.Size = new System.Drawing.Size(122, 36);
             this.btnApplyTab.TabIndex = 4;
@@ -294,6 +296,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Rows";
             // 
+            // cbPreFill
+            // 
+            this.cbPreFill.AutoSize = true;
+            this.cbPreFill.Location = new System.Drawing.Point(23, 126);
+            this.cbPreFill.Name = "cbPreFill";
+            this.cbPreFill.Size = new System.Drawing.Size(130, 20);
+            this.cbPreFill.TabIndex = 5;
+            this.cbPreFill.Text = "Fill alphabetically";
+            this.toolTip1.SetToolTip(this.cbPreFill, "Fill with letters indicating the row and column numvber");
+            this.cbPreFill.UseVisualStyleBackColor = true;
+            // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,6 +326,8 @@
             this.MinimizeBox = false;
             this.Name = "SetText";
             this.Text = "SetText";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SetText_FormClosing);
+            this.Shown += new System.EventHandler(this.SetText_Shown);
             this.gbSelectType.ResumeLayout(false);
             this.gbSelectType.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -355,5 +370,6 @@
         private System.Windows.Forms.TextBox tbRows;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbPreFill;
     }
 }

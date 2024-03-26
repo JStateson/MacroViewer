@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbNumMatches = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.cbHPKB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnHPKB = new System.Windows.Forms.Button();
             this.btnExitToMac = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.cbIgnCase = new System.Windows.Forms.CheckBox();
@@ -40,14 +40,14 @@
             this.rbAnyMatch = new System.Windows.Forms.RadioButton();
             this.rbExactMatch = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbNumMatches = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.lbKeyFound = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvSearched = new System.Windows.Forms.DataGridView();
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cbHPKB = new System.Windows.Forms.CheckBox();
-            this.btnHPKB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -66,27 +66,21 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(943, 651);
+            this.groupBox1.Size = new System.Drawing.Size(904, 651);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
             // 
-            // tbNumMatches
+            // cbHPKB
             // 
-            this.tbNumMatches.Location = new System.Drawing.Point(222, 43);
-            this.tbNumMatches.Name = "tbNumMatches";
-            this.tbNumMatches.ReadOnly = true;
-            this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
-            this.tbNumMatches.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Total Matches";
+            this.cbHPKB.AutoSize = true;
+            this.cbHPKB.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbHPKB.Location = new System.Drawing.Point(148, 41);
+            this.cbHPKB.Name = "cbHPKB";
+            this.cbHPKB.Size = new System.Drawing.Size(199, 24);
+            this.cbHPKB.TabIndex = 8;
+            this.cbHPKB.Text = "Include HP KB in search";
+            this.cbHPKB.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -99,15 +93,27 @@
             this.groupBox3.Controls.Add(this.rbExactMatch);
             this.groupBox3.Location = new System.Drawing.Point(497, 25);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(408, 259);
+            this.groupBox3.Size = new System.Drawing.Size(377, 259);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Keyword parameters";
             // 
+            // btnHPKB
+            // 
+            this.btnHPKB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHPKB.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHPKB.Location = new System.Drawing.Point(200, 127);
+            this.btnHPKB.Name = "btnHPKB";
+            this.btnHPKB.Size = new System.Drawing.Size(140, 34);
+            this.btnHPKB.TabIndex = 10;
+            this.btnHPKB.Text = "Search HP KB";
+            this.btnHPKB.UseVisualStyleBackColor = true;
+            this.btnHPKB.Click += new System.EventHandler(this.btnHPKB_Click);
+            // 
             // btnExitToMac
             // 
             this.btnExitToMac.ForeColor = System.Drawing.Color.Red;
-            this.btnExitToMac.Location = new System.Drawing.Point(112, 208);
+            this.btnExitToMac.Location = new System.Drawing.Point(30, 212);
             this.btnExitToMac.Name = "btnExitToMac";
             this.btnExitToMac.Size = new System.Drawing.Size(192, 31);
             this.btnExitToMac.TabIndex = 9;
@@ -120,7 +126,7 @@
             // btnExit
             // 
             this.btnExit.ForeColor = System.Drawing.Color.Red;
-            this.btnExit.Location = new System.Drawing.Point(222, 149);
+            this.btnExit.Location = new System.Drawing.Point(248, 212);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(92, 31);
             this.btnExit.TabIndex = 8;
@@ -144,7 +150,7 @@
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSearch.Location = new System.Drawing.Point(222, 25);
+            this.btnSearch.Location = new System.Drawing.Point(200, 52);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(99, 34);
             this.btnSearch.TabIndex = 5;
@@ -181,10 +187,27 @@
             this.groupBox2.Controls.Add(this.lbKeyFound);
             this.groupBox2.Location = new System.Drawing.Point(497, 312);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(408, 330);
+            this.groupBox2.Size = new System.Drawing.Size(377, 330);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Keywords found";
+            // 
+            // tbNumMatches
+            // 
+            this.tbNumMatches.Location = new System.Drawing.Point(222, 43);
+            this.tbNumMatches.Name = "tbNumMatches";
+            this.tbNumMatches.ReadOnly = true;
+            this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
+            this.tbNumMatches.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(65, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Total Matches";
             // 
             // lbKeyFound
             // 
@@ -242,34 +265,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter to search)";
             // 
-            // cbHPKB
-            // 
-            this.cbHPKB.AutoSize = true;
-            this.cbHPKB.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbHPKB.Location = new System.Drawing.Point(148, 41);
-            this.cbHPKB.Name = "cbHPKB";
-            this.cbHPKB.Size = new System.Drawing.Size(199, 24);
-            this.cbHPKB.TabIndex = 8;
-            this.cbHPKB.Text = "Include HP KB in search";
-            this.cbHPKB.UseVisualStyleBackColor = true;
-            // 
-            // btnHPKB
-            // 
-            this.btnHPKB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHPKB.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnHPKB.Location = new System.Drawing.Point(222, 85);
-            this.btnHPKB.Name = "btnHPKB";
-            this.btnHPKB.Size = new System.Drawing.Size(140, 34);
-            this.btnHPKB.TabIndex = 10;
-            this.btnHPKB.Text = "Search HP KB";
-            this.btnHPKB.UseVisualStyleBackColor = true;
-            this.btnHPKB.Click += new System.EventHandler(this.btnHPKB_Click);
-            // 
             // WordSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(995, 675);
+            this.ClientSize = new System.Drawing.Size(948, 675);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

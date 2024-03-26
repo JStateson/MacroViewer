@@ -346,12 +346,14 @@ namespace MacroViewer
             return "";
         }
 
-        public static string FormTable(int rows, int cols)
+        public static string FormTable(int rows, int cols, bool bFill)
         {
             if (rows == 0 && cols == 0) return "";
             if (rows == 0) rows = 1;
             if (cols == 0) cols = 1;
             int jChar = 0;
+            string r = rows > 9 ? "00" : "0";
+            string c = cols > 9 ? "00" : "0";
 
             StringBuilder htmlBuilder = new StringBuilder();
             htmlBuilder.Append("<table border='1'>");
@@ -361,8 +363,10 @@ namespace MacroViewer
                 htmlBuilder.Append("<tr>");
                 for (int j = 0; j < cols; j++)
                 {
+                    string s = "R" + i.ToString(r) + "C" + j.ToString(c) + "_" + strFill(jChar, 4);
                     htmlBuilder.Append("<td>");
-                    htmlBuilder.Append(strFill(jChar,4));
+                    if (bFill) htmlBuilder.Append(s);
+                    else htmlBuilder.Append("    ");
                     htmlBuilder.Append("</td>");
                     jChar++;
                 }

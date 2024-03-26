@@ -23,6 +23,7 @@ namespace MacroViewer
             tbRawUrl.Text = "";
             gpTable.Enabled = (strIn == "");
             sLoc = Utils.WhereExe;
+            cbPreFill.Checked = Properties.Settings.Default.FillAlpha;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -142,8 +143,19 @@ namespace MacroViewer
         {
             int r = Convert.ToInt32(tbRows.Text);
             int c = Convert.ToInt32(tbCols.Text);
-            strResultOut = Utils.FormTable(r, c);
+            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked);
             this.Close();
+        }
+
+        private void SetText_Shown(object sender, EventArgs e)
+        {
+            tbRawUrl.Focus();
+        }
+
+        private void SetText_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.FillAlpha = cbPreFill.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

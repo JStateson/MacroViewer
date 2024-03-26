@@ -257,6 +257,7 @@
             this.Name = "LinkObject";
             this.Text = "LinkObject";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LinkObject_FormClosing);
+            this.Shown += new System.EventHandler(this.LinkObject_Shown);
             this.gbSelectType.ResumeLayout(false);
             this.gbSelectType.PerformLayout();
             this.groupBox2.ResumeLayout(false);

@@ -48,11 +48,18 @@
             this.btnAddSupSig = new System.Windows.Forms.Button();
             this.tbSupSig = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnShowURL = new System.Windows.Forms.Button();
+            this.btnDelURL = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lbSaveLoc = new System.Windows.Forms.Label();
+            this.cbSaveUNK = new System.Windows.Forms.CheckBox();
+            this.tbURLcnt = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -144,9 +151,9 @@
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSave.Location = new System.Drawing.Point(208, 84);
+            this.btnSave.Location = new System.Drawing.Point(208, 78);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 23);
+            this.btnSave.Size = new System.Drawing.Size(100, 30);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Apply and exit";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -156,9 +163,9 @@
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(208, 148);
+            this.btnCancel.Location = new System.Drawing.Point(208, 142);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(101, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 30);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -169,7 +176,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnDelUnused);
             this.groupBox3.Controls.Add(this.dgvUsedImages);
-            this.groupBox3.Location = new System.Drawing.Point(338, 129);
+            this.groupBox3.Location = new System.Drawing.Point(338, 277);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(484, 322);
             this.groupBox3.TabIndex = 4;
@@ -244,11 +251,85 @@
             this.tbSupSig.Size = new System.Drawing.Size(334, 20);
             this.tbSupSig.TabIndex = 0;
             // 
+            // btnShowURL
+            // 
+            this.btnShowURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowURL.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnShowURL.Location = new System.Drawing.Point(327, 26);
+            this.btnShowURL.Name = "btnShowURL";
+            this.btnShowURL.Size = new System.Drawing.Size(135, 23);
+            this.btnShowURL.TabIndex = 1;
+            this.btnShowURL.Text = "Click to see them";
+            this.toolTip1.SetToolTip(this.btnShowURL, "This will replace any existing\r\nsupplemental signature");
+            this.btnShowURL.UseVisualStyleBackColor = true;
+            this.btnShowURL.Click += new System.EventHandler(this.btnShowURL_Click);
+            // 
+            // btnDelURL
+            // 
+            this.btnDelURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelURL.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDelURL.Location = new System.Drawing.Point(327, 67);
+            this.btnDelURL.Name = "btnDelURL";
+            this.btnDelURL.Size = new System.Drawing.Size(135, 23);
+            this.btnDelURL.TabIndex = 4;
+            this.btnDelURL.Text = "Click to delete them";
+            this.toolTip1.SetToolTip(this.btnDelURL, "This will replace any existing\r\nsupplemental signature");
+            this.btnDelURL.UseVisualStyleBackColor = true;
+            this.btnDelURL.Click += new System.EventHandler(this.btnDelURL_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnDelURL);
+            this.groupBox5.Controls.Add(this.lbSaveLoc);
+            this.groupBox5.Controls.Add(this.cbSaveUNK);
+            this.groupBox5.Controls.Add(this.btnShowURL);
+            this.groupBox5.Controls.Add(this.tbURLcnt);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(338, 132);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(484, 129);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Unscrubbed URL list";
+            // 
+            // lbSaveLoc
+            // 
+            this.lbSaveLoc.AutoSize = true;
+            this.lbSaveLoc.BackColor = System.Drawing.SystemColors.Window;
+            this.lbSaveLoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbSaveLoc.Location = new System.Drawing.Point(19, 99);
+            this.lbSaveLoc.Name = "lbSaveLoc";
+            this.lbSaveLoc.Size = new System.Drawing.Size(80, 15);
+            this.lbSaveLoc.TabIndex = 3;
+            this.lbSaveLoc.Text = "UrlDebug.txt";
+            // 
+            // cbSaveUNK
+            // 
+            this.cbSaveUNK.AutoSize = true;
+            this.cbSaveUNK.Location = new System.Drawing.Point(19, 31);
+            this.cbSaveUNK.Name = "cbSaveUNK";
+            this.cbSaveUNK.Size = new System.Drawing.Size(96, 17);
+            this.cbSaveUNK.TabIndex = 2;
+            this.cbSaveUNK.Text = " Save URLS";
+            this.cbSaveUNK.UseVisualStyleBackColor = true;
+            // 
+            // tbURLcnt
+            // 
+            this.tbURLcnt.BackColor = System.Drawing.SystemColors.Window;
+            this.tbURLcnt.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbURLcnt.Location = new System.Drawing.Point(148, 47);
+            this.tbURLcnt.Name = "tbURLcnt";
+            this.tbURLcnt.ReadOnly = true;
+            this.tbURLcnt.Size = new System.Drawing.Size(141, 20);
+            this.tbURLcnt.TabIndex = 0;
+            this.tbURLcnt.Text = "test";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 470);
+            this.ClientSize = new System.Drawing.Size(847, 611);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnCancel);
@@ -269,6 +350,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -293,5 +376,11 @@
         private System.Windows.Forms.Button btnAddSupSig;
         private System.Windows.Forms.TextBox tbSupSig;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnShowURL;
+        private System.Windows.Forms.TextBox tbURLcnt;
+        private System.Windows.Forms.Label lbSaveLoc;
+        private System.Windows.Forms.CheckBox cbSaveUNK;
+        private System.Windows.Forms.Button btnDelURL;
     }
 }

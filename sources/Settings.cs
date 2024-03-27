@@ -31,6 +31,27 @@ namespace MacroViewer
             }
             FillLocalImageTable();
             tbSupSig.Text = Properties.Settings.Default.SupSig;
+            cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
+            lbSaveLoc.Text = Utils.WhereExe + "\\UrlDebug.txt";
+            CountUnkUrls();
+        }
+
+        private void CountUnkUrls()
+        {
+            if (File.Exists(lbSaveLoc.Text))
+            {
+                string AllUnkUrls = File.ReadAllText(lbSaveLoc.Text);
+                int count = 0;
+                foreach (char c in AllUnkUrls)
+                {
+                    if (c == '\n')
+                    {
+                        count++;
+                    }
+                }
+                tbURLcnt.Text = "Total unknown " + count.ToString();
+            }
+            else tbURLcnt.Text = "No saved urls";
         }
 
         private void FillLocalImageTable()
@@ -77,6 +98,7 @@ namespace MacroViewer
                 Properties.Settings.Default.UserID = userid;
             }
             Utils.VolunteerUserID = userid;
+            Properties.Settings.Default.SaveUnkUrls = cbSaveUNK.Checked;
             Properties.Settings.Default.Save();
             this.Close();
         }
@@ -113,6 +135,16 @@ namespace MacroViewer
             Properties.Settings.Default.ChangeSig = true;
             Properties.Settings.Default.Save();
             MessageBox.Show("The program must restarted to update the supplemental signature");
+        }
+
+        private void btnDelURL_Click(object sender, EventArgs e)
+        {
+            File.Delete(lbSaveLoc.Text);
+        }
+
+        private void btnShowURL_Click(object sender, EventArgs e)
+        {
+            Utils.NotepadViewer(lbSaveLoc.Text);
         }
     }
 }

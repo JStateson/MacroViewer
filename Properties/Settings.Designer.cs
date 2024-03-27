@@ -118,5 +118,17 @@ namespace MacroViewer.Properties {
                 this["FillAlpha"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveUnkUrls {
+            get {
+                return ((bool)(this["SaveUnkUrls"]));
+            }
+            set {
+                this["SaveUnkUrls"] = value;
+            }
+        }
     }
 }

@@ -54,6 +54,7 @@ namespace MacroViewer
         public static string UnNamedMacro = "Change Me";
         public static string SupSigPrefix = "<b><font color=\"#f80000\">====";
         public static string SupSigSuffix = "====</font></b>";
+        public static bool bRecordUnscrubbedURLs = false;
 
         public static string FNtoHeader(string strFN)
         {
@@ -430,7 +431,10 @@ namespace MacroViewer
             surl = QVendor(sUrl);
             if (surl != "") return surl;
 
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (surl.Contains("https://parts.hp.com/hpparts/Default.aspx"))
+                return "https://parts.hp.com/hpparts";
+
+            if (System.Diagnostics.Debugger.IsAttached || bRecordUnscrubbedURLs)
             { 
                 // keep track of which urls cannot be untracked of de-referenced
                 using (StreamWriter writer = File.AppendText(WhereExe + "\\UrlDebug.txt"))

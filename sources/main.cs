@@ -73,6 +73,7 @@ namespace MacroViewer
             this.Text = " HP Macro Editor";
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
             LoadAllFiles();
+            Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
         }
 
         private string IgnoreSupSig(string s)

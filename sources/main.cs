@@ -631,6 +631,7 @@ namespace MacroViewer
             bMacroErrors = false;
             mShowErr.Visible = false;
             TXTName = strFN;
+            strType = strFN;     //TODO todo to do this needs to be cleaned up
             gpMainEdit.Enabled = true;
             gbSupp.Enabled = true;
             string TXTmacName = Utils.FNtoPath(strFN);
@@ -690,6 +691,7 @@ namespace MacroViewer
             int i = 0;
             string strOut = "";
             TXTName = strFN;
+            strType = strFN;    // TODO need to clean this up todo to do
             string TXTmacName = Utils.FNtoPath(strFN);
             foreach (DataGridViewRow row in lbName.Rows)
             {

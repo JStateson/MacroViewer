@@ -1103,12 +1103,14 @@ namespace MacroViewer
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool bChangeSig = false;
+            bool bMustExit = false;
             Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
+            bMustExit = MySettings.bWantsExit;
             MySettings.Dispose();
+            if (bMustExit) this.Close();
         }
 
 
@@ -1332,7 +1334,7 @@ namespace MacroViewer
         {
             bInitialLoad = true;
             bool bMustChange = Properties.Settings.Default.ChangeSig;
-            string nSig = Properties.Settings.Default.SupSig;           // the new supplemental signature
+            string nSig = Properties.Settings.Default.EditedSig;    // the new supplemental signature
             if (cBodies == null)
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();

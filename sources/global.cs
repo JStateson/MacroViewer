@@ -19,6 +19,7 @@ using System.Windows.Ink;
 using System.Collections.Generic;
 using System.Security.Policy;
 using System.Windows.Automation;
+using System.Net.NetworkInformation;
 
 namespace MacroViewer
 {
@@ -52,9 +53,11 @@ namespace MacroViewer
         //<body style="width: 800px; margin: 0 auto;">
         public static string WhereExe = "";
         public static string UnNamedMacro = "Change Me";
-        public static string SupSigPrefix = "<b><font color=\"#f80000\">====";
-        public static string SupSigSuffix = "====</font></b>";
+        public static string SupSigPrefix = "=+-=";   // these are used to identify the macro addition to make it eacy
+        public static string SupSigSuffix = "=-+=";   // to delete or to change.
         public static bool bRecordUnscrubbedURLs = false;
+        public static string YesButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v=v2\">";
+        public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
 
         public static string FNtoHeader(string strFN)
         {

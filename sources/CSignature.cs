@@ -203,5 +203,15 @@ namespace MacroViewer
         {
             TestBBC();
         }
+
+        private void btnPasteImg_Click(object sender, EventArgs e)
+        {
+            string sUrl = Clipboard.GetText();
+            if(Utils.IsUrlImage(sUrl))
+            {
+                string sImg = Utils.AssembleIMG(sUrl);
+                tbBody.Text += sImg;
+            }
+        }
     }
 }

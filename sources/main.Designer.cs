@@ -76,6 +76,8 @@
             this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,8 +116,6 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -582,6 +582,20 @@
             this.utilsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.utilsToolStripMenuItem.Text = "Utils";
             // 
+            // mnuLCnT
+            // 
+            this.mnuLCnT.Name = "mnuLCnT";
+            this.mnuLCnT.Size = new System.Drawing.Size(186, 22);
+            this.mnuLCnT.Text = "Create and test URLs";
+            this.mnuLCnT.Click += new System.EventHandler(this.mnuLCnT_Click);
+            // 
+            // mnuRemoveLocalImgs
+            // 
+            this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
+            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(186, 22);
+            this.mnuRemoveLocalImgs.Text = "Remove local images";
+            this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -613,8 +627,8 @@
             // testSignatureToolStripMenuItem
             // 
             this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
-            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.testSignatureToolStripMenuItem.Text = "Test Signature";
+            this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
+            this.testSignatureToolStripMenuItem.Text = "Images and Signatures";
             this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
             // 
             // mShowErr
@@ -1013,20 +1027,6 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
-            // 
-            // mnuLCnT
-            // 
-            this.mnuLCnT.Name = "mnuLCnT";
-            this.mnuLCnT.Size = new System.Drawing.Size(186, 22);
-            this.mnuLCnT.Text = "Create and test URLs";
-            this.mnuLCnT.Click += new System.EventHandler(this.mnuLCnT_Click);
-            // 
-            // mnuRemoveLocalImgs
-            // 
-            this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
-            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(186, 22);
-            this.mnuRemoveLocalImgs.Text = "Remove local images";
-            this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
             // 
             // main
             // 

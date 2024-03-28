@@ -180,10 +180,17 @@ The  url: https://support.hp.com/us-en/document/ish_2039298-1862169-16
 This result can be copied to the clipboard.  You can then paste it back into the macro edit page. Once in the main edit box you can add more instructions and click the "Show as page" to see if it works in a web page. </value>
   </data>
   <data name="rSIG.Text" xml:space="preserve">
-    <value>	Signature Help
+    <value>	Image and signature Help
 
 The signature file is stored in the same folder as the application.  It contains HTML which can be edited.
-Feel free to edit my signature to create your own. If you come up with some unique or unusual signature, please contribute them using the github issues tool.</value>
+Feel free to edit my signature to create your own. If you come up with some unique or unusual signature, please contribute them using the github issues tool.
+
+In addition to createing signature, you can save images that can be used in a macro or in a response to a user.  The image source must be in the HP public album.  When you snip an image and post it in a response, your image is automatically inserted into the HP album.
+
+You can capture the image address by using the right mouse botton and selecting "Copy Image Address".  The captured address can then be pasted into the  form by using the "Paste as image" feature.  Once pasted, you should save and view the image and decide what size to make it.
+Images captured from the HP album can be Thimb, Tiny, Small, Medium and Large
+
+You can put as many images on a single "Sig and Image List" as you want.  You can name them as collecton such as "audio setup"</value>
   </data>
   <data name="rEDIT.Text" xml:space="preserve">
     <value>	Help with main screen (editing)

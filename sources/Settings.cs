@@ -20,9 +20,10 @@ namespace MacroViewer
         public eBrowserType eBrowser {  get; set; }
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
-        public List<CLocalFiles> LocalImageFiles;
+
         private string strEditedSave = "";
-        public Settings(eBrowserType reBrowser, string ruserid)
+
+        public Settings(eBrowserType reBrowser, string ruserid, int NumAttached)
         {
             InitializeComponent();
             userid = ruserid;
@@ -34,7 +35,7 @@ namespace MacroViewer
                 case eBrowserType.eFirefox: rbFirefox.Checked = true; break;
                 case eBrowserType.eEdge: rbEdge.Checked = true; break;  
             }
-            FillLocalImageTable();
+
             tbSupSig.Text = Properties.Settings.Default.SupSig;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
             strEditedSave = Properties.Settings.Default.EditedSig;
@@ -45,9 +46,10 @@ namespace MacroViewer
             CountUnkUrls();
             clbImages.Items.Clear();
             clbImages.Items.Add("Message", true);
-            clbImages.Items.Add("Yes button", false);
-            clbImages.Items.Add("Solution", false);
+            clbImages.Items.Add("Yes image", false);   // TODO to do todo this should come from the
+            clbImages.Items.Add("Solution", false);     // test signature form and not be hard coded
             bWantsExit = false;
+            lbAttached.Text = NumAttached.ToString();
         }
 
         private void CountUnkUrls()
@@ -68,31 +70,6 @@ namespace MacroViewer
             else tbURLcnt.Text = "No saved urls";
         }
 
-        private void FillLocalImageTable()
-        {
-            string strpath = "";
-            string strTotal = "";
-            int i = 0;
-            int r = dgvUsedImages.Size.Width;
-            LocalImageFiles = Utils.NumLocalImageFiles();
-            foreach(string s in Utils.LocalMacroPrefix)
-            {
-                strpath = Utils.FNtoPath(s);
-                if (!File.Exists(strpath)) continue;
-                strTotal += File.ReadAllText(strpath);
-            }
-            foreach(CLocalFiles cf in LocalImageFiles)
-            {
-                if(strTotal.Contains(cf.Name))
-                {
-                    LocalImageFiles[i].NotUsed = false;
-                }
-                i++;
-            }
-            dgvUsedImages.DataSource = LocalImageFiles;
-            dgvUsedImages.Columns[0].Width = 64;
-            dgvUsedImages.Columns[1].Width = r - dgvUsedImages.Columns[0].Width - 36;
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -116,32 +93,6 @@ namespace MacroViewer
             Properties.Settings.Default.SupSig = tbSupSig.Text;
             Properties.Settings.Default.Save();
             this.Close();
-        }
-
-        private void btnDelUnused_Click(object sender, EventArgs e)
-        {
-            int NumDeleted = 0;
-            foreach(CLocalFiles cf in LocalImageFiles)
-            {
-                if(cf.NotUsed)
-                {
-                    string sFile = Utils.WhereExe + "\\" + cf.Name;
-                    try
-                    {
-                        File.Delete(sFile);
-                        NumDeleted++;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error:" + ex.Message, "Unable to delete", MessageBoxButtons.OKCancel);
-                    }
-                }
-            }
-            if (NumDeleted > 0)
-            {
-                LocalImageFiles.Clear();
-                FillLocalImageTable();
-            }
         }
 
 
@@ -222,6 +173,7 @@ namespace MacroViewer
             }
             if (clbImages.GetItemCheckState(0) == CheckState.Checked) sOut =
                     sS + sFs + tbSupSig.Text + sFe + sE + "<br>";
+            // TODO the following YES and SOLUTION probably need to come from the signature form
             if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut += Utils.YesButton + "  ";
             if (clbImages.GetItemCheckState(2) == CheckState.Checked) sOut += Utils.SolButton + "<br>";
             tbEdit.Text = sOut;
@@ -238,6 +190,8 @@ namespace MacroViewer
 
         private void btnSavEdits_Click(object sender, EventArgs e)
         {
+            if (tbEdit.Text == "") return;
+            btnAddSupSig.Enabled = true;
             PerformSave();
         }
 
@@ -312,6 +266,5 @@ namespace MacroViewer
             bWantsExit = (dr == DialogResult.OK);
             if (bWantsExit) this.Close();
         }
-
     }
 }

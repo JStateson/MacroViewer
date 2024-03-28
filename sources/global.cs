@@ -58,6 +58,11 @@ namespace MacroViewer
         public static bool bRecordUnscrubbedURLs = false;
         public static string YesButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v=v2\">";
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
+        public static int HasSupSig(ref string s)
+        {
+            if (s.Contains(SupSigPrefix) && s.Contains(SupSigSuffix)) return 1;
+            return 0;
+        }
 
         public static string FNtoHeader(string strFN)
         {
@@ -230,19 +235,6 @@ namespace MacroViewer
         {
             public bool NotUsed { get; set; }
             public string Name { get; set; }
-        }
-        public static List<CLocalFiles> NumLocalImageFiles() 
-        {
-            List<CLocalFiles> MyImages = new List<CLocalFiles>();
-            string[] files = Directory.GetFiles(WhereExe, "LOCALIMAGEFILE-*.png");
-            foreach(string s in files)
-            {
-                CLocalFiles cf = new CLocalFiles();
-                cf.Name = Path.GetFileName(s);
-                cf.NotUsed = true;
-                MyImages.Add(cf);
-            }
-            return MyImages;
         }
 
         public static string GetNextImageFile(string strType, string strExe)
@@ -718,5 +710,4 @@ namespace MacroViewer
         }
 
     }
-
 }

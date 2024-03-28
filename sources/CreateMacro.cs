@@ -76,9 +76,7 @@ namespace MacroViewer
             {
                 strImageName =  Utils.GetNextImageFile(strType, ExeFolder);
                 strImagePath = ExeFolder + "/" + strImageName;
-                ImageConverter converter = new ImageConverter();
-                byte[] MyByteArray = (byte[])converter.ConvertTo(pbImage.Image, typeof(byte[]));
-                File.WriteAllBytes(strImagePath, MyByteArray);
+                pbImage.Image.Save(strImagePath, ImageFormat.Png);
                 Width = pbImage.Image.Width;
                 Height = pbImage.Image.Height;
             }

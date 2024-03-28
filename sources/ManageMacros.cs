@@ -93,19 +93,6 @@ namespace MacroViewer
             ShowRow(0);
         }
 
-        private void btnView_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void btnDelAll_Click(object sender, EventArgs e)
-        {
-            Utils.PurgeLocalImages(strType,WhereExe);
-        }
-
-
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {

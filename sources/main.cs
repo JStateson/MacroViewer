@@ -52,6 +52,7 @@ namespace MacroViewer
         private bool bInitialLoad = false;  // this is used with the bad ending to look for
         private List<string> strBadEnding = new List<string>();
         private bool bHaveHTML = false; // html macro was read in. this cannot be edited
+        private int NumSupplementalSignatures = 0;
 
         //CSendCloud SendToCloud = new CSendCloud();
 
@@ -474,14 +475,6 @@ namespace MacroViewer
         {
             if (e.RowIndex < 0) return;
             RunBrowser();
-        }
-
-        private void utilsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            utils MyUtils = new utils();
-            MyUtils.Show();
-            //MyUtils.ShowDialog();
-            //MyUtils.Dispose();
         }
 
 
@@ -1104,7 +1097,7 @@ namespace MacroViewer
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool bMustExit = false;
-            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID);
+            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
@@ -1333,6 +1326,7 @@ namespace MacroViewer
         private void LoadAllFiles()
         {
             bInitialLoad = true;
+            NumSupplementalSignatures = 0;
             bool bMustChange = Properties.Settings.Default.ChangeSig;
             string nSig = Properties.Settings.Default.EditedSig;    // the new supplemental signature
             if (cBodies == null)
@@ -1349,7 +1343,8 @@ namespace MacroViewer
                         cb.File = s;
                         cb.Number = (i + 1).ToString();
                         cb.Name = lbName.Rows[i].Cells[2].Value.ToString();
-                        if(bMustChange)
+                        NumSupplementalSignatures += Utils.HasSupSig(ref Body[i]);
+                        if (bMustChange)
                         {
                             cb.sBody = Utils.ReplaceSupSig(nSig, ref Body[i]);
                             Body[i] = cb.sBody;
@@ -1619,6 +1614,19 @@ namespace MacroViewer
             cms.strType = strType;
             cms.bDelete = true;
             PerformMove(cms);
+        }
+
+        private void mnuLCnT_Click(object sender, EventArgs e)
+        {
+            utils MyUtils = new utils();
+            MyUtils.Show();
+        }
+
+        private void mnuRemoveLocalImgs_Click(object sender, EventArgs e)
+        {
+            RemoveImages ri = new RemoveImages();
+            ri.ShowDialog();
+            ri.Dispose();
         }
     }
 }

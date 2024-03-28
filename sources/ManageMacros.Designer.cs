@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.gbDiags = new System.Windows.Forms.GroupBox();
-            this.btnDelAll = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdateURL = new System.Windows.Forms.Button();
             this.btnBrowseImage = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,34 +40,10 @@
             this.dgManage = new System.Windows.Forms.DataGridView();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.gbDiags.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgManage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gbDiags
-            // 
-            this.gbDiags.Controls.Add(this.btnDelAll);
-            this.gbDiags.Location = new System.Drawing.Point(813, 12);
-            this.gbDiags.Name = "gbDiags";
-            this.gbDiags.Size = new System.Drawing.Size(146, 88);
-            this.gbDiags.TabIndex = 1;
-            this.gbDiags.TabStop = false;
-            this.gbDiags.Text = "Clean local files";
-            this.gbDiags.Visible = false;
-            // 
-            // btnDelAll
-            // 
-            this.btnDelAll.Location = new System.Drawing.Point(16, 33);
-            this.btnDelAll.Name = "btnDelAll";
-            this.btnDelAll.Size = new System.Drawing.Size(99, 23);
-            this.btnDelAll.TabIndex = 0;
-            this.btnDelAll.Text = "Clean All";
-            this.toolTip1.SetToolTip(this.btnDelAll, "Remove all .prg and .id files in executable folder");
-            this.btnDelAll.UseVisualStyleBackColor = true;
-            this.btnDelAll.Click += new System.EventHandler(this.btnDelAll_Click);
             // 
             // groupBox1
             // 
@@ -84,6 +59,18 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Macro List and URL";
+            // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnExit.Location = new System.Drawing.Point(252, 419);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(109, 38);
+            this.btnExit.TabIndex = 9;
+            this.btnExit.Text = "EXIT";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnUpdateURL
             // 
@@ -143,9 +130,9 @@
             this.dgManage.ReadOnly = true;
             this.dgManage.RowHeadersWidth = 16;
             this.dgManage.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgManage.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgManage.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgManage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgManage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgManage.ShowCellToolTips = false;
@@ -165,7 +152,7 @@
             // 
             this.btnHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHelp.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnHelp.Location = new System.Drawing.Point(526, 45);
+            this.btnHelp.Location = new System.Drawing.Point(603, 38);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(169, 38);
             this.btnHelp.TabIndex = 6;
@@ -173,32 +160,18 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
-            // btnExit
-            // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnExit.Location = new System.Drawing.Point(252, 419);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(109, 38);
-            this.btnExit.TabIndex = 9;
-            this.btnExit.Text = "EXIT";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // ManageMacros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 523);
+            this.ClientSize = new System.Drawing.Size(969, 523);
             this.Controls.Add(this.btnHelp);
-            this.Controls.Add(this.gbDiags);
             this.Controls.Add(this.pbImage);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ManageMacros";
             this.Text = "ManageMacros";
-            this.gbDiags.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgManage)).EndInit();
@@ -208,9 +181,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox gbDiags;
-        private System.Windows.Forms.Button btnDelAll;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgManage;

@@ -128,8 +128,11 @@ Download Macros	Bring up your macro settings page so you can download it.
 The macros are stored in the same folder as the application.  Any local images are also stored there.  Note that local images must be uploaded to the HP album before any user can see them.  You must switch yuur macro page to "source" and then save the source.  Macros are extracted from the file you saved.
 These supplemental macros are stored as HTML-Markup but are displayed and can be edited as plain text for convenience.  A total of 60 are available for use but they are not written to the HP macros website.  They are local files.  You can create additional macros, test them, and then use windows copy and paste to reply to a user.  
 
-	Menu Items - Utils
-This dialog box allows you to form URLs that optionally have a phrase that can be clcicked on.  Images urls can be added but only manually.  This is used for testing and noting is returned to the main dialog box
+	Menu Items - Utils - Create and test URLs
+This dialog box allows you to form URLs that optionally have a phrase that can be clicked on.  Images urls can be added but only manually.  This is used for testing and nothing is returned to the main dialog box.  You must use copy and paste to get the url back into this application.
+
+	Menu Items - Utils - Remove local images
+If you used the windows snip and paste to create an image than a local file was created.  This dialog box allows you to examine all local files and delete the oens that are no longer used. Local images files cannot be seen on the HP site.  Once uploaded to your HP photo album and replaced by the album url they need to be deletled.
 
 	Menu Item - Signature
 This dialog box allows you to create, test, and save variouis signatures
@@ -154,8 +157,8 @@ HP has a copy of the HTML that was downloaded from your HP forum settings. It is
 
 	Menu Item - Settings
 You can specoify which browser to use when accessing your forum settings page and photo album.   The MacroViewer app uses WebView2 to display all sites.  That tool uses Edge.  If you do not have Edge installed this app will not display sites properly or at all.
-If you enter your HP forum ID then the Edge or Chrome browser can being up your photo album.  This app cannot log in.  You must have logged in earlier.  There is no communication between the browser or any web page and this app.  If you need to grab the url to an image you must use copy and paste to get the url back into this application.
-Settings also maintains a list of local image files that you used to add images to your macro.  One the local image has been changed to one in your forum album, you should delete the image as it is no longer needed.
+If you enter your HP forum ID then the Edge or Chrome browser can bring up your photo album.  This app cannot log in.  You must have logged in earlier.  There is no communication between the browser or any web page and this app. 
+This dialog box also allows the creation (and deletion) of supplemental signatures.  The text and image are appended to the body of the macro and are not part of your normal signature.
 
 	Menu Item - Errors and Differences
 Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.

@@ -114,6 +114,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -573,10 +575,12 @@
             // 
             // utilsToolStripMenuItem
             // 
+            this.utilsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuLCnT,
+            this.mnuRemoveLocalImgs});
             this.utilsToolStripMenuItem.Name = "utilsToolStripMenuItem";
             this.utilsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.utilsToolStripMenuItem.Text = "Utils";
-            this.utilsToolStripMenuItem.Click += new System.EventHandler(this.utilsToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1010,6 +1014,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
+            // mnuLCnT
+            // 
+            this.mnuLCnT.Name = "mnuLCnT";
+            this.mnuLCnT.Size = new System.Drawing.Size(186, 22);
+            this.mnuLCnT.Text = "Create and test URLs";
+            this.mnuLCnT.Click += new System.EventHandler(this.mnuLCnT_Click);
+            // 
+            // mnuRemoveLocalImgs
+            // 
+            this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
+            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(186, 22);
+            this.mnuRemoveLocalImgs.Text = "Remove local images";
+            this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1133,6 +1151,8 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ToolStripMenuItem mOSload;
         private System.Windows.Forms.Button btnDelChecked;
+        private System.Windows.Forms.ToolStripMenuItem mnuLCnT;
+        private System.Windows.Forms.ToolStripMenuItem mnuRemoveLocalImgs;
     }
 }
 

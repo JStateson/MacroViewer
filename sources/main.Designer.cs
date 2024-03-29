@@ -251,7 +251,7 @@
             // btnCopyTo
             // 
             this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(235, 74);
+            this.btnCopyTo.Location = new System.Drawing.Point(254, 74);
             this.btnCopyTo.Name = "btnCopyTo";
             this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
@@ -357,7 +357,7 @@
             // btnCopyFrom
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyFrom.Location = new System.Drawing.Point(219, 130);
+            this.btnCopyFrom.Location = new System.Drawing.Point(238, 130);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(177, 27);
             this.btnCopyFrom.TabIndex = 10;
@@ -812,7 +812,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Info;
-            this.label6.Location = new System.Drawing.Point(27, 138);
+            this.label6.Location = new System.Drawing.Point(20, 134);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(182, 32);
             this.label6.TabIndex = 17;
@@ -869,7 +869,7 @@
             // btnToNotepad
             // 
             this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToNotepad.Location = new System.Drawing.Point(235, 22);
+            this.btnToNotepad.Location = new System.Drawing.Point(254, 22);
             this.btnToNotepad.Name = "btnToNotepad";
             this.btnToNotepad.Size = new System.Drawing.Size(161, 29);
             this.btnToNotepad.TabIndex = 12;

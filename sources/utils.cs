@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net.Mail;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -59,13 +60,69 @@ namespace MacroViewer
             MakeResult();
         }
 
-        private void btnShowBrowser_Click(object sender, EventArgs e)
+        private void ShowBrowser(string s)
         {
-            string strTemp = tbResult.Text;
-            if (strTemp == "") return;
+            if (s == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            MyBrowser.ShowInBrowser(s);
+        }
+
+        private void btnShowBrowser_Click(object sender, EventArgs e)
+        {
+            ShowBrowser(tbResult.Text);
+        }
+
+        private void btnApplyTab_Click(object sender, EventArgs e)
+        {
+            int r = Convert.ToInt32(tbRows.Text);
+            int c = Convert.ToInt32(tbCols.Text);
+            int n = r * c;
+            int i;
+            tbScratch.Text = Utils.FormTable(r, c, true);
+            btnShow.Enabled = (tbScratch.Text != "");
+            if(cbPreFill.Checked && (n <= 30))
+            {
+                dgv.Rows.Clear();
+                for(i = 0; i < n; i++)
+                {
+                    //DataGridViewRow row = new DataGridViewRow();
+                    dgv.Rows.Add(Utils.strFillSubscript(r,c,i),"    ");
+                }
+
+            }
+        }
+
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            ShowBrowser(tbScratch.Text);
+        }
+
+        private void cbPreFill_CheckStateChanged(object sender, EventArgs e)
+        {
+            dgv.Visible = cbPreFill.Checked;
+        }
+
+        private void btnTransfer_Click(object sender, EventArgs e)
+        {
+            string sBig = tbScratch.Text;
+            foreach(DataGridViewRow row in dgv.Rows)
+            {
+                string s1 = row.Cells[0].Value.ToString();
+                string s2 = row.Cells[1].Value.ToString();
+                sBig = sBig.Replace(s1, s2);
+            }
+            tbScratch.Text = sBig;
+        }
+
+        private void btnCopyScratch_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbScratch.Text);
+        }
+
+        private void btnShowScratch_Click(object sender, EventArgs e)
+        {
+            ShowBrowser(tbScratch.Text);
         }
     }
 }

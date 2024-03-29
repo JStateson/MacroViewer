@@ -152,7 +152,7 @@
             // 
             this.btnHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHelp.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnHelp.Location = new System.Drawing.Point(603, 38);
+            this.btnHelp.Location = new System.Drawing.Point(568, 38);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(169, 38);
             this.btnHelp.TabIndex = 6;

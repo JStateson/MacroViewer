@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>The local file needs to be uploaded to one of your HP photo albums.  I use my profile album as the global one has too many images.
+    <value>YOU DO NOT NEED TO DO THIS UNLESS YOU PLAN ON UPLOADING THE MACRO TO YOUR HP ALBUM.
+Even though the images are local and only on our disk drive you can use the SHOW AS PAGE to put the macros into your browser and then use your mouse to select ALL of the macro from the page and paste it into your reply.
+Images pasted are put into the HP global album automatically and no need to upload to your personal album unless you want to.
+
+The local file needs to be uploaded to one of your HP photo albums.  I use my profile album as the global one has too many images.
 
 To do thiis you first log into your account and select the album you want to upload the image to.  You then click the Add Images button and then the Choose Files button as shown top right.
 

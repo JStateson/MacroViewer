@@ -58,8 +58,13 @@ namespace MacroViewer
         public static bool bRecordUnscrubbedURLs = false;
         public static string YesButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v=v2\">";
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
+        public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
+
+
         public static int HasSupSig(ref string s)
         {
+            if (s == null) return 0;
+            if (s == "") return 0;
             if (s.Contains(SupSigPrefix) && s.Contains(SupSigSuffix)) return 1;
             return 0;
         }
@@ -300,12 +305,23 @@ namespace MacroViewer
         public static string strFill(int i, int n)
         {
             string strOut = "";
-            string sAlpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string sAlpha = sAlpha1 + sAlpha1.ToLower();
             int k = i % 52;
             for (int j = 0; j < n; j++)
-                strOut += sAlpha.Substring(k, 1); 
+                strOut += AllAlphas.Substring(k, 1); 
             return strOut;
+        }
+
+        // scripting into array r is row c is column sizes
+        public static string strFillSubscript(int r, int c, int n)
+        {
+            int row = n / c;
+            int col = n % c;
+            int k = n % 52;
+            string s ="R"+row.ToString();
+            s += "C" + col.ToString() + "_";
+            for (int j = 0; j < 4; j++)
+                s += AllAlphas.Substring(k, 1);
+            return s;
         }
 
         /*

@@ -456,6 +456,17 @@ namespace MacroViewer
             return sUrl;        
         }
 
+        // could have copied XML instead of HTML
+        public static string ChangeBRtoNL(string s)
+        {
+            string sNL = Environment.NewLine;
+            s = s.Replace("<br>", sNL);
+            //s = s.Replace("</br>", sNL); // these is error
+            s = s.Replace("<br/>", sNL);    // this is error but shows up in some HTML
+            s = s.Replace("<br />", sNL);
+            return s;
+        }
+
         public static string NoTrailingNL(string s)
         {
             int i = s.Length;

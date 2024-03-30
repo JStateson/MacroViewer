@@ -34,6 +34,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveEdits = new System.Windows.Forms.Button();
             this.btnDelSig = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.dgvSigList = new System.Windows.Forms.DataGridView();
             this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnPasteImg = new System.Windows.Forms.Button();
             this.btnAdd2New = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
             this.btnTestXML = new System.Windows.Forms.Button();
@@ -50,8 +52,7 @@
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnPasteImg = new System.Windows.Forms.Button();
+            this.btnNLtoNotepad = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -64,7 +65,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1122, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1168, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,6 +81,7 @@
             this.tbBody.Location = new System.Drawing.Point(43, 235);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
+            this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbBody.Size = new System.Drawing.Size(504, 301);
             this.tbBody.TabIndex = 1;
             // 
@@ -98,6 +100,18 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sig and Image List";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label3.Location = new System.Drawing.Point(41, 443);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(370, 80);
+            this.label3.TabIndex = 16;
+            this.label3.Text = resources.GetString("label3.Text");
             // 
             // label1
             // 
@@ -173,6 +187,7 @@
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.btnNLtoNotepad);
             this.gbEditSig.Controls.Add(this.btnPasteImg);
             this.gbEditSig.Controls.Add(this.btnAdd2New);
             this.gbEditSig.Controls.Add(this.btnAdd1New);
@@ -184,16 +199,29 @@
             this.gbEditSig.Controls.Add(this.bltnSaveBack);
             this.gbEditSig.Controls.Add(this.tbBody);
             this.gbEditSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbEditSig.Location = new System.Drawing.Point(514, 40);
+            this.gbEditSig.Location = new System.Drawing.Point(518, 40);
             this.gbEditSig.Name = "gbEditSig";
-            this.gbEditSig.Size = new System.Drawing.Size(582, 552);
+            this.gbEditSig.Size = new System.Drawing.Size(617, 552);
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
             // 
+            // btnPasteImg
+            // 
+            this.btnPasteImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPasteImg.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnPasteImg.Location = new System.Drawing.Point(43, 173);
+            this.btnPasteImg.Name = "btnPasteImg";
+            this.btnPasteImg.Size = new System.Drawing.Size(161, 34);
+            this.btnPasteImg.TabIndex = 21;
+            this.btnPasteImg.Text = "Paste as image";
+            this.toolTip1.SetToolTip(this.btnPasteImg, "Copy the signature back to the list table");
+            this.btnPasteImg.UseVisualStyleBackColor = true;
+            this.btnPasteImg.Click += new System.EventHandler(this.btnPasteImg_Click);
+            // 
             // btnAdd2New
             // 
-            this.btnAdd2New.Location = new System.Drawing.Point(406, 157);
+            this.btnAdd2New.Location = new System.Drawing.Point(261, 179);
             this.btnAdd2New.Name = "btnAdd2New";
             this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
             this.btnAdd2New.TabIndex = 20;
@@ -204,7 +232,7 @@
             // 
             // btnAdd1New
             // 
-            this.btnAdd1New.Location = new System.Drawing.Point(406, 123);
+            this.btnAdd1New.Location = new System.Drawing.Point(278, 145);
             this.btnAdd1New.Name = "btnAdd1New";
             this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
             this.btnAdd1New.TabIndex = 19;
@@ -243,12 +271,12 @@
             // 
             this.btnToNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToNote.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnToNote.Location = new System.Drawing.Point(406, 66);
+            this.btnToNote.Location = new System.Drawing.Point(406, 125);
             this.btnToNote.Name = "btnToNote";
-            this.btnToNote.Size = new System.Drawing.Size(141, 34);
+            this.btnToNote.Size = new System.Drawing.Size(173, 34);
             this.btnToNote.TabIndex = 16;
-            this.btnToNote.Text = "Copy to notepad";
-            this.toolTip1.SetToolTip(this.btnToNote, "Copy the signatur to notepad");
+            this.btnToNote.Text = "Copy as is to notepad";
+            this.toolTip1.SetToolTip(this.btnToNote, "Copy the signatur to notepad including linebreak markup");
             this.btnToNote.UseVisualStyleBackColor = true;
             this.btnToNote.Click += new System.EventHandler(this.btnToNote_Click);
             // 
@@ -258,12 +286,12 @@
             this.label2.BackColor = System.Drawing.SystemColors.Info;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(202, 21);
+            this.label2.Location = new System.Drawing.Point(185, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 96);
+            this.label2.Size = new System.Drawing.Size(188, 96);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Be sure to copy changes\r\nback (Apply) to Sig List\r\n\r\nUse the PASTE AS IMAGE\r\nto p" +
-    "aste the address of an\r\nimage from the Clipboard";
+            this.label2.Text = "Be sure to copy changes back\r\n(Apply) to Sig List and Save.\r\n\r\nUse the PASTE AS I" +
+    "MAGE\r\nto paste the address of an\r\nimage from the Clipboard";
             // 
             // btnShowBrowser
             // 
@@ -290,36 +318,24 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // label3
+            // btnNLtoNotepad
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Info;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(41, 443);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(370, 80);
-            this.label3.TabIndex = 16;
-            this.label3.Text = resources.GetString("label3.Text");
-            // 
-            // btnPasteImg
-            // 
-            this.btnPasteImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPasteImg.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPasteImg.Location = new System.Drawing.Point(43, 173);
-            this.btnPasteImg.Name = "btnPasteImg";
-            this.btnPasteImg.Size = new System.Drawing.Size(161, 34);
-            this.btnPasteImg.TabIndex = 21;
-            this.btnPasteImg.Text = "Paste as image";
-            this.toolTip1.SetToolTip(this.btnPasteImg, "Copy the signature back to the list table");
-            this.btnPasteImg.UseVisualStyleBackColor = true;
-            this.btnPasteImg.Click += new System.EventHandler(this.btnPasteImg_Click);
+            this.btnNLtoNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNLtoNotepad.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNLtoNotepad.Location = new System.Drawing.Point(406, 74);
+            this.btnNLtoNotepad.Name = "btnNLtoNotepad";
+            this.btnNLtoNotepad.Size = new System.Drawing.Size(141, 34);
+            this.btnNLtoNotepad.TabIndex = 22;
+            this.btnNLtoNotepad.Text = "Copy to notepad";
+            this.toolTip1.SetToolTip(this.btnNLtoNotepad, "Copy the signature using newlines");
+            this.btnNLtoNotepad.UseVisualStyleBackColor = true;
+            this.btnNLtoNotepad.Click += new System.EventHandler(this.btnNLtoNotepad_Click);
             // 
             // CSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 622);
+            this.ClientSize = new System.Drawing.Size(1168, 622);
             this.Controls.Add(this.gbEditSig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -362,5 +378,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPasteImg;
+        private System.Windows.Forms.Button btnNLtoNotepad;
     }
 }

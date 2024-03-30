@@ -75,6 +75,7 @@ namespace MacroViewer
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
             LoadAllFiles();
             Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
+            SpecialUsed(Properties.Settings.Default.SpecialWord != "");
         }
 
         private string IgnoreSupSig(string s)
@@ -1051,6 +1052,7 @@ namespace MacroViewer
             {
                 return true; // nothing to save 
             }
+            if (Body[CurrentRowSelected] == null) return true; // a leftover "Change Me" has empty body
             bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
             return !bEdited;
         }
@@ -1627,6 +1629,22 @@ namespace MacroViewer
             RemoveImages ri = new RemoveImages();
             ri.ShowDialog();
             ri.Dispose();
+        }
+
+        private void SpecialUsed(bool b)
+        {
+            btnSpecialWord.Visible = b;
+            timer1.Enabled = b;
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            SpecialUsed(false);
+        }
+
+        private void btnSpecialWord_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Properties.Settings.Default.SpecialWord);
+            SpecialUsed(false);
         }
     }
 }

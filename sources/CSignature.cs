@@ -158,11 +158,16 @@ namespace MacroViewer
             ReadSIG();
         }
 
-        private void btnToNote_Click(object sender, EventArgs e)
+        private void CopyToNotepad(string s)
         {
             CSendNotepad SendNotepad = new CSendNotepad();
-            string npTitle = dgvSigList.CurrentRow.Cells[0].Value.ToString() + Environment.NewLine + tbBody.Text;
+            string npTitle = dgvSigList.CurrentRow.Cells[0].Value.ToString() + Environment.NewLine + s;
             SendNotepad.PasteToNotepad(npTitle);
+        }
+
+        private void btnToNote_Click(object sender, EventArgs e)
+        {
+            CopyToNotepad(tbBody.Text);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -212,6 +217,12 @@ namespace MacroViewer
                 string sImg = Utils.AssembleIMG(sUrl);
                 tbBody.Text += sImg;
             }
+        }
+
+        private void btnNLtoNotepad_Click(object sender, EventArgs e)
+        {
+
+            CopyToNotepad(Utils.ChangeBRtoNL(tbBody.Text));
         }
     }
 }

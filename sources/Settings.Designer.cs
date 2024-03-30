@@ -36,11 +36,17 @@
             this.rbChrome = new System.Windows.Forms.RadioButton();
             this.rbEdge = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbSpecialWord = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbUserID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gbTB = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbAttached = new System.Windows.Forms.Label();
             this.btnRemoveAll = new System.Windows.Forms.Button();
             this.btnClearEB = new System.Windows.Forms.Button();
             this.btnCopy2Clip = new System.Windows.Forms.Button();
@@ -66,13 +72,12 @@
             this.tbURLcnt = new System.Windows.Forms.TextBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lbAttached = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -133,21 +138,67 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.tbSpecialWord);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.tbUserID);
             this.groupBox2.Location = new System.Drawing.Point(12, 240);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(274, 162);
+            this.groupBox2.Size = new System.Drawing.Size(274, 426);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "User ID";
+            this.groupBox2.Text = "User Info";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Info;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(13, 281);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(221, 52);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "The Special Word can be anything you want.\r\nThe main mage has a button that copie" +
+    "s the\r\nSpecial Word into the Windows Clipboard\r\nfor any use that you want.  Be t" +
+    "o to \"Apply\"";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Window;
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.Location = new System.Drawing.Point(16, 252);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Special Word";
+            // 
+            // tbSpecialWord
+            // 
+            this.tbSpecialWord.Location = new System.Drawing.Point(124, 249);
+            this.tbSpecialWord.Name = "tbSpecialWord";
+            this.tbSpecialWord.Size = new System.Drawing.Size(108, 20);
+            this.tbSpecialWord.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Window;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.Location = new System.Drawing.Point(16, 41);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Your HP user ID";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 53);
+            this.label1.Location = new System.Drawing.Point(23, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(230, 91);
             this.label1.TabIndex = 1;
@@ -155,7 +206,7 @@
             // 
             // tbUserID
             // 
-            this.tbUserID.Location = new System.Drawing.Point(65, 19);
+            this.tbUserID.Location = new System.Drawing.Point(132, 38);
             this.tbUserID.Name = "tbUserID";
             this.tbUserID.Size = new System.Drawing.Size(100, 20);
             this.tbUserID.TabIndex = 0;
@@ -210,6 +261,28 @@
             this.gbTB.TabIndex = 5;
             this.gbTB.TabStop = false;
             this.gbTB.Text = "Add at end of every macro";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lbAttached);
+            this.groupBox3.ForeColor = System.Drawing.Color.Red;
+            this.groupBox3.Location = new System.Drawing.Point(16, 387);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(143, 51);
+            this.groupBox3.TabIndex = 24;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Number Attached";
+            // 
+            // lbAttached
+            // 
+            this.lbAttached.AutoSize = true;
+            this.lbAttached.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAttached.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lbAttached.Location = new System.Drawing.Point(49, 26);
+            this.lbAttached.Name = "lbAttached";
+            this.lbAttached.Size = new System.Drawing.Size(15, 16);
+            this.lbAttached.TabIndex = 0;
+            this.lbAttached.Text = "0";
             // 
             // btnRemoveAll
             // 
@@ -415,9 +488,9 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(394, 28);
+            this.groupBox5.Location = new System.Drawing.Point(577, 28);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(693, 129);
+            this.groupBox5.Size = new System.Drawing.Size(510, 129);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Unscrubbed URL list";
@@ -447,40 +520,31 @@
             // 
             this.tbURLcnt.BackColor = System.Drawing.SystemColors.Window;
             this.tbURLcnt.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbURLcnt.Location = new System.Drawing.Point(148, 47);
+            this.tbURLcnt.Location = new System.Drawing.Point(139, 59);
             this.tbURLcnt.Name = "tbURLcnt";
             this.tbURLcnt.ReadOnly = true;
             this.tbURLcnt.Size = new System.Drawing.Size(141, 20);
             this.tbURLcnt.TabIndex = 0;
             this.tbURLcnt.Text = "test";
             // 
-            // groupBox3
+            // label8
             // 
-            this.groupBox3.Controls.Add(this.lbAttached);
-            this.groupBox3.ForeColor = System.Drawing.Color.Red;
-            this.groupBox3.Location = new System.Drawing.Point(16, 387);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(143, 51);
-            this.groupBox3.TabIndex = 24;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Number Attached";
-            // 
-            // lbAttached
-            // 
-            this.lbAttached.AutoSize = true;
-            this.lbAttached.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAttached.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lbAttached.Location = new System.Drawing.Point(49, 26);
-            this.lbAttached.Name = "lbAttached";
-            this.lbAttached.Size = new System.Drawing.Size(15, 16);
-            this.lbAttached.TabIndex = 0;
-            this.lbAttached.Text = "0";
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Info;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(357, 63);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(119, 65);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
+    "ems in this dialog\r\nbox need to be saved";
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1113, 678);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.gbTB);
             this.Controls.Add(this.btnCancel);
@@ -498,11 +562,12 @@
             this.groupBox2.PerformLayout();
             this.gbTB.ResumeLayout(false);
             this.gbTB.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -546,5 +611,10 @@
         private System.Windows.Forms.Button btnRemoveAll;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lbAttached;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbSpecialWord;
+        private System.Windows.Forms.Label label8;
     }
 }

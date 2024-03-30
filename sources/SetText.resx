@@ -123,4 +123,20 @@
   <metadata name="BlinkTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>224, 17</value>
   </metadata>
+  <data name="label3.Text" xml:space="preserve">
+    <value>"URL result is here" is the feature that creates a url that
+optionally has text that can be clicked on.
+
+"Create a table and exit" does just that. It creates an empty
+table that will show up after you exit.  If you want the table
+filled out you should use the Utils Menu and select the
+  'Create URLs and Tables' item.
+
+Apply and exit forms the the url at the desired location using
+any text you highlighted earlier.  This only applies to urls and
+is ignored for the table.</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

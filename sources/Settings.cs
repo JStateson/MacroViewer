@@ -37,6 +37,7 @@ namespace MacroViewer
             }
 
             tbSupSig.Text = Properties.Settings.Default.SupSig;
+            tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
             strEditedSave = Properties.Settings.Default.EditedSig;
             strEditedSave = strEditedSave.Replace(SupSigPrefix, "");
@@ -91,6 +92,7 @@ namespace MacroViewer
             Utils.VolunteerUserID = userid;
             Properties.Settings.Default.SaveUnkUrls = cbSaveUNK.Checked;
             Properties.Settings.Default.SupSig = tbSupSig.Text;
+            Properties.Settings.Default.SpecialWord = tbSpecialWord.Text;
             Properties.Settings.Default.Save();
             this.Close();
         }

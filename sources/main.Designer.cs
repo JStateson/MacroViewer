@@ -116,6 +116,8 @@
             this.btnDelM = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSpecialWord = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -585,14 +587,14 @@
             // mnuLCnT
             // 
             this.mnuLCnT.Name = "mnuLCnT";
-            this.mnuLCnT.Size = new System.Drawing.Size(186, 22);
-            this.mnuLCnT.Text = "Create and test URLs";
+            this.mnuLCnT.Size = new System.Drawing.Size(194, 22);
+            this.mnuLCnT.Text = "Create URLs and tables";
             this.mnuLCnT.Click += new System.EventHandler(this.mnuLCnT_Click);
             // 
             // mnuRemoveLocalImgs
             // 
             this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
-            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(186, 22);
+            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(194, 22);
             this.mnuRemoveLocalImgs.Text = "Remove local images";
             this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
             // 
@@ -1015,6 +1017,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSpecialWord);
             this.groupBox2.Controls.Add(this.btnPrev);
             this.groupBox2.Controls.Add(this.btnNextTable);
             this.groupBox2.Controls.Add(this.lbRCcopy);
@@ -1027,6 +1030,23 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
+            // 
+            // btnSpecialWord
+            // 
+            this.btnSpecialWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSpecialWord.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSpecialWord.Location = new System.Drawing.Point(27, 67);
+            this.btnSpecialWord.Name = "btnSpecialWord";
+            this.btnSpecialWord.Size = new System.Drawing.Size(93, 20);
+            this.btnSpecialWord.TabIndex = 21;
+            this.btnSpecialWord.Text = "Special Word";
+            this.btnSpecialWord.UseVisualStyleBackColor = true;
+            this.btnSpecialWord.Click += new System.EventHandler(this.btnSpecialWord_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // main
             // 
@@ -1153,6 +1173,8 @@
         private System.Windows.Forms.Button btnDelChecked;
         private System.Windows.Forms.ToolStripMenuItem mnuLCnT;
         private System.Windows.Forms.ToolStripMenuItem mnuRemoveLocalImgs;
+        private System.Windows.Forms.Button btnSpecialWord;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

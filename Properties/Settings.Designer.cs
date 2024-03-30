@@ -142,5 +142,17 @@ namespace MacroViewer.Properties {
                 this["EditedSig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SpecialWord {
+            get {
+                return ((string)(this["SpecialWord"]));
+            }
+            set {
+                this["SpecialWord"] = value;
+            }
+        }
     }
 }

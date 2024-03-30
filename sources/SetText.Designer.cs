@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetText));
             this.gbSelectType = new System.Windows.Forms.GroupBox();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -46,6 +47,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbPreFill = new System.Windows.Forms.CheckBox();
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
             this.gpTable = new System.Windows.Forms.GroupBox();
             this.btnApplyTab = new System.Windows.Forms.Button();
@@ -53,7 +55,7 @@
             this.tbRows = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbPreFill = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -138,13 +140,14 @@
             // 
             this.groupBox4.Controls.Add(this.lbBoxed);
             this.groupBox4.Controls.Add(this.btnBoxIT);
+            this.groupBox4.Controls.Add(this.btnApply);
             this.groupBox4.Controls.Add(this.btnTest);
             this.groupBox4.Controls.Add(this.btnApplyText);
             this.groupBox4.Controls.Add(this.tbResult);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(12, 279);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(654, 159);
+            this.groupBox4.Size = new System.Drawing.Size(654, 233);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
@@ -155,7 +158,7 @@
             this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbBoxed.Location = new System.Drawing.Point(376, 53);
+            this.lbBoxed.Location = new System.Drawing.Point(376, 61);
             this.lbBoxed.Name = "lbBoxed";
             this.lbBoxed.Size = new System.Drawing.Size(73, 22);
             this.lbBoxed.TabIndex = 9;
@@ -166,11 +169,11 @@
             // 
             this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(175, 46);
+            this.btnBoxIT.Location = new System.Drawing.Point(193, 54);
             this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(185, 36);
+            this.btnBoxIT.Size = new System.Drawing.Size(136, 36);
             this.btnBoxIT.TabIndex = 8;
-            this.btnBoxIT.Text = "Put In Box";
+            this.btnBoxIT.Text = "Put In a Box";
             this.btnBoxIT.UseVisualStyleBackColor = true;
             this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
             // 
@@ -178,7 +181,7 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(497, 45);
+            this.btnTest.Location = new System.Drawing.Point(497, 53);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(122, 36);
             this.btnTest.TabIndex = 7;
@@ -190,7 +193,7 @@
             // 
             this.btnApplyText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplyText.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApplyText.Location = new System.Drawing.Point(36, 46);
+            this.btnApplyText.Location = new System.Drawing.Point(34, 26);
             this.btnApplyText.Name = "btnApplyText";
             this.btnApplyText.Size = new System.Drawing.Size(122, 36);
             this.btnApplyText.TabIndex = 6;
@@ -200,16 +203,17 @@
             // 
             // tbResult
             // 
-            this.tbResult.Location = new System.Drawing.Point(36, 109);
+            this.tbResult.Location = new System.Drawing.Point(20, 135);
+            this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(592, 22);
+            this.tbResult.Size = new System.Drawing.Size(592, 74);
             this.tbResult.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(697, 374);
+            this.btnCancel.Location = new System.Drawing.Point(940, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(122, 36);
             this.btnCancel.TabIndex = 7;
@@ -221,13 +225,24 @@
             // 
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(697, 302);
+            this.btnApply.Location = new System.Drawing.Point(34, 78);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 6;
             this.btnApply.Text = "Apply and exit";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // cbPreFill
+            // 
+            this.cbPreFill.AutoSize = true;
+            this.cbPreFill.Location = new System.Drawing.Point(23, 126);
+            this.cbPreFill.Name = "cbPreFill";
+            this.cbPreFill.Size = new System.Drawing.Size(130, 20);
+            this.cbPreFill.TabIndex = 5;
+            this.cbPreFill.Text = "Fill alphabetically";
+            this.toolTip1.SetToolTip(this.cbPreFill, "Fill with letters indicating the row and column numvber");
+            this.cbPreFill.UseVisualStyleBackColor = true;
             // 
             // BlinkTimer
             // 
@@ -243,9 +258,9 @@
             this.gpTable.Controls.Add(this.label2);
             this.gpTable.Controls.Add(this.label1);
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpTable.Location = new System.Drawing.Point(825, 25);
+            this.gpTable.Location = new System.Drawing.Point(800, 67);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(250, 248);
+            this.gpTable.Size = new System.Drawing.Size(250, 212);
             this.gpTable.TabIndex = 8;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table and exit";
@@ -254,7 +269,7 @@
             // 
             this.btnApplyTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplyTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApplyTab.Location = new System.Drawing.Point(23, 182);
+            this.btnApplyTab.Location = new System.Drawing.Point(49, 163);
             this.btnApplyTab.Name = "btnApplyTab";
             this.btnApplyTab.Size = new System.Drawing.Size(122, 36);
             this.btnApplyTab.TabIndex = 4;
@@ -296,26 +311,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Rows";
             // 
-            // cbPreFill
+            // label3
             // 
-            this.cbPreFill.AutoSize = true;
-            this.cbPreFill.Location = new System.Drawing.Point(23, 126);
-            this.cbPreFill.Name = "cbPreFill";
-            this.cbPreFill.Size = new System.Drawing.Size(130, 20);
-            this.cbPreFill.TabIndex = 5;
-            this.cbPreFill.Text = "Fill alphabetically";
-            this.toolTip1.SetToolTip(this.cbPreFill, "Fill with letters indicating the row and column numvber");
-            this.cbPreFill.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(695, 317);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(361, 176);
+            this.label3.TabIndex = 6;
+            this.label3.Text = resources.GetString("label3.Text");
             // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1087, 482);
+            this.ClientSize = new System.Drawing.Size(1087, 536);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnApply);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -341,6 +356,7 @@
             this.gpTable.ResumeLayout(false);
             this.gpTable.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -371,5 +387,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbPreFill;
+        private System.Windows.Forms.Label label3;
     }
 }

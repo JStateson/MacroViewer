@@ -99,13 +99,13 @@
             this.rXMLERR.Location = new System.Drawing.Point(69, 469);
             this.rXMLERR.Name = "rXMLERR";
             this.rXMLERR.ReadOnly = true;
-            this.rXMLERR.Size = new System.Drawing.Size(197, 131);
+            this.rXMLERR.Size = new System.Drawing.Size(237, 131);
             this.rXMLERR.TabIndex = 7;
             this.rXMLERR.Text = resources.GetString("rXMLERR.Text");
             // 
             // rSEARCH
             // 
-            this.rSEARCH.Location = new System.Drawing.Point(301, 469);
+            this.rSEARCH.Location = new System.Drawing.Point(390, 459);
             this.rSEARCH.Name = "rSEARCH";
             this.rSEARCH.ReadOnly = true;
             this.rSEARCH.Size = new System.Drawing.Size(197, 131);

@@ -134,8 +134,8 @@ This dialog box allows you to form URLs that optionally have a phrase that can b
 	Menu Items - Utils - Remove local images
 If you used the windows snip and paste to create an image than a local file was created.  This dialog box allows you to examine all local files and delete the oens that are no longer used. Local images files cannot be seen on the HP site.  Once uploaded to your HP photo album and replaced by the album url they need to be deletled.
 
-	Menu Item - Signature
-This dialog box allows you to create, test, and save variouis signatures
+	Menu Item - Images and Signatures
+This dialog box allows you to create, test, and save variouis signatures.  You can also create a collection of image address or notes such as HTML and BBCode syntax for customizing your macros.
 
 	Menu Item - Search
 This dialog box allows you to search for word, phrases, or parts of words
@@ -149,19 +149,19 @@ PC	23	1	CMOS battery replace
 AIO	3	1	Cooler for hot laptop
 -----------------------------------------------------------------
 Double click any row to get the informaton availablle, then
-copy the information into yoor users response page.
+copy the information into your users response page.
 
 	Menu Item - Move
 This allows you to move macros from one file to another.  When you first download your forum macros they will end up in the file "HP" which can be edited.  Macros can be moved to different files for a better association.
 HP has a copy of the HTML that was downloaded from your HP forum settings. It is limited to 30 macros.  All other files can have 50 macros
 
 	Menu Item - Settings
-You can specoify which browser to use when accessing your forum settings page and photo album.   The MacroViewer app uses WebView2 to display all sites.  That tool uses Edge.  If you do not have Edge installed this app will not display sites properly or at all.
+You can specify which browser to use when accessing your forum settings page and photo album.   The MacroViewer app uses WebView2 to display all sites.  That tool reqwires the latest Edge.  If you do not have Edge installed this app will not display sites properly or at all.
 If you enter your HP forum ID then the Edge or Chrome browser can bring up your photo album.  This app cannot log in.  You must have logged in earlier.  There is no communication between the browser or any web page and this app. 
-This dialog box also allows the creation (and deletion) of supplemental signatures.  The text and image are appended to the body of the macro and are not part of your normal signature.
+This dialog box also allows the creation (and deletion) of supplemental signatures.  The text and image, if any, are appended to the body of the macro and are not part of your normal signature.
 
 	Menu Item - Errors and Differences
-Click to show differences.  If therre are also errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.
+Click to show differences.  If there are errors then click to show either errors or differences.  This menu item is only visible when the local HP macros are loaded.
 Differences indicate that you need to upload the HP macro to update the one at the Forum.  You must then download the Forum one to keep it synchronized with the HP.  This is just a tool you can use to update the HP forum macros.</value>
   </data>
   <data name="rUTIL.Text" xml:space="preserve">
@@ -288,7 +288,8 @@ The user can run the command "WMIC  diskdrive get model, size, mediaType, status
   <data name="rMANAGE.Text" xml:space="preserve">
     <value>		Managing Images
 
-Local images on your disk cannot be views by users.  If the image is on a website and is public domain unless indicated otheerwise.  Remote images can be added to a maro but local images need to be uploaded to your HP album before a user can see it.
+Local images on your disk cannot be views by users.  If the image is on a website and is public domain unless indicated otheerwise.  Remote images can be added to a macro but local images need to be made public or uploaded to your HP album before a user can see it.
+A quick way to make any image public is to paste it into any thread of the HP community forum.  Once pasted you can right click and select the image address.  The image address can then be used.  If desired you can bring up the Signatures and Images page and save the address in a collection.
 
 		Append Image
 
@@ -302,15 +303,26 @@ If all looks good, then click the "Apply and exit" button.
 This dialog box provides a convient tool to upload local images to your HP album and to replace the path with a url that access the HP image.  Once you ahve done this the local image is no longer needed and a user can view the image.</value>
   </data>
   <data name="rXMLERR.Text" xml:space="preserve">
-    <value>	HTML and XML errors
+    <value>	Pasting a response into Signature or a Reply field
 
+HP uses BBCode for forum posts and signatues.  It is called a markup.   There are differences in error handling between HTML and BBCode.
+
+You do not enter BBCode or HTML into a response.  The markup is done in the edit box.  To put the response in a reply you bring up the "Show As Page".
+Once shown and it looks correct you can copy the page into the response.  You do not copy from the edit box into the response.
+
+Signatures are different.  You copy the edit box contents into your HP signature box as it requires markup.  You should check for errors first before pasting.  If you have errors the HP processor will ignore what you inserted.   You will have to click the "Save" button and then look at the signature and see if it was accepted.
+
+You only need to check for HTML errors when creating a signature.
 Images and url can be badly formed. For example the following might be missing a slash
 
 &lt;br&gt;   shoud be &lt;br /&gt;
 &lt;img src=" .......  /&gt;
 &lt;a   needs  &lt;/ a&gt;  or /&gt;
 
-there should be a space before the forward slash</value>
+There should be a space before the forward slash if using XML but BBCode and HP ignore the above and will accept the code.
+&lt;br&gt; is used, not &lt;br /&gt;
+
+The above errors can be ignored in the signature editing HP page.  If you compose a macros using the correct syntax it will be accepted in a response if you copy from the "Show as Page"</value>
   </data>
   <data name="rSEARCH.Text" xml:space="preserve">
     <value>	Search for key words

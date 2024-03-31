@@ -595,7 +595,7 @@
             // 
             this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
             this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(194, 22);
-            this.mnuRemoveLocalImgs.Text = "Remove local images";
+            this.mnuRemoveLocalImgs.Text = "Manage local images";
             this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
             // 
             // settingsToolStripMenuItem

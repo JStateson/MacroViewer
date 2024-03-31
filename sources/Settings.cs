@@ -67,6 +67,8 @@ namespace MacroViewer
                     }
                 }
                 tbURLcnt.Text = "Total unknown " + count.ToString();
+                btnShowURL.Enabled = true;
+                btnDelURL.Enabled = true;
             }
             else tbURLcnt.Text = "No saved urls";
         }

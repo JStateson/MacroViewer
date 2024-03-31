@@ -456,6 +456,7 @@
             // 
             // btnShowURL
             // 
+            this.btnShowURL.Enabled = false;
             this.btnShowURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowURL.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnShowURL.Location = new System.Drawing.Point(327, 26);
@@ -469,6 +470,7 @@
             // 
             // btnDelURL
             // 
+            this.btnDelURL.Enabled = false;
             this.btnDelURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelURL.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnDelURL.Location = new System.Drawing.Point(327, 67);

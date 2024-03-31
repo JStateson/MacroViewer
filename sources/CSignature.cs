@@ -226,30 +226,3 @@ namespace MacroViewer
         }
     }
 }
-/*
-Black: #000000
-White: #FFFFFF
-Red: #FF0000
-Green: #008000
-Blue: #0000FF
-Yellow: #FFFF00
-Cyan: #00FFFF
-Magenta: #FF00FF
-Silver: #C0C0C0
-Gray: #808080
-Maroon: #800000
-Olive: #808000
-Purple: #800080
-Teal: #008080
-Navy: #000080
-Orange: #FFA500
-Aquamarine: #7FFFD4
-Turquoise: #40E0D0
-Lime: #00FF00
-Fuchsia: #FF00FF
-Indigo: #4B0082
-Violet: #EE82EE
-Pink: #FFC0CB
-Peach: #FFDAB9
-Beige: #F5F5DC 
- */

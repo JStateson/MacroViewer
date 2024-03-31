@@ -50,32 +50,33 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.showExampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpTable = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnShowTab = new System.Windows.Forms.Button();
+            this.btnClearTab = new System.Windows.Forms.Button();
+            this.cbUseDelims = new System.Windows.Forms.CheckBox();
+            this.btnFillCol = new System.Windows.Forms.Button();
+            this.btnFillRow = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnApplyTab = new System.Windows.Forms.Button();
+            this.cbPreFill = new System.Windows.Forms.CheckBox();
             this.tbCols = new System.Windows.Forms.TextBox();
             this.tbRows = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btnFillRow = new System.Windows.Forms.Button();
-            this.btnFillCol = new System.Windows.Forms.Button();
-            this.cbUseDelims = new System.Windows.Forms.CheckBox();
-            this.tbDelims = new System.Windows.Forms.TextBox();
-            this.btnClearTab = new System.Windows.Forms.Button();
-            this.cbPreFill = new System.Windows.Forms.CheckBox();
-            this.btnShowTab = new System.Windows.Forms.Button();
+            this.cbUseBorder = new System.Windows.Forms.CheckBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCleardgv = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gpTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCvt
@@ -103,7 +104,7 @@
             this.groupBox1.Controls.Add(this.btnCvt);
             this.groupBox1.Location = new System.Drawing.Point(31, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(733, 544);
+            this.groupBox1.Size = new System.Drawing.Size(733, 607);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form URL";
@@ -158,7 +159,7 @@
             this.tbScratch.Location = new System.Drawing.Point(161, 301);
             this.tbScratch.Multiline = true;
             this.tbScratch.Name = "tbScratch";
-            this.tbScratch.Size = new System.Drawing.Size(554, 222);
+            this.tbScratch.Size = new System.Drawing.Size(554, 284);
             this.tbScratch.TabIndex = 7;
             this.tbScratch.Text = resources.GetString("tbScratch.Text");
             // 
@@ -285,6 +286,7 @@
             // 
             // gpTable
             // 
+            this.gpTable.Controls.Add(this.btnCleardgv);
             this.gpTable.Controls.Add(this.groupBox5);
             this.gpTable.Controls.Add(this.btnTransfer);
             this.gpTable.Controls.Add(this.dgv);
@@ -298,16 +300,92 @@
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpTable.Location = new System.Drawing.Point(784, 59);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(509, 544);
+            this.gpTable.Size = new System.Drawing.Size(509, 585);
             this.gpTable.TabIndex = 9;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbUseBorder);
+            this.groupBox5.Controls.Add(this.btnShowTab);
+            this.groupBox5.Controls.Add(this.btnClearTab);
+            this.groupBox5.Controls.Add(this.cbUseDelims);
+            this.groupBox5.Controls.Add(this.btnFillCol);
+            this.groupBox5.Controls.Add(this.btnFillRow);
+            this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox5.Location = new System.Drawing.Point(32, 135);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(453, 123);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "How to fill it in (do not use above)";
+            // 
+            // btnShowTab
+            // 
+            this.btnShowTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowTab.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowTab.Location = new System.Drawing.Point(15, 85);
+            this.btnShowTab.Name = "btnShowTab";
+            this.btnShowTab.Size = new System.Drawing.Size(118, 22);
+            this.btnShowTab.TabIndex = 11;
+            this.btnShowTab.Text = "Show in browser";
+            this.btnShowTab.UseVisualStyleBackColor = true;
+            this.btnShowTab.Click += new System.EventHandler(this.btnShowTab_Click);
+            // 
+            // btnClearTab
+            // 
+            this.btnClearTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearTab.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClearTab.Location = new System.Drawing.Point(283, 20);
+            this.btnClearTab.Name = "btnClearTab";
+            this.btnClearTab.Size = new System.Drawing.Size(48, 23);
+            this.btnClearTab.TabIndex = 10;
+            this.btnClearTab.Text = "Clear";
+            this.btnClearTab.UseVisualStyleBackColor = true;
+            this.btnClearTab.Click += new System.EventHandler(this.btnClearTab_Click);
+            // 
+            // cbUseDelims
+            // 
+            this.cbUseDelims.AutoSize = true;
+            this.cbUseDelims.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseDelims.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseDelims.Location = new System.Drawing.Point(218, 87);
+            this.cbUseDelims.Name = "cbUseDelims";
+            this.cbUseDelims.Size = new System.Drawing.Size(218, 20);
+            this.cbUseDelims.TabIndex = 8;
+            this.cbUseDelims.Text = "Split on comma, whitespace";
+            this.cbUseDelims.UseVisualStyleBackColor = true;
+            // 
+            // btnFillCol
+            // 
+            this.btnFillCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillCol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFillCol.Location = new System.Drawing.Point(15, 21);
+            this.btnFillCol.Name = "btnFillCol";
+            this.btnFillCol.Size = new System.Drawing.Size(176, 23);
+            this.btnFillCol.TabIndex = 7;
+            this.btnFillCol.Text = "Fill COLUMN from clipboard";
+            this.btnFillCol.UseVisualStyleBackColor = true;
+            this.btnFillCol.Click += new System.EventHandler(this.btnFillCol_Click);
+            // 
+            // btnFillRow
+            // 
+            this.btnFillRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillRow.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFillRow.Location = new System.Drawing.Point(15, 53);
+            this.btnFillRow.Name = "btnFillRow";
+            this.btnFillRow.Size = new System.Drawing.Size(155, 23);
+            this.btnFillRow.TabIndex = 6;
+            this.btnFillRow.Text = "Fill ROW from clipboard";
+            this.btnFillRow.UseVisualStyleBackColor = true;
+            this.btnFillRow.Click += new System.EventHandler(this.btnFillRow_Click);
             // 
             // btnTransfer
             // 
             this.btnTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTransfer.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTransfer.Location = new System.Drawing.Point(330, 58);
+            this.btnTransfer.Location = new System.Drawing.Point(172, 59);
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.Size = new System.Drawing.Size(100, 22);
             this.btnTransfer.TabIndex = 8;
@@ -323,37 +401,20 @@
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.dgv.Location = new System.Drawing.Point(23, 247);
+            this.dgv.Location = new System.Drawing.Point(23, 288);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            this.dgv.Size = new System.Drawing.Size(417, 276);
+            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv.Size = new System.Drawing.Size(462, 276);
             this.dgv.TabIndex = 7;
             this.dgv.Visible = false;
             // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "Position";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Contents";
-            this.Column2.Name = "Column2";
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 312;
-            // 
             // btnShow
             // 
-            this.btnShow.Enabled = false;
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShow.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShow.Location = new System.Drawing.Point(172, 58);
+            this.btnShow.Location = new System.Drawing.Point(172, 95);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(118, 22);
             this.btnShow.TabIndex = 6;
@@ -373,6 +434,19 @@
             this.btnApplyTab.UseVisualStyleBackColor = true;
             this.btnApplyTab.Click += new System.EventHandler(this.btnApplyTab_Click);
             // 
+            // cbPreFill
+            // 
+            this.cbPreFill.AutoSize = true;
+            this.cbPreFill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbPreFill.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbPreFill.Location = new System.Drawing.Point(262, 28);
+            this.cbPreFill.Name = "cbPreFill";
+            this.cbPreFill.Size = new System.Drawing.Size(223, 20);
+            this.cbPreFill.TabIndex = 5;
+            this.cbPreFill.Text = "I want to fill it in now (limit 30)";
+            this.cbPreFill.UseVisualStyleBackColor = true;
+            this.cbPreFill.CheckStateChanged += new System.EventHandler(this.cbPreFill_CheckStateChanged);
+            // 
             // tbCols
             // 
             this.tbCols.Location = new System.Drawing.Point(85, 58);
@@ -383,7 +457,7 @@
             // 
             // tbRows
             // 
-            this.tbRows.Location = new System.Drawing.Point(85, 23);
+            this.tbRows.Location = new System.Drawing.Point(85, 26);
             this.tbRows.Name = "tbRows";
             this.tbRows.Size = new System.Drawing.Size(57, 22);
             this.tbRows.TabIndex = 2;
@@ -407,110 +481,55 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Rows";
             // 
-            // groupBox5
+            // cbUseBorder
             // 
-            this.groupBox5.Controls.Add(this.btnShowTab);
-            this.groupBox5.Controls.Add(this.btnClearTab);
-            this.groupBox5.Controls.Add(this.tbDelims);
-            this.groupBox5.Controls.Add(this.cbUseDelims);
-            this.groupBox5.Controls.Add(this.btnFillCol);
-            this.groupBox5.Controls.Add(this.btnFillRow);
-            this.groupBox5.Location = new System.Drawing.Point(32, 105);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(408, 123);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "How to fill it in (do not use above)";
+            this.cbUseBorder.AutoSize = true;
+            this.cbUseBorder.Checked = true;
+            this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseBorder.Location = new System.Drawing.Point(218, 61);
+            this.cbUseBorder.Name = "cbUseBorder";
+            this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
+            this.cbUseBorder.TabIndex = 12;
+            this.cbUseBorder.Text = "Form border on all tables";
+            this.cbUseBorder.UseVisualStyleBackColor = true;
+            this.cbUseBorder.CheckStateChanged += new System.EventHandler(this.cbUseBorder_CheckStateChanged);
             // 
-            // btnFillRow
+            // Column1
             // 
-            this.btnFillRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFillRow.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFillRow.Location = new System.Drawing.Point(15, 25);
-            this.btnFillRow.Name = "btnFillRow";
-            this.btnFillRow.Size = new System.Drawing.Size(155, 23);
-            this.btnFillRow.TabIndex = 6;
-            this.btnFillRow.Text = "Fill ROW from clipboard";
-            this.btnFillRow.UseVisualStyleBackColor = true;
-            this.btnFillRow.Click += new System.EventHandler(this.btnFillRow_Click);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "Position";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // btnFillCol
+            // Column2
             // 
-            this.btnFillCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFillCol.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFillCol.Location = new System.Drawing.Point(15, 54);
-            this.btnFillCol.Name = "btnFillCol";
-            this.btnFillCol.Size = new System.Drawing.Size(176, 23);
-            this.btnFillCol.TabIndex = 7;
-            this.btnFillCol.Text = "Fill COLUMN from clipboard";
-            this.btnFillCol.UseVisualStyleBackColor = true;
-            this.btnFillCol.Click += new System.EventHandler(this.btnFillCol_Click);
+            this.Column2.HeaderText = "Contents";
+            this.Column2.Name = "Column2";
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 356;
             // 
-            // cbUseDelims
+            // btnCleardgv
             // 
-            this.cbUseDelims.AutoSize = true;
-            this.cbUseDelims.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUseDelims.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseDelims.Location = new System.Drawing.Point(230, 55);
-            this.cbUseDelims.Name = "cbUseDelims";
-            this.cbUseDelims.Size = new System.Drawing.Size(152, 20);
-            this.cbUseDelims.TabIndex = 8;
-            this.cbUseDelims.Text = "Split on Delimiters";
-            this.cbUseDelims.UseVisualStyleBackColor = true;
-            // 
-            // tbDelims
-            // 
-            this.tbDelims.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDelims.Location = new System.Drawing.Point(264, 85);
-            this.tbDelims.Name = "tbDelims";
-            this.tbDelims.ReadOnly = true;
-            this.tbDelims.Size = new System.Drawing.Size(118, 20);
-            this.tbDelims.TabIndex = 9;
-            this.tbDelims.Text = "Comma, Whitespace";
-            // 
-            // btnClearTab
-            // 
-            this.btnClearTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClearTab.Location = new System.Drawing.Point(283, 20);
-            this.btnClearTab.Name = "btnClearTab";
-            this.btnClearTab.Size = new System.Drawing.Size(48, 23);
-            this.btnClearTab.TabIndex = 10;
-            this.btnClearTab.Text = "Clear";
-            this.btnClearTab.UseVisualStyleBackColor = true;
-            this.btnClearTab.Click += new System.EventHandler(this.btnClearTab_Click);
-            // 
-            // cbPreFill
-            // 
-            this.cbPreFill.AutoSize = true;
-            this.cbPreFill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPreFill.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbPreFill.Location = new System.Drawing.Point(262, 28);
-            this.cbPreFill.Name = "cbPreFill";
-            this.cbPreFill.Size = new System.Drawing.Size(223, 20);
-            this.cbPreFill.TabIndex = 5;
-            this.cbPreFill.Text = "I want to fill it in now (limit 30)";
-            this.cbPreFill.UseVisualStyleBackColor = true;
-            this.cbPreFill.CheckStateChanged += new System.EventHandler(this.cbPreFill_CheckStateChanged);
-            // 
-            // btnShowTab
-            // 
-            this.btnShowTab.Enabled = false;
-            this.btnShowTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowTab.Location = new System.Drawing.Point(15, 85);
-            this.btnShowTab.Name = "btnShowTab";
-            this.btnShowTab.Size = new System.Drawing.Size(118, 22);
-            this.btnShowTab.TabIndex = 11;
-            this.btnShowTab.Text = "Show in browser";
-            this.btnShowTab.UseVisualStyleBackColor = true;
-            this.btnShowTab.Click += new System.EventHandler(this.btnShowTab_Click);
+            this.btnCleardgv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleardgv.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnCleardgv.Location = new System.Drawing.Point(327, 59);
+            this.btnCleardgv.Name = "btnCleardgv";
+            this.btnCleardgv.Size = new System.Drawing.Size(48, 23);
+            this.btnCleardgv.TabIndex = 11;
+            this.btnCleardgv.Text = "Clear";
+            this.btnCleardgv.UseVisualStyleBackColor = true;
+            this.btnCleardgv.Click += new System.EventHandler(this.btnCleardgv_Click);
             // 
             // utils
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 615);
+            this.ClientSize = new System.Drawing.Size(1329, 678);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -532,9 +551,9 @@
             this.menuStrip1.PerformLayout();
             this.gpTable.ResumeLayout(false);
             this.gpTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,18 +585,19 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Button btnTransfer;
         private System.Windows.Forms.Button btnCopyScratch;
         private System.Windows.Forms.Button btnShowScratch;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnFillRow;
         private System.Windows.Forms.Button btnFillCol;
-        private System.Windows.Forms.TextBox tbDelims;
         private System.Windows.Forms.CheckBox cbUseDelims;
         private System.Windows.Forms.Button btnClearTab;
         private System.Windows.Forms.CheckBox cbPreFill;
         private System.Windows.Forms.Button btnShowTab;
+        private System.Windows.Forms.CheckBox cbUseBorder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button btnCleardgv;
     }
 }

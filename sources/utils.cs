@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define SPECIAL1
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
@@ -13,6 +15,8 @@ namespace MacroViewer
     public partial class utils : Form
     {
         private string sLoc;
+        private string sColor = ""; // used with SPECIAL1
+        int r30, c30;   // number of rows and columns in that small data grid table
         private int RowsExpected = 0;
         private int ColsExpected = 0;
         private int nGathered = 0;
@@ -34,7 +38,6 @@ namespace MacroViewer
             btnFillCol.Enabled = true;
             tbScratch.Text = "";
         }
-
 
         private void MakeResult()
         {
@@ -94,21 +97,35 @@ namespace MacroViewer
             ShowBrowser(tbResult.Text);
         }
 
+
+        private int RefreshTable()
+        {
+            int i = cbUseBorder.Checked ? 1 : 0;
+            try
+            {
+                r30 = Convert.ToInt32(tbRows.Text);
+                c30 = Convert.ToInt32(tbCols.Text);
+            }
+            catch
+            {
+                ClearDGV();
+                return 1;
+            }
+            int n = r30 * c30;
+            tbScratch.Text = Utils.FormTable(r30, c30, true, i);
+            return n;
+        }
+
         private void btnApplyTab_Click(object sender, EventArgs e)
         {
-            int r = Convert.ToInt32(tbRows.Text);
-            int c = Convert.ToInt32(tbCols.Text);
-            int n = r * c;
-            int i;
-            tbScratch.Text = Utils.FormTable(r, c, true);
-            btnShow.Enabled = (tbScratch.Text != "");
+            int n = RefreshTable();
             if(cbPreFill.Checked && (n <= 30))
             {
                 dgv.Rows.Clear();
-                for(i = 0; i < n; i++)
+                for(int i = 0; i < n; i++)
                 {
                     //DataGridViewRow row = new DataGridViewRow();
-                    dgv.Rows.Add(Utils.strFillSubscript(r,c,i),"    ");
+                    dgv.Rows.Add(Utils.strFillSubscript(r30,c30,i),"    ");
                 }
 
             }
@@ -127,6 +144,7 @@ namespace MacroViewer
         private void btnTransfer_Click(object sender, EventArgs e)
         {
             if (dgv.Rows.Count == 0) return;
+            RefreshTable();
             string sBig = tbScratch.Text;
             foreach (DataGridViewRow row in dgv.Rows)
             {
@@ -221,8 +239,8 @@ namespace MacroViewer
             string sSuf = "</td>";
             string sStrCol = "<tr>";
             string sEndCol = "</tr>";
-            string sSt = "<table border='1'>";
-            string sSe = "</table.";
+            string sSt = cbUseBorder.Checked  ?  "<table border='1'>" : "<table>";
+            string sSe = "</table>";
             string sOut = sSt;
             if (RowsExpected > 0)
             {
@@ -230,10 +248,18 @@ namespace MacroViewer
                 int rE = RowsExpected;
                 for (int r = 0; r < RowsExpected; r++)
                 {
+                    int i = 0;
                     sOut += sStrCol;
+#if SPECIAL1
+                    sColor = sMyTable[cE - 1][r];
+#endif
                     for (int c = 0; c < cE; c++)
                     {
                         string s = sMyTable[c][r];
+#if SPECIAL1
+                        s = FormSpecial(i, s);
+                        i++;
+#endif
                         sOut += sPre + s + sSuf;
                     }
                     sOut += sEndCol;
@@ -276,5 +302,52 @@ namespace MacroViewer
         {
             ShowBrowser(tbScratch.Text);
         }
+
+        private void ClearDGV()
+        {
+            dgv.Rows.Clear();
+            tbCols.Text = "1";
+            tbRows.Text = "1";
+        }
+
+        private void btnCleardgv_Click(object sender, EventArgs e)
+        {
+            ClearDGV();
+        }
+
+        private void cbUseBorder_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(cbUseBorder.Checked)
+            {
+                tbScratch.Text = tbScratch.Text.Replace("<table>", "table border='1'>");
+            }
+            else
+            {
+                tbScratch.Text = tbScratch.Text.Replace("table border='1'>", "<table>");
+            }
+        }
+
+#if SPECIAL1
+        private string FormSpecial(int i, string s)
+        {
+            string r = s;
+            // expecting Cyan ForeGround ForeGroundBold Background BackgroundBold #00FFFF
+            // from ChatGPT HTML palette list replacing ":" with the above words
+            if (i == 0 || i == 5) return s;
+            switch (i)
+            {
+                case 1: r = "<font color='" + sColor + "'>" + s + "</font>";
+                    break;
+                case 2: r  = "<font color='" + sColor + "'><b>" + s + "</b></font>";
+                    break;
+                    // below white was black for first run of SPECIAL1
+                case 3: r = "<div style='background-color: " + sColor + "; color: white;'><p>" + s + "</p></div>";
+                    break;   
+                case 4: r = "<div style='background-color: " + sColor + "; color: white;'><p><b>" + s + "</b</p></div>";
+                    break;
+            }
+            return r;
+        }
+#endif
     }
 }

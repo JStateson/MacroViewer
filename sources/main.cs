@@ -742,10 +742,13 @@ namespace MacroViewer
         {
             string strName = tbMacName.Text;
             int i = CurrentRowSelected + 1;
+            string strN = "";
             if (strType != "HP")
             {
-                DialogResult Res1 = MessageBox.Show("You are deleting the macro named " + strName,
-"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                strN = (strName == "") ? "You are deleting an unnamed macro" :
+                    "You are deleting the macro named " + strName;
+                DialogResult Res1 = MessageBox.Show(strN, "Deleting  macro " + i.ToString(),
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (Res1 != DialogResult.Yes)
                 {
                     return;
@@ -754,8 +757,10 @@ namespace MacroViewer
             }
             else
             {
-                DialogResult Res1 = MessageBox.Show("You are removing contents of the macro named " + strName,
-"Deleting  macro " + i.ToString(), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                strN = (strName == "") ? "You are removing the contents of an unnamed macro" :
+                    "You are removing contents of the macro named " + strName;
+                DialogResult Res1 = MessageBox.Show(strN, "Deleting  macro " + i.ToString(),
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (Res1 != DialogResult.Yes)
                 {
                     return;

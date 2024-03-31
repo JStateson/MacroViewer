@@ -141,9 +141,19 @@ namespace MacroViewer
 
         private void btnApplyTab_Click(object sender, EventArgs e)
         {
-            int r = Convert.ToInt32(tbRows.Text);
-            int c = Convert.ToInt32(tbCols.Text);
-            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked);
+            int r, c;
+            try
+            {
+                r = Convert.ToInt32(tbRows.Text);
+                c = Convert.ToInt32(tbCols.Text);
+            }
+            catch
+            {
+                tbRows.Text = "1";
+                tbCols.Text = "1";
+                return;
+            }
+            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked,1);
             this.Close();
         }
 

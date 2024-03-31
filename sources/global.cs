@@ -358,7 +358,7 @@ namespace MacroViewer
             return "";
         }
 
-        public static string FormTable(int rows, int cols, bool bFill)
+        public static string FormTable(int rows, int cols, bool bFill, int iSize)
         {
             if (rows == 0 && cols == 0) return "";
             if (rows == 0) rows = 1;
@@ -366,9 +366,11 @@ namespace MacroViewer
             int jChar = 0;
             string r = rows > 9 ? "00" : "0";
             string c = cols > 9 ? "00" : "0";
+            string UseBorder = iSize == 0 ? "<table>" : "<table border='" + iSize.ToString() + "'>";
+
 
             StringBuilder htmlBuilder = new StringBuilder();
-            htmlBuilder.Append("<table border='1'>");
+            htmlBuilder.Append(UseBorder);
 
             for (int i = 0; i < rows; i++)
             {

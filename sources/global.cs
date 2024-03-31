@@ -196,6 +196,33 @@ namespace MacroViewer
             eFirefox = 2
         }
 
+        public static bool GetPixSize(string strName, ref int iHeight, ref int iWidth)
+        {
+            string strPath = WhereExe + "\\" + strName;
+            try
+            {
+                using (var image = new Bitmap(strPath))
+                {
+                    iWidth = image.Width;
+                    iHeight = image.Height;
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static string AssembleImage(string strUrl, int Height, int Width)
+        {
+            if (strUrl.Contains("image-id"))
+            {
+                return Utils.AssembleIMG(strUrl);
+            }
+            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
+        }
+
         public static string AssembleIMG(string strURL)
         {
             return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";

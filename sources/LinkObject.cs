@@ -171,6 +171,11 @@ namespace MacroViewer
         {
             BlinkTimer.Enabled = false;
             BlinkTimer = null;
+            if (pbImage.Image != null)
+            {
+                pbImage.Image.Dispose();
+                pbImage.Image = null;
+            }
         }
 
         private void BlinkTimer_Tick(object sender, EventArgs e)

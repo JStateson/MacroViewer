@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnDelUnused = new System.Windows.Forms.Button();
             this.dgvUsedImages = new System.Windows.Forms.DataGridView();
             this.pbImage = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).BeginInit();
@@ -50,6 +50,17 @@
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Advailable Image Files";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Info;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(156, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(229, 32);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "This deletes all the checked images.\r\nThe unchecked ones are being used.";
             // 
             // btnDelUnused
             // 
@@ -74,6 +85,7 @@
             this.dgvUsedImages.Name = "dgvUsedImages";
             this.dgvUsedImages.Size = new System.Drawing.Size(358, 292);
             this.dgvUsedImages.TabIndex = 0;
+            this.dgvUsedImages.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsedImages_CellMouseDoubleClick);
             this.dgvUsedImages.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsedImages_RowEnter);
             // 
             // pbImage
@@ -82,20 +94,9 @@
             this.pbImage.Location = new System.Drawing.Point(554, 117);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(355, 294);
-            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 6;
             this.pbImage.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(156, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 32);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "This deletes all the checked images.\r\nThe unchecked ones are being used.";
             // 
             // label2
             // 
@@ -121,6 +122,7 @@
             this.MinimizeBox = false;
             this.Name = "RemoveImages";
             this.Text = "View and Remove unused Images";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RemoveImages_FormClosing);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).EndInit();

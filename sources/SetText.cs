@@ -68,7 +68,7 @@ namespace MacroViewer
             StopTimer();
         }
 
-        private void RunBrowser(string sLoc)
+        private void RunBrowser()
         {
             string strTemp = tbResult.Text;
             if (strTemp == "" || bBoxed) strTemp = strBoxed;
@@ -80,7 +80,7 @@ namespace MacroViewer
 
         private void btnTest_Click(object sender, EventArgs e) 
         {
-            RunBrowser(sLoc); 
+            RunBrowser(); 
         }
 
         private void TimerControl(bool bEnable)

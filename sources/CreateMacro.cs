@@ -59,14 +59,7 @@ namespace MacroViewer
         }
 
 
-        public string AssembleImage(string strUrl, int Height, int Width)
-        {
-            if(strUrl.Contains("image-id"))
-            {
-                return Utils.AssembleIMG(strUrl);   
-            }
-            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + " width=\"" + Width.ToString() + "\">";
-        }
+
 
         private void AddImage()
         {
@@ -84,7 +77,7 @@ namespace MacroViewer
             {
                 strImageName = tbUrlText.Text;
             }
-            strResultOut = AssembleImage(strImageName, Width, Height);
+            strResultOut = Utils.AssembleImage(strImageName, Height, Width);
         }
 
 

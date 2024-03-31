@@ -90,10 +90,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RemoveImages.cs">
+    <Compile Include="sources\RemoveImages.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RemoveImages.Designer.cs">
+    <Compile Include="sources\RemoveImages.Designer.cs">
       <DependentUpon>RemoveImages.cs</DependentUpon>
     </Compile>
     <Compile Include="sources\MoveMacro.cs">
@@ -202,7 +202,7 @@
     <Compile Include="sources\WordSearch.Designer.cs">
       <DependentUpon>WordSearch.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RemoveImages.resx">
+    <EmbeddedResource Include="sources\RemoveImages.resx">
       <DependentUpon>RemoveImages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sources\MoveMacro.resx">

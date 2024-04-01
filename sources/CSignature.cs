@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -14,16 +15,16 @@ namespace MacroViewer
         private string SigLoc = "";
         private string SigFilename = "";
         private string DefaultSig = "<div><font face=\"hpsimplified, arial, sans-serif\" size=\"2.5\">I am a community volunteer.<br/><strong><font color=\"#000000\" size=\"2.75\">If you found the answer helpful and/or you want to say “thanks”? </font></strong>Click the <strong><font color=\"#0059d6\" size=\"2.75\">“ Yes ” box below </font></strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v&#61;v2\" />Did I help solve the problem?<strong><font color=\"#f80000\" size=\"2.75\"> don´t forget to </font></strong>click <strong><font color=\" green \" size=\"2.75\">“ Accept as a solution”</font> </strong><img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v&#61;v2\">, someone who has the same query may find this solution and be helped by it.</font></div>";
+        private int rowIndexFromMouseDown;
+        private DataGridViewRow draggedRow;
 
-
-        public List<string> sSigListBody = new List<string>();
         public int CurrentRowSelected = 0; // this corresponds to the body of the text and the name selected
 
         private void ShowSig(int iRow)
         {
             if (iRow < 0) return;
             CurrentRowSelected = iRow;
-            tbBody.Text = sSigListBody[CurrentRowSelected].ToString();
+            tbBody.Text = dgvSigList.Rows[CurrentRowSelected].Cells[1].Value.ToString();
         }
 
         public CSignature()
@@ -59,7 +60,6 @@ namespace MacroViewer
                 CreateSigFromDefault();
             }
             dgvSigList.Rows.Clear();
-            sSigListBody.Clear();
             FillTable();
         }
 
@@ -71,10 +71,9 @@ namespace MacroViewer
                 StreamReader sr = new StreamReader(SigFilename);
                 string sName = sr.ReadLine();
                 string sBody = sr.ReadLine();
-                sSigListBody.Add(sBody);
-                //DataGridViewRow row = new DataGridViewRow();
-                dgvSigList.Rows.Add(sName);
-                while(true)
+                dgvSigList.Rows.Add(sName,sBody);
+
+                while (true)
                 {
                     i++;
                     sName = sr.ReadLine();
@@ -83,8 +82,7 @@ namespace MacroViewer
                     sBody = sr.ReadLine();
                     if(sBody == null) break;
                     if (sBody == "") break;
-                    dgvSigList.Rows.Add(sName);
-                    sSigListBody.Add(sBody);
+                    dgvSigList.Rows.Add(sName,sBody);
                 }
                 sr.Close();
             }
@@ -95,9 +93,6 @@ namespace MacroViewer
 
         private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = e.RowIndex;
-            RunBrowser(SigLoc);
-            ShowSig(i);
         }
         private void RunBrowser(string sLoc)
         {
@@ -115,15 +110,13 @@ namespace MacroViewer
 
         private void blnAdd_Click(object sender, EventArgs e)
         {
-            dgvSigList.Rows.Add("ChangeMe");
             tbBody.Text = "ChangeMe";
-            sSigListBody.Add(tbBody.Text);
+            dgvSigList.Rows.Add("ChangeMe",tbBody.Text);
         }
 
         private void btnDelSig_Click(object sender, EventArgs e)
         {
             int i = dgvSigList.CurrentRow.Index;
-            sSigListBody.RemoveAt(i);
             dgvSigList.Rows.RemoveAt(i);
         }
 
@@ -134,7 +127,7 @@ namespace MacroViewer
             foreach (DataGridViewRow row in dgvSigList.Rows)
             {
                 string Name = row.Cells[0].Value.ToString().Trim();
-                string strBody = sSigListBody[i].ToString().Trim();
+                string strBody = row.Cells[1].Value.ToString().Trim();
                 strOut += FormNewSig(Name, strBody);
                 i++;
             }
@@ -144,7 +137,7 @@ namespace MacroViewer
         private void bltnSaveBack_Click(object sender, EventArgs e)
         {
             tbBody.Text = Utils.RemoveNL(tbBody.Text);
-            sSigListBody[CurrentRowSelected] = tbBody.Text;
+            dgvSigList.Rows[CurrentRowSelected].Cells[1].Value = tbBody.Text;
         }
 
         private void dgvSigList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -198,7 +191,6 @@ namespace MacroViewer
             string strErr = Utils.BBCparse(strTemp);
             if (strErr == "")
             {
-                //btnSaveEdits.Enabled = true;
                 return;
             }
             DialogResult Res1 = MessageBox.Show(strErr, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -223,6 +215,38 @@ namespace MacroViewer
         {
 
             CopyToNotepad(Utils.ChangeBRtoNL(tbBody.Text));
+        }
+
+        private void dgvSigList_DragDrop(object sender, DragEventArgs e)
+        {
+            Point clientPoint = dgvSigList.PointToClient(new Point(e.X, e.Y));
+            int rowIndexOfTarget = dgvSigList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+            if (e.Data.GetDataPresent(typeof(DataGridViewRow)) && rowIndexOfTarget != rowIndexFromMouseDown)
+            {
+                DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
+                dgvSigList.Rows.RemoveAt(rowIndexFromMouseDown);
+                dgvSigList.Rows.Insert(rowIndexOfTarget, rowToMove);
+            }
+        }
+
+        private void dgvSigList_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dgvSigList_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                rowIndexFromMouseDown = dgvSigList.HitTest(e.X, e.Y).RowIndex;
+                if (rowIndexFromMouseDown != -1)
+                {
+                    Size dragSize = SystemInformation.DragSize;
+                    draggedRow = dgvSigList.Rows[rowIndexFromMouseDown];
+                    dgvSigList.DoDragDrop(draggedRow, DragDropEffects.Move);
+                    ShowSig(rowIndexFromMouseDown);
+                }
+            }
         }
     }
 }

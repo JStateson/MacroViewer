@@ -34,7 +34,7 @@ namespace MacroViewer
 
         List<CImageItems> MyItems;
 
-        public ManageMacros(string rstrType, ref string[] rBody)
+        public ManageMacros(string rstrType, int nMacros, ref string[] rBody)
         {
             InitializeComponent();
             AllBody = rBody;
@@ -50,7 +50,7 @@ namespace MacroViewer
             
             while (true)
             {
-                if (i > 29) return;
+                if (i >= nMacros) return;// something wrong can only hold 50
                 sBody = rBody[i];
                 if (sBody == ""|| sBody == null) break;
                 if (sBody.Contains(Utils.AssignedImageName))
@@ -112,6 +112,7 @@ namespace MacroViewer
 
         private void btnUpdateURL_Click(object sender, EventArgs e)
         {
+            if (iRow < 0) return;
             string strOld = dgManage.Rows[iRow].Cells[0].Value.ToString();
             int r = -1 + (int)dgManage.Rows[iRow].Cells[1].Value;
             string strNew;

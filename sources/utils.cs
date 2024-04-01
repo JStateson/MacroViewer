@@ -323,7 +323,7 @@ namespace MacroViewer
             }
             else
             {
-                tbScratch.Text = tbScratch.Text.Replace("table border='1'>", "<table>");
+                tbScratch.Text = tbScratch.Text.Replace("<table border='1'>", "<table>");
             }
         }
 

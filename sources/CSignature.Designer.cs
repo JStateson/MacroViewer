@@ -41,7 +41,9 @@
             this.blnAdd = new System.Windows.Forms.Button();
             this.dgvSigList = new System.Windows.Forms.DataGridView();
             this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnNLtoNotepad = new System.Windows.Forms.Button();
             this.btnPasteImg = new System.Windows.Forms.Button();
             this.btnAdd2New = new System.Windows.Forms.Button();
             this.btnAdd1New = new System.Windows.Forms.Button();
@@ -52,7 +54,6 @@
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnNLtoNotepad = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -121,9 +122,10 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(11, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 48);
+            this.label1.Size = new System.Drawing.Size(132, 80);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Be sure to save\r\nedits if you added\r\nor remove a sig";
+            this.label1.Text = "Be sure to save edits\r\nif you added or\r\nremoved an item.\r\nUse mouse to drag\r\nand " +
+    "move rows";
             // 
             // btnSaveEdits
             // 
@@ -163,12 +165,14 @@
             // 
             // dgvSigList
             // 
+            this.dgvSigList.AllowDrop = true;
             this.dgvSigList.AllowUserToAddRows = false;
             this.dgvSigList.AllowUserToResizeColumns = false;
             this.dgvSigList.AllowUserToResizeRows = false;
             this.dgvSigList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSigList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.sName});
+            this.sName,
+            this.Column1});
             this.dgvSigList.Location = new System.Drawing.Point(191, 38);
             this.dgvSigList.MultiSelect = false;
             this.dgvSigList.Name = "dgvSigList";
@@ -177,13 +181,21 @@
             this.dgvSigList.Size = new System.Drawing.Size(243, 384);
             this.dgvSigList.TabIndex = 0;
             this.dgvSigList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellClick);
-            this.dgvSigList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellContentDoubleClick);
+            this.dgvSigList.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSigList_DragDrop);
+            this.dgvSigList.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvSigList_DragEnter);
+            this.dgvSigList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvSigList_MouseDown);
             // 
             // sName
             // 
             this.sName.HeaderText = "Name";
             this.sName.Name = "sName";
             this.sName.Width = 240;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
             // 
             // gbEditSig
             // 
@@ -205,6 +217,19 @@
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // btnNLtoNotepad
+            // 
+            this.btnNLtoNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNLtoNotepad.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNLtoNotepad.Location = new System.Drawing.Point(406, 74);
+            this.btnNLtoNotepad.Name = "btnNLtoNotepad";
+            this.btnNLtoNotepad.Size = new System.Drawing.Size(141, 34);
+            this.btnNLtoNotepad.TabIndex = 22;
+            this.btnNLtoNotepad.Text = "Copy to notepad";
+            this.toolTip1.SetToolTip(this.btnNLtoNotepad, "Copy the signature using newlines");
+            this.btnNLtoNotepad.UseVisualStyleBackColor = true;
+            this.btnNLtoNotepad.Click += new System.EventHandler(this.btnNLtoNotepad_Click);
             // 
             // btnPasteImg
             // 
@@ -318,19 +343,6 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // btnNLtoNotepad
-            // 
-            this.btnNLtoNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNLtoNotepad.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnNLtoNotepad.Location = new System.Drawing.Point(406, 74);
-            this.btnNLtoNotepad.Name = "btnNLtoNotepad";
-            this.btnNLtoNotepad.Size = new System.Drawing.Size(141, 34);
-            this.btnNLtoNotepad.TabIndex = 22;
-            this.btnNLtoNotepad.Text = "Copy to notepad";
-            this.toolTip1.SetToolTip(this.btnNLtoNotepad, "Copy the signature using newlines");
-            this.btnNLtoNotepad.UseVisualStyleBackColor = true;
-            this.btnNLtoNotepad.Click += new System.EventHandler(this.btnNLtoNotepad_Click);
-            // 
             // CSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,9 +387,10 @@
         private System.Windows.Forms.Button btnTestXML;
         private System.Windows.Forms.Button btnAdd2New;
         private System.Windows.Forms.Button btnAdd1New;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPasteImg;
         private System.Windows.Forms.Button btnNLtoNotepad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

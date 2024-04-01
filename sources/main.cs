@@ -1077,7 +1077,7 @@ namespace MacroViewer
 
         private void btnChangeUrls_Click(object sender, EventArgs e)
         {
-            ManageMacros MyManageMac = new ManageMacros(strType, ref Body);
+            ManageMacros MyManageMac = new ManageMacros(strType, NumMacros, ref Body);
             MyManageMac.ShowDialog();
             tbBody.Text = MyManageMac.AllBody[CurrentRowSelected];
             SaveCurrentMacros();

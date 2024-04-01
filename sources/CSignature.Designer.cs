@@ -34,6 +34,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveEdits = new System.Windows.Forms.Button();
@@ -54,6 +55,7 @@
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -66,7 +68,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1168, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1230, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,6 +90,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnSaveEdits);
@@ -101,6 +104,19 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sig and Image List";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(11, 329);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(143, 64);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "To change a macro\r\nname, first select the\r\nmacro with your mouse\r\nthen tap the F2" +
+    " key.";
             // 
             // label3
             // 
@@ -122,10 +138,10 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(11, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 80);
+            this.label1.Size = new System.Drawing.Size(162, 96);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Be sure to save edits\r\nif you added or\r\nremoved an item.\r\nUse mouse to drag\r\nand " +
-    "move rows";
+            this.label1.Text = "Be sure to save edits lf\r\nyou added or removed\r\nan item.  Double click to\r\nsee th" +
+    "e image in a page.\r\nReorder rows by using the\r\nleft button to drag rows.";
             // 
             // btnSaveEdits
             // 
@@ -199,6 +215,7 @@
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.label5);
             this.gbEditSig.Controls.Add(this.btnNLtoNotepad);
             this.gbEditSig.Controls.Add(this.btnPasteImg);
             this.gbEditSig.Controls.Add(this.btnAdd2New);
@@ -213,7 +230,7 @@
             this.gbEditSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEditSig.Location = new System.Drawing.Point(518, 40);
             this.gbEditSig.Name = "gbEditSig";
-            this.gbEditSig.Size = new System.Drawing.Size(617, 552);
+            this.gbEditSig.Size = new System.Drawing.Size(673, 552);
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
@@ -237,31 +254,31 @@
             this.btnPasteImg.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnPasteImg.Location = new System.Drawing.Point(43, 173);
             this.btnPasteImg.Name = "btnPasteImg";
-            this.btnPasteImg.Size = new System.Drawing.Size(161, 34);
+            this.btnPasteImg.Size = new System.Drawing.Size(113, 34);
             this.btnPasteImg.TabIndex = 21;
-            this.btnPasteImg.Text = "Paste as image";
-            this.toolTip1.SetToolTip(this.btnPasteImg, "Copy the signature back to the list table");
+            this.btnPasteImg.Text = "Paste image";
+            this.toolTip1.SetToolTip(this.btnPasteImg, "Pastes an image or a url that is an image");
             this.btnPasteImg.UseVisualStyleBackColor = true;
             this.btnPasteImg.Click += new System.EventHandler(this.btnPasteImg_Click);
             // 
             // btnAdd2New
             // 
-            this.btnAdd2New.Location = new System.Drawing.Point(261, 179);
+            this.btnAdd2New.Location = new System.Drawing.Point(565, 381);
             this.btnAdd2New.Name = "btnAdd2New";
-            this.btnAdd2New.Size = new System.Drawing.Size(108, 23);
+            this.btnAdd2New.Size = new System.Drawing.Size(66, 23);
             this.btnAdd2New.TabIndex = 20;
-            this.btnAdd2New.Text = "Add 2 newlines";
-            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br />");
+            this.btnAdd2New.Text = "Add 2";
+            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br>");
             this.btnAdd2New.UseVisualStyleBackColor = true;
             this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
             // 
             // btnAdd1New
             // 
-            this.btnAdd1New.Location = new System.Drawing.Point(278, 145);
+            this.btnAdd1New.Location = new System.Drawing.Point(565, 331);
             this.btnAdd1New.Name = "btnAdd1New";
-            this.btnAdd1New.Size = new System.Drawing.Size(91, 23);
+            this.btnAdd1New.Size = new System.Drawing.Size(66, 23);
             this.btnAdd1New.TabIndex = 19;
-            this.btnAdd1New.Text = "Add newline";
+            this.btnAdd1New.Text = "Add 1";
             this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br>");
             this.btnAdd1New.UseVisualStyleBackColor = true;
             this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
@@ -311,12 +328,11 @@
             this.label2.BackColor = System.Drawing.SystemColors.Info;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(185, 21);
+            this.label2.Location = new System.Drawing.Point(185, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(188, 96);
+            this.label2.Size = new System.Drawing.Size(197, 160);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Be sure to copy changes back\r\n(Apply) to Sig List and Save.\r\n\r\nUse the PASTE AS I" +
-    "MAGE\r\nto paste the address of an\r\nimage from the Clipboard";
+            this.label2.Text = resources.GetString("label2.Text");
             // 
             // btnShowBrowser
             // 
@@ -343,17 +359,33 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Location = new System.Drawing.Point(562, 291);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 16);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "New Lines";
+            // 
             // CSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1168, 622);
+            this.ClientSize = new System.Drawing.Size(1230, 622);
             this.Controls.Add(this.gbEditSig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CSignature";
             this.Text = "Signature";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.CSignature_HelpButtonClicked);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -392,5 +424,7 @@
         private System.Windows.Forms.Button btnNLtoNotepad;
         private System.Windows.Forms.DataGridViewTextBoxColumn sName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

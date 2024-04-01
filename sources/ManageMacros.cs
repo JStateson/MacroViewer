@@ -152,6 +152,12 @@ namespace MacroViewer
             this.Close();
         }
 
+        private void ManageMacros_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            help MyHelp = new help("MANAGE");
+            MyHelp.Show();
+        }
+
         private void dgManage_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SetLocation();

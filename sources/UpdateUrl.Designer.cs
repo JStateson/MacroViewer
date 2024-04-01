@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateUrl));
             this.btnSaveExit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbUrl = new System.Windows.Forms.TextBox();
@@ -165,6 +166,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSaveExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "UpdateUrl";
             this.Text = "UpdateUrl";

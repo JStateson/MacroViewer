@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+using System.Security.Policy;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
@@ -94,7 +97,7 @@ namespace MacroViewer
         private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
         }
-        private void RunBrowser(string sLoc)
+        private void RunBrowser()
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
@@ -105,7 +108,7 @@ namespace MacroViewer
 
         private void btnShowBrowser_Click(object sender, EventArgs e)
         {
-            RunBrowser(SigLoc);
+            RunBrowser();
         }
 
         private void blnAdd_Click(object sender, EventArgs e)
@@ -142,8 +145,7 @@ namespace MacroViewer
 
         private void dgvSigList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = e.RowIndex;
-            ShowSig(i);
+            //ShowSig(e.RowIndex);
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,11 +205,29 @@ namespace MacroViewer
 
         private void btnPasteImg_Click(object sender, EventArgs e)
         {
-            string sUrl = Clipboard.GetText();
-            if(Utils.IsUrlImage(sUrl))
+            string sUrl,sImg;
+
+            if(Clipboard.ContainsImage())
             {
-                string sImg = Utils.AssembleIMG(sUrl);
+                PictureBox pbImage = new PictureBox();
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom; // .StretchImage;
+                pbImage.Image = Clipboard.GetImage();
+                sUrl = Utils.GetNextImageFile("SI", Utils.WhereExe);
+                string sImagePath = Utils.WhereExe + "/" + sUrl;
+                pbImage.Image.Save(sImagePath, ImageFormat.Png);
+                //int iWidth = pbImage.Image.Width;
+                //int iHeight = pbImage.Image.Height;
+                sImg = Utils.AssembleIMG(sUrl);
                 tbBody.Text += sImg;
+            }
+            else
+            {
+                sUrl = Clipboard.GetText();
+                if (Utils.IsUrlImage(sUrl))
+                {
+                    sImg = Utils.AssembleIMG(sUrl);
+                    tbBody.Text += sImg;
+                }
             }
         }
 
@@ -245,8 +265,15 @@ namespace MacroViewer
                     draggedRow = dgvSigList.Rows[rowIndexFromMouseDown];
                     dgvSigList.DoDragDrop(draggedRow, DragDropEffects.Move);
                     ShowSig(rowIndexFromMouseDown);
+                    if (e.Clicks == 2) RunBrowser();
                 }
             }
+        }
+
+        private void CSignature_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            help MyHelp = new help("SIG");
+            MyHelp.Show();
         }
     }
 }

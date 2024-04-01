@@ -44,7 +44,7 @@ namespace MacroViewer
     {
         public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OS", "HP" };
         private static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)", "DeskJet(DJ)", "OS related", "HP from HTML" };
-
+        // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -91,7 +91,7 @@ namespace MacroViewer
 
         public static string FNtoPath(string strFN)
         {
-            return WhereExe + "\\" + strFN + "macros.txt";
+            return WhereExe + "\\" + strFN + ((strFN == "SI") ? "gnatures.txt" : "macros.txt");
         }
 
         public static bool NoFileThere(string strFN)
@@ -434,7 +434,7 @@ namespace MacroViewer
             int i,j;
             sUrl = dStr(sUrl,"/ref");
             string surl = sUrl.ToLower();
-            if (surl.Contains("youtube"))return sUrl;
+            if (surl.Contains("youtube") || surl.Contains("support.hp.com"))return sUrl;
 
             i = surl.IndexOf("search?");
             if(i > 0)

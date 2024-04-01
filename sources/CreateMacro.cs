@@ -96,7 +96,7 @@ namespace MacroViewer
         {
             if (Clipboard.ContainsImage())
             {
-                pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom; // .StretchImage;
                 pbImage.Image = Clipboard.GetImage();
                 bIsPath = true;
                 btnApply.Enabled = true; 
@@ -104,8 +104,7 @@ namespace MacroViewer
             else
             {
                 MessageBox.Show("Empty clipboard: Please copy image using windows key + 'S'\r\nOr any screen capture tool such as snagit");
-            }
-            
+            }            
         }
 
         private void btnClear_Click(object sender, EventArgs e)

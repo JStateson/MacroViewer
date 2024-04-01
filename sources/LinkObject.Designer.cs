@@ -36,19 +36,19 @@
             this.rbimage = new System.Windows.Forms.RadioButton();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbUrlText = new System.Windows.Forms.TextBox();
             this.lbBoxed = new System.Windows.Forms.Label();
             this.btnBoxIT = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnApplyText = new System.Windows.Forms.Button();
-            this.tbUrlText = new System.Windows.Forms.TextBox();
             this.tbImageUrl = new System.Windows.Forms.TextBox();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCencel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.gbSelectType.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -129,6 +129,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compose URL or image";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button1.Location = new System.Drawing.Point(31, 165);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 36);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Apply and exit";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(180, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Text for URL (can be omitted)";
+            // 
+            // tbUrlText
+            // 
+            this.tbUrlText.Location = new System.Drawing.Point(227, 48);
+            this.tbUrlText.Name = "tbUrlText";
+            this.tbUrlText.Size = new System.Drawing.Size(404, 22);
+            this.tbUrlText.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.tbUrlText, "Can be left blank if no text wanted");
+            // 
             // lbBoxed
             // 
             this.lbBoxed.AutoSize = true;
@@ -177,14 +205,6 @@
             this.btnApplyText.Text = "Form Object";
             this.btnApplyText.UseVisualStyleBackColor = true;
             this.btnApplyText.Click += new System.EventHandler(this.btnApplyText_Click);
-            // 
-            // tbUrlText
-            // 
-            this.tbUrlText.Location = new System.Drawing.Point(227, 48);
-            this.tbUrlText.Name = "tbUrlText";
-            this.tbUrlText.Size = new System.Drawing.Size(404, 22);
-            this.tbUrlText.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.tbUrlText, "Can be left blank if no text wanted");
             // 
             // tbImageUrl
             // 
@@ -235,26 +255,6 @@
             this.BlinkTimer.Interval = 500;
             this.BlinkTimer.Tick += new System.EventHandler(this.BlinkTimer_Tick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 16);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Text for URL (can be omitted)";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.button1.Location = new System.Drawing.Point(31, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 36);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Apply and exit";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -278,6 +278,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbSelectType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LinkObject";

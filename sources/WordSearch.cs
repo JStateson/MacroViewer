@@ -243,5 +243,11 @@ namespace MacroViewer
         {
             HP_KB_find();
         }
+
+        private void WordSearch_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            help MyHelp = new help("SEARCH");
+            MyHelp.Show();
+        }
     }
 }

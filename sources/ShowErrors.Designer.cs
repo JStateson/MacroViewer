@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowErrors));
             this.lbMacNames = new System.Windows.Forms.ListBox();
             this.tbError = new System.Windows.Forms.TextBox();
             this.btnFindErr = new System.Windows.Forms.Button();
@@ -83,6 +84,7 @@
             this.Controls.Add(this.gbShowErr);
             this.Controls.Add(this.tbError);
             this.Controls.Add(this.lbMacNames);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShowErrors";
             this.Text = "Macro Errors";
             this.gbShowErr.ResumeLayout(false);

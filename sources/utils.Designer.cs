@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnShowScratch = new System.Windows.Forms.Button();
             this.btnCopyScratch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +52,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.showExampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpTable = new System.Windows.Forms.GroupBox();
+            this.btnCleardgv = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cbUseBorder = new System.Windows.Forms.CheckBox();
             this.btnShowTab = new System.Windows.Forms.Button();
             this.btnClearTab = new System.Windows.Forms.Button();
             this.cbUseDelims = new System.Windows.Forms.CheckBox();
@@ -58,6 +62,8 @@
             this.btnFillRow = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnApplyTab = new System.Windows.Forms.Button();
             this.cbPreFill = new System.Windows.Forms.CheckBox();
@@ -65,10 +71,7 @@
             this.tbRows = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbUseBorder = new System.Windows.Forms.CheckBox();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCleardgv = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -93,6 +96,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnShowScratch);
             this.groupBox1.Controls.Add(this.btnCopyScratch);
             this.groupBox1.Controls.Add(this.label1);
@@ -109,10 +113,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form URL";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(17, 468);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 80);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "This form does not\r\ntransfer data back\r\nto any form.  Use\r\nthe clipboard to copy\r" +
+    "\ndata you want to use.";
+            // 
             // btnShowScratch
             // 
             this.btnShowScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowScratch.Location = new System.Drawing.Point(29, 419);
+            this.btnShowScratch.Location = new System.Drawing.Point(29, 374);
             this.btnShowScratch.Name = "btnShowScratch";
             this.btnShowScratch.Size = new System.Drawing.Size(111, 24);
             this.btnShowScratch.TabIndex = 11;
@@ -123,7 +140,7 @@
             // btnCopyScratch
             // 
             this.btnCopyScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyScratch.Location = new System.Drawing.Point(29, 369);
+            this.btnCopyScratch.Location = new System.Drawing.Point(29, 422);
             this.btnCopyScratch.Name = "btnCopyScratch";
             this.btnCopyScratch.Size = new System.Drawing.Size(111, 24);
             this.btnCopyScratch.TabIndex = 10;
@@ -199,6 +216,7 @@
             // btnClip
             // 
             this.btnClip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClip.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnClip.Location = new System.Drawing.Point(24, 47);
             this.btnClip.Name = "btnClip";
             this.btnClip.Size = new System.Drawing.Size(135, 24);
@@ -300,10 +318,22 @@
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpTable.Location = new System.Drawing.Point(784, 59);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(509, 585);
+            this.gpTable.Size = new System.Drawing.Size(509, 607);
             this.gpTable.TabIndex = 9;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table";
+            // 
+            // btnCleardgv
+            // 
+            this.btnCleardgv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleardgv.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnCleardgv.Location = new System.Drawing.Point(327, 59);
+            this.btnCleardgv.Name = "btnCleardgv";
+            this.btnCleardgv.Size = new System.Drawing.Size(48, 23);
+            this.btnCleardgv.TabIndex = 11;
+            this.btnCleardgv.Text = "Clear";
+            this.btnCleardgv.UseVisualStyleBackColor = true;
+            this.btnCleardgv.Click += new System.EventHandler(this.btnCleardgv_Click);
             // 
             // groupBox5
             // 
@@ -320,6 +350,22 @@
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "How to fill it in (do not use above)";
+            // 
+            // cbUseBorder
+            // 
+            this.cbUseBorder.AutoSize = true;
+            this.cbUseBorder.Checked = true;
+            this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseBorder.Location = new System.Drawing.Point(218, 61);
+            this.cbUseBorder.Name = "cbUseBorder";
+            this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
+            this.cbUseBorder.TabIndex = 12;
+            this.cbUseBorder.Text = "Form border on all tables";
+            this.toolTip1.SetToolTip(this.cbUseBorder, "In HP signature setup, all tahbles have a border");
+            this.cbUseBorder.UseVisualStyleBackColor = true;
+            this.cbUseBorder.CheckStateChanged += new System.EventHandler(this.cbUseBorder_CheckStateChanged);
             // 
             // btnShowTab
             // 
@@ -406,9 +452,26 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv.Size = new System.Drawing.Size(462, 276);
+            this.dgv.Size = new System.Drawing.Size(462, 297);
             this.dgv.TabIndex = 7;
             this.dgv.Visible = false;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column1.HeaderText = "Position";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Contents";
+            this.Column2.Name = "Column2";
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 356;
             // 
             // btnShow
             // 
@@ -481,50 +544,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Rows";
             // 
-            // cbUseBorder
-            // 
-            this.cbUseBorder.AutoSize = true;
-            this.cbUseBorder.Checked = true;
-            this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseBorder.Location = new System.Drawing.Point(218, 61);
-            this.cbUseBorder.Name = "cbUseBorder";
-            this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
-            this.cbUseBorder.TabIndex = 12;
-            this.cbUseBorder.Text = "Form border on all tables";
-            this.cbUseBorder.UseVisualStyleBackColor = true;
-            this.cbUseBorder.CheckStateChanged += new System.EventHandler(this.cbUseBorder_CheckStateChanged);
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "Position";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Contents";
-            this.Column2.Name = "Column2";
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 356;
-            // 
-            // btnCleardgv
-            // 
-            this.btnCleardgv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleardgv.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCleardgv.Location = new System.Drawing.Point(327, 59);
-            this.btnCleardgv.Name = "btnCleardgv";
-            this.btnCleardgv.Size = new System.Drawing.Size(48, 23);
-            this.btnCleardgv.TabIndex = 11;
-            this.btnCleardgv.Text = "Clear";
-            this.btnCleardgv.UseVisualStyleBackColor = true;
-            this.btnCleardgv.Click += new System.EventHandler(this.btnCleardgv_Click);
-            // 
             // utils
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,11 +553,14 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "utils";
             this.Text = "utils";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.utils_HelpButtonClicked);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -599,5 +621,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Button btnCleardgv;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label4;
     }
 }

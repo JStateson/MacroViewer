@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveMacro));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnMove = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnMove = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.tbNFree = new System.Windows.Forms.TextBox();
             this.tbNumMoving = new System.Windows.Forms.TextBox();
@@ -70,6 +71,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Action";
             // 
+            // btnMove
+            // 
+            this.btnMove.Enabled = false;
+            this.btnMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMove.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnMove.Location = new System.Drawing.Point(20, 207);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(112, 37);
+            this.btnMove.TabIndex = 4;
+            this.btnMove.Text = "Move Them";
+            this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -89,19 +103,6 @@
             this.label1.Size = new System.Drawing.Size(112, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "Number Checked";
-            // 
-            // btnMove
-            // 
-            this.btnMove.Enabled = false;
-            this.btnMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMove.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnMove.Location = new System.Drawing.Point(20, 207);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(112, 37);
-            this.btnMove.TabIndex = 4;
-            this.btnMove.Text = "Move Them";
-            this.btnMove.UseVisualStyleBackColor = true;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // btnExit
             // 
@@ -157,6 +158,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 450);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MoveMacro";
             this.Text = "MoveMacro";
             this.groupBox1.ResumeLayout(false);

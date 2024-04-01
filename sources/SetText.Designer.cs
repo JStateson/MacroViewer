@@ -41,11 +41,11 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lbBoxed = new System.Windows.Forms.Label();
             this.btnBoxIT = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnApplyText = new System.Windows.Forms.Button();
             this.tbResult = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnApply = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cbPreFill = new System.Windows.Forms.CheckBox();
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
@@ -177,6 +177,18 @@
             this.btnBoxIT.UseVisualStyleBackColor = true;
             this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
             // 
+            // btnApply
+            // 
+            this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnApply.Location = new System.Drawing.Point(34, 78);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(122, 36);
+            this.btnApply.TabIndex = 6;
+            this.btnApply.Text = "Apply and exit";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
             // btnTest
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,18 +232,6 @@
             this.btnCancel.Text = "Cancel and exit";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnApply
-            // 
-            this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(34, 78);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(122, 36);
-            this.btnApply.TabIndex = 6;
-            this.btnApply.Text = "Apply and exit";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // cbPreFill
             // 
@@ -337,6 +337,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbSelectType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetText";

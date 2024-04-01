@@ -1651,5 +1651,11 @@ namespace MacroViewer
             Clipboard.SetText(Properties.Settings.Default.SpecialWord);
             SpecialUsed(false);
         }
+
+        private void main_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            help MyHelp = new help("FILE");
+            MyHelp.Show();
+        }
     }
 }

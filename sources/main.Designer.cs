@@ -118,6 +118,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -192,7 +193,8 @@
             this.btnGo.Size = new System.Drawing.Size(121, 31);
             this.btnGo.TabIndex = 7;
             this.btnGo.Text = "Show As Page";
-            this.toolTip1.SetToolTip(this.btnGo, "Pops up form using Edge or Chrome");
+            this.toolTip1.SetToolTip(this.btnGo, "Pops up a page using WebViewer2 (EDGE)\r\nYou can copy the page and paste it into\r\n" +
+        "any response.  Any link to an image must\r\nnot be local.");
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
@@ -653,6 +655,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.label7);
             this.gpMainEdit.Controls.Add(this.btnSearch);
             this.gpMainEdit.Controls.Add(this.btnCleanUrl);
             this.gpMainEdit.Controls.Add(this.btnCancelEdits);
@@ -852,7 +855,7 @@
             this.btnNoMark.Name = "btnNoMark";
             this.btnNoMark.Size = new System.Drawing.Size(155, 29);
             this.btnNoMark.TabIndex = 14;
-            this.btnNoMark.Text = "Remove markup";
+            this.btnNoMark.Text = "Remove markup just puts\r\nnewlines whre <br> was\r\nto make it easy to read.";
             this.btnNoMark.UseVisualStyleBackColor = true;
             this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
@@ -864,7 +867,8 @@
             this.btnToMark.Name = "btnToMark";
             this.btnToMark.Size = new System.Drawing.Size(155, 29);
             this.btnToMark.TabIndex = 13;
-            this.btnToMark.Text = "Switch to markup";
+            this.btnToMark.Text = "Switch to markup substitutes\r\n <br> for newlines to make the\r\npage appear as norm" +
+    "al.";
             this.btnToMark.UseVisualStyleBackColor = true;
             this.btnToMark.Click += new System.EventHandler(this.btnToMark_Click);
             // 
@@ -1048,6 +1052,17 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Info;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(355, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 26);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Hover mouse over\r\nbelow button";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1058,15 +1073,20 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "main";
             this.Text = " HP Macro Editor";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.main_HelpButtonClicked);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gpMainEdit.ResumeLayout(false);
+            this.gpMainEdit.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.gbManageImages.ResumeLayout(false);
@@ -1175,6 +1195,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRemoveLocalImgs;
         private System.Windows.Forms.Button btnSpecialWord;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label7;
     }
 }
 

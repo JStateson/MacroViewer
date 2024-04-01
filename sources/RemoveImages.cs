@@ -90,6 +90,11 @@ namespace MacroViewer
                 if (!File.Exists(strpath)) continue;
                 strTotal += File.ReadAllText(strpath);
             }
+            strpath = Utils.FNtoPath("SI");
+            if (File.Exists(strpath))
+            {
+                strTotal += File.ReadAllText(strpath);
+            }
             foreach (CLocalFiles cf in LocalImageFiles)
             {
                 if (strTotal.Contains(cf.Name))

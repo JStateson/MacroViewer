@@ -315,6 +315,12 @@ namespace MacroViewer
             ClearDGV();
         }
 
+        private void utils_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            help MyHelp = new help("UTILS");
+            MyHelp.Show();
+        }
+
         private void cbUseBorder_CheckStateChanged(object sender, EventArgs e)
         {
             if(cbUseBorder.Checked)

@@ -36,7 +36,7 @@
             this.rbimage = new System.Windows.Forms.RadioButton();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAE = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbUrlText = new System.Windows.Forms.TextBox();
             this.lbBoxed = new System.Windows.Forms.Label();
@@ -113,7 +113,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnAE);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tbUrlText);
             this.groupBox1.Controls.Add(this.lbBoxed);
@@ -129,16 +129,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compose URL or image";
             // 
-            // button1
+            // btnAE
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.button1.Location = new System.Drawing.Point(31, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 36);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Apply and exit";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAE.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAE.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnAE.Location = new System.Drawing.Point(31, 165);
+            this.btnAE.Name = "btnAE";
+            this.btnAE.Size = new System.Drawing.Size(122, 36);
+            this.btnAE.TabIndex = 10;
+            this.btnAE.Text = "Apply and exit";
+            this.btnAE.UseVisualStyleBackColor = true;
+            this.btnAE.Click += new System.EventHandler(this.btnAE_Click);
             // 
             // label1
             // 
@@ -316,7 +317,7 @@
         private System.Windows.Forms.Button btnBoxIT;
         private System.Windows.Forms.Label lbBoxed;
         private System.Windows.Forms.Timer BlinkTimer;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAE;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
     }

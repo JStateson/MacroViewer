@@ -188,5 +188,11 @@ namespace MacroViewer
         {
             tbImageUrl.Focus();
         }
+
+        private void btnAE_Click(object sender, EventArgs e)
+        {
+            strResultOut = bBoxed ? strBoxed : tbImageUrl.Text;
+            this.Close();
+        }
     }
 }

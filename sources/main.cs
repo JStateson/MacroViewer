@@ -922,22 +922,12 @@ namespace MacroViewer
 
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
-            int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br>");
-            i += 4;
-            tbBody.SelectionStart = i;
-            tbBody.SelectionLength = 0;
-            tbBody.Focus();
+            Utils.AddNL(ref tbBody, 1);
         }
 
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
-            int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
-            i += 8;
-            tbBody.SelectionStart = i;
-            tbBody.SelectionLength = 0;
-            tbBody.Focus();
+            Utils.AddNL(ref tbBody, 2);
         }
 
         private void btnCLrUrl_Click(object sender, EventArgs e)
@@ -1657,5 +1647,16 @@ namespace MacroViewer
             help MyHelp = new help("FILE");
             MyHelp.Show();
         }
+
+        private void btnInvertNL_Click(object sender, EventArgs e)
+        {
+            SwitchToMarkup(!(tbBody.Text.Contains("<br>")));
+        }
+
+        private void btnBold_Click(object sender, EventArgs e)
+        {
+            Utils.AddBold(ref tbBody);
+        }
+
     }
 }

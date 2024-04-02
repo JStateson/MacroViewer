@@ -20,7 +20,6 @@ namespace MacroViewer
         public eBrowserType eBrowser {  get; set; }
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
-
         private string strEditedSave = "";
 
         public Settings(eBrowserType reBrowser, string ruserid, int NumAttached)
@@ -164,15 +163,30 @@ namespace MacroViewer
             float fontSize = tbSupSig.Font.Size - 5;  // html seems to need -5 to scale good
             int iSize = (int)Math.Ceiling(fontSize);
             sFONTs = fontSize.ToString("0.00");
-            if (tbEdit.Font.Style == FontStyle.Bold) sNBI = "b";
-            if (tbEdit.Font.Style == FontStyle.Italic) sNBI = "i";
-            Color color = Color.FromArgb( tbSupSig.ForeColor.ToArgb());
+            if (tbSupSig.Font.Style == FontStyle.Bold) sNBI = "b";
+            if (tbSupSig.Font.Style == FontStyle.Italic) sNBI = "i";
+
+            int i = (int)tbSupSig.Font.Style;   // enums 1 and 2 are now 3 for bold italix
+            Color color = Color.FromArgb(tbSupSig.ForeColor.ToArgb());
             sCol = ColorToHtml(color);
-            sS = (sNBI == "") ? "" : "<" + sNBI + ">";
-            sE = (sNBI == "") ? "" : "</" + sNBI + ">";
+            if (i==3)
+            {
+                sS = "<b><i>";
+                sE = "</b></i>";
+            }
+            else
+            {
+                sS = (sNBI == "") ? "" : "<" + sNBI + ">";
+                sE = (sNBI == "") ? "" : "</" + sNBI + ">";
+            }
             if(sCol != "#000000")
             {
                 sFs = "<font color =\"" + sCol + "\" size=\"" + sFONTs + "\">";
+                sFe = "</font>";
+            }
+            else
+            {
+                sFs = "<font size=\"" + sFONTs + "\">";
                 sFe = "</font>";
             }
             if (clbImages.GetItemCheckState(0) == CheckState.Checked) sOut =
@@ -207,41 +221,23 @@ namespace MacroViewer
             Properties.Settings.Default.Save();
         }
 
-        private void AddNL(int n)
-        {
-            int i = tbEdit.SelectionStart;
-            int j = tbEdit.Text.Length;
-            if(i == 0)
-            {
-                if (j > 0)
-                {
-                    if (!tbEdit.Focused)
-                    {
-                        i = j;
-                        tbEdit.Focus();
-                    }
-                }
-            }
-            tbEdit.Text = tbEdit.Text.Insert(i, "<br><br>".Substring(0, n * 4)); ;
-            i += 4*n;
-            tbEdit.SelectionStart = i;
-            tbEdit.SelectionLength = 0;
-            tbEdit.Focus();
-        }
 
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
-            AddNL(1);
+            Utils.AddNL(ref tbEdit, 1);
         }
 
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
-            AddNL(2);
+            Utils.AddNL(ref tbEdit, 2);
         }
 
         private void btnClearEB_Click(object sender, EventArgs e)
         {
             tbEdit.Text = "";
+            Properties.Settings.Default.ChangeSig = false;
+            PerformSave();
+            btnAddSupSig.Enabled = false;
         }
 
         private void btnCopy2Clip_Click(object sender, EventArgs e)

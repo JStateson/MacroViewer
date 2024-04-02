@@ -385,6 +385,72 @@ namespace MacroViewer
             return "";
         }
 
+        public static void SwapNL(ref TextBox tb)
+        {
+            if(tb.Text.Length > 0)
+            {
+                if (tb.Text.Contains("<br>"))
+                    tb.Text = tb.Text.Replace("<br>", Environment.NewLine);
+                else tb.Text = tb.Text.Replace(Environment.NewLine, "<br>");                   
+            }
+        }
+
+        // add or remove bold text
+        public static void AddBold(ref TextBox tbEdit)
+        {
+            string s1, s2, s3;
+            int i = tbEdit.SelectionStart;
+            int j = tbEdit.SelectionLength;
+            if (j == 0) return;
+            int n = tbEdit.Text.Length;
+            s1 = tbEdit.Text.Substring(0, i);
+            s2 = tbEdit.Text.Substring(i, j);
+            s3 = tbEdit.Text.Substring(i + j);
+            // user may have selected several bold so let them all be undone
+            if (s2.Contains("<b>"))
+            {
+                s2 = s2.Replace("<b>", "");
+                s2 = s2.Replace("</b>", "");
+                tbEdit.Text = s1 + s2 + s3;
+                tbEdit.SelectionStart = i;
+                tbEdit.SelectionLength = j - (n - tbEdit.Text.Length);
+            }
+            else
+            {
+                s1 += "<b>";
+                s2 += "</b>";
+                tbEdit.Text = s1 + s2 + s3;
+                tbEdit.SelectionStart = i;
+                tbEdit.SelectionLength = j + 7;
+            }
+            tbEdit.Focus();
+        }
+
+
+
+        //insert newlines into textbox
+        public static void AddNL(ref TextBox tbEdit, int n)
+        {
+            int i = tbEdit.SelectionStart;
+            int j = tbEdit.Text.Length;
+            if (i == 0)
+            {
+                if (j > 0)
+                {
+                    if (!tbEdit.Focused)
+                    {
+                        i = j;
+                        tbEdit.Focus();
+                    }
+                }
+            }
+            tbEdit.Text = tbEdit.Text.Insert(i, "<br><br>".Substring(0, n * 4)); ;
+            i += 4 * n;
+            tbEdit.SelectionStart = i;
+            tbEdit.SelectionLength = 0;
+            tbEdit.Focus();
+        }
+
         public static string FormTable(int rows, int cols, bool bFill, int iSize)
         {
             if (rows == 0 && cols == 0) return "";

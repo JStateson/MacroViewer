@@ -272,6 +272,7 @@
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Number Attached";
+            this.toolTip1.SetToolTip(this.groupBox3, "Number of macros having \r\nsupplemental signatures");
             // 
             // lbAttached
             // 
@@ -299,12 +300,13 @@
             // 
             // btnClearEB
             // 
+            this.btnClearEB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearEB.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClearEB.Location = new System.Drawing.Point(236, 377);
+            this.btnClearEB.Location = new System.Drawing.Point(181, 375);
             this.btnClearEB.Name = "btnClearEB";
-            this.btnClearEB.Size = new System.Drawing.Size(65, 23);
+            this.btnClearEB.Size = new System.Drawing.Size(120, 33);
             this.btnClearEB.TabIndex = 22;
-            this.btnClearEB.Text = "Clear";
+            this.btnClearEB.Text = "Clear all";
             this.btnClearEB.UseVisualStyleBackColor = true;
             this.btnClearEB.Click += new System.EventHandler(this.btnClearEB_Click);
             // 
@@ -367,9 +369,9 @@
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnTest.Location = new System.Drawing.Point(16, 282);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.Size = new System.Drawing.Size(114, 23);
             this.btnTest.TabIndex = 8;
-            this.btnTest.Text = " Test";
+            this.btnTest.Text = "Show on page";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
@@ -406,6 +408,7 @@
             this.btnCpyEdit.Size = new System.Drawing.Size(114, 23);
             this.btnCpyEdit.TabIndex = 4;
             this.btnCpyEdit.Text = "Copy to edit box";
+            this.toolTip1.SetToolTip(this.btnCpyEdit, "Click this to create the\r\nsupplemental signature");
             this.btnCpyEdit.UseVisualStyleBackColor = true;
             this.btnCpyEdit.Click += new System.EventHandler(this.btnCpyEdit_Click);
             // 

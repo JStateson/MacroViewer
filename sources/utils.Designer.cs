@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -85,6 +85,11 @@
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnAdd1New = new System.Windows.Forms.Button();
+            this.btnAdd2New = new System.Windows.Forms.Button();
+            this.btnInvertNL = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -98,6 +103,7 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCvt
@@ -114,6 +120,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox9);
+            this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnShowScratch);
             this.groupBox1.Controls.Add(this.btnCopyScratch);
@@ -126,7 +134,7 @@
             this.groupBox1.Controls.Add(this.btnCvt);
             this.groupBox1.Location = new System.Drawing.Point(31, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(733, 641);
+            this.groupBox1.Size = new System.Drawing.Size(733, 764);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form URL";
@@ -137,7 +145,7 @@
             this.label4.BackColor = System.Drawing.SystemColors.Info;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(17, 468);
+            this.label4.Location = new System.Drawing.Point(14, 649);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 80);
             this.label4.TabIndex = 12;
@@ -146,10 +154,11 @@
             // 
             // btnShowScratch
             // 
-            this.btnShowScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowScratch.Location = new System.Drawing.Point(29, 374);
+            this.btnShowScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowScratch.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowScratch.Location = new System.Drawing.Point(17, 374);
             this.btnShowScratch.Name = "btnShowScratch";
-            this.btnShowScratch.Size = new System.Drawing.Size(111, 24);
+            this.btnShowScratch.Size = new System.Drawing.Size(123, 24);
             this.btnShowScratch.TabIndex = 11;
             this.btnShowScratch.Text = "Show in browser";
             this.btnShowScratch.UseVisualStyleBackColor = true;
@@ -157,10 +166,11 @@
             // 
             // btnCopyScratch
             // 
-            this.btnCopyScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyScratch.Location = new System.Drawing.Point(29, 422);
+            this.btnCopyScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyScratch.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnCopyScratch.Location = new System.Drawing.Point(17, 418);
             this.btnCopyScratch.Name = "btnCopyScratch";
-            this.btnCopyScratch.Size = new System.Drawing.Size(111, 24);
+            this.btnCopyScratch.Size = new System.Drawing.Size(123, 24);
             this.btnCopyScratch.TabIndex = 10;
             this.btnCopyScratch.Text = "Copy to Clipboard";
             this.btnCopyScratch.UseVisualStyleBackColor = true;
@@ -179,7 +189,8 @@
             // 
             // btnClrScratch
             // 
-            this.btnClrScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrScratch.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnClrScratch.Location = new System.Drawing.Point(92, 324);
             this.btnClrScratch.Name = "btnClrScratch";
             this.btnClrScratch.Size = new System.Drawing.Size(48, 23);
@@ -194,7 +205,7 @@
             this.tbScratch.Location = new System.Drawing.Point(161, 301);
             this.tbScratch.Multiline = true;
             this.tbScratch.Name = "tbScratch";
-            this.tbScratch.Size = new System.Drawing.Size(554, 305);
+            this.tbScratch.Size = new System.Drawing.Size(554, 428);
             this.tbScratch.TabIndex = 7;
             this.tbScratch.Text = resources.GetString("tbScratch.Text");
             // 
@@ -688,14 +699,14 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv.Size = new System.Drawing.Size(569, 297);
+            this.dgv.Size = new System.Drawing.Size(569, 395);
             this.dgv.TabIndex = 7;
             this.dgv.Visible = false;
             // 
             // Column1
             // 
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column1.HeaderText = "Position";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -705,11 +716,67 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column2.HeaderText = "Contents";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Location = new System.Drawing.Point(38, 167);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(8, 8);
+            this.groupBox8.TabIndex = 22;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "groupBox8";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnInvertNL);
+            this.groupBox9.Controls.Add(this.btnAdd2New);
+            this.groupBox9.Controls.Add(this.btnAdd1New);
+            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.groupBox9.Location = new System.Drawing.Point(26, 470);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(114, 158);
+            this.groupBox9.TabIndex = 23;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "New Lines";
+            // 
+            // btnAdd1New
+            // 
+            this.btnAdd1New.Location = new System.Drawing.Point(22, 30);
+            this.btnAdd1New.Name = "btnAdd1New";
+            this.btnAdd1New.Size = new System.Drawing.Size(70, 23);
+            this.btnAdd1New.TabIndex = 22;
+            this.btnAdd1New.Text = "Add 1";
+            this.toolTip1.SetToolTip(this.btnAdd1New, "inserts <br />");
+            this.btnAdd1New.UseVisualStyleBackColor = true;
+            this.btnAdd1New.Click += new System.EventHandler(this.btnAdd1New_Click);
+            // 
+            // btnAdd2New
+            // 
+            this.btnAdd2New.Location = new System.Drawing.Point(22, 68);
+            this.btnAdd2New.Name = "btnAdd2New";
+            this.btnAdd2New.Size = new System.Drawing.Size(70, 23);
+            this.btnAdd2New.TabIndex = 23;
+            this.btnAdd2New.Text = "Add 2";
+            this.toolTip1.SetToolTip(this.btnAdd2New, "inserts <br />");
+            this.btnAdd2New.UseVisualStyleBackColor = true;
+            this.btnAdd2New.Click += new System.EventHandler(this.btnAdd2New_Click);
+            // 
+            // btnInvertNL
+            // 
+            this.btnInvertNL.Location = new System.Drawing.Point(22, 114);
+            this.btnInvertNL.Name = "btnInvertNL";
+            this.btnInvertNL.Size = new System.Drawing.Size(70, 23);
+            this.btnInvertNL.TabIndex = 24;
+            this.btnInvertNL.Text = "Swap NL";
+            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
+            this.btnInvertNL.UseVisualStyleBackColor = true;
+            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
             // 
             // utils
             // 
@@ -751,6 +818,7 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -810,5 +878,10 @@
         private System.Windows.Forms.Button btnClrList;
         private System.Windows.Forms.Button bltnShowList;
         private System.Windows.Forms.TextBox tbScratch;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button btnAdd1New;
+        private System.Windows.Forms.Button btnInvertNL;
+        private System.Windows.Forms.Button btnAdd2New;
     }
 }

@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSignature));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbBody = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnNLtoNotepad = new System.Windows.Forms.Button();
             this.btnPasteImg = new System.Windows.Forms.Button();
             this.btnAdd2New = new System.Windows.Forms.Button();
@@ -55,7 +55,9 @@
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label5 = new System.Windows.Forms.Label();
+            this.btnBold = new System.Windows.Forms.Button();
+            this.tbBody = new System.Windows.Forms.TextBox();
+            this.btnInvertNL = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -78,15 +80,6 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.fileToolStripMenuItem.Text = "ReOpen";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
-            // 
-            // tbBody
-            // 
-            this.tbBody.Location = new System.Drawing.Point(43, 235);
-            this.tbBody.Multiline = true;
-            this.tbBody.Name = "tbBody";
-            this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbBody.Size = new System.Drawing.Size(504, 301);
-            this.tbBody.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -215,6 +208,8 @@
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.btnInvertNL);
+            this.gbEditSig.Controls.Add(this.btnBold);
             this.gbEditSig.Controls.Add(this.label5);
             this.gbEditSig.Controls.Add(this.btnNLtoNotepad);
             this.gbEditSig.Controls.Add(this.btnPasteImg);
@@ -234,6 +229,17 @@
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(562, 291);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 20);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "New Lines";
             // 
             // btnNLtoNotepad
             // 
@@ -263,6 +269,7 @@
             // 
             // btnAdd2New
             // 
+            this.btnAdd2New.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnAdd2New.Location = new System.Drawing.Point(565, 381);
             this.btnAdd2New.Name = "btnAdd2New";
             this.btnAdd2New.Size = new System.Drawing.Size(66, 23);
@@ -274,6 +281,7 @@
             // 
             // btnAdd1New
             // 
+            this.btnAdd1New.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnAdd1New.Location = new System.Drawing.Point(565, 331);
             this.btnAdd1New.Name = "btnAdd1New";
             this.btnAdd1New.Size = new System.Drawing.Size(66, 23);
@@ -328,9 +336,9 @@
             this.label2.BackColor = System.Drawing.SystemColors.Info;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(185, 38);
+            this.label2.Location = new System.Drawing.Point(180, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 160);
+            this.label2.Size = new System.Drawing.Size(208, 192);
             this.label2.TabIndex = 15;
             this.label2.Text = resources.GetString("label2.Text");
             // 
@@ -359,15 +367,39 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // label5
+            // btnBold
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Info;
-            this.label5.Location = new System.Drawing.Point(562, 291);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 16);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "New Lines";
+            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBold.Location = new System.Drawing.Point(406, 179);
+            this.btnBold.Name = "btnBold";
+            this.btnBold.Size = new System.Drawing.Size(113, 34);
+            this.btnBold.TabIndex = 24;
+            this.btnBold.Text = "BOLD";
+            this.toolTip1.SetToolTip(this.btnBold, "Copy the signature back to the list table");
+            this.btnBold.UseVisualStyleBackColor = true;
+            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
+            // 
+            // tbBody
+            // 
+            this.tbBody.Location = new System.Drawing.Point(43, 235);
+            this.tbBody.Multiline = true;
+            this.tbBody.Name = "tbBody";
+            this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbBody.Size = new System.Drawing.Size(504, 301);
+            this.tbBody.TabIndex = 1;
+            // 
+            // btnInvertNL
+            // 
+            this.btnInvertNL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnInvertNL.Location = new System.Drawing.Point(566, 440);
+            this.btnInvertNL.Name = "btnInvertNL";
+            this.btnInvertNL.Size = new System.Drawing.Size(94, 23);
+            this.btnInvertNL.TabIndex = 26;
+            this.btnInvertNL.Text = "Swap NL";
+            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
+            this.btnInvertNL.UseVisualStyleBackColor = true;
+            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
             // 
             // CSignature
             // 
@@ -402,7 +434,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.TextBox tbBody;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnDelSig;
         private System.Windows.Forms.Button blnAdd;
@@ -426,5 +457,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnBold;
+        private System.Windows.Forms.TextBox tbBody;
+        private System.Windows.Forms.Button btnInvertNL;
     }
 }

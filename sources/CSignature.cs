@@ -172,18 +172,12 @@ namespace MacroViewer
 
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
-            int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br>");
-            i += 4;
-            tbBody.SelectionStart = i;
+            Utils.AddNL(ref tbBody, 1);
         }
 
         private void btnAdd2New_Click(object sender, EventArgs e)
         {
-            int i = tbBody.SelectionStart;
-            tbBody.Text = tbBody.Text.Insert(i, "<br><br>");
-            i += 8;
-            tbBody.SelectionStart = i;
+            Utils.AddNL(ref tbBody, 2);
         }
         
         private void TestBBC()
@@ -274,6 +268,16 @@ namespace MacroViewer
         {
             help MyHelp = new help("SIG");
             MyHelp.Show();
+        }
+
+        private void btnBold_Click(object sender, EventArgs e)
+        {
+            Utils.AddBold(ref tbBody);
+        }
+
+        private void btnInvertNL_Click(object sender, EventArgs e)
+        {
+            Utils.SwapNL(ref tbBody);
         }
     }
 }

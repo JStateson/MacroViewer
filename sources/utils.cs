@@ -341,7 +341,7 @@ namespace MacroViewer
                 string s = row.Cells[1].Value.ToString();
                 sOut += "<li>" + s + "</li>";
             }
-            sOut += rbBullet.Checked ? "<ul>" : "<ol>";
+            sOut += rbBullet.Checked ? "</ul>" : "</ol>";
             //<table border='1'><tr><td>R0C0_AAAA</td></tr></table>
             if (cbFrameList.Checked)
             {
@@ -391,6 +391,21 @@ namespace MacroViewer
         private void cbFrameList_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdd1New_Click(object sender, EventArgs e)
+        {
+            Utils.AddNL(ref tbScratch, 1);
+        }
+
+        private void btnAdd2New_Click(object sender, EventArgs e)
+        {
+            Utils.AddNL(ref tbScratch, 2);
+        }
+
+        private void btnInvertNL_Click(object sender, EventArgs e)
+        {
+            Utils.SwapNL(ref tbScratch);
         }
 
         private void cbUseBorder_CheckStateChanged(object sender, EventArgs e)

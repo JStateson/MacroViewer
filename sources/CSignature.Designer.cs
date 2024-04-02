@@ -43,6 +43,8 @@
             this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnInvertNL = new System.Windows.Forms.Button();
+            this.btnBold = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btnNLtoNotepad = new System.Windows.Forms.Button();
             this.btnPasteImg = new System.Windows.Forms.Button();
@@ -54,10 +56,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnShowBrowser = new System.Windows.Forms.Button();
             this.bltnSaveBack = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnBold = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
-            this.btnInvertNL = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -189,7 +189,6 @@
             this.dgvSigList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSigList.Size = new System.Drawing.Size(243, 384);
             this.dgvSigList.TabIndex = 0;
-            this.dgvSigList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSigList_CellClick);
             this.dgvSigList.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSigList_DragDrop);
             this.dgvSigList.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvSigList_DragEnter);
             this.dgvSigList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvSigList_MouseDown);
@@ -229,6 +228,31 @@
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // btnInvertNL
+            // 
+            this.btnInvertNL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnInvertNL.Location = new System.Drawing.Point(566, 440);
+            this.btnInvertNL.Name = "btnInvertNL";
+            this.btnInvertNL.Size = new System.Drawing.Size(94, 23);
+            this.btnInvertNL.TabIndex = 26;
+            this.btnInvertNL.Text = "Swap NL";
+            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
+            this.btnInvertNL.UseVisualStyleBackColor = true;
+            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
+            // 
+            // btnBold
+            // 
+            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBold.Location = new System.Drawing.Point(406, 179);
+            this.btnBold.Name = "btnBold";
+            this.btnBold.Size = new System.Drawing.Size(113, 34);
+            this.btnBold.TabIndex = 24;
+            this.btnBold.Text = "BOLD";
+            this.toolTip1.SetToolTip(this.btnBold, "Copy the signature back to the list table");
+            this.btnBold.UseVisualStyleBackColor = true;
+            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
             // 
             // label5
             // 
@@ -367,19 +391,6 @@
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
             // 
-            // btnBold
-            // 
-            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBold.Location = new System.Drawing.Point(406, 179);
-            this.btnBold.Name = "btnBold";
-            this.btnBold.Size = new System.Drawing.Size(113, 34);
-            this.btnBold.TabIndex = 24;
-            this.btnBold.Text = "BOLD";
-            this.toolTip1.SetToolTip(this.btnBold, "Copy the signature back to the list table");
-            this.btnBold.UseVisualStyleBackColor = true;
-            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
-            // 
             // tbBody
             // 
             this.tbBody.Location = new System.Drawing.Point(43, 235);
@@ -388,18 +399,6 @@
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbBody.Size = new System.Drawing.Size(504, 301);
             this.tbBody.TabIndex = 1;
-            // 
-            // btnInvertNL
-            // 
-            this.btnInvertNL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnInvertNL.Location = new System.Drawing.Point(566, 440);
-            this.btnInvertNL.Name = "btnInvertNL";
-            this.btnInvertNL.Size = new System.Drawing.Size(94, 23);
-            this.btnInvertNL.TabIndex = 26;
-            this.btnInvertNL.Text = "Swap NL";
-            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
-            this.btnInvertNL.UseVisualStyleBackColor = true;
-            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
             // 
             // CSignature
             // 

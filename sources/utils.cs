@@ -388,11 +388,6 @@ namespace MacroViewer
             }
         }
 
-        private void cbFrameList_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAdd1New_Click(object sender, EventArgs e)
         {
             Utils.AddNL(ref tbScratch, 1);

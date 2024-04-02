@@ -37,7 +37,7 @@ namespace MacroViewer
                 rb = new CheckBox();
                 rb.Text = s+ "macro";
                 rb.Location = new System.Drawing.Point(x, y + (i) * 30);
-                rb.Enabled = (cms.strType == s) ? true : false; ;
+                rb.Enabled = (cms.strType == s);
                 rb.CheckedChanged += CheckBox_CheckedChanged;
                 gb.Controls.Add(rb);
             }
@@ -67,7 +67,7 @@ namespace MacroViewer
                 rb.Text = s + "macro";
                 rb.Name = s;
                 rb.Location = new System.Drawing.Point(x, y + (i) * 30);
-                rb.Enabled = (cms.strType == s) ? false: true;
+                rb.Enabled = (cms.strType != s);
                 rb.CheckedChanged += RadioButton_CheckedChanged;
                 gb.Controls.Add(rb);
             }

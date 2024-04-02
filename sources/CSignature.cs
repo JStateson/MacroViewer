@@ -94,9 +94,7 @@ namespace MacroViewer
             return i;
         }
 
-        private void dgvSigList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
+
         private void RunBrowser()
         {
             string strTemp = tbBody.Text;
@@ -141,11 +139,6 @@ namespace MacroViewer
         {
             tbBody.Text = Utils.RemoveNL(tbBody.Text);
             dgvSigList.Rows[CurrentRowSelected].Cells[1].Value = tbBody.Text;
-        }
-
-        private void dgvSigList_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //ShowSig(e.RowIndex);
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)

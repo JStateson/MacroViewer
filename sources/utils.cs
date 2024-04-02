@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.LinkLabel;
@@ -146,10 +148,14 @@ namespace MacroViewer
             if (dgv.Rows.Count == 0) return;
             RefreshTable();
             string sBig = tbScratch.Text;
+            int i = 0;
+            string s1, s2;
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                string s1 = row.Cells[0].Value.ToString();
-                string s2 = row.Cells[1].Value.ToString();
+                if (null == row.Cells[0].Value) break;
+                s1 = row.Cells[0].Value.ToString();
+                if (null == row.Cells[1].Value) break;
+                s2 = row.Cells[1].Value.ToString();
                 sBig = sBig.Replace(s1, s2);
             }
             tbScratch.Text = sBig;
@@ -319,6 +325,72 @@ namespace MacroViewer
         {
             help MyHelp = new help("UTILS");
             MyHelp.Show();
+        }
+
+        private void btnApplyList_Click(object sender, EventArgs e)
+        {
+            CopyListToScratch();
+        }
+
+        private void CopyListToScratch()
+        {
+            string sOut = rbBullet.Checked ? "<ul>" : "<ol>";
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (null == row.Cells[1].Value) break;
+                string s = row.Cells[1].Value.ToString();
+                sOut += "<li>" + s + "</li>";
+            }
+            sOut += rbBullet.Checked ? "<ul>" : "<ol>";
+            //<table border='1'><tr><td>R0C0_AAAA</td></tr></table>
+            if (cbFrameList.Checked)
+            {
+                sOut = "<table border='1'><tr><td>" + sOut + "</td></tr></table>";
+            }
+            tbScratch.Text = sOut;
+        }
+
+        private void btnClrList_Click(object sender, EventArgs e)
+        {
+            dgv.Rows.Clear();
+        }
+
+        private void bltnShowList_Click(object sender, EventArgs e)
+        {
+            ShowBrowser(tbScratch.Text);
+        }
+
+        private void btnFillList_Click(object sender, EventArgs e)
+        {
+            nGathered = GatherClipboardText();
+            dgv.Rows.Clear();
+            foreach(string s in sEach)
+            {
+                dgv.Rows.Add(dgv.Rows.Count + 1, s);
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex == 1)
+            {
+                dgv.Rows.Clear();
+                dgv.Visible = true;
+                dgv.AllowUserToAddRows = true;
+                dgv.AllowUserToDeleteRows = true;
+            }
+            else
+            {
+                dgv.Rows.Clear();
+                dgv.Visible = cbPreFill.Checked;
+                dgv.AllowUserToAddRows = false;
+                dgv.AllowUserToDeleteRows = false;
+            }
+        }
+
+        private void cbFrameList_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cbUseBorder_CheckStateChanged(object sender, EventArgs e)

@@ -86,6 +86,7 @@
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -118,7 +119,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
@@ -589,14 +589,14 @@
             // mnuLCnT
             // 
             this.mnuLCnT.Name = "mnuLCnT";
-            this.mnuLCnT.Size = new System.Drawing.Size(194, 22);
-            this.mnuLCnT.Text = "Create URLs and tables";
+            this.mnuLCnT.Size = new System.Drawing.Size(220, 22);
+            this.mnuLCnT.Text = "Create URLs, tables and lists";
             this.mnuLCnT.Click += new System.EventHandler(this.mnuLCnT_Click);
             // 
             // mnuRemoveLocalImgs
             // 
             this.mnuRemoveLocalImgs.Name = "mnuRemoveLocalImgs";
-            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(194, 22);
+            this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(220, 22);
             this.mnuRemoveLocalImgs.Text = "Manage local images";
             this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
             // 
@@ -675,6 +675,17 @@
             this.gpMainEdit.TabIndex = 8;
             this.gpMainEdit.TabStop = false;
             this.gpMainEdit.Text = "Edit Macro";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Info;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(355, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 26);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Hover mouse over\r\nbelow button";
             // 
             // btnTest
             // 
@@ -1051,17 +1062,6 @@
             // 
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.Info;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(355, 31);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 26);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Hover mouse over\r\nbelow button";
             // 
             // main
             // 

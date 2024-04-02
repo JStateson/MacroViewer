@@ -30,7 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,19 +52,20 @@
             this.btnClrHREF = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.showExampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbUseBorder = new System.Windows.Forms.CheckBox();
+            this.cbFrameList = new System.Windows.Forms.CheckBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gpTable = new System.Windows.Forms.GroupBox();
             this.btnCleardgv = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cbUseBorder = new System.Windows.Forms.CheckBox();
             this.btnShowTab = new System.Windows.Forms.Button();
             this.btnClearTab = new System.Windows.Forms.Button();
             this.cbUseDelims = new System.Windows.Forms.CheckBox();
             this.btnFillCol = new System.Windows.Forms.Button();
             this.btnFillRow = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
-            this.dgv = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnApplyTab = new System.Windows.Forms.Button();
             this.cbPreFill = new System.Windows.Forms.CheckBox();
@@ -71,14 +73,30 @@
             this.tbRows = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnApplyList = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnFillList = new System.Windows.Forms.Button();
+            this.btnClrList = new System.Windows.Forms.Button();
+            this.bltnShowList = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rbNumbered = new System.Windows.Forms.RadioButton();
+            this.rbBullet = new System.Windows.Forms.RadioButton();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.gpTable.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +126,7 @@
             this.groupBox1.Controls.Add(this.btnCvt);
             this.groupBox1.Location = new System.Drawing.Point(31, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(733, 607);
+            this.groupBox1.Size = new System.Drawing.Size(733, 641);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form URL";
@@ -176,7 +194,7 @@
             this.tbScratch.Location = new System.Drawing.Point(161, 301);
             this.tbScratch.Multiline = true;
             this.tbScratch.Name = "tbScratch";
-            this.tbScratch.Size = new System.Drawing.Size(554, 284);
+            this.tbScratch.Size = new System.Drawing.Size(554, 305);
             this.tbScratch.TabIndex = 7;
             this.tbScratch.Text = resources.GetString("tbScratch.Text");
             // 
@@ -291,7 +309,7 @@
             this.showExampleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1329, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1452, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -302,12 +320,63 @@
             this.showExampleToolStripMenuItem.Text = "Run Example";
             this.showExampleToolStripMenuItem.Click += new System.EventHandler(this.showExampleToolStripMenuItem_Click);
             // 
+            // cbUseBorder
+            // 
+            this.cbUseBorder.AutoSize = true;
+            this.cbUseBorder.Checked = true;
+            this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseBorder.Location = new System.Drawing.Point(218, 61);
+            this.cbUseBorder.Name = "cbUseBorder";
+            this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
+            this.cbUseBorder.TabIndex = 12;
+            this.cbUseBorder.Text = "Form border on all tables";
+            this.toolTip1.SetToolTip(this.cbUseBorder, "In HP signature setup, all tahbles have a border");
+            this.cbUseBorder.UseVisualStyleBackColor = true;
+            this.cbUseBorder.CheckStateChanged += new System.EventHandler(this.cbUseBorder_CheckStateChanged);
+            // 
+            // cbFrameList
+            // 
+            this.cbFrameList.AutoSize = true;
+            this.cbFrameList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFrameList.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbFrameList.Location = new System.Drawing.Point(223, 29);
+            this.cbFrameList.Name = "cbFrameList";
+            this.cbFrameList.Size = new System.Drawing.Size(187, 20);
+            this.cbFrameList.TabIndex = 12;
+            this.cbFrameList.Text = "Form border around list";
+            this.toolTip1.SetToolTip(this.cbFrameList, "In HP signature setup, all tahbles have a border");
+            this.cbFrameList.UseVisualStyleBackColor = true;
+            this.cbFrameList.CheckedChanged += new System.EventHandler(this.cbFrameList_CheckedChanged);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(811, 40);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(577, 335);
+            this.tabControl1.TabIndex = 10;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.gpTable);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(569, 309);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Tables";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // gpTable
             // 
             this.gpTable.Controls.Add(this.btnCleardgv);
             this.gpTable.Controls.Add(this.groupBox5);
             this.gpTable.Controls.Add(this.btnTransfer);
-            this.gpTable.Controls.Add(this.dgv);
             this.gpTable.Controls.Add(this.btnShow);
             this.gpTable.Controls.Add(this.btnApplyTab);
             this.gpTable.Controls.Add(this.cbPreFill);
@@ -316,12 +385,11 @@
             this.gpTable.Controls.Add(this.label2);
             this.gpTable.Controls.Add(this.label3);
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpTable.Location = new System.Drawing.Point(784, 59);
+            this.gpTable.Location = new System.Drawing.Point(23, 10);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(509, 607);
-            this.gpTable.TabIndex = 9;
+            this.gpTable.Size = new System.Drawing.Size(509, 273);
+            this.gpTable.TabIndex = 10;
             this.gpTable.TabStop = false;
-            this.gpTable.Text = "Create a table";
             // 
             // btnCleardgv
             // 
@@ -350,22 +418,6 @@
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "How to fill it in (do not use above)";
-            // 
-            // cbUseBorder
-            // 
-            this.cbUseBorder.AutoSize = true;
-            this.cbUseBorder.Checked = true;
-            this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseBorder.Location = new System.Drawing.Point(218, 61);
-            this.cbUseBorder.Name = "cbUseBorder";
-            this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
-            this.cbUseBorder.TabIndex = 12;
-            this.cbUseBorder.Text = "Form border on all tables";
-            this.toolTip1.SetToolTip(this.cbUseBorder, "In HP signature setup, all tahbles have a border");
-            this.cbUseBorder.UseVisualStyleBackColor = true;
-            this.cbUseBorder.CheckStateChanged += new System.EventHandler(this.cbUseBorder_CheckStateChanged);
             // 
             // btnShowTab
             // 
@@ -439,40 +491,6 @@
             this.btnTransfer.UseVisualStyleBackColor = true;
             this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
-            // dgv
-            // 
-            this.dgv.AllowUserToAddRows = false;
-            this.dgv.AllowUserToDeleteRows = false;
-            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dgv.Location = new System.Drawing.Point(23, 288);
-            this.dgv.MultiSelect = false;
-            this.dgv.Name = "dgv";
-            this.dgv.RowHeadersVisible = false;
-            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv.Size = new System.Drawing.Size(462, 297);
-            this.dgv.TabIndex = 7;
-            this.dgv.Visible = false;
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column1.HeaderText = "Position";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Contents";
-            this.Column2.Name = "Column2";
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 356;
-            // 
             // btnShow
             // 
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -544,12 +562,162 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Rows";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnApplyList);
+            this.tabPage2.Controls.Add(this.groupBox7);
+            this.tabPage2.Controls.Add(this.btnClrList);
+            this.tabPage2.Controls.Add(this.bltnShowList);
+            this.tabPage2.Controls.Add(this.groupBox6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(569, 309);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Lists";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnApplyList
+            // 
+            this.btnApplyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplyList.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnApplyList.Location = new System.Drawing.Point(265, 83);
+            this.btnApplyList.Name = "btnApplyList";
+            this.btnApplyList.Size = new System.Drawing.Size(48, 23);
+            this.btnApplyList.TabIndex = 12;
+            this.btnApplyList.Text = "Apply";
+            this.btnApplyList.UseVisualStyleBackColor = true;
+            this.btnApplyList.Click += new System.EventHandler(this.btnApplyList_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.cbFrameList);
+            this.groupBox7.Controls.Add(this.btnFillList);
+            this.groupBox7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox7.Location = new System.Drawing.Point(42, 146);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(453, 123);
+            this.groupBox7.TabIndex = 10;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Fill in from clipboard";
+            // 
+            // btnFillList
+            // 
+            this.btnFillList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillList.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFillList.Location = new System.Drawing.Point(15, 29);
+            this.btnFillList.Name = "btnFillList";
+            this.btnFillList.Size = new System.Drawing.Size(132, 23);
+            this.btnFillList.TabIndex = 7;
+            this.btnFillList.Text = "Fill from clipboard";
+            this.btnFillList.UseVisualStyleBackColor = true;
+            this.btnFillList.Click += new System.EventHandler(this.btnFillList_Click);
+            // 
+            // btnClrList
+            // 
+            this.btnClrList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrList.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClrList.Location = new System.Drawing.Point(265, 26);
+            this.btnClrList.Name = "btnClrList";
+            this.btnClrList.Size = new System.Drawing.Size(48, 23);
+            this.btnClrList.TabIndex = 10;
+            this.btnClrList.Text = "Clear";
+            this.btnClrList.UseVisualStyleBackColor = true;
+            this.btnClrList.Click += new System.EventHandler(this.btnClrList_Click);
+            // 
+            // bltnShowList
+            // 
+            this.bltnShowList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bltnShowList.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.bltnShowList.Location = new System.Drawing.Point(356, 55);
+            this.bltnShowList.Name = "bltnShowList";
+            this.bltnShowList.Size = new System.Drawing.Size(118, 22);
+            this.bltnShowList.TabIndex = 11;
+            this.bltnShowList.Text = "Show in browser";
+            this.bltnShowList.UseVisualStyleBackColor = true;
+            this.bltnShowList.Click += new System.EventHandler(this.bltnShowList_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.rbNumbered);
+            this.groupBox6.Controls.Add(this.rbBullet);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(42, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(189, 90);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Type of list";
+            // 
+            // rbNumbered
+            // 
+            this.rbNumbered.AutoSize = true;
+            this.rbNumbered.Checked = true;
+            this.rbNumbered.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rbNumbered.Location = new System.Drawing.Point(58, 55);
+            this.rbNumbered.Name = "rbNumbered";
+            this.rbNumbered.Size = new System.Drawing.Size(89, 20);
+            this.rbNumbered.TabIndex = 2;
+            this.rbNumbered.TabStop = true;
+            this.rbNumbered.Text = "Numbered";
+            this.rbNumbered.UseVisualStyleBackColor = true;
+            // 
+            // rbBullet
+            // 
+            this.rbBullet.AutoSize = true;
+            this.rbBullet.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rbBullet.Location = new System.Drawing.Point(58, 22);
+            this.rbBullet.Name = "rbBullet";
+            this.rbBullet.Size = new System.Drawing.Size(74, 20);
+            this.rbBullet.TabIndex = 1;
+            this.rbBullet.Text = "Bulleted";
+            this.rbBullet.UseVisualStyleBackColor = true;
+            // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.AllowUserToResizeColumns = false;
+            this.dgv.AllowUserToResizeRows = false;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.dgv.Location = new System.Drawing.Point(811, 393);
+            this.dgv.MultiSelect = false;
+            this.dgv.Name = "dgv";
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv.Size = new System.Drawing.Size(569, 297);
+            this.dgv.TabIndex = 7;
+            this.dgv.Visible = false;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column1.HeaderText = "Position";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Column2.HeaderText = "Contents";
+            this.Column2.Name = "Column2";
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // utils
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 678);
-            this.Controls.Add(this.gpTable);
+            this.ClientSize = new System.Drawing.Size(1452, 872);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -571,10 +739,17 @@
             this.groupBox2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.gpTable.ResumeLayout(false);
             this.gpTable.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -593,35 +768,47 @@
         private System.Windows.Forms.Button btnClip;
         private System.Windows.Forms.Button btnClrHREF;
         private System.Windows.Forms.Button btnClearURL;
-        private System.Windows.Forms.TextBox tbScratch;
         private System.Windows.Forms.Button btnClrScratch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showExampleToolStripMenuItem;
         private System.Windows.Forms.Button btnShowBrowser;
+        private System.Windows.Forms.Button btnCopyScratch;
+        private System.Windows.Forms.Button btnShowScratch;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox gpTable;
+        private System.Windows.Forms.Button btnCleardgv;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox cbUseBorder;
+        private System.Windows.Forms.Button btnShowTab;
+        private System.Windows.Forms.Button btnClearTab;
+        private System.Windows.Forms.CheckBox cbUseDelims;
+        private System.Windows.Forms.Button btnFillCol;
+        private System.Windows.Forms.Button btnFillRow;
+        private System.Windows.Forms.Button btnTransfer;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Button btnApplyTab;
+        private System.Windows.Forms.CheckBox cbPreFill;
         private System.Windows.Forms.TextBox tbCols;
         private System.Windows.Forms.TextBox tbRows;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnShow;
-        private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.Button btnTransfer;
-        private System.Windows.Forms.Button btnCopyScratch;
-        private System.Windows.Forms.Button btnShowScratch;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button btnFillRow;
-        private System.Windows.Forms.Button btnFillCol;
-        private System.Windows.Forms.CheckBox cbUseDelims;
-        private System.Windows.Forms.Button btnClearTab;
-        private System.Windows.Forms.CheckBox cbPreFill;
-        private System.Windows.Forms.Button btnShowTab;
-        private System.Windows.Forms.CheckBox cbUseBorder;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.Button btnCleardgv;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton rbNumbered;
+        private System.Windows.Forms.RadioButton rbBullet;
+        private System.Windows.Forms.Button btnApplyList;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox cbFrameList;
+        private System.Windows.Forms.Button btnFillList;
+        private System.Windows.Forms.Button btnClrList;
+        private System.Windows.Forms.Button bltnShowList;
+        private System.Windows.Forms.TextBox tbScratch;
     }
 }

@@ -58,6 +58,7 @@
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnFixBR = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -207,6 +208,7 @@
             // 
             // gbEditSig
             // 
+            this.gbEditSig.Controls.Add(this.btnFixBR);
             this.gbEditSig.Controls.Add(this.btnInvertNL);
             this.gbEditSig.Controls.Add(this.btnBold);
             this.gbEditSig.Controls.Add(this.label5);
@@ -400,6 +402,18 @@
             this.tbBody.Size = new System.Drawing.Size(504, 301);
             this.tbBody.TabIndex = 1;
             // 
+            // btnFixBR
+            // 
+            this.btnFixBR.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFixBR.Location = new System.Drawing.Point(566, 491);
+            this.btnFixBR.Name = "btnFixBR";
+            this.btnFixBR.Size = new System.Drawing.Size(94, 23);
+            this.btnFixBR.TabIndex = 27;
+            this.btnFixBR.Text = "Fix </ b>";
+            this.toolTip1.SetToolTip(this.btnFixBR, "HP sig page uses <br /> unlike macros");
+            this.btnFixBR.UseVisualStyleBackColor = true;
+            this.btnFixBR.Click += new System.EventHandler(this.btnFixBR_Click);
+            // 
             // CSignature
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,5 +473,6 @@
         private System.Windows.Forms.Button btnBold;
         private System.Windows.Forms.TextBox tbBody;
         private System.Windows.Forms.Button btnInvertNL;
+        private System.Windows.Forms.Button btnFixBR;
     }
 }

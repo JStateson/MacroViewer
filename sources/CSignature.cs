@@ -272,5 +272,10 @@ namespace MacroViewer
         {
             Utils.SwapNL(ref tbBody);
         }
+
+        private void btnFixBR_Click(object sender, EventArgs e)
+        {
+            tbBody.Text = Utils.ChangeBRtoNL(tbBody.Text);
+        }
     }
 }

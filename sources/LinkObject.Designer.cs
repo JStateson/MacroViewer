@@ -50,6 +50,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.btnSqueeze = new System.Windows.Forms.Button();
             this.gbSelectType.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -113,6 +114,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSqueeze);
             this.groupBox1.Controls.Add(this.btnAE);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tbUrlText);
@@ -175,11 +177,12 @@
             // 
             this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(185, 140);
+            this.btnBoxIT.Location = new System.Drawing.Point(175, 99);
             this.btnBoxIT.Name = "btnBoxIT";
             this.btnBoxIT.Size = new System.Drawing.Size(210, 36);
             this.btnBoxIT.TabIndex = 6;
-            this.btnBoxIT.Text = "Put In Box";
+            this.btnBoxIT.Text = "Put Into a larger Box";
+            this.toolTip1.SetToolTip(this.btnBoxIT, "This makes it esasy to read\r\nand to do a copy from");
             this.btnBoxIT.UseVisualStyleBackColor = true;
             this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
             // 
@@ -267,6 +270,19 @@
             this.label3.TabIndex = 7;
             this.label3.Text = resources.GetString("label3.Text");
             // 
+            // btnSqueeze
+            // 
+            this.btnSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSqueeze.Location = new System.Drawing.Point(175, 165);
+            this.btnSqueeze.Name = "btnSqueeze";
+            this.btnSqueeze.Size = new System.Drawing.Size(210, 36);
+            this.btnSqueeze.TabIndex = 11;
+            this.btnSqueeze.Text = "Squeeze Into the Box";
+            this.toolTip1.SetToolTip(this.btnSqueeze, "There are no empty lines\r\nabove and under text");
+            this.btnSqueeze.UseVisualStyleBackColor = true;
+            this.btnSqueeze.Click += new System.EventHandler(this.btnSqueeze_Click);
+            // 
             // LinkObject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,5 +336,6 @@
         private System.Windows.Forms.Button btnAE;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSqueeze;
     }
 }

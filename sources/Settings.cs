@@ -116,13 +116,8 @@ namespace MacroViewer
             {
                 if (colorDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Get the selected color
                     Color selectedColor = colorDialog.Color;
-
-                    // Use the selected color
                     tbSupSig.ForeColor = selectedColor;
-                    //BackColor = selectedColor;
-                    //tbSupSig.Text = $"Selected Color: {selectedColor.Name}";
                 }
             }
         }
@@ -146,52 +141,12 @@ namespace MacroViewer
             public static string SupSigPrefix = "<b><font color=\"#f80000\">====";
             public static string SupSigSuffix = "====</font></b>";
          */
-        private string ColorToHtml(Color color)
-        {
-            return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-        }
+
         private void btnCpyEdit_Click(object sender, EventArgs e)
         {
-            string sNBI = "";
-            string sSiz = "";
-            string sCol = "";
-            string sFs = "";
-            string sFe = "";
-            string sS, sE;
             string sOut = "";
-            string sFONTs = "";
-            float fontSize = tbSupSig.Font.Size - 5;  // html seems to need -5 to scale good
-            int iSize = (int)Math.Ceiling(fontSize);
-            sFONTs = fontSize.ToString("0.00");
-            if (tbSupSig.Font.Style == FontStyle.Bold) sNBI = "b";
-            if (tbSupSig.Font.Style == FontStyle.Italic) sNBI = "i";
-
-            int i = (int)tbSupSig.Font.Style;   // enums 1 and 2 are now 3 for bold italix
-            Color color = Color.FromArgb(tbSupSig.ForeColor.ToArgb());
-            sCol = ColorToHtml(color);
-            if (i==3)
-            {
-                sS = "<b><i>";
-                sE = "</b></i>";
-            }
-            else
-            {
-                sS = (sNBI == "") ? "" : "<" + sNBI + ">";
-                sE = (sNBI == "") ? "" : "</" + sNBI + ">";
-            }
-            if(sCol != "#000000")
-            {
-                sFs = "<font color =\"" + sCol + "\" size=\"" + sFONTs + "\">";
-                sFe = "</font>";
-            }
-            else
-            {
-                sFs = "<font size=\"" + sFONTs + "\">";
-                sFe = "</font>";
-            }
-            if (clbImages.GetItemCheckState(0) == CheckState.Checked) sOut =
-                    sS + sFs + tbSupSig.Text + sFe + sE + "<br>";
-            // TODO the following YES and SOLUTION probably need to come from the signature form
+            if (clbImages.GetItemCheckState(0) == CheckState.Checked)
+                sOut = Utils.ApplyColors(ref tbSupSig) + "<br>";
             if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut += Utils.YesButton + "  ";
             if (clbImages.GetItemCheckState(2) == CheckState.Checked) sOut += Utils.SolButton + "<br>";
             tbEdit.Text = sOut;

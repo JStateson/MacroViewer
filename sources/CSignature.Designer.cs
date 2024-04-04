@@ -43,6 +43,7 @@
             this.sName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbEditSig = new System.Windows.Forms.GroupBox();
+            this.btnFixBR = new System.Windows.Forms.Button();
             this.btnInvertNL = new System.Windows.Forms.Button();
             this.btnBold = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.bltnSaveBack = new System.Windows.Forms.Button();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnFixBR = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSigList)).BeginInit();
@@ -78,8 +78,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.fileToolStripMenuItem.Text = "ReOpen";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
+            this.fileToolStripMenuItem.Text = "Create URLs, tables and lists";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // groupBox1
@@ -158,6 +158,7 @@
             this.btnDelSig.Size = new System.Drawing.Size(152, 29);
             this.btnDelSig.TabIndex = 2;
             this.btnDelSig.Text = "Delete Selected";
+            this.toolTip1.SetToolTip(this.btnDelSig, "Be sure to to save your changes\r\nor it will not be deleted.");
             this.btnDelSig.UseVisualStyleBackColor = true;
             this.btnDelSig.Click += new System.EventHandler(this.btnDelSig_Click);
             // 
@@ -230,6 +231,19 @@
             this.gbEditSig.TabIndex = 3;
             this.gbEditSig.TabStop = false;
             this.gbEditSig.Text = "Sig Edit";
+            // 
+            // btnFixBR
+            // 
+            this.btnFixBR.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFixBR.Location = new System.Drawing.Point(566, 491);
+            this.btnFixBR.Name = "btnFixBR";
+            this.btnFixBR.Size = new System.Drawing.Size(94, 23);
+            this.btnFixBR.TabIndex = 27;
+            this.btnFixBR.Text = "Fix <br />";
+            this.toolTip1.SetToolTip(this.btnFixBR, "HP sig page uses <br /> unlike macros\r\nThis removed <br /> from the text body.\r\nN" +
+        "ote that HP will correct the <br> so \r\nthere is no problem uploading to HP");
+            this.btnFixBR.UseVisualStyleBackColor = true;
+            this.btnFixBR.Click += new System.EventHandler(this.btnFixBR_Click);
             // 
             // btnInvertNL
             // 
@@ -388,7 +402,7 @@
             this.bltnSaveBack.Name = "bltnSaveBack";
             this.bltnSaveBack.Size = new System.Drawing.Size(113, 34);
             this.bltnSaveBack.TabIndex = 2;
-            this.bltnSaveBack.Text = "Apply";
+            this.bltnSaveBack.Text = "Update";
             this.toolTip1.SetToolTip(this.bltnSaveBack, "Copy the signature back to the list table");
             this.bltnSaveBack.UseVisualStyleBackColor = true;
             this.bltnSaveBack.Click += new System.EventHandler(this.bltnSaveBack_Click);
@@ -401,18 +415,6 @@
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbBody.Size = new System.Drawing.Size(504, 301);
             this.tbBody.TabIndex = 1;
-            // 
-            // btnFixBR
-            // 
-            this.btnFixBR.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFixBR.Location = new System.Drawing.Point(566, 491);
-            this.btnFixBR.Name = "btnFixBR";
-            this.btnFixBR.Size = new System.Drawing.Size(94, 23);
-            this.btnFixBR.TabIndex = 27;
-            this.btnFixBR.Text = "Fix </ b>";
-            this.toolTip1.SetToolTip(this.btnFixBR, "HP sig page uses <br /> unlike macros");
-            this.btnFixBR.UseVisualStyleBackColor = true;
-            this.btnFixBR.Click += new System.EventHandler(this.btnFixBR_Click);
             // 
             // CSignature
             // 
@@ -429,7 +431,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CSignature";
-            this.Text = "Signature";
+            this.Text = "Signaturs, Images, notes";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.CSignature_HelpButtonClicked);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -30,10 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rbLnkToImg = new System.Windows.Forms.RadioButton();
+            this.rbIsImg = new System.Windows.Forms.RadioButton();
+            this.rbNotImg = new System.Windows.Forms.RadioButton();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.btnInvertNL = new System.Windows.Forms.Button();
             this.btnAdd2New = new System.Windows.Forms.Button();
@@ -87,10 +91,20 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.rbNumbered = new System.Windows.Forms.RadioButton();
             this.rbBullet = new System.Windows.Forms.RadioButton();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnShowCode = new System.Windows.Forms.Button();
+            this.gbTxtCol = new System.Windows.Forms.GroupBox();
+            this.btnApplyCol = new System.Windows.Forms.Button();
+            this.tbTextToColor = new System.Windows.Forms.TextBox();
+            this.btnSetFont = new System.Windows.Forms.Button();
+            this.tbColorResult = new System.Windows.Forms.TextBox();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.btnClrCol = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -103,6 +117,8 @@
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.gbTxtCol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,7 +126,7 @@
             // 
             this.btnCvt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCvt.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCvt.Location = new System.Drawing.Point(137, 125);
+            this.btnCvt.Location = new System.Drawing.Point(19, 282);
             this.btnCvt.Name = "btnCvt";
             this.btnCvt.Size = new System.Drawing.Size(127, 32);
             this.btnCvt.TabIndex = 1;
@@ -120,6 +136,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox10);
             this.groupBox1.Controls.Add(this.groupBox9);
             this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.label4);
@@ -134,10 +151,56 @@
             this.groupBox1.Controls.Add(this.btnCvt);
             this.groupBox1.Location = new System.Drawing.Point(31, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(733, 764);
+            this.groupBox1.Size = new System.Drawing.Size(733, 801);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form URL";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.rbLnkToImg);
+            this.groupBox10.Controls.Add(this.rbIsImg);
+            this.groupBox10.Controls.Add(this.rbNotImg);
+            this.groupBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox10.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.groupBox10.Location = new System.Drawing.Point(19, 114);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(189, 121);
+            this.groupBox10.TabIndex = 25;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "The URL is";
+            // 
+            // rbLnkToImg
+            // 
+            this.rbLnkToImg.AutoSize = true;
+            this.rbLnkToImg.Location = new System.Drawing.Point(29, 73);
+            this.rbLnkToImg.Name = "rbLnkToImg";
+            this.rbLnkToImg.Size = new System.Drawing.Size(133, 20);
+            this.rbLnkToImg.TabIndex = 2;
+            this.rbLnkToImg.Text = "A  link to an image";
+            this.rbLnkToImg.UseVisualStyleBackColor = true;
+            // 
+            // rbIsImg
+            // 
+            this.rbIsImg.AutoSize = true;
+            this.rbIsImg.Location = new System.Drawing.Point(29, 47);
+            this.rbIsImg.Name = "rbIsImg";
+            this.rbIsImg.Size = new System.Drawing.Size(82, 20);
+            this.rbIsImg.TabIndex = 1;
+            this.rbIsImg.Text = "An image";
+            this.rbIsImg.UseVisualStyleBackColor = true;
+            // 
+            // rbNotImg
+            // 
+            this.rbNotImg.AutoSize = true;
+            this.rbNotImg.Checked = true;
+            this.rbNotImg.Location = new System.Drawing.Point(29, 21);
+            this.rbNotImg.Name = "rbNotImg";
+            this.rbNotImg.Size = new System.Drawing.Size(105, 20);
+            this.rbNotImg.TabIndex = 0;
+            this.rbNotImg.TabStop = true;
+            this.rbNotImg.Text = "Not an image";
+            this.rbNotImg.UseVisualStyleBackColor = true;
             // 
             // groupBox9
             // 
@@ -146,7 +209,7 @@
             this.groupBox9.Controls.Add(this.btnAdd1New);
             this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox9.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.groupBox9.Location = new System.Drawing.Point(26, 470);
+            this.groupBox9.Location = new System.Drawing.Point(26, 536);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(114, 158);
             this.groupBox9.TabIndex = 23;
@@ -201,7 +264,7 @@
             this.label4.BackColor = System.Drawing.SystemColors.Info;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(14, 649);
+            this.label4.Location = new System.Drawing.Point(14, 715);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 80);
             this.label4.TabIndex = 12;
@@ -212,7 +275,7 @@
             // 
             this.btnShowScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowScratch.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowScratch.Location = new System.Drawing.Point(17, 374);
+            this.btnShowScratch.Location = new System.Drawing.Point(17, 440);
             this.btnShowScratch.Name = "btnShowScratch";
             this.btnShowScratch.Size = new System.Drawing.Size(123, 24);
             this.btnShowScratch.TabIndex = 11;
@@ -224,7 +287,7 @@
             // 
             this.btnCopyScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopyScratch.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopyScratch.Location = new System.Drawing.Point(17, 418);
+            this.btnCopyScratch.Location = new System.Drawing.Point(17, 484);
             this.btnCopyScratch.Name = "btnCopyScratch";
             this.btnCopyScratch.Size = new System.Drawing.Size(123, 24);
             this.btnCopyScratch.TabIndex = 10;
@@ -247,7 +310,7 @@
             // 
             this.btnClrScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClrScratch.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClrScratch.Location = new System.Drawing.Point(92, 324);
+            this.btnClrScratch.Location = new System.Drawing.Point(92, 390);
             this.btnClrScratch.Name = "btnClrScratch";
             this.btnClrScratch.Size = new System.Drawing.Size(48, 23);
             this.btnClrScratch.TabIndex = 8;
@@ -258,10 +321,10 @@
             // tbScratch
             // 
             this.tbScratch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbScratch.Location = new System.Drawing.Point(161, 301);
+            this.tbScratch.Location = new System.Drawing.Point(161, 390);
             this.tbScratch.Multiline = true;
             this.tbScratch.Name = "tbScratch";
-            this.tbScratch.Size = new System.Drawing.Size(554, 428);
+            this.tbScratch.Size = new System.Drawing.Size(554, 405);
             this.tbScratch.TabIndex = 7;
             this.tbScratch.Text = resources.GetString("tbScratch.Text");
             // 
@@ -270,9 +333,9 @@
             this.groupBox4.Controls.Add(this.btnShowBrowser);
             this.groupBox4.Controls.Add(this.tbResult);
             this.groupBox4.Controls.Add(this.btnClip);
-            this.groupBox4.Location = new System.Drawing.Point(137, 187);
+            this.groupBox4.Location = new System.Drawing.Point(193, 260);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(578, 85);
+            this.groupBox4.Size = new System.Drawing.Size(522, 107);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Result";
@@ -281,9 +344,9 @@
             // 
             this.btnShowBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowBrowser.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowBrowser.Location = new System.Drawing.Point(335, 47);
+            this.btnShowBrowser.Location = new System.Drawing.Point(334, 78);
             this.btnShowBrowser.Name = "btnShowBrowser";
-            this.btnShowBrowser.Size = new System.Drawing.Size(135, 24);
+            this.btnShowBrowser.Size = new System.Drawing.Size(135, 23);
             this.btnShowBrowser.TabIndex = 3;
             this.btnShowBrowser.Text = "Show in browser";
             this.btnShowBrowser.UseVisualStyleBackColor = true;
@@ -292,19 +355,20 @@
             // tbResult
             // 
             this.tbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbResult.Location = new System.Drawing.Point(24, 19);
+            this.tbResult.Location = new System.Drawing.Point(17, 20);
+            this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
             this.tbResult.ReadOnly = true;
-            this.tbResult.Size = new System.Drawing.Size(529, 22);
+            this.tbResult.Size = new System.Drawing.Size(499, 52);
             this.tbResult.TabIndex = 0;
             // 
             // btnClip
             // 
             this.btnClip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClip.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClip.Location = new System.Drawing.Point(24, 47);
+            this.btnClip.Location = new System.Drawing.Point(23, 78);
             this.btnClip.Name = "btnClip";
-            this.btnClip.Size = new System.Drawing.Size(135, 24);
+            this.btnClip.Size = new System.Drawing.Size(135, 23);
             this.btnClip.TabIndex = 2;
             this.btnClip.Text = "Copy to Clipboard";
             this.btnClip.UseVisualStyleBackColor = true;
@@ -314,9 +378,9 @@
             // 
             this.groupBox3.Controls.Add(this.tbURL);
             this.groupBox3.Controls.Add(this.btnClearURL);
-            this.groupBox3.Location = new System.Drawing.Point(289, 105);
+            this.groupBox3.Location = new System.Drawing.Point(289, 135);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(426, 61);
+            this.groupBox3.Size = new System.Drawing.Size(426, 89);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "URL";
@@ -325,14 +389,15 @@
             // 
             this.tbURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbURL.Location = new System.Drawing.Point(91, 21);
+            this.tbURL.Multiline = true;
             this.tbURL.Name = "tbURL";
-            this.tbURL.Size = new System.Drawing.Size(317, 22);
+            this.tbURL.Size = new System.Drawing.Size(317, 51);
             this.tbURL.TabIndex = 0;
             // 
             // btnClearURL
             // 
             this.btnClearURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearURL.Location = new System.Drawing.Point(6, 20);
+            this.btnClearURL.Location = new System.Drawing.Point(14, 32);
             this.btnClearURL.Name = "btnClearURL";
             this.btnClearURL.Size = new System.Drawing.Size(48, 23);
             this.btnClearURL.TabIndex = 5;
@@ -346,23 +411,24 @@
             this.groupBox2.Controls.Add(this.btnClrHREF);
             this.groupBox2.Location = new System.Drawing.Point(289, 19);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(426, 61);
+            this.groupBox2.Size = new System.Drawing.Size(426, 90);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "HREF";
+            this.groupBox2.Text = "TEXT (if any)";
             // 
             // tbTEXT
             // 
             this.tbTEXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTEXT.Location = new System.Drawing.Point(91, 19);
+            this.tbTEXT.Multiline = true;
             this.tbTEXT.Name = "tbTEXT";
-            this.tbTEXT.Size = new System.Drawing.Size(317, 22);
+            this.tbTEXT.Size = new System.Drawing.Size(317, 49);
             this.tbTEXT.TabIndex = 0;
             // 
             // btnClrHREF
             // 
             this.btnClrHREF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClrHREF.Location = new System.Drawing.Point(6, 19);
+            this.btnClrHREF.Location = new System.Drawing.Point(14, 33);
             this.btnClrHREF.Name = "btnClrHREF";
             this.btnClrHREF.Size = new System.Drawing.Size(48, 23);
             this.btnClrHREF.TabIndex = 6;
@@ -420,10 +486,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(811, 40);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(577, 335);
+            this.tabControl1.Size = new System.Drawing.Size(629, 335);
             this.tabControl1.TabIndex = 10;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -433,7 +500,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(569, 309);
+            this.tabPage1.Size = new System.Drawing.Size(621, 309);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tables";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -638,7 +705,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(569, 309);
+            this.tabPage2.Size = new System.Drawing.Size(621, 309);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Lists";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -739,6 +806,86 @@
             this.rbBullet.Text = "Bulleted";
             this.rbBullet.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnShowCode);
+            this.tabPage3.Controls.Add(this.gbTxtCol);
+            this.tabPage3.Controls.Add(this.tbColorResult);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(621, 309);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Colors";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnShowCode
+            // 
+            this.btnShowCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowCode.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowCode.Location = new System.Drawing.Point(30, 180);
+            this.btnShowCode.Name = "btnShowCode";
+            this.btnShowCode.Size = new System.Drawing.Size(123, 24);
+            this.btnShowCode.TabIndex = 12;
+            this.btnShowCode.Text = "Form HTML code";
+            this.btnShowCode.UseVisualStyleBackColor = true;
+            this.btnShowCode.Click += new System.EventHandler(this.btnShowCode_Click);
+            // 
+            // gbTxtCol
+            // 
+            this.gbTxtCol.Controls.Add(this.btnClrCol);
+            this.gbTxtCol.Controls.Add(this.btnApplyCol);
+            this.gbTxtCol.Controls.Add(this.tbTextToColor);
+            this.gbTxtCol.Controls.Add(this.btnSetFont);
+            this.gbTxtCol.Location = new System.Drawing.Point(30, 20);
+            this.gbTxtCol.Name = "gbTxtCol";
+            this.gbTxtCol.Size = new System.Drawing.Size(566, 138);
+            this.gbTxtCol.TabIndex = 2;
+            this.gbTxtCol.TabStop = false;
+            this.gbTxtCol.Text = "Text to use";
+            // 
+            // btnApplyCol
+            // 
+            this.btnApplyCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplyCol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnApplyCol.Location = new System.Drawing.Point(15, 63);
+            this.btnApplyCol.Name = "btnApplyCol";
+            this.btnApplyCol.Size = new System.Drawing.Size(108, 23);
+            this.btnApplyCol.TabIndex = 9;
+            this.btnApplyCol.Text = "Change Colors";
+            this.btnApplyCol.UseVisualStyleBackColor = true;
+            this.btnApplyCol.Click += new System.EventHandler(this.btnApplyCol_Click);
+            // 
+            // tbTextToColor
+            // 
+            this.tbTextToColor.Location = new System.Drawing.Point(152, 29);
+            this.tbTextToColor.Multiline = true;
+            this.tbTextToColor.Name = "tbTextToColor";
+            this.tbTextToColor.Size = new System.Drawing.Size(393, 75);
+            this.tbTextToColor.TabIndex = 4;
+            this.tbTextToColor.Text = "Change Me";
+            // 
+            // btnSetFont
+            // 
+            this.btnSetFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetFont.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSetFont.Location = new System.Drawing.Point(15, 29);
+            this.btnSetFont.Name = "btnSetFont";
+            this.btnSetFont.Size = new System.Drawing.Size(108, 23);
+            this.btnSetFont.TabIndex = 0;
+            this.btnSetFont.Text = "Change Font";
+            this.btnSetFont.UseVisualStyleBackColor = true;
+            this.btnSetFont.Click += new System.EventHandler(this.btnSetFont_Click);
+            // 
+            // tbColorResult
+            // 
+            this.tbColorResult.Location = new System.Drawing.Point(30, 212);
+            this.tbColorResult.Multiline = true;
+            this.tbColorResult.Name = "tbColorResult";
+            this.tbColorResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbColorResult.Size = new System.Drawing.Size(566, 75);
+            this.tbColorResult.TabIndex = 1;
+            // 
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
@@ -754,14 +901,14 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv.Size = new System.Drawing.Size(569, 395);
+            this.dgv.Size = new System.Drawing.Size(569, 467);
             this.dgv.TabIndex = 7;
             this.dgv.Visible = false;
             // 
             // Column1
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column1.HeaderText = "Position";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -771,11 +918,27 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column2.HeaderText = "Contents";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
+            // 
+            // btnClrCol
+            // 
+            this.btnClrCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrCol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClrCol.Location = new System.Drawing.Point(15, 98);
+            this.btnClrCol.Name = "btnClrCol";
+            this.btnClrCol.Size = new System.Drawing.Size(48, 23);
+            this.btnClrCol.TabIndex = 10;
+            this.btnClrCol.Text = "Clear";
+            this.btnClrCol.UseVisualStyleBackColor = true;
+            this.btnClrCol.Click += new System.EventHandler(this.btnClrCol_Click);
             // 
             // utils
             // 
@@ -797,6 +960,8 @@
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.utils_HelpButtonClicked);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -817,6 +982,10 @@
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.gbTxtCol.ResumeLayout(false);
+            this.gbTxtCol.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -882,5 +1051,18 @@
         private System.Windows.Forms.Button btnAdd1New;
         private System.Windows.Forms.Button btnInvertNL;
         private System.Windows.Forms.Button btnAdd2New;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.RadioButton rbLnkToImg;
+        private System.Windows.Forms.RadioButton rbIsImg;
+        private System.Windows.Forms.RadioButton rbNotImg;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnSetFont;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.GroupBox gbTxtCol;
+        private System.Windows.Forms.TextBox tbColorResult;
+        private System.Windows.Forms.Button btnShowCode;
+        private System.Windows.Forms.TextBox tbTextToColor;
+        private System.Windows.Forms.Button btnApplyCol;
+        private System.Windows.Forms.Button btnClrCol;
     }
 }

@@ -56,6 +56,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnSqueeze = new System.Windows.Forms.Button();
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -138,6 +140,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnSqueeze);
             this.groupBox4.Controls.Add(this.lbBoxed);
             this.groupBox4.Controls.Add(this.btnBoxIT);
             this.groupBox4.Controls.Add(this.btnApply);
@@ -169,7 +172,7 @@
             // 
             this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(193, 54);
+            this.btnBoxIT.Location = new System.Drawing.Point(186, 26);
             this.btnBoxIT.Name = "btnBoxIT";
             this.btnBoxIT.Size = new System.Drawing.Size(136, 36);
             this.btnBoxIT.TabIndex = 8;
@@ -322,6 +325,19 @@
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
             // 
+            // btnSqueeze
+            // 
+            this.btnSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSqueeze.Location = new System.Drawing.Point(186, 78);
+            this.btnSqueeze.Name = "btnSqueeze";
+            this.btnSqueeze.Size = new System.Drawing.Size(136, 36);
+            this.btnSqueeze.TabIndex = 10;
+            this.btnSqueeze.Text = "Squeeze Into Box";
+            this.toolTip1.SetToolTip(this.btnSqueeze, "There are no empty lines\r\nabove and under text");
+            this.btnSqueeze.UseVisualStyleBackColor = true;
+            this.btnSqueeze.Click += new System.EventHandler(this.btnSqueeze_Click);
+            // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,5 +405,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbPreFill;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSqueeze;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }

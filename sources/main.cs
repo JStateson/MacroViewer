@@ -499,7 +499,6 @@ namespace MacroViewer
             tbBody.Text = strOut;
             lbM.Visible = bEnable;
             lbNotM.Visible = !bEnable;
-            UsingMarkup(bEnable);
         }
 
         private void CopyBodyToClipboard()
@@ -933,12 +932,6 @@ namespace MacroViewer
         private void btnCLrUrl_Click(object sender, EventArgs e)
         {
             tbImgUrl.Text = "";
-        }
-
-        private void UsingMarkup(bool bEnable)
-        {
-            btnAdd1New.Enabled = bEnable;
-            btnAdd2New.Enabled = bEnable;
         }
 
         private void btnToMark_Click(object sender, EventArgs e)

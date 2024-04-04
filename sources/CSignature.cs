@@ -143,7 +143,8 @@ namespace MacroViewer
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadSIG();
+            utils MyUtils = new utils();
+            MyUtils.Show();
         }
 
         private void CopyToNotepad(string s)

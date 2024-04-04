@@ -78,9 +78,9 @@ namespace MacroViewer
             MyBrowser.ShowInBrowser(strTemp, true);
         }
 
-        private void btnTest_Click(object sender, EventArgs e) 
+        private void btnTest_Click(object sender, EventArgs e)
         {
-            RunBrowser(); 
+            RunBrowser();
         }
 
         private void TimerControl(bool bEnable)
@@ -116,21 +116,6 @@ namespace MacroViewer
         }
 
 
-        private void btnBoxIT_Click(object sender, EventArgs e)
-        {
-            string strUnBoxed = tbResult.Text.Trim();
-            if (strUnBoxed == "") strUnBoxed = FormObject();
-            if (strUnBoxed == "")
-            {
-                strUnBoxed = tbSelectedItem.Text.Trim();
-            }
-            if (strUnBoxed == "") return;
-            strBoxed = Utils.Form1CellTable(strUnBoxed);
-            if (bBoxed) StopTimer();
-            else StartTimer();
-        }
-
-
         private void BlinkTimer_Tick(object sender, EventArgs e)
         {
             lbBoxed.Visible = bBlinking;
@@ -153,7 +138,7 @@ namespace MacroViewer
                 tbCols.Text = "1";
                 return;
             }
-            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked,1);
+            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked, 1);
             this.Close();
         }
 
@@ -166,6 +151,30 @@ namespace MacroViewer
         {
             Properties.Settings.Default.FillAlpha = cbPreFill.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void btnSqueeze_Click(object sender, EventArgs e)
+        {
+            PutInBox(true);
+        }
+
+        private void btnBoxIT_Click(object sender, EventArgs e)
+        {
+            PutInBox(false);
+        }
+
+        private void PutInBox(bool bSqueeze)
+        {
+            string strUnBoxed = tbResult.Text.Trim();
+            if (strUnBoxed == "") strUnBoxed = FormObject();
+            if (strUnBoxed == "")
+            {
+                strUnBoxed = tbSelectedItem.Text.Trim();
+            }
+            if (strUnBoxed == "") return;
+            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed); ;
+            if (bBoxed) StopTimer();
+            else StartTimer();
         }
     }
 }

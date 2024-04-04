@@ -90,6 +90,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="sources\HTMlColorPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sources\HTMlColorPicker.Designer.cs">
+      <DependentUpon>HTMlColorPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="sources\RemoveImages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     <Compile Include="sources\WordSearch.Designer.cs">
       <DependentUpon>WordSearch.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="sources\HTMlColorPicker.resx">
+      <DependentUpon>HTMlColorPicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sources\RemoveImages.resx">
       <DependentUpon>RemoveImages.cs</DependentUpon>
     </EmbeddedResource>

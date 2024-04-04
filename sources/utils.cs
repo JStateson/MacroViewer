@@ -1,13 +1,15 @@
-﻿//#define SPECIAL1
+﻿#define SPECIAL1
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.LinkLabel;
@@ -17,6 +19,7 @@ namespace MacroViewer
     public partial class utils : Form
     {
         private string sLoc;
+        private bool bDoingExample = false;
         private string sColor = ""; // used with SPECIAL1
         int r30, c30;   // number of rows and columns in that small data grid table
         private int RowsExpected = 0;
@@ -28,6 +31,10 @@ namespace MacroViewer
         {
             InitializeComponent();
             sLoc = Utils.WhereExe;
+#if SPECIAL1
+            cbUseDelims.Checked = true;
+            cbUseBorder.Checked = true;
+#endif
         }
 
         private void EnableRC()
@@ -46,7 +53,19 @@ namespace MacroViewer
             string strUrl = Utils.dRef(tbURL.Text);
             string strTmp = tbTEXT.Text;
             if (strTmp == "") strTmp = strUrl;
-            tbResult.Text = Utils.FormUrl(strUrl, strTmp);
+            if (rbIsImg.Checked)
+                tbResult.Text = Utils.AssembleIMG(strUrl);
+            else tbResult.Text = Utils.FormUrl(strUrl, strTmp);
+            if (bDoingExample)
+            {  //<table border="1" width="50%"><tr><td>atest</td></tr></table>
+                string s = "Your <b>example</b> follows below this horizontal line<hr>";
+                s += tbResult.Text;
+                s += "<hr>Your example is above.  ";
+                s += "<font color='#006400'>I am DarkGreen and <b>bold</b></font><br>";
+                s += "Put me in a <table border='1' width='%50'><tr><td>box if you are <b>BOLD</b></td></tr></table>";
+                s += "<br>Click the adjacent 'Show In Browser' to see it";
+                tbScratch.Text = s;
+            }
         }
 
         private void btnCvt_Click(object sender, EventArgs e)
@@ -79,11 +98,23 @@ namespace MacroViewer
 
         private void showExampleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bDoingExample = true;
             string Samp1 = "Click to see how to find the release date of an hp laptop";
             string Samp2 = "https://www.lifewire.com/how-to-find-the-serial-number-of-an-hp-laptop-5189844#:~:text=You%20can%20determine%20your%20laptop's,week%20of%20the%20year%202020.";
+            if (rbLnkToImg.Checked)
+            {
+                Samp1 = "Click to see an Expert Icon";
+                Samp2 = "https://h30434.www3.hp.com/html/@029DD5B9D9DE7F854E52DDBD91AAAAD9/rank_icons/expert.png";
+            }
+            if (rbIsImg.Checked)
+            {
+                Samp1 = "This field is ignored";
+                Samp2 = "https://h30434.www3.hp.com/html/@029DD5B9D9DE7F854E52DDBD91AAAAD9/rank_icons/expert.png";
+            }
             tbTEXT.Text = Samp1;
             tbURL.Text = Samp2;
             MakeResult();
+            bDoingExample = false;
         }
 
         private void ShowBrowser(string s)
@@ -121,13 +152,13 @@ namespace MacroViewer
         private void btnApplyTab_Click(object sender, EventArgs e)
         {
             int n = RefreshTable();
-            if(cbPreFill.Checked && (n <= 30))
+            if (cbPreFill.Checked && (n <= 30))
             {
                 dgv.Rows.Clear();
-                for(int i = 0; i < n; i++)
+                for (int i = 0; i < n; i++)
                 {
                     //DataGridViewRow row = new DataGridViewRow();
-                    dgv.Rows.Add(Utils.strFillSubscript(r30,c30,i),"    ");
+                    dgv.Rows.Add(Utils.strFillSubscript(r30, c30, i), "    ");
                 }
 
             }
@@ -183,7 +214,7 @@ namespace MacroViewer
         {
             btnFillRow.Enabled = false;
             nGathered = GatherClipboardText();
-            if(RowsExpected == 0) RowsExpected = nGathered;
+            if (RowsExpected == 0) RowsExpected = nGathered;
             FillTable();
         }
 
@@ -210,16 +241,16 @@ namespace MacroViewer
         private void FillTable()
         {
             if (cbUseDelims.Checked)
-            { 
+            {
                 string[] sFirst = sEach[0].Trim().Split(new char[] { ' ', '\t', ',' },
                         StringSplitOptions.RemoveEmptyEntries);
                 int n = sFirst.Length;
-                List < string[]> list = new List<string[]>();   
-                foreach(string s in sEach)
+                List<string[]> list = new List<string[]>();
+                foreach (string s in sEach)
                 {
                     sFirst = s.Trim().Split(new char[] { ' ', '\t', ',' },
                         StringSplitOptions.RemoveEmptyEntries);
-                    if(n != sFirst.Length)
+                    if (n != sFirst.Length)
                     {
                         MessageBox.Show("missing delimiter in your paste");
                         return;
@@ -227,9 +258,9 @@ namespace MacroViewer
                     list.Add(sFirst);
                 }
                 string[] sOne = new string[list.Count];
-                for(int i = 0; i < n; i++)
-                {                    
-                    for(int j = 0; j < list.Count;j++)
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < list.Count; j++)
                     {
                         sOne[j] = list[j][i];
                     }
@@ -245,7 +276,7 @@ namespace MacroViewer
             string sSuf = "</td>";
             string sStrCol = "<tr>";
             string sEndCol = "</tr>";
-            string sSt = cbUseBorder.Checked  ?  "<table border='1'>" : "<table>";
+            string sSt = cbUseBorder.Checked ? "<table border='1'>" : "<table>";
             string sSe = "</table>";
             string sOut = sSt;
             if (RowsExpected > 0)
@@ -364,7 +395,7 @@ namespace MacroViewer
         {
             nGathered = GatherClipboardText();
             dgv.Rows.Clear();
-            foreach(string s in sEach)
+            foreach (string s in sEach)
             {
                 dgv.Rows.Add(dgv.Rows.Count + 1, s);
             }
@@ -372,7 +403,7 @@ namespace MacroViewer
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex == 1)
+            if (tabControl1.SelectedIndex == 1)
             {
                 dgv.Rows.Clear();
                 dgv.Visible = true;
@@ -385,6 +416,11 @@ namespace MacroViewer
                 dgv.Visible = cbPreFill.Checked;
                 dgv.AllowUserToAddRows = false;
                 dgv.AllowUserToDeleteRows = false;
+            }
+            if(tabControl1.SelectedIndex == 2)
+            {
+                tbColorResult.ForeColor = tbTextToColor.ForeColor;
+                tbColorResult.BackColor = tbTextToColor.BackColor;
             }
         }
 
@@ -405,7 +441,7 @@ namespace MacroViewer
 
         private void cbUseBorder_CheckStateChanged(object sender, EventArgs e)
         {
-            if(cbUseBorder.Checked)
+            if (cbUseBorder.Checked)
             {
                 tbScratch.Text = tbScratch.Text.Replace("<table>", "table border='1'>");
             }
@@ -415,23 +451,109 @@ namespace MacroViewer
             }
         }
 
+        private void fontDialog1_Apply(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            //string htmlColor = ColorTranslator.ToHtml(selectedColor);
+        }
+
+        private void btnShowB_Click(object sender, EventArgs e)
+        {
+            ShowBrowser(tbColorResult.Text);
+        }
+
+        private void btnBackGround_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Color selectedColor = colorDialog.Color;
+                    tbColorResult.BackColor = selectedColor;
+                }
+            }
+        }
+
+        private void btnForeColor_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Color selectedColor = colorDialog.Color;
+                    tbColorResult.ForeColor = selectedColor;
+                }
+            }
+        }
+
+        private void btnSetFont_Click(object sender, EventArgs e)
+        {
+            using (FontDialog fontDialog = new FontDialog())
+            {
+                if (fontDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Font selectedFont = fontDialog.Font;
+                    tbColorResult.Font = selectedFont;
+                }
+            }
+            tbColorResult.Text = tbTextToColor.Text;
+        }
+
+        private void btnApplyCol_Click(object sender, EventArgs e)
+        {
+            tbColorResult.Text = tbTextToColor.Text;
+            HTMlColorPicker cp = new HTMlColorPicker(tbColorResult.Font);
+            cp.ShowDialog();
+            if(cp.WantedColors != null)
+            {
+                tbColorResult.ForeColor = cp.WantedColors.ForeColor;
+                tbColorResult.BackColor = cp.WantedColors.BackColor;
+            }
+            cp.Dispose();
+        }
+
+        private void btnShowCode_Click(object sender, EventArgs e)
+        {
+            
+            string s = Utils.ApplyColors1(ref tbColorResult);
+            tbScratch.Text = s;
+        }
+
+        private void btnClrCol_Click(object sender, EventArgs e)
+        {
+            tbTextToColor.Text = "";
+            tbTextToColor.Font = gbTxtCol.Font;
+        }
+
+
+
 #if SPECIAL1
         private string FormSpecial(int i, string s)
         {
             string r = s;
-            // expecting Cyan ForeGround ForeGroundBold Background BackgroundBold #00FFFF
-            // from ChatGPT HTML palette list replacing ":" with the above words
-            if (i == 0 || i == 5) return s;
+            // expecting Cyan' ForeGround ForeGroundBold Background BackgroundBold '#00FFFF
+            // from ChatGPT HTML palette list replacing ":" with the above words in the quote '
+            if (i == 0) return s;
+            if(i == 5) // note that HP forum no longer allows background colors
+            {
+                //return "&lt;span style='background-color: " + sColor + "; color: white;'&gt;" + "&lt;b&gt;ForeGroundBold&lt;b&gt;" + "&lt;/span&gt;"; //  used with white
+                return "&lt;font color='" + sColor + "'&gt;" +"ForeGround" + "&lt;/font&gt;"; // used with 'black'
+            }
+
             switch (i)
             {
                 case 1: r = "<font color='" + sColor + "'>" + s + "</font>";
                     break;
                 case 2: r  = "<font color='" + sColor + "'><b>" + s + "</b></font>";
                     break;
-                    // below white was black for first run of SPECIAL1
-                case 3: r = "<div style='background-color: " + sColor + "; color: white;'><p>" + s + "</p></div>";
+                    // below white was black (or viceversa) for first run of SPECIAL1 and
+                case 3: r = "<span style='background-color: " + sColor + "; color: black;'>" + s + "</span>";
                     break;   
-                case 4: r = "<div style='background-color: " + sColor + "; color: white;'><p><b>" + s + "</b</p></div>";
+                case 4: r = "<span style='background-color: " + sColor + "; color: black;'><b>" + s + "</b></span>";
                     break;
             }
             return r;
@@ -439,3 +561,30 @@ namespace MacroViewer
 #endif
     }
 }
+/* the below was used with 'SPECIAL1'
+Black: #000000
+White: #FFFFFF
+Red: #FF0000
+Green: #008000
+Blue: #0000FF
+Yellow: #FFFF00
+Cyan: #00FFFF
+Magenta: #FF00FF
+Silver: #C0C0C0
+Gray: #808080
+Maroon: #800000
+Olive: #808000
+Purple: #800080
+Teal: #008080
+Navy: #000080
+Orange: #FFA500
+Aquamarine: #7FFFD4
+Turquoise: #40E0D0
+Lime: #00FF00
+Fuchsia: #FF00FF
+Indigo: #4B0082
+Violet: #EE82EE
+Pink: #FFC0CB
+Peach: #FFDAB9
+Beige: #F5F5DC
+ */

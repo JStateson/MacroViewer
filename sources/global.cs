@@ -245,9 +245,78 @@ namespace MacroViewer
             }
         }
 
+        private static string ColorToHtml(Color color)
+        {
+            return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        }
+        //<span style='background-color: #000000; color: white;'>ForeGroundBold</span>
+        public static string ApplyColors1(ref TextBox tb)
+        {
+            Graphics graphics = tb.CreateGraphics();
+            int px = (int)Math.Round(tb.Font.SizeInPoints * graphics.DpiY / 72);
+            string s = "<span style=\"color: " + tb.ForeColor.Name + "; background-color: " + tb.BackColor.Name + "; ";
+
+            int i = (int)tb.Font.Style;   // enums 1 and 2 are now 3 for bold italix
+            if(i == 3)
+            {
+                s += "font-style: italic; ";
+                s += "font-weight: bold; ";
+            }
+            if (tb.Font.Style == FontStyle.Italic) s += "font-style: italic; ";
+            if (tb.Font.Style == FontStyle.Bold) s += "font-weight: bold; ";
+            s += "font-size: " + px.ToString() + "px; font-family: \"" + tb.Font.Name + "\"; >";
+            s += tb.Text + "</span>";
+            return s;
+        }
+        public static string ApplyColors(ref TextBox tb)
+        {
+            string sNBI = "";
+            string s = tb.Text;
+            string sCol = "";
+            string sFs = "";
+            string sFe = "";
+            string sS, sE;
+            string sFONTs = "";
+            float fontSize = tb.Font.Size - 5;  // html seems to need -5 to scale good
+            int iSize = (int)Math.Ceiling(fontSize);
+            sFONTs = fontSize.ToString("0.00");
+            if (tb.Font.Style == FontStyle.Bold) sNBI = "b";
+            if (tb.Font.Style == FontStyle.Italic) sNBI = "i";
+
+            int i = (int)tb.Font.Style;   // enums 1 and 2 are now 3 for bold italix
+            Color color = Color.FromArgb(tb.ForeColor.ToArgb());
+            sCol = ColorToHtml(color);
+            if (i == 3)
+            {
+                sS = "<b><i>";
+                sE = "</b></i>";
+            }
+            else
+            {
+                sS = (sNBI == "") ? "" : "<" + sNBI + ">";
+                sE = (sNBI == "") ? "" : "</" + sNBI + ">";
+            }
+            if (sCol != "#000000")
+            {
+                sFs = "<font color =\"" + sCol + "\" size=\"" + sFONTs + "\">";
+                sFe = "</font>";
+            }
+            else
+            {
+                sFs = "<font size=\"" + sFONTs + "\">";
+                sFe = "</font>";
+            }
+            return sS + sFs + s + sFe + sE;
+        }
         public static string Form1CellTable(string strIn)
         {
-            return "<table border=\"1\" width=\"100%\"><tr><td width=\"100%\"><p>" + strIn + "</p></td></tr></table>";
+            return "<table border=\"1\" width=\"50%\"><td>" + strIn + "</td></table>";
+        }
+
+        // this puts a newline in the table to make it easier to read the text and copy it
+        public static string Form1CellTableP(string strIn)
+        {
+            return "<table border=\"1\" width=\"50%\"><td>l<p>" + strIn + "</p></td></table>";
         }
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {

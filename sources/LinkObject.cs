@@ -157,15 +157,6 @@ namespace MacroViewer
             strBoxed = "";
         }
 
-        private void btnBoxIT_Click(object sender, EventArgs e)
-        {
-            string strUnBoxed = tbImageUrl.Text.Trim();
-            if (strUnBoxed == "") strUnBoxed = FormObject();
-            if (strUnBoxed == "") return;
-            strBoxed = Utils.Form1CellTable(strUnBoxed);
-            if (bBoxed) StopTimer();
-            else StartTimer();
-        }
 
         private void LinkObject_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -194,5 +185,26 @@ namespace MacroViewer
             strResultOut = bBoxed ? strBoxed : tbImageUrl.Text;
             this.Close();
         }
+
+        private void btnSqueeze_Click(object sender, EventArgs e)
+        {
+            BoxIt(true);
+        }
+
+        private void btnBoxIT_Click(object sender, EventArgs e)
+        {
+            BoxIt(false);
+        }
+
+        private void BoxIt(bool bSqueeze)
+        {
+            string strUnBoxed = tbImageUrl.Text.Trim();
+            if (strUnBoxed == "") strUnBoxed = FormObject();
+            if (strUnBoxed == "") return;
+            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
+            if (bBoxed) StopTimer();
+            else StartTimer();
+        }
+
     }
 }

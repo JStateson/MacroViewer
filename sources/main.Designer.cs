@@ -52,7 +52,18 @@
             this.btnPrev = new System.Windows.Forms.Button();
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnBold = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnInvertNL = new System.Windows.Forms.Button();
+            this.gbManageImages = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAppendMac = new System.Windows.Forms.Button();
+            this.btnSetObj = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbBody = new System.Windows.Forms.TextBox();
+            this.btnNoMark = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,18 +100,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.gbManageImages = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnAppendMac = new System.Windows.Forms.Button();
-            this.btnSetObj = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lbNotM = new System.Windows.Forms.Label();
             this.lbM = new System.Windows.Forms.Label();
-            this.btnNoMark = new System.Windows.Forms.Button();
             this.btnToMark = new System.Windows.Forms.Button();
             this.btnToNotepad = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -118,20 +121,17 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnInvertNL = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBold = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.gbManageImages.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.gbManageImages.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbSupp.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -248,9 +248,9 @@
             // 
             this.btnChangeUrls.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangeUrls.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnChangeUrls.Location = new System.Drawing.Point(253, 88);
+            this.btnChangeUrls.Location = new System.Drawing.Point(387, 84);
             this.btnChangeUrls.Name = "btnChangeUrls";
-            this.btnChangeUrls.Size = new System.Drawing.Size(138, 25);
+            this.btnChangeUrls.Size = new System.Drawing.Size(138, 30);
             this.btnChangeUrls.TabIndex = 9;
             this.btnChangeUrls.Text = "Change URLS";
             this.toolTip1.SetToolTip(this.btnChangeUrls, "You must upload images to your\r\nHP community picture folder first.");
@@ -391,6 +391,129 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnBold);
+            this.groupBox6.Controls.Add(this.groupBox1);
+            this.groupBox6.Controls.Add(this.btnLinkAll);
+            this.groupBox6.Controls.Add(this.gbManageImages);
+            this.groupBox6.Controls.Add(this.btnSetObj);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Controls.Add(this.tbBody);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(484, 21);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(580, 709);
+            this.groupBox6.TabIndex = 17;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
+            this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes");
+            // 
+            // btnBold
+            // 
+            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnBold.Location = new System.Drawing.Point(421, 515);
+            this.btnBold.Name = "btnBold";
+            this.btnBold.Size = new System.Drawing.Size(122, 25);
+            this.btnBold.TabIndex = 27;
+            this.btnBold.Text = "BOLD";
+            this.btnBold.UseVisualStyleBackColor = true;
+            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnInvertNL);
+            this.groupBox1.Controls.Add(this.btnAdd1New);
+            this.groupBox1.Controls.Add(this.btnAdd2New);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.groupBox1.Location = new System.Drawing.Point(409, 121);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(134, 170);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "New Lines";
+            // 
+            // btnInvertNL
+            // 
+            this.btnInvertNL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnInvertNL.Location = new System.Drawing.Point(27, 121);
+            this.btnInvertNL.Name = "btnInvertNL";
+            this.btnInvertNL.Size = new System.Drawing.Size(94, 23);
+            this.btnInvertNL.TabIndex = 25;
+            this.btnInvertNL.Text = "Swap NL";
+            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
+            this.btnInvertNL.UseVisualStyleBackColor = true;
+            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
+            // 
+            // gbManageImages
+            // 
+            this.gbManageImages.Controls.Add(this.label4);
+            this.gbManageImages.Controls.Add(this.btnChangeUrls);
+            this.gbManageImages.Controls.Add(this.label3);
+            this.gbManageImages.Controls.Add(this.btnAppendMac);
+            this.gbManageImages.Location = new System.Drawing.Point(18, 563);
+            this.gbManageImages.Name = "gbManageImages";
+            this.gbManageImages.Size = new System.Drawing.Size(540, 131);
+            this.gbManageImages.TabIndex = 8;
+            this.gbManageImages.TabStop = false;
+            this.gbManageImages.Text = "Manage Images";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.Location = new System.Drawing.Point(6, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(199, 32);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Location = new System.Drawing.Point(6, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(225, 32);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "This can create an entire macro\r\none image at a time";
+            // 
+            // btnAppendMac
+            // 
+            this.btnAppendMac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAppendMac.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnAppendMac.Location = new System.Drawing.Point(387, 28);
+            this.btnAppendMac.Name = "btnAppendMac";
+            this.btnAppendMac.Size = new System.Drawing.Size(138, 30);
+            this.btnAppendMac.TabIndex = 7;
+            this.btnAppendMac.Text = "Append Image";
+            this.btnAppendMac.UseVisualStyleBackColor = true;
+            this.btnAppendMac.Click += new System.EventHandler(this.btnAppendMac_Click);
+            // 
+            // btnSetObj
+            // 
+            this.btnSetObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetObj.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSetObj.Location = new System.Drawing.Point(421, 438);
+            this.btnSetObj.Name = "btnSetObj";
+            this.btnSetObj.Size = new System.Drawing.Size(122, 25);
+            this.btnSetObj.TabIndex = 5;
+            this.btnSetObj.Text = "EDIT LINK";
+            this.btnSetObj.UseVisualStyleBackColor = true;
+            this.btnSetObj.Click += new System.EventHandler(this.btnSetObj_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Info;
+            this.label1.Location = new System.Drawing.Point(15, 443);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(330, 96);
+            this.label1.TabIndex = 4;
+            this.label1.Text = resources.GetString("label1.Text");
+            // 
             // tbBody
             // 
             this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -400,6 +523,22 @@
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbBody.Size = new System.Drawing.Size(391, 376);
             this.tbBody.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.tbBody, "Any HTML can be dropped into here for testing.\r\nFor example if you use ChatGPT to" +
+        " ask for HTML \r\nthe samples provided can be tested here.  Just be\r\nsure NOT to a" +
+        "ccidently save the example");
+            // 
+            // btnNoMark
+            // 
+            this.btnNoMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoMark.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNoMark.Location = new System.Drawing.Point(6, 84);
+            this.btnNoMark.Name = "btnNoMark";
+            this.btnNoMark.Size = new System.Drawing.Size(182, 29);
+            this.btnNoMark.TabIndex = 14;
+            this.btnNoMark.Text = "Remove <BR> markup";
+            this.toolTip1.SetToolTip(this.btnNoMark, "Remove markup just puts");
+            this.btnNoMark.UseVisualStyleBackColor = true;
+            this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
             // menuStrip1
             // 
@@ -716,92 +855,6 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // groupBox6
-            // 
-            this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox6.Controls.Add(this.btnBold);
-            this.groupBox6.Controls.Add(this.groupBox1);
-            this.groupBox6.Controls.Add(this.btnLinkAll);
-            this.groupBox6.Controls.Add(this.gbManageImages);
-            this.groupBox6.Controls.Add(this.btnSetObj);
-            this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Controls.Add(this.tbBody);
-            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(484, 21);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(580, 709);
-            this.groupBox6.TabIndex = 17;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
-            this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes");
-            // 
-            // gbManageImages
-            // 
-            this.gbManageImages.Controls.Add(this.label4);
-            this.gbManageImages.Controls.Add(this.btnChangeUrls);
-            this.gbManageImages.Controls.Add(this.label3);
-            this.gbManageImages.Controls.Add(this.btnAppendMac);
-            this.gbManageImages.Location = new System.Drawing.Point(18, 563);
-            this.gbManageImages.Name = "gbManageImages";
-            this.gbManageImages.Size = new System.Drawing.Size(397, 131);
-            this.gbManageImages.TabIndex = 8;
-            this.gbManageImages.TabStop = false;
-            this.gbManageImages.Text = "Manage Images";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Info;
-            this.label4.Location = new System.Drawing.Point(6, 84);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(199, 32);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Info;
-            this.label3.Location = new System.Drawing.Point(6, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 32);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "This can create an entire macro\r\none image at a time";
-            // 
-            // btnAppendMac
-            // 
-            this.btnAppendMac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAppendMac.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnAppendMac.Location = new System.Drawing.Point(253, 28);
-            this.btnAppendMac.Name = "btnAppendMac";
-            this.btnAppendMac.Size = new System.Drawing.Size(138, 25);
-            this.btnAppendMac.TabIndex = 7;
-            this.btnAppendMac.Text = "Append Image";
-            this.btnAppendMac.UseVisualStyleBackColor = true;
-            this.btnAppendMac.Click += new System.EventHandler(this.btnAppendMac_Click);
-            // 
-            // btnSetObj
-            // 
-            this.btnSetObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetObj.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSetObj.Location = new System.Drawing.Point(421, 438);
-            this.btnSetObj.Name = "btnSetObj";
-            this.btnSetObj.Size = new System.Drawing.Size(122, 25);
-            this.btnSetObj.TabIndex = 5;
-            this.btnSetObj.Text = "EDIT LINK";
-            this.btnSetObj.UseVisualStyleBackColor = true;
-            this.btnSetObj.Click += new System.EventHandler(this.btnSetObj_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(15, 443);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(330, 96);
-            this.label1.TabIndex = 4;
-            this.label1.Text = resources.GetString("label1.Text");
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label6);
@@ -852,19 +905,6 @@
             this.lbM.Size = new System.Drawing.Size(21, 17);
             this.lbM.TabIndex = 15;
             this.lbM.Text = "";
-            // 
-            // btnNoMark
-            // 
-            this.btnNoMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoMark.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnNoMark.Location = new System.Drawing.Point(6, 84);
-            this.btnNoMark.Name = "btnNoMark";
-            this.btnNoMark.Size = new System.Drawing.Size(182, 29);
-            this.btnNoMark.TabIndex = 14;
-            this.btnNoMark.Text = "Remove <BR> markup";
-            this.toolTip1.SetToolTip(this.btnNoMark, "Remove markup just puts");
-            this.btnNoMark.UseVisualStyleBackColor = true;
-            this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
             // btnToMark
             // 
@@ -1058,43 +1098,6 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnInvertNL
-            // 
-            this.btnInvertNL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnInvertNL.Location = new System.Drawing.Point(27, 121);
-            this.btnInvertNL.Name = "btnInvertNL";
-            this.btnInvertNL.Size = new System.Drawing.Size(94, 23);
-            this.btnInvertNL.TabIndex = 25;
-            this.btnInvertNL.Text = "Swap NL";
-            this.toolTip1.SetToolTip(this.btnInvertNL, "swap <BR> and NewLines");
-            this.btnInvertNL.UseVisualStyleBackColor = true;
-            this.btnInvertNL.Click += new System.EventHandler(this.btnInvertNL_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnInvertNL);
-            this.groupBox1.Controls.Add(this.btnAdd1New);
-            this.groupBox1.Controls.Add(this.btnAdd2New);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.groupBox1.Location = new System.Drawing.Point(409, 121);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(134, 170);
-            this.groupBox1.TabIndex = 26;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "New Lines";
-            // 
-            // btnBold
-            // 
-            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBold.Location = new System.Drawing.Point(421, 515);
-            this.btnBold.Name = "btnBold";
-            this.btnBold.Size = new System.Drawing.Size(122, 25);
-            this.btnBold.TabIndex = 27;
-            this.btnBold.Text = "BOLD";
-            this.btnBold.UseVisualStyleBackColor = true;
-            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1115,14 +1118,15 @@
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.main_HelpButtonClicked);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.gbManageImages.ResumeLayout(false);
+            this.gbManageImages.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gpMainEdit.ResumeLayout(false);
             this.gpMainEdit.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.gbManageImages.ResumeLayout(false);
-            this.gbManageImages.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1133,7 +1137,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

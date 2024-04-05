@@ -121,6 +121,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnClipToUpper = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -394,6 +395,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnClipToUpper);
             this.groupBox6.Controls.Add(this.btnBold);
             this.groupBox6.Controls.Add(this.groupBox1);
             this.groupBox6.Controls.Add(this.btnLinkAll);
@@ -1098,6 +1100,18 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnClipToUpper
+            // 
+            this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClipToUpper.Location = new System.Drawing.Point(409, 327);
+            this.btnClipToUpper.Name = "btnClipToUpper";
+            this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
+            this.btnClipToUpper.TabIndex = 28;
+            this.btnClipToUpper.Text = "Clipboard to Upper case";
+            this.toolTip1.SetToolTip(this.btnClipToUpper, "This just changes the\r\nclipboard to upper case");
+            this.btnClipToUpper.UseVisualStyleBackColor = true;
+            this.btnClipToUpper.Click += new System.EventHandler(this.btnClipToUpper_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1234,6 +1248,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnInvertNL;
         private System.Windows.Forms.Button btnBold;
+        private System.Windows.Forms.Button btnClipToUpper;
     }
 }
 

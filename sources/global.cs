@@ -314,9 +314,10 @@ namespace MacroViewer
         }
 
         // this puts a newline in the table to make it easier to read the text and copy it
+        // the <p> does not work at the HP forum and a double newline is needed
         public static string Form1CellTableP(string strIn)
         {
-            return "<table border=\"1\" width=\"50%\"><td>l<p>" + strIn + "</p></td></table>";
+            return "<table border=\"1\" width=\"50%\"><td><br>" + strIn + "<br><br></td></table>";
         }
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {

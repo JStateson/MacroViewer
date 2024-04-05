@@ -1690,5 +1690,10 @@ namespace MacroViewer
             Utils.AddBold(ref tbBody);
         }
 
+        private void btnClipToUpper_Click(object sender, EventArgs e)
+        {
+            string s = Clipboard.GetText().ToUpper();
+            Clipboard.SetText(s);
+        }
     }
 }

@@ -127,6 +127,20 @@ namespace MacroViewer
             }
         }
 
+        private string FormBetter(string s)
+        {
+            string t = s.ToLower();
+            if (t.Contains("wi-fi"))
+            {
+                return s + "wifi";
+            }
+            if (t.Contains("wifi"))
+            {
+                return s + "wi-fi";
+            }
+            return s;
+        }
+
         private void RunSearch()
         {
             cFound.Clear();
@@ -134,7 +148,8 @@ namespace MacroViewer
             TotalMatches = 0;
             lbKeyFound.Items.Clear();
             tbNumMatches.Text = "";
-            keywords = tbKeywords.Text.Trim().Split(new char[] { ' ', '\t' });
+            string sBetter = FormBetter(tbKeywords.Text.Trim());
+            keywords = sBetter.Split(new char[] { ' ', '\t' });
             int n = keywords.Length;
             int j,i = 0;
             KeyPresent = new bool[n];

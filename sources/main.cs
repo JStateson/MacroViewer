@@ -448,7 +448,7 @@ namespace MacroViewer
         private void ShowUneditedRow(int e)
         {
             CurrentRowSelected = e;
-            if (lbName.Rows.Count == 0)
+            if (lbName.Rows.Count == 0 || e >= lbName.Rows.Count)
             {
                 tbBody.Text = "";
                 tbMacName.Text = "";
@@ -621,7 +621,7 @@ namespace MacroViewer
         {
             int i = 0;
             bool bNoEmpty = !(strFN == "HP" || strFN == "" || strFN == "HTML");
-            tbMacName.Enabled = bNoEmpty;
+            // 
             bMacroErrors = false;
             mShowErr.Visible = false;
             TXTName = strFN;
@@ -644,7 +644,7 @@ namespace MacroViewer
                     lbName.Rows.Add(i + 1, false, line);   // this triggers row enter callback
                     MacroNames[i] = line;
                     sBody = sr.ReadLine();
-                    Body[i] = sBody; // not needed ?? .Replace("<br />", "<br>");
+                    Body[i] = sBody; // only signatures need this .Replace("<br />", "<br>");
                     sBody = Utils.BBCparse(sBody);
                     MacroErrors[i] = sBody;
                     HPerr[i] = (sBody != "");
@@ -660,6 +660,10 @@ namespace MacroViewer
                     if(line == null)
                     {
                         break;
+                    }
+                    if(line == "")
+                    {
+
                     }
                     if (line == "" & bNoEmpty)
                     {
@@ -788,9 +792,28 @@ namespace MacroViewer
             return true;
         }
 
+        private bool NoEmptyMacros()
+        {
+            int i = 0;
+            tbMacName.Text = tbMacName.Text.Trim();
+            if (tbMacName.Text == "")
+            {
+                tbMacName.Text = "Change Me";
+                i++;
+            }
+            tbBody.Text = tbBody.Text.Trim();
+            if (tbBody.Text == "")
+            {
+                tbBody.Text = "Change Me";
+                i++;
+            }
+            return i == 2;  // both items blank
+        }
+
         private void SaveCurrentMacros()
         {
             bool bChanged = false;
+            NoEmptyMacros();
             string strName = tbMacName.Text;
             string strOld = "";
             if (lbName.RowCount == 0)
@@ -827,6 +850,11 @@ namespace MacroViewer
 
         private void btnSaveM_Click(object sender, EventArgs e)
         {
+            if(NoEmptyMacros())
+            {
+                MessageBox.Show("You cannot save an empty macro");
+                return;
+            }
             SaveCurrentMacros();
         }
 
@@ -1031,7 +1059,8 @@ namespace MacroViewer
 
         private string tbBodyMarked()
         {
-            return tbBody.Text.Replace(Environment.NewLine, "<br>");
+            tbBody.Text = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
+            return tbBody.Text;
         }
 
         private bool bNothingToSave()
@@ -1040,16 +1069,25 @@ namespace MacroViewer
             {
                 return true; // nothing to save 
             }
-            if (Body[CurrentRowSelected] == null) return true; // a leftover "Change Me" has empty body
+            if (Body[CurrentRowSelected] == null)
+            {
+                if (tbBodyMarked().Length > 0) return false;
+                return true; // a leftover "Change Me" has empty body
+            }
             bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);
             return !bEdited;
         }
 
         private bool bPageSaved()
         {
+            string sMsg = "Macro was not saved";
+            if(tbMacName.Text.Trim() == "")
+            {
+                NoEmptyMacros();
+                sMsg = "Un-named macro not saved, using 'Change Me'";
+            }
             if (bNothingToSave()) return true;
-
-            DialogResult Res1 = MessageBox.Show("Macro was not saved", "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            DialogResult Res1 = MessageBox.Show(sMsg, "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             if (Res1 == DialogResult.OK)
             {
                 SaveCurrentMacros();
@@ -1600,6 +1638,7 @@ namespace MacroViewer
 
         private void btnDelChecked_Click(object sender, EventArgs e)
         {
+            if(CountChecks() == 0)return;
             CMoveSpace cms = new CMoveSpace();
             cms.strType = strType;
             cms.bDelete = true;

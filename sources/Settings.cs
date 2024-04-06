@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static MacroViewer.Utils;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
@@ -38,6 +39,7 @@ namespace MacroViewer
             tbSupSig.Text = Properties.Settings.Default.SupSig;
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
+            cbRefOnly.Checked = !Properties.Settings.Default.UseMarkers;
             strEditedSave = Properties.Settings.Default.EditedSig;
             strEditedSave = strEditedSave.Replace(SupSigPrefix, "");
             strEditedSave = strEditedSave.Replace(SupSigSuffix, "");
@@ -50,8 +52,13 @@ namespace MacroViewer
             clbImages.Items.Add("Solution", false);     // test signature form and not be hard coded
             bWantsExit = false;
             lbAttached.Text = NumAttached.ToString();
-        }
+            cbListFN.Items.Add("ALL");
+            foreach (string s in Utils.LocalMacroPrefix)
+                cbListFN.Items.Add(s);
+            cbListFN.SelectedIndex = 0;
+            lbMarker.Text = lbMarker.Text.Replace("pre", Utils.SupSigPrefix).Replace("suf", Utils.SupSigSuffix);        }
 
+     
         private void CountUnkUrls()
         {
             if (File.Exists(lbSaveLoc.Text))
@@ -137,16 +144,12 @@ namespace MacroViewer
             }
         }
 
-        /*
-            public static string SupSigPrefix = "<b><font color=\"#f80000\">====";
-            public static string SupSigSuffix = "====</font></b>";
-         */
 
         private void btnCpyEdit_Click(object sender, EventArgs e)
         {
             string sOut = "";
             if (clbImages.GetItemCheckState(0) == CheckState.Checked)
-                sOut = Utils.ApplyColors(ref tbSupSig) + "<br>";
+                sOut = Utils.ApplyColors1(ref tbSupSig) + "<br>";
             if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut += Utils.YesButton + "  ";
             if (clbImages.GetItemCheckState(2) == CheckState.Checked) sOut += Utils.SolButton + "<br>";
             tbEdit.Text = sOut;
@@ -190,7 +193,7 @@ namespace MacroViewer
         private void btnClearEB_Click(object sender, EventArgs e)
         {
             tbEdit.Text = "";
-            Properties.Settings.Default.ChangeSig = false;
+            Properties.Settings.Default.ChangeSig = "";
             PerformSave();
             btnAddSupSig.Enabled = false;
         }
@@ -209,17 +212,60 @@ namespace MacroViewer
          
         private void btnAddSupSig_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.UseMarkers = !cbRefOnly.Checked;
             UpdateSupSignature();
         }
 
         private void UpdateSupSignature()
         {
-            Properties.Settings.Default.ChangeSig = true;
+            Properties.Settings.Default.ChangeSig = cbListFN.SelectedItem.ToString();
             PerformSave();
             DialogResult dr =   MessageBox.Show("The program must restarted to update the supplemental signature",
                     "Click OK to restart now",MessageBoxButtons.OKCancel);
             bWantsExit = (dr == DialogResult.OK);
             if (bWantsExit) this.Close();
+        }
+
+        private void SetRef(int n)
+        {
+            if (!cbRefOnly.Checked) return;
+            if (n > 0)
+            {
+                tbEdit.Text = Utils.LocalMacroRefs[n-1];
+
+            }
+            else
+            {
+                tbEdit.Text = "";
+            }
+            tbSupSig.Text = tbEdit.Text;
+        }
+
+        private void cbListFN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int n = cbListFN.SelectedIndex;
+            if(cbRefOnly.Checked)
+                SetRef(n);
+        }
+
+        private void LockRef(bool bRefOnly)
+        {
+            if (bRefOnly)
+            {
+                SetRef(cbListFN.SelectedIndex);
+            }
+            bRefOnly = !bRefOnly;
+            btnColor.Enabled = bRefOnly;
+            btnCpyEdit.Enabled = bRefOnly;
+            btnFont.Enabled = bRefOnly;
+            btnTest.Enabled = bRefOnly;
+            clbImages.Enabled = bRefOnly;
+
+        }
+
+        private void cbRefOnly_CheckStateChanged(object sender, EventArgs e)
+        {
+            LockRef(cbRefOnly.Checked);
         }
     }
 }

@@ -23,15 +23,75 @@ using System.Net.NetworkInformation;
 
 namespace MacroViewer
 {
+
     public class CMoveSpace
-    {
+    {/// <summary>
+     /// "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
+     /// </summary>
+        public string[] MacroIDs;
+        public int[] nMacsInFile;
+        public int[] nMacsAllowed;
+        public void Init()
+        {
+            int i = 0;
+            MacroIDs = Utils.LocalMacroPrefix;
+            nMacsInFile = new int[MacroIDs.Length];
+            nMacsAllowed = new int[MacroIDs.Length];
+            for (i = 0; i < MacroIDs.Length - 1; i++)
+                nMacsAllowed[i] = Utils.NumMacros;
+            nMacsAllowed[MacroIDs.Length - 1] = 30; // only 30 macros in HP forum original list
+            // this item has to be "HP" and stay at end of any string list of files
+        }
+        public void SetMacCount(string ID, int n)
+        {
+            int i = 0;
+            foreach(string s in MacroIDs)
+            {
+                if(s == ID)
+                {
+                    nMacsInFile[i] = n;
+                    return;
+                }
+                i++;
+            }
+        }
+        public int GetMacCount(string ID)
+        {
+            int i = 0;
+            foreach (string s in MacroIDs)
+            {
+                if (s == ID)
+                {
+                    return nMacsInFile[i];
+                }
+                i++;
+            }
+            return -1;
+        }
+        public int GetMacCountAvailable(string ID)
+        {
+            int i = 0;
+            int n = 0;
+            foreach (string s in MacroIDs)
+            {
+                if (s == ID)
+                {
+                    return nMacsAllowed[i] - nMacsInFile[i];
+                }
+                i++;
+            }
+            return n;
+        }
+        public void UpdateCount()
+        {
+            int n = GetMacCount(strDes);
+            n += nChecked;
+            SetMacCount(strDes, n);
+            n = GetMacCount(strType);   //removing checked from source file
+            n -= nChecked;
+            SetMacCount(strType, n);
+        }
         public int nChecked;    // this many checked
-        public int nePC;        // number of empty slots for macros
-        public int neAIO;       // AIO or laptop as disassembly is different from PC
-        public int neLJ;        // laserjst
-        public int neDJ;        // deskjet
-        public int neOS;        // any general OS related help not specific to HP
-        public int neHP;        // local copy of the HP macros
         public bool bRun;       // if true then perform move
         public string strType;    // name of the "from" file ie: source
         public string strDes;   // destination
@@ -42,8 +102,15 @@ namespace MacroViewer
     // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
-        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OS", "HP" };
-        private static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)", "DeskJet(DJ)", "OS related", "HP from HTML" };
+        public const int NumMacros = 50;   // only 30 for the HTML file
+        // do not change the order of below items and HP must be last!
+
+        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP" };
+        public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
+                "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "HP from HTML" };
+        public static string[] LocalMacroRefs = {"PC Reference","PC Reference","Laserjet Reference",
+                "Deskjet Reference","OfficeJet Reference", "", "", "", ""};
+
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
@@ -61,11 +128,13 @@ namespace MacroViewer
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
 
 
-        public static int HasSupSig(ref string s)
+        public static int HasSupSig(ref string s, ref int i, ref int j)
         {
             if (s == null) return 0;
             if (s == "") return 0;
-            if (s.Contains(SupSigPrefix) && s.Contains(SupSigSuffix)) return 1;
+            i = s.IndexOf(SupSigPrefix);
+            j = s.IndexOf(SupSigSuffix);
+            if (i > 0 && j > 0 && i < j) return 1;
             return 0;
         }
 
@@ -615,7 +684,7 @@ namespace MacroViewer
                 // keep track of which urls cannot be untracked of de-referenced
                 using (StreamWriter writer = File.AppendText(WhereExe + "\\UrlDebug.txt"))
                 {
-                    writer.WriteLine(sUrl);
+                    writer.WriteLine(sUrl); // we are allowing newlines here
                 }
             }
             return sUrl;        
@@ -659,7 +728,7 @@ namespace MacroViewer
             string strGEnd = (b ? "" : Environment.NewLine) + NoTrailingNL(text);
             using (StreamWriter writer = File.AppendText(sFilePath))
             {
-                writer.WriteLine(strGEnd);
+                writer.Write(strGEnd);
                 writer.Close();
             }
         }

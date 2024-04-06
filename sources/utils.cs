@@ -179,7 +179,6 @@ namespace MacroViewer
             if (dgv.Rows.Count == 0) return;
             RefreshTable();
             string sBig = tbScratch.Text;
-            int i = 0;
             string s1, s2;
             foreach (DataGridViewRow row in dgv.Rows)
             {

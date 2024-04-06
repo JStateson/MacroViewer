@@ -53,6 +53,7 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnClipToUpper = new System.Windows.Forms.Button();
             this.btnBold = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnInvertNL = new System.Windows.Forms.Button();
@@ -121,7 +122,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnClipToUpper = new System.Windows.Forms.Button();
+            this.mnuNet = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -412,6 +413,18 @@
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
             this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes");
             // 
+            // btnClipToUpper
+            // 
+            this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClipToUpper.Location = new System.Drawing.Point(409, 327);
+            this.btnClipToUpper.Name = "btnClipToUpper";
+            this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
+            this.btnClipToUpper.TabIndex = 28;
+            this.btnClipToUpper.Text = "Clipboard to Upper case";
+            this.toolTip1.SetToolTip(this.btnClipToUpper, "This just changes the\r\nclipboard to upper case");
+            this.btnClipToUpper.UseVisualStyleBackColor = true;
+            this.btnClipToUpper.Click += new System.EventHandler(this.btnClipToUpper_Click);
+            // 
             // btnBold
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -570,6 +583,7 @@
             this.mLJload,
             this.mDJload,
             this.mOSload,
+            this.mnuNet,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
             this.mHPload,
@@ -1100,17 +1114,12 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnClipToUpper
+            // mnuNet
             // 
-            this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClipToUpper.Location = new System.Drawing.Point(409, 327);
-            this.btnClipToUpper.Name = "btnClipToUpper";
-            this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
-            this.btnClipToUpper.TabIndex = 28;
-            this.btnClipToUpper.Text = "Clipboard to Upper case";
-            this.toolTip1.SetToolTip(this.btnClipToUpper, "This just changes the\r\nclipboard to upper case");
-            this.btnClipToUpper.UseVisualStyleBackColor = true;
-            this.btnClipToUpper.Click += new System.EventHandler(this.btnClipToUpper_Click);
+            this.mnuNet.Name = "mnuNet";
+            this.mnuNet.Size = new System.Drawing.Size(194, 22);
+            this.mnuNet.Text = "Load NET macros";
+            this.mnuNet.Click += new System.EventHandler(this.mnuNet_Click);
             // 
             // main
             // 
@@ -1249,6 +1258,7 @@
         private System.Windows.Forms.Button btnInvertNL;
         private System.Windows.Forms.Button btnBold;
         private System.Windows.Forms.Button btnClipToUpper;
+        private System.Windows.Forms.ToolStripMenuItem mnuNet;
     }
 }
 

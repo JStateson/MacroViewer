@@ -73,6 +73,10 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
+            this.cbListFN = new System.Windows.Forms.ComboBox();
+            this.lbMarker = new System.Windows.Forms.Label();
+            this.cbRefOnly = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
@@ -237,6 +241,10 @@
             // 
             // gbTB
             // 
+            this.gbTB.Controls.Add(this.label9);
+            this.gbTB.Controls.Add(this.cbRefOnly);
+            this.gbTB.Controls.Add(this.lbMarker);
+            this.gbTB.Controls.Add(this.cbListFN);
             this.gbTB.Controls.Add(this.groupBox3);
             this.gbTB.Controls.Add(this.btnRemoveAll);
             this.gbTB.Controls.Add(this.btnClearEB);
@@ -255,9 +263,9 @@
             this.gbTB.Controls.Add(this.btnAddSupSig);
             this.gbTB.Controls.Add(this.tbSupSig);
             this.gbTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbTB.Location = new System.Drawing.Point(317, 212);
+            this.gbTB.Location = new System.Drawing.Point(317, 191);
             this.gbTB.Name = "gbTB";
-            this.gbTB.Size = new System.Drawing.Size(770, 454);
+            this.gbTB.Size = new System.Drawing.Size(826, 526);
             this.gbTB.TabIndex = 5;
             this.gbTB.TabStop = false;
             this.gbTB.Text = "Add at end of every macro";
@@ -289,11 +297,11 @@
             // 
             this.btnRemoveAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Red;
-            this.btnRemoveAll.Location = new System.Drawing.Point(12, 85);
+            this.btnRemoveAll.Location = new System.Drawing.Point(12, 72);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(134, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(118, 23);
             this.btnRemoveAll.TabIndex = 23;
-            this.btnRemoveAll.Text = "Remove from all";
+            this.btnRemoveAll.Text = "Remove from:";
             this.toolTip1.SetToolTip(this.btnRemoveAll, "This will replace any existing\r\nsupplemental signature");
             this.btnRemoveAll.UseVisualStyleBackColor = true;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
@@ -302,7 +310,7 @@
             // 
             this.btnClearEB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearEB.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClearEB.Location = new System.Drawing.Point(181, 375);
+            this.btnClearEB.Location = new System.Drawing.Point(233, 441);
             this.btnClearEB.Name = "btnClearEB";
             this.btnClearEB.Size = new System.Drawing.Size(120, 33);
             this.btnClearEB.TabIndex = 22;
@@ -313,7 +321,7 @@
             // btnCopy2Clip
             // 
             this.btnCopy2Clip.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopy2Clip.Location = new System.Drawing.Point(181, 331);
+            this.btnCopy2Clip.Location = new System.Drawing.Point(233, 397);
             this.btnCopy2Clip.Name = "btnCopy2Clip";
             this.btnCopy2Clip.Size = new System.Drawing.Size(120, 23);
             this.btnCopy2Clip.TabIndex = 21;
@@ -324,7 +332,7 @@
             // 
             // btnAdd2New
             // 
-            this.btnAdd2New.Location = new System.Drawing.Point(181, 280);
+            this.btnAdd2New.Location = new System.Drawing.Point(233, 346);
             this.btnAdd2New.Name = "btnAdd2New";
             this.btnAdd2New.Size = new System.Drawing.Size(120, 23);
             this.btnAdd2New.TabIndex = 20;
@@ -335,7 +343,7 @@
             // 
             // btnAdd1New
             // 
-            this.btnAdd1New.Location = new System.Drawing.Point(181, 230);
+            this.btnAdd1New.Location = new System.Drawing.Point(233, 298);
             this.btnAdd1New.Name = "btnAdd1New";
             this.btnAdd1New.Size = new System.Drawing.Size(120, 23);
             this.btnAdd1New.TabIndex = 19;
@@ -347,7 +355,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(244, 30);
+            this.label3.Location = new System.Drawing.Point(296, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 10;
@@ -378,7 +386,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(178, 199);
+            this.label4.Location = new System.Drawing.Point(230, 265);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 13);
             this.label4.TabIndex = 7;
@@ -387,14 +395,14 @@
             // clbImages
             // 
             this.clbImages.FormattingEnabled = true;
-            this.clbImages.Location = new System.Drawing.Point(181, 85);
+            this.clbImages.Location = new System.Drawing.Point(233, 153);
             this.clbImages.Name = "clbImages";
             this.clbImages.Size = new System.Drawing.Size(120, 109);
             this.clbImages.TabIndex = 6;
             // 
             // tbEdit
             // 
-            this.tbEdit.Location = new System.Drawing.Point(326, 87);
+            this.tbEdit.Location = new System.Drawing.Point(378, 155);
             this.tbEdit.Multiline = true;
             this.tbEdit.Name = "tbEdit";
             this.tbEdit.Size = new System.Drawing.Size(414, 342);
@@ -426,7 +434,7 @@
             // btnColor
             // 
             this.btnColor.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnColor.Location = new System.Drawing.Point(16, 135);
+            this.btnColor.Location = new System.Drawing.Point(12, 128);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(114, 23);
             this.btnColor.TabIndex = 2;
@@ -439,11 +447,11 @@
             this.btnAddSupSig.Enabled = false;
             this.btnAddSupSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddSupSig.ForeColor = System.Drawing.Color.Red;
-            this.btnAddSupSig.Location = new System.Drawing.Point(16, 30);
+            this.btnAddSupSig.Location = new System.Drawing.Point(12, 30);
             this.btnAddSupSig.Name = "btnAddSupSig";
-            this.btnAddSupSig.Size = new System.Drawing.Size(134, 23);
+            this.btnAddSupSig.Size = new System.Drawing.Size(114, 23);
             this.btnAddSupSig.TabIndex = 1;
-            this.btnAddSupSig.Text = "Apply to all macros";
+            this.btnAddSupSig.Text = "Apply to macros:";
             this.toolTip1.SetToolTip(this.btnAddSupSig, "This will replace any existing\r\nsupplemental signature");
             this.btnAddSupSig.UseVisualStyleBackColor = true;
             this.btnAddSupSig.Click += new System.EventHandler(this.btnAddSupSig_Click);
@@ -451,7 +459,7 @@
             // tbSupSig
             // 
             this.tbSupSig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSupSig.Location = new System.Drawing.Point(326, 32);
+            this.tbSupSig.Location = new System.Drawing.Point(378, 32);
             this.tbSupSig.Name = "tbSupSig";
             this.tbSupSig.Size = new System.Drawing.Size(424, 20);
             this.tbSupSig.TabIndex = 0;
@@ -493,7 +501,7 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(577, 28);
+            this.groupBox5.Location = new System.Drawing.Point(633, 28);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(510, 129);
             this.groupBox5.TabIndex = 6;
@@ -544,11 +552,62 @@
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
             // 
+            // cbListFN
+            // 
+            this.cbListFN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbListFN.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbListFN.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cbListFN.FormattingEnabled = true;
+            this.cbListFN.Location = new System.Drawing.Point(154, 52);
+            this.cbListFN.Name = "cbListFN";
+            this.cbListFN.Size = new System.Drawing.Size(63, 22);
+            this.cbListFN.TabIndex = 25;
+            this.cbListFN.SelectedIndexChanged += new System.EventHandler(this.cbListFN_SelectedIndexChanged);
+            // 
+            // lbMarker
+            // 
+            this.lbMarker.AutoSize = true;
+            this.lbMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMarker.ForeColor = System.Drawing.Color.Red;
+            this.lbMarker.Location = new System.Drawing.Point(375, 72);
+            this.lbMarker.Name = "lbMarker";
+            this.lbMarker.Size = new System.Drawing.Size(134, 16);
+            this.lbMarker.TabIndex = 26;
+            this.lbMarker.Text = "Markers [pre] [suf]";
+            this.toolTip1.SetToolTip(this.lbMarker, "These are used to mark the\r\nlocation of the supplemental\r\nsignature. If not used " +
+        "then those\r\nsignatures must be manually\r\nremoved if unwanted.");
+            // 
+            // cbRefOnly
+            // 
+            this.cbRefOnly.AutoSize = true;
+            this.cbRefOnly.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRefOnly.ForeColor = System.Drawing.Color.Red;
+            this.cbRefOnly.Location = new System.Drawing.Point(378, 105);
+            this.cbRefOnly.Name = "cbRefOnly";
+            this.cbRefOnly.Size = new System.Drawing.Size(156, 20);
+            this.cbRefOnly.TabIndex = 27;
+            this.cbRefOnly.Text = "Do not use  marker";
+            this.toolTip1.SetToolTip(this.cbRefOnly, "If you are just adding a\r\nreference at the bottom\r\nof each macro then no\r\nneed to" +
+        " use markers");
+            this.cbRefOnly.UseVisualStyleBackColor = true;
+            this.cbRefOnly.CheckStateChanged += new System.EventHandler(this.cbRefOnly_CheckStateChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Info;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(589, 72);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(203, 65);
+            this.label9.TabIndex = 28;
+            this.label9.Text = resources.GetString("label9.Text");
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 678);
+            this.ClientSize = new System.Drawing.Size(1191, 729);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.gbTB);
@@ -622,5 +681,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbSpecialWord;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbListFN;
+        private System.Windows.Forms.Label lbMarker;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox cbRefOnly;
     }
 }

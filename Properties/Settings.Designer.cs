@@ -85,10 +85,10 @@ namespace MacroViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ChangeSig {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ChangeSig {
             get {
-                return ((bool)(this["ChangeSig"]));
+                return ((string)(this["ChangeSig"]));
             }
             set {
                 this["ChangeSig"] = value;
@@ -152,6 +152,18 @@ namespace MacroViewer.Properties {
             }
             set {
                 this["SpecialWord"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseMarkers {
+            get {
+                return ((bool)(this["UseMarkers"]));
+            }
+            set {
+                this["UseMarkers"] = value;
             }
         }
     }

@@ -58,7 +58,7 @@ namespace MacroViewer
 
         private void FillTo(ref GroupBox gb)
         {
-            int n = Utils.LocalMacroPrefix.Length;
+            int n = Utils.LocalMacroPrefix.Length;  //number of files
             RadioButton rb;
             for (int i = 0; i < n; i++)
             {
@@ -75,32 +75,13 @@ namespace MacroViewer
 
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            int n = -1;
             RadioButton rb = (RadioButton)sender;
             if (rb.Checked)
             {
                 cms.strDes = rb.Name;
-                switch(rb.Name)
-                {
-                    case "PC":
-                        tbNFree.Text = cms.nePC.ToString();
-                        break;
-                    case "AIO":
-                        tbNFree.Text = cms.neAIO.ToString();
-                        break;
-                    case "LJ":
-                        tbNFree.Text = cms.neLJ.ToString();
-                        break;
-                    case "DJ":
-                        tbNFree.Text = cms.neDJ.ToString();
-                        break;
-                    case "OS":
-                        tbNFree.Text = cms.neOS.ToString();
-                        break;
-                    case "HP":
-                        tbNFree.Text = cms.neHP.ToString();
-                        break;
-                }
-                int n = Convert.ToInt32(tbNFree.Text);
+                n = cms.GetMacCountAvailable(cms.strDes);
+                tbNFree.Text = n.ToString();
                 btnMove.Enabled = false;
                 if (n > cms.nChecked)
                 {
@@ -135,6 +116,7 @@ namespace MacroViewer
         private void btnMove_Click(object sender, EventArgs e)
         {
             cms.bRun = true;
+            cms.UpdateCount();
             this.Close();
         }
 

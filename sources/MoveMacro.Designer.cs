@@ -138,7 +138,7 @@
             // 
             this.gbTo.Location = new System.Drawing.Point(321, 56);
             this.gbTo.Name = "gbTo";
-            this.gbTo.Size = new System.Drawing.Size(242, 270);
+            this.gbTo.Size = new System.Drawing.Size(242, 300);
             this.gbTo.TabIndex = 1;
             this.gbTo.TabStop = false;
             this.gbTo.Text = "To";
@@ -147,7 +147,7 @@
             // 
             this.gbFrom.Location = new System.Drawing.Point(28, 56);
             this.gbFrom.Name = "gbFrom";
-            this.gbFrom.Size = new System.Drawing.Size(242, 270);
+            this.gbFrom.Size = new System.Drawing.Size(242, 300);
             this.gbFrom.TabIndex = 0;
             this.gbFrom.TabStop = false;
             this.gbFrom.Text = "From";

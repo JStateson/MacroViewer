@@ -1125,11 +1125,11 @@ namespace MacroViewer
             }
             if (bNothingToSave()) return true;
             MustFinishEdit(false);
-            DialogResult Res1 = MessageBox.Show(sMsg, "Click OK to save this macro", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            if (Res1 == DialogResult.OK)
-            {
-                SaveCurrentMacros();
-                return true;
+            DialogResult Res1 = MessageBox.Show(sMsg, "Either save or cancel edits", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.OK) // problem with clearing dgv when saving current macro
+            {   // error was "operation cannot be performed in this event handler
+                //SaveCurrentMacros();
+                //return true;
             }
             return false;
         }

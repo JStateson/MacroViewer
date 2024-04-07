@@ -149,8 +149,8 @@ namespace MacroViewer
         {
             string sOut = "";
             if (clbImages.GetItemCheckState(0) == CheckState.Checked)
-                sOut = Utils.ApplyColors1(ref tbSupSig) + "<br>";
-            if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut += Utils.YesButton + "  ";
+                sOut = "<br><br>" + Utils.ApplyColors1(ref tbSupSig);
+            if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut +="<br>" + Utils.YesButton + "  ";
             if (clbImages.GetItemCheckState(2) == CheckState.Checked) sOut += Utils.SolButton + "<br>";
             tbEdit.Text = sOut;
         }
@@ -231,8 +231,7 @@ namespace MacroViewer
             if (!cbRefOnly.Checked) return;
             if (n > 0)
             {
-                tbEdit.Text = Utils.LocalMacroRefs[n-1];
-
+                tbEdit.Text = "<br><br>" + Utils.LocalMacroRefs[n-1];
             }
             else
             {

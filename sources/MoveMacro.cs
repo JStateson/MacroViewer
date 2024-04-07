@@ -35,7 +35,8 @@ namespace MacroViewer
             {
                 string s = Utils.LocalMacroPrefix[i];
                 rb = new CheckBox();
-                rb.Text = s+ "macro";
+                rb.Text = s + "macro";
+                rb.Name = s + i.ToString();
                 rb.Location = new System.Drawing.Point(x, y + (i) * 30);
                 rb.Enabled = (cms.strType == s);
                 rb.CheckedChanged += CheckBox_CheckedChanged;
@@ -64,7 +65,8 @@ namespace MacroViewer
             {
                 string s = Utils.LocalMacroPrefix[i];
                 rb = new RadioButton();
-                rb.Text = s + "macro";
+                rb.AutoSize = true;
+                rb.Text = s + "macro - " + Utils.LocalMacroFullname[i];
                 rb.Name = s;
                 rb.Location = new System.Drawing.Point(x, y + (i) * 30);
                 rb.Enabled = (cms.strType != s);

@@ -108,8 +108,8 @@ namespace MacroViewer
         public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP" };
         public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
                 "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "HP from HTML" };
-        public static string[] LocalMacroRefs = {"PC Reference","PC Reference","Laserjet Reference",
-                "Deskjet Reference","OfficeJet Reference", "", "", "", ""};
+        public static string[] LocalMacroRefs = {"PC Reference","PC Reference","LaserJet Reference",
+                "DeskJet Reference","OfficeJet Reference", "", "", "", ""};
 
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";

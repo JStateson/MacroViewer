@@ -73,6 +73,7 @@
             this.mLJload = new System.Windows.Forms.ToolStripMenuItem();
             this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
             this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mHPload = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +123,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mnuNet = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadHardwareMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -584,6 +585,7 @@
             this.mDJload,
             this.mOSload,
             this.mnuNet,
+            this.loadHardwareMacsToolStripMenuItem,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
             this.mHPload,
@@ -634,6 +636,13 @@
             this.mOSload.Size = new System.Drawing.Size(194, 22);
             this.mOSload.Text = "Load OS related";
             this.mOSload.Click += new System.EventHandler(this.mOSload_Click);
+            // 
+            // mnuNet
+            // 
+            this.mnuNet.Name = "mnuNet";
+            this.mnuNet.Size = new System.Drawing.Size(194, 22);
+            this.mnuNet.Text = "Load NET macros";
+            this.mnuNet.Click += new System.EventHandler(this.mnuNet_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1114,12 +1123,11 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // mnuNet
+            // loadHardwareMacsToolStripMenuItem
             // 
-            this.mnuNet.Name = "mnuNet";
-            this.mnuNet.Size = new System.Drawing.Size(194, 22);
-            this.mnuNet.Text = "Load NET macros";
-            this.mnuNet.Click += new System.EventHandler(this.mnuNet_Click);
+            this.loadHardwareMacsToolStripMenuItem.Name = "loadHardwareMacsToolStripMenuItem";
+            this.loadHardwareMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadHardwareMacsToolStripMenuItem.Text = "Load Hardware macs";
             // 
             // main
             // 
@@ -1259,6 +1267,7 @@
         private System.Windows.Forms.Button btnBold;
         private System.Windows.Forms.Button btnClipToUpper;
         private System.Windows.Forms.ToolStripMenuItem mnuNet;
+        private System.Windows.Forms.ToolStripMenuItem loadHardwareMacsToolStripMenuItem;
     }
 }
 

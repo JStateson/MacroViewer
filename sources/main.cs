@@ -1052,11 +1052,25 @@ namespace MacroViewer
             }
         }
 
+        private string GetReference()
+        {
+            string sRtn = "";
+            int i = 0;
+            foreach(string s in Utils.LocalMacroPrefix)
+            {
+                if(s == strType)
+                {
+                    return string.Concat(Enumerable.Repeat(Environment.NewLine, 8)) + Utils.LocalMacroRefs[i];
+                }
+                i++;
+            }
+            return sRtn;
+        }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             SwitchToMarkup(true);
-            AddNew(Utils.UnNamedMacro, "");
+            AddNew(Utils.UnNamedMacro, GetReference());
         }
 
         private void MustFinishEdit(bool bFinished)
@@ -1417,10 +1431,10 @@ namespace MacroViewer
                                 if (m > 0)   // there is a supplemental signature
                                 {
                                     tSig = cb.sBody.Substring(j, k - j);
-                                    cb.sBody = cb.sBody.Replace(tSig, "<br>" + nSig + "<br>");
+                                    cb.sBody = cb.sBody.Replace(tSig, nSig);
                                     Body[i] = cb.sBody + tSig;
                                 }
-                                else cb.sBody += "<br>" + nSig + "<br>";
+                                else cb.sBody += nSig;
                             }
                             Body[i] = cb.sBody;
                         }

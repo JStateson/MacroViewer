@@ -51,7 +51,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(25, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(897, 393);
+            this.groupBox1.Size = new System.Drawing.Size(935, 423);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Move macros to another file";
@@ -64,7 +64,7 @@
             this.groupBox2.Controls.Add(this.btnExit);
             this.groupBox2.Controls.Add(this.tbNFree);
             this.groupBox2.Controls.Add(this.tbNumMoving);
-            this.groupBox2.Location = new System.Drawing.Point(606, 56);
+            this.groupBox2.Location = new System.Drawing.Point(609, 56);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(261, 264);
             this.groupBox2.TabIndex = 2;
@@ -136,9 +136,9 @@
             // 
             // gbTo
             // 
-            this.gbTo.Location = new System.Drawing.Point(321, 56);
+            this.gbTo.Location = new System.Drawing.Point(287, 56);
             this.gbTo.Name = "gbTo";
-            this.gbTo.Size = new System.Drawing.Size(242, 300);
+            this.gbTo.Size = new System.Drawing.Size(254, 325);
             this.gbTo.TabIndex = 1;
             this.gbTo.TabStop = false;
             this.gbTo.Text = "To";
@@ -147,7 +147,7 @@
             // 
             this.gbFrom.Location = new System.Drawing.Point(28, 56);
             this.gbFrom.Name = "gbFrom";
-            this.gbFrom.Size = new System.Drawing.Size(242, 300);
+            this.gbFrom.Size = new System.Drawing.Size(193, 325);
             this.gbFrom.TabIndex = 0;
             this.gbFrom.TabStop = false;
             this.gbFrom.Text = "From";
@@ -156,7 +156,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 450);
+            this.ClientSize = new System.Drawing.Size(1073, 493);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

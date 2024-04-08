@@ -912,11 +912,6 @@ namespace MacroViewer
             return true;
         }
 
-        private void btnAddM_Click(object sender, EventArgs e)
-        {
-            string strNewName = tbMacName.Text.Trim();
-            AddNew(tbMacName.Text.Trim(), tbBody.Text.Trim());
-        }
 
         private void btnAddImg_Click(object sender, EventArgs e)
         {
@@ -1060,7 +1055,9 @@ namespace MacroViewer
             {
                 if(s == strType)
                 {
-                    return string.Concat(Enumerable.Repeat(Environment.NewLine, 8)) + Utils.LocalMacroRefs[i];
+                    string t = Utils.LocalMacroRefs[i];
+                    if (t == "") break;
+                    return string.Concat(Enumerable.Repeat(Environment.NewLine, 8)) + s;
                 }
                 i++;
             }
@@ -1127,8 +1124,8 @@ namespace MacroViewer
             MustFinishEdit(false);
             DialogResult Res1 = MessageBox.Show(sMsg, "Either save or cancel edits", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             if (Res1 == DialogResult.OK) // problem with clearing dgv when saving current macro
-            {   // error was "operation cannot be performed in this event handler
-                //SaveCurrentMacros();
+            {   // error was "operation cannot be performed in this event handler"
+                //SaveCurrentMacros();  // cannot do this as it was called from a row change
                 //return true;
             }
             return false;

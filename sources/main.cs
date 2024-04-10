@@ -1057,7 +1057,7 @@ namespace MacroViewer
                 {
                     string t = Utils.LocalMacroRefs[i];
                     if (t == "") break;
-                    return string.Concat(Enumerable.Repeat(Environment.NewLine, 8)) + s;
+                    return string.Concat(Enumerable.Repeat(Environment.NewLine, 8)) + t;
                 }
                 i++;
             }

@@ -447,6 +447,11 @@ namespace MacroViewer
         {
             SelectFileItem("NET");
         }
+
+        private void mnRecDis_Click(object sender, EventArgs e)
+        {
+            Utils.LocalBrowser("https://h30434.www3.hp.com/t5/custom/page/page-id/RecentDiscussions");
+        }
         private void HaveSelected(bool bVal)
         {
             btnSaveM.Enabled = bVal;
@@ -1760,5 +1765,7 @@ namespace MacroViewer
             string s = Clipboard.GetText().ToUpper();
             Clipboard.SetText(s);
         }
+
+
     }
 }

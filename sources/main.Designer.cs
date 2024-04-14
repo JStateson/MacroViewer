@@ -74,6 +74,7 @@
             this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
             this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNet = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadHardwareMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mHPload = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +124,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.loadHardwareMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -568,7 +569,8 @@
             this.aboutToolStripMenuItem,
             this.testSignatureToolStripMenuItem,
             this.mShowErr,
-            this.mShowDiff});
+            this.mShowDiff,
+            this.mnRecDis});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1516, 24);
@@ -643,6 +645,12 @@
             this.mnuNet.Size = new System.Drawing.Size(194, 22);
             this.mnuNet.Text = "Load NET macros";
             this.mnuNet.Click += new System.EventHandler(this.mnuNet_Click);
+            // 
+            // loadHardwareMacsToolStripMenuItem
+            // 
+            this.loadHardwareMacsToolStripMenuItem.Name = "loadHardwareMacsToolStripMenuItem";
+            this.loadHardwareMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadHardwareMacsToolStripMenuItem.Text = "Load Hardware macs";
             // 
             // toolStripSeparator1
             // 
@@ -1123,11 +1131,12 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // loadHardwareMacsToolStripMenuItem
+            // mnRecDis
             // 
-            this.loadHardwareMacsToolStripMenuItem.Name = "loadHardwareMacsToolStripMenuItem";
-            this.loadHardwareMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadHardwareMacsToolStripMenuItem.Text = "Load Hardware macs";
+            this.mnRecDis.Name = "mnRecDis";
+            this.mnRecDis.Size = new System.Drawing.Size(119, 20);
+            this.mnRecDis.Text = "Recent Discussions";
+            this.mnRecDis.Click += new System.EventHandler(this.mnRecDis_Click);
             // 
             // main
             // 
@@ -1268,6 +1277,7 @@
         private System.Windows.Forms.Button btnClipToUpper;
         private System.Windows.Forms.ToolStripMenuItem mnuNet;
         private System.Windows.Forms.ToolStripMenuItem loadHardwareMacsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnRecDis;
     }
 }
 

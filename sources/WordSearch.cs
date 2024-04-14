@@ -57,6 +57,7 @@ namespace MacroViewer
         private void dgvSearched_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             SelectedRow = e.RowIndex;
+            if (SelectedRow < 0) return;
             int n = cSorted[SelectedRow].WhereFound;
             nUseLastViewed = n;
             string[] sEach = cAll[n].fKeys.Trim().Split(new char[] {' '});

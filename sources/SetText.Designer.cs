@@ -39,6 +39,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbSuffix = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnSqueeze = new System.Windows.Forms.Button();
             this.lbBoxed = new System.Windows.Forms.Label();
             this.btnBoxIT = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
@@ -56,8 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnSqueeze = new System.Windows.Forms.Button();
-            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbCleanUrl = new System.Windows.Forms.CheckBox();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,11 +86,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbCleanUrl);
             this.groupBox1.Controls.Add(this.tbRawUrl);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 98);
+            this.groupBox1.Size = new System.Drawing.Size(415, 128);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enter the URL here";
@@ -148,12 +149,25 @@
             this.groupBox4.Controls.Add(this.btnApplyText);
             this.groupBox4.Controls.Add(this.tbResult);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(12, 279);
+            this.groupBox4.Location = new System.Drawing.Point(18, 316);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(654, 233);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
+            // 
+            // btnSqueeze
+            // 
+            this.btnSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSqueeze.Location = new System.Drawing.Point(186, 78);
+            this.btnSqueeze.Name = "btnSqueeze";
+            this.btnSqueeze.Size = new System.Drawing.Size(136, 36);
+            this.btnSqueeze.TabIndex = 10;
+            this.btnSqueeze.Text = "Squeeze Into Box";
+            this.toolTip1.SetToolTip(this.btnSqueeze, "There are no empty lines\r\nabove and under text");
+            this.btnSqueeze.UseVisualStyleBackColor = true;
+            this.btnSqueeze.Click += new System.EventHandler(this.btnSqueeze_Click);
             // 
             // lbBoxed
             // 
@@ -319,31 +333,31 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(695, 317);
+            this.label3.Location = new System.Drawing.Point(701, 354);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(361, 176);
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
             // 
-            // btnSqueeze
+            // cbCleanUrl
             // 
-            this.btnSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSqueeze.Location = new System.Drawing.Point(186, 78);
-            this.btnSqueeze.Name = "btnSqueeze";
-            this.btnSqueeze.Size = new System.Drawing.Size(136, 36);
-            this.btnSqueeze.TabIndex = 10;
-            this.btnSqueeze.Text = "Squeeze Into Box";
-            this.toolTip1.SetToolTip(this.btnSqueeze, "There are no empty lines\r\nabove and under text");
-            this.btnSqueeze.UseVisualStyleBackColor = true;
-            this.btnSqueeze.Click += new System.EventHandler(this.btnSqueeze_Click);
+            this.cbCleanUrl.AutoSize = true;
+            this.cbCleanUrl.Checked = true;
+            this.cbCleanUrl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCleanUrl.Location = new System.Drawing.Point(19, 88);
+            this.cbCleanUrl.Name = "cbCleanUrl";
+            this.cbCleanUrl.Size = new System.Drawing.Size(91, 20);
+            this.cbCleanUrl.TabIndex = 1;
+            this.cbCleanUrl.Text = "Clean URL";
+            this.toolTip1.SetToolTip(this.cbCleanUrl, "strip unwanted referals");
+            this.cbCleanUrl.UseVisualStyleBackColor = true;
             // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1087, 536);
+            this.ClientSize = new System.Drawing.Size(1087, 557);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
@@ -406,6 +420,6 @@
         private System.Windows.Forms.CheckBox cbPreFill;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSqueeze;
-        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.CheckBox cbCleanUrl;
     }
 }

@@ -135,7 +135,7 @@ This dialog box allows you to form URLs that optionally have a phrase that can b
 If you used the windows snip and paste to create an image than a local file was created.  This dialog box allows you to examine all local files and delete the oens that are no longer used. Local images files cannot be seen on the HP site.  Once uploaded to your HP photo album and replaced by the album url they need to be deletled.
 
 	Menu Item - Images and Signatures
-This dialog box allows you to create, test, and save variouis signatures.  You can also create a collection of image address or notes such as HTML and BBCode syntax for customizing your macros.
+This dialog box allows you to create, test, and save various signatures.  You can also create a collection of image address or notes such as HTML and BBCode syntax for customizing your macros.
 
 	Menu Item - Search
 This dialog box allows you to search for word, phrases, or parts of words
@@ -335,6 +335,25 @@ You can search for one or more words in all the macros.  The search returns
 
 Selecting one of the macros in the view will show which of the keywords were found.
 Double clicking any row will bring up the body of the macro.</value>
+  </data>
+  <data name="rWEB.Text" xml:space="preserve">
+    <value>	Web Search Menu
+
+These search menu items can use the clipboard.  You may highlight and copy a key word or phrase and then select the search item.
+
+
+Recent HP Discussion:  This just bring up the HP community forum.  There is no search so clipboard is ignored
+
+KB Knowledge base:   The HP knowledge base is searched for the keyword or phrase in the clipboard
+
+HP Community:  The entire community is searched for the word or phrase
+
+Drivers google:  Google's search engine asds "support.hp.com us-en drivers model series " before the search phrase before searching
+
+Drivers collection:  The us.driverscollection site is searched.  This site is good for older drivers
+
+Device Hunt:   The site devicehunt.com is searched.  The clipboard must contain a copy of the type, vendor and device id from the device manager 
+                          This expeects the device managers "device instance path' to be in the clipboard.  An example of which could be PCI\VEN_1B21&amp;DEV_2142&amp;SUBSYS_87561043&amp;REV_00\4&amp;299AAA38&amp;0&amp;00E4</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

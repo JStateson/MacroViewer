@@ -7,7 +7,7 @@ namespace MacroViewer
 {
     public partial class help : Form
     {
-        private static string[] strForms = { "FILE", "SIG", "EDIT", "MANAGE", "UTILS", "EDITLINK", "XMLERRORS", "SEARCH" };
+        private static string[] strForms = { "FILE", "SIG", "EDIT", "MANAGE", "UTILS", "EDITLINK", "XMLERRORS", "SEARCH", "" };
         private void MakeVisible(string sHelp)
         {
             rFILE.Visible = (sHelp == "FILE");
@@ -18,6 +18,7 @@ namespace MacroViewer
             rEDITLINK.Visible = (sHelp == "EDITLINK");
             rMANAGE.Visible = (sHelp == "MANAGE");
             rSEARCH.Visible = (sHelp == "SEARCH");
+            rWEB.Visible = (sHelp == "WEB");
         }
 
         private int nLongest = 0;
@@ -69,6 +70,9 @@ namespace MacroViewer
                     break;
                 case "SEARCH":
                     SetPosition(rSEARCH);
+                    break;
+                case "WEB":
+                    SetPosition(rWEB);
                     break;
             }
         }

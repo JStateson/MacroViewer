@@ -37,6 +37,7 @@
             this.rMANAGE = new System.Windows.Forms.RichTextBox();
             this.rXMLERR = new System.Windows.Forms.RichTextBox();
             this.rSEARCH = new System.Windows.Forms.RichTextBox();
+            this.rWEB = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // rFILE
@@ -96,7 +97,7 @@
             // 
             // rXMLERR
             // 
-            this.rXMLERR.Location = new System.Drawing.Point(69, 469);
+            this.rXMLERR.Location = new System.Drawing.Point(29, 482);
             this.rXMLERR.Name = "rXMLERR";
             this.rXMLERR.ReadOnly = true;
             this.rXMLERR.Size = new System.Drawing.Size(237, 131);
@@ -105,18 +106,28 @@
             // 
             // rSEARCH
             // 
-            this.rSEARCH.Location = new System.Drawing.Point(390, 459);
+            this.rSEARCH.Location = new System.Drawing.Point(291, 495);
             this.rSEARCH.Name = "rSEARCH";
             this.rSEARCH.ReadOnly = true;
             this.rSEARCH.Size = new System.Drawing.Size(197, 131);
             this.rSEARCH.TabIndex = 8;
             this.rSEARCH.Text = resources.GetString("rSEARCH.Text");
             // 
+            // rWEB
+            // 
+            this.rWEB.Location = new System.Drawing.Point(533, 482);
+            this.rWEB.Name = "rWEB";
+            this.rWEB.ReadOnly = true;
+            this.rWEB.Size = new System.Drawing.Size(197, 131);
+            this.rWEB.TabIndex = 9;
+            this.rWEB.Text = resources.GetString("rWEB.Text");
+            // 
             // help
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 656);
+            this.Controls.Add(this.rWEB);
             this.Controls.Add(this.rSEARCH);
             this.Controls.Add(this.rXMLERR);
             this.Controls.Add(this.rMANAGE);
@@ -144,5 +155,6 @@
         private System.Windows.Forms.RichTextBox rMANAGE;
         private System.Windows.Forms.RichTextBox rXMLERR;
         private System.Windows.Forms.RichTextBox rSEARCH;
+        private System.Windows.Forms.RichTextBox rWEB;
     }
 }

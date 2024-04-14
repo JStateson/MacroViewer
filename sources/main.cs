@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using System.Windows.Media.Animation;
+using System.Dynamic;
 
 
 namespace MacroViewer
@@ -446,6 +447,125 @@ namespace MacroViewer
         private void mnuNet_Click(object sender, EventArgs e)
         {
             SelectFileItem("NET");
+        }
+
+
+        //h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=dateRangeType&q=search&rangeTime=0&collapse_discussion=true
+        private void mnuKnow_Click(object sender, EventArgs e)
+        {
+            string sObj = Clipboard.GetText().Trim();
+            if(sObj == "")// this is unlikely but not impossible
+                Utils.LocalBrowser("https://h30434.www3.hp.com/t5/tkb/communitypage");
+            else
+            {
+                string sKB = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&filter=includeTkbs,location&include_tkbs=true&location=tkb-board:desktop-knowledge-base&q=";
+                sKB += sObj;
+                Utils.LocalBrowser(sKB);
+            }
+        }
+
+
+        private string ExtractSearchID(string str)
+        {
+            int n = str.Length;
+            if (n > 20) return "";  // was not a keyword probably a bunch of junk or url
+            string  str0 = "";
+            char res;
+            str = str.Trim();
+
+            //remove any parens anywhere
+            str0 = str.Replace("(", "").Replace(")", "");
+            while (str0 != str)
+            {
+                str = str0;
+                str0 = str.Replace("(", "").Replace(")", "");
+            }
+
+            //remove trailing periods or commas
+            n = str.Length - 1;
+            res = str[n];
+            if (res == '.' || res == ',') str0 = str.Substring(0, n);
+
+            while (str0 != str)
+            {
+                str = str0;
+                n = str.Length - 1;
+                res = str[n];
+                if (res == '.' || res == ',') str0 = str.Substring(0, n);
+            }
+            str = str.Replace("HP", "");
+            str = str.Replace("hp", "");
+            return str;
+        }
+
+        private string GetSearchKeyword(string s)
+        {
+            string sObj = ExtractSearchID(Clipboard.GetText().Trim());
+            if (s == "" || sObj == "") return sObj;
+            return s + " " + sObj;
+        }
+
+        private void mnuDrvGoog_Click(object sender, EventArgs e)
+        {
+            string sObj = GetSearchKeyword("support.hp.com us-en drivers model series");
+            if (sObj == "") return;
+            sObj = sObj.Replace(" ", "+");
+            Utils.LocalBrowser("https://google.com/search?q=" + sObj);
+        }
+
+        private void mnuDevCol_Click(object sender, EventArgs e)
+        {
+            string sObj = GetSearchKeyword("HP");
+            if (sObj == "") return;
+            Utils.LocalBrowser("https://us.driverscollection.com/Search/" + sObj);
+        }
+
+        //https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=ipmmb-fm
+        private void mnuSearchComm_Click(object sender, EventArgs e)
+        {
+            string s="", sObj = Clipboard.GetText().Trim();
+            if (sObj == "")// this is unlikely but not impossible
+                Utils.LocalBrowser("https://h30434.www3.hp.com");
+            else
+            {
+                s = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
+                s += sObj;
+            }
+            Utils.LocalBrowser(s);
+        }
+
+        private string sExtract(string s, string sPat)
+        {
+            int n = s.IndexOf(sPat);
+            int m = sPat.Length;
+            if (n < 0) return "";
+            n += m;
+            int i = s.IndexOf("&", n);
+            if (i < 0) i = s.IndexOf("\\",n);
+            if (i < 0) return "";
+            if ((i - n) != 4) return "";
+            return s.Substring(n, 4);
+        }
+
+        // "USB\\VID_2EF4&PID_5842&MI_00\\8&1AD5FA5&0&0000";
+        // "PCI\VEN_1B21&DEV_2142&SUBSYS_87561043&REV_00\4&299AAA38&0&00E4"
+
+        // devicehunt.com/search/type/usb/vendor/2EF4/device/5842
+        private void mnuHuntDev_Click(object sender, EventArgs e)
+        {
+            string s = Clipboard.GetText().Trim();
+            string sType = "";
+            if (s.Contains("USB")) sType = "/usb";
+            if (s.Contains("PCI")) sType = "/pci";
+            if (sType == "") return;
+            string sVid = sExtract(s, "\\VID_");
+            if (sVid == "") sVid = sExtract(s, "\\VEN_");
+            if (sVid == "") return;
+            string sPid = sExtract(s, "&PID_");
+            if (sPid == "") sPid = sExtract(s, "&DEV_");
+            if (sPid == "") return;
+            s = "https://devicehunt.com/view/type/" + sType + "/vendor/" + sVid + "/device/" + sPid;
+            Utils.LocalBrowser(s);
         }
 
         private void mnRecDis_Click(object sender, EventArgs e)
@@ -1052,6 +1172,12 @@ namespace MacroViewer
             }
         }
 
+        private string AppendDash(string s, int n)
+        {
+            int i = n - s.Length;
+            return s + string.Concat(Enumerable.Repeat('-', i));
+        }
+
         private string GetReference()
         {
             string sRtn = "";
@@ -1178,6 +1304,11 @@ namespace MacroViewer
         private void helpWithUtilsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowHelp("UTILS");
+        }
+
+        private void helpWithWebSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHelp("WEB");
         }
 
         private void managingImagesHelpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1766,6 +1897,25 @@ namespace MacroViewer
             Clipboard.SetText(s);
         }
 
+        private void btnToLower_Click(object sender, EventArgs e)
+        {
+            string s = Clipboard.GetText().ToLower();
+            Clipboard.SetText(s);
+        }
+
+        private void btnCleanPaste_Click(object sender, EventArgs e)
+        {
+            int i, j;
+            string sDirty = Clipboard.GetText();
+            i = sDirty.Length;
+            tbBody.Text = AppendDash("Before cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;   
+            Utils.ReplaceUrls(ref sDirty, false);
+            j = sDirty.Length;
+            tbBody.Text+= AppendDash("After cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;
+            tbBody.Text += (i == j) ? "No difference" : "\r\nShortened " + (i - j).ToString() + " characters";
+
+            Clipboard.SetText(sDirty);
+        }
 
     }
 }

@@ -53,6 +53,8 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnCleanPaste = new System.Windows.Forms.Button();
+            this.btnToLower = new System.Windows.Forms.Button();
             this.btnClipToUpper = new System.Windows.Forms.Button();
             this.btnBold = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -89,6 +91,7 @@
             this.managingImagesHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpWithSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpWithWebSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +102,13 @@
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
+            this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuKnow = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSearchComm = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDrvGoog = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDevCol = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHuntDev = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
@@ -124,7 +134,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -370,6 +379,7 @@
             // btnCopyFrom
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyFrom.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnCopyFrom.Location = new System.Drawing.Point(238, 130);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(177, 27);
@@ -398,6 +408,8 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnCleanPaste);
+            this.groupBox6.Controls.Add(this.btnToLower);
             this.groupBox6.Controls.Add(this.btnClipToUpper);
             this.groupBox6.Controls.Add(this.btnBold);
             this.groupBox6.Controls.Add(this.groupBox1);
@@ -413,12 +425,37 @@
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
-            this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes");
+            this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes <BR> for newliens\r\nAvoid using CTRL-V to paste from " +
+        "forum\r\nUse \"Pase from clipboard\" instead");
+            // 
+            // btnCleanPaste
+            // 
+            this.btnCleanPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleanPaste.Location = new System.Drawing.Point(424, 331);
+            this.btnCleanPaste.Name = "btnCleanPaste";
+            this.btnCleanPaste.Size = new System.Drawing.Size(134, 23);
+            this.btnCleanPaste.TabIndex = 30;
+            this.btnCleanPaste.Text = "Clean URL and paste";
+            this.toolTip1.SetToolTip(this.btnCleanPaste, "Displays the before and after");
+            this.btnCleanPaste.UseVisualStyleBackColor = true;
+            this.btnCleanPaste.Click += new System.EventHandler(this.btnCleanPaste_Click);
+            // 
+            // btnToLower
+            // 
+            this.btnToLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToLower.Location = new System.Drawing.Point(424, 291);
+            this.btnToLower.Name = "btnToLower";
+            this.btnToLower.Size = new System.Drawing.Size(134, 23);
+            this.btnToLower.TabIndex = 29;
+            this.btnToLower.Text = "Clipboard to Lower case";
+            this.toolTip1.SetToolTip(this.btnToLower, "This just changes the\r\nclipboard to lower case");
+            this.btnToLower.UseVisualStyleBackColor = true;
+            this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
             // 
             // btnClipToUpper
             // 
             this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClipToUpper.Location = new System.Drawing.Point(409, 327);
+            this.btnClipToUpper.Location = new System.Drawing.Point(424, 248);
             this.btnClipToUpper.Name = "btnClipToUpper";
             this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
             this.btnClipToUpper.TabIndex = 28;
@@ -445,7 +482,7 @@
             this.groupBox1.Controls.Add(this.btnAdd1New);
             this.groupBox1.Controls.Add(this.btnAdd2New);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.groupBox1.Location = new System.Drawing.Point(409, 121);
+            this.groupBox1.Location = new System.Drawing.Point(424, 44);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(134, 170);
             this.groupBox1.TabIndex = 26;
@@ -483,7 +520,7 @@
             this.label4.BackColor = System.Drawing.SystemColors.Info;
             this.label4.Location = new System.Drawing.Point(6, 84);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(199, 32);
+            this.label4.Size = new System.Drawing.Size(208, 32);
             this.label4.TabIndex = 8;
             this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
             // 
@@ -493,7 +530,7 @@
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Location = new System.Drawing.Point(6, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 32);
+            this.label3.Size = new System.Drawing.Size(230, 32);
             this.label3.TabIndex = 6;
             this.label3.Text = "This can create an entire macro\r\none image at a time";
             // 
@@ -527,13 +564,13 @@
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Location = new System.Drawing.Point(15, 443);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(330, 96);
+            this.label1.Size = new System.Drawing.Size(349, 96);
             this.label1.TabIndex = 4;
             this.label1.Text = resources.GetString("label1.Text");
             // 
             // tbBody
             // 
-            this.tbBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBody.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBody.Location = new System.Drawing.Point(12, 44);
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
@@ -693,7 +730,8 @@
             this.EDITLINKHelpToolStripMenuItem,
             this.managingImagesHelpToolStripMenuItem,
             this.helpWithErrorsToolStripMenuItem,
-            this.helpWithSearchToolStripMenuItem});
+            this.helpWithSearchToolStripMenuItem,
+            this.helpWithWebSearchToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -753,6 +791,13 @@
             this.helpWithSearchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.helpWithSearchToolStripMenuItem.Text = "Help with search";
             this.helpWithSearchToolStripMenuItem.Click += new System.EventHandler(this.helpWithSearchToolStripMenuItem_Click);
+            // 
+            // helpWithWebSearchToolStripMenuItem
+            // 
+            this.helpWithWebSearchToolStripMenuItem.Name = "helpWithWebSearchToolStripMenuItem";
+            this.helpWithWebSearchToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.helpWithWebSearchToolStripMenuItem.Text = "Hellp with Web Search";
+            this.helpWithWebSearchToolStripMenuItem.Click += new System.EventHandler(this.helpWithWebSearchToolStripMenuItem_Click);
             // 
             // utilsToolStripMenuItem
             // 
@@ -829,6 +874,68 @@
             this.mShowDiff.Text = "Show Diff";
             this.mShowDiff.Visible = false;
             this.mShowDiff.Click += new System.EventHandler(this.mShowDiff_Click);
+            // 
+            // mnRecDis
+            // 
+            this.mnRecDis.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recentToolStripMenuItem,
+            this.mnuKnow,
+            this.mnuSearchComm,
+            this.mnuDrvGoog,
+            this.mnuDevCol,
+            this.mnuHuntDev});
+            this.mnRecDis.Name = "mnRecDis";
+            this.mnRecDis.Size = new System.Drawing.Size(168, 20);
+            this.mnRecDis.Text = "Web Search (uses clipboard)";
+            // 
+            // recentToolStripMenuItem
+            // 
+            this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
+            this.recentToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.recentToolStripMenuItem.Text = "Recent HP discussion";
+            this.recentToolStripMenuItem.ToolTipText = "most recent discussion HP forum";
+            this.recentToolStripMenuItem.Click += new System.EventHandler(this.mnRecDis_Click);
+            // 
+            // mnuKnow
+            // 
+            this.mnuKnow.Name = "mnuKnow";
+            this.mnuKnow.Size = new System.Drawing.Size(187, 22);
+            this.mnuKnow.Text = "HP Knowledge Base";
+            this.mnuKnow.ToolTipText = "search the KB for phrase";
+            this.mnuKnow.Click += new System.EventHandler(this.mnuKnow_Click);
+            // 
+            // mnuSearchComm
+            // 
+            this.mnuSearchComm.Name = "mnuSearchComm";
+            this.mnuSearchComm.Size = new System.Drawing.Size(187, 22);
+            this.mnuSearchComm.Text = "HP Community";
+            this.mnuSearchComm.ToolTipText = "search the forum for phrase";
+            this.mnuSearchComm.Click += new System.EventHandler(this.mnuSearchComm_Click);
+            // 
+            // mnuDrvGoog
+            // 
+            this.mnuDrvGoog.Name = "mnuDrvGoog";
+            this.mnuDrvGoog.Size = new System.Drawing.Size(187, 22);
+            this.mnuDrvGoog.Text = "Drivers Google";
+            this.mnuDrvGoog.ToolTipText = "search for HP drivers";
+            this.mnuDrvGoog.Click += new System.EventHandler(this.mnuDrvGoog_Click);
+            // 
+            // mnuDevCol
+            // 
+            this.mnuDevCol.Name = "mnuDevCol";
+            this.mnuDevCol.Size = new System.Drawing.Size(187, 22);
+            this.mnuDevCol.Text = "Drivers Collection";
+            this.mnuDevCol.ToolTipText = "Old driver collection search";
+            this.mnuDevCol.Click += new System.EventHandler(this.mnuDevCol_Click);
+            // 
+            // mnuHuntDev
+            // 
+            this.mnuHuntDev.Name = "mnuHuntDev";
+            this.mnuHuntDev.Size = new System.Drawing.Size(187, 22);
+            this.mnuHuntDev.Text = "Device Hunt";
+            this.mnuHuntDev.ToolTipText = "from the device manager\r\nselect the device instance path\r\nand copy to the clipboa" +
+    "rd\r\nPCI\\VEN_1B21&DEV_2142&\r\n-or-\r\nUSB\\VID_0BDA&PID_0129\\20100201396000000\r\n";
+            this.mnuHuntDev.Click += new System.EventHandler(this.mnuHuntDev_Click);
             // 
             // gpMainEdit
             // 
@@ -1131,13 +1238,6 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // mnRecDis
-            // 
-            this.mnRecDis.Name = "mnRecDis";
-            this.mnRecDis.Size = new System.Drawing.Size(119, 20);
-            this.mnRecDis.Text = "Recent Discussions";
-            this.mnRecDis.Click += new System.EventHandler(this.mnRecDis_Click);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1278,6 +1378,15 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNet;
         private System.Windows.Forms.ToolStripMenuItem loadHardwareMacsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnRecDis;
+        private System.Windows.Forms.ToolStripMenuItem recentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuKnow;
+        private System.Windows.Forms.ToolStripMenuItem mnuDrvGoog;
+        private System.Windows.Forms.ToolStripMenuItem mnuDevCol;
+        private System.Windows.Forms.ToolStripMenuItem mnuHuntDev;
+        private System.Windows.Forms.ToolStripMenuItem mnuSearchComm;
+        private System.Windows.Forms.Button btnCleanPaste;
+        private System.Windows.Forms.Button btnToLower;
+        private System.Windows.Forms.ToolStripMenuItem helpWithWebSearchToolStripMenuItem;
     }
 }
 

@@ -353,8 +353,7 @@ namespace MacroViewer
 
         private void utils_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            help MyHelp = new help("UTILS");
-            MyHelp.Show();
+            Utils.WordpadHelp("UTILS");
         }
 
         private void btnApplyList_Click(object sender, EventArgs e)

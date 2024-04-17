@@ -520,7 +520,7 @@
             this.label4.BackColor = System.Drawing.SystemColors.Info;
             this.label4.Location = new System.Drawing.Point(6, 84);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(208, 32);
+            this.label4.Size = new System.Drawing.Size(199, 32);
             this.label4.TabIndex = 8;
             this.label4.Text = "This changes image path to\r\nyour HP picture folder URLs";
             // 
@@ -530,7 +530,7 @@
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Location = new System.Drawing.Point(6, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(230, 32);
+            this.label3.Size = new System.Drawing.Size(225, 32);
             this.label3.TabIndex = 6;
             this.label3.Text = "This can create an entire macro\r\none image at a time";
             // 
@@ -564,7 +564,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Location = new System.Drawing.Point(15, 443);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(349, 96);
+            this.label1.Size = new System.Drawing.Size(330, 96);
             this.label1.TabIndex = 4;
             this.label1.Text = resources.GetString("label1.Text");
             // 
@@ -1235,7 +1235,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 5000;
+            this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // main

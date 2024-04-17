@@ -154,8 +154,7 @@ namespace MacroViewer
 
         private void ManageMacros_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            help MyHelp = new help("MANAGE");
-            MyHelp.Show();
+            Utils.WordpadHelp("MANAGE");
         }
 
         private void dgManage_CellContentClick(object sender, DataGridViewCellEventArgs e)

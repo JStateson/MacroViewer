@@ -260,8 +260,7 @@ namespace MacroViewer
 
         private void CSignature_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            help MyHelp = new help("SIG");
-            MyHelp.Show();
+            Utils.WordpadHelp("SIG");            
         }
 
         private void btnBold_Click(object sender, EventArgs e)

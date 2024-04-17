@@ -45,6 +45,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gbTB = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbRefOnly = new System.Windows.Forms.CheckBox();
+            this.lbMarker = new System.Windows.Forms.Label();
+            this.cbListFN = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbAttached = new System.Windows.Forms.Label();
             this.btnRemoveAll = new System.Windows.Forms.Button();
@@ -73,10 +77,6 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
-            this.cbListFN = new System.Windows.Forms.ComboBox();
-            this.lbMarker = new System.Windows.Forms.Label();
-            this.cbRefOnly = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
@@ -162,11 +162,11 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(13, 281);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(221, 52);
+            this.label7.Size = new System.Drawing.Size(222, 52);
             this.label7.TabIndex = 7;
             this.label7.Text = "The Special Word can be anything you want.\r\nThe main mage has a button that copie" +
-    "s the\r\nSpecial Word into the Windows Clipboard\r\nfor any use that you want.  Be t" +
-    "o to \"Apply\"";
+    "s the\r\nSpecial Word into the Windows Clipboard\r\nfor any use that you want.  Be s" +
+    "ure to \"Apply\"";
             // 
             // label6
             // 
@@ -269,6 +269,57 @@
             this.gbTB.TabIndex = 5;
             this.gbTB.TabStop = false;
             this.gbTB.Text = "Add at end of every macro";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Info;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(589, 72);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(203, 65);
+            this.label9.TabIndex = 28;
+            this.label9.Text = resources.GetString("label9.Text");
+            // 
+            // cbRefOnly
+            // 
+            this.cbRefOnly.AutoSize = true;
+            this.cbRefOnly.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRefOnly.ForeColor = System.Drawing.Color.Red;
+            this.cbRefOnly.Location = new System.Drawing.Point(378, 105);
+            this.cbRefOnly.Name = "cbRefOnly";
+            this.cbRefOnly.Size = new System.Drawing.Size(156, 20);
+            this.cbRefOnly.TabIndex = 27;
+            this.cbRefOnly.Text = "Do not use  marker";
+            this.toolTip1.SetToolTip(this.cbRefOnly, "If you are just adding a\r\nreference at the bottom\r\nof each macro then no\r\nneed to" +
+        " use markers");
+            this.cbRefOnly.UseVisualStyleBackColor = true;
+            this.cbRefOnly.CheckStateChanged += new System.EventHandler(this.cbRefOnly_CheckStateChanged);
+            // 
+            // lbMarker
+            // 
+            this.lbMarker.AutoSize = true;
+            this.lbMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMarker.ForeColor = System.Drawing.Color.Red;
+            this.lbMarker.Location = new System.Drawing.Point(375, 72);
+            this.lbMarker.Name = "lbMarker";
+            this.lbMarker.Size = new System.Drawing.Size(134, 16);
+            this.lbMarker.TabIndex = 26;
+            this.lbMarker.Text = "Markers [pre] [suf]";
+            this.toolTip1.SetToolTip(this.lbMarker, "These are used to mark the\r\nlocation of the supplemental\r\nsignature. If not used " +
+        "then those\r\nsignatures must be manually\r\nremoved if unwanted.");
+            // 
+            // cbListFN
+            // 
+            this.cbListFN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbListFN.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbListFN.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cbListFN.FormattingEnabled = true;
+            this.cbListFN.Location = new System.Drawing.Point(154, 52);
+            this.cbListFN.Name = "cbListFN";
+            this.cbListFN.Size = new System.Drawing.Size(63, 22);
+            this.cbListFN.TabIndex = 25;
+            this.cbListFN.SelectedIndexChanged += new System.EventHandler(this.cbListFN_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -551,57 +602,6 @@
             this.label8.TabIndex = 8;
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
-            // 
-            // cbListFN
-            // 
-            this.cbListFN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbListFN.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbListFN.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cbListFN.FormattingEnabled = true;
-            this.cbListFN.Location = new System.Drawing.Point(154, 52);
-            this.cbListFN.Name = "cbListFN";
-            this.cbListFN.Size = new System.Drawing.Size(63, 22);
-            this.cbListFN.TabIndex = 25;
-            this.cbListFN.SelectedIndexChanged += new System.EventHandler(this.cbListFN_SelectedIndexChanged);
-            // 
-            // lbMarker
-            // 
-            this.lbMarker.AutoSize = true;
-            this.lbMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMarker.ForeColor = System.Drawing.Color.Red;
-            this.lbMarker.Location = new System.Drawing.Point(375, 72);
-            this.lbMarker.Name = "lbMarker";
-            this.lbMarker.Size = new System.Drawing.Size(134, 16);
-            this.lbMarker.TabIndex = 26;
-            this.lbMarker.Text = "Markers [pre] [suf]";
-            this.toolTip1.SetToolTip(this.lbMarker, "These are used to mark the\r\nlocation of the supplemental\r\nsignature. If not used " +
-        "then those\r\nsignatures must be manually\r\nremoved if unwanted.");
-            // 
-            // cbRefOnly
-            // 
-            this.cbRefOnly.AutoSize = true;
-            this.cbRefOnly.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRefOnly.ForeColor = System.Drawing.Color.Red;
-            this.cbRefOnly.Location = new System.Drawing.Point(378, 105);
-            this.cbRefOnly.Name = "cbRefOnly";
-            this.cbRefOnly.Size = new System.Drawing.Size(156, 20);
-            this.cbRefOnly.TabIndex = 27;
-            this.cbRefOnly.Text = "Do not use  marker";
-            this.toolTip1.SetToolTip(this.cbRefOnly, "If you are just adding a\r\nreference at the bottom\r\nof each macro then no\r\nneed to" +
-        " use markers");
-            this.cbRefOnly.UseVisualStyleBackColor = true;
-            this.cbRefOnly.CheckStateChanged += new System.EventHandler(this.cbRefOnly_CheckStateChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.Info;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(589, 72);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(203, 65);
-            this.label9.TabIndex = 28;
-            this.label9.Text = resources.GetString("label9.Text");
             // 
             // Settings
             // 

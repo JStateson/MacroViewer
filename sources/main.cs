@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using System.Windows.Media.Animation;
 using System.Dynamic;
+using System.Configuration;
 
 
 namespace MacroViewer
@@ -1333,8 +1334,7 @@ namespace MacroViewer
 
         private void ShowHelp(string sHelp)
         {
-            help MyHelp = new help(sHelp);
-            MyHelp.Show();
+            Utils.WordpadHelp(sHelp);
         }
 
         private void helpWithEditingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1877,8 +1877,7 @@ namespace MacroViewer
 
         private void main_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            help MyHelp = new help("FILE");
-            MyHelp.Show();
+            Utils.WordpadHelp("FILE");
         }
 
         private void btnInvertNL_Click(object sender, EventArgs e)

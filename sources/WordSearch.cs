@@ -262,8 +262,7 @@ namespace MacroViewer
 
         private void WordSearch_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            help MyHelp = new help("SEARCH");
-            MyHelp.Show();
+            Utils.WordpadHelp("SEARCH");
         }
     }
 }

@@ -121,12 +121,6 @@
       <DependentUpon>CreateMacro.cs</DependentUpon>
     </Compile>
     <Compile Include="sources\global.cs" />
-    <Compile Include="sources\help.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sources\help.Designer.cs">
-      <DependentUpon>help.cs</DependentUpon>
-    </Compile>
     <Compile Include="sources\HelpUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,10 +221,6 @@
     <EmbeddedResource Include="sources\CSignature.resx">
       <DependentUpon>CSignature.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sources\help.resx">
-      <DependentUpon>help.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="sources\HelpUpdate.resx">
       <DependentUpon>HelpUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,6 +268,15 @@
       <DependentUpon>WordSearch.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="sources\mnu-edit-link.rtf" />
+    <None Include="sources\mnu-file.rtf" />
+    <None Include="sources\mnu-imag-sig.rtf" />
+    <None Include="sources\mnu-main-edit.rtf" />
+    <None Include="sources\mnu-manage-img.rtf" />
+    <None Include="sources\mnu-paste-sig.rtf" />
+    <None Include="sources\mnu-util.rtf" />
+    <None Include="sources\mnu-web-search.rtf" />
+    <None Include="sources\mnu-word-search.rtf" />
     <None Include="sources\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

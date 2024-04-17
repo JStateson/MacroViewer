@@ -127,6 +127,23 @@ namespace MacroViewer
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
 
+        public static void WordpadHelp(string sHelp)
+        {
+            string[] strForms = { "FILE", "SIG", "EDIT",  "EDITLINK",
+                "MANAGE","XMLERRORS", "UTILS", "SEARCH", "WEB" };
+            string[] strFiles = { "mnu-file.rtf","mnu-imag-sig.rtf","mnu-main-edit.rtf", "mnu-edit-link.rtf",
+                "mnu-manage-img.rtf", "mnu-paste-sig.rtf", "mnu-util.rtf", "mnu-word-search.rtf" , "mnu-web-search.rtf"};
+            int n = 0;
+            foreach (string s in strForms)
+            {
+                if (s == sHelp)
+                {
+                    Process.Start("wordpad.exe", WhereExe + "/" + strFiles[n]);
+                    return;
+                }
+                n++;
+            }
+        }
 
         public static int HasSupSig(ref string s, ref int i, ref int j)
         {

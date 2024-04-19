@@ -1631,11 +1631,12 @@ namespace MacroViewer
 
         private void RaiseSearch()
         {
-            WordSearch ws = new WordSearch(ref cBodies);
+            bool bFinishedEdits = bNothingToSave();
+            WordSearch ws = new WordSearch(ref cBodies, bFinishedEdits);            
             ws.ShowDialog();
             int i, n = ws.LastViewed;
             ws.Dispose();
-            if(n >= 0 && bNothingToSave())
+            if(n >= 0 && bFinishedEdits)
             {
                 CBody cb = cBodies[n];
                 LoadFromTXT(cb.File);

@@ -32,7 +32,7 @@ namespace MacroViewer
         public int LastViewed { get; set; }
         int nUseLastViewed = -1;
         private bool TriedFailed = false;
-        public WordSearch(ref List<CBody> Rcb)
+        public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
             cFound = new List<CFound>();
@@ -41,6 +41,7 @@ namespace MacroViewer
             LastViewed = -1;
             cbHPKB.Checked = Properties.Settings.Default.IncludeHPKB;
             cbOfferAlt.Checked = Properties.Settings.Default.OfferAltSearch;
+            btnExitToMac.Enabled = bAllowChangeExit;
         }
 
 

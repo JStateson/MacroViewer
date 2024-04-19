@@ -15,6 +15,7 @@ using System.Diagnostics.Contracts;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using System.Security;
 using Microsoft.Win32;
+using static System.Net.WebRequestMethods;
 
 namespace MacroViewer
 {
@@ -30,7 +31,7 @@ namespace MacroViewer
         private int TotalMatches = 0;
         public int LastViewed { get; set; }
         int nUseLastViewed = -1;
-
+        private bool TriedFailed = false;
         public WordSearch(ref List<CBody> Rcb)
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace MacroViewer
             cAll = Rcb;
             LastViewed = -1;
             cbHPKB.Checked = Properties.Settings.Default.IncludeHPKB;
+            cbOfferAlt.Checked = Properties.Settings.Default.OfferAltSearch;
         }
 
 
@@ -147,6 +149,7 @@ namespace MacroViewer
             cFound.Clear();
             cSorted.Clear();
             TotalMatches = 0;
+            TriedFailed = true;
             lbKeyFound.Items.Clear();
             tbNumMatches.Text = "";
             string sBetter = FormBetter(tbKeywords.Text.Trim());
@@ -204,8 +207,17 @@ namespace MacroViewer
             j = 0;
             foreach (int k in cWidth)
                 dgvSearched.Columns[j++].Width = k;
-            if (TotalMatches > 0) tbNumMatches.Text = TotalMatches.ToString();
-            else tbNumMatches.Text = "";
+            if (TotalMatches > 0)
+            {
+                tbNumMatches.Text = TotalMatches.ToString();
+                TriedFailed = false;
+            }
+            else
+            {
+                tbNumMatches.Text = "";
+                TriedFailed = true;
+            }
+            gbAlltSearch.Visible = TriedFailed && cbOfferAlt.Checked;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -240,6 +252,7 @@ namespace MacroViewer
         private void WordSearch_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.IncludeHPKB = cbHPKB.Checked;
+            Properties.Settings.Default.OfferAltSearch = cbOfferAlt.Checked;
             Properties.Settings.Default.Save();
         }
 
@@ -248,21 +261,112 @@ namespace MacroViewer
             string s = tbKeywords.Text.Trim();
             if (s == "") return;
             string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
-
-            s = Utils.FormUrl(strUrl + s, "Lookup:'" + s + "'");
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(s);
+            Utils.LocalBrowser(strUrl + s);
         }
 
-        private void btnHPKB_Click(object sender, EventArgs e)
-        {
-            HP_KB_find();
-        }
 
         private void WordSearch_HelpButtonClicked(object sender, CancelEventArgs e)
         {
             Utils.WordpadHelp("SEARCH");
+        }
+
+        private void cbOfferAlt_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (cbOfferAlt.Checked)
+            {
+                gbAlltSearch.Visible = TriedFailed;
+            }
+            else gbAlltSearch.Visible = false;
+        }
+
+
+        private string PlusConCat(string t, string[] ss)
+        {
+            string sRtn = t;
+            foreach(string s in ss)
+            {
+                sRtn += s + "+";
+            }
+            return sRtn.Substring(0, sRtn.Length - 1); ;
+        }
+
+        private void RunB(string s, string t)
+        {
+            Utils.LocalBrowser(s + PlusConCat(t, keywords));
+        }
+
+        //https://www.ebay.com/sch/i.html?_nkw=hp+cm1415&_sacat=58058
+        private void AltSearch(string sKey)
+        {
+            //string[] sBtn = { "PC", "PRN", "EBA", "GOO", "MAN", "DRV"};
+            string s = "";
+            string t = "";
+            switch(sKey)
+            { 
+                case "PC":
+                    RunB("https://www.google.com/search?q=", "DRIVERS+HP+");
+                    RunB("https://www.google.com/search?q=", "DISASSEMBLE+HP+");
+                    break;
+                case "PRN":
+                    RunB("https://www.google.com/search?q=", "PRINTER+DRIVERS+HP+");
+                    RunB("https://www.google.com/search?q=", "PRINTER+MANUAL+HP+");
+                    RunB("https://www.google.com/search?q=", "FACTORY+RESET+HP+");
+                    RunB("https://www.google.com/search?q=", "YOUTUBE+NETWORK+CONNECT+HP+");
+                    break;
+                case "EBA":
+                    t = PlusConCat("HP ",keywords);
+                    s = "https://www.ebay.com/sch/i.html?_nkw=" + t + "&_sacat=58058";
+                    Utils.LocalBrowser(s);
+                    break;
+                case "GOO":
+                    RunB("https://www.google.com/search?q=", "HP+");
+                    break;
+                case "MAN":
+                    RunB("https://www.google.com/search?q=", "HP+MANUAL+");
+                    break;
+                case "DRV":
+                    RunB("https://www.google.com/search?q=", "HP+DRIVERS+");
+                    break;
+                case "HPKB":
+                    HP_KB_find();
+                    break;
+            }
+
+        }
+
+        private void btnPC_Click(object sender, EventArgs e)
+        {
+            AltSearch("PC");
+        }
+
+        private void btnPrn_Click(object sender, EventArgs e)
+        {
+            AltSearch("PRN");
+        }
+
+        private void btnEbay_Click(object sender, EventArgs e)
+        {
+            AltSearch("EBA");
+        }
+
+        private void btnGoogle_Click(object sender, EventArgs e)
+        {
+            AltSearch("GOO");
+        }
+
+        private void btnMan_Click(object sender, EventArgs e)
+        {
+            AltSearch("MAN");
+        }
+
+        private void btnDrv_Click(object sender, EventArgs e)
+        {
+            AltSearch("DRV");
+        }
+
+        private void btnKbSearch_Click(object sender, EventArgs e)
+        {
+            AltSearch("HPKB");
         }
     }
 }

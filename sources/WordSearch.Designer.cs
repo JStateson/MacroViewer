@@ -31,9 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbAlltSearch = new System.Windows.Forms.GroupBox();
+            this.btnGoogle = new System.Windows.Forms.Button();
+            this.btnMan = new System.Windows.Forms.Button();
+            this.btnDrv = new System.Windows.Forms.Button();
+            this.btnEbay = new System.Windows.Forms.Button();
+            this.btnPrn = new System.Windows.Forms.Button();
+            this.btnPC = new System.Windows.Forms.Button();
+            this.cbOfferAlt = new System.Windows.Forms.CheckBox();
             this.cbHPKB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnHPKB = new System.Windows.Forms.Button();
             this.btnExitToMac = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.cbIgnCase = new System.Windows.Forms.CheckBox();
@@ -49,7 +56,9 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnKbSearch = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.gbAlltSearch.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).BeginInit();
@@ -57,6 +66,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbAlltSearch);
+            this.groupBox1.Controls.Add(this.cbOfferAlt);
             this.groupBox1.Controls.Add(this.cbHPKB);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -67,16 +78,121 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(904, 651);
+            this.groupBox1.Size = new System.Drawing.Size(1005, 651);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
+            // 
+            // gbAlltSearch
+            // 
+            this.gbAlltSearch.Controls.Add(this.btnKbSearch);
+            this.gbAlltSearch.Controls.Add(this.btnGoogle);
+            this.gbAlltSearch.Controls.Add(this.btnMan);
+            this.gbAlltSearch.Controls.Add(this.btnDrv);
+            this.gbAlltSearch.Controls.Add(this.btnEbay);
+            this.gbAlltSearch.Controls.Add(this.btnPrn);
+            this.gbAlltSearch.Controls.Add(this.btnPC);
+            this.gbAlltSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbAlltSearch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbAlltSearch.Location = new System.Drawing.Point(276, 25);
+            this.gbAlltSearch.Name = "gbAlltSearch";
+            this.gbAlltSearch.Size = new System.Drawing.Size(275, 129);
+            this.gbAlltSearch.TabIndex = 10;
+            this.gbAlltSearch.TabStop = false;
+            this.gbAlltSearch.Text = "Search";
+            this.gbAlltSearch.Visible = false;
+            // 
+            // btnGoogle
+            // 
+            this.btnGoogle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoogle.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnGoogle.Location = new System.Drawing.Point(91, 88);
+            this.btnGoogle.Name = "btnGoogle";
+            this.btnGoogle.Size = new System.Drawing.Size(74, 23);
+            this.btnGoogle.TabIndex = 5;
+            this.btnGoogle.Text = "Google";
+            this.btnGoogle.UseVisualStyleBackColor = true;
+            this.btnGoogle.Click += new System.EventHandler(this.btnGoogle_Click);
+            // 
+            // btnMan
+            // 
+            this.btnMan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMan.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMan.Location = new System.Drawing.Point(91, 57);
+            this.btnMan.Name = "btnMan";
+            this.btnMan.Size = new System.Drawing.Size(74, 23);
+            this.btnMan.TabIndex = 4;
+            this.btnMan.Text = "Manuals";
+            this.btnMan.UseVisualStyleBackColor = true;
+            this.btnMan.Click += new System.EventHandler(this.btnMan_Click);
+            // 
+            // btnDrv
+            // 
+            this.btnDrv.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrv.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDrv.Location = new System.Drawing.Point(91, 25);
+            this.btnDrv.Name = "btnDrv";
+            this.btnDrv.Size = new System.Drawing.Size(74, 23);
+            this.btnDrv.TabIndex = 3;
+            this.btnDrv.Text = "Drivers";
+            this.btnDrv.UseVisualStyleBackColor = true;
+            this.btnDrv.Click += new System.EventHandler(this.btnDrv_Click);
+            // 
+            // btnEbay
+            // 
+            this.btnEbay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEbay.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnEbay.Location = new System.Drawing.Point(21, 88);
+            this.btnEbay.Name = "btnEbay";
+            this.btnEbay.Size = new System.Drawing.Size(53, 23);
+            this.btnEbay.TabIndex = 2;
+            this.btnEbay.Text = "EBay";
+            this.btnEbay.UseVisualStyleBackColor = true;
+            this.btnEbay.Click += new System.EventHandler(this.btnEbay_Click);
+            // 
+            // btnPrn
+            // 
+            this.btnPrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrn.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPrn.Location = new System.Drawing.Point(21, 57);
+            this.btnPrn.Name = "btnPrn";
+            this.btnPrn.Size = new System.Drawing.Size(53, 23);
+            this.btnPrn.TabIndex = 1;
+            this.btnPrn.Text = "Printer";
+            this.btnPrn.UseVisualStyleBackColor = true;
+            this.btnPrn.Click += new System.EventHandler(this.btnPrn_Click);
+            // 
+            // btnPC
+            // 
+            this.btnPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPC.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPC.Location = new System.Drawing.Point(21, 25);
+            this.btnPC.Name = "btnPC";
+            this.btnPC.Size = new System.Drawing.Size(53, 23);
+            this.btnPC.TabIndex = 0;
+            this.btnPC.Text = "PC";
+            this.btnPC.UseVisualStyleBackColor = true;
+            this.btnPC.Click += new System.EventHandler(this.btnPC_Click);
+            // 
+            // cbOfferAlt
+            // 
+            this.cbOfferAlt.AutoSize = true;
+            this.cbOfferAlt.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbOfferAlt.Location = new System.Drawing.Point(28, 65);
+            this.cbOfferAlt.Name = "cbOfferAlt";
+            this.cbOfferAlt.Size = new System.Drawing.Size(218, 24);
+            this.cbOfferAlt.TabIndex = 9;
+            this.cbOfferAlt.Text = "Offer alternatives on failure";
+            this.toolTip1.SetToolTip(this.cbOfferAlt, "If enabled and the search\r\nturns up empty then one\r\ncan use google for printer\r\nP" +
+        "C or a general search.");
+            this.cbOfferAlt.UseVisualStyleBackColor = true;
+            this.cbOfferAlt.CheckStateChanged += new System.EventHandler(this.cbOfferAlt_CheckStateChanged);
             // 
             // cbHPKB
             // 
             this.cbHPKB.AutoSize = true;
             this.cbHPKB.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbHPKB.Location = new System.Drawing.Point(148, 41);
+            this.cbHPKB.Location = new System.Drawing.Point(28, 35);
             this.cbHPKB.Name = "cbHPKB";
             this.cbHPKB.Size = new System.Drawing.Size(199, 24);
             this.cbHPKB.TabIndex = 8;
@@ -85,31 +201,18 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnHPKB);
             this.groupBox3.Controls.Add(this.btnExitToMac);
             this.groupBox3.Controls.Add(this.btnExit);
             this.groupBox3.Controls.Add(this.cbIgnCase);
             this.groupBox3.Controls.Add(this.btnSearch);
             this.groupBox3.Controls.Add(this.rbAnyMatch);
             this.groupBox3.Controls.Add(this.rbExactMatch);
-            this.groupBox3.Location = new System.Drawing.Point(497, 25);
+            this.groupBox3.Location = new System.Drawing.Point(592, 25);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(377, 259);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Keyword parameters";
-            // 
-            // btnHPKB
-            // 
-            this.btnHPKB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHPKB.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnHPKB.Location = new System.Drawing.Point(200, 127);
-            this.btnHPKB.Name = "btnHPKB";
-            this.btnHPKB.Size = new System.Drawing.Size(140, 34);
-            this.btnHPKB.TabIndex = 10;
-            this.btnHPKB.Text = "Search HP KB";
-            this.btnHPKB.UseVisualStyleBackColor = true;
-            this.btnHPKB.Click += new System.EventHandler(this.btnHPKB_Click);
             // 
             // btnExitToMac
             // 
@@ -151,7 +254,7 @@
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSearch.Location = new System.Drawing.Point(200, 52);
+            this.btnSearch.Location = new System.Drawing.Point(198, 76);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(99, 34);
             this.btnSearch.TabIndex = 5;
@@ -186,7 +289,7 @@
             this.groupBox2.Controls.Add(this.tbNumMatches);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.lbKeyFound);
-            this.groupBox2.Location = new System.Drawing.Point(497, 312);
+            this.groupBox2.Location = new System.Drawing.Point(592, 312);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(377, 330);
             this.groupBox2.TabIndex = 6;
@@ -224,7 +327,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Info;
-            this.label2.Location = new System.Drawing.Point(127, 223);
+            this.label2.Location = new System.Drawing.Point(127, 226);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 20);
             this.label2.TabIndex = 4;
@@ -242,7 +345,7 @@
             this.dgvSearched.Name = "dgvSearched";
             this.dgvSearched.ReadOnly = true;
             this.dgvSearched.RowHeadersVisible = false;
-            this.dgvSearched.Size = new System.Drawing.Size(431, 384);
+            this.dgvSearched.Size = new System.Drawing.Size(514, 384);
             this.dgvSearched.TabIndex = 3;
             this.dgvSearched.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             this.dgvSearched.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_CellDoubleClick);
@@ -250,9 +353,9 @@
             // 
             // tbKeywords
             // 
-            this.tbKeywords.Location = new System.Drawing.Point(28, 152);
+            this.tbKeywords.Location = new System.Drawing.Point(28, 172);
             this.tbKeywords.Name = "tbKeywords";
-            this.tbKeywords.Size = new System.Drawing.Size(431, 26);
+            this.tbKeywords.Size = new System.Drawing.Size(523, 26);
             this.tbKeywords.TabIndex = 2;
             this.tbKeywords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbKeywords_KeyDown);
             // 
@@ -260,17 +363,30 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(24, 110);
+            this.label1.Location = new System.Drawing.Point(29, 134);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(241, 20);
+            this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Keywords (press enter to search)";
+            this.label1.Text = "Keywords (press enter)";
+            // 
+            // btnKbSearch
+            // 
+            this.btnKbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKbSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnKbSearch.Location = new System.Drawing.Point(182, 25);
+            this.btnKbSearch.Name = "btnKbSearch";
+            this.btnKbSearch.Size = new System.Drawing.Size(74, 23);
+            this.btnKbSearch.TabIndex = 6;
+            this.btnKbSearch.Text = "HP KB";
+            this.toolTip1.SetToolTip(this.btnKbSearch, "HP Knowledge base search");
+            this.btnKbSearch.UseVisualStyleBackColor = true;
+            this.btnKbSearch.Click += new System.EventHandler(this.btnKbSearch_Click);
             // 
             // WordSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 675);
+            this.ClientSize = new System.Drawing.Size(1049, 675);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
@@ -283,6 +399,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WordSearch_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbAlltSearch.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -312,6 +429,14 @@
         private System.Windows.Forms.Button btnExitToMac;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox cbHPKB;
-        private System.Windows.Forms.Button btnHPKB;
+        private System.Windows.Forms.GroupBox gbAlltSearch;
+        private System.Windows.Forms.CheckBox cbOfferAlt;
+        private System.Windows.Forms.Button btnPC;
+        private System.Windows.Forms.Button btnMan;
+        private System.Windows.Forms.Button btnDrv;
+        private System.Windows.Forms.Button btnEbay;
+        private System.Windows.Forms.Button btnPrn;
+        private System.Windows.Forms.Button btnGoogle;
+        private System.Windows.Forms.Button btnKbSearch;
     }
 }

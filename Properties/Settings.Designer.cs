@@ -166,5 +166,29 @@ namespace MacroViewer.Properties {
                 this["UseMarkers"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string In {
+            get {
+                return ((string)(this["In"]));
+            }
+            set {
+                this["In"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OfferAltSearch {
+            get {
+                return ((bool)(this["OfferAltSearch"]));
+            }
+            set {
+                this["OfferAltSearch"] = value;
+            }
+        }
     }
 }

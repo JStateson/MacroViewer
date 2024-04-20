@@ -465,7 +465,10 @@ namespace MacroViewer
             }
         }
 
-
+        private void hPYouTubeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.LocalBrowser("https://www.youtube.com/@HPSupport/search?query=" + Clipboard.GetText().Trim());
+        }
         private string ExtractSearchID(string str)
         {
             int n = str.Length;

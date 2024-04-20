@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbAlltSearch = new System.Windows.Forms.GroupBox();
+            this.btnKbSearch = new System.Windows.Forms.Button();
             this.btnGoogle = new System.Windows.Forms.Button();
             this.btnMan = new System.Windows.Forms.Button();
             this.btnDrv = new System.Windows.Forms.Button();
@@ -56,7 +57,7 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnKbSearch = new System.Windows.Forms.Button();
+            this.btnHpYTsup = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,6 +86,7 @@
             // 
             // gbAlltSearch
             // 
+            this.gbAlltSearch.Controls.Add(this.btnHpYTsup);
             this.gbAlltSearch.Controls.Add(this.btnKbSearch);
             this.gbAlltSearch.Controls.Add(this.btnGoogle);
             this.gbAlltSearch.Controls.Add(this.btnMan);
@@ -99,8 +101,21 @@
             this.gbAlltSearch.Size = new System.Drawing.Size(275, 129);
             this.gbAlltSearch.TabIndex = 10;
             this.gbAlltSearch.TabStop = false;
-            this.gbAlltSearch.Text = "Search";
+            this.gbAlltSearch.Text = "Search (HP)";
             this.gbAlltSearch.Visible = false;
+            // 
+            // btnKbSearch
+            // 
+            this.btnKbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKbSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnKbSearch.Location = new System.Drawing.Point(182, 25);
+            this.btnKbSearch.Name = "btnKbSearch";
+            this.btnKbSearch.Size = new System.Drawing.Size(74, 23);
+            this.btnKbSearch.TabIndex = 6;
+            this.btnKbSearch.Text = "HP KB";
+            this.toolTip1.SetToolTip(this.btnKbSearch, "HP Knowledge base search");
+            this.btnKbSearch.UseVisualStyleBackColor = true;
+            this.btnKbSearch.Click += new System.EventHandler(this.btnKbSearch_Click);
             // 
             // btnGoogle
             // 
@@ -369,18 +384,18 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
             // 
-            // btnKbSearch
+            // btnHpYTsup
             // 
-            this.btnKbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKbSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnKbSearch.Location = new System.Drawing.Point(182, 25);
-            this.btnKbSearch.Name = "btnKbSearch";
-            this.btnKbSearch.Size = new System.Drawing.Size(74, 23);
-            this.btnKbSearch.TabIndex = 6;
-            this.btnKbSearch.Text = "HP KB";
-            this.toolTip1.SetToolTip(this.btnKbSearch, "HP Knowledge base search");
-            this.btnKbSearch.UseVisualStyleBackColor = true;
-            this.btnKbSearch.Click += new System.EventHandler(this.btnKbSearch_Click);
+            this.btnHpYTsup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHpYTsup.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHpYTsup.Location = new System.Drawing.Point(182, 57);
+            this.btnHpYTsup.Name = "btnHpYTsup";
+            this.btnHpYTsup.Size = new System.Drawing.Size(74, 23);
+            this.btnHpYTsup.TabIndex = 7;
+            this.btnHpYTsup.Text = "YouTub";
+            this.toolTip1.SetToolTip(this.btnHpYTsup, "search hp youtube support");
+            this.btnHpYTsup.UseVisualStyleBackColor = true;
+            this.btnHpYTsup.Click += new System.EventHandler(this.btnHpYTsup_Click);
             // 
             // WordSearch
             // 
@@ -438,5 +453,6 @@
         private System.Windows.Forms.Button btnPrn;
         private System.Windows.Forms.Button btnGoogle;
         private System.Windows.Forms.Button btnKbSearch;
+        private System.Windows.Forms.Button btnHpYTsup;
     }
 }

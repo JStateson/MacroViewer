@@ -134,6 +134,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.hPYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -883,7 +884,8 @@
             this.mnuSearchComm,
             this.mnuDrvGoog,
             this.mnuDevCol,
-            this.mnuHuntDev});
+            this.mnuHuntDev,
+            this.hPYouTubeToolStripMenuItem});
             this.mnRecDis.Name = "mnRecDis";
             this.mnRecDis.Size = new System.Drawing.Size(168, 20);
             this.mnRecDis.Text = "Web Search (uses clipboard)";
@@ -1238,6 +1240,13 @@
             this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // hPYouTubeToolStripMenuItem
+            // 
+            this.hPYouTubeToolStripMenuItem.Name = "hPYouTubeToolStripMenuItem";
+            this.hPYouTubeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.hPYouTubeToolStripMenuItem.Text = "HP YouTube";
+            this.hPYouTubeToolStripMenuItem.Click += new System.EventHandler(this.hPYouTubeToolStripMenuItem_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1387,6 +1396,7 @@
         private System.Windows.Forms.Button btnCleanPaste;
         private System.Windows.Forms.Button btnToLower;
         private System.Windows.Forms.ToolStripMenuItem helpWithWebSearchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hPYouTubeToolStripMenuItem;
     }
 }
 

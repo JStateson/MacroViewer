@@ -257,11 +257,13 @@ namespace MacroViewer
             Properties.Settings.Default.Save();
         }
 
+        //https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=includeTkbs&q=cm1415&include_tkbs=true&collapse_discussion=true
         private void HP_KB_find()
         {
             string s = tbKeywords.Text.Trim();
             if (s == "") return;
-            string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
+            //string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
+            string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=includeTkbs&include_tkbs=true&collapse_discussion=true&q=";            
             Utils.LocalBrowser(strUrl + s);
         }
 
@@ -313,6 +315,7 @@ namespace MacroViewer
                     RunB("https://www.google.com/search?q=", "PRINTER+MANUAL+HP+");
                     RunB("https://www.google.com/search?q=", "FACTORY+RESET+HP+");
                     RunB("https://www.google.com/search?q=", "YOUTUBE+NETWORK+CONNECT+HP+");
+                    RunB("https://www.youtube.com/@HPSupport/search?query=", "");
                     break;
                 case "EBA":
                     t = PlusConCat("HP ",keywords);
@@ -327,6 +330,9 @@ namespace MacroViewer
                     break;
                 case "DRV":
                     RunB("https://www.google.com/search?q=", "HP+DRIVERS+");
+                    break;
+                case "HPYT":
+                    RunB("https://www.youtube.com/@HPSupport/search?query=", "");
                     break;
                 case "HPKB":
                     HP_KB_find();
@@ -368,6 +374,11 @@ namespace MacroViewer
         private void btnKbSearch_Click(object sender, EventArgs e)
         {
             AltSearch("HPKB");
+        }
+
+        private void btnHpYTsup_Click(object sender, EventArgs e)
+        {
+            AltSearch("HPYT");
         }
     }
 }

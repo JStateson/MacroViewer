@@ -16,6 +16,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using System.Security;
 using Microsoft.Win32;
 using static System.Net.WebRequestMethods;
+using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices.WindowsRuntime;
+
 
 namespace MacroViewer
 {
@@ -30,6 +33,8 @@ namespace MacroViewer
         private int[] KeyCount;
         private int TotalMatches = 0;
         public int LastViewed { get; set; }
+        public string NewItemName { get; set; }
+        public string NewItemID { get; set; }
         int nUseLastViewed = -1;
         private bool TriedFailed = false;
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
@@ -42,9 +47,30 @@ namespace MacroViewer
             cbHPKB.Checked = Properties.Settings.Default.IncludeHPKB;
             cbOfferAlt.Checked = Properties.Settings.Default.OfferAltSearch;
             btnExitToMac.Enabled = bAllowChangeExit;
+            NewItemID = "";
+            NewItemName = "";
         }
 
-
+        
+        private void FormCandidateMacros(string sBtnName)
+        {
+            CMoveSpace cms = new CMoveSpace();
+            cms.Init();
+            if (lbNewItems.DataSource != null)
+                lbNewItems.DataSource = null;
+            string s = Utils.sFindUses(sBtnName).Trim();
+            string[] sOut = s.Split(new char[] {' '});
+            int i = 0;
+            foreach(string sID in sOut)
+            {
+                int n = cms.GetMacCountAvailable(sID);
+                if (n == 0) sOut[i] = "";
+                i++;
+            }
+            lbNewItems.Items.Clear();
+            lbNewItems.DataSource = sOut;
+            gbMakeNew.Visible = true;
+        }
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -167,7 +193,7 @@ namespace MacroViewer
             if(cbHPKB.Checked)
                 HP_KB_find();
 
-            foreach(CBody cb in cAll)
+            foreach (CBody cb in cAll)
             { 
                 string sKeys = PerformSearch(cb.Name + " " + cb.sBody);
                 if (sKeys != "")
@@ -219,6 +245,7 @@ namespace MacroViewer
                 TriedFailed = true;
             }
             gbAlltSearch.Visible = TriedFailed && cbOfferAlt.Checked;
+            gbMakeNew.Visible = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -286,11 +313,19 @@ namespace MacroViewer
         private string PlusConCat(string t, string[] ss)
         {
             string sRtn = t;
+            int i = t.IndexOf('&');
+            string sAppend = "";
+            if(i != -1)
+            {
+                sAppend = t.Substring(i);
+                sRtn = t.Substring(0,i);
+            }
             foreach(string s in ss)
             {
                 sRtn += s + "+";
             }
-            return sRtn.Substring(0, sRtn.Length - 1); ;
+            t = sRtn.Substring(0, sRtn.Length - 1) + sAppend;
+            return t;
         }
 
         private void RunB(string s, string t)
@@ -301,9 +336,9 @@ namespace MacroViewer
         //https://www.ebay.com/sch/i.html?_nkw=hp+cm1415&_sacat=58058
         private void AltSearch(string sKey)
         {
-            //string[] sBtn = { "PC", "PRN", "EBA", "GOO", "MAN", "DRV"};
             string s = "";
             string t = "";
+            FormCandidateMacros(sKey);
             switch(sKey)
             { 
                 case "PC":
@@ -316,11 +351,10 @@ namespace MacroViewer
                     RunB("https://www.google.com/search?q=", "FACTORY+RESET+HP+");
                     RunB("https://www.google.com/search?q=", "YOUTUBE+NETWORK+CONNECT+HP+");
                     RunB("https://www.youtube.com/@HPSupport/search?query=", "");
+                    RunB("https://support.hp.com/us-en/deviceSearch?q=", "&origin=pdp");
                     break;
                 case "EBA":
-                    t = PlusConCat("HP ",keywords);
-                    s = "https://www.ebay.com/sch/i.html?_nkw=" + t + "&_sacat=58058";
-                    Utils.LocalBrowser(s);
+                    RunB("https://www.ebay.com/sch/i.html?_nkw=", "HP &_sacat=58058");
                     break;
                 case "GOO":
                     RunB("https://www.google.com/search?q=", "HP+");
@@ -379,6 +413,17 @@ namespace MacroViewer
         private void btnHpYTsup_Click(object sender, EventArgs e)
         {
             AltSearch("HPYT");
+        }
+
+        private void btnMakeNew_Click(object sender, EventArgs e)
+        {
+            int r = lbNewItems.SelectedIndex;
+            if (r < 0) return;
+            string s = lbNewItems.Items[r].ToString();
+            if (s == "") return;    // no space left
+            NewItemID = s;
+            NewItemName = tbKeywords.Text.Trim();
+            this.Close();
         }
     }
 }

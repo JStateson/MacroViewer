@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbAlltSearch = new System.Windows.Forms.GroupBox();
+            this.btnHpYTsup = new System.Windows.Forms.Button();
             this.btnKbSearch = new System.Windows.Forms.Button();
             this.btnGoogle = new System.Windows.Forms.Button();
             this.btnMan = new System.Windows.Forms.Button();
@@ -57,16 +58,20 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnHpYTsup = new System.Windows.Forms.Button();
+            this.gbMakeNew = new System.Windows.Forms.GroupBox();
+            this.btnMakeNew = new System.Windows.Forms.Button();
+            this.lbNewItems = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).BeginInit();
+            this.gbMakeNew.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbMakeNew);
             this.groupBox1.Controls.Add(this.gbAlltSearch);
             this.groupBox1.Controls.Add(this.cbOfferAlt);
             this.groupBox1.Controls.Add(this.cbHPKB);
@@ -79,7 +84,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1005, 651);
+            this.groupBox1.Size = new System.Drawing.Size(1025, 651);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
@@ -96,19 +101,32 @@
             this.gbAlltSearch.Controls.Add(this.btnPC);
             this.gbAlltSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbAlltSearch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbAlltSearch.Location = new System.Drawing.Point(276, 25);
+            this.gbAlltSearch.Location = new System.Drawing.Point(235, 25);
             this.gbAlltSearch.Name = "gbAlltSearch";
-            this.gbAlltSearch.Size = new System.Drawing.Size(275, 129);
+            this.gbAlltSearch.Size = new System.Drawing.Size(175, 194);
             this.gbAlltSearch.TabIndex = 10;
             this.gbAlltSearch.TabStop = false;
             this.gbAlltSearch.Text = "Search (HP)";
             this.gbAlltSearch.Visible = false;
             // 
+            // btnHpYTsup
+            // 
+            this.btnHpYTsup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHpYTsup.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHpYTsup.Location = new System.Drawing.Point(91, 152);
+            this.btnHpYTsup.Name = "btnHpYTsup";
+            this.btnHpYTsup.Size = new System.Drawing.Size(74, 23);
+            this.btnHpYTsup.TabIndex = 7;
+            this.btnHpYTsup.Text = "YouTube";
+            this.toolTip1.SetToolTip(this.btnHpYTsup, "search hp youtube support");
+            this.btnHpYTsup.UseVisualStyleBackColor = true;
+            this.btnHpYTsup.Click += new System.EventHandler(this.btnHpYTsup_Click);
+            // 
             // btnKbSearch
             // 
             this.btnKbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKbSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnKbSearch.Location = new System.Drawing.Point(182, 25);
+            this.btnKbSearch.Location = new System.Drawing.Point(91, 120);
             this.btnKbSearch.Name = "btnKbSearch";
             this.btnKbSearch.Size = new System.Drawing.Size(74, 23);
             this.btnKbSearch.TabIndex = 6;
@@ -192,10 +210,11 @@
             // cbOfferAlt
             // 
             this.cbOfferAlt.AutoSize = true;
+            this.cbOfferAlt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbOfferAlt.ForeColor = System.Drawing.SystemColors.Highlight;
             this.cbOfferAlt.Location = new System.Drawing.Point(28, 65);
             this.cbOfferAlt.Name = "cbOfferAlt";
-            this.cbOfferAlt.Size = new System.Drawing.Size(218, 24);
+            this.cbOfferAlt.Size = new System.Drawing.Size(183, 20);
             this.cbOfferAlt.TabIndex = 9;
             this.cbOfferAlt.Text = "Offer alternatives on failure";
             this.toolTip1.SetToolTip(this.cbOfferAlt, "If enabled and the search\r\nturns up empty then one\r\ncan use google for printer\r\nP" +
@@ -206,10 +225,11 @@
             // cbHPKB
             // 
             this.cbHPKB.AutoSize = true;
+            this.cbHPKB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbHPKB.ForeColor = System.Drawing.SystemColors.Highlight;
             this.cbHPKB.Location = new System.Drawing.Point(28, 35);
             this.cbHPKB.Name = "cbHPKB";
-            this.cbHPKB.Size = new System.Drawing.Size(199, 24);
+            this.cbHPKB.Size = new System.Drawing.Size(168, 20);
             this.cbHPKB.TabIndex = 8;
             this.cbHPKB.Text = "Include HP KB in search";
             this.cbHPKB.UseVisualStyleBackColor = true;
@@ -222,7 +242,7 @@
             this.groupBox3.Controls.Add(this.btnSearch);
             this.groupBox3.Controls.Add(this.rbAnyMatch);
             this.groupBox3.Controls.Add(this.rbExactMatch);
-            this.groupBox3.Location = new System.Drawing.Point(592, 25);
+            this.groupBox3.Location = new System.Drawing.Point(621, 25);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(377, 259);
             this.groupBox3.TabIndex = 7;
@@ -304,7 +324,7 @@
             this.groupBox2.Controls.Add(this.tbNumMatches);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.lbKeyFound);
-            this.groupBox2.Location = new System.Drawing.Point(592, 312);
+            this.groupBox2.Location = new System.Drawing.Point(621, 312);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(377, 330);
             this.groupBox2.TabIndex = 6;
@@ -342,7 +362,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Info;
-            this.label2.Location = new System.Drawing.Point(127, 226);
+            this.label2.Location = new System.Drawing.Point(127, 294);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 20);
             this.label2.TabIndex = 4;
@@ -355,12 +375,12 @@
             this.dgvSearched.AllowUserToResizeColumns = false;
             this.dgvSearched.AllowUserToResizeRows = false;
             this.dgvSearched.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSearched.Location = new System.Drawing.Point(28, 258);
+            this.dgvSearched.Location = new System.Drawing.Point(28, 330);
             this.dgvSearched.MultiSelect = false;
             this.dgvSearched.Name = "dgvSearched";
             this.dgvSearched.ReadOnly = true;
             this.dgvSearched.RowHeadersVisible = false;
-            this.dgvSearched.Size = new System.Drawing.Size(514, 384);
+            this.dgvSearched.Size = new System.Drawing.Size(561, 312);
             this.dgvSearched.TabIndex = 3;
             this.dgvSearched.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             this.dgvSearched.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_CellDoubleClick);
@@ -368,9 +388,9 @@
             // 
             // tbKeywords
             // 
-            this.tbKeywords.Location = new System.Drawing.Point(28, 172);
+            this.tbKeywords.Location = new System.Drawing.Point(28, 239);
             this.tbKeywords.Name = "tbKeywords";
-            this.tbKeywords.Size = new System.Drawing.Size(523, 26);
+            this.tbKeywords.Size = new System.Drawing.Size(561, 26);
             this.tbKeywords.TabIndex = 2;
             this.tbKeywords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbKeywords_KeyDown);
             // 
@@ -378,24 +398,47 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(29, 134);
+            this.label1.Location = new System.Drawing.Point(24, 199);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
             // 
-            // btnHpYTsup
+            // gbMakeNew
             // 
-            this.btnHpYTsup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHpYTsup.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnHpYTsup.Location = new System.Drawing.Point(182, 57);
-            this.btnHpYTsup.Name = "btnHpYTsup";
-            this.btnHpYTsup.Size = new System.Drawing.Size(74, 23);
-            this.btnHpYTsup.TabIndex = 7;
-            this.btnHpYTsup.Text = "YouTub";
-            this.toolTip1.SetToolTip(this.btnHpYTsup, "search hp youtube support");
-            this.btnHpYTsup.UseVisualStyleBackColor = true;
-            this.btnHpYTsup.Click += new System.EventHandler(this.btnHpYTsup_Click);
+            this.gbMakeNew.Controls.Add(this.lbNewItems);
+            this.gbMakeNew.Controls.Add(this.btnMakeNew);
+            this.gbMakeNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbMakeNew.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.gbMakeNew.Location = new System.Drawing.Point(434, 25);
+            this.gbMakeNew.Name = "gbMakeNew";
+            this.gbMakeNew.Size = new System.Drawing.Size(155, 194);
+            this.gbMakeNew.TabIndex = 11;
+            this.gbMakeNew.TabStop = false;
+            this.gbMakeNew.Text = "Make new macro";
+            this.gbMakeNew.Visible = false;
+            // 
+            // btnMakeNew
+            // 
+            this.btnMakeNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMakeNew.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMakeNew.Location = new System.Drawing.Point(17, 25);
+            this.btnMakeNew.Name = "btnMakeNew";
+            this.btnMakeNew.Size = new System.Drawing.Size(90, 23);
+            this.btnMakeNew.TabIndex = 7;
+            this.btnMakeNew.Text = "GO make it";
+            this.toolTip1.SetToolTip(this.btnMakeNew, "HP Knowledge base search");
+            this.btnMakeNew.UseVisualStyleBackColor = true;
+            this.btnMakeNew.Click += new System.EventHandler(this.btnMakeNew_Click);
+            // 
+            // lbNewItems
+            // 
+            this.lbNewItems.FormattingEnabled = true;
+            this.lbNewItems.ItemHeight = 16;
+            this.lbNewItems.Location = new System.Drawing.Point(56, 59);
+            this.lbNewItems.Name = "lbNewItems";
+            this.lbNewItems.Size = new System.Drawing.Size(75, 116);
+            this.lbNewItems.TabIndex = 8;
             // 
             // WordSearch
             // 
@@ -420,6 +463,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).EndInit();
+            this.gbMakeNew.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -454,5 +498,8 @@
         private System.Windows.Forms.Button btnGoogle;
         private System.Windows.Forms.Button btnKbSearch;
         private System.Windows.Forms.Button btnHpYTsup;
+        private System.Windows.Forms.GroupBox gbMakeNew;
+        private System.Windows.Forms.ListBox lbNewItems;
+        private System.Windows.Forms.Button btnMakeNew;
     }
 }

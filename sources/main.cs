@@ -78,8 +78,8 @@ namespace MacroViewer
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
             LoadAllFiles();
             cms = new CMoveSpace();  // note that this is only read at startup
-            cms.Init();                         // and the count must be updated after a move
-            CountEmpties(ref cms);
+//           cms.Init();                         // and the count must be updated after a move
+//           CountEmpties(ref cms);
             Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
             SpecialUsed(Properties.Settings.Default.SpecialWord != "");
             NormalEditColor = btnCancelEdits.ForeColor;
@@ -910,7 +910,7 @@ namespace MacroViewer
                 lbName.Rows[CurrentRowSelected].Cells[2].Value = "";
                 tbBody.Text = "";
             }
-
+            MustFinishEdit(true);
             ReSaveAsTXT(TXTName);
             ShowUneditedRow(CurrentRowSelected);
         }
@@ -1638,6 +1638,8 @@ namespace MacroViewer
             WordSearch ws = new WordSearch(ref cBodies, bFinishedEdits);            
             ws.ShowDialog();
             int i, n = ws.LastViewed;
+            string NewID = ws.NewItemID;
+            string NewName = ws.NewItemName;
             ws.Dispose();
             if(n >= 0 && bFinishedEdits)
             {
@@ -1646,6 +1648,15 @@ namespace MacroViewer
                 i = Convert.ToInt32(cb.Number);
                 ShowUneditedRow(i - 1);
             }
+            if(NewID != "" &&bFinishedEdits)
+            {
+                n = LoadFromTXT(NewID);
+                SwitchToMarkup(true);
+                if (n < Utils.NumMacros)
+                {
+                    AddNew(NewName, GetReference());
+                }
+            }
         }
 
         private void WordSearch_Click(object sender, EventArgs e)
@@ -1653,31 +1664,6 @@ namespace MacroViewer
             RaiseSearch();
         }
 
-        private int CountItems(string s)
-        {
-            if (Utils.NoFileThere(s)) return 0;
-            string[] sAll = File.ReadAllLines(Utils.FNtoPath(s));
-            if (s == "HP")
-            {
-                int j = 0;
-                for(int i = 0; i < sAll.Length;i+= 2)
-                {
-                    if (sAll[i].Length == 0) j++;
-                }
-                return j;
-            }
-            return sAll.Length / 2;
-        }
-
-        //"PC", "AIO", "LJ", "DJ", "OS", "NET", "HP" 
-        //
-        private void CountEmpties(ref CMoveSpace cms)
-        {
-            foreach (string s in Utils.LocalMacroPrefix)
-            {
-                cms.SetMacCount(s, CountItems(s));
-            }
-        }
         private int CountChecks()
         {
             int n = 0;
@@ -1822,6 +1808,7 @@ namespace MacroViewer
 
         private void mMoveMacro_Click(object sender, EventArgs e)
         {
+            cms.Init(); 
             cms.strType = strType;
             cms.bRun = false;
             cms.bDelete = false;

@@ -41,6 +41,7 @@ namespace MacroViewer
                 nMacsAllowed[i] = Utils.NumMacros;
             nMacsAllowed[MacroIDs.Length - 1] = 30; // only 30 macros in HP forum original list
             // this item has to be "HP" and stay at end of any string list of files
+            CountEmpties();
         }
         public void SetMacCount(string ID, int n)
         {
@@ -91,6 +92,31 @@ namespace MacroViewer
             n -= nChecked;
             SetMacCount(strType, n);
         }
+
+        private int CountItems(string s)
+        {
+            if (Utils.NoFileThere(s)) return 0;
+            string[] sAll = File.ReadAllLines(Utils.FNtoPath(s));
+            if (s == "HP")
+            {
+                int j = 0;
+                for (int i = 0; i < sAll.Length; i += 2)
+                {
+                    if (sAll[i].Length == 0) j++;
+                }
+                return j;
+            }
+            return sAll.Length / 2;
+        }
+
+        public void CountEmpties()
+        {
+            foreach (string s in Utils.LocalMacroPrefix)
+            {
+                SetMacCount(s, CountItems(s));
+            }
+        }
+
         public int nChecked;    // this many checked
         public bool bRun;       // if true then perform move
         public string strType;    // name of the "from" file ie: source
@@ -103,8 +129,34 @@ namespace MacroViewer
     public static class Utils
     {
         public const int NumMacros = 50;   // only 30 for the HTML file
-        // do not change the order of below items and HP must be last!
 
+        public static string[] nUse ={ // these must match the button names in WordSearch
+            //"PC","Printer","Drivers","EBay","Google","Manuals","YouTube","HP KB"
+              "PC","PRN",    "DRV",    "EBA", "GOO",   "MAN",    "HPYT",   "HPKB"
+        };
+
+        private static string[] sUse = // possible new macros
+        {
+            "PC AIO HW",            //PC
+            "LJ DJ OJ HW",          //PRN
+            "PC AIO LJ DJ OJ",      //DRV
+            "NET OS HW",            //EBY
+            "NET OS HW",            //GOO
+            "PC AIO LJ DJ OJ",      //MAN
+            "LJ DJ OJ NET",         //Youtube
+            "PC AIO LJ DJ OJ OS"    //HP KB
+        };
+        public static string sFindUses(string s)
+        {
+            int i = 0;
+            foreach(string t in nUse )
+            {
+                if (s == t) return sUse[i];
+                i++;
+            }
+            return "";
+        }
+        // do not change the order of below items and HP must be last!
         public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP" };
         public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
                 "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "HP from HTML" };

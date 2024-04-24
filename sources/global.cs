@@ -180,6 +180,17 @@ namespace MacroViewer
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
 
+        public static void ShowPageInBrowser(string strType, string strTemp)
+        {
+            string sPP = Properties.Settings.Default.sPPrefix;
+            if (sPP != "init" && Utils.sPrinterTypes.Contains(strType + " "))
+            {
+                strTemp = Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
+            }
+            CShowBrowser MyBrowser = new CShowBrowser();
+            MyBrowser.Init();
+            MyBrowser.ShowInBrowser(strTemp);
+        }
         public static void WordpadHelp(string sHelp)
         {
             string[] strForms = { "FILE", "SIG", "EDIT",  "EDITLINK",

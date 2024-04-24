@@ -79,12 +79,11 @@ namespace MacroViewer
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int n = cSorted[SelectedRow].WhereFound;
+            string strType = cSorted[SelectedRow].File;
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
             nUseLastViewed = n;
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            Utils.ShowPageInBrowser(strType, strTemp);
         }
 
         private void dgvSearched_RowEnter(object sender, DataGridViewCellEventArgs e)

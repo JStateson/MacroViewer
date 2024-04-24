@@ -405,6 +405,11 @@ namespace MacroViewer
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
+            string sPP = Properties.Settings.Default.sPPrefix;
+            if (sPP != "init" && Utils.sPrinterTypes.Contains(strType + " "))
+            {
+                strTemp = Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
+            }
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
             MyBrowser.ShowInBrowser(strTemp);

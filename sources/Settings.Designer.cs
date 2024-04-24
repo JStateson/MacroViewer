@@ -77,11 +77,15 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbPP = new System.Windows.Forms.TextBox();
+            this.btnTestPP = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -148,7 +152,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.tbUserID);
-            this.groupBox2.Location = new System.Drawing.Point(12, 240);
+            this.groupBox2.Location = new System.Drawing.Point(12, 291);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(274, 426);
             this.groupBox2.TabIndex = 1;
@@ -219,7 +223,7 @@
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSave.Location = new System.Drawing.Point(237, 46);
+            this.btnSave.Location = new System.Drawing.Point(207, 45);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 30);
             this.btnSave.TabIndex = 2;
@@ -231,7 +235,7 @@
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(237, 109);
+            this.btnCancel.Location = new System.Drawing.Point(207, 95);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
             this.btnCancel.TabIndex = 3;
@@ -263,7 +267,7 @@
             this.gbTB.Controls.Add(this.btnAddSupSig);
             this.gbTB.Controls.Add(this.tbSupSig);
             this.gbTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbTB.Location = new System.Drawing.Point(317, 191);
+            this.gbTB.Location = new System.Drawing.Point(457, 191);
             this.gbTB.Name = "gbTB";
             this.gbTB.Size = new System.Drawing.Size(826, 526);
             this.gbTB.TabIndex = 5;
@@ -552,7 +556,7 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(633, 28);
+            this.groupBox5.Location = new System.Drawing.Point(773, 28);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(510, 129);
             this.groupBox5.TabIndex = 6;
@@ -596,18 +600,53 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Info;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(357, 63);
+            this.label8.Location = new System.Drawing.Point(188, 160);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 65);
             this.label8.TabIndex = 8;
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnTestPP);
+            this.groupBox4.Controls.Add(this.tbPP);
+            this.groupBox4.Location = new System.Drawing.Point(359, 28);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(362, 129);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Printer Prefix";
+            this.toolTip1.SetToolTip(this.groupBox4, "Is put in first line of\r\neach printer macro");
+            // 
+            // tbPP
+            // 
+            this.tbPP.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbPP.Location = new System.Drawing.Point(89, 23);
+            this.tbPP.Multiline = true;
+            this.tbPP.Name = "tbPP";
+            this.tbPP.Size = new System.Drawing.Size(244, 88);
+            this.tbPP.TabIndex = 1;
+            this.tbPP.Text = "Click <a href=\"https://support.hp.com/us-en/document/ish_1716406-1413451-16?openC" +
+    "LC=true\" target=\"_blank\">here for network setup</a> in your language";
+            // 
+            // btnTestPP
+            // 
+            this.btnTestPP.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTestPP.Location = new System.Drawing.Point(15, 53);
+            this.btnTestPP.Name = "btnTestPP";
+            this.btnTestPP.Size = new System.Drawing.Size(51, 23);
+            this.btnTestPP.TabIndex = 4;
+            this.btnTestPP.Text = "Test";
+            this.btnTestPP.UseVisualStyleBackColor = true;
+            this.btnTestPP.Click += new System.EventHandler(this.btnTestPP_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1191, 729);
+            this.ClientSize = new System.Drawing.Size(1295, 729);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.gbTB);
@@ -631,6 +670,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,5 +726,8 @@
         private System.Windows.Forms.Label lbMarker;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox cbRefOnly;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox tbPP;
+        private System.Windows.Forms.Button btnTestPP;
     }
 }

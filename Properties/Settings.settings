@@ -44,5 +44,8 @@
     <Setting Name="OfferAltSearch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="sPPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">init</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

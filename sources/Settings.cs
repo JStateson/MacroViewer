@@ -35,7 +35,8 @@ namespace MacroViewer
                 case eBrowserType.eFirefox: rbFirefox.Checked = true; break;
                 case eBrowserType.eEdge: rbEdge.Checked = true; break;  
             }
-
+            string sPP = Properties.Settings.Default.sPPrefix;
+            if (sPP != "init") tbPP.Text = sPP;
             tbSupSig.Text = Properties.Settings.Default.SupSig;
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
@@ -56,7 +57,8 @@ namespace MacroViewer
             foreach (string s in Utils.LocalMacroPrefix)
                 cbListFN.Items.Add(s);
             cbListFN.SelectedIndex = 0;
-            lbMarker.Text = lbMarker.Text.Replace("pre", Utils.SupSigPrefix).Replace("suf", Utils.SupSigSuffix);        }
+            lbMarker.Text = lbMarker.Text.Replace("pre", Utils.SupSigPrefix).Replace("suf", Utils.SupSigSuffix); 
+        }
 
      
         private void CountUnkUrls()
@@ -91,6 +93,7 @@ namespace MacroViewer
             if (rbEdge.Checked) eBrowser = eBrowserType.eEdge;
             if (rbFirefox.Checked) eBrowser = eBrowserType.eFirefox;
             Properties.Settings.Default.BrowserID = (int)eBrowser;
+            Properties.Settings.Default.sPPrefix = tbPP.Text;
             Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")
             { 
@@ -155,13 +158,17 @@ namespace MacroViewer
             tbEdit.Text = sOut;
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void ShowText(string strTemp)
         {
-            string strTemp = tbEdit.Text;
             if (strTemp == "") return;
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
             MyBrowser.ShowInBrowser(strTemp);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            ShowText(tbEdit.Text);
         }
 
         private void btnSavEdits_Click(object sender, EventArgs e)
@@ -265,6 +272,11 @@ namespace MacroViewer
         private void cbRefOnly_CheckStateChanged(object sender, EventArgs e)
         {
             LockRef(cbRefOnly.Checked);
+        }
+
+        private void btnTestPP_Click(object sender, EventArgs e)
+        {
+            ShowText(tbPP.Text);
         }
     }
 }

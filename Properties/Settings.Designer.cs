@@ -190,5 +190,17 @@ namespace MacroViewer.Properties {
                 this["OfferAltSearch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("init")]
+        public string sPPrefix {
+            get {
+                return ((string)(this["sPPrefix"]));
+            }
+            set {
+                this["sPPrefix"] = value;
+            }
+        }
     }
 }

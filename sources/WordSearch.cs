@@ -37,6 +37,8 @@ namespace MacroViewer
         public string NewItemID { get; set; }
         int nUseLastViewed = -1;
         private bool TriedFailed = false;
+        Font Reg12;
+        Font Reg10;
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
@@ -49,6 +51,8 @@ namespace MacroViewer
             btnExitToMac.Enabled = bAllowChangeExit;
             NewItemID = "";
             NewItemName = "";
+            Reg12 = cbHPKB.Font;
+            Reg10 = gbAlltSearch.Font;
         }
 
         
@@ -171,6 +175,12 @@ namespace MacroViewer
             return s;
         }
 
+        private void SetFont(Font f)
+        {
+            cbHPKB.Font = f;
+            cbOfferAlt.Font = f;
+        }
+
         private void RunSearch()
         {
             cFound.Clear();
@@ -245,6 +255,8 @@ namespace MacroViewer
                 TriedFailed = true;
             }
             gbAlltSearch.Visible = TriedFailed && cbOfferAlt.Checked;
+            if(gbAlltSearch.Visible) SetFont(Reg10);
+            else SetFont(Reg12);
             gbMakeNew.Visible = false;
         }
 
@@ -307,6 +319,8 @@ namespace MacroViewer
                 gbAlltSearch.Visible = TriedFailed;
             }
             else gbAlltSearch.Visible = false;
+            if (gbAlltSearch.Visible) SetFont(Reg10);
+            else SetFont(Reg12);
         }
 
 

@@ -33,6 +33,7 @@
             this.gbSelectType = new System.Windows.Forms.GroupBox();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCleanUrl = new System.Windows.Forms.CheckBox();
             this.tbRawUrl = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbPrefix = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbCleanUrl = new System.Windows.Forms.CheckBox();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,6 +80,7 @@
             // tbSelectedItem
             // 
             this.tbSelectedItem.Location = new System.Drawing.Point(19, 37);
+            this.tbSelectedItem.Multiline = true;
             this.tbSelectedItem.Name = "tbSelectedItem";
             this.tbSelectedItem.Size = new System.Drawing.Size(341, 22);
             this.tbSelectedItem.TabIndex = 0;
@@ -95,6 +96,19 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enter the URL here";
+            // 
+            // cbCleanUrl
+            // 
+            this.cbCleanUrl.AutoSize = true;
+            this.cbCleanUrl.Checked = true;
+            this.cbCleanUrl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCleanUrl.Location = new System.Drawing.Point(19, 88);
+            this.cbCleanUrl.Name = "cbCleanUrl";
+            this.cbCleanUrl.Size = new System.Drawing.Size(91, 20);
+            this.cbCleanUrl.TabIndex = 1;
+            this.cbCleanUrl.Text = "Clean URL";
+            this.toolTip1.SetToolTip(this.cbCleanUrl, "strip unwanted referals");
+            this.cbCleanUrl.UseVisualStyleBackColor = true;
             // 
             // tbRawUrl
             // 
@@ -338,19 +352,6 @@
             this.label3.Size = new System.Drawing.Size(361, 176);
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
-            // 
-            // cbCleanUrl
-            // 
-            this.cbCleanUrl.AutoSize = true;
-            this.cbCleanUrl.Checked = true;
-            this.cbCleanUrl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCleanUrl.Location = new System.Drawing.Point(19, 88);
-            this.cbCleanUrl.Name = "cbCleanUrl";
-            this.cbCleanUrl.Size = new System.Drawing.Size(91, 20);
-            this.cbCleanUrl.TabIndex = 1;
-            this.cbCleanUrl.Text = "Clean URL";
-            this.toolTip1.SetToolTip(this.cbCleanUrl, "strip unwanted referals");
-            this.cbCleanUrl.UseVisualStyleBackColor = true;
             // 
             // SetText
             // 

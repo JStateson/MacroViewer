@@ -38,6 +38,7 @@ namespace MacroViewer
             string sPP = Properties.Settings.Default.sPPrefix;
             if (sPP != "init") tbPP.Text = sPP;
             tbSupSig.Text = Properties.Settings.Default.SupSig;
+            tbLongAllowed.Text = Properties.Settings.Default.LongestExpectedURL.ToString();
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
             cbRefOnly.Checked = !Properties.Settings.Default.UseMarkers;
@@ -94,6 +95,8 @@ namespace MacroViewer
             if (rbFirefox.Checked) eBrowser = eBrowserType.eFirefox;
             Properties.Settings.Default.BrowserID = (int)eBrowser;
             Properties.Settings.Default.sPPrefix = tbPP.Text;
+            Properties.Settings.Default.LongestExpectedURL = Convert.ToInt32(tbLongAllowed.Text);
+            Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")
             { 

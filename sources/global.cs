@@ -129,7 +129,7 @@ namespace MacroViewer
     public static class Utils
     {
         public const int NumMacros = 50;   // only 30 for the HTML file
-
+        public static int nLongestExpectedURL = 256;
         public static string[] nUse ={ // these must match the button names in WordSearch
             //"PC","Printer","Drivers","EBay","Google","Manuals","YouTube","HP KB"
               "PC","PRN",    "DRV",    "EBA", "GOO",   "MAN",    "HPYT",   "HPKB"
@@ -715,12 +715,37 @@ namespace MacroViewer
             int i = strIn.IndexOf(strRef);
             return (i < 0) ? strIn.Trim() : strIn.Substring(0,i);
         }
+
         public static string dRef(string sUrl)
+        {
+            bool bWritten = false;
+            string s = eRef(sUrl, ref bWritten);
+            int n = s.Length;
+            if (!bWritten && n > nLongestExpectedURL)
+            {
+                RecordLongUrl(sUrl);
+            }
+            return s;
+        }
+
+        private static void RecordLongUrl(string sUrl)
+        {
+            if (System.Diagnostics.Debugger.IsAttached || bRecordUnscrubbedURLs)
+            {
+                // keep track of which urls cannot be untracked of de-referenced
+                using (StreamWriter writer = File.AppendText(WhereExe + "\\UrlDebug.txt"))
+                {
+                    writer.WriteLine(sUrl); // we are allowing newlines here
+                }
+            }
+        }
+
+        private static string eRef(string sUrl, ref bool bWritten)
         {
             int i,j;
             sUrl = dStr(sUrl,"/ref");
             string surl = sUrl.ToLower();
-            if (surl.Contains("youtube") || surl.Contains("support.hp.com"))return sUrl;
+            if (surl.Contains(".youtube") || surl.Contains("support.hp.com"))return sUrl;
 
             i = surl.IndexOf("search?");
             if(i > 0)
@@ -732,7 +757,7 @@ namespace MacroViewer
                 return sUrl.Substring(0, i);
             }
 
-            if(surl.Contains("aliexpress") || surl.Contains("ebay"))
+            if(surl.Contains(".aliexpress") || surl.Contains(".ebay"))
             {
                 i = sUrl.IndexOf('?');
                 return (i < 0) ? sUrl : sUrl.Substring(0, i);
@@ -760,14 +785,7 @@ namespace MacroViewer
             if (surl.Contains("https://parts.hp.com/hpparts/Default.aspx"))
                 return "https://parts.hp.com/hpparts";
 
-            if (System.Diagnostics.Debugger.IsAttached || bRecordUnscrubbedURLs)
-            { 
-                // keep track of which urls cannot be untracked of de-referenced
-                using (StreamWriter writer = File.AppendText(WhereExe + "\\UrlDebug.txt"))
-                {
-                    writer.WriteLine(sUrl); // we are allowing newlines here
-                }
-            }
+            RecordLongUrl(sUrl);
             return sUrl;        
         }
 

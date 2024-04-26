@@ -47,5 +47,8 @@
     <Setting Name="sPPrefix" Type="System.String" Scope="User">
       <Value Profile="(Default)">init</Value>
     </Setting>
+    <Setting Name="LongestExpectedURL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

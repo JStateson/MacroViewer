@@ -73,6 +73,7 @@ namespace MacroViewer
             if (iBrowser < 0) Utils.BrowserWanted = Utils.eBrowserType.eEdge;
             else Utils.BrowserWanted = (Utils.eBrowserType)Properties.Settings.Default.BrowserID;
             Utils.VolunteerUserID = Properties.Settings.Default.UserID;
+            Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             string strFilename = Properties.Settings.Default.HTTP_HP;
             this.Text = " HP Macro Editor";
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;

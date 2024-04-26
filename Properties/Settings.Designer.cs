@@ -202,5 +202,17 @@ namespace MacroViewer.Properties {
                 this["sPPrefix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int LongestExpectedURL {
+            get {
+                return ((int)(this["LongestExpectedURL"]));
+            }
+            set {
+                this["LongestExpectedURL"] = value;
+            }
+        }
     }
 }

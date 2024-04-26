@@ -70,6 +70,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnShowURL = new System.Windows.Forms.Button();
             this.btnDelURL = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnTestPP = new System.Windows.Forms.Button();
+            this.tbPP = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lbSaveLoc = new System.Windows.Forms.Label();
             this.cbSaveUNK = new System.Windows.Forms.CheckBox();
@@ -77,15 +80,14 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.tbPP = new System.Windows.Forms.TextBox();
-            this.btnTestPP = new System.Windows.Forms.Button();
+            this.tbLongAllowed = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -525,7 +527,7 @@
             this.btnShowURL.Enabled = false;
             this.btnShowURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowURL.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnShowURL.Location = new System.Drawing.Point(327, 26);
+            this.btnShowURL.Location = new System.Drawing.Point(276, 25);
             this.btnShowURL.Name = "btnShowURL";
             this.btnShowURL.Size = new System.Drawing.Size(135, 23);
             this.btnShowURL.TabIndex = 1;
@@ -539,7 +541,7 @@
             this.btnDelURL.Enabled = false;
             this.btnDelURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelURL.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnDelURL.Location = new System.Drawing.Point(327, 67);
+            this.btnDelURL.Location = new System.Drawing.Point(276, 64);
             this.btnDelURL.Name = "btnDelURL";
             this.btnDelURL.Size = new System.Drawing.Size(135, 23);
             this.btnDelURL.TabIndex = 4;
@@ -548,8 +550,44 @@
             this.btnDelURL.UseVisualStyleBackColor = true;
             this.btnDelURL.Click += new System.EventHandler(this.btnDelURL_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnTestPP);
+            this.groupBox4.Controls.Add(this.tbPP);
+            this.groupBox4.Location = new System.Drawing.Point(359, 28);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(362, 129);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Printer Prefix";
+            this.toolTip1.SetToolTip(this.groupBox4, "Is put in first line of\r\neach printer macro");
+            // 
+            // btnTestPP
+            // 
+            this.btnTestPP.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTestPP.Location = new System.Drawing.Point(15, 53);
+            this.btnTestPP.Name = "btnTestPP";
+            this.btnTestPP.Size = new System.Drawing.Size(51, 23);
+            this.btnTestPP.TabIndex = 4;
+            this.btnTestPP.Text = "Test";
+            this.btnTestPP.UseVisualStyleBackColor = true;
+            this.btnTestPP.Click += new System.EventHandler(this.btnTestPP_Click);
+            // 
+            // tbPP
+            // 
+            this.tbPP.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbPP.Location = new System.Drawing.Point(89, 23);
+            this.tbPP.Multiline = true;
+            this.tbPP.Name = "tbPP";
+            this.tbPP.Size = new System.Drawing.Size(244, 88);
+            this.tbPP.TabIndex = 1;
+            this.tbPP.Text = "Click <a href=\"https://support.hp.com/us-en/document/ish_1716406-1413451-16?openC" +
+    "LC=true\" target=\"_blank\">here for network setup</a> in your language";
+            // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.tbLongAllowed);
             this.groupBox5.Controls.Add(this.btnDelURL);
             this.groupBox5.Controls.Add(this.lbSaveLoc);
             this.groupBox5.Controls.Add(this.cbSaveUNK);
@@ -588,10 +626,10 @@
             // 
             this.tbURLcnt.BackColor = System.Drawing.SystemColors.Window;
             this.tbURLcnt.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbURLcnt.Location = new System.Drawing.Point(139, 59);
+            this.tbURLcnt.Location = new System.Drawing.Point(428, 25);
             this.tbURLcnt.Name = "tbURLcnt";
             this.tbURLcnt.ReadOnly = true;
-            this.tbURLcnt.Size = new System.Drawing.Size(141, 20);
+            this.tbURLcnt.Size = new System.Drawing.Size(48, 20);
             this.tbURLcnt.TabIndex = 0;
             this.tbURLcnt.Text = "test";
             // 
@@ -607,39 +645,29 @@
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
             // 
-            // groupBox4
+            // tbLongAllowed
             // 
-            this.groupBox4.Controls.Add(this.btnTestPP);
-            this.groupBox4.Controls.Add(this.tbPP);
-            this.groupBox4.Location = new System.Drawing.Point(359, 28);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(362, 129);
-            this.groupBox4.TabIndex = 9;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Printer Prefix";
-            this.toolTip1.SetToolTip(this.groupBox4, "Is put in first line of\r\neach printer macro");
+            this.tbLongAllowed.BackColor = System.Drawing.SystemColors.Window;
+            this.tbLongAllowed.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbLongAllowed.Location = new System.Drawing.Point(170, 61);
+            this.tbLongAllowed.Name = "tbLongAllowed";
+            this.tbLongAllowed.Size = new System.Drawing.Size(48, 20);
+            this.tbLongAllowed.TabIndex = 5;
+            this.tbLongAllowed.Text = "256";
+            this.toolTip1.SetToolTip(this.tbLongAllowed, "Click APPLY to save");
             // 
-            // tbPP
+            // label10
             // 
-            this.tbPP.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbPP.Location = new System.Drawing.Point(89, 23);
-            this.tbPP.Multiline = true;
-            this.tbPP.Name = "tbPP";
-            this.tbPP.Size = new System.Drawing.Size(244, 88);
-            this.tbPP.TabIndex = 1;
-            this.tbPP.Text = "Click <a href=\"https://support.hp.com/us-en/document/ish_1716406-1413451-16?openC" +
-    "LC=true\" target=\"_blank\">here for network setup</a> in your language";
-            // 
-            // btnTestPP
-            // 
-            this.btnTestPP.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestPP.Location = new System.Drawing.Point(15, 53);
-            this.btnTestPP.Name = "btnTestPP";
-            this.btnTestPP.Size = new System.Drawing.Size(51, 23);
-            this.btnTestPP.TabIndex = 4;
-            this.btnTestPP.Text = "Test";
-            this.btnTestPP.UseVisualStyleBackColor = true;
-            this.btnTestPP.Click += new System.EventHandler(this.btnTestPP_Click);
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.Window;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(19, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(131, 15);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Longest Allowed URL";
+            this.toolTip1.SetToolTip(this.label10, "After scrubbing, any url with length\r\nexceeding this number is recorded\r\nas an un" +
+        "scrubbed url.");
             // 
             // Settings
             // 
@@ -668,10 +696,10 @@
             this.gbTB.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -729,5 +757,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox tbPP;
         private System.Windows.Forms.Button btnTestPP;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbLongAllowed;
     }
 }

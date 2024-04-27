@@ -109,6 +109,7 @@
             this.mnuDrvGoog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDevCol = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHuntDev = new System.Windows.Forms.ToolStripMenuItem();
+            this.hPYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
@@ -134,7 +135,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.hPYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -543,7 +543,7 @@
             this.btnAppendMac.Name = "btnAppendMac";
             this.btnAppendMac.Size = new System.Drawing.Size(138, 30);
             this.btnAppendMac.TabIndex = 7;
-            this.btnAppendMac.Text = "Append Image";
+            this.btnAppendMac.Text = "Insert Image";
             this.btnAppendMac.UseVisualStyleBackColor = true;
             this.btnAppendMac.Click += new System.EventHandler(this.btnAppendMac_Click);
             // 
@@ -939,6 +939,13 @@
     "rd\r\nPCI\\VEN_1B21&DEV_2142&\r\n-or-\r\nUSB\\VID_0BDA&PID_0129\\20100201396000000\r\n";
             this.mnuHuntDev.Click += new System.EventHandler(this.mnuHuntDev_Click);
             // 
+            // hPYouTubeToolStripMenuItem
+            // 
+            this.hPYouTubeToolStripMenuItem.Name = "hPYouTubeToolStripMenuItem";
+            this.hPYouTubeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.hPYouTubeToolStripMenuItem.Text = "HP YouTube";
+            this.hPYouTubeToolStripMenuItem.Click += new System.EventHandler(this.hPYouTubeToolStripMenuItem_Click);
+            // 
             // gpMainEdit
             // 
             this.gpMainEdit.Controls.Add(this.label7);
@@ -1239,13 +1246,6 @@
             // 
             this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // hPYouTubeToolStripMenuItem
-            // 
-            this.hPYouTubeToolStripMenuItem.Name = "hPYouTubeToolStripMenuItem";
-            this.hPYouTubeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.hPYouTubeToolStripMenuItem.Text = "HP YouTube";
-            this.hPYouTubeToolStripMenuItem.Click += new System.EventHandler(this.hPYouTubeToolStripMenuItem_Click);
             // 
             // main
             // 

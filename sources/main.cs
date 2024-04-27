@@ -1278,12 +1278,15 @@ namespace MacroViewer
 
         private void btnAppendMac_Click(object sender, EventArgs e)
         {
+            int i = tbBody.SelectionStart;
             CreateMacro MyCM = new CreateMacro(strType);
             MyCM.ShowDialog();
             string strReturn = MyCM.strResultOut;
             if (strReturn == null) return;
             if (strReturn == "") return;
-            tbBody.Text += strReturn;
+            string s1 = tbBody.Text.Substring(0, i) + "<br>";
+            string s2 = "<br>" + tbBody.Text.Substring(i);
+            tbBody.Text = s1 + strReturn + s2;
         }
 
         private void downloadMacrosToolStripMenuItem_Click(object sender, EventArgs e)

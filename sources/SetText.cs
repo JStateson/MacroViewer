@@ -173,9 +173,14 @@ namespace MacroViewer
                 strUnBoxed = tbSelectedItem.Text.Trim();
             }
             if (strUnBoxed == "") return;
-            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed); ;
+            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
             if (bBoxed) StopTimer();
             else StartTimer();
+        }
+
+        private void blnUseBr_Click(object sender, EventArgs e)
+        {
+            tbResult.Text = tbResult.Text.Replace(Environment.NewLine, "<br>");
         }
     }
 }

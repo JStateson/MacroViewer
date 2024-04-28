@@ -679,7 +679,7 @@ namespace MacroViewer
             int jChar = 0;
             string r = rows > 9 ? "00" : "0";
             string c = cols > 9 ? "00" : "0";
-            string UseBorder = iSize == 0 ? "<table>" : "<table border='" + iSize.ToString() + "'>";
+            string UseBorder = iSize == 0 ? "<table>" : "<table border='" + iSize.ToString() + "' width=\"50%\">";
 
 
             StringBuilder htmlBuilder = new StringBuilder();

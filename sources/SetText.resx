@@ -134,7 +134,11 @@ filled out you should use the Utils Menu and select the
 
 Apply and exit forms the the url at the desired location using
 any text you highlighted earlier.  This only applies to urls and
-is ignored for the table.</value>
+is ignored for the table.
+
+You may enter text into the resut area and the box it. You can
+change the width from %50 to %100 only.  Replace newliens
+with &lt;br&gt; before boxing.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>108</value>

@@ -58,6 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.blnUseBr = new System.Windows.Forms.Button();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,6 +114,7 @@
             // tbRawUrl
             // 
             this.tbRawUrl.Location = new System.Drawing.Point(19, 37);
+            this.tbRawUrl.Multiline = true;
             this.tbRawUrl.Name = "tbRawUrl";
             this.tbRawUrl.Size = new System.Drawing.Size(341, 22);
             this.tbRawUrl.TabIndex = 0;
@@ -155,6 +157,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.blnUseBr);
             this.groupBox4.Controls.Add(this.btnSqueeze);
             this.groupBox4.Controls.Add(this.lbBoxed);
             this.groupBox4.Controls.Add(this.btnBoxIT);
@@ -163,9 +166,9 @@
             this.groupBox4.Controls.Add(this.btnApplyText);
             this.groupBox4.Controls.Add(this.tbResult);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(18, 316);
+            this.groupBox4.Location = new System.Drawing.Point(18, 296);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(654, 233);
+            this.groupBox4.Size = new System.Drawing.Size(654, 253);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
@@ -224,7 +227,7 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(497, 53);
+            this.btnTest.Location = new System.Drawing.Point(490, 28);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(122, 36);
             this.btnTest.TabIndex = 7;
@@ -246,10 +249,10 @@
             // 
             // tbResult
             // 
-            this.tbResult.Location = new System.Drawing.Point(20, 135);
+            this.tbResult.Location = new System.Drawing.Point(14, 133);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(592, 74);
+            this.tbResult.Size = new System.Drawing.Size(592, 100);
             this.tbResult.TabIndex = 0;
             // 
             // btnCancel
@@ -347,11 +350,24 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(701, 354);
+            this.label3.Location = new System.Drawing.Point(689, 308);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(361, 176);
+            this.label3.Size = new System.Drawing.Size(361, 240);
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
+            // 
+            // blnUseBr
+            // 
+            this.blnUseBr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blnUseBr.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.blnUseBr.Location = new System.Drawing.Point(490, 78);
+            this.blnUseBr.Name = "blnUseBr";
+            this.blnUseBr.Size = new System.Drawing.Size(122, 36);
+            this.blnUseBr.TabIndex = 11;
+            this.blnUseBr.Text = "Use <br>";
+            this.toolTip1.SetToolTip(this.blnUseBr, "Use this first before boxing or\r\nthe box is always squeezed");
+            this.blnUseBr.UseVisualStyleBackColor = true;
+            this.blnUseBr.Click += new System.EventHandler(this.blnUseBr_Click);
             // 
             // SetText
             // 
@@ -422,5 +438,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSqueeze;
         private System.Windows.Forms.CheckBox cbCleanUrl;
+        private System.Windows.Forms.Button blnUseBr;
     }
 }

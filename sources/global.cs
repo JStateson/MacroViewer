@@ -370,12 +370,15 @@ namespace MacroViewer
             {
                 return Utils.AssembleIMG(strUrl);
             }
-            return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
+//return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
+
+            return "<img src=\"" + strUrl + "\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
         }
 
         public static string AssembleIMG(string strURL)
         {
-            return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
+//return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
+            return "<img src=\"" + strURL.Trim() + "\">";
         }
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
         public static string VolunteerUserID = "";

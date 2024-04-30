@@ -77,7 +77,8 @@ namespace MacroViewer
             {
                 strImageName = tbUrlText.Text;
             }
-            strResultOut = Utils.AssembleImage(strImageName, Height, Width);
+            string s = Utils.AssembleImage(strImageName, Height, Width);
+            strResultOut = cbFormBorder.Checked ? Utils.Form1CellTable(s) : s;
         }
 
 

@@ -39,6 +39,7 @@
             this.btnPaste = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
+            this.cbFormBorder = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +48,7 @@
             // 
             this.btnCencel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCencel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCencel.Location = new System.Drawing.Point(204, 403);
+            this.btnCencel.Location = new System.Drawing.Point(51, 435);
             this.btnCencel.Name = "btnCencel";
             this.btnCencel.Size = new System.Drawing.Size(122, 36);
             this.btnCencel.TabIndex = 9;
@@ -60,7 +61,7 @@
             this.btnApply.Enabled = false;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(204, 331);
+            this.btnApply.Location = new System.Drawing.Point(51, 345);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 8;
@@ -72,7 +73,7 @@
             // 
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImage.Image = ((System.Drawing.Image)(resources.GetObject("pbImage.Image")));
-            this.pbImage.Location = new System.Drawing.Point(423, 12);
+            this.pbImage.Location = new System.Drawing.Point(474, 12);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(565, 473);
             this.pbImage.TabIndex = 7;
@@ -128,7 +129,7 @@
             // 
             this.btnPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPaste.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPaste.Location = new System.Drawing.Point(154, 261);
+            this.btnPaste.Location = new System.Drawing.Point(204, 242);
             this.btnPaste.Name = "btnPaste";
             this.btnPaste.Size = new System.Drawing.Size(227, 36);
             this.btnPaste.TabIndex = 5;
@@ -140,7 +141,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(66, 331);
+            this.btnClear.Location = new System.Drawing.Point(309, 312);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(122, 36);
             this.btnClear.TabIndex = 10;
@@ -152,11 +153,26 @@
             // 
             this.ofd.FileName = "openFileDialog1";
             // 
+            // cbFormBorder
+            // 
+            this.cbFormBorder.AutoSize = true;
+            this.cbFormBorder.Checked = true;
+            this.cbFormBorder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFormBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFormBorder.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbFormBorder.Location = new System.Drawing.Point(204, 407);
+            this.cbFormBorder.Name = "cbFormBorder";
+            this.cbFormBorder.Size = new System.Drawing.Size(112, 20);
+            this.cbFormBorder.TabIndex = 11;
+            this.cbFormBorder.Text = "Form Border";
+            this.cbFormBorder.UseVisualStyleBackColor = true;
+            // 
             // CreateMacro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 510);
+            this.ClientSize = new System.Drawing.Size(1084, 510);
+            this.Controls.Add(this.cbFormBorder);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnPaste);
             this.Controls.Add(this.btnCencel);
@@ -173,6 +189,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -188,5 +205,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnBrowseImg;
         private System.Windows.Forms.OpenFileDialog ofd;
+        private System.Windows.Forms.CheckBox cbFormBorder;
     }
 }

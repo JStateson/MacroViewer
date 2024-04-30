@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define RUNFIX
+using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
@@ -15,6 +16,7 @@ using System.Xml.Serialization;
 using System.Windows.Media.Animation;
 using System.Dynamic;
 using System.Configuration;
+using System.Security.Policy;
 
 
 namespace MacroViewer
@@ -1548,6 +1550,7 @@ namespace MacroViewer
 
                 foreach (string s in Utils.LocalMacroPrefix)
                 {
+                    bool bDebug = false;
                     string tSig = "";
                     int j, k;
                     int i, n = LoadFileItem(s);
@@ -1557,6 +1560,12 @@ namespace MacroViewer
                         cb.File = s;
                         cb.Number = (i + 1).ToString();
                         cb.Name = lbName.Rows[i].Cells[2].Value.ToString();
+#if RUNFIX
+                        if(s != "HP")
+                        {
+                            bDebug |= RunBorderFix(s, i+1, cb.Name, ref Body[i]);
+                        }
+#endif
                         j = 0;
                         k = 0;
                         int m = Utils.HasSupSig(ref Body[i], ref j, ref k);
@@ -1582,7 +1591,7 @@ namespace MacroViewer
                         cb.fKeys = "";
                         cBodies.Add(cb);
                     }
-                    if(bMustChange && n > 0)
+                    if((bMustChange && n > 0) || bDebug)
                     {
                         SaveAsTXT(s);
                     }
@@ -1909,6 +1918,41 @@ namespace MacroViewer
             tbBody.Text += (i == j) ? "No difference" : "\r\nShortened " + (i - j).ToString() + " characters";
 
             Clipboard.SetText(sDirty);
+        }
+
+        private bool RunBorderFix(string sType, int i, string mName, ref string sIn)
+        {
+            int n = BorderFix(ref sIn);
+            if(n > 0)
+            {
+                using (StreamWriter writer = File.AppendText(Utils.WhereExe + "\\FixedBorder.txt"))
+                {
+                    writer.WriteLine(sType + " " + i.ToString() + " " + mName + " " + n.ToString());
+                }
+            }
+            return n>0;
+        }
+
+        /*
+         * replace
+         * <img src= border="2">
+         * with
+         * <table border="1" width="50%"><td><img src=></td></table>
+         * 
+        */
+        private int BorderFix(ref string s)
+        {
+            string t,u;
+            int i,j;
+            j = s.LastIndexOf("border=\"2\">");
+            if (j < 0) return 0;
+            i = s.LastIndexOf("<img", j);
+            if (i < 0) return 0;
+            t = s.Substring(i, j - i) + ">";
+            u = Utils.Form1CellTable(t);
+            t = s.Substring(i, 11 + j - i);
+            s = s.Replace(t, u);
+            return 1 + BorderFix(ref s);
         }
 
     }

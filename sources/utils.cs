@@ -158,7 +158,7 @@ namespace MacroViewer
                 for (int i = 0; i < n; i++)
                 {
                     //DataGridViewRow row = new DataGridViewRow();
-                    dgv.Rows.Add(Utils.strFillSubscript(r30, c30, i), "    ");
+                    dgv.Rows.Add(Utils.strFillSubscript(r30, c30, i), "");
                 }
 
             }
@@ -186,7 +186,7 @@ namespace MacroViewer
                 s1 = row.Cells[0].Value.ToString();
                 if (null == row.Cells[1].Value) break;
                 s2 = row.Cells[1].Value.ToString();
-                sBig = sBig.Replace(s1, s2);
+                sBig = sBig.Replace(s1, s2== "" ? "&nbsp;" : s2);
             }
             tbScratch.Text = sBig;
         }
@@ -204,7 +204,7 @@ namespace MacroViewer
         private void btnFillRow_Click(object sender, EventArgs e)
         {
             btnFillCol.Enabled = false;
-            nGathered = GatherClipboardText();
+            nGathered = GatherClipboardText(cbRemE_tab.Checked);
             if (ColsExpected == 0) ColsExpected = nGathered;
             FillTable();
         }
@@ -212,7 +212,7 @@ namespace MacroViewer
         private void btnFillCol_Click(object sender, EventArgs e)
         {
             btnFillRow.Enabled = false;
-            nGathered = GatherClipboardText();
+            nGathered = GatherClipboardText(cbRemE_tab.Checked);
             if (RowsExpected == 0) RowsExpected = nGathered;
             FillTable();
         }
@@ -229,10 +229,27 @@ namespace MacroViewer
             string[] sNew = new string[n];
             foreach (string s in sOne)
             {
-                sNew[i] = s.Trim();
-                i++;
+                string t = s.Trim();
+                if(cbRemE_tab.Checked)
+                {
+                    if (t == "") continue;
+                    sNew[i] = t;
+                    i++;
+                }
+                else
+                {
+                    if (t == "") t = "&nbsp;";
+                    sNew[i] = t;
+                    i++;
+                }
             }
-            sMyTable.Add(sNew);
+            if (i == n) sMyTable.Add(sNew);
+            else
+            {
+                string[] truncatedArray = new string[i];
+                Array.Copy(sNew, truncatedArray, i);
+                sMyTable.Add(truncatedArray);
+            }
             FormTable();
         }
 
@@ -275,7 +292,7 @@ namespace MacroViewer
             string sSuf = "</td>";
             string sStrCol = "<tr>";
             string sEndCol = "</tr>";
-            string sSt = cbUseBorder.Checked ? "<table border='1'>" : "<table>";
+            string sSt = cbUseBorder.Checked ? "<table border='1' width='50%'>" : "<table width='50%'>";
             string sSe = "</table>";
             string sOut = sSt;
             if (RowsExpected > 0)
@@ -321,11 +338,13 @@ namespace MacroViewer
             tbScratch.Text = sOut;
         }
 
-        private int GatherClipboardText()
+        // if checked then remove unwanted lines
+        private int GatherClipboardText(bool b)
         {
             string sIn = Clipboard.GetText();
             // remove emptys is needed because \r\n is newline
-            sEach = sIn.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            if (b) sEach = sIn.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            else sEach = sIn.Split(new[] { '\n', '\r' });
             return sEach.Length;
         }
 
@@ -374,7 +393,7 @@ namespace MacroViewer
             //<table border='1'><tr><td>R0C0_AAAA</td></tr></table>
             if (cbFrameList.Checked)
             {
-                sOut = "<table border='1'><tr><td>" + sOut + "</td></tr></table>";
+                sOut = "<table border='1' width='50%'><tr><td>" + sOut + "</td></tr></table>";
             }
             tbScratch.Text = sOut;
         }
@@ -391,7 +410,7 @@ namespace MacroViewer
 
         private void btnFillList_Click(object sender, EventArgs e)
         {
-            nGathered = GatherClipboardText();
+            nGathered = GatherClipboardText(cbRemE_list.Checked);
             dgv.Rows.Clear();
             foreach (string s in sEach)
             {
@@ -445,7 +464,7 @@ namespace MacroViewer
             }
             else
             {
-                tbScratch.Text = tbScratch.Text.Replace("<table border='1'>", "<table>");
+                tbScratch.Text = tbScratch.Text.Replace("<table border='1' width='50%'>", "<table width='50%'>");
             }
         }
 

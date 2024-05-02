@@ -183,7 +183,7 @@ namespace MacroViewer
         public static void ShowPageInBrowser(string strType, string strTemp)
         {
             string sPP = Properties.Settings.Default.sPPrefix;
-            if (sPP != "init" && Utils.sPrinterTypes.Contains(strType + " "))
+            if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
             {
                 strTemp = Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
             }
@@ -463,14 +463,14 @@ namespace MacroViewer
         }
         public static string Form1CellTable(string strIn)
         {
-            return "<table border=\"1\" width=\"50%\"><td>" + strIn + "</td></table>";
+            return "<table border=\"1\" width=\"50%\"><tr><td>" + strIn + "</td></tr></table>";
         }
 
         // this puts a newline in the table to make it easier to read the text and copy it
         // the <p> does not work at the HP forum and a double newline is needed
         public static string Form1CellTableP(string strIn)
         {
-            return "<table border=\"1\" width=\"50%\"><td><br>" + strIn + "<br><br></td></table>";
+            return "<table border=\"1\" width=\"50%\"><tr><td><br>" + strIn + "<br><br></td></tr></table>";
         }
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {
@@ -649,7 +649,33 @@ namespace MacroViewer
             tbEdit.Focus();
         }
 
+        public static void AddColor(ref TextBox tbEdit, string sColor)
+        {
+            string s1, s2, s3;
+            int i = tbEdit.SelectionStart;
+            int j = tbEdit.SelectionLength;
+            if (j == 0) return;
+            s1 = tbEdit.Text.Substring(0, i);
+            s2 = tbEdit.Text.Substring(i, j);
+            s3 = tbEdit.Text.Substring(i + j);
+            if (s2.Contains("<")) return; // not going to restore any previous FUs
+            string s = "<font color =\"" + sColor + "\">";
+            int n = s.Length;
+            s1 += s;
+            s = "</font>";
+            n += s.Length;
+            s2 += s;
+            tbEdit.Text = s1 + s2 + s3;
+            tbEdit.SelectionStart = i;
+            tbEdit.SelectionLength = j + n;
+            tbEdit.Focus();
+        }
 
+        public static bool IsValidHtmlColor(string color)
+        {
+            string pattern = @"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+            return Regex.IsMatch(color, pattern);
+        }
 
         //insert newlines into textbox
         public static void AddNL(ref TextBox tbEdit, int n)

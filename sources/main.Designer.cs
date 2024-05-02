@@ -53,6 +53,9 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnColors = new System.Windows.Forms.Button();
+            this.tbColorCode = new System.Windows.Forms.TextBox();
+            this.btnRed = new System.Windows.Forms.Button();
             this.btnCleanPaste = new System.Windows.Forms.Button();
             this.btnToLower = new System.Windows.Forms.Button();
             this.btnClipToUpper = new System.Windows.Forms.Button();
@@ -329,7 +332,7 @@
             // 
             this.btnLinkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLinkAll.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnLinkAll.Location = new System.Drawing.Point(421, 478);
+            this.btnLinkAll.Location = new System.Drawing.Point(405, 514);
             this.btnLinkAll.Name = "btnLinkAll";
             this.btnLinkAll.Size = new System.Drawing.Size(122, 25);
             this.btnLinkAll.TabIndex = 9;
@@ -409,6 +412,9 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnColors);
+            this.groupBox6.Controls.Add(this.tbColorCode);
+            this.groupBox6.Controls.Add(this.btnRed);
             this.groupBox6.Controls.Add(this.btnCleanPaste);
             this.groupBox6.Controls.Add(this.btnToLower);
             this.groupBox6.Controls.Add(this.btnClipToUpper);
@@ -429,10 +435,44 @@
             this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes <BR> for newliens\r\nAvoid using CTRL-V to paste from " +
         "forum\r\nUse \"Pase from clipboard\" instead");
             // 
+            // btnColors
+            // 
+            this.btnColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColors.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnColors.Location = new System.Drawing.Point(448, 352);
+            this.btnColors.Name = "btnColors";
+            this.btnColors.Size = new System.Drawing.Size(110, 25);
+            this.btnColors.TabIndex = 33;
+            this.btnColors.Text = "See Colors";
+            this.toolTip1.SetToolTip(this.btnColors, "Copy the color code\r\nsuch as #0000FF\r\nback into the text box\r\nfor the color BLUE");
+            this.btnColors.UseVisualStyleBackColor = true;
+            this.btnColors.Click += new System.EventHandler(this.btnColors_Click);
+            // 
+            // tbColorCode
+            // 
+            this.tbColorCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbColorCode.Location = new System.Drawing.Point(426, 322);
+            this.tbColorCode.Name = "tbColorCode";
+            this.tbColorCode.Size = new System.Drawing.Size(69, 22);
+            this.tbColorCode.TabIndex = 32;
+            this.tbColorCode.Text = "#FF6600";
+            // 
+            // btnRed
+            // 
+            this.btnRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRed.ForeColor = System.Drawing.Color.Red;
+            this.btnRed.Location = new System.Drawing.Point(501, 321);
+            this.btnRed.Name = "btnRed";
+            this.btnRed.Size = new System.Drawing.Size(57, 25);
+            this.btnRed.TabIndex = 31;
+            this.btnRed.Text = "RED";
+            this.btnRed.UseVisualStyleBackColor = true;
+            this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
+            // 
             // btnCleanPaste
             // 
             this.btnCleanPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleanPaste.Location = new System.Drawing.Point(424, 331);
+            this.btnCleanPaste.Location = new System.Drawing.Point(424, 284);
             this.btnCleanPaste.Name = "btnCleanPaste";
             this.btnCleanPaste.Size = new System.Drawing.Size(134, 23);
             this.btnCleanPaste.TabIndex = 30;
@@ -444,7 +484,7 @@
             // btnToLower
             // 
             this.btnToLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToLower.Location = new System.Drawing.Point(424, 291);
+            this.btnToLower.Location = new System.Drawing.Point(424, 247);
             this.btnToLower.Name = "btnToLower";
             this.btnToLower.Size = new System.Drawing.Size(134, 23);
             this.btnToLower.TabIndex = 29;
@@ -456,7 +496,7 @@
             // btnClipToUpper
             // 
             this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClipToUpper.Location = new System.Drawing.Point(424, 248);
+            this.btnClipToUpper.Location = new System.Drawing.Point(424, 211);
             this.btnClipToUpper.Name = "btnClipToUpper";
             this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
             this.btnClipToUpper.TabIndex = 28;
@@ -469,11 +509,12 @@
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBold.Location = new System.Drawing.Point(421, 515);
+            this.btnBold.Location = new System.Drawing.Point(501, 391);
             this.btnBold.Name = "btnBold";
-            this.btnBold.Size = new System.Drawing.Size(122, 25);
+            this.btnBold.Size = new System.Drawing.Size(57, 25);
             this.btnBold.TabIndex = 27;
             this.btnBold.Text = "BOLD";
+            this.toolTip1.SetToolTip(this.btnBold, "Do colors first.  You cannot\r\nadd colors after doing  bold");
             this.btnBold.UseVisualStyleBackColor = true;
             this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
             // 
@@ -483,7 +524,7 @@
             this.groupBox1.Controls.Add(this.btnAdd1New);
             this.groupBox1.Controls.Add(this.btnAdd2New);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.groupBox1.Location = new System.Drawing.Point(424, 44);
+            this.groupBox1.Location = new System.Drawing.Point(424, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(134, 170);
             this.groupBox1.TabIndex = 26;
@@ -551,7 +592,7 @@
             // 
             this.btnSetObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSetObj.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSetObj.Location = new System.Drawing.Point(421, 438);
+            this.btnSetObj.Location = new System.Drawing.Point(405, 472);
             this.btnSetObj.Name = "btnSetObj";
             this.btnSetObj.Size = new System.Drawing.Size(122, 25);
             this.btnSetObj.TabIndex = 5;
@@ -576,7 +617,7 @@
             this.tbBody.Multiline = true;
             this.tbBody.Name = "tbBody";
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbBody.Size = new System.Drawing.Size(391, 376);
+            this.tbBody.Size = new System.Drawing.Size(391, 384);
             this.tbBody.TabIndex = 3;
             this.toolTip1.SetToolTip(this.tbBody, "Any HTML can be dropped into here for testing.\r\nFor example if you use ChatGPT to" +
         " ask for HTML \r\nthe samples provided can be tested here.  Just be\r\nsure NOT to a" +
@@ -697,6 +738,7 @@
             // 
             // saveToXMLToolStripMenuItem
             // 
+            this.saveToXMLToolStripMenuItem.Enabled = false;
             this.saveToXMLToolStripMenuItem.Name = "saveToXMLToolStripMenuItem";
             this.saveToXMLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.saveToXMLToolStripMenuItem.Text = "Save HTML as local HP";
@@ -1397,6 +1439,9 @@
         private System.Windows.Forms.Button btnToLower;
         private System.Windows.Forms.ToolStripMenuItem helpWithWebSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hPYouTubeToolStripMenuItem;
+        private System.Windows.Forms.Button btnRed;
+        private System.Windows.Forms.TextBox tbColorCode;
+        private System.Windows.Forms.Button btnColors;
     }
 }
 

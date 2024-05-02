@@ -1,4 +1,5 @@
-﻿//#define RUNFIX
+﻿#define SPECIAL2
+#define SPECIAL3
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -17,6 +18,7 @@ using System.Windows.Media.Animation;
 using System.Dynamic;
 using System.Configuration;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 
 
 namespace MacroViewer
@@ -86,6 +88,7 @@ namespace MacroViewer
             Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
             SpecialUsed(Properties.Settings.Default.SpecialWord != "");
             NormalEditColor = btnCancelEdits.ForeColor;
+            SetFGcolor("#FF6600");
         }
 
         private string IgnoreSupSig(string s)
@@ -745,6 +748,7 @@ namespace MacroViewer
                 gbSupp.Enabled = false;
                 strType = "";
                 bHaveHTML = true;
+                saveToXMLToolStripMenuItem.Enabled = true;
                 ShowUneditedRow(0);
                 btnNew.Enabled = false;
                 tbMacName.Enabled = false;
@@ -1413,10 +1417,10 @@ namespace MacroViewer
         private void btnCancelEdits_Click(object sender, EventArgs e)
         {
             tbBody.Text = Body[CurrentRowSelected];
+            SetFGcolor("#FF6600");
+            tbColorCode.ForeColor = ColorTranslator.FromHtml(tbColorCode.Text.ToString());
             MustFinishEdit(true);
         }
-
-
 
         private void btnLinkAll_Click(object sender, EventArgs e)
         {
@@ -1560,12 +1564,13 @@ namespace MacroViewer
                         cb.File = s;
                         cb.Number = (i + 1).ToString();
                         cb.Name = lbName.Rows[i].Cells[2].Value.ToString();
-#if RUNFIX
-                        if(s != "HP")
-                        {
-                            bDebug |= RunBorderFix(s, i+1, cb.Name, ref Body[i]);
-                        }
+#if SPECIAL2
+                        bDebug |= RunBorderFix(s, i+1, cb.Name, ref Body[i]);
 #endif
+#if SPECIAL3
+                        bDebug |= RunLookMissingTR(s, i + 1, cb.Name, ref Body[i]);
+#endif
+
                         j = 0;
                         k = 0;
                         int m = Utils.HasSupSig(ref Body[i], ref j, ref k);
@@ -1920,6 +1925,59 @@ namespace MacroViewer
             Clipboard.SetText(sDirty);
         }
 
+// some <tr> are missing the required <tr><td> and cannot be used in forum macro
+// this seems to be a requirement to HP forums and is not an HTML requirement 
+// the program fixes it so that any macros can be used at in the HP forum
+// this would not have to be done if I knew about the problem before I coded anything
+#if SPECIAL3
+        private bool RunLookMissingTR(string sType, int i, string mName, ref string sIn)
+        {
+            int n = sIn.IndexOf("<td></td>");
+            int m = 0;
+            if(n > 0)
+            {
+                m = 1;
+                sIn = sIn.Replace("<td></td>", "<td>&nbsp;</td>");
+            }
+            string s = sIn;
+            sIn = s;
+            n = m + LookMissing(ref sIn, 0);
+            if (n > 0)
+            {
+                using (StreamWriter writer = File.AppendText(Utils.WhereExe + "\\LookedMissing.txt"))
+                {
+                    writer.WriteLine(sType + " " + i.ToString() + " " + mName + " " + n.ToString());
+                }
+            }
+            return n > 0;
+        }
+
+        private int LookMissing(ref string sIn, int n)
+        {
+            string s1, s2, s3;
+            int k;
+            if (n >= sIn.Length) return 0;
+            int i = sIn.IndexOf("<table", n); //6
+            if (i < 0) return 0;
+            int j = sIn.IndexOf("</table>", i); //8
+            if (j < 0) return 0;
+            string s = sIn.Substring(i, 8 + j - i);
+            n += (j + 8);
+            if (s.Contains("<tr>"))return LookMissing(ref sIn, n);
+            k = sIn.IndexOf("<td>", i);
+            Debug.Assert((i < k) && (k < j));
+            s1 = sIn.Substring(0, i);
+            k = s.IndexOf("<td>");  // should be first one
+            s3 = sIn.Substring(j + 8);
+            s2 = s.Substring(0, k) + "<tr>" + s.Substring(k); // 4
+            s2 = s2.Replace("</table>", "</tr></table>"); //5
+            sIn = s1 + s2 + s3;
+            n += 9;// (9 + s2.Length());
+            return 1 + LookMissing(ref sIn, n);
+        }
+#endif
+
+#if SPECIAL2
         private bool RunBorderFix(string sType, int i, string mName, ref string sIn)
         {
             int n = BorderFix(ref sIn);
@@ -1930,7 +1988,7 @@ namespace MacroViewer
                     writer.WriteLine(sType + " " + i.ToString() + " " + mName + " " + n.ToString());
                 }
             }
-            return n>0;
+            return n > 0;
         }
 
         /*
@@ -1954,6 +2012,49 @@ namespace MacroViewer
             s = s.Replace(t, u);
             return 1 + BorderFix(ref s);
         }
+#endif
+        //red is #FF6600
+        private void btnRed_Click(object sender, EventArgs e)
+        {
+            if (SetFGcolor(tbColorCode.Text))
+            {
+                string s = tbColorCode.Text;    // may have changed
+                Utils.AddColor(ref tbBody, s);
+            }
+            else BeepError();
+        }
+        private bool SetFGcolor(string sColor)
+        { 
+            string s = sColor.Trim().ToUpper();
+            bool bRtn = true;   // assume all is ok
+            if (Utils.IsValidHtmlColor(s))
+            {
+                tbColorCode.Text = s;
+            }
+            else
+            {
+                s = "#FF6600";
+                tbColorCode.Text = s;
+                bRtn = false;
+            }
+            tbColorCode.ForeColor = ColorTranslator.FromHtml(s);
+            return bRtn;
+        }
+        private void btnColors_Click(object sender, EventArgs e)
+        {
+            string sHTMLcolors = "<table border='1'><tr><td>Black</td><td><font color='#000000'>ForeGround</font></td><td><font color='#000000'><b>ForeGroundBold</b></font></td><td><span style='background-color: #000000; color: black;'>Background</span></td><td><span style='background-color: #000000; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#000000'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>White</td><td><font color='#FFFFFF'>ForeGround</font></td><td><font color='#FFFFFF'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FFFFFF; color: black;'>Background</span></td><td><span style='background-color: #FFFFFF; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FFFFFF'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Red</td><td><font color='#FF0000'>ForeGround</font></td><td><font color='#FF0000'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FF0000; color: black;'>Background</span></td><td><span style='background-color: #FF0000; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FF0000'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Green</td><td><font color='#008000'>ForeGround</font></td><td><font color='#008000'><b>ForeGroundBold</b></font></td><td><span style='background-color: #008000; color: black;'>Background</span></td><td><span style='background-color: #008000; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#008000'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Blue</td><td><font color='#0000FF'>ForeGround</font></td><td><font color='#0000FF'><b>ForeGroundBold</b></font></td><td><span style='background-color: #0000FF; color: black;'>Background</span></td><td><span style='background-color: #0000FF; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#0000FF'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Yellow</td><td><font color='#FFFF00'>ForeGround</font></td><td><font color='#FFFF00'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FFFF00; color: black;'>Background</span></td><td><span style='background-color: #FFFF00; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FFFF00'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Cyan</td><td><font color='#00FFFF'>ForeGround</font></td><td><font color='#00FFFF'><b>ForeGroundBold</b></font></td><td><span style='background-color: #00FFFF; color: black;'>Background</span></td><td><span style='background-color: #00FFFF; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#00FFFF'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Magenta</td><td><font color='#FF00FF'>ForeGround</font></td><td><font color='#FF00FF'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FF00FF; color: black;'>Background</span></td><td><span style='background-color: #FF00FF; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FF00FF'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Silver</td><td><font color='#C0C0C0'>ForeGround</font></td><td><font color='#C0C0C0'><b>ForeGroundBold</b></font></td><td><span style='background-color: #C0C0C0; color: black;'>Background</span></td><td><span style='background-color: #C0C0C0; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#C0C0C0'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Gray</td><td><font color='#808080'>ForeGround</font></td><td><font color='#808080'><b>ForeGroundBold</b></font></td><td><span style='background-color: #808080; color: black;'>Background</span></td><td><span style='background-color: #808080; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#808080'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Maroon</td><td><font color='#800000'>ForeGround</font></td><td><font color='#800000'><b>ForeGroundBold</b></font></td><td><span style='background-color: #800000; color: black;'>Background</span></td><td><span style='background-color: #800000; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#800000'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Olive</td><td><font color='#808000'>ForeGround</font></td><td><font color='#808000'><b>ForeGroundBold</b></font></td><td><span style='background-color: #808000; color: black;'>Background</span></td><td><span style='background-color: #808000; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#808000'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Purple</td><td><font color='#800080'>ForeGround</font></td><td><font color='#800080'><b>ForeGroundBold</b></font></td><td><span style='background-color: #800080; color: black;'>Background</span></td><td><span style='background-color: #800080; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#800080'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Teal</td><td><font color='#008080'>ForeGround</font></td><td><font color='#008080'><b>ForeGroundBold</b></font></td><td><span style='background-color: #008080; color: black;'>Background</span></td><td><span style='background-color: #008080; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#008080'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Navy</td><td><font color='#000080'>ForeGround</font></td><td><font color='#000080'><b>ForeGroundBold</b></font></td><td><span style='background-color: #000080; color: black;'>Background</span></td><td><span style='background-color: #000080; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#000080'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Orange</td><td><font color='#FFA500'>ForeGround</font></td><td><font color='#FFA500'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FFA500; color: black;'>Background</span></td><td><span style='background-color: #FFA500; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FFA500'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Aquamarine</td><td><font color='#7FFFD4'>ForeGround</font></td><td><font color='#7FFFD4'><b>ForeGroundBold</b></font></td><td><span style='background-color: #7FFFD4; color: black;'>Background</span></td><td><span style='background-color: #7FFFD4; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#7FFFD4'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Turquoise</td><td><font color='#40E0D0'>ForeGround</font></td><td><font color='#40E0D0'><b>ForeGroundBold</b></font></td><td><span style='background-color: #40E0D0; color: black;'>Background</span></td><td><span style='background-color: #40E0D0; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#40E0D0'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Lime</td><td><font color='#00FF00'>ForeGround</font></td><td><font color='#00FF00'><b>ForeGroundBold</b></font></td><td><span style='background-color: #00FF00; color: black;'>Background</span></td><td><span style='background-color: #00FF00; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#00FF00'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Fuchsia</td><td><font color='#FF00FF'>ForeGround</font></td><td><font color='#FF00FF'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FF00FF; color: black;'>Background</span></td><td><span style='background-color: #FF00FF; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FF00FF'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Indigo</td><td><font color='#4B0082'>ForeGround</font></td><td><font color='#4B0082'><b>ForeGroundBold</b></font></td><td><span style='background-color: #4B0082; color: black;'>Background</span></td><td><span style='background-color: #4B0082; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#4B0082'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Violet</td><td><font color='#EE82EE'>ForeGround</font></td><td><font color='#EE82EE'><b>ForeGroundBold</b></font></td><td><span style='background-color: #EE82EE; color: black;'>Background</span></td><td><span style='background-color: #EE82EE; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#EE82EE'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Pink</td><td><font color='#FFC0CB'>ForeGround</font></td><td><font color='#FFC0CB'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FFC0CB; color: black;'>Background</span></td><td><span style='background-color: #FFC0CB; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FFC0CB'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Peach</td><td><font color='#FFDAB9'>ForeGround</font></td><td><font color='#FFDAB9'><b>ForeGroundBold</b></font></td><td><span style='background-color: #FFDAB9; color: black;'>Background</span></td><td><span style='background-color: #FFDAB9; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#FFDAB9'&gt;ForeGround&lt;/font&gt;</td></tr><tr><td>Beige</td><td><font color='#F5F5DC'>ForeGround</font></td><td><font color='#F5F5DC'><b>ForeGroundBold</b></font></td><td><span style='background-color: #F5F5DC; color: black;'>Background</span></td><td><span style='background-color: #F5F5DC; color: black;'><b>BackgroundBold</b></span></td><td>&lt;font color='#F5F5DC'&gt;ForeGround&lt;/font&gt;</td></tr></table>";
+            CShowBrowser MyBrowser = new CShowBrowser();
+            MyBrowser.Init();
+            MyBrowser.ShowInBrowser(sHTMLcolors);
+        }
+
+        private void BeepError()
+        {
+            int frequency = 1000;
+            int duration = 500;
+            Console.Beep(frequency, duration);
+        }
 
     }
+    
 }

@@ -1,6 +1,6 @@
 # MacroViewer - View and edit user macros and signatures
  
-## This app is only useful for HP Community Volunteers to help compose macro images and urls
+## This app is only useful for HP Community Volunteers and a dual monitor 2K system is recommended.
 
 Log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html"
 
@@ -13,4 +13,6 @@ A tar with latest binaries can be downloaded if you do not wish to build the app
 The tar has a sample macro html, five supplemental macro txt's and a sample signatures.  You may copy any of the sample macros into your own macros.  
 
 Images that are not URLs must be uploaded to your HP photo album and urls are cleaned of tracking info.
+
+You can create macros, signatures, and hyperlinks, assemble images, search extensively thorough the macro collection and easily paste replies to users from the collection.
 

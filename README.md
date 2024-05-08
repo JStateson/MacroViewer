@@ -12,6 +12,8 @@ Images that are not URLs must be uploaded to your HP photo album and urls are cl
 
 You can create macros, signatures, and hyperlinks, assemble images, search extensively thorough the macro collection and easily paste replies to users from the collection.
 
-If you wish to use your own macros, log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html" to replace the default file.
+Supplemental macros files: HP (editable copy of macros.html), HW, OS, NET, LJ, DJ, OJ, PC, AIO.  Maximum of 50 macros each except HP which has only 30 slots.
 
-Run MacroViewer, open the file, and select the option to save as a local File.  All supplemental demo files found are loaded immediately.
+If you wish to use your own macros you must: (1) log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html" to replace the default file.
+
+(2) Run MacroViewer, open "macros.html", and select the option to save as a local File.  All supplemental demo files are unchanged and are loaded immediately.

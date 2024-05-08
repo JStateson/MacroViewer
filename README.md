@@ -12,7 +12,7 @@ Images that are not URLs must be uploaded to your HP photo album and urls are cl
 
 You can create macros, signatures, and hyperlinks, assemble images, search extensively thorough the macro collection and easily paste replies to users from the collection.
 
-Supplemental macros files: HP (editable copy of macros.html), HW, OS, NET, LJ, DJ, OJ, PC, AIO.  Maximum of 50 macros each except HP which has only 30 slots.
+Supplemental macros files: HP (editable copy of macros.html), HW, OS, NET, LJ, DJ, OJ, PC, AIO.  Maximum of 50 macros each except HP which can have only 30.
 
 If you wish to use your own macros you must: (1) log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html" to replace the default file.
 

@@ -12,6 +12,6 @@ Images that are not URLs must be uploaded to your HP photo album and urls are cl
 
 You can create macros, signatures, and hyperlinks, assemble images, search extensively thorough the macro collection and easily paste replies to users from the collection.
 
-Log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html"
+If you wish to use your own macros, log in and access your macros page.  If using chrome then right click, "view page source", and save as "macros.html" to replace the default file.
 
 Run MacroViewer, open the file, and select the option to save as a local File.  All supplemental demo files found are loaded immediately.

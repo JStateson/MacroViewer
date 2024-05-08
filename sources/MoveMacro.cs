@@ -85,7 +85,7 @@ namespace MacroViewer
                 n = cms.GetMacCountAvailable(cms.strDes);
                 tbNFree.Text = n.ToString();
                 btnMove.Enabled = false;
-                if (n > cms.nChecked)
+                if (n >= cms.nChecked)
                 {
                     if (cbFROMbox != null)
                     {

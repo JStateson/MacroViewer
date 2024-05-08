@@ -102,7 +102,7 @@ namespace MacroViewer
                 int j = 0;
                 for (int i = 0; i < sAll.Length; i += 2)
                 {
-                    if (sAll[i].Length == 0) j++;
+                    if (sAll[i].Length != 0) j++;
                 }
                 return j;
             }

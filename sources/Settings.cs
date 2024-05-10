@@ -40,6 +40,7 @@ namespace MacroViewer
             tbSupSig.Text = Properties.Settings.Default.SupSig;
             tbLongAllowed.Text = Properties.Settings.Default.LongestExpectedURL.ToString();
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
+            tbEmail.Text = Properties.Settings.Default.sEmail;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
             cbRefOnly.Checked = !Properties.Settings.Default.UseMarkers;
             strEditedSave = Properties.Settings.Default.EditedSig;
@@ -107,6 +108,7 @@ namespace MacroViewer
             Properties.Settings.Default.SaveUnkUrls = cbSaveUNK.Checked;
             Properties.Settings.Default.SupSig = tbSupSig.Text;
             Properties.Settings.Default.SpecialWord = tbSpecialWord.Text;
+            Properties.Settings.Default.sEmail = tbEmail.Text;
             Properties.Settings.Default.Save();
             this.Close();
         }

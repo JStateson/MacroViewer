@@ -73,6 +73,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnTestPP = new System.Windows.Forms.Button();
             this.tbPP = new System.Windows.Forms.TextBox();
+            this.tbLongAllowed = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lbSaveLoc = new System.Windows.Forms.Label();
             this.cbSaveUNK = new System.Windows.Forms.CheckBox();
@@ -80,8 +82,8 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbLongAllowed = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbEmail = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTB.SuspendLayout();
@@ -148,15 +150,17 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.tbEmail);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tbSpecialWord);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.tbUserID);
-            this.groupBox2.Location = new System.Drawing.Point(12, 291);
+            this.groupBox2.Location = new System.Drawing.Point(12, 243);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(274, 426);
+            this.groupBox2.Size = new System.Drawing.Size(274, 422);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User Info";
@@ -584,6 +588,30 @@
             this.tbPP.Text = "Click <a href=\"https://support.hp.com/us-en/document/ish_1716406-1413451-16?openC" +
     "LC=true\" target=\"_blank\">here for network setup</a> in your language";
             // 
+            // tbLongAllowed
+            // 
+            this.tbLongAllowed.BackColor = System.Drawing.SystemColors.Window;
+            this.tbLongAllowed.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbLongAllowed.Location = new System.Drawing.Point(170, 61);
+            this.tbLongAllowed.Name = "tbLongAllowed";
+            this.tbLongAllowed.Size = new System.Drawing.Size(48, 20);
+            this.tbLongAllowed.TabIndex = 5;
+            this.tbLongAllowed.Text = "256";
+            this.toolTip1.SetToolTip(this.tbLongAllowed, "Click APPLY to save");
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.Window;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(19, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(131, 15);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Longest Allowed URL";
+            this.toolTip1.SetToolTip(this.label10, "After scrubbing, any url with length\r\nexceeding this number is recorded\r\nas an un" +
+        "scrubbed url.");
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label10);
@@ -645,29 +673,23 @@
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
             // 
-            // tbLongAllowed
+            // label11
             // 
-            this.tbLongAllowed.BackColor = System.Drawing.SystemColors.Window;
-            this.tbLongAllowed.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbLongAllowed.Location = new System.Drawing.Point(170, 61);
-            this.tbLongAllowed.Name = "tbLongAllowed";
-            this.tbLongAllowed.Size = new System.Drawing.Size(48, 20);
-            this.tbLongAllowed.TabIndex = 5;
-            this.tbLongAllowed.Text = "256";
-            this.toolTip1.SetToolTip(this.tbLongAllowed, "Click APPLY to save");
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.SystemColors.Window;
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.Location = new System.Drawing.Point(16, 361);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(34, 15);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Email";
             // 
-            // label10
+            // tbEmail
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.Window;
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(19, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(131, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Longest Allowed URL";
-            this.toolTip1.SetToolTip(this.label10, "After scrubbing, any url with length\r\nexceeding this number is recorded\r\nas an un" +
-        "scrubbed url.");
+            this.tbEmail.Location = new System.Drawing.Point(74, 358);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(158, 20);
+            this.tbEmail.TabIndex = 8;
             // 
             // Settings
             // 
@@ -759,5 +781,7 @@
         private System.Windows.Forms.Button btnTestPP;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbLongAllowed;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbEmail;
     }
 }

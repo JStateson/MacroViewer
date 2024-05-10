@@ -214,5 +214,17 @@ namespace MacroViewer.Properties {
                 this["LongestExpectedURL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("josephy@stateson.net")]
+        public string sEmail {
+            get {
+                return ((string)(this["sEmail"]));
+            }
+            set {
+                this["sEmail"] = value;
+            }
+        }
     }
 }

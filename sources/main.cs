@@ -60,9 +60,6 @@ namespace MacroViewer
         private int NumSupplementalSignatures = 0;
         private Color NormalEditColor;
         public CMoveSpace cms;
-
-        //CSendCloud SendToCloud = new CSendCloud();
-
         public List<CBody> cBodies;  // this is only updated when the program starts
 
         public main()
@@ -71,7 +68,6 @@ namespace MacroViewer
             Utils.WhereExe = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
             EnableMacEdits(false);
             SwitchToMarkup(true);
-            //SendToCloud.Init();
             gbManageImages.Enabled = true;// System.Diagnostics.Debugger.IsAttached;
             int iBrowser = Properties.Settings.Default.BrowserID;
             if (iBrowser < 0) Utils.BrowserWanted = Utils.eBrowserType.eEdge;
@@ -82,9 +78,7 @@ namespace MacroViewer
             this.Text = " HP Macro Editor";
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
             LoadAllFiles();
-            cms = new CMoveSpace();  // note that this is only read at startup
-//           cms.Init();                         // and the count must be updated after a move
-//           CountEmpties(ref cms);
+            cms = new CMoveSpace();
             Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
             SpecialUsed(Properties.Settings.Default.SpecialWord != "");
             NormalEditColor = btnCancelEdits.ForeColor;
@@ -456,18 +450,35 @@ namespace MacroViewer
             SelectFileItem("NET");
         }
 
-
-        //h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=dateRangeType&q=search&rangeTime=0&collapse_discussion=true
-        private void mnuKnow_Click(object sender, EventArgs e)
+        private void FormQueryKB(string sS)
         {
-            string sObj = Clipboard.GetText().Trim();
-            if(sObj == "")// this is unlikely but not impossible
-                Utils.LocalBrowser("https://h30434.www3.hp.com/t5/tkb/communitypage");
-            else
+            string t = Clipboard.GetText().Trim();
+            string s = sS.Substring(0,1).ToLower();
+            string w = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message";
+            string f = w + "?filter=location&q=" + t;
+            string p = f + "&location=tkb-board:";
+            string[] KBl = { "printers-knowledge-base", "desktop-knowledge-base",
+                    "notebooks-knowledge-base","gaming-knowledge-base" };
+            string sQ = "";
+            switch (s)
             {
-                string sKB = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&filter=includeTkbs,location&include_tkbs=true&location=tkb-board:desktop-knowledge-base&q=";
-                sKB += sObj;
-                Utils.LocalBrowser(sKB);
+                case "p": sQ = p + KBl[0]; break;
+                case "d": sQ = p + KBl[1]; break;
+                case "n": sQ = p + KBl[2]; break;
+                case "g": sQ = p + KBl[3]; break;
+                case "a": sQ = w + "?filter=includeTkbs&include_tkbs=true&q=" + t;
+                break;
+            }
+            if(sQ != "")
+                Utils.LocalBrowser(sQ);
+        }
+
+        private void mnuKnow(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem != null)
+            {
+                FormQueryKB(menuItem.Text);
             }
         }
 
@@ -658,6 +669,7 @@ namespace MacroViewer
         // below is for testing but I never got it to work
         // trying to get BBCode from an HTML page
         //https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767917(v=vs.85)?redirectedfrom=MSDN
+/*
         private void RecoverBBCfromHTML()
         {
             RichTextBox rtb = new RichTextBox();
@@ -671,7 +683,7 @@ namespace MacroViewer
                 string strTemp = (string)Clipboard.GetData(DataFormats.Html);
             }
         }
-
+*/
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
             string strTemp = Clipboard.GetText();
@@ -695,8 +707,6 @@ namespace MacroViewer
         }
 
 
-        const uint WM_PASTE = 0x302;
-        const int WM_SETTEXT = 0x000C;
 
 
         private void PutOnNotepad(string strIn)
@@ -710,7 +720,6 @@ namespace MacroViewer
         {
             string s = tbMacName.Text + Environment.NewLine;
             PutOnNotepad(s + tbBody.Text);
-            //SendToCloud.PasteToCloud("7L4H9UA#ABA");
         }
 
         // the below is never set true?: TODO to do todo
@@ -1386,11 +1395,6 @@ namespace MacroViewer
                     }
                     string s ="Original Macro " + (r+1).ToString() + ": '" + Name_HP_HTML[r] + "'" + sWhereErr + Environment.NewLine + Body_HP_HTML[r];
                     PutOnNotepad(s);
-                    /*
-                    Application.DoEvents();
-                    MessageBox.Show("Original macro is on notepad",
-                            "Macro " + (r+1).ToString(),MessageBoxButtons.OKCancel);
-                    */
                 }
             }
         }
@@ -2055,6 +2059,48 @@ namespace MacroViewer
             Console.Beep(frequency, duration);
         }
 
+        private void FormGoToKB(string sS)
+        {
+            string s = sS.Substring(0, 1).ToLower();
+            string w = "https://h30434.www3.hp.com/t5/";
+
+            string[] KBl = 
+            {
+                "Printers-Knowledge-Base/tkb-p/printers-knowledge-base",
+                "Desktop-Knowledge-Base/tkb-p/desktop-knowledge-base",
+                "Notebooks-Knowledge-Base/tkb-p/notebooks-knowledge-base",
+                "Gaming-Knowledge-Base/tkb-p/gaming-knowledge-base"
+            };
+            string sQ = "";
+            switch (s)
+            {
+                case "p": sQ = w + KBl[0]; break;
+                case "d": sQ = w + KBl[1]; break;
+                case "n": sQ = w + KBl[2]; break;
+                case "g": sQ = w + KBl[3]; break;
+                case "a":
+                    sQ = "https://h30434.www3.hp.com/t5/custom/page/page-id/RecentDiscussions";
+                    break;
+                case "s":
+                    if (Properties.Settings.Default.SpecialWord == null) return;
+                    Clipboard.SetText(Properties.Settings.Default.SpecialWord);
+                    SpecialUsed(false);
+                    return;
+                case "e": Clipboard.SetText(Properties.Settings.Default.sEmail);
+                    return;
+            }
+            if (sQ != "")
+                Utils.LocalBrowser(sQ);
+        }
+
+        private void HPWS_click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem != null)
+            {
+                FormGoToKB(menuItem.Text);
+            }
+        }
     }
     
 }

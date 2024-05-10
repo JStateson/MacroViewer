@@ -301,7 +301,7 @@ namespace MacroViewer
             string s = tbKeywords.Text.Trim();
             if (s == "") return;
             //string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
-            string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=includeTkbs&include_tkbs=true&collapse_discussion=true&q=";            
+            string strUrl = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?filter=includeTkbs&include_tkbs=true&q=";            
             Utils.LocalBrowser(strUrl + s);
         }
 

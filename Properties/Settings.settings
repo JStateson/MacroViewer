@@ -50,5 +50,8 @@
     <Setting Name="LongestExpectedURL" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">255</Value>
     </Setting>
+    <Setting Name="sEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">josephy@stateson.net</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

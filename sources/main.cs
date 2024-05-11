@@ -753,16 +753,22 @@ namespace MacroViewer
             if (ReadMacroHTML())
             {
                 EnableMacEdits(false);
-                gpMainEdit.Enabled = true;
-                gbSupp.Enabled = false;
                 strType = "";
                 bHaveHTML = true;
                 saveToXMLToolStripMenuItem.Enabled = true;
                 ShowUneditedRow(0);
-                btnNew.Enabled = false;
-                tbMacName.Enabled = false;
+                AllowChanges(false);
                 lbName.Columns[2].HeaderText = "Name HTML";
             }
+            else AllowChanges(true);
+        }
+
+        private void AllowChanges(bool f)
+        {
+            btnNew.Enabled = f;
+            tbMacName.Enabled = f;
+            //gpMainEdit.Enabled = f;
+            gbSupp.Enabled = f;
         }
 
         private void readHTMLToolStripMenuItem_Click(object sender, EventArgs e)

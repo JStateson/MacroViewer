@@ -104,6 +104,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
+            this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
             this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSearchComm = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,7 +117,16 @@
             this.notebookKBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desktopKBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gamingKBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
+            this.hPWebSitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printerKBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desktopKBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.desktopKBToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gaminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.specialWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
@@ -142,16 +152,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.hPWebSitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printerKBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.desktopKBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.desktopKBToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.gaminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.specialWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bltnHR = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -426,6 +427,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.bltnHR);
             this.groupBox6.Controls.Add(this.btnColors);
             this.groupBox6.Controls.Add(this.tbColorCode);
             this.groupBox6.Controls.Add(this.btnRed);
@@ -925,6 +927,15 @@
             this.mShowErr.Visible = false;
             this.mShowErr.Click += new System.EventHandler(this.mShowErr_Click);
             // 
+            // mShowDiff
+            // 
+            this.mShowDiff.ForeColor = System.Drawing.Color.Red;
+            this.mShowDiff.Name = "mShowDiff";
+            this.mShowDiff.Size = new System.Drawing.Size(70, 20);
+            this.mShowDiff.Text = "Show Diff";
+            this.mShowDiff.Visible = false;
+            this.mShowDiff.Click += new System.EventHandler(this.mShowDiff_Click);
+            // 
             // mnRecDis
             // 
             this.mnRecDis.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1026,14 +1037,80 @@
             this.gamingKBToolStripMenuItem.Text = "Gaming KB";
             this.gamingKBToolStripMenuItem.Click += new System.EventHandler(this.mnuKnow);
             // 
-            // mShowDiff
+            // hPWebSitesToolStripMenuItem
             // 
-            this.mShowDiff.ForeColor = System.Drawing.Color.Red;
-            this.mShowDiff.Name = "mShowDiff";
-            this.mShowDiff.Size = new System.Drawing.Size(70, 20);
-            this.mShowDiff.Text = "Show Diff";
-            this.mShowDiff.Visible = false;
-            this.mShowDiff.Click += new System.EventHandler(this.mShowDiff_Click);
+            this.hPWebSitesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printerKBToolStripMenuItem,
+            this.desktopKBToolStripMenuItem1,
+            this.desktopKBToolStripMenuItem2,
+            this.gaminToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.allToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.specialWordToolStripMenuItem,
+            this.emailToolStripMenuItem});
+            this.hPWebSitesToolStripMenuItem.Name = "hPWebSitesToolStripMenuItem";
+            this.hPWebSitesToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.hPWebSitesToolStripMenuItem.Text = "HP Web Sites";
+            // 
+            // printerKBToolStripMenuItem
+            // 
+            this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.printerKBToolStripMenuItem.Text = "Printer KB";
+            this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // desktopKBToolStripMenuItem1
+            // 
+            this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
+            this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // desktopKBToolStripMenuItem2
+            // 
+            this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
+            this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // gaminToolStripMenuItem
+            // 
+            this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.gaminToolStripMenuItem.Text = "Gaming KB";
+            this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.allToolStripMenuItem.Text = "All recent";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            // 
+            // specialWordToolStripMenuItem
+            // 
+            this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
+            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.specialWordToolStripMenuItem.Text = "Special Word";
+            this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // emailToolStripMenuItem
+            // 
+            this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
+            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.emailToolStripMenuItem.Text = "Email";
+            this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gpMainEdit
             // 
@@ -1336,80 +1413,18 @@
             this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // hPWebSitesToolStripMenuItem
+            // bltnHR
             // 
-            this.hPWebSitesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printerKBToolStripMenuItem,
-            this.desktopKBToolStripMenuItem1,
-            this.desktopKBToolStripMenuItem2,
-            this.gaminToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.allToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.specialWordToolStripMenuItem,
-            this.emailToolStripMenuItem});
-            this.hPWebSitesToolStripMenuItem.Name = "hPWebSitesToolStripMenuItem";
-            this.hPWebSitesToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.hPWebSitesToolStripMenuItem.Text = "HP Web Sites";
-            // 
-            // printerKBToolStripMenuItem
-            // 
-            this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.printerKBToolStripMenuItem.Text = "Printer KB";
-            this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // desktopKBToolStripMenuItem1
-            // 
-            this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
-            this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // desktopKBToolStripMenuItem2
-            // 
-            this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
-            this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // gaminToolStripMenuItem
-            // 
-            this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.gaminToolStripMenuItem.Text = "Gaming KB";
-            this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
-            // 
-            // allToolStripMenuItem
-            // 
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allToolStripMenuItem.Text = "All recent";
-            this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // specialWordToolStripMenuItem
-            // 
-            this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.specialWordToolStripMenuItem.Text = "Special Word";
-            this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // emailToolStripMenuItem
-            // 
-            this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.emailToolStripMenuItem.Text = "Email";
-            this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.bltnHR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bltnHR.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.bltnHR.Location = new System.Drawing.Point(424, 391);
+            this.bltnHR.Name = "bltnHR";
+            this.bltnHR.Size = new System.Drawing.Size(57, 25);
+            this.bltnHR.TabIndex = 34;
+            this.bltnHR.Text = "Line";
+            this.toolTip1.SetToolTip(this.bltnHR, "Horizontal line");
+            this.bltnHR.UseVisualStyleBackColor = true;
+            this.bltnHR.Click += new System.EventHandler(this.bltnHR_Click);
             // 
             // main
             // 
@@ -1578,6 +1593,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem specialWordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emailToolStripMenuItem;
+        private System.Windows.Forms.Button bltnHR;
     }
 }
 

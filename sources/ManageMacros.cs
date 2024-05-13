@@ -113,6 +113,7 @@ namespace MacroViewer
         private void btnUpdateURL_Click(object sender, EventArgs e)
         {
             if (iRow < 0) return;
+            if (dgManage.Rows.Count == 0) return;
             string strOld = dgManage.Rows[iRow].Cells[0].Value.ToString();
             if(strOld.Length == 0) return; // user forgot to exit
             int r = -1 + (int)dgManage.Rows[iRow].Cells[1].Value;

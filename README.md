@@ -2,7 +2,7 @@
  
 ## This app is only useful for HP Community Volunteers and a dual monitor 2K system is recommended.
 
-Image of main page https://h30434.www3.hp.com/t5/image/serverpage/image-id/365981i8646389DF0A0444B and RTF help files can be viewed in sources
+Image of main page https://h30434.www3.hp.com/t5/image/serverpage/image-id/369851i13A420A4C8E6D69E and RTF help files can be viewed in sources
 
 A tar with latest binaries can be downloaded if you do not wish to build the app.  There is no install app so you must unzip the tar and may have to unblock the .exe app before it can run.
 

@@ -2107,6 +2107,11 @@ namespace MacroViewer
                 FormGoToKB(menuItem.Text);
             }
         }
+
+        private void bltnHR_Click(object sender, EventArgs e)
+        {
+            Utils.InsertHR(ref tbBody);
+        }
     }
     
 }

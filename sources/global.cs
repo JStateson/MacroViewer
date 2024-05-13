@@ -417,7 +417,7 @@ namespace MacroViewer
             }
             if (tb.Font.Style == FontStyle.Italic) s += "font-style: italic; ";
             if (tb.Font.Style == FontStyle.Bold) s += "font-weight: bold; ";
-            s += "font-size: " + px.ToString() + "px; font-family: \"" + tb.Font.Name + "\"; >";
+            s += "font-size: " + px.ToString() + "px; font-family: '" + tb.Font.Name + "'\"; >";
             s += tb.Text + "</span>";
             return s;
         }
@@ -616,6 +616,23 @@ namespace MacroViewer
                     tb.Text = tb.Text.Replace("<br>", Environment.NewLine);
                 else tb.Text = tb.Text.Replace(Environment.NewLine, "<br>");                   
             }
+        }
+
+        //insert a horizontal line
+        public static void InsertHR(ref TextBox tbEdit)
+        {
+            string s1, s2;
+            int i = tbEdit.SelectionStart;
+            int j = tbEdit.SelectionLength;
+            if (j != 0) return;
+            int n = tbEdit.Text.Length;
+            s1 = tbEdit.Text.Substring(0, i);
+            s2 = tbEdit.Text.Substring(i);
+            s1 += "<br><hr><br>" + s2;
+            tbEdit.Text = s1;
+            tbEdit.SelectionStart = i;
+            tbEdit.SelectionLength = 0;
+            tbEdit.Focus();
         }
 
         // add or remove bold text

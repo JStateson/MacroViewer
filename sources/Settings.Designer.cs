@@ -586,7 +586,7 @@
             this.tbPP.Size = new System.Drawing.Size(244, 88);
             this.tbPP.TabIndex = 1;
             this.tbPP.Text = "Click <a href=\"https://support.hp.com/us-en/document/ish_1716406-1413451-16?openC" +
-    "LC=true\" target=\"_blank\">here for network setup</a> in your language";
+    "LC=true\" target=\"_blank\">here for network setup</a> in a different language language";
             // 
             // tbLongAllowed
             // 

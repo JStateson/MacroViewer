@@ -135,6 +135,22 @@ namespace MacroViewer
               "PC","PRN",    "DRV",    "EBA", "GOO",   "MAN",    "HPYT",   "HPKB"
         };
 
+        public static bool IsNewPRN (string sT)
+        {
+            if (sT == "") return false;
+            return (sPrinterTypes.Contains(" " + sT + " "));
+        }
+
+        public static string nBR(int n)
+        {
+            string s = "";
+            for (int i = 0; i < n; i ++)
+            {
+                s += "<br>";
+            }
+            return s;
+        }
+
         private static string[] sUse = // possible new macros
         {
             "PC AIO HW",            //PC
@@ -157,7 +173,7 @@ namespace MacroViewer
             return "";
         }
         // do not change the order of below items and HP must be last!
-        public static string sPrinterTypes = "LJ DJ OJ ";    // must have a space and match below
+        public static string sPrinterTypes = " LJ DJ OJ ";    // must have a space and match below
         public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP" };
         public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
                 "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "HP from HTML" };

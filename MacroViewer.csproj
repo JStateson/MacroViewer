@@ -292,6 +292,7 @@
     <None Include="sources\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sources\SiteMap.html" />
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />
     <Content Include="Resources\HowToPasteImage.png" />

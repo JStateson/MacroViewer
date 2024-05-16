@@ -1027,6 +1027,7 @@ namespace MacroViewer
         }
 
 
+
         private bool AddNew(string strNewName, string strBody)
         {
             bool bChanged = false;
@@ -1052,6 +1053,17 @@ namespace MacroViewer
                 lbName.Rows[CurrentRowSelected].Selected = false;
             CurrentRowSelected = lbName.Rows.Count;
             lbName.Rows.Add(CurrentRowSelected + 1, false, strNewName);
+            if(Utils.IsNewPRN(TXTName))
+            {
+                string sNB =
+                    "You may need to reset the printer: instructions here" + Utils.nBR(3) +
+                    "WiFi setup to router:  instructions here" + Utils.nBR(3) +
+                    "For WiFi direct setup click here" + Utils.nBR(3) +
+                    "Push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
+                    "Full feature software DEVICE MONTH YEAR" + Utils.nBR(3) +
+                    "Printer Reference";
+                strBody = sNB;
+            }
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, strBody);
             tbBody.Text = strBody;
             ReSaveAsTXT(TXTName);
@@ -1060,6 +1072,7 @@ namespace MacroViewer
             tbMacName.Text = strNewName;
             tbNumMac.Text = lbName.Rows.Count.ToString();
             EnableMacEdits(true);
+            SwitchToMarkup(false);
             return true;
         }
 
@@ -2111,6 +2124,12 @@ namespace MacroViewer
         private void bltnHR_Click(object sender, EventArgs e)
         {
             Utils.InsertHR(ref tbBody);
+        }
+
+        private void mnuAskQ_Click(object sender, EventArgs e)
+        {
+            string s = Utils.WhereExe + "\\SiteMap.html";
+            Process.Start("explorer.exe", s);
         }
     }
     

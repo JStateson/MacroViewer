@@ -53,6 +53,7 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bltnHR = new System.Windows.Forms.Button();
             this.btnColors = new System.Windows.Forms.Button();
             this.tbColorCode = new System.Windows.Forms.TextBox();
             this.btnRed = new System.Windows.Forms.Button();
@@ -152,7 +153,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.bltnHR = new System.Windows.Forms.Button();
+            this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -450,6 +451,19 @@
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
             this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes <BR> for newliens\r\nAvoid using CTRL-V to paste from " +
         "forum\r\nUse \"Pase from clipboard\" instead");
+            // 
+            // bltnHR
+            // 
+            this.bltnHR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bltnHR.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.bltnHR.Location = new System.Drawing.Point(424, 391);
+            this.bltnHR.Name = "bltnHR";
+            this.bltnHR.Size = new System.Drawing.Size(57, 25);
+            this.bltnHR.TabIndex = 34;
+            this.bltnHR.Text = "Line";
+            this.toolTip1.SetToolTip(this.bltnHR, "Horizontal line");
+            this.bltnHR.UseVisualStyleBackColor = true;
+            this.bltnHR.Click += new System.EventHandler(this.bltnHR_Click);
             // 
             // btnColors
             // 
@@ -1048,7 +1062,8 @@
             this.allToolStripMenuItem,
             this.toolStripSeparator4,
             this.specialWordToolStripMenuItem,
-            this.emailToolStripMenuItem});
+            this.emailToolStripMenuItem,
+            this.mnuAskQ});
             this.hPWebSitesToolStripMenuItem.Name = "hPWebSitesToolStripMenuItem";
             this.hPWebSitesToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.hPWebSitesToolStripMenuItem.Text = "HP Web Sites";
@@ -1056,59 +1071,59 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // specialWordToolStripMenuItem
             // 
             this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.specialWordToolStripMenuItem.Text = "Special Word";
             this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // emailToolStripMenuItem
             // 
             this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.emailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.emailToolStripMenuItem.Text = "Email";
             this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
@@ -1413,18 +1428,12 @@
             this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // bltnHR
+            // mnuAskQ
             // 
-            this.bltnHR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bltnHR.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.bltnHR.Location = new System.Drawing.Point(424, 391);
-            this.bltnHR.Name = "bltnHR";
-            this.bltnHR.Size = new System.Drawing.Size(57, 25);
-            this.bltnHR.TabIndex = 34;
-            this.bltnHR.Text = "Line";
-            this.toolTip1.SetToolTip(this.bltnHR, "Horizontal line");
-            this.bltnHR.UseVisualStyleBackColor = true;
-            this.bltnHR.Click += new System.EventHandler(this.bltnHR_Click);
+            this.mnuAskQ.Name = "mnuAskQ";
+            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
+            this.mnuAskQ.Text = "Ask Question";
+            this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
             // main
             // 
@@ -1594,6 +1603,7 @@
         private System.Windows.Forms.ToolStripMenuItem specialWordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emailToolStripMenuItem;
         private System.Windows.Forms.Button bltnHR;
+        private System.Windows.Forms.ToolStripMenuItem mnuAskQ;
     }
 }
 

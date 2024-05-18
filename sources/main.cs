@@ -61,6 +61,7 @@ namespace MacroViewer
         private Color NormalEditColor;
         public CMoveSpace cms;
         public List<CBody> cBodies;  // this is only updated when the program starts
+        private string sBadMacroName;
 
         public main()
         {
@@ -803,6 +804,14 @@ namespace MacroViewer
                 {
                     lbName.Rows.Add(i + 1, false, line);   // this triggers row enter callback
                     MacroNames[i] = line;
+                    if(bInitialLoad)
+                    {
+                        if(line.Contains(Utils.UnNamedMacro))
+                        {
+                            sBadMacroName +=
+                                "Macro " + (i + 1).ToString() + " in " + strFN + " is un-named\r\n";
+                        }
+                    }
                     sBody = sr.ReadLine();
                     Body[i] = sBody; // only signatures need this .Replace("<br />", "<br>");
                     sBody = Utils.BBCparse(sBody);
@@ -1058,8 +1067,8 @@ namespace MacroViewer
                 string sNB =
                     "You may need to reset the printer: instructions here" + Utils.nBR(3) +
                     "WiFi setup to router:  instructions here" + Utils.nBR(3) +
-                    "For WiFi direct setup click here" + Utils.nBR(3) +
-                    "Push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
+                    "For WiFi direct setup click here.<br>This is useful if there is no modem " + Utils.nBR(3) +
+                    "Simple push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
                     "Full feature software DEVICE MONTH YEAR" + Utils.nBR(3) +
                     "Printer Reference";
                 strBody = sNB;
@@ -1564,6 +1573,7 @@ namespace MacroViewer
         private void LoadAllFiles()
         {
             bInitialLoad = true;
+            sBadMacroName = "";
             NumSupplementalSignatures = 0;
             string sChg = Properties.Settings.Default.ChangeSig;
             bool bMustChange = sChg != "";
@@ -1636,6 +1646,10 @@ namespace MacroViewer
             Properties.Settings.Default.Save();
 
             bInitialLoad = false;
+            if(sBadMacroName != "")
+            {
+                MessageBox.Show(sBadMacroName, "Bad macro names");
+            }
             if(strBadEnding.Count > 0)
             {
                 string strNames = "";
@@ -2130,6 +2144,19 @@ namespace MacroViewer
         {
             string s = Utils.WhereExe + "\\SiteMap.html";
             Process.Start("explorer.exe", s);
+        }
+
+        private void loadHardwareMacsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectFileItem("HW");
+        }
+
+        private void main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!bPageSaved())
+            {
+                return; // user failed to save edits
+            }
         }
     }
     

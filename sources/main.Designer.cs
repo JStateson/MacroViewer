@@ -128,6 +128,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.specialWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
@@ -153,7 +154,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -762,6 +762,7 @@
             this.loadHardwareMacsToolStripMenuItem.Name = "loadHardwareMacsToolStripMenuItem";
             this.loadHardwareMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.loadHardwareMacsToolStripMenuItem.Text = "Load Hardware macs";
+            this.loadHardwareMacsToolStripMenuItem.Click += new System.EventHandler(this.loadHardwareMacsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1071,61 +1072,68 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
             // 
             // specialWordToolStripMenuItem
             // 
             this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.specialWordToolStripMenuItem.Text = "Special Word";
             this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // emailToolStripMenuItem
             // 
             this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.emailToolStripMenuItem.Text = "Email";
             this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // mnuAskQ
+            // 
+            this.mnuAskQ.Name = "mnuAskQ";
+            this.mnuAskQ.Size = new System.Drawing.Size(144, 22);
+            this.mnuAskQ.Text = "Ask Question";
+            this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
             // gpMainEdit
             // 
@@ -1428,13 +1436,6 @@
             this.timer1.Interval = 8000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // mnuAskQ
-            // 
-            this.mnuAskQ.Name = "mnuAskQ";
-            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
-            this.mnuAskQ.Text = "Ask Question";
-            this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1453,6 +1454,7 @@
             this.Name = "main";
             this.Text = " HP Macro Editor";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.main_HelpButtonClicked);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).EndInit();
             this.groupBox6.ResumeLayout(false);

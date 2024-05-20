@@ -61,7 +61,7 @@ namespace MacroViewer
             }
             */
             fWidth = 825;
-            fHeight = 600;
+            fHeight = 800;
             File.WriteAllText(sLoc + "/MyHtml.html", ShowString);
             ShowStuff(sLoc, ShowString);
         }

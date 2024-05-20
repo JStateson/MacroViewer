@@ -201,7 +201,7 @@ namespace MacroViewer
             string sPP = Properties.Settings.Default.sPPrefix;
             if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
             {
-                strTemp = Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
+                strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
             }
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();

@@ -71,6 +71,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbBody = new System.Windows.Forms.TextBox();
             this.btnNoMark = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,7 +132,6 @@
             this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -667,6 +667,19 @@
             this.btnNoMark.UseVisualStyleBackColor = true;
             this.btnNoMark.Click += new System.EventHandler(this.btnNoMark_Click);
             // 
+            // btnTest
+            // 
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnTest.Location = new System.Drawing.Point(399, 212);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 31);
+            this.btnTest.TabIndex = 20;
+            this.btnTest.Text = "TEST";
+            this.toolTip1.SetToolTip(this.btnTest, "syntax test");
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1169,23 +1182,11 @@
             this.label7.TabIndex = 24;
             this.label7.Text = "Hover mouse over\r\nbelow button";
             // 
-            // btnTest
-            // 
-            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnTest.Location = new System.Drawing.Point(399, 219);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 32);
-            this.btnTest.TabIndex = 20;
-            this.btnTest.Text = "TEST";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNew.Location = new System.Drawing.Point(399, 171);
+            this.btnNew.Location = new System.Drawing.Point(399, 117);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 32);
             this.btnNew.TabIndex = 18;
@@ -1395,7 +1396,7 @@
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnClearEM.Location = new System.Drawing.Point(399, 117);
+            this.btnClearEM.Location = new System.Drawing.Point(399, 162);
             this.btnClearEM.Name = "btnClearEM";
             this.btnClearEM.Size = new System.Drawing.Size(75, 32);
             this.btnClearEM.TabIndex = 8;

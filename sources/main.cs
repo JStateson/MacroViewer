@@ -413,7 +413,9 @@ namespace MacroViewer
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            RunBrowser();
+            string strTemp = tbBody.Text;
+            if (strTemp == "") return;
+            Utils.ShowPageInBrowser(strType, strTemp.Replace(Environment.NewLine,"<br>"));
         }
 
         private void mHPload_Click(object sender, EventArgs e)
@@ -1427,16 +1429,22 @@ namespace MacroViewer
             }
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+       
+        private void SyntaxTest()
         {
             string strErr = Utils.BBCparse(tbBody.Text);
             if (strErr == "") return;
-            DialogResult Res1 = MessageBox.Show(strErr,"Click OK to see where errors are",MessageBoxButtons.OKCancel,MessageBoxIcon.Error);
-            if(Res1 == DialogResult.OK)
+            DialogResult Res1 = MessageBox.Show(strErr, "Click OK to see where errors are", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.OK)
             {
                 Utils.ShowParseLocationErrors(tbBody.Text);
                 MessageBox.Show(strErr, "Errors are near locations listed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+      
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            SyntaxTest();
         }
 
         private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)

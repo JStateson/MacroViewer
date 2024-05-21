@@ -2163,7 +2163,7 @@ namespace MacroViewer
         {
             if (!bPageSaved())
             {
-                return; // user failed to save edits
+                e.Cancel = true;
             }
         }
     }

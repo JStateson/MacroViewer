@@ -406,16 +406,14 @@ namespace MacroViewer
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
-            Utils.ShowPageInBrowser(strType, strTemp);
+            Utils.ShowPageInBrowser(strType, strTemp.Replace(Environment.NewLine, "<br>"));
         }
 
 
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            string strTemp = tbBody.Text;
-            if (strTemp == "") return;
-            Utils.ShowPageInBrowser(strType, strTemp.Replace(Environment.NewLine,"<br>"));
+            RunBrowser();
         }
 
         private void mHPload_Click(object sender, EventArgs e)

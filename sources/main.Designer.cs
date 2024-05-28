@@ -353,7 +353,8 @@
             this.btnLinkAll.Size = new System.Drawing.Size(122, 25);
             this.btnLinkAll.TabIndex = 9;
             this.btnLinkAll.Text = "LINK ALL";
-            this.toolTip1.SetToolTip(this.btnLinkAll, "Not avaialble if any hyperlihnks\r\nor images are present");
+            this.toolTip1.SetToolTip(this.btnLinkAll, "Not available if any hyperlinks or images are\r\nalready present.  You can also sel" +
+        "ected only the\r\ntext that you want to process into hyperlinks.");
             this.btnLinkAll.UseVisualStyleBackColor = true;
             this.btnLinkAll.Click += new System.EventHandler(this.btnLinkAll_Click);
             // 

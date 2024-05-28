@@ -1464,11 +1464,23 @@ namespace MacroViewer
         {
             string sBody = tbBody.Text.ToLower();
             bool bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
-            if (bHasHyper) return; // probably need to explain why
-            SwitchToMarkup(false);
-            sBody = tbBody.Text;
-            Utils.ReplaceUrls(ref sBody, true);
-            tbBody.Text = sBody;
+            if (!bHasHyper) // do not want to unlink urls
+            {
+                sBody = tbBody.Text;
+                Utils.ReplaceUrls(ref sBody, true);
+                tbBody.Text = sBody;
+                return;
+            }
+            // see if there is a range to link
+            int i = tbBody.SelectionStart;
+            int j = tbBody.SelectionLength;
+            if (j < 12) return; // http://a.com is smallest
+            string strRaw = tbBody.SelectedText;
+            sBody = strRaw.ToLower();
+            bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
+            if (bHasHyper) return;  // do not want to link anything twice
+            Utils.ReplaceUrls(ref strRaw, true);
+            ReplaceText(i, j, strRaw);
         }
 
         private void btnPrev_Click(object sender, EventArgs e)

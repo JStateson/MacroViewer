@@ -1442,7 +1442,10 @@ namespace MacroViewer
       
         private void btnTest_Click(object sender, EventArgs e)
         {
-            SyntaxTest();
+            //SyntaxTest(); // this was useless as hp community html used mix of bbcode
+            string strTemp = tbBody.Text;
+            if (strTemp == "") return;
+            Utils.CopyHTML(strType, strTemp.Replace(Environment.NewLine, "<br>"));
         }
 
         private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)

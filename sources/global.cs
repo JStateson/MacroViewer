@@ -196,6 +196,99 @@ namespace MacroViewer
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
 
+        private static void ShellHTML(string s)
+        {
+            string sTemp = WhereExe + "\\MyHtml.html";
+            File.WriteAllText(sTemp, s);
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "explorer.exe", // The application to run
+                    Arguments = sTemp,           // Any arguments to pass to the application
+                    UseShellExecute = true,   // Whether to use the operating system shell to start the process
+                    RedirectStandardOutput = false, // Whether to redirect the output (for console applications)
+                    RedirectStandardError = false,  // Whether to redirect the error output (for console applications)
+                    CreateNoWindow = false    // Whether to create a window for the process
+                };
+
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+
+internal static class ClipboardFormats
+        {
+            static readonly string HEADER =
+                "Version:0.9\r\n" +
+                "StartHTML:{0:0000000000}\r\n" +
+                "EndHTML:{1:0000000000}\r\n" +
+                "StartFragment:{2:0000000000}\r\n" +
+                "EndFragment:{3:0000000000}\r\n";
+
+            static readonly string HTML_START =
+                "<html>\r\n" +
+                "<body>\r\n" +
+                "<!--StartFragment-->";
+
+            static readonly string HTML_END =
+                "<!--EndFragment-->\r\n" +
+                "</body>\r\n" +
+                "</html>";
+
+            public static string ConvertHtmlToClipboardData(string html)
+            {
+                var encoding = new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+                var data = Array.Empty<byte>();
+
+                var header = encoding.GetBytes(String.Format(HEADER, 0, 1, 2, 3));
+                data = data.Concat(header).ToArray();
+
+                var startHtml = data.Length;
+                data = data.Concat(encoding.GetBytes(HTML_START)).ToArray();
+
+                var startFragment = data.Length;
+                data = data.Concat(encoding.GetBytes(html)).ToArray();
+
+                var endFragment = data.Length;
+                data = data.Concat(encoding.GetBytes(HTML_END)).ToArray();
+
+                var endHtml = data.Length;
+
+                var newHeader = encoding.GetBytes(
+                    String.Format(HEADER, startHtml, endHtml, startFragment, endFragment));
+                if (newHeader.Length != startHtml)
+                {
+                    throw new InvalidOperationException(nameof(ConvertHtmlToClipboardData));
+                }
+
+                Array.Copy(newHeader, data, length: startHtml);
+                return encoding.GetString(data);
+            }
+        }
+
+        public static void CopyHTML(string html)
+        {
+            var dataObject = new DataObject();
+            string s = ClipboardFormats.ConvertHtmlToClipboardData(html);
+            Clipboard.SetData(DataFormats.Html, s);
+        }
+
+        public static void CopyHTML(string strType, string strTemp)
+        {
+            var dataObject = new DataObject();
+            string sPP = Properties.Settings.Default.sPPrefix;
+            if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
+            {
+                strTemp = "<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
+            }
+            CopyHTML(strTemp);
+        }
+
         public static void ShowPageInBrowser(string strType, string strTemp)
         {
             string sPP = Properties.Settings.Default.sPPrefix;
@@ -203,9 +296,13 @@ namespace MacroViewer
             {
                 strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
             }
+            /*
             CShowBrowser MyBrowser = new CShowBrowser();
             MyBrowser.Init();
             MyBrowser.ShowInBrowser(strTemp);
+            */
+            ShellHTML(strTemp);
+            CopyHTML(strTemp);
         }
         public static void WordpadHelp(string sHelp)
         {

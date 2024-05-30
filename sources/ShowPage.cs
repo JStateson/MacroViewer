@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -50,9 +51,11 @@ namespace MacroViewer
             this.Controls.Add(webview);
         }
 
+
         public ShowPage(string sLoc, string ShowString)
         {
             InitializeComponent();
+            string sTemp = sLoc + "\\MyHtml.html";
             /*
             if(ShowPage.ActiveForm != null) { }
             {
@@ -62,8 +65,9 @@ namespace MacroViewer
             */
             fWidth = 825;
             fHeight = 800;
-            File.WriteAllText(sLoc + "/MyHtml.html", ShowString);
+            File.WriteAllText(sTemp, ShowString);
             ShowStuff(sLoc, ShowString);
+            //ShellHTML(sTemp);
         }
 
     }

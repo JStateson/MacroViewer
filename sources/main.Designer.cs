@@ -229,8 +229,8 @@
             this.btnGo.Size = new System.Drawing.Size(121, 31);
             this.btnGo.TabIndex = 7;
             this.btnGo.Text = "Show As Page";
-            this.toolTip1.SetToolTip(this.btnGo, "Pops up a page using WebViewer2 (EDGE)\r\nYou can copy the page and paste it into\r\n" +
-        "any response.  Any link to an image must\r\nnot be local.");
+            this.toolTip1.SetToolTip(this.btnGo, "Pops up a page using EDGE or default\r\nThe Clipboard has a copy of the page or\r\nyo" +
+        "u can select and copy just what you\r\nwant into your reply");
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
@@ -672,12 +672,13 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnTest.Location = new System.Drawing.Point(399, 212);
+            this.btnTest.Location = new System.Drawing.Point(358, 112);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 31);
+            this.btnTest.Size = new System.Drawing.Size(116, 31);
             this.btnTest.TabIndex = 20;
-            this.btnTest.Text = "TEST";
-            this.toolTip1.SetToolTip(this.btnTest, "syntax test");
+            this.btnTest.Text = "Copy HTML";
+            this.toolTip1.SetToolTip(this.btnTest, "Copies the html of the page to the windows\r\nclipboard for pasting to the HP commu" +
+        "nity");
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
@@ -1187,7 +1188,7 @@
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNew.Location = new System.Drawing.Point(399, 117);
+            this.btnNew.Location = new System.Drawing.Point(399, 177);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 32);
             this.btnNew.TabIndex = 18;
@@ -1397,7 +1398,7 @@
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnClearEM.Location = new System.Drawing.Point(399, 162);
+            this.btnClearEM.Location = new System.Drawing.Point(399, 222);
             this.btnClearEM.Name = "btnClearEM";
             this.btnClearEM.Size = new System.Drawing.Size(75, 32);
             this.btnClearEM.TabIndex = 8;

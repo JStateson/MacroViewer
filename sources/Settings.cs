@@ -166,9 +166,7 @@ namespace MacroViewer
         private void ShowText(string strTemp)
         {
             if (strTemp == "") return;
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            Utils.ShowPageInBrowser("", strTemp);
         }
 
         private void btnTest_Click(object sender, EventArgs e)

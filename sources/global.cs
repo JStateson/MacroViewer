@@ -26,7 +26,7 @@ namespace MacroViewer
 
     public class CMoveSpace
     {/// <summary>
-     /// "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
+     /// "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
      /// </summary>
         public string[] MacroIDs;
         public int[] nMacsInFile;
@@ -157,7 +157,7 @@ namespace MacroViewer
             "LJ DJ OJ HW",          //PRN
             "PC AIO LJ DJ OJ",      //DRV
             "NET OS HW",            //EBY
-            "NET OS HW",            //GOO
+            "NET OS HW RF NO",      //GOO
             "PC AIO LJ DJ OJ",      //MAN
             "LJ DJ OJ NET",         //Youtube
             "PC AIO LJ DJ OJ OS"    //HP KB
@@ -174,11 +174,11 @@ namespace MacroViewer
         }
         // do not change the order of below items and HP must be last!
         public static string sPrinterTypes = " LJ DJ OJ ";    // must have a space and match below
-        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "HP" };
+        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP" };
         public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
-                "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "HP from HTML" };
+                "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
         public static string[] LocalMacroRefs = {"PC Reference","PC Reference","LaserJet Reference",
-                "DeskJet Reference","OfficeJet Reference", "", "", "", ""};
+                "DeskJet Reference","OfficeJet Reference", "", "", "", "","",""};
 
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
@@ -292,15 +292,11 @@ internal static class ClipboardFormats
         public static void ShowPageInBrowser(string strType, string strTemp)
         {
             string sPP = Properties.Settings.Default.sPPrefix;
+            strTemp = strTemp.Replace(Environment.NewLine, "<br>");
             if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
             {
                 strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
             }
-            /*
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
-            */
             ShellHTML(strTemp);
             CopyHTML(strTemp);
         }
@@ -1069,69 +1065,6 @@ internal static class ClipboardFormats
         }
     }
 
-    internal class CShowBrowser
-    {
-        private bool bUseWebView  = true;
-        private string strPrefix = Utils.XMLprefix;  //"<!DOCTYPE html><body><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />";
-        private string strSuffix = Utils.XMLsuffix;  //"</body></html>";
-        
-        private bool WebViewIsInstalled()
-        {
-            string regKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";
-            using (RegistryKey edgeKey = Registry.LocalMachine.OpenSubKey(regKey))
-            {
-                if (edgeKey != null)
-                {
-                    string[] productKeys = edgeKey.GetSubKeyNames();
-                    if (productKeys.Any())
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-        public void Init()
-        {
-            bUseWebView = WebViewIsInstalled();
-        }
-
-        // had to add block as BlinkTimer was not working !?!?!? todo to do todo
-        //<body style="width: 800px; margin: 0 auto;">
-        public void ShowInBrowser(string strIn, bool bBlock)
-        {
-            string strTemp = strPrefix + strIn + strSuffix;
-            if (bUseWebView)
-            {
-                ShowPage MyShowPage = new ShowPage(Utils.WhereExe, strTemp);    // this is WebView2 stuff
-                if(bBlock)
-                {
-                    MyShowPage.ShowDialog();
-                    MyShowPage.Dispose();
-                    return;
-                }
-                MyShowPage.Show();
-            }
-            else
-            {
-                WebBrowserPage MyShowPage = new WebBrowserPage(strTemp);    // ie11 old browser
-                if (bBlock)
-                {
-                    MyShowPage.ShowDialog();
-                    MyShowPage.Dispose();
-                    return;
-                }
-                MyShowPage.Show();
-            }
-        }
-
-        public void ShowInBrowser(string strIn)
-        {
-            ShowInBrowser(strIn, false);
-        }
-
-    }
     internal class CSendNotepad
     {
 

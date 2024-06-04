@@ -74,9 +74,7 @@ namespace MacroViewer
             string strTemp = tbResult.Text;
             if (strTemp == "" || bBoxed) strTemp = strBoxed;
             if (strTemp == "") return;
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp, true);
+            Utils.ShowPageInBrowser("", strTemp);
         }
 
         private void btnTest_Click(object sender, EventArgs e)

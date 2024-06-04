@@ -19,8 +19,8 @@ xcopy /Y /I %1sources\SiteMap.html %2..\Release
 xcopy /Y /I %1sources\SiteMap.html %2..\Debug
 xcopy /Y /I %1sources\SiteMap.html %1temp
 xcopy %2signatures.txt %1temp
+xcopy %2signatures.txt %2..\Debug
 xcopy %4 %1temp
-rem xcopy %1packages\Microsoft.Web.WebView2.1.0.2210.55\runtimes\win-x64\native\WebView2Loader.dll %1temp
 xcopy %userprofile%\Downloads\macros.html %1temp
 cd %1
 tar -z -cf %1%ARC%  temp

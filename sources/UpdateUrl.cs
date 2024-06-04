@@ -45,9 +45,7 @@ namespace MacroViewer
         {
             string strTemp = tbUrl.Text;
             if (strTemp == "") return;
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(Utils.AssembleIMG(strTemp));
+            Utils.ShowPageInBrowser("",Utils.AssembleIMG(strTemp));
         }
 
         private void btnSaveExit_Click(object sender, EventArgs e)

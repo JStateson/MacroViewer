@@ -124,9 +124,7 @@ namespace MacroViewer
 
         private void RunBrowser(string strTemp)
         {
-            CShowBrowser MyBrowser = new CShowBrowser();
-            MyBrowser.Init();
-            MyBrowser.ShowInBrowser(strTemp);
+            Utils.ShowPageInBrowser("", strTemp);
         }
 
         private void ClearPB()

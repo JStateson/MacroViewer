@@ -18,6 +18,7 @@ using Microsoft.Win32;
 using static System.Net.WebRequestMethods;
 using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.CompilerServices;
 
 
 namespace MacroViewer
@@ -27,6 +28,7 @@ namespace MacroViewer
         private int SelectedRow = -1;
         private List<CFound> cFound;
         private List<CFound> cSorted;
+        private List<CFound> aSorted;
         private List<CBody> cAll;
         private string[] keywords;
         private bool[] KeyPresent;
@@ -37,8 +39,14 @@ namespace MacroViewer
         public string NewItemID { get; set; }
         int nUseLastViewed = -1;
         private bool TriedFailed = false;
+        private int[] cWidth = new int[4] { 48, 64, 64, 316 };
+        private int[] Unsorted;
+        private int[] SortInx;
+        private int[] aSort;
+        private int CFcnt = 0;
         Font Reg12;
         Font Reg10;
+        private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
@@ -78,6 +86,7 @@ namespace MacroViewer
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             int n = cSorted[SelectedRow].WhereFound;
             string strType = cSorted[SelectedRow].File;
             string strTemp = cAll[n].sBody;
@@ -86,10 +95,36 @@ namespace MacroViewer
             Utils.ShowPageInBrowser(strType, strTemp);
         }
 
+        private void SortTable(int column)
+        {
+            //dgvSearched.Sort(dgvSearched.Columns[column], ListSortDirection.Descending);
+            if(column == 2)
+            {
+                bool b = !ColSortDirection[2];
+                ColSortDirection[2] = b;
+                RunMacSort(CFcnt, b);
+            }
+            if(column == 0) // sort by file
+            {
+                AlphaExtractFile();
+                aSorted = new List<CFound>();
+                foreach(int i in aSort)
+                {
+                    aSorted.Add(cSorted[i]);
+                }
+                cSorted = aSorted;
+                dgvSearched.DataSource = cSorted;
+            }
+        }
+
         private void dgvSearched_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             SelectedRow = e.RowIndex;
-            if (SelectedRow < 0) return;
+            if (SelectedRow < 0)
+            {
+                SortTable(e.ColumnIndex);
+                return;
+            }
             int n = cSorted[SelectedRow].WhereFound;
             nUseLastViewed = n;
             string[] sEach = cAll[n].fKeys.Trim().Split(new char[] {' '});
@@ -142,7 +177,7 @@ namespace MacroViewer
             return sS.Length;
         }
 
-        private void RunSort(int n, ref int[] Unsorted, ref int[] SortInx)
+        private void RunSort(int n, bool Descending)
         {
             int a,b;
             for (int i = 0; i < n - 1; i++)
@@ -151,10 +186,21 @@ namespace MacroViewer
                 {
                     a = SortInx[j];
                     b = SortInx[j + 1];
-                    if (Unsorted[a] < Unsorted[b])
+                    if(Descending)
                     {
-                        SortInx[j] = SortInx[j + 1];
-                        SortInx[j + 1] = a;
+                        if (Unsorted[a] < Unsorted[b])
+                        {
+                            SortInx[j] = SortInx[j + 1];
+                            SortInx[j + 1] = a;
+                        }
+                    }
+                    else
+                    {
+                        if (Unsorted[a] > Unsorted[b])
+                        {
+                            SortInx[j] = SortInx[j + 1];
+                            SortInx[j + 1] = a;
+                        }
                     }
                 }
             }
@@ -189,17 +235,23 @@ namespace MacroViewer
             lbKeyFound.Items.Clear();
             tbNumMatches.Text = "";
             string sBetter = FormBetter(tbKeywords.Text.Trim());
-            keywords = sBetter.Split(new char[] { ' ', '\t' });
+             if(rbEPhrase.Checked)
+            {
+                keywords = new string[] { sBetter };    
+            }
+            else
+            {
+                keywords = sBetter.Split(new char[] { ' ', '\t' });
+            }
             int n = keywords.Length;
             int j,i = 0;
             KeyPresent = new bool[n];
             KeyCount = new int[n];
-            int[] cWidth = new int[4] { 48, 64, 64, 316 };
+            CFcnt = 0;
             n = cAll.Count;
-            int[] Unsorted = new int[n];
-            int[] SortInx = new int[n];
-            int CFcnt = 0;
-            if(cbHPKB.Checked)
+            Unsorted = new int[n];
+            SortInx = new int[n];
+            if (cbHPKB.Checked)
                 HP_KB_find();
 
             foreach (CBody cb in cAll)
@@ -231,9 +283,34 @@ namespace MacroViewer
                 }
                 i++;
             }
-            RunSort(CFcnt, ref Unsorted, ref SortInx);
-            n  = cFound.Count;
-            for(i = 0; i < n; i++)
+            RunMacSort(CFcnt, true);
+        }
+
+        // get alphabet sort order for file "AIO" "LJ" etc.
+        private void AlphaExtractFile()
+        {
+            aSort = new int[cFound.Count];
+            int i = 0;
+            foreach(string s in Utils.LocalMacroPrefix)
+            {
+                for(int j = 0; j < cFound.Count; j++)
+                {
+                    if(s == cSorted[j].File)
+                    {
+                        aSort[i] = j;
+                        i++;
+                    }
+                }
+            }
+        }
+
+        private void RunMacSort(int CFcnt, bool Descending)
+        {
+            int i, j, n;
+            cSorted.Clear();
+            RunSort(CFcnt, Descending);
+            n = cFound.Count;
+            for (i = 0; i < n; i++)
             {
                 j = SortInx[i];
                 cSorted.Add(cFound[j]);
@@ -254,7 +331,7 @@ namespace MacroViewer
                 TriedFailed = true;
             }
             gbAlltSearch.Visible = TriedFailed && cbOfferAlt.Checked;
-            if(gbAlltSearch.Visible) SetFont(Reg10);
+            if (gbAlltSearch.Visible) SetFont(Reg10);
             else SetFont(Reg12);
             gbMakeNew.Visible = false;
         }

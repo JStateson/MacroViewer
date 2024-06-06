@@ -154,6 +154,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.mnuNote = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRef = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -714,6 +716,8 @@
             this.mOSload,
             this.mnuNet,
             this.loadHardwareMacsToolStripMenuItem,
+            this.mnuRef,
+            this.mnuNote,
             this.toolStripSeparator1,
             this.saveToXMLToolStripMenuItem,
             this.mHPload,
@@ -1436,8 +1440,22 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 8000;
+            this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // mnuNote
+            // 
+            this.mnuNote.Name = "mnuNote";
+            this.mnuNote.Size = new System.Drawing.Size(194, 22);
+            this.mnuNote.Text = "Load Notes";
+            this.mnuNote.Click += new System.EventHandler(this.mnuNote_Click);
+            // 
+            // mnuRef
+            // 
+            this.mnuRef.Name = "mnuRef";
+            this.mnuRef.Size = new System.Drawing.Size(194, 22);
+            this.mnuRef.Text = "Load References";
+            this.mnuRef.Click += new System.EventHandler(this.mnuRef_Click);
             // 
             // main
             // 
@@ -1609,6 +1627,8 @@
         private System.Windows.Forms.ToolStripMenuItem emailToolStripMenuItem;
         private System.Windows.Forms.Button bltnHR;
         private System.Windows.Forms.ToolStripMenuItem mnuAskQ;
+        private System.Windows.Forms.ToolStripMenuItem mnuRef;
+        private System.Windows.Forms.ToolStripMenuItem mnuNote;
     }
 }
 

@@ -812,7 +812,7 @@ namespace MacroViewer
                         }
                     }
                     sBody = sr.ReadLine();
-                    Body[i] = sBody; // only signatures need this .Replace("<br />", "<br>");
+                    Body[i] = sBody;
                     sBody = Utils.BBCparse(sBody);
                     MacroErrors[i] = sBody;
                     HPerr[i] = (sBody != "");
@@ -1062,8 +1062,8 @@ namespace MacroViewer
             if(Utils.IsNewPRN(TXTName))
             {
                 string sNB =
-                    "You may need to reset the printer: instructions here" + Utils.nBR(3) +
-                    "WiFi setup to router:  instructions here" + Utils.nBR(3) +
+                    "You may need to reset the printer: video here" + Utils.nBR(3) +
+                    "WiFi setup to router:  video here" + Utils.nBR(3) +
                     "For WiFi direct setup click here.<br>This is useful if there is no modem " + Utils.nBR(3) +
                     "Simple push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
                     "Full feature software DEVICE MONTH YEAR" + Utils.nBR(3) +
@@ -2188,6 +2188,16 @@ namespace MacroViewer
             {
                 e.Cancel = true;
             }
+        }
+
+        private void mnuRef_Click(object sender, EventArgs e)
+        {
+            SelectFileItem("RF");
+        }
+
+        private void mnuNote_Click(object sender, EventArgs e)
+        {
+            SelectFileItem("NO");
         }
     }
     

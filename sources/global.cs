@@ -179,7 +179,6 @@ namespace MacroViewer
                 "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
         public static string[] LocalMacroRefs = {"PC Reference","PC Reference","LaserJet Reference",
                 "DeskJet Reference","OfficeJet Reference", "", "", "", "","",""};
-
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
@@ -385,6 +384,11 @@ internal static class ClipboardFormats
             {
                 string strLine = " line:" + strErr.Line.ToString() + ", char:" + strErr.LinePosition.ToString();
                 strRtn += strErr.Reason + strLine + Environment.NewLine;
+            }
+            int i = strIn.IndexOf("...");
+            if(i >= 0)
+            {
+                strRtn += "possible '...' problem at " + i.ToString() + Environment.NewLine;
             }
             return strRtn;
         }

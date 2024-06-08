@@ -97,7 +97,6 @@ namespace MacroViewer
 
         private void SortTable(int column)
         {
-            //dgvSearched.Sort(dgvSearched.Columns[column], ListSortDirection.Descending);
             if(column == 2)
             {
                 bool b = !ColSortDirection[2];
@@ -162,8 +161,8 @@ namespace MacroViewer
                 foreach (Match m in allMatches)
                 {
                     sTmp = m.Value;
-                    if (strRtn.Contains(sTmp)) continue;
                     KeyCount[i]++;
+                    if (strRtn.Contains(sTmp)) continue;
                     strRtn += sTmp + " ";
                 }
                 i++;
@@ -267,7 +266,7 @@ namespace MacroViewer
                     }
                     cAll[i].fKeys = sKeys;
                     SortInx[CFcnt] = CFcnt;
-                    Unsorted[CFcnt] = CountWords(sKeys);
+                    Unsorted[CFcnt] = n; // CountWords(sKeys);
                     cAll[i].nWdsfKey = Unsorted[CFcnt];
                     CFcnt++;
                     cf.Name = cb.Name;

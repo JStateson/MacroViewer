@@ -1,5 +1,6 @@
 ﻿//#define SPECIAL2
 //#define SPECIAL3
+//#define SPECIAL4
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -19,6 +20,7 @@ using System.Dynamic;
 using System.Configuration;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace MacroViewer
@@ -776,6 +778,22 @@ namespace MacroViewer
             LoadHTMLfile();
         }
 
+#if SPECIAL4
+// this needs to check for a table followed by a width followed by NO image before the end of the table
+        private string Has50noPic(string strIn)
+        {
+            string strRtn="";
+            int i;
+            i = strIn.IndexOf("width=\"50%\"");
+            if (i >= 0)
+            {
+                strRtn += "possible '%50' problem at " + i.ToString() + Environment.NewLine;
+            }
+            return strRtn;
+        }
+#endif
+
+
         // HP and HTML can have blank macro names and body but NOT any others
         private int LoadFromTXT(string strFN)
         {
@@ -814,6 +832,8 @@ namespace MacroViewer
                     sBody = sr.ReadLine();
                     Body[i] = sBody;
                     sBody = Utils.BBCparse(sBody);
+#if SPECIAL4
+#endif
                     MacroErrors[i] = sBody;
                     HPerr[i] = (sBody != "");
                     if (HPerr[i])
@@ -1545,6 +1565,7 @@ namespace MacroViewer
             lbName.Columns[2].HeaderText = "Name: " + Utils.FNtoHeader(sWanted);
             NumInBody = 0;
             btnSaveM.Enabled = false;
+            btnNew.Enabled = true; // allow to be created
         }
 
         private void SelectFileItem(string sPrefix)
@@ -1556,6 +1577,8 @@ namespace MacroViewer
                     return; // user failed to save edits
                 }
             }
+            strType = sPrefix;
+            TXTName = sPrefix;
             if (Utils.NoFileThere(sPrefix))
             {
                 ShowEmpty(sPrefix);
@@ -1565,7 +1588,7 @@ namespace MacroViewer
             lbRCcopy.Visible = false;
             mMoveMacro.Visible = true;
             lbName.ReadOnly = false;
-            strType = sPrefix;
+
             if(sPrefix == "HP")
             {
                 ReloadHP(0);
@@ -1598,6 +1621,7 @@ namespace MacroViewer
         private void btnCleanUrl_Click(object sender, EventArgs e)
         {
             string sDirty = Clipboard.GetText();
+            if (sDirty == "") return;
             Utils.ReplaceUrls(ref sDirty,false);
             Clipboard.SetText(sDirty);
         }

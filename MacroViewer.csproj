@@ -250,6 +250,7 @@
       <DependentUpon>WordSearch.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="sources\excel_to_html.vba" />
     <None Include="sources\mnu-edit-link.rtf" />
     <None Include="sources\mnu-file.rtf" />
     <None Include="sources\mnu-imag-sig.rtf" />

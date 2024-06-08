@@ -379,6 +379,7 @@ internal static class ClipboardFormats
         {
             string strRtn = "";
             HtmlDocument htmlDoc = new HtmlDocument();
+            if (strIn == null) return "";
             htmlDoc.LoadHtml(strIn + " ");  // seems needed to catch trailing open tag
             foreach(var strErr in htmlDoc.ParseErrors)
             {

@@ -170,7 +170,8 @@
             this.blnAdd.Name = "blnAdd";
             this.blnAdd.Size = new System.Drawing.Size(152, 29);
             this.blnAdd.TabIndex = 1;
-            this.blnAdd.Text = "Add Sig or Image";
+            this.blnAdd.Text = "New Item";
+            this.toolTip1.SetToolTip(this.blnAdd, "Use F2 to change name");
             this.blnAdd.UseVisualStyleBackColor = true;
             this.blnAdd.Click += new System.EventHandler(this.blnAdd_Click);
             // 

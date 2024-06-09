@@ -288,6 +288,12 @@ internal static class ClipboardFormats
             CopyHTML(strTemp);
         }
 
+        public static string ClipboardGetText()
+        {
+            string t = Clipboard.GetText();
+            if (t == null) t = "";
+            return t.Trim();
+        }
         public static void ShowPageInBrowser(string strType, string strTemp)
         {
             string sPP = Properties.Settings.Default.sPPrefix;

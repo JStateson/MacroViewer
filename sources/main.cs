@@ -459,7 +459,7 @@ namespace MacroViewer
 
         private void FormQueryKB(string sS)
         {
-            string t = Clipboard.GetText().Trim();
+            string t = Utils.ClipboardGetText();
             string s = sS.Substring(0,1).ToLower();
             string w = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message";
             string f = w + "?filter=location&q=" + t;
@@ -491,15 +491,18 @@ namespace MacroViewer
 
         private void hPYouTubeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utils.LocalBrowser("https://www.youtube.com/@HPSupport/search?query=" + Clipboard.GetText().Trim());
+            Utils.LocalBrowser("https://www.youtube.com/@HPSupport/search?query=" + Utils.ClipboardGetText());
         }
-        private string ExtractSearchID(string str)
+
+        // this was to look at the clipboard and see if there were keywords
+        private string ClipExtractSearchID()
         {
+            string str = Utils.ClipboardGetText();
+            if (str == "") return "";
             int n = str.Length;
             if (n > 20) return "";  // was not a keyword probably a bunch of junk or url
             string  str0 = "";
             char res;
-            str = str.Trim();
 
             //remove any parens anywhere
             str0 = str.Replace("(", "").Replace(")", "");
@@ -528,7 +531,7 @@ namespace MacroViewer
 
         private string GetSearchKeyword(string s)
         {
-            string sObj = ExtractSearchID(Clipboard.GetText().Trim());
+            string sObj = ClipExtractSearchID();
             if (s == "" || sObj == "") return sObj;
             return s + " " + sObj;
         }
@@ -551,7 +554,7 @@ namespace MacroViewer
         //https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=ipmmb-fm
         private void mnuSearchComm_Click(object sender, EventArgs e)
         {
-            string s="", sObj = Clipboard.GetText().Trim();
+            string s="", sObj = Utils.ClipboardGetText();
             if (sObj == "")// this is unlikely but not impossible
                 Utils.LocalBrowser("https://h30434.www3.hp.com");
             else
@@ -581,7 +584,7 @@ namespace MacroViewer
         // devicehunt.com/search/type/usb/vendor/2EF4/device/5842
         private void mnuHuntDev_Click(object sender, EventArgs e)
         {
-            string s = Clipboard.GetText().Trim();
+            string s = Utils.ClipboardGetText();
             string sType = "";
             if (s.Contains("USB")) sType = "/usb";
             if (s.Contains("PCI")) sType = "/pci";
@@ -693,7 +696,7 @@ namespace MacroViewer
 */
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            string strTemp = Clipboard.GetText();
+            string strTemp = Utils.ClipboardGetText();
             if (!strTemp.Contains(Environment.NewLine))
             {
                 strTemp = strTemp.Replace("\n", Environment.NewLine);
@@ -1625,7 +1628,7 @@ namespace MacroViewer
 
         private void btnCleanUrl_Click(object sender, EventArgs e)
         {
-            string sDirty = Clipboard.GetText();
+            string sDirty = Utils.ClipboardGetText();
             if (sDirty == "") return;
             Utils.ReplaceUrls(ref sDirty,false);
             Clipboard.SetText(sDirty);
@@ -2000,20 +2003,20 @@ namespace MacroViewer
 
         private void btnClipToUpper_Click(object sender, EventArgs e)
         {
-            string s = Clipboard.GetText().ToUpper();
+            string s = Utils.ClipboardGetText().ToUpper();
             Clipboard.SetText(s);
         }
 
         private void btnToLower_Click(object sender, EventArgs e)
         {
-            string s = Clipboard.GetText().ToLower();
+            string s = Utils.ClipboardGetText().ToLower();
             Clipboard.SetText(s);
         }
 
         private void btnCleanPaste_Click(object sender, EventArgs e)
         {
             int i, j;
-            string sDirty = Clipboard.GetText();
+            string sDirty = Utils.ClipboardGetText();
             i = sDirty.Length;
             tbBody.Text = AppendDash("Before cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;   
             Utils.ReplaceUrls(ref sDirty, false);

@@ -339,7 +339,7 @@ namespace MacroViewer
         // if checked then remove unwanted lines
         private int GatherClipboardText(bool b)
         {
-            string sIn = Clipboard.GetText();
+            string sIn = Utils.ClipboardGetText();
             // remove emptys is needed because \r\n is newline
             if (b) sEach = sIn.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             else sEach = sIn.Split(new[] { '\n', '\r' });

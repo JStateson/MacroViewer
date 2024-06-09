@@ -208,7 +208,7 @@ namespace MacroViewer
             }
             else
             {
-                sUrl = Clipboard.GetText();
+                sUrl = Utils.ClipboardGetText();
                 if (Utils.IsUrlImage(sUrl))
                 {
                     sImg = Utils.AssembleIMG(sUrl);

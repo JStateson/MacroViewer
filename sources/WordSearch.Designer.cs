@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbDropped = new System.Windows.Forms.Label();
+            this.gbSelect = new System.Windows.Forms.GroupBox();
             this.gbMakeNew = new System.Windows.Forms.GroupBox();
             this.lbNewItems = new System.Windows.Forms.ListBox();
             this.btnMakeNew = new System.Windows.Forms.Button();
@@ -62,8 +64,6 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.gbSelect = new System.Windows.Forms.GroupBox();
-            this.lbDropped = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -93,6 +93,27 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
+            // 
+            // lbDropped
+            // 
+            this.lbDropped.AutoSize = true;
+            this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDropped.ForeColor = System.Drawing.Color.Red;
+            this.lbDropped.Location = new System.Drawing.Point(340, 300);
+            this.lbDropped.Name = "lbDropped";
+            this.lbDropped.Size = new System.Drawing.Size(56, 16);
+            this.lbDropped.TabIndex = 13;
+            this.lbDropped.Text = "Ignored:";
+            this.lbDropped.Visible = false;
+            // 
+            // gbSelect
+            // 
+            this.gbSelect.Location = new System.Drawing.Point(28, 658);
+            this.gbSelect.Name = "gbSelect";
+            this.gbSelect.Size = new System.Drawing.Size(970, 57);
+            this.gbSelect.TabIndex = 12;
+            this.gbSelect.TabStop = false;
+            this.gbSelect.Visible = false;
             // 
             // gbMakeNew
             // 
@@ -294,12 +315,10 @@
             // rbEPhrase
             // 
             this.rbEPhrase.AutoSize = true;
-            this.rbEPhrase.Checked = true;
             this.rbEPhrase.Location = new System.Drawing.Point(47, 76);
             this.rbEPhrase.Name = "rbEPhrase";
             this.rbEPhrase.Size = new System.Drawing.Size(121, 24);
             this.rbEPhrase.TabIndex = 10;
-            this.rbEPhrase.TabStop = true;
             this.rbEPhrase.Text = "Exact Phrase";
             this.rbEPhrase.UseVisualStyleBackColor = true;
             // 
@@ -364,10 +383,12 @@
             // rbExactMatch
             // 
             this.rbExactMatch.AutoSize = true;
+            this.rbExactMatch.Checked = true;
             this.rbExactMatch.Location = new System.Drawing.Point(47, 35);
             this.rbExactMatch.Name = "rbExactMatch";
             this.rbExactMatch.Size = new System.Drawing.Size(134, 24);
             this.rbExactMatch.TabIndex = 0;
+            this.rbExactMatch.TabStop = true;
             this.rbExactMatch.Text = "Any exact word";
             this.rbExactMatch.UseVisualStyleBackColor = true;
             // 
@@ -456,27 +477,6 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
-            // 
-            // gbSelect
-            // 
-            this.gbSelect.Location = new System.Drawing.Point(28, 658);
-            this.gbSelect.Name = "gbSelect";
-            this.gbSelect.Size = new System.Drawing.Size(970, 57);
-            this.gbSelect.TabIndex = 12;
-            this.gbSelect.TabStop = false;
-            this.gbSelect.Visible = false;
-            // 
-            // lbDropped
-            // 
-            this.lbDropped.AutoSize = true;
-            this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDropped.ForeColor = System.Drawing.Color.Red;
-            this.lbDropped.Location = new System.Drawing.Point(340, 300);
-            this.lbDropped.Name = "lbDropped";
-            this.lbDropped.Size = new System.Drawing.Size(56, 16);
-            this.lbDropped.TabIndex = 13;
-            this.lbDropped.Text = "Ignored:";
-            this.lbDropped.Visible = false;
             // 
             // WordSearch
             // 

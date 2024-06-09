@@ -4,7 +4,7 @@
 
 Image of main page https://h30434.www3.hp.com/t5/image/serverpage/image-id/369851i13A420A4C8E6D69E and RTF help files can be viewed in sources
 
-A tar with latest binaries can be downloaded if you do not wish to build the app.  There is no install app so you must unzip the tar and may have to unblock the .exe app before it can run.
+A tar with latest binaries can be downloaded if you do not wish to build the app.  There is no install app so you must unzip the tar and <a href="https://h30434.www3.hp.com/t5/image/serverpage/image-id/371726i4F7A8A35B3DFE493" target="_blank">will have to unblock</a> the .exe app before it can run.
 
 The tar has a sample macro html from the forum, 8 supplemental macro files and a sample signature file.  You may copy any of the sample macros into your own macros.  
 

@@ -63,6 +63,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.gbSelect = new System.Windows.Forms.GroupBox();
+            this.lbDropped = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbDropped);
             this.groupBox1.Controls.Add(this.gbSelect);
             this.groupBox1.Controls.Add(this.gbMakeNew);
             this.groupBox1.Controls.Add(this.gbAlltSearch);
@@ -412,7 +414,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Info;
-            this.label2.Location = new System.Drawing.Point(127, 294);
+            this.label2.Location = new System.Drawing.Point(33, 291);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(284, 40);
             this.label2.TabIndex = 4;
@@ -442,6 +444,7 @@
             this.tbKeywords.Name = "tbKeywords";
             this.tbKeywords.Size = new System.Drawing.Size(561, 26);
             this.tbKeywords.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.tbKeywords, "all single characters are ignored");
             this.tbKeywords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbKeywords_KeyDown);
             // 
             // label1
@@ -462,6 +465,18 @@
             this.gbSelect.TabIndex = 12;
             this.gbSelect.TabStop = false;
             this.gbSelect.Visible = false;
+            // 
+            // lbDropped
+            // 
+            this.lbDropped.AutoSize = true;
+            this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDropped.ForeColor = System.Drawing.Color.Red;
+            this.lbDropped.Location = new System.Drawing.Point(340, 300);
+            this.lbDropped.Name = "lbDropped";
+            this.lbDropped.Size = new System.Drawing.Size(56, 16);
+            this.lbDropped.TabIndex = 13;
+            this.lbDropped.Text = "Ignored:";
+            this.lbDropped.Visible = false;
             // 
             // WordSearch
             // 
@@ -526,5 +541,6 @@
         private System.Windows.Forms.Button btnMakeNew;
         private System.Windows.Forms.RadioButton rbEPhrase;
         private System.Windows.Forms.GroupBox gbSelect;
+        private System.Windows.Forms.Label lbDropped;
     }
 }

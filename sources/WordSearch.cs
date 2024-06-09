@@ -118,8 +118,9 @@ namespace MacroViewer
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            int n = cSorted[SelectedRow].WhereFound;
-            string strType = cSorted[SelectedRow].File;
+            List<CFound> bSorted = (List<CFound>)dgvSearched.DataSource as List<CFound>;
+            int n = bSorted[SelectedRow].WhereFound;
+            string strType = bSorted[SelectedRow].File;
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
             nUseLastViewed = n;
@@ -165,6 +166,7 @@ namespace MacroViewer
             if (SelectedRow < 0)
             {
                 SortTable(e.ColumnIndex);
+                dgvSearched.Refresh();
                 return;
             }
             int n = cSorted[SelectedRow].WhereFound;
@@ -189,6 +191,7 @@ namespace MacroViewer
             i = 0;
             foreach (string keyword in keywords)
             {
+                if (keyword.Length == 1) continue;
                 if(rbExactMatch.Checked)
                 {
                     regex = new Regex("\\b" + Regex.Escape(keyword) + "\\b",
@@ -196,7 +199,14 @@ namespace MacroViewer
                 }
                 else
                 {
-                    sPattern = "\\b\\w*" + keyword + "\\w*\\b";
+                    if(rbEPhrase.Checked)
+                    {
+                        sPattern = $@"\b{Regex.Escape(keyword)}\b";
+                    }
+                    else
+                    {
+                        sPattern = "\\b\\w*" + keyword + "\\w*\\b";
+                    }
                     regex = new Regex(sPattern, cbIgnCase.Checked ? RegexOptions.IgnoreCase : RegexOptions.None);
                 }
                 allMatches = regex.Matches(text);
@@ -282,6 +292,8 @@ namespace MacroViewer
             lbKeyFound.Items.Clear();
             tbNumMatches.Text = "";
             HasFiles = "";
+            SelectedFile = "";
+            dgvSearched.DataSource = null;
             string sBetter = FormBetter(tbKeywords.Text.Trim());
              if(rbEPhrase.Checked)
             {
@@ -301,7 +313,17 @@ namespace MacroViewer
             SortInx = new int[n];
             if (cbHPKB.Checked)
                 HP_KB_find();
-
+            lbDropped.Text = "";
+            foreach(string s in keywords)
+            {
+                if(s.Length == 1)
+                {
+                    if(!lbDropped.Text.Contains(s))
+                        lbDropped.Text += s + " ";
+                }
+            }
+            if(lbDropped.Text != "")lbDropped.Text = "Dropped from search: " + lbDropped.Text;
+            lbDropped.Visible = rbExactMatch.Checked || rbAnyMatch.Checked;
             foreach (CBody cb in cAll)
             { 
                 string sKeys = PerformSearch(cb.Name + " " + cb.sBody);
@@ -401,7 +423,7 @@ namespace MacroViewer
                 j = SortInx[i];
                 cSorted.Add(cFound[j]);
             }
-            dgvSearched.DataSource = cSorted.ToArray();
+            dgvSearched.DataSource = cSorted;
             dgvSearched.Columns[1].HeaderText = "Mac#";
             j = 0;
             foreach (int k in cWidth)

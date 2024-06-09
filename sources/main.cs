@@ -70,7 +70,6 @@ namespace MacroViewer
             InitializeComponent();
             Utils.WhereExe = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
             EnableMacEdits(false);
-            SwitchToMarkup(true);
             gbManageImages.Enabled = true;// System.Diagnostics.Debugger.IsAttached;
             int iBrowser = Properties.Settings.Default.BrowserID;
             if (iBrowser < 0) Utils.BrowserWanted = Utils.eBrowserType.eEdge;
@@ -620,13 +619,18 @@ namespace MacroViewer
                 return;
             }
             HaveSelected(true);
-            tbBody.Text = Body[CurrentRowSelected];
+            ShowBodyFromSelected();
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
             lbName.ClearSelection();
             lbName.Rows[CurrentRowSelected].Selected = true;
-            if (lbNotM.Visible) SwitchToMarkup(false);
             if (cbLaunchPage.Checked)
                 RunBrowser();
+        }
+
+        private void ShowBodyFromSelected()
+        {
+            tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
+            ClearBRoption();
         }
 
         private void ShowSelectedRow(int e)
@@ -650,50 +654,17 @@ namespace MacroViewer
             tbBody.Clear();
         }
 
-        private void SwitchToMarkup(bool bEnable)
-        {
-            string strOut = "";
-            if (bEnable)
-            {
-                strOut = tbBody.Text.Replace(Environment.NewLine, "<br>");
-            }
-            else
-            {
-                strOut = tbBody.Text.Replace("<br>", Environment.NewLine);
-            }
-            tbBody.Text = strOut;
-            lbM.Visible = bEnable;
-            lbNotM.Visible = !bEnable;
-        }
-
         private void CopyBodyToClipboard()
         {
             if (tbBody.Text == "") return;
             Clipboard.SetText(tbBody.Text);
         }
+
         private void btnCopyTo_Click(object sender, EventArgs e)
         {
             CopyBodyToClipboard();
         }
 
-        // below is for testing but I never got it to work
-        // trying to get BBCode from an HTML page
-        //https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767917(v=vs.85)?redirectedfrom=MSDN
-/*
-        private void RecoverBBCfromHTML()
-        {
-            RichTextBox rtb = new RichTextBox();
-            if (Clipboard.ContainsText(TextDataFormat.Html))
-            {
-                string returnHtmlText = Clipboard.GetText(TextDataFormat.Html);
-                //Clipboard.SetText(replacementHtmlText, TextDataFormat.Html);
-                rtb.Text = (string)Clipboard.GetData(DataFormats.Html);
-                rtb.Text = "";
-                rtb.Paste();
-                string strTemp = (string)Clipboard.GetData(DataFormats.Html);
-            }
-        }
-*/
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
             string strTemp = Utils.ClipboardGetText();
@@ -701,9 +672,7 @@ namespace MacroViewer
             {
                 strTemp = strTemp.Replace("\n", Environment.NewLine);
             }
-            if (lbM.Visible)strTemp = strTemp.Replace(Environment.NewLine, "<br>");
-            tbBody.Text = strTemp;
-            //RecoverBBCfromHTML();
+            tbBody.Text = strTemp.Replace("<br>", Environment.NewLine);
         }
 
         // notice to anyone reading this: Feel free to copy the signature and change it
@@ -1106,78 +1075,10 @@ namespace MacroViewer
             tbMacName.Text = strNewName;
             tbNumMac.Text = lbName.Rows.Count.ToString();
             EnableMacEdits(true);
-            SwitchToMarkup(false);
             return true;
         }
 
 
-        private void btnAddImg_Click(object sender, EventArgs e)
-        {
-            int i = tbBody.SelectionStart;
-            if (tbImgUrl.Text == "") return;
-            string strImgUrl = Utils.AssembleIMG(tbImgUrl.Text);
-            tbBody.Text = tbBody.Text.Insert(i, strImgUrl);
-            tbBody.SelectionStart = i + strImgUrl.Length;
-            tbBody.SelectionLength = 0;
-            tbBody.Focus();
-        }
-
-
-
-        private void btnAddURL_Click(object sender, EventArgs e)
-        {
-            if (tbImgUrl.Text == "") return;
-            string strOver = "";
-            string strUrl = "<a href=\"" + tbImgUrl.Text.Trim() + " target=\"_blank\">";
-            int i = tbBody.SelectionStart;
-            int n = tbBody.SelectionLength;
-            if (n > 0)
-                strOver = tbBody.Text.Substring(i, n).Trim();
-            if (strOver == "") n = 0;
-            if (n == 0)
-            {
-                strUrl += "</a>";
-                tbBody.Text = tbBody.Text.Insert(i, strUrl);
-            }
-            else
-            {
-                tbBody.Text = tbBody.Text.Remove(i, n);
-                strUrl += strOver + "</a>";
-                tbBody.Text = tbBody.Text.Insert(i, strUrl);
-            }
-            tbBody.SelectionStart = i + strUrl.Length;
-            tbBody.SelectionLength = 0;
-            tbBody.Focus();
-        }
-
-        private void btnAdd1New_Click(object sender, EventArgs e)
-        {
-            Utils.AddNL(ref tbBody, 1);
-        }
-
-        private void btnAdd2New_Click(object sender, EventArgs e)
-        {
-            Utils.AddNL(ref tbBody, 2);
-        }
-
-        private void btnCLrUrl_Click(object sender, EventArgs e)
-        {
-            tbImgUrl.Text = "";
-        }
-
-        private void btnToMark_Click(object sender, EventArgs e)
-        {
-            SwitchToMarkup(true);
-        }
-
-        private void btnNoMark_Click(object sender, EventArgs e)
-        {
-            SwitchToMarkup(false);
-        }
-
-        private void loadPrinterMacsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
 
         private void ReloadHP(int r)
         {
@@ -1270,7 +1171,6 @@ namespace MacroViewer
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            SwitchToMarkup(true);
             AddNew(Utils.UnNamedMacro, GetReference());
         }
 
@@ -1479,13 +1379,6 @@ namespace MacroViewer
             return true;
         }
       
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            //SyntaxTest(); // this was useless as hp community html used mix of bbcode
-            string strTemp = tbBody.Text;
-            if (strTemp == "") return;
-            Utils.CopyHTML(strType, strTemp.Replace(Environment.NewLine, "<br>"));
-        }
 
         private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -1496,7 +1389,7 @@ namespace MacroViewer
 
         private void btnCancelEdits_Click(object sender, EventArgs e)
         {
-            tbBody.Text = Body[CurrentRowSelected];
+            ShowBodyFromSelected();
             SetFGcolor("#FF6600");
             tbColorCode.ForeColor = ColorTranslator.FromHtml(tbColorCode.Text.ToString());
             MustFinishEdit(true);
@@ -1771,7 +1664,6 @@ namespace MacroViewer
             if(NewID != "" &&bFinishedEdits)
             {
                 n = LoadFromTXT(NewID);
-                SwitchToMarkup(true);
                 if (n < Utils.NumMacros)
                 {
                     AddNew(NewName, GetReference());
@@ -1991,10 +1883,6 @@ namespace MacroViewer
             Utils.WordpadHelp("FILE");
         }
 
-        private void btnInvertNL_Click(object sender, EventArgs e)
-        {
-            SwitchToMarkup(!(tbBody.Text.Contains("<br>")));
-        }
 
         private void btnBold_Click(object sender, EventArgs e)
         {
@@ -2230,6 +2118,28 @@ namespace MacroViewer
         private void mnuNote_Click(object sender, EventArgs e)
         {
             SelectFileItem("NO");
+        }
+
+        private void ClearBRoption()
+        {
+            btnSwapNL.Text = "Show <BR>";
+            lbBRcopyInfo.Visible = false;
+        }
+
+        private void btnSwapNL_Click(object sender, EventArgs e)
+        {
+            bool ShowingNL = (btnSwapNL.Text == "Show <BR>");
+            if(ShowingNL)
+            {
+                btnSwapNL.Text = "Hide <BR>";
+                tbBody.Text = tbBody.Text.Replace(Environment.NewLine, "<br>");
+                lbBRcopyInfo.Visible = true;
+            }
+            else
+            {
+                ClearBRoption();
+                tbBody.Text = tbBody.Text.Replace("<br>",Environment.NewLine);
+            }
         }
     }
     

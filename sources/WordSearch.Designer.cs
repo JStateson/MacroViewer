@@ -62,6 +62,7 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gbSelect = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbSelect);
             this.groupBox1.Controls.Add(this.gbMakeNew);
             this.groupBox1.Controls.Add(this.gbAlltSearch);
             this.groupBox1.Controls.Add(this.cbOfferAlt);
@@ -85,7 +87,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1025, 694);
+            this.groupBox1.Size = new System.Drawing.Size(1025, 733);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
@@ -315,9 +317,9 @@
             // btnExit
             // 
             this.btnExit.ForeColor = System.Drawing.Color.Red;
-            this.btnExit.Location = new System.Drawing.Point(248, 212);
+            this.btnExit.Location = new System.Drawing.Point(264, 212);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(92, 31);
+            this.btnExit.Size = new System.Drawing.Size(77, 31);
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -428,7 +430,7 @@
             this.dgvSearched.Name = "dgvSearched";
             this.dgvSearched.ReadOnly = true;
             this.dgvSearched.RowHeadersVisible = false;
-            this.dgvSearched.Size = new System.Drawing.Size(561, 312);
+            this.dgvSearched.Size = new System.Drawing.Size(561, 287);
             this.dgvSearched.TabIndex = 3;
             this.dgvSearched.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             this.dgvSearched.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_CellDoubleClick);
@@ -452,11 +454,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
             // 
+            // gbSelect
+            // 
+            this.gbSelect.Location = new System.Drawing.Point(28, 658);
+            this.gbSelect.Name = "gbSelect";
+            this.gbSelect.Size = new System.Drawing.Size(970, 57);
+            this.gbSelect.TabIndex = 12;
+            this.gbSelect.TabStop = false;
+            this.gbSelect.Visible = false;
+            // 
             // WordSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 730);
+            this.ClientSize = new System.Drawing.Size(1049, 757);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
@@ -514,5 +525,6 @@
         private System.Windows.Forms.ListBox lbNewItems;
         private System.Windows.Forms.Button btnMakeNew;
         private System.Windows.Forms.RadioButton rbEPhrase;
+        private System.Windows.Forms.GroupBox gbSelect;
     }
 }

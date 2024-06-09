@@ -44,9 +44,12 @@ namespace MacroViewer
         private int[] SortInx;
         private int[] aSort;
         private int CFcnt = 0;
-        Font Reg12;
-        Font Reg10;
+        private Font Reg12;
+        private Font Reg10;
+        private string SelectedFile = "";
+        private string HasFiles = "";
         private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
+
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
@@ -63,7 +66,35 @@ namespace MacroViewer
             Reg10 = gbAlltSearch.Font;
         }
 
-        
+        private void AddSelButtons()
+        {
+            int i = 0;
+            int x = 2, y = 18;
+            gbSelect.Controls.Clear();
+            foreach (string s in Utils.LocalMacroPrefix)
+            {
+                Button btn = new Button();
+                btn.Text = s;
+                btn.Width = 50;
+                btn.Height = 30;
+                btn.Location = new System.Drawing.Point(x + i*(btn.Width + 10), y);
+                btn.Enabled = FileFound(s);
+                gbSelect.Controls.Add(btn);
+                btn.Click += Btn_Click;
+                i++;
+            }
+        }
+
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                SelectedFile = button.Text;
+                SortTable(0);
+            }
+        }
+
         private void FormCandidateMacros(string sBtnName)
         {
             CMoveSpace cms = new CMoveSpace();
@@ -97,22 +128,34 @@ namespace MacroViewer
 
         private void SortTable(int column)
         {
+            bool b;
+            int n=0;
             if(column == 2)
             {
-                bool b = !ColSortDirection[2];
+                b = !ColSortDirection[2];
                 ColSortDirection[2] = b;
                 RunMacSort(CFcnt, b);
             }
             if(column == 0) // sort by file
             {
-                AlphaExtractFile();
-                aSorted = new List<CFound>();
-                foreach(int i in aSort)
+                b = !ColSortDirection[2];
+                ColSortDirection[2] = b;
+                if(SelectedFile == "")
                 {
-                    aSorted.Add(cSorted[i]);
+                    AlphaExtractFile(b);
+                    n = aSort.Length;
                 }
-                cSorted = aSorted;
-                dgvSearched.DataSource = cSorted;
+                else
+                {
+                    n = JustExtract(SelectedFile);
+                }
+                aSorted = new List<CFound>();
+                for(int i = 0; i < n; i++)
+                {
+                    int j = aSort[i];
+                    aSorted.Add(cSorted[j]);
+                }
+                dgvSearched.DataSource = aSorted;
             }
         }
 
@@ -170,10 +213,15 @@ namespace MacroViewer
             return strRtn;
         }
 
-        private int CountWords(string s)
+        private void CountFile(string s)
         {
-            string[] sS = s.Trim().Split(new char[] { ' ', '\t' });
-            return sS.Length;
+            if (!HasFiles.Contains(s))
+                HasFiles += s + " ";
+        }
+
+        private bool FileFound(string s)
+        {
+            return HasFiles.Contains(s) ;
         }
 
         private void RunSort(int n, bool Descending)
@@ -233,6 +281,7 @@ namespace MacroViewer
             TriedFailed = true;
             lbKeyFound.Items.Clear();
             tbNumMatches.Text = "";
+            HasFiles = "";
             string sBetter = FormBetter(tbKeywords.Text.Trim());
              if(rbEPhrase.Checked)
             {
@@ -266,12 +315,13 @@ namespace MacroViewer
                     }
                     cAll[i].fKeys = sKeys;
                     SortInx[CFcnt] = CFcnt;
-                    Unsorted[CFcnt] = n; // CountWords(sKeys);
+                    Unsorted[CFcnt] = n;
                     cAll[i].nWdsfKey = Unsorted[CFcnt];
                     CFcnt++;
                     cf.Name = cb.Name;
                     cf.Number = cb.Number;
                     cf.File = cb.File;
+                    CountFile(cb.File);
                     cf.Found = n.ToString();
                     cf.WhereFound = i;
                     cFound.Add(cf);
@@ -285,19 +335,55 @@ namespace MacroViewer
             RunMacSort(CFcnt, true);
         }
 
-        // get alphabet sort order for file "AIO" "LJ" etc.
-        private void AlphaExtractFile()
+        private int JustExtract(string w)
         {
             aSort = new int[cFound.Count];
             int i = 0;
-            foreach(string s in Utils.LocalMacroPrefix)
+            foreach (string s in Utils.LocalMacroPrefix)
             {
-                for(int j = 0; j < cFound.Count; j++)
+                if (s != w) continue;
+                for (int j = 0; j < cFound.Count; j++)
                 {
-                    if(s == cSorted[j].File)
+                    if (s == cSorted[j].File)
                     {
                         aSort[i] = j;
                         i++;
+                    }
+                }
+            }
+            return i;
+        }
+
+        // get alphabet sort order for file "AIO" "LJ" etc.
+        private void AlphaExtractFile(bool b)
+        {
+            aSort = new int[cFound.Count];
+            int i = 0;
+            if(b)
+            {
+                foreach (string s in Utils.LocalMacroPrefix)
+                {
+                    for (int j = 0; j < cFound.Count; j++)
+                    {
+                        if (s == cSorted[j].File)
+                        {
+                            aSort[i] = j;
+                            i++;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (string s in Utils.LocalMacroPrefix.AsEnumerable().Reverse())
+                {
+                    for (int j = 0; j < cFound.Count; j++)
+                    {
+                        if (s == cSorted[j].File)
+                        {
+                            aSort[i] = j;
+                            i++;
+                        }
                     }
                 }
             }
@@ -309,6 +395,7 @@ namespace MacroViewer
             cSorted.Clear();
             RunSort(CFcnt, Descending);
             n = cFound.Count;
+            SelectedFile = "";
             for (i = 0; i < n; i++)
             {
                 j = SortInx[i];
@@ -333,6 +420,11 @@ namespace MacroViewer
             if (gbAlltSearch.Visible) SetFont(Reg10);
             else SetFont(Reg12);
             gbMakeNew.Visible = false;
+            gbSelect.Visible = TotalMatches > 0;
+            if(TotalMatches > 0)
+            {
+                AddSelButtons();
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

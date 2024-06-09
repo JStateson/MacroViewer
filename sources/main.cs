@@ -396,6 +396,11 @@ namespace MacroViewer
             string strFilename = Properties.Settings.Default.HTTP_HP;
             if (strFilename == null) return false;
             if (strFilename == "") return false;
+            if(!File.Exists(strFilename))
+            {
+                MessageBox.Show("file " + strFilename + " cannot be found");
+                return false;
+            }
             aPage = File.ReadAllText(strFilename);
             if (aPage == null) return false;
             if (aPage.Length == 0) return false;

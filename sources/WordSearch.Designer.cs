@@ -440,6 +440,8 @@
             this.label2.Size = new System.Drawing.Size(284, 40);
             this.label2.TabIndex = 4;
             this.label2.Text = "Double click any row to view macro and\r\nClick \'FOUND\' or \'FILE\' to sort columns";
+            this.toolTip1.SetToolTip(this.label2, "Rows with  RF will list only those\r\nreferences that contain the match\r\nAll other " +
+        "rows display the entire macro.");
             // 
             // dgvSearched
             // 

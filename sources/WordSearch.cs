@@ -19,12 +19,45 @@ using static System.Net.WebRequestMethods;
 using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.CompilerServices;
+using System.Windows.Media.Media3D;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 
 namespace MacroViewer
 {
     public partial class WordSearch : Form
     {
+        public class cRefURLs
+        {
+            public string PageOut="";
+            public string sFile="", sMacN="";
+            public void init(string ssFile, string ssMacN)
+            {
+                sFile = ssFile;
+                sMacN = ssMacN;
+                PageOut = "";
+            }
+            // only look after the _blank>
+            public bool LookForUrl(int inx, ref string s)
+            {
+                // <a href ...blank..whatever.....</a>
+                string sBlank = "=\"_blank\">";
+                int Left_a, Right_a;
+                Right_a = s.IndexOf("</a>", inx);
+                if (Right_a == -1) return true;
+                Left_a = s.LastIndexOf("<a href", inx);
+                if(Left_a == -1) return true;
+                string t = s.Substring(Left_a, Right_a - Left_a) + "<br><br>";
+                int i = t.IndexOf(sBlank);
+                inx -= Left_a;
+                if (inx < i) return false;
+                if (PageOut.Contains(t)) return true;
+                PageOut += t;
+                return true;
+            }
+        }
+
+        public List<cRefURLs> RefUrls;
         private int SelectedRow = -1;
         private List<CFound> cFound;
         private List<CFound> cSorted;
@@ -112,7 +145,22 @@ namespace MacroViewer
             }
             lbNewItems.Items.Clear();
             lbNewItems.DataSource = sOut;
-            gbMakeNew.Visible = true;
+            gbMakeNew.Visible = true;       
+        }
+
+
+        //n is the ordinal index number of RF items.  if exactly 2 RF items then n can be 0 or 1
+        private string GetRefUrl(int n)
+        {
+            int i = -1;
+            string sRtn = "";
+            foreach(cRefURLs cr in RefUrls)
+            {
+                if (cr.PageOut == "") continue;
+                i++;
+                if (i == n) return cr.PageOut;
+            }
+            return sRtn;
         }
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -124,6 +172,15 @@ namespace MacroViewer
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
             nUseLastViewed = n;
+            if (dgvSearched.Rows[e.RowIndex].Cells[0].Value.ToString() == "RF")
+            {
+                int i = -1;
+                for(int j = 0; j <= e.RowIndex;j++)
+                {
+                    if (dgvSearched.Rows[j].Cells[0].Value.ToString() == "RF") i++;
+                }
+                strTemp = GetRefUrl(i);
+            }
             Utils.ShowPageInBrowser(strType, strTemp);
         }
 
@@ -179,7 +236,7 @@ namespace MacroViewer
             }
         }
 
-        private string PerformSearch(string text)
+        private string PerformSearch(string text, string sMacID)
         {
             string strRtn = "";
             string sTmp = "";
@@ -214,6 +271,16 @@ namespace MacroViewer
                 foreach (Match m in allMatches)
                 {
                     sTmp = m.Value;
+                    if(sMacID == "RF")
+                    {
+                        cRefURLs cr = RefUrls.Last();
+                        bool b = cr.LookForUrl(m.Index, ref text);
+                        if(!b)
+                        {
+                            // was NOT a match as was part of the url
+                            KeyCount[i]--;
+                        }
+                    }
                     KeyCount[i]++;
                     if (strRtn.Contains(sTmp)) continue;
                     strRtn += sTmp + " ";
@@ -294,6 +361,7 @@ namespace MacroViewer
             HasFiles = "";
             SelectedFile = "";
             dgvSearched.DataSource = null;
+            RefUrls = new List<cRefURLs>();
             string sBetter = FormBetter(tbKeywords.Text.Trim());
              if(rbEPhrase.Checked)
             {
@@ -325,8 +393,16 @@ namespace MacroViewer
             if(lbDropped.Text != "")lbDropped.Text = "Dropped from search: " + lbDropped.Text;
             lbDropped.Visible = rbExactMatch.Checked || rbAnyMatch.Checked;
             foreach (CBody cb in cAll)
-            { 
-                string sKeys = PerformSearch(cb.Name + " " + cb.sBody);
+            {
+                string sPrN = cb.Name + " ";
+                if (cb.File == "RF")
+                {
+                    cRefURLs cr = new cRefURLs();
+                    cr.init(cb.File, cb.Name);
+                    RefUrls.Add(cr);
+                    sPrN = "";  // RF does not need to have the name searched unlike all other macro information.
+                }
+                string sKeys = PerformSearch(sPrN + cb.sBody,cb.File);  // eg: do not include "support" for RF
                 if (sKeys != "")
                 {
                     n = 0;

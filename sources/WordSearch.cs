@@ -165,7 +165,7 @@ namespace MacroViewer
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0 || SelectedRow < 0) return;
             List<CFound> bSorted = (List<CFound>)dgvSearched.DataSource as List<CFound>;
             int n = bSorted[SelectedRow].WhereFound;
             string strType = bSorted[SelectedRow].File;

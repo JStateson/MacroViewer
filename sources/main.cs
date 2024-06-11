@@ -629,6 +629,8 @@ namespace MacroViewer
 
         private void ShowBodyFromSelected()
         {
+            if (Body[CurrentRowSelected] == null)
+                Body[CurrentRowSelected] = "";
             tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
             ClearBRoption();
         }
@@ -1180,11 +1182,13 @@ namespace MacroViewer
             {
                 btnCancelEdits.ForeColor = NormalEditColor;
                 btnSaveM.ForeColor = NormalEditColor;
+                btnDelM.ForeColor = NormalEditColor;
             }
             else
             {
                 btnCancelEdits.ForeColor = Color.Red;
                 btnSaveM.ForeColor = Color.Red;
+                btnDelM.ForeColor = Color.Red;   
             }
         }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

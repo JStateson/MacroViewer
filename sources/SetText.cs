@@ -11,7 +11,9 @@ namespace MacroViewer
         private string sLoc;
         private bool bBoxed = false;
         private bool bBlinking = false;
-        string strBoxed = "";
+        private string strBoxed = "";
+        private int CurrentDemo = 0, TotalDemos = 4;
+        //0: box url, 1: list, 2:image url, 3: image
         public string strResultOut { get; set; }
         public SetText(string strIn)
         {
@@ -26,6 +28,12 @@ namespace MacroViewer
             cbPreFill.Checked = Properties.Settings.Default.FillAlpha;
         }
 
+        private void SetNextDemo()
+        {
+            CurrentDemo++;
+            if (CurrentDemo == TotalDemos) CurrentDemo = 0;
+            btnDemo.Text = "Click for demo" + (CurrentDemo + 1).ToString();
+        }
         private void btnApply_Click(object sender, EventArgs e)
         {
             strResultOut = tbResult.Text;
@@ -54,7 +62,15 @@ namespace MacroViewer
             }
             if ((bHaveHTML))
             {
-                strOut += Utils.FormUrl(cbCleanUrl.Checked ? Utils.dRef(tbRawUrl.Text) : tbRawUrl.Text, tbSelectedItem.Text.Trim());
+                if (cbMakeIMG.Checked)
+                {
+                    strOut += Utils.AssembleIMG(tbRawUrl.Text);
+                }
+                else
+                {
+                    strOut += Utils.FormUrl(cbCleanUrl.Checked ? Utils.dRef(tbRawUrl.Text) : tbRawUrl.Text, tbSelectedItem.Text.Trim());
+
+                }
                 strTmp = tbSuffix.Text.Trim();
                 if (strTmp != "")
                 {
@@ -132,13 +148,68 @@ namespace MacroViewer
             tbResult.Text = "";
         }
 
+        private int WhichDemo()
+        {
+            int i = 0;
+            string[] sDemos = {"1", "2", "3", "4" };
+            for(i = 0; i < sDemos.Length; i++)
+            {
+                if(btnDemo.Text.Contains(sDemos[i]))
+                {
+                    break;
+                }
+            }
+            SetNextDemo();
+            return i;
+        }
+
+
+        private void RunDemo()
+        {
+            int i = WhichDemo();
+            switch (i)
+            {
+                case 0:
+                    tbPrefix.Text = "You can ";
+                    tbSuffix.Text = " to visit google";
+                    tbSelectedItem.Text = "CLICK HERE";
+                    tbRawUrl.Text = "https://www.google.com";
+                    rbFitBox.Checked = true;
+                    cbMakeIMG.Checked = false;
+                break;
+                case 1:
+                    tbPrefix.Text = "";
+                    tbSuffix.Text = "";
+                    tbSelectedItem.Text = "Some country codes:\r\n#A2M - Iceland - English\r\n#A2N - Saudi Arabia - Arabic'English";
+                    tbRawUrl.Text = "";
+                    rbSqueeze.Checked = true;
+                    cbMakeIMG.Checked = false;
+                break;
+                case 2:
+                    tbPrefix.Text = "You can ";
+                    tbSuffix.Text = " to see what to do with old Dell systems";
+                    tbSelectedItem.Text = "Click Here";
+                    tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/368919i27FD57F55C2EC433";
+                    //tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/372002iFA9364C9FF20F330";
+                    rbSqueeze.Checked = true;
+                    cbMakeIMG.Checked = false;
+                break;
+                case 3:
+                    tbPrefix.Text = "This is what linux thinks of Windows XP<br>";
+                    tbSuffix.Text = "<br><br>Yes, Linux does suck!";
+                    tbSelectedItem.Text = "";
+                    //tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/368919i27FD57F55C2EC433";
+                    tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/372002iFA9364C9FF20F330";
+                    rbNoBox.Checked = true;
+                    cbMakeIMG.Checked = true;
+                    break;
+            }
+
+        }
+
         private void btnDemo_Click(object sender, EventArgs e)
         {
-            tbPrefix.Text = "You can ";
-            tbSuffix.Text = " to visit google";
-            tbSelectedItem.Text = "CLICK HERE";
-            tbRawUrl.Text = "https://www.google.com";
-            rbFitBox.Checked = true;
+            RunDemo();
             FormObject();
         }
 
@@ -148,6 +219,7 @@ namespace MacroViewer
             tbSuffix.Text = "";
             tbSelectedItem.Text = "";
             tbRawUrl.Text = "";
+            cbMakeIMG.Checked = false;
         }
     }
 }

@@ -120,14 +120,17 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="label4.Text" xml:space="preserve">
+    <value>If left empty then TEXT is used for boxing and Prefix
+and Suffix are ignored.  If the URL is an image then 
+it can be shown as an image by checking the box.
+Else it must be clicked on to view as an image.</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>"URL result is here" is the feature that creates a url that
 optionally has text that can be clicked on.
 
-"Create a table and exit" does just that. It creates an empty
+"Create a table" does just that. It creates an empty
 table that will show up after you exit.  If you want the table
 filled out you should use the Utils Menu and select the
   'Create URLs and Tables' item.
@@ -141,7 +144,7 @@ and any data can be boxed.  Squeeae means no space at top or
 bottom of data inside the box</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>49</value>
+    <value>25</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

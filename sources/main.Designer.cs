@@ -68,6 +68,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.btnClearEM = new System.Windows.Forms.Button();
             this.btnCleanPaste = new System.Windows.Forms.Button();
+            this.btnSwapBR = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +144,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnSwapBR = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -618,6 +618,19 @@
             this.btnCleanPaste.UseVisualStyleBackColor = true;
             this.btnCleanPaste.Click += new System.EventHandler(this.btnCleanPaste_Click);
             // 
+            // btnSwapBR
+            // 
+            this.btnSwapBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwapBR.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSwapBR.Location = new System.Drawing.Point(358, 385);
+            this.btnSwapBR.Name = "btnSwapBR";
+            this.btnSwapBR.Size = new System.Drawing.Size(121, 32);
+            this.btnSwapBR.TabIndex = 33;
+            this.btnSwapBR.Text = "Show <BR>";
+            this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline");
+            this.btnSwapBR.UseVisualStyleBackColor = true;
+            this.btnSwapBR.Click += new System.EventHandler(this.btnSwapBR_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -995,7 +1008,7 @@
             // 
             this.prrinterKBToolStripMenuItem.Name = "prrinterKBToolStripMenuItem";
             this.prrinterKBToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.prrinterKBToolStripMenuItem.Text = "Prrinter KB";
+            this.prrinterKBToolStripMenuItem.Text = "Printer KB";
             this.prrinterKBToolStripMenuItem.Click += new System.EventHandler(this.mnuKnow);
             // 
             // notebookKBToolStripMenuItem
@@ -1291,19 +1304,6 @@
             // 
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnSwapBR
-            // 
-            this.btnSwapBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwapBR.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSwapBR.Location = new System.Drawing.Point(358, 385);
-            this.btnSwapBR.Name = "btnSwapBR";
-            this.btnSwapBR.Size = new System.Drawing.Size(121, 32);
-            this.btnSwapBR.TabIndex = 33;
-            this.btnSwapBR.Text = "Show <BR>";
-            this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline");
-            this.btnSwapBR.UseVisualStyleBackColor = true;
-            this.btnSwapBR.Click += new System.EventHandler(this.btnSwapBR_Click);
             // 
             // main
             // 

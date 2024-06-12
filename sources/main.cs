@@ -459,6 +459,7 @@ namespace MacroViewer
         private void FormQueryKB(string sS)
         {
             string t = Utils.ClipboardGetText();
+            if (t.Length > 64) t = "";  // probably garbage
             string s = sS.Substring(0,1).ToLower();
             string w = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message";
             string f = w + "?filter=location&q=" + t;

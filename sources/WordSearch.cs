@@ -21,7 +21,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.CompilerServices;
 using System.Windows.Media.Media3D;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
-
+using System.Diagnostics;
 
 namespace MacroViewer
 {
@@ -30,11 +30,12 @@ namespace MacroViewer
         public class cRefURLs
         {
             public string PageOut="";
-            public string sFile="", sMacN="";
-            public void init(string ssFile, string ssMacN)
+            public string sFile="", sMacN="", nMac = "";
+            public void init(string ssFile, string ssMacN, string sMac)
             {
                 sFile = ssFile;
                 sMacN = ssMacN;
+                nMac = sMac;
                 PageOut = "";
             }
             // only look after the _blank>
@@ -72,7 +73,7 @@ namespace MacroViewer
         public string NewItemID { get; set; }
         int nUseLastViewed = -1;
         private bool TriedFailed = false;
-        private int[] cWidth = new int[4] { 48, 64, 64, 316 };
+        private int[] cWidth = new int[3] { 48, 64, 64 }; // last was 316 but now using fill
         private int[] Unsorted;
         private int[] SortInx;
         private int[] aSort;
@@ -82,6 +83,7 @@ namespace MacroViewer
         private string SelectedFile = "";
         private string HasFiles = "";
         private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
+        private Color RestoreColor;
 
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
@@ -95,6 +97,7 @@ namespace MacroViewer
             NewItemName = "";
             Reg12 = cbHPKB.Font;
             Reg10 = gbAlltSearch.Font;
+            RestoreColor = lbTMinfo.ForeColor;
         }
 
         private void AddSelButtons()
@@ -122,7 +125,9 @@ namespace MacroViewer
             if (sender is Button button)
             {
                 SelectedFile = button.Text;
+                dgvSearched.RowEnter -= dgvSearched_RowEnter;
                 SortTable(0);
+                dgvSearched.RowEnter += dgvSearched_RowEnter;
             }
         }
 
@@ -146,19 +151,21 @@ namespace MacroViewer
             gbMakeNew.Visible = true;       
         }
 
-
-        //n is the ordinal index number of RF items.  if exactly 2 RF items then n can be 0 or 1
-        private string GetRefUrl(int n)
+        private string GetRefUrl(string sMacName)
         {
             int i = -1;
-            string sRtn = "";
+            string strRtn = "";
             foreach(cRefURLs cr in RefUrls)
             {
-                if (cr.PageOut == "") continue;
-                i++;
-                if (i == n) return cr.PageOut;
+                if(sMacName == cr.sMacN)
+                {
+                    i = Convert.ToInt32(cr.nMac) ;
+                    strRtn = cr.PageOut;
+                    break;
+                }
             }
-            return sRtn;
+            Debug.Assert(i > 0, "RF macro number not found!");
+            return strRtn;
         }
 
         private void dgvSearched_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -172,12 +179,9 @@ namespace MacroViewer
             nUseLastViewed = n;
             if (dgvSearched.Rows[e.RowIndex].Cells[0].Value.ToString() == "RF")
             {
-                int i = -1;
-                for(int j = 0; j <= e.RowIndex;j++)
-                {
-                    if (dgvSearched.Rows[j].Cells[0].Value.ToString() == "RF") i++;
-                }
-                strTemp = GetRefUrl(i);
+                string MacName = dgvSearched.Rows[e.RowIndex].Cells[3].Value.ToString();
+                strTemp = GetRefUrl(MacName);
+                if (strTemp == "") return;
             }
             Utils.ShowPageInBrowser(strType, strTemp);
         }
@@ -211,7 +215,11 @@ namespace MacroViewer
                     int j = aSort[i];
                     aSorted.Add(cSorted[j]);
                 }
+                dgvSearched.DataSource = null;
+                dgvSearched.Invalidate();
                 dgvSearched.DataSource = aSorted;
+                SetDGVwidth();
+                dgvSearched.Refresh();
             }
         }
 
@@ -399,7 +407,7 @@ namespace MacroViewer
                 if (cb.File == "RF")
                 {
                     cRefURLs cr = new cRefURLs();
-                    cr.init(cb.File, cb.Name);
+                    cr.init(cb.File, cb.Name, cb.Number);
                     RefUrls.Add(cr);
                     sPrN = "";  // RF does not need to have the name searched unlike all other macro information.
                 }
@@ -431,8 +439,24 @@ namespace MacroViewer
                 }
                 i++;
             }
-
+            NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);
+        }
+
+        private void NotifyFinding(int cnt)
+        {
+            if(cnt == 0)
+            {
+                lbTMinfo.Text = "Nothing found";
+                lbTMinfo.ForeColor = Color.Red;
+                tbNumMatches.Visible = false;
+            }
+            else
+            {
+                lbTMinfo.Text = "Total Matches";
+                lbTMinfo.ForeColor = RestoreColor;
+                tbNumMatches.Visible = true;
+            }
         }
 
         private int JustExtract(string w)
@@ -489,6 +513,14 @@ namespace MacroViewer
             }
         }
 
+        private void SetDGVwidth()
+        {
+            int j = 0;
+            foreach (int k in cWidth)
+                dgvSearched.Columns[j++].Width = k;
+            dgvSearched.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
         private void RunMacSort(int CFcnt, bool Descending)
         {
             int i, j, n;
@@ -505,9 +537,7 @@ namespace MacroViewer
             }
             dgvSearched.DataSource = cSorted;
             dgvSearched.Columns[1].HeaderText = "Mac#";
-            j = 0;
-            foreach (int k in cWidth)
-                dgvSearched.Columns[j++].Width = k;
+            SetDGVwidth();
             if (TotalMatches > 0)
             {
                 tbNumMatches.Text = TotalMatches.ToString();

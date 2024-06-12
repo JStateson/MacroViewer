@@ -57,7 +57,7 @@
             this.rbExactMatch = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbNumMatches = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbTMinfo = new System.Windows.Forms.Label();
             this.lbKeyFound = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvSearched = new System.Windows.Forms.DataGridView();
@@ -395,7 +395,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tbNumMatches);
-            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.lbTMinfo);
             this.groupBox2.Controls.Add(this.lbKeyFound);
             this.groupBox2.Location = new System.Drawing.Point(621, 312);
             this.groupBox2.Name = "groupBox2";
@@ -412,14 +412,14 @@
             this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
             this.tbNumMatches.TabIndex = 5;
             // 
-            // label3
+            // lbTMinfo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Total Matches";
+            this.lbTMinfo.AutoSize = true;
+            this.lbTMinfo.Location = new System.Drawing.Point(65, 48);
+            this.lbTMinfo.Name = "lbTMinfo";
+            this.lbTMinfo.Size = new System.Drawing.Size(109, 20);
+            this.lbTMinfo.TabIndex = 4;
+            this.lbTMinfo.Text = "Total Matches";
             // 
             // lbKeyFound
             // 
@@ -523,7 +523,7 @@
         private System.Windows.Forms.RadioButton rbExactMatch;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TextBox tbNumMatches;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbTMinfo;
         private System.Windows.Forms.ListBox lbKeyFound;
         private System.Windows.Forms.Button btnExitToMac;
         private System.Windows.Forms.ToolTip toolTip1;

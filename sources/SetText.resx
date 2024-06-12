@@ -120,8 +120,8 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="BlinkTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>224, 17</value>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <data name="label3.Text" xml:space="preserve">
     <value>"URL result is here" is the feature that creates a url that
@@ -136,12 +136,12 @@ Apply and exit forms the the url at the desired location using
 any text you highlighted earlier.  This only applies to urls and
 is ignored for the table.
 
-You may enter text into the resut area and the box it. You can
-change the width from %50 to %100 only.  Replace newliens
-with &lt;br&gt; before boxing.</value>
+If URL, Prefix and Suffix are empty then  text must contain data
+and any data can be boxed.  Squeeae means no space at top or
+bottom of data inside the box</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>108</value>
+    <value>49</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

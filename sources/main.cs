@@ -632,7 +632,6 @@ namespace MacroViewer
             if (Body[CurrentRowSelected] == null)
                 Body[CurrentRowSelected] = "";
             tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
-            ClearBRoption();
         }
 
         private void ShowSelectedRow(int e)
@@ -659,7 +658,7 @@ namespace MacroViewer
         private void CopyBodyToClipboard()
         {
             if (tbBody.Text == "") return;
-            Clipboard.SetText(tbBody.Text);
+            Clipboard.SetText(tbBody.Text.Replace(Environment.NewLine,"<br>")); 
         }
 
         private void btnCopyTo_Click(object sender, EventArgs e)
@@ -667,12 +666,30 @@ namespace MacroViewer
             CopyBodyToClipboard();
         }
 
+        private string RemoveHeaders(string s)
+        {
+            string t = s.Replace("<!--StartFragment-->", "");
+            int i = t.IndexOf("<body>");
+            int j = t.IndexOf("</body>");
+            if(i < 0 || j < 0)return "";
+            i += 6;
+            return t.Substring(i, j - i);
+        }
+
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            string strTemp = Utils.ClipboardGetText();
-            if (!strTemp.Contains(Environment.NewLine))
+            string strTemp = "";
+            if (Clipboard.ContainsText(TextDataFormat.Html))
             {
-                strTemp = strTemp.Replace("\n", Environment.NewLine);
+                strTemp = RemoveHeaders(Clipboard.GetText(TextDataFormat.Html));
+            }
+            else if (Clipboard.ContainsText(TextDataFormat.Text))
+            {
+                strTemp = Clipboard.GetText(TextDataFormat.Text);
+                if (!strTemp.Contains(Environment.NewLine))
+                {
+                    strTemp = strTemp.Replace("\n", Environment.NewLine);
+                }
             }
             tbBody.Text = strTemp.Replace("<br>", Environment.NewLine);
         }
@@ -895,8 +912,10 @@ namespace MacroViewer
                     Body[i] = Body[i + 1];
                 }
             }
-            lbName.Rows.RemoveAt(lbName.Rows.Count - 1);
+            NumInBody--;
+            lbName.Rows.RemoveAt(lbName.Rows.Count - 1);    // side effect causes a select which causes another warning
             HaveSelected(lbName.RowCount > 0);
+            //NumInBody--; cannot go here as the test will fail
             return j;
         }
 
@@ -1070,7 +1089,7 @@ namespace MacroViewer
                 strBody = sNB;
             }
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, strBody);
-            tbBody.Text = strBody;
+            tbBody.Text = strBody.Replace("<br>",Environment.NewLine);
             ReSaveAsTXT(TXTName);
             HaveSelected(true);
             lbName.Rows[CurrentRowSelected].Selected = true;
@@ -1204,9 +1223,12 @@ namespace MacroViewer
             return tbBody.Text;
         }
 
+
+        //?? if NumInBody is equal to CurrentRowSelected then the we must have deleted the row??
+        // this side effect happened
         private bool bNothingToSave()
         {
-            if (CurrentRowSelected < 0 || strType == "" || NumInBody == 0)
+            if (CurrentRowSelected < 0 || strType == "" || NumInBody == 0 || NumInBody == CurrentRowSelected)
             {
                 // if row count is 0 then a new macro file and user should have saved: sorry
                 return true; // nothing to save 
@@ -1905,18 +1927,22 @@ namespace MacroViewer
             Clipboard.SetText(s);
         }
 
+        // this shows the difference if url is cleaned
         private void btnCleanPaste_Click(object sender, EventArgs e)
         {
             int i, j;
+            string sOut = "";
             string sDirty = Utils.ClipboardGetText();
+            if (sDirty == null) return;
+            string s = sDirty.ToUpper();
+            if (!(s.Contains("HTTPS:") || s.Contains("HTTP:"))) return;
             i = sDirty.Length;
-            tbBody.Text = AppendDash("Before cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;   
+            sOut = AppendDash("Before cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;   
             Utils.ReplaceUrls(ref sDirty, false);
             j = sDirty.Length;
-            tbBody.Text+= AppendDash("After cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;
-            tbBody.Text += (i == j) ? "No difference" : "\r\nShortened " + (i - j).ToString() + " characters";
-
-            Clipboard.SetText(sDirty);
+            sOut += AppendDash("After cleaning",40) + Environment.NewLine + sDirty + Environment.NewLine;
+            sOut += (i == j) ? "No difference" : "\r\nShortened " + (i - j).ToString() + " characters";
+            PutOnNotepad(sOut);
         }
 
 // some <tr> are missing the required <tr><td> and cannot be used in forum macro
@@ -2124,24 +2150,16 @@ namespace MacroViewer
             SelectFileItem("NO");
         }
 
-        private void ClearBRoption()
+        private void btnSwapBR_Click(object sender, EventArgs e)
         {
-            btnSwapNL.Text = "Show <BR>";
-            lbBRcopyInfo.Visible = false;
-        }
-
-        private void btnSwapNL_Click(object sender, EventArgs e)
-        {
-            bool ShowingNL = (btnSwapNL.Text == "Show <BR>");
-            if(ShowingNL)
+            if(btnSwapBR.Text == "Show <BR>")
             {
-                btnSwapNL.Text = "Hide <BR>";
+                btnSwapBR.Text = "Hide <BR>";
                 tbBody.Text = tbBody.Text.Replace(Environment.NewLine, "<br>");
-                lbBRcopyInfo.Visible = true;
             }
             else
             {
-                ClearBRoption();
+                btnSwapBR.Text = "Show <BR>";
                 tbBody.Text = tbBody.Text.Replace("<br>",Environment.NewLine);
             }
         }

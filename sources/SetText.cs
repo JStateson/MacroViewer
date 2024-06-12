@@ -28,7 +28,7 @@ namespace MacroViewer
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            strResultOut = bBoxed ? strBoxed : tbResult.Text;
+            strResultOut = tbResult.Text;
             this.Close();
         }
 
@@ -38,35 +38,42 @@ namespace MacroViewer
             this.Close();
         }
 
-        private string FormObject()
+        private void FormObject()
         {
             string strOut = "";
             string strTmp = "";
             string strUC = tbRawUrl.Text.ToUpper();
-            if (strUC == "") return "";
             bool bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
-            if (!bHaveHTML) return "";
+            string strResult = "";
+            tbResult.Text = "";
+
             strTmp = tbPrefix.Text.Trim();
             if (strTmp != "")
             {
                 strOut = strTmp + " ";
             }
-            strOut += Utils.FormUrl(cbCleanUrl.Checked ? Utils.dRef(tbRawUrl.Text) : tbRawUrl.Text,
-                tbSelectedItem.Text.Trim());
-            strTmp = tbSuffix.Text.Trim();
-            if (strTmp != "")
+            if ((bHaveHTML))
             {
-                strOut += " " + strTmp;
+                strOut += Utils.FormUrl(cbCleanUrl.Checked ? Utils.dRef(tbRawUrl.Text) : tbRawUrl.Text, tbSelectedItem.Text.Trim());
+                strTmp = tbSuffix.Text.Trim();
+                if (strTmp != "")
+                {
+                    strOut += " " + strTmp;
+                }
             }
-            strResultOut = strOut.Trim();
-            tbResult.Text = strResultOut;
-            return strResultOut;
+            else strOut = tbSelectedItem.Text.Trim();
+
+            strResult = strOut.Trim();
+            if(rbNoBox.Checked) tbResult.Text = strResult;
+            else
+            {
+                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult) : Utils.Form1CellTableP(strResult);
+            }
         }
 
         private void btnApplyText_Click(object sender, EventArgs e)
         {
             FormObject();
-            StopTimer();
         }
 
         private void RunBrowser()
@@ -81,46 +88,6 @@ namespace MacroViewer
         {
             RunBrowser();
         }
-
-        private void TimerControl(bool bEnable)
-        {
-            bBoxed = bEnable;
-            bBlinking = bEnable;
-            BlinkTimer.Enabled = bEnable;
-            if (bEnable) btnBoxIT.Text = "Remove from box";
-            else
-            {
-                btnBoxIT.Text = "Put in box";
-                strBoxed = "";
-            }
-        }
-
-        private void StopTimer()
-        {
-            BlinkTimer.Enabled = false;
-            Application.DoEvents();
-            bBlinking = false;
-            bBoxed = false;
-            btnBoxIT.Text = "Put in box";
-            strBoxed = "";
-        }
-
-        private void StartTimer()
-        {
-            bBlinking = true;
-            bBoxed = true;
-            btnBoxIT.Text = "Remove from box";
-            BlinkTimer.Enabled = true;
-            Application.DoEvents();
-        }
-
-
-        private void BlinkTimer_Tick(object sender, EventArgs e)
-        {
-            lbBoxed.Visible = bBlinking;
-            bBlinking = !bBlinking;
-        }
-
 
 
         private void btnApplyTab_Click(object sender, EventArgs e)
@@ -137,8 +104,7 @@ namespace MacroViewer
                 tbCols.Text = "1";
                 return;
             }
-            strResultOut = Utils.FormTable(r, c, cbPreFill.Checked, 1);
-            this.Close();
+            tbResult.Text = Utils.FormTable(r, c, cbPreFill.Checked, 1);
         }
 
         private void SetText_Shown(object sender, EventArgs e)
@@ -152,33 +118,36 @@ namespace MacroViewer
             Properties.Settings.Default.Save();
         }
 
-        private void btnSqueeze_Click(object sender, EventArgs e)
-        {
-            PutInBox(true);
-        }
-
-        private void btnBoxIT_Click(object sender, EventArgs e)
-        {
-            PutInBox(false);
-        }
 
         private void PutInBox(bool bSqueeze)
         {
             string strUnBoxed = tbResult.Text.Trim();
-            if (strUnBoxed == "") strUnBoxed = FormObject();
-            if (strUnBoxed == "")
-            {
-                strUnBoxed = tbSelectedItem.Text.Trim();
-            }
             if (strUnBoxed == "") return;
-            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
-            if (bBoxed) StopTimer();
-            else StartTimer();
+            strBoxed = rbSqueeze.Checked ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
+            tbResult.Text = strBoxed;
         }
 
-        private void blnUseBr_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            tbResult.Text = tbResult.Text.Replace(Environment.NewLine, "<br>");
+            tbResult.Text = "";
+        }
+
+        private void btnDemo_Click(object sender, EventArgs e)
+        {
+            tbPrefix.Text = "You can ";
+            tbSuffix.Text = " to visit google";
+            tbSelectedItem.Text = "CLICK HERE";
+            tbRawUrl.Text = "https://www.google.com";
+            rbFitBox.Checked = true;
+            FormObject();
+        }
+
+        private void btnClrDemo_Click(object sender, EventArgs e)
+        {
+            tbPrefix.Text = "";
+            tbSuffix.Text = "";
+            tbSelectedItem.Text = "";
+            tbRawUrl.Text = "";
         }
     }
 }

@@ -55,9 +55,6 @@
             this.btnColors = new System.Windows.Forms.Button();
             this.tbColorCode = new System.Windows.Forms.TextBox();
             this.btnRed = new System.Windows.Forms.Button();
-            this.btnCleanPaste = new System.Windows.Forms.Button();
-            this.btnToLower = new System.Windows.Forms.Button();
-            this.btnClipToUpper = new System.Windows.Forms.Button();
             this.btnBold = new System.Windows.Forms.Button();
             this.gbManageImages = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,6 +63,11 @@
             this.btnSetObj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbBody = new System.Windows.Forms.TextBox();
+            this.btnToLower = new System.Windows.Forms.Button();
+            this.btnClipToUpper = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnClearEM = new System.Windows.Forms.Button();
+            this.btnCleanPaste = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,21 +130,20 @@
             this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnNew = new System.Windows.Forms.Button();
+            this.btnSaveM = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbBRcopyInfo = new System.Windows.Forms.Label();
             this.btnToNotepad = new System.Windows.Forms.Button();
             this.gbSupp = new System.Windows.Forms.GroupBox();
             this.btnDelChecked = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnSaveM = new System.Windows.Forms.Button();
             this.btnDelM = new System.Windows.Forms.Button();
-            this.btnClearEM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbBRcopyInfo = new System.Windows.Forms.Label();
-            this.btnSwapNL = new System.Windows.Forms.Button();
+            this.btnSwapBR = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -256,7 +257,7 @@
             // btnCopyTo
             // 
             this.btnCopyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCopyTo.Location = new System.Drawing.Point(23, 74);
+            this.btnCopyTo.Location = new System.Drawing.Point(23, 96);
             this.btnCopyTo.Name = "btnCopyTo";
             this.btnCopyTo.Size = new System.Drawing.Size(161, 29);
             this.btnCopyTo.TabIndex = 9;
@@ -303,7 +304,7 @@
             this.btnCancelEdits.Size = new System.Drawing.Size(121, 32);
             this.btnCancelEdits.TabIndex = 21;
             this.btnCancelEdits.Text = "Cancel Edits";
-            this.toolTip1.SetToolTip(this.btnCancelEdits, "For errors only.  This saves changes\r\nand refreshes the error table");
+            this.toolTip1.SetToolTip(this.btnCancelEdits, "Restore the edit box back\r\nto the original value, if any.");
             this.btnCancelEdits.UseVisualStyleBackColor = true;
             this.btnCancelEdits.Click += new System.EventHandler(this.btnCancelEdits_Click);
             // 
@@ -338,12 +339,13 @@
             // 
             this.btnCleanUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCleanUrl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCleanUrl.Location = new System.Drawing.Point(209, 266);
+            this.btnCleanUrl.Location = new System.Drawing.Point(202, 237);
             this.btnCleanUrl.Name = "btnCleanUrl";
             this.btnCleanUrl.Size = new System.Drawing.Size(194, 32);
             this.btnCleanUrl.TabIndex = 22;
             this.btnCleanUrl.Text = "Clean Clipboard URLs";
-            this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any\r\nURL in the clipboard.  Use\r\nbefore pasting or anytime.");
+            this.toolTip1.SetToolTip(this.btnCleanUrl, "strips tracking from any URL in the clipboard. \r\nUse before pasting a URL.  You c" +
+        "an use the\r\nTest URL cleaning to see the differnce.");
             this.btnCleanUrl.UseVisualStyleBackColor = true;
             this.btnCleanUrl.Click += new System.EventHandler(this.btnCleanUrl_Click);
             // 
@@ -364,12 +366,12 @@
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopyFrom.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopyFrom.Location = new System.Drawing.Point(209, 218);
+            this.btnCopyFrom.Location = new System.Drawing.Point(285, 324);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(194, 27);
             this.btnCopyFrom.TabIndex = 10;
             this.btnCopyFrom.Text = "Paste from clipboard";
-            this.toolTip1.SetToolTip(this.btnCopyFrom, "Use this if CTRL-V or windows paste\r\ndoes not correctly paste new-lines");
+            this.toolTip1.SetToolTip(this.btnCopyFrom, "This will paste HTML in additon to text");
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
@@ -458,42 +460,6 @@
             this.btnRed.Text = "RED";
             this.btnRed.UseVisualStyleBackColor = true;
             this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
-            // 
-            // btnCleanPaste
-            // 
-            this.btnCleanPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleanPaste.Location = new System.Drawing.Point(27, 275);
-            this.btnCleanPaste.Name = "btnCleanPaste";
-            this.btnCleanPaste.Size = new System.Drawing.Size(134, 23);
-            this.btnCleanPaste.TabIndex = 30;
-            this.btnCleanPaste.Text = "Clean URL and paste";
-            this.toolTip1.SetToolTip(this.btnCleanPaste, "Displays the before and after");
-            this.btnCleanPaste.UseVisualStyleBackColor = true;
-            this.btnCleanPaste.Click += new System.EventHandler(this.btnCleanPaste_Click);
-            // 
-            // btnToLower
-            // 
-            this.btnToLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToLower.Location = new System.Drawing.Point(24, 233);
-            this.btnToLower.Name = "btnToLower";
-            this.btnToLower.Size = new System.Drawing.Size(134, 23);
-            this.btnToLower.TabIndex = 29;
-            this.btnToLower.Text = "Clipboard to Lower case";
-            this.toolTip1.SetToolTip(this.btnToLower, "This just changes the\r\nclipboard to lower case");
-            this.btnToLower.UseVisualStyleBackColor = true;
-            this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
-            // 
-            // btnClipToUpper
-            // 
-            this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClipToUpper.Location = new System.Drawing.Point(23, 194);
-            this.btnClipToUpper.Name = "btnClipToUpper";
-            this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
-            this.btnClipToUpper.TabIndex = 28;
-            this.btnClipToUpper.Text = "Clipboard to Upper case";
-            this.toolTip1.SetToolTip(this.btnClipToUpper, "This just changes the\r\nclipboard to upper case");
-            this.btnClipToUpper.UseVisualStyleBackColor = true;
-            this.btnClipToUpper.Click += new System.EventHandler(this.btnClipToUpper_Click);
             // 
             // btnBold
             // 
@@ -588,6 +554,69 @@
         " ask for HTML \r\nthe samples provided can be tested here.  Just be\r\nsure NOT to a" +
         "ccidently save the example");
             this.tbBody.Click += new System.EventHandler(this.mnuKnow);
+            // 
+            // btnToLower
+            // 
+            this.btnToLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToLower.Location = new System.Drawing.Point(28, 210);
+            this.btnToLower.Name = "btnToLower";
+            this.btnToLower.Size = new System.Drawing.Size(134, 23);
+            this.btnToLower.TabIndex = 29;
+            this.btnToLower.Text = "Clipboard to Lower case";
+            this.toolTip1.SetToolTip(this.btnToLower, "This just changes the\r\nclipboard to lower case");
+            this.btnToLower.UseVisualStyleBackColor = true;
+            this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
+            // 
+            // btnClipToUpper
+            // 
+            this.btnClipToUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClipToUpper.Location = new System.Drawing.Point(27, 175);
+            this.btnClipToUpper.Name = "btnClipToUpper";
+            this.btnClipToUpper.Size = new System.Drawing.Size(134, 23);
+            this.btnClipToUpper.TabIndex = 28;
+            this.btnClipToUpper.Text = "Clipboard to Upper case";
+            this.toolTip1.SetToolTip(this.btnClipToUpper, "This just changes the\r\nclipboard to upper case");
+            this.btnClipToUpper.UseVisualStyleBackColor = true;
+            this.btnClipToUpper.Click += new System.EventHandler(this.btnClipToUpper_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNew.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnNew.Location = new System.Drawing.Point(399, 117);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 32);
+            this.btnNew.TabIndex = 18;
+            this.btnNew.Text = "New";
+            this.toolTip1.SetToolTip(this.btnNew, "Creates and saves a dummy macro");
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnClearEM
+            // 
+            this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnClearEM.Location = new System.Drawing.Point(403, 213);
+            this.btnClearEM.Name = "btnClearEM";
+            this.btnClearEM.Size = new System.Drawing.Size(75, 32);
+            this.btnClearEM.TabIndex = 8;
+            this.btnClearEM.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnClearEM, "Erease the edit box");
+            this.btnClearEM.UseVisualStyleBackColor = true;
+            this.btnClearEM.Click += new System.EventHandler(this.btnClearEM_Click);
+            // 
+            // btnCleanPaste
+            // 
+            this.btnCleanPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCleanPaste.Location = new System.Drawing.Point(27, 243);
+            this.btnCleanPaste.Name = "btnCleanPaste";
+            this.btnCleanPaste.Size = new System.Drawing.Size(134, 23);
+            this.btnCleanPaste.TabIndex = 30;
+            this.btnCleanPaste.Text = "Test URL cleaning";
+            this.toolTip1.SetToolTip(this.btnCleanPaste, "Displays the before and after of\r\nURL cleaning using notepad.\r\nCopy a URL into th" +
+        "e clipboard to test.");
+            this.btnCleanPaste.UseVisualStyleBackColor = true;
+            this.btnCleanPaste.Click += new System.EventHandler(this.btnCleanPaste_Click);
             // 
             // menuStrip1
             // 
@@ -1075,12 +1104,14 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnSwapBR);
             this.gpMainEdit.Controls.Add(this.label7);
             this.gpMainEdit.Controls.Add(this.btnSearch);
             this.gpMainEdit.Controls.Add(this.btnCancelEdits);
             this.gpMainEdit.Controls.Add(this.btnNew);
             this.gpMainEdit.Controls.Add(this.btnSaveM);
             this.gpMainEdit.Controls.Add(this.groupBox6);
+            this.gpMainEdit.Controls.Add(this.btnCopyFrom);
             this.gpMainEdit.Controls.Add(this.groupBox5);
             this.gpMainEdit.Controls.Add(this.gbSupp);
             this.gpMainEdit.Controls.Add(this.btnClearEM);
@@ -1103,23 +1134,24 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(94, 26);
             this.label7.TabIndex = 24;
-            this.label7.Text = "Hover mouse over\r\nbelow button";
+            this.label7.Text = "Hover mouse over\r\nbelow buttons";
             // 
-            // btnNew
+            // btnSaveM
             // 
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNew.Location = new System.Drawing.Point(399, 117);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 32);
-            this.btnNew.TabIndex = 18;
-            this.btnNew.Text = "New";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnSaveM.Enabled = false;
+            this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSaveM.Location = new System.Drawing.Point(399, 166);
+            this.btnSaveM.Name = "btnSaveM";
+            this.btnSaveM.Size = new System.Drawing.Size(75, 32);
+            this.btnSaveM.TabIndex = 2;
+            this.btnSaveM.Text = "Save Macro";
+            this.btnSaveM.UseVisualStyleBackColor = true;
+            this.btnSaveM.Click += new System.EventHandler(this.btnSaveM_Click);
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.btnSwapNL);
+            this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.lbBRcopyInfo);
             this.groupBox5.Controls.Add(this.btnCleanUrl);
             this.groupBox5.Controls.Add(this.btnCleanPaste);
@@ -1127,13 +1159,34 @@
             this.groupBox5.Controls.Add(this.btnClipToUpper);
             this.groupBox5.Controls.Add(this.btnToNotepad);
             this.groupBox5.Controls.Add(this.btnCopyTo);
-            this.groupBox5.Controls.Add(this.btnCopyFrom);
-            this.groupBox5.Location = new System.Drawing.Point(24, 390);
+            this.groupBox5.Location = new System.Drawing.Point(24, 440);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(425, 340);
+            this.groupBox5.Size = new System.Drawing.Size(425, 290);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Clipboard and Notepad operations";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(198, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 20);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Copy as shown in edit box";
+            // 
+            // lbBRcopyInfo
+            // 
+            this.lbBRcopyInfo.AutoSize = true;
+            this.lbBRcopyInfo.BackColor = System.Drawing.SystemColors.Info;
+            this.lbBRcopyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBRcopyInfo.Location = new System.Drawing.Point(198, 100);
+            this.lbBRcopyInfo.Name = "lbBRcopyInfo";
+            this.lbBRcopyInfo.Size = new System.Drawing.Size(191, 20);
+            this.lbBRcopyInfo.TabIndex = 31;
+            this.lbBRcopyInfo.Text = "The COPY will have <BR>";
             // 
             // btnToNotepad
             // 
@@ -1193,19 +1246,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Count";
             // 
-            // btnSaveM
-            // 
-            this.btnSaveM.Enabled = false;
-            this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSaveM.Location = new System.Drawing.Point(399, 166);
-            this.btnSaveM.Name = "btnSaveM";
-            this.btnSaveM.Size = new System.Drawing.Size(75, 32);
-            this.btnSaveM.TabIndex = 2;
-            this.btnSaveM.Text = "Save Macro";
-            this.btnSaveM.UseVisualStyleBackColor = true;
-            this.btnSaveM.Click += new System.EventHandler(this.btnSaveM_Click);
-            // 
             // btnDelM
             // 
             this.btnDelM.Enabled = false;
@@ -1218,18 +1258,6 @@
             this.btnDelM.Text = "Delete Current Item";
             this.btnDelM.UseVisualStyleBackColor = true;
             this.btnDelM.Click += new System.EventHandler(this.btnDelM_Click);
-            // 
-            // btnClearEM
-            // 
-            this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnClearEM.Location = new System.Drawing.Point(403, 213);
-            this.btnClearEM.Name = "btnClearEM";
-            this.btnClearEM.Size = new System.Drawing.Size(75, 32);
-            this.btnClearEM.TabIndex = 8;
-            this.btnClearEM.Text = "Clear";
-            this.btnClearEM.UseVisualStyleBackColor = true;
-            this.btnClearEM.Click += new System.EventHandler(this.btnClearEM_Click);
             // 
             // groupBox2
             // 
@@ -1264,29 +1292,18 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lbBRcopyInfo
+            // btnSwapBR
             // 
-            this.lbBRcopyInfo.AutoSize = true;
-            this.lbBRcopyInfo.BackColor = System.Drawing.SystemColors.Info;
-            this.lbBRcopyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBRcopyInfo.Location = new System.Drawing.Point(205, 57);
-            this.lbBRcopyInfo.Name = "lbBRcopyInfo";
-            this.lbBRcopyInfo.Size = new System.Drawing.Size(191, 20);
-            this.lbBRcopyInfo.TabIndex = 31;
-            this.lbBRcopyInfo.Text = "The COPY will have <BR>";
-            // 
-            // btnSwapNL
-            // 
-            this.btnSwapNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwapNL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSwapNL.Location = new System.Drawing.Point(240, 140);
-            this.btnSwapNL.Name = "btnSwapNL";
-            this.btnSwapNL.Size = new System.Drawing.Size(110, 30);
-            this.btnSwapNL.TabIndex = 32;
-            this.btnSwapNL.Text = "Show <BR>";
-            this.toolTip1.SetToolTip(this.btnSwapNL, "Switch between newlines and <BR>");
-            this.btnSwapNL.UseVisualStyleBackColor = true;
-            this.btnSwapNL.Click += new System.EventHandler(this.btnSwapNL_Click);
+            this.btnSwapBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwapBR.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSwapBR.Location = new System.Drawing.Point(358, 385);
+            this.btnSwapBR.Name = "btnSwapBR";
+            this.btnSwapBR.Size = new System.Drawing.Size(121, 32);
+            this.btnSwapBR.TabIndex = 33;
+            this.btnSwapBR.Text = "Show <BR>";
+            this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline");
+            this.btnSwapBR.UseVisualStyleBackColor = true;
+            this.btnSwapBR.Click += new System.EventHandler(this.btnSwapBR_Click);
             // 
             // main
             // 
@@ -1416,7 +1433,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuDevCol;
         private System.Windows.Forms.ToolStripMenuItem mnuHuntDev;
         private System.Windows.Forms.ToolStripMenuItem mnuSearchComm;
-        private System.Windows.Forms.Button btnCleanPaste;
         private System.Windows.Forms.Button btnToLower;
         private System.Windows.Forms.ToolStripMenuItem helpWithWebSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hPYouTubeToolStripMenuItem;
@@ -1443,7 +1459,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRef;
         private System.Windows.Forms.ToolStripMenuItem mnuNote;
         private System.Windows.Forms.Label lbBRcopyInfo;
-        private System.Windows.Forms.Button btnSwapNL;
+        private System.Windows.Forms.Button btnCleanPaste;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnSwapBR;
     }
 }
 

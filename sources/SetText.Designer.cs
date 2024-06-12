@@ -40,9 +40,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbSuffix = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnSqueeze = new System.Windows.Forms.Button();
-            this.lbBoxed = new System.Windows.Forms.Label();
-            this.btnBoxIT = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnApplyText = new System.Windows.Forms.Button();
@@ -50,7 +47,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cbPreFill = new System.Windows.Forms.CheckBox();
-            this.BlinkTimer = new System.Windows.Forms.Timer(this.components);
             this.gpTable = new System.Windows.Forms.GroupBox();
             this.btnApplyTab = new System.Windows.Forms.Button();
             this.tbCols = new System.Windows.Forms.TextBox();
@@ -58,7 +54,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.blnUseBr = new System.Windows.Forms.Button();
+            this.rbFitBox = new System.Windows.Forms.RadioButton();
+            this.rbSqueeze = new System.Windows.Forms.RadioButton();
+            this.rbNoBox = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDemo = new System.Windows.Forms.Button();
+            this.btnClrDemo = new System.Windows.Forms.Button();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,39 +73,40 @@
             // 
             this.gbSelectType.Controls.Add(this.tbSelectedItem);
             this.gbSelectType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbSelectType.Location = new System.Drawing.Point(13, 25);
+            this.gbSelectType.Location = new System.Drawing.Point(12, 23);
             this.gbSelectType.Name = "gbSelectType";
-            this.gbSelectType.Size = new System.Drawing.Size(415, 98);
+            this.gbSelectType.Size = new System.Drawing.Size(499, 141);
             this.gbSelectType.TabIndex = 1;
             this.gbSelectType.TabStop = false;
             this.gbSelectType.Text = "Your Selected TEXT (if any)";
             // 
             // tbSelectedItem
             // 
-            this.tbSelectedItem.Location = new System.Drawing.Point(19, 37);
+            this.tbSelectedItem.Location = new System.Drawing.Point(6, 34);
             this.tbSelectedItem.Multiline = true;
             this.tbSelectedItem.Name = "tbSelectedItem";
-            this.tbSelectedItem.Size = new System.Drawing.Size(341, 22);
+            this.tbSelectedItem.Size = new System.Drawing.Size(448, 83);
             this.tbSelectedItem.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cbCleanUrl);
             this.groupBox1.Controls.Add(this.tbRawUrl);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 151);
+            this.groupBox1.Location = new System.Drawing.Point(18, 188);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 128);
+            this.groupBox1.Size = new System.Drawing.Size(500, 155);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Enter the URL here";
+            this.groupBox1.Text = "Enter the URL here (if wanted)";
             // 
             // cbCleanUrl
             // 
             this.cbCleanUrl.AutoSize = true;
             this.cbCleanUrl.Checked = true;
             this.cbCleanUrl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCleanUrl.Location = new System.Drawing.Point(19, 88);
+            this.cbCleanUrl.Location = new System.Drawing.Point(19, 103);
             this.cbCleanUrl.Name = "cbCleanUrl";
             this.cbCleanUrl.Size = new System.Drawing.Size(91, 20);
             this.cbCleanUrl.TabIndex = 1;
@@ -116,100 +119,64 @@
             this.tbRawUrl.Location = new System.Drawing.Point(19, 37);
             this.tbRawUrl.Multiline = true;
             this.tbRawUrl.Name = "tbRawUrl";
-            this.tbRawUrl.Size = new System.Drawing.Size(341, 22);
+            this.tbRawUrl.Size = new System.Drawing.Size(430, 45);
             this.tbRawUrl.TabIndex = 0;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnClrDemo);
+            this.groupBox2.Controls.Add(this.btnDemo);
             this.groupBox2.Controls.Add(this.tbPrefix);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(459, 25);
+            this.groupBox2.Location = new System.Drawing.Point(551, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 98);
+            this.groupBox2.Size = new System.Drawing.Size(227, 138);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Prefix (if any)";
+            this.groupBox2.Text = "Prefix (if any and can be empty)";
             // 
             // tbPrefix
             // 
-            this.tbPrefix.Location = new System.Drawing.Point(19, 37);
+            this.tbPrefix.Location = new System.Drawing.Point(19, 25);
             this.tbPrefix.Name = "tbPrefix";
-            this.tbPrefix.Size = new System.Drawing.Size(234, 22);
+            this.tbPrefix.Size = new System.Drawing.Size(174, 22);
             this.tbPrefix.TabIndex = 0;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tbSuffix);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(459, 151);
+            this.groupBox3.Location = new System.Drawing.Point(551, 197);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(278, 98);
+            this.groupBox3.Size = new System.Drawing.Size(227, 98);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Suffix (if any)";
+            this.groupBox3.Text = "Suffix (if any and can be empty)";
             // 
             // tbSuffix
             // 
             this.tbSuffix.Location = new System.Drawing.Point(19, 37);
             this.tbSuffix.Name = "tbSuffix";
-            this.tbSuffix.Size = new System.Drawing.Size(234, 22);
+            this.tbSuffix.Size = new System.Drawing.Size(146, 22);
             this.tbSuffix.TabIndex = 0;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.blnUseBr);
-            this.groupBox4.Controls.Add(this.btnSqueeze);
-            this.groupBox4.Controls.Add(this.lbBoxed);
-            this.groupBox4.Controls.Add(this.btnBoxIT);
+            this.groupBox4.Controls.Add(this.btnClear);
+            this.groupBox4.Controls.Add(this.rbNoBox);
+            this.groupBox4.Controls.Add(this.rbSqueeze);
+            this.groupBox4.Controls.Add(this.rbFitBox);
             this.groupBox4.Controls.Add(this.btnApply);
             this.groupBox4.Controls.Add(this.btnTest);
             this.groupBox4.Controls.Add(this.btnApplyText);
             this.groupBox4.Controls.Add(this.tbResult);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(18, 296);
+            this.groupBox4.Location = new System.Drawing.Point(18, 355);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(654, 253);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
-            // 
-            // btnSqueeze
-            // 
-            this.btnSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSqueeze.Location = new System.Drawing.Point(186, 78);
-            this.btnSqueeze.Name = "btnSqueeze";
-            this.btnSqueeze.Size = new System.Drawing.Size(136, 36);
-            this.btnSqueeze.TabIndex = 10;
-            this.btnSqueeze.Text = "Squeeze Into Box";
-            this.toolTip1.SetToolTip(this.btnSqueeze, "There are no empty lines\r\nabove and under text");
-            this.btnSqueeze.UseVisualStyleBackColor = true;
-            this.btnSqueeze.Click += new System.EventHandler(this.btnSqueeze_Click);
-            // 
-            // lbBoxed
-            // 
-            this.lbBoxed.AutoSize = true;
-            this.lbBoxed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbBoxed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBoxed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lbBoxed.Location = new System.Drawing.Point(376, 61);
-            this.lbBoxed.Name = "lbBoxed";
-            this.lbBoxed.Size = new System.Drawing.Size(73, 22);
-            this.lbBoxed.TabIndex = 9;
-            this.lbBoxed.Text = "BOXED";
-            this.lbBoxed.Visible = false;
-            // 
-            // btnBoxIT
-            // 
-            this.btnBoxIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBoxIT.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBoxIT.Location = new System.Drawing.Point(186, 26);
-            this.btnBoxIT.Name = "btnBoxIT";
-            this.btnBoxIT.Size = new System.Drawing.Size(136, 36);
-            this.btnBoxIT.TabIndex = 8;
-            this.btnBoxIT.Text = "Put In a Box";
-            this.btnBoxIT.UseVisualStyleBackColor = true;
-            this.btnBoxIT.Click += new System.EventHandler(this.btnBoxIT_Click);
             // 
             // btnApply
             // 
@@ -270,18 +237,13 @@
             // cbPreFill
             // 
             this.cbPreFill.AutoSize = true;
-            this.cbPreFill.Location = new System.Drawing.Point(23, 126);
+            this.cbPreFill.Location = new System.Drawing.Point(23, 105);
             this.cbPreFill.Name = "cbPreFill";
             this.cbPreFill.Size = new System.Drawing.Size(130, 20);
             this.cbPreFill.TabIndex = 5;
             this.cbPreFill.Text = "Fill alphabetically";
             this.toolTip1.SetToolTip(this.cbPreFill, "Fill with letters indicating the row and column numvber");
             this.cbPreFill.UseVisualStyleBackColor = true;
-            // 
-            // BlinkTimer
-            // 
-            this.BlinkTimer.Interval = 500;
-            this.BlinkTimer.Tick += new System.EventHandler(this.BlinkTimer_Tick);
             // 
             // gpTable
             // 
@@ -292,9 +254,9 @@
             this.gpTable.Controls.Add(this.label2);
             this.gpTable.Controls.Add(this.label1);
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpTable.Location = new System.Drawing.Point(800, 67);
+            this.gpTable.Location = new System.Drawing.Point(812, 71);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(250, 212);
+            this.gpTable.Size = new System.Drawing.Size(250, 224);
             this.gpTable.TabIndex = 8;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table and exit";
@@ -303,11 +265,11 @@
             // 
             this.btnApplyTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplyTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApplyTab.Location = new System.Drawing.Point(49, 163);
+            this.btnApplyTab.Location = new System.Drawing.Point(23, 156);
             this.btnApplyTab.Name = "btnApplyTab";
             this.btnApplyTab.Size = new System.Drawing.Size(122, 36);
             this.btnApplyTab.TabIndex = 4;
-            this.btnApplyTab.Text = "Apply and exit";
+            this.btnApplyTab.Text = "Form Object";
             this.btnApplyTab.UseVisualStyleBackColor = true;
             this.btnApplyTab.Click += new System.EventHandler(this.btnApplyTab_Click);
             // 
@@ -350,31 +312,102 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(689, 308);
+            this.label3.Location = new System.Drawing.Point(689, 367);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(361, 240);
+            this.label3.Size = new System.Drawing.Size(389, 240);
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
             // 
-            // blnUseBr
+            // rbFitBox
             // 
-            this.blnUseBr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blnUseBr.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.blnUseBr.Location = new System.Drawing.Point(490, 78);
-            this.blnUseBr.Name = "blnUseBr";
-            this.blnUseBr.Size = new System.Drawing.Size(122, 36);
-            this.blnUseBr.TabIndex = 11;
-            this.blnUseBr.Text = "Use <br>";
-            this.toolTip1.SetToolTip(this.blnUseBr, "Use this first before boxing or\r\nthe box is always squeezed");
-            this.blnUseBr.UseVisualStyleBackColor = true;
-            this.blnUseBr.Click += new System.EventHandler(this.blnUseBr_Click);
+            this.rbFitBox.AutoSize = true;
+            this.rbFitBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbFitBox.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rbFitBox.Location = new System.Drawing.Point(225, 31);
+            this.rbFitBox.Name = "rbFitBox";
+            this.rbFitBox.Size = new System.Drawing.Size(115, 24);
+            this.rbFitBox.TabIndex = 8;
+            this.rbFitBox.Text = "Fit in a box";
+            this.rbFitBox.UseVisualStyleBackColor = true;
+            // 
+            // rbSqueeze
+            // 
+            this.rbSqueeze.AutoSize = true;
+            this.rbSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rbSqueeze.Location = new System.Drawing.Point(225, 61);
+            this.rbSqueeze.Name = "rbSqueeze";
+            this.rbSqueeze.Size = new System.Drawing.Size(171, 24);
+            this.rbSqueeze.TabIndex = 9;
+            this.rbSqueeze.Text = "Squeze into a box";
+            this.rbSqueeze.UseVisualStyleBackColor = true;
+            // 
+            // rbNoBox
+            // 
+            this.rbNoBox.AutoSize = true;
+            this.rbNoBox.Checked = true;
+            this.rbNoBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbNoBox.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rbNoBox.Location = new System.Drawing.Point(225, 90);
+            this.rbNoBox.Name = "rbNoBox";
+            this.rbNoBox.Size = new System.Drawing.Size(82, 24);
+            this.rbNoBox.TabIndex = 10;
+            this.rbNoBox.TabStop = true;
+            this.rbNoBox.Text = "No box";
+            this.rbNoBox.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.Location = new System.Drawing.Point(161, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(246, 32);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "If left empty then TEXT is used for boxing\r\nand Prefix and Suffix are ignored.";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClear.Location = new System.Drawing.Point(533, 78);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(79, 36);
+            this.btnClear.TabIndex = 11;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnDemo
+            // 
+            this.btnDemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDemo.ForeColor = System.Drawing.Color.Green;
+            this.btnDemo.Location = new System.Drawing.Point(76, 61);
+            this.btnDemo.Name = "btnDemo";
+            this.btnDemo.Size = new System.Drawing.Size(117, 26);
+            this.btnDemo.TabIndex = 1;
+            this.btnDemo.Text = "Click for demo";
+            this.btnDemo.UseVisualStyleBackColor = true;
+            this.btnDemo.Click += new System.EventHandler(this.btnDemo_Click);
+            // 
+            // btnClrDemo
+            // 
+            this.btnClrDemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrDemo.ForeColor = System.Drawing.Color.Green;
+            this.btnClrDemo.Location = new System.Drawing.Point(76, 93);
+            this.btnClrDemo.Name = "btnClrDemo";
+            this.btnClrDemo.Size = new System.Drawing.Size(117, 26);
+            this.btnClrDemo.TabIndex = 2;
+            this.btnClrDemo.Text = "Clear demo";
+            this.btnClrDemo.UseVisualStyleBackColor = true;
+            this.btnClrDemo.Click += new System.EventHandler(this.btnClrDemo_Click);
             // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1087, 557);
+            this.ClientSize = new System.Drawing.Size(1087, 625);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
@@ -425,9 +458,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label lbBoxed;
-        private System.Windows.Forms.Button btnBoxIT;
-        private System.Windows.Forms.Timer BlinkTimer;
         private System.Windows.Forms.GroupBox gpTable;
         private System.Windows.Forms.Button btnApplyTab;
         private System.Windows.Forms.TextBox tbCols;
@@ -436,8 +466,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbPreFill;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnSqueeze;
         private System.Windows.Forms.CheckBox cbCleanUrl;
-        private System.Windows.Forms.Button blnUseBr;
+        private System.Windows.Forms.RadioButton rbSqueeze;
+        private System.Windows.Forms.RadioButton rbFitBox;
+        private System.Windows.Forms.RadioButton rbNoBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDemo;
+        private System.Windows.Forms.Button btnClrDemo;
     }
 }

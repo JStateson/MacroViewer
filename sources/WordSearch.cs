@@ -57,11 +57,11 @@ namespace MacroViewer
             }
         }
 
-        public List<cRefURLs> RefUrls;
         private int SelectedRow = -1;
-        private List<CFound> cFound;
-        private List<CFound> cSorted;
-        private List<CFound> aSorted;
+        private List<cRefURLs> RefUrls = new List<cRefURLs>();
+        private List<CFound> cFound = new List<CFound>();
+        private List<CFound> cSorted = new List<CFound>();
+        private List<CFound> aSorted = new List<CFound>();
         private List<CBody> cAll;
         private string[] keywords;
         private bool[] KeyPresent;
@@ -86,8 +86,6 @@ namespace MacroViewer
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
-            cFound = new List<CFound>();
-            cSorted = new List<CFound>();
             cAll = Rcb;
             LastViewed = -1;
             cbHPKB.Checked = Properties.Settings.Default.IncludeHPKB;
@@ -207,7 +205,7 @@ namespace MacroViewer
                 {
                     n = JustExtract(SelectedFile);
                 }
-                aSorted = new List<CFound>();
+                aSorted.Clear();
                 for(int i = 0; i < n; i++)
                 {
                     int j = aSort[i];
@@ -260,7 +258,7 @@ namespace MacroViewer
                     {
                         sPattern = $@"\b{Regex.Escape(keyword)}\b";
                     }
-                    else
+                    else //rbAnyMatch.Checked
                     {
                         sPattern = "\\b\\w*" + keyword + "\\w*\\b";
                     }
@@ -354,6 +352,8 @@ namespace MacroViewer
         {
             cFound.Clear();
             cSorted.Clear();
+            RefUrls.Clear();
+            aSorted.Clear();
             TotalMatches = 0;
             TriedFailed = true;
             lbKeyFound.Items.Clear();
@@ -361,9 +361,10 @@ namespace MacroViewer
             HasFiles = "";
             SelectedFile = "";
             dgvSearched.DataSource = null;
-            RefUrls = new List<cRefURLs>();
+            dgvSearched.Rows.Clear();
+
             string sBetter = FormBetter(tbKeywords.Text.Trim());
-             if(rbEPhrase.Checked)
+            if(rbEPhrase.Checked)
             {
                 keywords = new string[] { sBetter };    
             }
@@ -430,6 +431,7 @@ namespace MacroViewer
                 }
                 i++;
             }
+
             RunMacSort(CFcnt, true);
         }
 
@@ -490,6 +492,8 @@ namespace MacroViewer
         private void RunMacSort(int CFcnt, bool Descending)
         {
             int i, j, n;
+            if (CFcnt == 0) return;
+            dgvSearched.RowEnter -= dgvSearched_RowEnter;
             cSorted.Clear();
             RunSort(CFcnt, Descending);
             n = cFound.Count;
@@ -523,6 +527,7 @@ namespace MacroViewer
             {
                 AddSelButtons();
             }
+            dgvSearched.RowEnter += dgvSearched_RowEnter;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

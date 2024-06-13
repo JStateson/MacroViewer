@@ -27,6 +27,7 @@ namespace MacroViewer
 {
     public partial class main : Form
     {
+        private bool bForceClose = false;
         private int NumInBody = 0;  // probably should have used a List<string> instead of [Utils.NumMacros]
         bool bHaveHTMLasLOCAL = false;      // if true then we just read in html 
         private bool bShowingError = false; // if true then highlighting errors between HP and local
@@ -85,6 +86,10 @@ namespace MacroViewer
             SpecialUsed(Properties.Settings.Default.SpecialWord != "");
             NormalEditColor = btnCancelEdits.ForeColor;
             SetFGcolor("#FF6600");
+            if (bForceClose)
+            {
+                timer1.Interval = 500;
+            }
         }
 
         private string IgnoreSupSig(string s)
@@ -610,6 +615,19 @@ namespace MacroViewer
             btnDelChecked.Enabled = bVal;
         }
 
+        private void MakeSticky(string s)
+        {
+            bool b = true;
+            switch(s)
+            {
+                case "RF":
+                    b = (CurrentRowSelected >= Utils.RequiredMacrosRF.Length);
+                    break;
+            }
+            btnDelM.Enabled = b;
+            btnDelChecked.Enabled = b;
+        }
+
         private void ShowUneditedRow(int e)
         {
             CurrentRowSelected = e;
@@ -619,7 +637,11 @@ namespace MacroViewer
                 tbMacName.Text = "";
                 return;
             }
-            HaveSelected(true);
+            if(strType == "RF")
+            {
+                MakeSticky(strType);
+            }
+            else HaveSelected(true);
             ShowBodyFromSelected();
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
             lbName.ClearSelection();
@@ -1476,12 +1498,37 @@ namespace MacroViewer
             PositionNext(1);
         }
 
+        private int WarnMissing(string sFN)
+        {
+            string sOut = "";
+            string TXTmacName = Utils.FNtoPath(sFN);
+            DialogResult dr = MessageBox.Show("Reference Macro RFmacros.txt is missing\r\nClick YES to create placeholders or NO to quit",
+                "WARNING",MessageBoxButtons.YesNo);
+            if (dr == DialogResult.No)
+            {
+                bForceClose = true;
+                return -1;
+            }
+            foreach (string s in Utils.RequiredMacrosRF)
+            {
+                sOut += s + Environment.NewLine + "Content is missing" + Environment.NewLine;
+            }
+            Utils.WriteAllText(TXTmacName, sOut);
+            return Utils.RequiredMacrosRF.Length;
+        }
+
         private int LoadFileItem(string sPrefix)
         {
             int n = LoadFromTXT(sPrefix);
             if(sPrefix != "HP")
             {
                 SetVisDiffErr(false);
+            }
+            if(n == 0 && sPrefix == "RF")
+            {
+                n = WarnMissing(sPrefix);
+                if(n > 0) return LoadFromTXT(sPrefix);
+                return 0;
             }
             return n;
         }
@@ -1710,9 +1757,26 @@ namespace MacroViewer
         private int CountChecks()
         {
             int n = 0;
+            int i = 0;
             foreach (DataGridViewRow row in lbName.Rows)
             {
-                if((bool)row.Cells[1].EditedFormattedValue) n++ ;
+                row.Cells[1].Value = row.Cells[1].EditedFormattedValue;
+                if (strType == "RF")
+                {
+                    if (i < Utils.RequiredMacrosRF.Length)
+                    {
+                        row.Cells[1].Value = false;                        
+                    }
+                    else
+                    {
+                        if ((bool)row.Cells[1].Value)
+                        {
+                            n++;
+                        }
+                    }
+                    i++;
+                }
+                else if((bool)row.Cells[1].Value) n++ ;
             }
             return n;
         }
@@ -1901,6 +1965,11 @@ namespace MacroViewer
         private void timer1_Tick(object sender, EventArgs e)
         {
             SpecialUsed(false);
+            if (bForceClose)
+            {
+                this.Close();
+            }
+
         }
 
         private void btnSpecialWord_Click(object sender, EventArgs e)
@@ -2139,10 +2208,14 @@ namespace MacroViewer
 
         private void main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!bPageSaved())
+            if(!bForceClose)
             {
-                e.Cancel = true;
+                if (!bPageSaved())
+                {
+                    e.Cancel = true;
+                }
             }
+
         }
 
         private void mnuRef_Click(object sender, EventArgs e)

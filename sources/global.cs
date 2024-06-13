@@ -305,6 +305,9 @@ internal static class ClipboardFormats
             ShellHTML(strTemp);
             CopyHTML(strTemp);
         }
+
+        public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents","Printer support documents", "HP-KB-WIKI"};
+
         public static void WordpadHelp(string sHelp)
         {
             string[] strForms = { "FILE", "SIG", "EDIT",  "EDITLINK",

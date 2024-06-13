@@ -64,6 +64,7 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnShowCC = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnShowCC);
             this.groupBox1.Controls.Add(this.lbDropped);
             this.groupBox1.Controls.Add(this.gbSelect);
             this.groupBox1.Controls.Add(this.gbMakeNew);
@@ -430,6 +432,7 @@
             this.lbKeyFound.Name = "lbKeyFound";
             this.lbKeyFound.Size = new System.Drawing.Size(291, 204);
             this.lbKeyFound.TabIndex = 0;
+            this.lbKeyFound.DoubleClick += new System.EventHandler(this.lbKeyFound_DoubleClick);
             // 
             // label2
             // 
@@ -479,6 +482,18 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
+            // 
+            // btnShowCC
+            // 
+            this.btnShowCC.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowCC.Location = new System.Drawing.Point(213, 196);
+            this.btnShowCC.Name = "btnShowCC";
+            this.btnShowCC.Size = new System.Drawing.Size(114, 30);
+            this.btnShowCC.TabIndex = 14;
+            this.btnShowCC.Text = "Show Codes";
+            this.btnShowCC.UseVisualStyleBackColor = true;
+            this.btnShowCC.Visible = false;
+            this.btnShowCC.Click += new System.EventHandler(this.btnShowCC_Click);
             // 
             // WordSearch
             // 
@@ -544,5 +559,6 @@
         private System.Windows.Forms.RadioButton rbEPhrase;
         private System.Windows.Forms.GroupBox gbSelect;
         private System.Windows.Forms.Label lbDropped;
+        private System.Windows.Forms.Button btnShowCC;
     }
 }

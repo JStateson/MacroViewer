@@ -1193,7 +1193,10 @@ namespace MacroViewer
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            AddNew(Utils.UnNamedMacro, GetReference());
+            if (bPageSaved())
+            {
+                AddNew(Utils.UnNamedMacro, GetReference());
+            }
         }
 
         private void MustFinishEdit(bool bFinished)
@@ -1208,7 +1211,7 @@ namespace MacroViewer
             {
                 btnCancelEdits.ForeColor = Color.Red;
                 btnSaveM.ForeColor = Color.Red;
-                btnDelM.ForeColor = Color.Red;   
+                btnDelM.ForeColor = Color.Red;  
             }
         }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1218,10 +1221,11 @@ namespace MacroViewer
             aboutBox.Dispose();
         }
 
+        //need a copy of the edit box contents in full markup
         private string tbBodyMarked()
         {
-            tbBody.Text = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
-            return tbBody.Text;
+            string sBody = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
+            return sBody;
         }
 
 
@@ -1236,7 +1240,7 @@ namespace MacroViewer
             }
             if (Body[CurrentRowSelected] == null)
             {
-                if (tbBodyMarked().Length > 0) return false;
+                if (tbBody.Text.Trim().Length > 0) return false;
                 return true; // a leftover "Change Me" has empty body
             }
             bool bEdited = (tbBodyMarked() != Body[CurrentRowSelected]);

@@ -89,5 +89,40 @@ namespace MacroViewer.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This file is used by MacroViewer        ///
+        ///Number Countries:68        ///
+        ///Columns wanted:3        ///
+        ///Number Rows:23        ///
+        ///Number slots:69        ///
+        ///#A2M - Iceland - English 
+        ///#A2N - Saudi Arabia - Arabic&apos;English 
+        ///#A2Q - Ukraine - Ukrainian 
+        ///#AB0 Taiwan
+        ///#AB1 Korea
+        ///#AB2 China
+        ///#AB4 Singapore Malaysia
+        ///#AB5 Hong Kong
+        ///#AB6 Arabia (French)
+        ///#AB7 Greece
+        ///#AB8 Turkey
+        ///#AB9 Portugal
+        ///#ABA US (English)
+        ///#ABB Europe (English)
+        ///#ABC Canada (French)
+        ///#ABD Germany
+        ///#ABE Spain
+        ///#ABF France
+        ///#ABG Australia
+        ///#ABH Netherlands
+        ///#ABJ Japan
+        ///#ABL Canada engl [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Sorted_Raw_List {
+            get {
+                return ResourceManager.GetString("Sorted_Raw_List", resourceCulture);
+            }
+        }
     }
 }

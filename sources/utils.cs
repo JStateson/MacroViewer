@@ -33,6 +33,7 @@ namespace MacroViewer
             sLoc = Utils.WhereExe;
 #if SPECIAL1
             cbUseDelims.Checked = true;
+            cbUseWhiteSpace.Checked = true;
             cbUseBorder.Checked = true;
 #endif
         }
@@ -206,6 +207,7 @@ namespace MacroViewer
             if (ColsExpected == 0) ColsExpected = nGathered;
             FillTable();
         }
+        
 
         private void btnFillCol_Click(object sender, EventArgs e)
         {
@@ -251,19 +253,36 @@ namespace MacroViewer
             FormTable();
         }
 
+        private string[] DoReqSplit(string s)
+        {
+            string t = s.Trim();
+            StringSplitOptions sso = cbRemE_tab.Checked ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None;
+            if (cbUseDelims.Checked && cbUseWhiteSpace.Checked)
+            {
+                return t.Split(new char[] { ' ', '\t', ',' }, sso);
+            }
+            if (cbUseDelims.Checked)
+            {
+                return t.Split(new char[] { ',' }, sso);
+            }
+            if (cbUseWhiteSpace.Checked)
+            {
+                return t.Split(new char[] { ' ', '\t' }, sso);
+            }
+            return null;
+        }
 
         private void FillTable()
         {
-            if (cbUseDelims.Checked)
+            if (cbUseDelims.Checked || cbUseWhiteSpace.Checked)
             {
-                string[] sFirst = sEach[0].Trim().Split(new char[] { ' ', '\t', ',' },
-                        StringSplitOptions.RemoveEmptyEntries);
+                if (sEach.Length == 0) return;
+                string[] sFirst = DoReqSplit(sEach[0]);
                 int n = sFirst.Length;
                 List<string[]> list = new List<string[]>();
                 foreach (string s in sEach)
                 {
-                    sFirst = s.Trim().Split(new char[] { ' ', '\t', ',' },
-                        StringSplitOptions.RemoveEmptyEntries);
+                    sFirst = DoReqSplit(s);
                     if (n != sFirst.Length)
                     {
                         MessageBox.Show("missing delimiter in your paste");
@@ -296,6 +315,8 @@ namespace MacroViewer
             if (RowsExpected > 0)
             {
                 int cE = sMyTable.Count;
+                if (sMyTable.Count == 0) return;
+                if (sMyTable[0].Length == 0) return;
                 int rE = RowsExpected;
                 for (int r = 0; r < RowsExpected; r++)
                 {
@@ -541,6 +562,7 @@ namespace MacroViewer
         private void btnClrCol_Click(object sender, EventArgs e)
         {
             tbTextToColor.Text = "";
+            tbColorResult.Text = "";
             tbTextToColor.Font = gbTxtCol.Font;
         }
 

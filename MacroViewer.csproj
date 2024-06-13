@@ -275,6 +275,7 @@
     <None Include="sources\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Sorted-Raw-List.txt" />
     <Content Include="sources\SiteMap.html" />
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />

@@ -84,6 +84,8 @@ namespace MacroViewer
         private string HasFiles = "";
         private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
         private Color RestoreColor;
+        private string[] CountryCodes;
+        private string CountryCodeResults;
 
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
@@ -98,8 +100,28 @@ namespace MacroViewer
             Reg12 = cbHPKB.Font;
             Reg10 = gbAlltSearch.Font;
             RestoreColor = lbTMinfo.ForeColor;
+            CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        private void CountryLookup(string sLine)
+        {
+            CountryCodeResults = "";
+            int i = 5; //'#abc "
+            string[] sWords = sLine.Split(new char[] { ' ', '\t', ',' },StringSplitOptions.RemoveEmptyEntries);
+            foreach(string sWord in sWords)
+            {
+                foreach (string s in CountryCodes)
+                {
+                    if (s.StartsWith("#"))
+                    {
+                        if (s.Substring(i).ToLower().Contains(sWord))
+                        {
+                            CountryCodeResults += s + Environment.NewLine;
+                        }
+                    }
+                }
+            }
+        }
         private void AddSelButtons()
         {
             int i = 0;
@@ -336,16 +358,17 @@ namespace MacroViewer
             }
         }
 
+
         private string FormBetter(string s)
         {
             string t = s.ToLower();
             if (t.Contains("wi-fi"))
             {
-                return s + "wifi";
+                return s + " wifi";
             }
             if (t.Contains("wifi"))
             {
-                return s + "wi-fi";
+                return s + " wi-fi";
             }
             return s;
         }
@@ -354,6 +377,13 @@ namespace MacroViewer
         {
             cbHPKB.Font = f;
             cbOfferAlt.Font = f;
+        }
+
+        private void TestForCountryCode(string sLine)
+        {
+            int i = sLine.IndexOf("country ");
+            bool b = ((i >= 0) && (sLine.Length > 10));
+            btnShowCC.Visible = b;
         }
 
         private void RunSearch()
@@ -371,8 +401,12 @@ namespace MacroViewer
             dgvSearched.DataSource = null;
             dgvSearched.Rows.Clear();
 
+            TestForCountryCode(tbKeywords.Text.ToLower());
+
             string sBetter = FormBetter(tbKeywords.Text.Trim());
-            if(rbEPhrase.Checked)
+
+
+            if (rbEPhrase.Checked)
             {
                 keywords = new string[] { sBetter };    
             }
@@ -457,6 +491,10 @@ namespace MacroViewer
                 lbTMinfo.ForeColor = RestoreColor;
                 tbNumMatches.Visible = true;
             }
+            gbAlltSearch.Visible = cnt==0 && cbOfferAlt.Checked;
+            if (gbAlltSearch.Visible) SetFont(Reg10);
+            else SetFont(Reg12);
+            gbMakeNew.Visible = false;
         }
 
         private int JustExtract(string w)
@@ -548,10 +586,6 @@ namespace MacroViewer
                 tbNumMatches.Text = "";
                 TriedFailed = true;
             }
-            gbAlltSearch.Visible = TriedFailed && cbOfferAlt.Checked;
-            if (gbAlltSearch.Visible) SetFont(Reg10);
-            else SetFont(Reg12);
-            gbMakeNew.Visible = false;
             gbSelect.Visible = TotalMatches > 0;
             if(TotalMatches > 0)
             {
@@ -738,6 +772,34 @@ namespace MacroViewer
             NewItemID = s;
             NewItemName = tbKeywords.Text.Trim();
             this.Close();
+        }
+
+        private void btnShowCC_Click(object sender, EventArgs e)
+        {
+            string sLine = tbKeywords.Text.ToLower();
+            int i = sLine.IndexOf("country ");
+            bool b = ((i >= 0) && (sLine.Length > 10));
+            btnShowCC.Visible = b;
+            if (btnShowCC.Visible)
+            {
+                CountryLookup(sLine.Substring(i + 8));
+            }
+            lbKeyFound.Items.Clear();
+            lbKeyFound.Items.Add("Double click to capture code");
+            lbKeyFound.Items.AddRange(CountryCodeResults.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
+        }
+
+        private void lbKeyFound_DoubleClick(object sender, EventArgs e)
+        {
+            if(btnShowCC.Visible)
+            {
+                int index = lbKeyFound.SelectedIndex;
+                if (index != ListBox.NoMatches)
+                {
+                    string sCode = lbKeyFound.Items[index].ToString();
+                    Clipboard.SetText(sCode.Substring(0, 4));
+                }
+            }
         }
     }
 }

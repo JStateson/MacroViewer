@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -64,6 +64,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cbUseBorder = new System.Windows.Forms.CheckBox();
             this.cbFrameList = new System.Windows.Forms.CheckBox();
+            this.cbRemE_list = new System.Windows.Forms.CheckBox();
+            this.cbRemE_tab = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gpTable = new System.Windows.Forms.GroupBox();
@@ -103,8 +105,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.cbRemE_list = new System.Windows.Forms.CheckBox();
-            this.cbRemE_tab = new System.Windows.Forms.CheckBox();
+            this.cbUseWhiteSpace = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -484,6 +485,36 @@
             this.toolTip1.SetToolTip(this.cbFrameList, "In HP signature setup, all tahbles have a border");
             this.cbFrameList.UseVisualStyleBackColor = true;
             // 
+            // cbRemE_list
+            // 
+            this.cbRemE_list.AutoSize = true;
+            this.cbRemE_list.Checked = true;
+            this.cbRemE_list.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRemE_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRemE_list.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbRemE_list.Location = new System.Drawing.Point(223, 76);
+            this.cbRemE_list.Name = "cbRemE_list";
+            this.cbRemE_list.Size = new System.Drawing.Size(167, 20);
+            this.cbRemE_list.TabIndex = 13;
+            this.cbRemE_list.Text = "Remove empty lines";
+            this.toolTip1.SetToolTip(this.cbRemE_list, "In HP signature setup, all tahbles have a border");
+            this.cbRemE_list.UseVisualStyleBackColor = true;
+            // 
+            // cbRemE_tab
+            // 
+            this.cbRemE_tab.AutoSize = true;
+            this.cbRemE_tab.Checked = true;
+            this.cbRemE_tab.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRemE_tab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRemE_tab.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbRemE_tab.Location = new System.Drawing.Point(239, 126);
+            this.cbRemE_tab.Name = "cbRemE_tab";
+            this.cbRemE_tab.Size = new System.Drawing.Size(167, 20);
+            this.cbRemE_tab.TabIndex = 14;
+            this.cbRemE_tab.Text = "Remove empty lines";
+            this.toolTip1.SetToolTip(this.cbRemE_tab, "In HP signature setup, all tahbles have a border");
+            this.cbRemE_tab.UseVisualStyleBackColor = true;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -540,6 +571,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbUseWhiteSpace);
             this.groupBox5.Controls.Add(this.cbRemE_tab);
             this.groupBox5.Controls.Add(this.cbUseBorder);
             this.groupBox5.Controls.Add(this.btnShowTab);
@@ -548,9 +580,9 @@
             this.groupBox5.Controls.Add(this.btnFillCol);
             this.groupBox5.Controls.Add(this.btnFillRow);
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox5.Location = new System.Drawing.Point(32, 135);
+            this.groupBox5.Location = new System.Drawing.Point(23, 99);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(471, 123);
+            this.groupBox5.Size = new System.Drawing.Size(471, 152);
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "How to fill it in (do not use above buttons)";
@@ -586,9 +618,9 @@
             this.cbUseDelims.ForeColor = System.Drawing.SystemColors.Highlight;
             this.cbUseDelims.Location = new System.Drawing.Point(236, 53);
             this.cbUseDelims.Name = "cbUseDelims";
-            this.cbUseDelims.Size = new System.Drawing.Size(218, 20);
+            this.cbUseDelims.Size = new System.Drawing.Size(132, 20);
             this.cbUseDelims.TabIndex = 8;
-            this.cbUseDelims.Text = "Split on comma, whitespace";
+            this.cbUseDelims.Text = "Split on comma";
             this.cbUseDelims.UseVisualStyleBackColor = true;
             // 
             // btnFillCol
@@ -631,7 +663,7 @@
             // 
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShow.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShow.Location = new System.Drawing.Point(172, 95);
+            this.btnShow.Location = new System.Drawing.Point(410, 60);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(118, 22);
             this.btnShow.TabIndex = 6;
@@ -923,8 +955,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column1.HeaderText = "Position";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -934,8 +966,8 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column2.HeaderText = "Contents";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -944,35 +976,17 @@
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
             // 
-            // cbRemE_list
+            // cbUseWhiteSpace
             // 
-            this.cbRemE_list.AutoSize = true;
-            this.cbRemE_list.Checked = true;
-            this.cbRemE_list.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRemE_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRemE_list.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbRemE_list.Location = new System.Drawing.Point(223, 76);
-            this.cbRemE_list.Name = "cbRemE_list";
-            this.cbRemE_list.Size = new System.Drawing.Size(167, 20);
-            this.cbRemE_list.TabIndex = 13;
-            this.cbRemE_list.Text = "Remove empty lines";
-            this.toolTip1.SetToolTip(this.cbRemE_list, "In HP signature setup, all tahbles have a border");
-            this.cbRemE_list.UseVisualStyleBackColor = true;
-            // 
-            // cbRemE_tab
-            // 
-            this.cbRemE_tab.AutoSize = true;
-            this.cbRemE_tab.Checked = true;
-            this.cbRemE_tab.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRemE_tab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRemE_tab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbRemE_tab.Location = new System.Drawing.Point(269, 85);
-            this.cbRemE_tab.Name = "cbRemE_tab";
-            this.cbRemE_tab.Size = new System.Drawing.Size(167, 20);
-            this.cbRemE_tab.TabIndex = 14;
-            this.cbRemE_tab.Text = "Remove empty lines";
-            this.toolTip1.SetToolTip(this.cbRemE_tab, "In HP signature setup, all tahbles have a border");
-            this.cbRemE_tab.UseVisualStyleBackColor = true;
+            this.cbUseWhiteSpace.AutoSize = true;
+            this.cbUseWhiteSpace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseWhiteSpace.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseWhiteSpace.Location = new System.Drawing.Point(236, 87);
+            this.cbUseWhiteSpace.Name = "cbUseWhiteSpace";
+            this.cbUseWhiteSpace.Size = new System.Drawing.Size(160, 20);
+            this.cbUseWhiteSpace.TabIndex = 15;
+            this.cbUseWhiteSpace.Text = "Split on whitespace";
+            this.cbUseWhiteSpace.UseVisualStyleBackColor = true;
             // 
             // utils
             // 
@@ -1100,5 +1114,6 @@
         private System.Windows.Forms.Button btnClrCol;
         private System.Windows.Forms.CheckBox cbRemE_list;
         private System.Windows.Forms.CheckBox cbRemE_tab;
+        private System.Windows.Forms.CheckBox cbUseWhiteSpace;
     }
 }

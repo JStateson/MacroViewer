@@ -12,7 +12,7 @@ namespace MacroViewer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -74,24 +74,12 @@ namespace MacroViewer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Please let me know if this works")]
-        public string SupSig {
+        public string sMSuffix {
             get {
-                return ((string)(this["SupSig"]));
+                return ((string)(this["sMSuffix"]));
             }
             set {
-                this["SupSig"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ChangeSig {
-            get {
-                return ((string)(this["ChangeSig"]));
-            }
-            set {
-                this["ChangeSig"] = value;
+                this["sMSuffix"] = value;
             }
         }
         
@@ -152,18 +140,6 @@ namespace MacroViewer.Properties {
             }
             set {
                 this["SpecialWord"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseMarkers {
-            get {
-                return ((bool)(this["UseMarkers"]));
-            }
-            set {
-                this["UseMarkers"] = value;
             }
         }
         

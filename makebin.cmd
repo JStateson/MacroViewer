@@ -1,4 +1,3 @@
-rmdir /S /Q %1temp
 mkdir %1temp
 set ARC=binaries-for-testing.tar
 del %1%ARC%

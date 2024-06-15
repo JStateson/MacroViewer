@@ -1610,12 +1610,6 @@ namespace MacroViewer
         {
             bInitialLoad = true;
             sBadMacroName = "";
-            NumSupplementalSignatures = 0;
-            string sChg = Properties.Settings.Default.ChangeSig;
-            bool bMustChange = sChg != "";
-            string nSig = Properties.Settings.Default.EditedSig; 
-                // the new supplemental signature or just a reference
-            bool bUseMarkers = Properties.Settings.Default.UseMarkers;
             if (cBodies == null)
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();
@@ -1623,9 +1617,6 @@ namespace MacroViewer
 
                 foreach (string s in Utils.LocalMacroPrefix)
                 {
-                    bool bDebug = false;
-                    string tSig = "";
-                    int j, k;
                     int i, n = LoadFileItem(s);
                     for (i = 0; i < n; i++)
                     {
@@ -1640,46 +1631,13 @@ namespace MacroViewer
                         bDebug |= RunLookMissingTR(s, i + 1, cb.Name, ref Body[i]);
 #endif
 
-                        j = 0;
-                        k = 0;
-                        int m = Utils.HasSupSig(ref Body[i], ref j, ref k);
-                        NumSupplementalSignatures += m;
-                        if (bMustChange && (sChg == s || sChg == "ALL")) // only add sig to wanted file
-                        {
-                            if (bUseMarkers) cb.sBody = Utils.ReplaceSupSig(nSig, ref Body[i]);
-                            else
-                            {
-                                tSig = "";
-                                cb.sBody = Body[i];
-                                if (m > 0)   // there is a supplemental signature
-                                {
-                                    tSig = cb.sBody.Substring(j, k - j);
-                                    cb.sBody = cb.sBody.Replace(tSig, nSig);
-                                    Body[i] = cb.sBody + tSig;
-                                }
-                                else cb.sBody += nSig;
-                            }
-                            Body[i] = cb.sBody;
-                        }
-                        else cb.sBody = Body[i];
+                        cb.sBody = Body[i];
                         cb.fKeys = "";
                         cBodies.Add(cb);
-                    }
-                    if((bMustChange && n > 0) || bDebug)
-                    {
-                        SaveAsTXT(s);
                     }
                     if (n != 0) strType = s;
                 }
             }
-            Properties.Settings.Default.ChangeSig = "";
-            if (!Properties.Settings.Default.UseMarkers)
-            {
-                Properties.Settings.Default.SupSig = "";
-                Properties.Settings.Default.EditedSig = "";
-            }
-            Properties.Settings.Default.UseMarkers = true;
-            Properties.Settings.Default.Save();
 
             bInitialLoad = false;
             if(sBadMacroName != "")

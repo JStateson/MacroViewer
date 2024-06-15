@@ -14,11 +14,8 @@
     <Setting Name="HTTP_HP" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SupSig" Type="System.String" Scope="User">
+    <Setting Name="sMSuffix" Type="System.String" Scope="User">
       <Value Profile="(Default)">Please let me know if this works</Value>
-    </Setting>
-    <Setting Name="ChangeSig" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="IncludeHPKB" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -34,9 +31,6 @@
     </Setting>
     <Setting Name="SpecialWord" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="UseMarkers" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="In" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

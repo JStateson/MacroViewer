@@ -20,14 +20,15 @@ using System.Collections.Generic;
 using System.Security.Policy;
 using System.Windows.Automation;
 using System.Net.NetworkInformation;
+using System.Linq.Expressions;
 
 namespace MacroViewer
 {
-
     public class CMoveSpace
     {/// <summary>
      /// "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
      /// </summary>
+
         public string[] MacroIDs;
         public int[] nMacsInFile;
         public int[] nMacsAllowed;
@@ -128,6 +129,7 @@ namespace MacroViewer
     // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
+        private const int iNMacros = 11;
         public const int NumMacros = 50;   // only 30 for the HTML file
         public static int nLongestExpectedURL = 256;
         public static string[] nUse ={ // these must match the button names in WordSearch
@@ -174,11 +176,12 @@ namespace MacroViewer
         }
         // do not change the order of below items and HP must be last!
         public static string sPrinterTypes = " LJ DJ OJ ";    // must have a space and match below
-        public static string[] LocalMacroPrefix = { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP" };
-        public static string[] LocalMacroFullname = { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
+        public static string[] LocalMacroPrefix = new string[iNMacros]  { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP" };
+        public static string[] LocalMacroFullname = new string[iNMacros] { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
                 "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
-        public static string[] LocalMacroRefs = {"PC Reference","PC Reference","LaserJet Reference",
+        public static string[] LocalMacroRefs = new string[iNMacros] {"PC Reference","PC Reference","LaserJet Reference",
                 "DeskJet Reference","OfficeJet Reference", "", "", "", "","",""};
+
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
@@ -277,17 +280,6 @@ internal static class ClipboardFormats
             Clipboard.SetData(DataFormats.Html, s);
         }
 
-        public static void CopyHTML(string strType, string strTemp)
-        {
-            var dataObject = new DataObject();
-            string sPP = Properties.Settings.Default.sPPrefix;
-            if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
-            {
-                strTemp = "<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
-            }
-            CopyHTML(strTemp);
-        }
-
         public static string ClipboardGetText()
         {
             string t = Clipboard.GetText();
@@ -300,7 +292,8 @@ internal static class ClipboardFormats
             strTemp = strTemp.Replace(Environment.NewLine, "<br>");
             if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
             {
-                strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp;
+                strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp +
+                    "<br><br>" + Properties.Settings.Default.sMSuffix;
             }
             ShellHTML(strTemp);
             CopyHTML(strTemp);
@@ -409,35 +402,6 @@ internal static class ClipboardFormats
             return "<a href=\"" + strUrl + "\" target=\"_blank\">" + strIn + "</a>";
         }
 
-        public static string ReplaceSupSig(string sSup, ref string sBody)
-        {
-            int i, j;
-            if (sBody == null) return "";
-            if (sBody == "") return "";
-            string sAdded, sRtn = "";
-            if(sSup == "")
-            {
-                i = sBody.IndexOf(SupSigPrefix);
-                if (i > 0) sRtn = sBody.Substring(0, i);
-                else sRtn = sBody;
-                sRtn = NoTrailingNL(sRtn).Trim();
-            }
-            else
-            {
-                sAdded = SupSigPrefix + sSup + SupSigSuffix;
-                i = sBody.IndexOf(SupSigPrefix);
-                if (i < 0)
-                {
-                    sRtn = NoTrailingNL(sBody).Trim() + "<br><br>" + sAdded;
-                }
-                else
-                {
-                    j = sBody.IndexOf(SupSigSuffix);    // probably should assert j > 0
-                    sRtn = sBody.Substring(0, i) + sAdded;
-                }
-            }
-            return sRtn;
-        }
 
         public static int FirstDifferenceIndex(string str1, string str2)
         {

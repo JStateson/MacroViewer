@@ -37,29 +37,13 @@ namespace MacroViewer
             }
             string sPP = Properties.Settings.Default.sPPrefix;
             if (sPP != "init") tbPP.Text = sPP;
-            tbSupSig.Text = Properties.Settings.Default.SupSig;
             tbLongAllowed.Text = Properties.Settings.Default.LongestExpectedURL.ToString();
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             tbEmail.Text = Properties.Settings.Default.sEmail;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
-            cbRefOnly.Checked = !Properties.Settings.Default.UseMarkers;
-            strEditedSave = Properties.Settings.Default.EditedSig;
-            strEditedSave = strEditedSave.Replace(SupSigPrefix, "");
-            strEditedSave = strEditedSave.Replace(SupSigSuffix, "");
-            tbEdit.Text = strEditedSave;
             lbSaveLoc.Text = Utils.WhereExe + "\\UrlDebug.txt";
             CountUnkUrls();
-            clbImages.Items.Clear();
-            clbImages.Items.Add("Message", true);
-            clbImages.Items.Add("Yes image", false);   // TODO to do todo this should come from the
-            clbImages.Items.Add("Solution", false);     // test signature form and not be hard coded
-            bWantsExit = false;
-            lbAttached.Text = NumAttached.ToString();
-            cbListFN.Items.Add("ALL");
-            foreach (string s in Utils.LocalMacroPrefix)
-                cbListFN.Items.Add(s);
-            cbListFN.SelectedIndex = 0;
-            lbMarker.Text = lbMarker.Text.Replace("pre", Utils.SupSigPrefix).Replace("suf", Utils.SupSigSuffix); 
+            bWantsExit = false; 
         }
 
      
@@ -96,6 +80,7 @@ namespace MacroViewer
             if (rbFirefox.Checked) eBrowser = eBrowserType.eFirefox;
             Properties.Settings.Default.BrowserID = (int)eBrowser;
             Properties.Settings.Default.sPPrefix = tbPP.Text;
+            Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
             Properties.Settings.Default.LongestExpectedURL = Convert.ToInt32(tbLongAllowed.Text);
             Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             Utils.BrowserWanted = eBrowser;
@@ -106,7 +91,6 @@ namespace MacroViewer
             }
             Utils.VolunteerUserID = userid;
             Properties.Settings.Default.SaveUnkUrls = cbSaveUNK.Checked;
-            Properties.Settings.Default.SupSig = tbSupSig.Text;
             Properties.Settings.Default.SpecialWord = tbSpecialWord.Text;
             Properties.Settings.Default.sEmail = tbEmail.Text;
             Properties.Settings.Default.Save();
@@ -125,43 +109,7 @@ namespace MacroViewer
             Utils.NotepadViewer(lbSaveLoc.Text);
         }
 
-        private void btnColor_Click(object sender, EventArgs e)
-        {
-            using (ColorDialog colorDialog = new ColorDialog())
-            {
-                if (colorDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Color selectedColor = colorDialog.Color;
-                    tbSupSig.ForeColor = selectedColor;
-                }
-            }
-        }
 
-        private void btnFont_Click(object sender, EventArgs e)
-        {
-            using (FontDialog fontDialog = new FontDialog())
-            {
-                if (fontDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Get the selected font
-                    Font selectedFont = fontDialog.Font;
-
-                    // Use the selected font
-                    tbSupSig.Font = selectedFont;
-                }
-            }
-        }
-
-
-        private void btnCpyEdit_Click(object sender, EventArgs e)
-        {
-            string sOut = "";
-            if (clbImages.GetItemCheckState(0) == CheckState.Checked)
-                sOut = "<br><br>" + Utils.ApplyColors1(ref tbSupSig);
-            if (clbImages.GetItemCheckState(1) == CheckState.Checked) sOut +="<br>" + Utils.YesButton + "  ";
-            if (clbImages.GetItemCheckState(2) == CheckState.Checked) sOut += Utils.SolButton + "<br>";
-            tbEdit.Text = sOut;
-        }
 
         private void ShowText(string strTemp)
         {
@@ -169,113 +117,6 @@ namespace MacroViewer
             Utils.ShowPageInBrowser("", strTemp);
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            ShowText(tbEdit.Text);
-        }
-
-        private void btnSavEdits_Click(object sender, EventArgs e)
-        {
-            if (tbEdit.Text == "") return;
-            btnAddSupSig.Enabled = true;
-            PerformSave();
-        }
-
-        private void PerformSave()
-        {
-            string strTemp = NoTrailingNL(tbEdit.Text.Replace(Environment.NewLine, "<br>"));
-            Properties.Settings.Default.EditedSig = strTemp;
-            Properties.Settings.Default.SupSig = tbSupSig.Text.ToString();
-            Properties.Settings.Default.Save();
-        }
-
-
-        private void btnAdd1New_Click(object sender, EventArgs e)
-        {
-            Utils.AddNL(ref tbEdit, 1);
-        }
-
-        private void btnAdd2New_Click(object sender, EventArgs e)
-        {
-            Utils.AddNL(ref tbEdit, 2);
-        }
-
-        private void btnClearEB_Click(object sender, EventArgs e)
-        {
-            tbEdit.Text = "";
-            Properties.Settings.Default.ChangeSig = "";
-            PerformSave();
-            btnAddSupSig.Enabled = false;
-        }
-
-        private void btnCopy2Clip_Click(object sender, EventArgs e)
-        {
-            if (tbEdit.Text == "") return;
-            Clipboard.SetText(tbEdit.Text);
-        }
-
-        private void btnRemoveAll_Click(object sender, EventArgs e)
-        {
-            tbEdit.Text = "";
-            UpdateSupSignature();
-        }
-         
-        private void btnAddSupSig_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.UseMarkers = !cbRefOnly.Checked;
-            UpdateSupSignature();
-        }
-
-        private void UpdateSupSignature()
-        {
-            Properties.Settings.Default.ChangeSig = cbListFN.SelectedItem.ToString();
-            PerformSave();
-            DialogResult dr =   MessageBox.Show("The program must restarted to update the supplemental signature",
-                    "Click OK to restart now",MessageBoxButtons.OKCancel);
-            bWantsExit = (dr == DialogResult.OK);
-            if (bWantsExit) this.Close();
-        }
-
-        private void SetRef(int n)
-        {
-            if (!cbRefOnly.Checked) return;
-            if (n > 0)
-            {
-                tbEdit.Text = "<br><br>" + Utils.LocalMacroRefs[n-1];
-            }
-            else
-            {
-                tbEdit.Text = "";
-            }
-            tbSupSig.Text = tbEdit.Text;
-        }
-
-        private void cbListFN_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int n = cbListFN.SelectedIndex;
-            if(cbRefOnly.Checked)
-                SetRef(n);
-        }
-
-        private void LockRef(bool bRefOnly)
-        {
-            if (bRefOnly)
-            {
-                SetRef(cbListFN.SelectedIndex);
-            }
-            bRefOnly = !bRefOnly;
-            btnColor.Enabled = bRefOnly;
-            btnCpyEdit.Enabled = bRefOnly;
-            btnFont.Enabled = bRefOnly;
-            btnTest.Enabled = bRefOnly;
-            clbImages.Enabled = bRefOnly;
-
-        }
-
-        private void cbRefOnly_CheckStateChanged(object sender, EventArgs e)
-        {
-            LockRef(cbRefOnly.Checked);
-        }
 
         private void btnTestPP_Click(object sender, EventArgs e)
         {

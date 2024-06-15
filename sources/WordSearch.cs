@@ -64,7 +64,7 @@ namespace MacroViewer
         private List<CFound> cSorted = new List<CFound>();
         private List<CFound> aSorted = new List<CFound>();
         private List<CBody> cAll;
-        private string[] keywords;
+        List<string> keywords;
         private bool[] KeyPresent;
         private int[] KeyCount;
         private int TotalMatches = 0;
@@ -256,7 +256,7 @@ namespace MacroViewer
             }
             int n = cSorted[SelectedRow].WhereFound;
             nUseLastViewed = n;
-            string[] sEach = cAll[n].fKeys.Trim().Split(new char[] {' '});
+            string[] sEach = cAll[n].fKeys.Trim().Split(new[] {"\n"}, StringSplitOptions.None);
             lbKeyFound.Items.Clear();
             foreach (string s in sEach)
             {
@@ -269,7 +269,7 @@ namespace MacroViewer
             string strRtn = "";
             string sTmp = "";
             string sPattern = "";
-            int i, n = keywords.Length;
+            int i, n = keywords.Count;
             Regex regex;
             MatchCollection allMatches;
             for (i = 0; i < n; i++) KeyCount[i] = 0;
@@ -277,28 +277,29 @@ namespace MacroViewer
             foreach (string keyword in keywords)
             {
                 if (keyword.Length == 1) continue;
-                if(rbExactMatch.Checked)
+
+                if(keyword.Contains(" ") || rbEPhrase.Checked)
                 {
-                    regex = new Regex("\\b" + Regex.Escape(keyword) + "\\b",
-                        cbIgnCase.Checked ? RegexOptions.IgnoreCase : RegexOptions.None);
+                    sPattern = $@"\b{Regex.Escape(keyword)}\b";
                 }
                 else
                 {
-                    if(rbEPhrase.Checked)
+                    if(rbExactMatch.Checked)
                     {
-                        sPattern = $@"\b{Regex.Escape(keyword)}\b";
+                        sPattern = "\\b" + Regex.Escape(keyword) + "\\b";
                     }
-                    else //rbAnyMatch.Checked
+                    else
                     {
                         sPattern = "\\b\\w*" + keyword + "\\w*\\b";
                     }
-                    regex = new Regex(sPattern, cbIgnCase.Checked ? RegexOptions.IgnoreCase : RegexOptions.None);
                 }
+                regex = new Regex(sPattern, cbIgnCase.Checked ? RegexOptions.IgnoreCase : RegexOptions.None);
+
                 allMatches = regex.Matches(text);
                 TotalMatches += allMatches.Count;
                 foreach (Match m in allMatches)
                 {
-                    sTmp = m.Value;
+                    sTmp = m.Value.ToLower();
                     if(sMacID == "RF")
                     {
                         cRefURLs cr = RefUrls.Last();
@@ -311,7 +312,7 @@ namespace MacroViewer
                     }
                     KeyCount[i]++;
                     if (strRtn.Contains(sTmp)) continue;
-                    strRtn += sTmp + " ";
+                    strRtn += sTmp + "\n";
                 }
                 i++;
             }
@@ -386,8 +387,28 @@ namespace MacroViewer
             btnShowCC.Visible = b;
         }
 
+
+
+        private void SplitStringWithQuotedPhrases(string input)
+        {
+            // Regex pattern to match words and quoted phrases
+            string pattern = @"(""(?:\\.|[^""])*""|\S+)";
+            keywords = new List<string>();
+            if (rbEPhrase.Checked)
+            {
+                keywords.Add(input);
+                return;
+            }
+            foreach (Match match in Regex.Matches(input, pattern))
+            {
+                keywords.Add(match.Value.Replace("\"",""));
+            }
+            return;
+        }
+
         private void RunSearch()
         {
+            string sBetter = "";
             cFound.Clear();
             cSorted.Clear();
             RefUrls.Clear();
@@ -403,18 +424,16 @@ namespace MacroViewer
 
             TestForCountryCode(tbKeywords.Text.ToLower());
 
-            string sBetter = FormBetter(tbKeywords.Text.Trim());
-
-
+            sBetter = FormBetter(tbKeywords.Text.Trim());
             if (rbEPhrase.Checked)
-            {
-                keywords = new string[] { sBetter };    
-            }
-            else
-            {
-                keywords = sBetter.Split(new char[] { ' ', '\t' });
-            }
-            int n = keywords.Length;
+                sBetter = tbKeywords.Text.Trim().Replace("\"", "");
+            else sBetter = FormBetter(tbKeywords.Text.Trim());
+            tbKeywords.Text = sBetter;
+
+            SplitStringWithQuotedPhrases(sBetter);
+
+
+            int n = keywords.Count;
             int j,i = 0;
             KeyPresent = new bool[n];
             KeyCount = new int[n];
@@ -658,7 +677,7 @@ namespace MacroViewer
         }
 
 
-        private string PlusConCat(string t, string[] ss)
+        private string PlusConCat(string t, List<string> ss)
         {
             string sRtn = t;
             int i = t.IndexOf('&');

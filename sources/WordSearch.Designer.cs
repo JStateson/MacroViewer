@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnShowCC = new System.Windows.Forms.Button();
             this.lbDropped = new System.Windows.Forms.Label();
             this.gbSelect = new System.Windows.Forms.GroupBox();
             this.gbMakeNew = new System.Windows.Forms.GroupBox();
@@ -64,7 +65,6 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnShowCC = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -95,6 +95,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
+            // 
+            // btnShowCC
+            // 
+            this.btnShowCC.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnShowCC.Location = new System.Drawing.Point(213, 196);
+            this.btnShowCC.Name = "btnShowCC";
+            this.btnShowCC.Size = new System.Drawing.Size(114, 30);
+            this.btnShowCC.TabIndex = 14;
+            this.btnShowCC.Text = "Show Codes";
+            this.btnShowCC.UseVisualStyleBackColor = true;
+            this.btnShowCC.Visible = false;
+            this.btnShowCC.Click += new System.EventHandler(this.btnShowCC_Click);
             // 
             // lbDropped
             // 
@@ -319,9 +331,9 @@
             this.rbEPhrase.AutoSize = true;
             this.rbEPhrase.Location = new System.Drawing.Point(47, 76);
             this.rbEPhrase.Name = "rbEPhrase";
-            this.rbEPhrase.Size = new System.Drawing.Size(121, 24);
+            this.rbEPhrase.Size = new System.Drawing.Size(232, 24);
             this.rbEPhrase.TabIndex = 10;
-            this.rbEPhrase.Text = "Exact Phrase";
+            this.rbEPhrase.Text = "Exact Phrase (or use quotes)";
             this.rbEPhrase.UseVisualStyleBackColor = true;
             // 
             // btnExitToMac
@@ -364,7 +376,7 @@
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSearch.Location = new System.Drawing.Point(231, 88);
+            this.btnSearch.Location = new System.Drawing.Point(242, 160);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(99, 34);
             this.btnSearch.TabIndex = 5;
@@ -482,18 +494,6 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
-            // 
-            // btnShowCC
-            // 
-            this.btnShowCC.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowCC.Location = new System.Drawing.Point(213, 196);
-            this.btnShowCC.Name = "btnShowCC";
-            this.btnShowCC.Size = new System.Drawing.Size(114, 30);
-            this.btnShowCC.TabIndex = 14;
-            this.btnShowCC.Text = "Show Codes";
-            this.btnShowCC.UseVisualStyleBackColor = true;
-            this.btnShowCC.Visible = false;
-            this.btnShowCC.Click += new System.EventHandler(this.btnShowCC_Click);
             // 
             // WordSearch
             // 

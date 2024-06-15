@@ -183,7 +183,7 @@ namespace MacroViewer
                 {
                     i = Convert.ToInt32(cr.nMac) ;
                     strRtn = cr.PageOut;
-                    break;
+                     break;
                 }
             }
             Debug.Assert(i > 0, "RF macro number not found!");
@@ -311,7 +311,7 @@ namespace MacroViewer
                         }
                     }
                     KeyCount[i]++;
-                    if (strRtn.Contains(sTmp)) continue;
+                    if (strRtn.Contains(sTmp) || KeyCount[i] == 0) continue;
                     strRtn += sTmp + "\n";
                 }
                 i++;

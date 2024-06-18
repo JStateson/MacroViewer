@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Mail;
@@ -38,15 +39,34 @@ namespace MacroViewer
 #endif
         }
 
+        private string strDemo6r4c = "HP#\tPegatron#\tHP_codename\tDL\r\nIPISB-CH2\t2AB5\tChicago\t\thttps://drive.google.com/file/d/1aF0dFarCTE6FCGLThelI6oSfs-09RyAs\r\nIPISB-CH\t2AB6\tCleveland-GL8\thttps://drive.google.com/file/d/1cX1Rlt8VqArq9V3N5hVy0HPGCFSputsr\r\nIPISB-CU\t2AC2\tCarmel2\t\thttps://drive.google.com/file/d/1u_bz92UD2BFwc87Qd7uavfTXa8Ga25vC\r\nHP#\tFoxconn#\tHP_codename\tDL\r\nH-Cupertino\t2ABF\tCupertino2\thttps://drive.google.com/file/d/1yMRtaFx5NJw3sb06o3oozqthz22MhoEf";
+        private void FormDemo()
+        {
+            tbRows.Text = "6";
+            tbCols.Text = "4";
+            cbUseDelims.Checked = false;
+            cbUseWhiteSpace.Checked = true;
+            cbFormHL.Checked = true;
+            cbUseBorder.Checked = true;
+            CSendNotepad SendNotepad = new CSendNotepad();
+            SendNotepad.PasteToNotepad(strDemo6r4c);    // this pastes to Clipboard
+            btnFillCol.PerformClick();
+        }
+
+        private void ClearTable()
+        {
+            sMyTable = new List<string[]>();
+            tbScratch.Text = "";
+        }
+
         private void EnableRC()
         {
             RowsExpected = 0;
             ColsExpected = 0;
             nGathered = 0;
-            sMyTable = new List<string[]>();
             btnFillRow.Enabled = true;
             btnFillCol.Enabled = true;
-            tbScratch.Text = "";
+            ClearTable();
         }
 
         private void MakeResult()
@@ -175,7 +195,16 @@ namespace MacroViewer
 
         private void btnTransfer_Click(object sender, EventArgs e)
         {
-            if (dgv.Rows.Count == 0) return;
+            if (dgv.Rows.Count == 0)
+            {
+                if(RowsExpected>0)
+                {
+                    ClearTable();
+                    FillTable();
+                    return;
+                }
+                return;
+            }
             RefreshTable();
             string sBig = tbScratch.Text;
             string s1, s2;
@@ -230,6 +259,29 @@ namespace MacroViewer
             foreach (string s in sOne)
             {
                 string t = s.Trim();
+                if(cbAddNLtoHTML.Checked || cbFormHL.Checked)
+                {
+                    string u = t.ToLower();
+                    int j = u.IndexOf("http:");
+                    if (j < 0) j = u.IndexOf("https:");
+                    if(j >= 0)
+                    {                        
+                        if(cbAddNLtoHTML.Checked && j!= 0)
+                        {
+                            t = t.Insert(j, "<br>"); // no need for new line if first word of a line
+                            j += 4;
+                        }
+                        if(cbFormHL.Checked)
+                        {
+                            int k = Utils.LengthURL(ref t, j);
+                            u = t.Substring(j, k);
+                            Debug.Assert(k > 0, "cannot find url");
+                            string v = Utils.FormUrl(u, "");
+                            u= t.Replace(u, v);
+                            t = u;
+                        }
+                    }
+                }
                 if(cbRemE_tab.Checked)
                 {
                     if (t == "") continue;
@@ -557,6 +609,11 @@ namespace MacroViewer
             
             string s = Utils.ApplyColors1(ref tbColorResult);
             tbScratch.Text = s;
+        }
+
+        private void btnDemoTB_Click(object sender, EventArgs e)
+        {
+            FormDemo();
         }
 
         private void btnClrCol_Click(object sender, EventArgs e)

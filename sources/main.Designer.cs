@@ -144,6 +144,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnHTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -366,7 +367,7 @@
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopyFrom.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopyFrom.Location = new System.Drawing.Point(285, 324);
+            this.btnCopyFrom.Location = new System.Drawing.Point(285, 315);
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(194, 27);
             this.btnCopyFrom.TabIndex = 10;
@@ -622,7 +623,7 @@
             // 
             this.btnSwapBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSwapBR.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSwapBR.Location = new System.Drawing.Point(358, 385);
+            this.btnSwapBR.Location = new System.Drawing.Point(357, 402);
             this.btnSwapBR.Name = "btnSwapBR";
             this.btnSwapBR.Size = new System.Drawing.Size(121, 32);
             this.btnSwapBR.TabIndex = 33;
@@ -1117,6 +1118,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnHTest);
             this.gpMainEdit.Controls.Add(this.btnSwapBR);
             this.gpMainEdit.Controls.Add(this.label7);
             this.gpMainEdit.Controls.Add(this.btnSearch);
@@ -1305,6 +1307,19 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnHTest
+            // 
+            this.btnHTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHTest.Location = new System.Drawing.Point(353, 359);
+            this.btnHTest.Name = "btnHTest";
+            this.btnHTest.Size = new System.Drawing.Size(121, 32);
+            this.btnHTest.TabIndex = 34;
+            this.btnHTest.Text = "HTML test";
+            this.toolTip1.SetToolTip(this.btnHTest, "simple html syntax test");
+            this.btnHTest.UseVisualStyleBackColor = true;
+            this.btnHTest.Click += new System.EventHandler(this.btnHTest_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1462,6 +1477,7 @@
         private System.Windows.Forms.Button btnCleanPaste;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSwapBR;
+        private System.Windows.Forms.Button btnHTest;
     }
 }
 

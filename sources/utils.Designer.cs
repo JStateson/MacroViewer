@@ -71,6 +71,7 @@
             this.gpTable = new System.Windows.Forms.GroupBox();
             this.btnCleardgv = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cbUseWhiteSpace = new System.Windows.Forms.CheckBox();
             this.btnShowTab = new System.Windows.Forms.Button();
             this.btnClearTab = new System.Windows.Forms.Button();
             this.cbUseDelims = new System.Windows.Forms.CheckBox();
@@ -105,7 +106,10 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.cbUseWhiteSpace = new System.Windows.Forms.CheckBox();
+            this.cbAddNLtoHTML = new System.Windows.Forms.CheckBox();
+            this.cbFormHL = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnDemoTB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -463,7 +467,7 @@
             this.cbUseBorder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbUseBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbUseBorder.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseBorder.Location = new System.Drawing.Point(236, 24);
+            this.cbUseBorder.Location = new System.Drawing.Point(15, 159);
             this.cbUseBorder.Name = "cbUseBorder";
             this.cbUseBorder.Size = new System.Drawing.Size(200, 20);
             this.cbUseBorder.TabIndex = 12;
@@ -507,12 +511,11 @@
             this.cbRemE_tab.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbRemE_tab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRemE_tab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbRemE_tab.Location = new System.Drawing.Point(239, 126);
+            this.cbRemE_tab.Location = new System.Drawing.Point(304, 70);
             this.cbRemE_tab.Name = "cbRemE_tab";
             this.cbRemE_tab.Size = new System.Drawing.Size(167, 20);
             this.cbRemE_tab.TabIndex = 14;
             this.cbRemE_tab.Text = "Remove empty lines";
-            this.toolTip1.SetToolTip(this.cbRemE_tab, "In HP signature setup, all tahbles have a border");
             this.cbRemE_tab.UseVisualStyleBackColor = true;
             // 
             // tabControl1
@@ -529,6 +532,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.gpTable);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -536,7 +540,6 @@
             this.tabPage1.Size = new System.Drawing.Size(621, 309);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tables";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // gpTable
             // 
@@ -553,7 +556,7 @@
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpTable.Location = new System.Drawing.Point(23, 10);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(552, 273);
+            this.gpTable.Size = new System.Drawing.Size(564, 293);
             this.gpTable.TabIndex = 10;
             this.gpTable.TabStop = false;
             // 
@@ -571,6 +574,10 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnDemoTB);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.cbFormHL);
+            this.groupBox5.Controls.Add(this.cbAddNLtoHTML);
             this.groupBox5.Controls.Add(this.cbUseWhiteSpace);
             this.groupBox5.Controls.Add(this.cbRemE_tab);
             this.groupBox5.Controls.Add(this.cbUseBorder);
@@ -580,18 +587,30 @@
             this.groupBox5.Controls.Add(this.btnFillCol);
             this.groupBox5.Controls.Add(this.btnFillRow);
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox5.Location = new System.Drawing.Point(23, 99);
+            this.groupBox5.Location = new System.Drawing.Point(23, 91);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(471, 152);
+            this.groupBox5.Size = new System.Drawing.Size(519, 185);
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "How to fill it in (do not use above buttons)";
+            this.groupBox5.Text = "How to fill in from clipboard";
+            // 
+            // cbUseWhiteSpace
+            // 
+            this.cbUseWhiteSpace.AutoSize = true;
+            this.cbUseWhiteSpace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUseWhiteSpace.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbUseWhiteSpace.Location = new System.Drawing.Point(304, 44);
+            this.cbUseWhiteSpace.Name = "cbUseWhiteSpace";
+            this.cbUseWhiteSpace.Size = new System.Drawing.Size(160, 20);
+            this.cbUseWhiteSpace.TabIndex = 15;
+            this.cbUseWhiteSpace.Text = "Split on whitespace";
+            this.cbUseWhiteSpace.UseVisualStyleBackColor = true;
             // 
             // btnShowTab
             // 
             this.btnShowTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnShowTab.Location = new System.Drawing.Point(15, 85);
+            this.btnShowTab.Location = new System.Drawing.Point(16, 79);
             this.btnShowTab.Name = "btnShowTab";
             this.btnShowTab.Size = new System.Drawing.Size(118, 22);
             this.btnShowTab.TabIndex = 11;
@@ -603,7 +622,7 @@
             // 
             this.btnClearTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClearTab.Location = new System.Drawing.Point(170, 85);
+            this.btnClearTab.Location = new System.Drawing.Point(170, 79);
             this.btnClearTab.Name = "btnClearTab";
             this.btnClearTab.Size = new System.Drawing.Size(48, 23);
             this.btnClearTab.TabIndex = 10;
@@ -616,7 +635,7 @@
             this.cbUseDelims.AutoSize = true;
             this.cbUseDelims.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbUseDelims.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseDelims.Location = new System.Drawing.Point(236, 53);
+            this.cbUseDelims.Location = new System.Drawing.Point(304, 17);
             this.cbUseDelims.Name = "cbUseDelims";
             this.cbUseDelims.Size = new System.Drawing.Size(132, 20);
             this.cbUseDelims.TabIndex = 8;
@@ -639,7 +658,7 @@
             // 
             this.btnFillRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFillRow.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFillRow.Location = new System.Drawing.Point(15, 53);
+            this.btnFillRow.Location = new System.Drawing.Point(15, 50);
             this.btnFillRow.Name = "btnFillRow";
             this.btnFillRow.Size = new System.Drawing.Size(155, 23);
             this.btnFillRow.TabIndex = 6;
@@ -949,7 +968,7 @@
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv.Size = new System.Drawing.Size(569, 467);
+            this.dgv.Size = new System.Drawing.Size(625, 467);
             this.dgv.TabIndex = 7;
             this.dgv.Visible = false;
             // 
@@ -976,17 +995,56 @@
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
             // 
-            // cbUseWhiteSpace
+            // cbAddNLtoHTML
             // 
-            this.cbUseWhiteSpace.AutoSize = true;
-            this.cbUseWhiteSpace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUseWhiteSpace.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbUseWhiteSpace.Location = new System.Drawing.Point(236, 87);
-            this.cbUseWhiteSpace.Name = "cbUseWhiteSpace";
-            this.cbUseWhiteSpace.Size = new System.Drawing.Size(160, 20);
-            this.cbUseWhiteSpace.TabIndex = 15;
-            this.cbUseWhiteSpace.Text = "Split on whitespace";
-            this.cbUseWhiteSpace.UseVisualStyleBackColor = true;
+            this.cbAddNLtoHTML.AutoSize = true;
+            this.cbAddNLtoHTML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAddNLtoHTML.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbAddNLtoHTML.Location = new System.Drawing.Point(15, 113);
+            this.cbAddNLtoHTML.Name = "cbAddNLtoHTML";
+            this.cbAddNLtoHTML.Size = new System.Drawing.Size(211, 20);
+            this.cbAddNLtoHTML.TabIndex = 16;
+            this.cbAddNLtoHTML.Text = "Add NewLine before HTML";
+            this.toolTip1.SetToolTip(this.cbAddNLtoHTML, "If http: or https: appear and are not the\r\nfirst word of a line then insert a new" +
+        "line");
+            this.cbAddNLtoHTML.UseVisualStyleBackColor = true;
+            // 
+            // cbFormHL
+            // 
+            this.cbFormHL.AutoSize = true;
+            this.cbFormHL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFormHL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbFormHL.Location = new System.Drawing.Point(15, 137);
+            this.cbFormHL.Name = "cbFormHL";
+            this.cbFormHL.Size = new System.Drawing.Size(210, 20);
+            this.cbFormHL.TabIndex = 17;
+            this.cbFormHL.Text = "Form Hyperlink from HTML";
+            this.toolTip1.SetToolTip(this.cbFormHL, "If a url then make it a hyperlink");
+            this.cbFormHL.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(246, 93);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(267, 48);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Set either number of rows or columns then\r\nclick one of the fill buttons.  Use th" +
+    "e Update\r\nTable button for changes to HTML or border";
+            // 
+            // btnDemoTB
+            // 
+            this.btnDemoTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDemoTB.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDemoTB.Location = new System.Drawing.Point(304, 154);
+            this.btnDemoTB.Name = "btnDemoTB";
+            this.btnDemoTB.Size = new System.Drawing.Size(118, 22);
+            this.btnDemoTB.TabIndex = 19;
+            this.btnDemoTB.Text = "Show 6x4 demo";
+            this.btnDemoTB.UseVisualStyleBackColor = true;
+            this.btnDemoTB.Click += new System.EventHandler(this.btnDemoTB_Click);
             // 
             // utils
             // 
@@ -1115,5 +1173,9 @@
         private System.Windows.Forms.CheckBox cbRemE_list;
         private System.Windows.Forms.CheckBox cbRemE_tab;
         private System.Windows.Forms.CheckBox cbUseWhiteSpace;
+        private System.Windows.Forms.CheckBox cbAddNLtoHTML;
+        private System.Windows.Forms.CheckBox cbFormHL;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnDemoTB;
     }
 }

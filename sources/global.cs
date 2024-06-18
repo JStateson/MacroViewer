@@ -984,7 +984,26 @@ internal static class ClipboardFormats
                 sBody = sBody.Replace(cf.sFiller, cf.NewUrl);
             }
         }
+
+        public static int LengthURL(ref string sBody, int iStart)
+        {
+            int n = -1;
+            string s = sBody.Substring(iStart);
+            foreach (char c in s)
+            {
+                n++;
+                if (c == ' ') return n;
+                if (c == '\n') return n;
+                if (c == '\r') return n;
+                if (c == '\t') return n;
+                if (c == '<') return n;
+            }
+            return s.Length;
+        }
+
     }
+
+
 
 
     public class CMarkup
@@ -1014,20 +1033,6 @@ internal static class ClipboardFormats
             MakeHyper = bMakeHyper;
         }
 
-        private int LengthURL(ref string sBody, int iStart)
-        {
-            int n = -1;
-            string s = sBody.Substring(iStart);
-            foreach (char c in s)
-            {
-                n++;
-                if (c == ' ') return n;
-                if (c == '\n') return n;
-                if (c == '\r') return n;
-                if (c == '\t') return n;
-            }
-            return s.Length;
-        }
 
         public bool FindUrl(int nLooked, ref string s)
         {
@@ -1036,7 +1041,7 @@ internal static class ClipboardFormats
             string sTMP = s.ToLower();
             iHTTP = sTMP.IndexOf("http");
             if (iHTTP < 0) return false;
-            iLen = LengthURL(ref s, iHTTP);
+            iLen = Utils.LengthURL(ref s, iHTTP);
             string strFound = s.Substring(iHTTP, iLen);
             cReplace(nLooked, ref s, iHTTP, iLen);
             return true;

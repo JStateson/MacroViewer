@@ -2199,6 +2199,11 @@ namespace MacroViewer
                 tbBody.Text = tbBody.Text.Replace("<br>",Environment.NewLine);
             }
         }
+
+        private void btnHTest_Click(object sender, EventArgs e)
+        {
+            SyntaxTest();
+        }
     }
     
 }

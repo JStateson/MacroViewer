@@ -717,17 +717,6 @@ namespace MacroViewer
             tbBody.Text = strTemp.Replace("<br>", Environment.NewLine);
         }
 
-        // notice to anyone reading this: Feel free to copy the signature and change it
-        //https://h30434.www3.hp.com/t5/image/serverpage/image-id/362592i68E07BAE29119CCB/image-size/tiny/is-moderation-mode/true?v=v2&px=100
-        // can be tiny thumb small large 
-        private void testSignatureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CSignature MySigTest = new CSignature();
-            MySigTest.ShowDialog();
-            MySigTest.Dispose();
-        }
-
-
 
 
         private void PutOnNotepad(string strIn)
@@ -2203,6 +2192,29 @@ namespace MacroViewer
         private void btnHTest_Click(object sender, EventArgs e)
         {
             SyntaxTest();
+        }
+
+        private void btnNoNL_Click(object sender, EventArgs e)
+        {
+            Utils.RemoveSelectedNL(ref tbBody);
+        }
+
+
+
+        private void SigImages()
+        {
+            CSignature MySigTest = new CSignature();
+            MySigTest.ShowDialog();
+            MySigTest.Dispose();
+        }
+        private void mnuEmoji_Click(object sender, EventArgs e)
+        {
+            Utils.ShellHTML("emoji.html",true);
+        }
+
+        private void mnuImgSig_Click(object sender, EventArgs e)
+        {
+            SigImages();
         }
     }
     

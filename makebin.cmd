@@ -10,13 +10,13 @@ xcopy %2*macros.txt %1temp
 xcopy %2LOCALIMAGEFILE-*.png %1temp
 xcopy /Y /I %2*macros.txt %2..\Debug
 replace /U /S %2..\Release\*.rtf %1sources
-replace /U /S %2..\Release\SiteMap.html %1sources
+replace /U /S %2..\Release\*.html %1sources
 xcopy /Y /I %1sources\*.rtf %2..\Release
 xcopy /Y /I %1sources\*.rtf %2..\Debug
 xcopy /Y /I %1sources\*.rtf %1temp
-xcopy /Y /I %1sources\SiteMap.html %2..\Release
-xcopy /Y /I %1sources\SiteMap.html %2..\Debug
-xcopy %1sources\SiteMap.html %1temp
+xcopy /Y /I %1sources\*.html %2..\Release
+xcopy /Y /I %1sources\*.html %2..\Debug
+xcopy %1sources\*.html %1temp
 xcopy %2signatures.txt %1temp
 xcopy /Y %2signatures.txt %2..\Debug
 xcopy %4 %1temp

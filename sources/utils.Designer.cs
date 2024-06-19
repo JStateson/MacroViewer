@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -65,12 +65,16 @@
             this.cbUseBorder = new System.Windows.Forms.CheckBox();
             this.cbFrameList = new System.Windows.Forms.CheckBox();
             this.cbRemE_list = new System.Windows.Forms.CheckBox();
+            this.cbAddNLtoHTML = new System.Windows.Forms.CheckBox();
+            this.cbFormHL = new System.Windows.Forms.CheckBox();
             this.cbRemE_tab = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gpTable = new System.Windows.Forms.GroupBox();
             this.btnCleardgv = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnDemoTB = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.cbUseWhiteSpace = new System.Windows.Forms.CheckBox();
             this.btnShowTab = new System.Windows.Forms.Button();
             this.btnClearTab = new System.Windows.Forms.Button();
@@ -106,10 +110,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.cbAddNLtoHTML = new System.Windows.Forms.CheckBox();
-            this.cbFormHL = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnDemoTB = new System.Windows.Forms.Button();
+            this.btnLRTD = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -504,6 +505,33 @@
             this.toolTip1.SetToolTip(this.cbRemE_list, "In HP signature setup, all tahbles have a border");
             this.cbRemE_list.UseVisualStyleBackColor = true;
             // 
+            // cbAddNLtoHTML
+            // 
+            this.cbAddNLtoHTML.AutoSize = true;
+            this.cbAddNLtoHTML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAddNLtoHTML.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbAddNLtoHTML.Location = new System.Drawing.Point(15, 113);
+            this.cbAddNLtoHTML.Name = "cbAddNLtoHTML";
+            this.cbAddNLtoHTML.Size = new System.Drawing.Size(211, 20);
+            this.cbAddNLtoHTML.TabIndex = 16;
+            this.cbAddNLtoHTML.Text = "Add NewLine before HTML";
+            this.toolTip1.SetToolTip(this.cbAddNLtoHTML, "If http: or https: appear and are not the\r\nfirst word of a line then insert a new" +
+        "line");
+            this.cbAddNLtoHTML.UseVisualStyleBackColor = true;
+            // 
+            // cbFormHL
+            // 
+            this.cbFormHL.AutoSize = true;
+            this.cbFormHL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFormHL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbFormHL.Location = new System.Drawing.Point(15, 137);
+            this.cbFormHL.Name = "cbFormHL";
+            this.cbFormHL.Size = new System.Drawing.Size(210, 20);
+            this.cbFormHL.TabIndex = 17;
+            this.cbFormHL.Text = "Form Hyperlink from HTML";
+            this.toolTip1.SetToolTip(this.cbFormHL, "If a url then make it a hyperlink");
+            this.cbFormHL.UseVisualStyleBackColor = true;
+            // 
             // cbRemE_tab
             // 
             this.cbRemE_tab.AutoSize = true;
@@ -574,6 +602,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnLRTD);
             this.groupBox5.Controls.Add(this.btnDemoTB);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.cbFormHL);
@@ -593,6 +622,30 @@
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "How to fill in from clipboard";
+            // 
+            // btnDemoTB
+            // 
+            this.btnDemoTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDemoTB.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDemoTB.Location = new System.Drawing.Point(304, 154);
+            this.btnDemoTB.Name = "btnDemoTB";
+            this.btnDemoTB.Size = new System.Drawing.Size(118, 22);
+            this.btnDemoTB.TabIndex = 19;
+            this.btnDemoTB.Text = "Show 6x4 demo";
+            this.btnDemoTB.UseVisualStyleBackColor = true;
+            this.btnDemoTB.Click += new System.EventHandler(this.btnDemoTB_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(246, 93);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(267, 48);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Set either number of rows or columns then\r\nclick one of the fill buttons.  Use th" +
+    "e Update\r\nTable button for changes to HTML or border";
             // 
             // cbUseWhiteSpace
             // 
@@ -651,6 +704,7 @@
             this.btnFillCol.Size = new System.Drawing.Size(176, 23);
             this.btnFillCol.TabIndex = 7;
             this.btnFillCol.Text = "Fill COLUMN from clipboard";
+            this.toolTip1.SetToolTip(this.btnFillCol, "Fills column 1 first then remaining columns.\r\nYou must provide the delimeters");
             this.btnFillCol.UseVisualStyleBackColor = true;
             this.btnFillCol.Click += new System.EventHandler(this.btnFillCol_Click);
             // 
@@ -663,6 +717,8 @@
             this.btnFillRow.Size = new System.Drawing.Size(155, 23);
             this.btnFillRow.TabIndex = 6;
             this.btnFillRow.Text = "Fill ROW from clipboard";
+            this.toolTip1.SetToolTip(this.btnFillRow, "Fills all of row 1 first before next\r\nrows.  Like LRTD but you must\r\nprovide the " +
+        "delimeters");
             this.btnFillRow.UseVisualStyleBackColor = true;
             this.btnFillRow.Click += new System.EventHandler(this.btnFillRow_Click);
             // 
@@ -955,6 +1011,7 @@
             // 
             // dgv
             // 
+            this.dgv.AllowDrop = true;
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
@@ -974,8 +1031,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column1.HeaderText = "Position";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -985,8 +1042,8 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle12;
             this.Column2.HeaderText = "Contents";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -995,56 +1052,18 @@
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
             // 
-            // cbAddNLtoHTML
+            // btnLRTD
             // 
-            this.cbAddNLtoHTML.AutoSize = true;
-            this.cbAddNLtoHTML.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbAddNLtoHTML.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbAddNLtoHTML.Location = new System.Drawing.Point(15, 113);
-            this.cbAddNLtoHTML.Name = "cbAddNLtoHTML";
-            this.cbAddNLtoHTML.Size = new System.Drawing.Size(211, 20);
-            this.cbAddNLtoHTML.TabIndex = 16;
-            this.cbAddNLtoHTML.Text = "Add NewLine before HTML";
-            this.toolTip1.SetToolTip(this.cbAddNLtoHTML, "If http: or https: appear and are not the\r\nfirst word of a line then insert a new" +
-        "line");
-            this.cbAddNLtoHTML.UseVisualStyleBackColor = true;
-            // 
-            // cbFormHL
-            // 
-            this.cbFormHL.AutoSize = true;
-            this.cbFormHL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbFormHL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbFormHL.Location = new System.Drawing.Point(15, 137);
-            this.cbFormHL.Name = "cbFormHL";
-            this.cbFormHL.Size = new System.Drawing.Size(210, 20);
-            this.cbFormHL.TabIndex = 17;
-            this.cbFormHL.Text = "Form Hyperlink from HTML";
-            this.toolTip1.SetToolTip(this.cbFormHL, "If a url then make it a hyperlink");
-            this.cbFormHL.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Info;
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(246, 93);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(267, 48);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Set either number of rows or columns then\r\nclick one of the fill buttons.  Use th" +
-    "e Update\r\nTable button for changes to HTML or border";
-            // 
-            // btnDemoTB
-            // 
-            this.btnDemoTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDemoTB.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDemoTB.Location = new System.Drawing.Point(304, 154);
-            this.btnDemoTB.Name = "btnDemoTB";
-            this.btnDemoTB.Size = new System.Drawing.Size(118, 22);
-            this.btnDemoTB.TabIndex = 19;
-            this.btnDemoTB.Text = "Show 6x4 demo";
-            this.btnDemoTB.UseVisualStyleBackColor = true;
-            this.btnDemoTB.Click += new System.EventHandler(this.btnDemoTB_Click);
+            this.btnLRTD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLRTD.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnLRTD.Location = new System.Drawing.Point(195, 51);
+            this.btnLRTD.Name = "btnLRTD";
+            this.btnLRTD.Size = new System.Drawing.Size(81, 22);
+            this.btnLRTD.TabIndex = 20;
+            this.btnLRTD.Text = "Fill LRTD";
+            this.toolTip1.SetToolTip(this.btnLRTD, resources.GetString("btnLRTD.ToolTip"));
+            this.btnLRTD.UseVisualStyleBackColor = true;
+            this.btnLRTD.Click += new System.EventHandler(this.btnLRTD_Click);
             // 
             // utils
             // 
@@ -1177,5 +1196,6 @@
         private System.Windows.Forms.CheckBox cbFormHL;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnDemoTB;
+        private System.Windows.Forms.Button btnLRTD;
     }
 }

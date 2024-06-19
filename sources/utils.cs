@@ -9,6 +9,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -193,6 +194,41 @@ namespace MacroViewer
             dgv.Visible = cbPreFill.Checked;
         }
 
+        private int NumLinesInDGV()
+        {
+            int n = 0;
+            int NumEntries = 0;
+            int i = 0;
+            int[] nCnt = new int[c30];
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (null == row.Cells[1].Value) break;
+                string s = row.Cells[1].Value.ToString();
+                string[] ss = s.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                nCnt[NumEntries] = ss.Length;
+                n = Math.Max(n, ss.Length);
+                NumEntries++;
+            }
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                string sNL = Environment.NewLine + "&nbsp;";
+                if (null == row.Cells[1].Value) break;
+                string s = row.Cells[1].Value.ToString();
+                int nDif = n - nCnt[i];
+                if(nDif > 0)
+                {
+                    for(int j = 0; j < nDif;j++)
+                    {
+                        s += sNL;
+                    }
+                    dgv.Rows[i].Cells[1].Value = s;
+                }
+                i++;
+            }
+            return NumEntries;
+        }
+
         private void btnTransfer_Click(object sender, EventArgs e)
         {
             if (dgv.Rows.Count == 0)
@@ -206,6 +242,7 @@ namespace MacroViewer
                 return;
             }
             RefreshTable();
+            int n = NumLinesInDGV();
             string sBig = tbScratch.Text;
             string s1, s2;
             foreach (DataGridViewRow row in dgv.Rows)
@@ -249,15 +286,18 @@ namespace MacroViewer
         private void AddTable(string[] sOne)
         {
             int i = 0, n = RowsExpected;
+            string s;
             if (n == 0) n = ColsExpected;
             if (n != nGathered)
             {
-                MessageBox.Show("wrong number of items for row or column");
-                return;
+                DialogResult Res1 = MessageBox.Show("wrong number of items for row or column","Click Yes to supply missing",MessageBoxButtons.YesNo);
+                if(DialogResult.No == Res1) return;
             }
             string[] sNew = new string[n];
-            foreach (string s in sOne)
+            for(int m = 0; m < n; m++)
             {
+                if (m < nGathered) s = sOne[m];
+                else s = "&nbsp";
                 string t = s.Trim();
                 if(cbAddNLtoHTML.Checked || cbFormHL.Checked)
                 {
@@ -409,7 +449,7 @@ namespace MacroViewer
             tbScratch.Text = sOut;
         }
 
-        // if checked then remove unwanted lines
+        // if checked b=true then remove unwanted lines
         private int GatherClipboardText(bool b)
         {
             string sIn = Utils.ClipboardGetText();
@@ -616,6 +656,90 @@ namespace MacroViewer
             FormDemo();
         }
 
+        private bool GetRowCol(ref int row, ref int col)
+        {
+            int r, c;
+            try
+            {
+                r = Convert.ToInt32(tbRows.Text);
+                c = Convert.ToInt32(tbCols.Text);
+            }
+            catch
+            {
+                row = 1;
+                col = 1;
+                return false;
+            }
+            row = r;
+            col = c;
+            return true;
+        }
+
+        private void FormLRTD(string sIn)
+        {
+            cbUseWhiteSpace.Checked = true;
+            cbUseDelims.Checked = false;
+            sEach = sIn.Split(new[] { '\n', '\r' });
+            btnFillRow.Enabled = false;
+            nGathered = sEach.Length;
+            if (RowsExpected == 0) RowsExpected = nGathered;
+            FillTable();
+        }
+
+        // find number of rows
+        private int MakeDivisible(int nItems,int nColumnsWanted)
+        {
+            int remainder = nItems % nColumnsWanted;
+            if (remainder == 0) return nItems;
+            return nItems + (nColumnsWanted - remainder);
+        }
+
+        private void SetRowsFromColumns(int nItems, int nColumnsWanted)
+        {
+            int nRows = MakeDivisible(nItems, nColumnsWanted) / nColumnsWanted;
+            Debug.Assert(nRows > 0,"Problem with bean counter");
+            tbRows.Text = nRows.ToString();
+            tbCols.Text = nColumnsWanted.ToString();
+        }
+
+        private void btnLRTD_Click(object sender, EventArgs e)
+        {
+            int Row=1, Col=1;
+            if(GetRowCol(ref Row, ref Col))
+            {
+                string sIn = Utils.ClipboardGetText();
+                string[] sOt = sIn.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                int nActual = sOt.Length;
+                int nExpect = Row * Col;
+                if (nExpect >= nActual)
+                {
+                    int n = 0;
+                    sIn = "";
+                    for(int i = 0; i < Row; i++)
+                    {
+                        for(int j = 0; j < Col; j++)
+                        {
+                            string s = "";
+                            if (n >= nActual)
+                            {
+                                s = "&nbsp;";
+                            }
+                            else s = sOt[n];
+                            sIn += s + " ";
+                            n++;
+                        }
+                        if(n < nExpect)
+                            sIn += "\n";
+                    }
+                    FormLRTD(sIn);
+                }
+                else
+                {
+                    SetRowsFromColumns(nActual, 10);
+                }
+            }
+        }
+
         private void btnClrCol_Click(object sender, EventArgs e)
         {
             tbTextToColor.Text = "";
@@ -682,3 +806,49 @@ Pink: #FFC0CB
 Peach: #FFDAB9
 Beige: #F5F5DC
  */
+/*
+ common emoji 
+&#x1f60D;
+&#x1f60E;
+&#x1f60F;
+&#x1f610;
+&#x1f611;
+&#x1f612;
+&#x1f613;
+&#x1f614;
+&#x1f615;
+&#x1f616;
+&#x1f617;
+&#x1f618;
+&#x1f619;
+&#x1f61A;
+&#x1f61B;
+&#x1f61C;
+&#x1f61D;
+&#x1f61E;
+&#x1f61F;
+&#x1f620;
+&#x1f621;
+&#x1f622;
+&#x1f623;
+&#x1f624;
+&#x1f625;
+&#x1f626;
+&#x1f627;
+&#x1f628;
+&#x1f629;
+&#x1f62A;
+&#x1f62B;
+&#x1f62C;
+&#x1f62D;
+&#x1f62E;
+&#x1f62F;
+&#x1f630;
+&#x1f631;
+&#x1f632;
+&#x1f633;
+&#x1f634;
+&#x1f635;
+&#x1f636;
+&#x1f637;
+*/

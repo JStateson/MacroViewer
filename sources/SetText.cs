@@ -105,7 +105,6 @@ namespace MacroViewer
             RunBrowser();
         }
 
-
         private void btnApplyTab_Click(object sender, EventArgs e)
         {
             int r, c;

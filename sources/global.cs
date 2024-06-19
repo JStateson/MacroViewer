@@ -198,10 +198,19 @@ namespace MacroViewer
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
 
-        private static void ShellHTML(string s)
+        public static void ShellHTML(string s, bool IsFilename)
         {
-            string sTemp = WhereExe + "\\MyHtml.html";
-            File.WriteAllText(sTemp, s);
+            string sTemp = WhereExe + "\\";
+            if(IsFilename)
+            {
+                sTemp += s;
+                if (!File.Exists(sTemp)) return;
+            }
+            else
+            {
+                sTemp += "MyHtml.html";
+                File.WriteAllText(sTemp, s);
+            }
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo
@@ -295,7 +304,7 @@ internal static class ClipboardFormats
                 strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp +
                     "<br><br>" + Properties.Settings.Default.sMSuffix;
             }
-            ShellHTML(strTemp);
+            ShellHTML(strTemp, false);
             CopyHTML(strTemp);
         }
 
@@ -750,6 +759,23 @@ internal static class ClipboardFormats
                 tbEdit.SelectionStart = i;
                 tbEdit.SelectionLength = j + 7;
             }
+            tbEdit.Focus();
+        }
+
+        // add or remove bold text
+        public static void RemoveSelectedNL(ref TextBox tbEdit)
+        {
+            string s1, s2, s3;
+            int i = tbEdit.SelectionStart;
+            int j = tbEdit.SelectionLength;
+            if (j == 0) return;
+            int n = tbEdit.Text.Length;
+            s1 = tbEdit.Text.Substring(0, i);
+            s2 = tbEdit.Text.Substring(i, j);
+            s3 = tbEdit.Text.Substring(i + j);
+            // user may have selected several bold so let them all be undone
+            s2 = s2.Replace(Environment.NewLine, "");
+            tbEdit.Text = s1 + s2 + s3;
             tbEdit.Focus();
         }
 

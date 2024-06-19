@@ -276,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sorted-Raw-List.txt" />
+    <Content Include="Resources\emoji.html" />
     <Content Include="sources\SiteMap.html" />
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />

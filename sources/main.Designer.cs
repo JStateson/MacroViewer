@@ -69,6 +69,7 @@
             this.btnClearEM = new System.Windows.Forms.Button();
             this.btnCleanPaste = new System.Windows.Forms.Button();
             this.btnSwapBR = new System.Windows.Forms.Button();
+            this.btnHTest = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,7 +145,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnHTest = new System.Windows.Forms.Button();
+            this.btnNoNL = new System.Windows.Forms.Button();
+            this.mnuImgSig = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEmoji = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -395,6 +398,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.btnNoNL);
             this.groupBox6.Controls.Add(this.bltnHR);
             this.groupBox6.Controls.Add(this.btnColors);
             this.groupBox6.Controls.Add(this.tbColorCode);
@@ -419,7 +423,7 @@
             // 
             this.bltnHR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bltnHR.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.bltnHR.Location = new System.Drawing.Point(278, 44);
+            this.bltnHR.Location = new System.Drawing.Point(276, 29);
             this.bltnHR.Name = "bltnHR";
             this.bltnHR.Size = new System.Drawing.Size(164, 25);
             this.bltnHR.TabIndex = 34;
@@ -631,6 +635,19 @@
             this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline");
             this.btnSwapBR.UseVisualStyleBackColor = true;
             this.btnSwapBR.Click += new System.EventHandler(this.btnSwapBR_Click);
+            // 
+            // btnHTest
+            // 
+            this.btnHTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnHTest.Location = new System.Drawing.Point(353, 359);
+            this.btnHTest.Name = "btnHTest";
+            this.btnHTest.Size = new System.Drawing.Size(121, 32);
+            this.btnHTest.TabIndex = 34;
+            this.btnHTest.Text = "HTML test";
+            this.toolTip1.SetToolTip(this.btnHTest, "simple html syntax test");
+            this.btnHTest.UseVisualStyleBackColor = true;
+            this.btnHTest.Click += new System.EventHandler(this.btnHTest_Click);
             // 
             // menuStrip1
             // 
@@ -909,10 +926,12 @@
             // 
             // testSignatureToolStripMenuItem
             // 
+            this.testSignatureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuImgSig,
+            this.mnuEmoji});
             this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
             this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
             this.testSignatureToolStripMenuItem.Text = "Images and Signatures";
-            this.testSignatureToolStripMenuItem.Click += new System.EventHandler(this.testSignatureToolStripMenuItem_Click);
             // 
             // mShowErr
             // 
@@ -1053,66 +1072,66 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // specialWordToolStripMenuItem
             // 
             this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.specialWordToolStripMenuItem.Text = "Special Word";
             this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // emailToolStripMenuItem
             // 
             this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.emailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.emailToolStripMenuItem.Text = "Email";
             this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // mnuAskQ
             // 
             this.mnuAskQ.Name = "mnuAskQ";
-            this.mnuAskQ.Size = new System.Drawing.Size(144, 22);
+            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
             this.mnuAskQ.Text = "Ask Question";
             this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
@@ -1307,18 +1326,32 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnHTest
+            // btnNoNL
             // 
-            this.btnHTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHTest.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnHTest.Location = new System.Drawing.Point(353, 359);
-            this.btnHTest.Name = "btnHTest";
-            this.btnHTest.Size = new System.Drawing.Size(121, 32);
-            this.btnHTest.TabIndex = 34;
-            this.btnHTest.Text = "HTML test";
-            this.toolTip1.SetToolTip(this.btnHTest, "simple html syntax test");
-            this.btnHTest.UseVisualStyleBackColor = true;
-            this.btnHTest.Click += new System.EventHandler(this.btnHTest_Click);
+            this.btnNoNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoNL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNoNL.Location = new System.Drawing.Point(276, 62);
+            this.btnNoNL.Name = "btnNoNL";
+            this.btnNoNL.Size = new System.Drawing.Size(220, 25);
+            this.btnNoNL.TabIndex = 35;
+            this.btnNoNL.Text = "Remove selected newlines";
+            this.toolTip1.SetToolTip(this.btnNoNL, "Select the text from which you\r\nwant to remove new line characters");
+            this.btnNoNL.UseVisualStyleBackColor = true;
+            this.btnNoNL.Click += new System.EventHandler(this.btnNoNL_Click);
+            // 
+            // mnuImgSig
+            // 
+            this.mnuImgSig.Name = "mnuImgSig";
+            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
+            this.mnuImgSig.Text = "Image & Sig";
+            this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
+            // 
+            // mnuEmoji
+            // 
+            this.mnuEmoji.Name = "mnuEmoji";
+            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
+            this.mnuEmoji.Text = "Emoji";
+            this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
             // 
             // main
             // 
@@ -1478,6 +1511,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSwapBR;
         private System.Windows.Forms.Button btnHTest;
+        private System.Windows.Forms.Button btnNoNL;
+        private System.Windows.Forms.ToolStripMenuItem mnuImgSig;
+        private System.Windows.Forms.ToolStripMenuItem mnuEmoji;
     }
 }
 

@@ -65,6 +65,7 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbvAddLangRef = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbvAddLangRef);
             this.groupBox1.Controls.Add(this.btnShowCC);
             this.groupBox1.Controls.Add(this.lbDropped);
             this.groupBox1.Controls.Add(this.gbSelect);
@@ -113,7 +115,7 @@
             this.lbDropped.AutoSize = true;
             this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDropped.ForeColor = System.Drawing.Color.Red;
-            this.lbDropped.Location = new System.Drawing.Point(340, 300);
+            this.lbDropped.Location = new System.Drawing.Point(341, 294);
             this.lbDropped.Name = "lbDropped";
             this.lbDropped.Size = new System.Drawing.Size(56, 16);
             this.lbDropped.TabIndex = 13;
@@ -450,11 +452,13 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Info;
-            this.label2.Location = new System.Drawing.Point(33, 291);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(33, 284);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(284, 40);
+            this.label2.Size = new System.Drawing.Size(246, 48);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Double click any row to view macro and\r\nClick \'FOUND\' or \'FILE\' to sort columns";
+            this.label2.Text = "Double click any row to view macro and\r\nClick \'FOUND\' or \'FILE\' to sort columns.\r" +
+    "\nRF macros can have language changes";
             this.toolTip1.SetToolTip(this.label2, "Rows with  RF will list only those\r\nreferences that contain the match\r\nAll other " +
         "rows display the entire macro.");
             // 
@@ -494,6 +498,18 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
+            // 
+            // cbvAddLangRef
+            // 
+            this.cbvAddLangRef.AutoSize = true;
+            this.cbvAddLangRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbvAddLangRef.Location = new System.Drawing.Point(344, 313);
+            this.cbvAddLangRef.Name = "cbvAddLangRef";
+            this.cbvAddLangRef.Size = new System.Drawing.Size(139, 20);
+            this.cbvAddLangRef.TabIndex = 15;
+            this.cbvAddLangRef.Text = "Add Language Ref";
+            this.cbvAddLangRef.UseVisualStyleBackColor = true;
+            this.cbvAddLangRef.Visible = false;
             // 
             // WordSearch
             // 
@@ -560,5 +576,6 @@
         private System.Windows.Forms.GroupBox gbSelect;
         private System.Windows.Forms.Label lbDropped;
         private System.Windows.Forms.Button btnShowCC;
+        private System.Windows.Forms.CheckBox cbvAddLangRef;
     }
 }

@@ -423,6 +423,8 @@ internal static class ClipboardFormats
 
         public static int FirstDifferenceIndex(string str1, string str2)
         {
+            if (str1 == null) return 0;
+            if (str2 == null) return 0;
             int minLength = Math.Min(str1.Length, str2.Length);
             for (int i = 0; i < minLength; i++)
             {

@@ -71,6 +71,7 @@
             this.btnCleanPaste = new System.Windows.Forms.Button();
             this.btnSwapBR = new System.Windows.Forms.Button();
             this.btnHTest = new System.Windows.Forms.Button();
+            this.cbShowLang = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,7 +149,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cbShowLang = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -662,6 +662,21 @@
             this.toolTip1.SetToolTip(this.btnHTest, "simple html syntax test");
             this.btnHTest.UseVisualStyleBackColor = true;
             this.btnHTest.Click += new System.EventHandler(this.btnHTest_Click);
+            // 
+            // cbShowLang
+            // 
+            this.cbShowLang.AutoSize = true;
+            this.cbShowLang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbShowLang.ForeColor = System.Drawing.Color.Green;
+            this.cbShowLang.Location = new System.Drawing.Point(24, 389);
+            this.cbShowLang.Name = "cbShowLang";
+            this.cbShowLang.Size = new System.Drawing.Size(170, 20);
+            this.cbShowLang.TabIndex = 35;
+            this.cbShowLang.Text = "Add language option";
+            this.toolTip1.SetToolTip(this.cbShowLang, "The macro has an HP document that\r\ncan be displayed in a differentlanguage.\r\nChec" +
+        "k the box to add the option of\r\nusing a different language.");
+            this.cbShowLang.UseVisualStyleBackColor = true;
+            this.cbShowLang.Visible = false;
             // 
             // menuStrip1
             // 
@@ -1354,21 +1369,6 @@
             // 
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // cbShowLang
-            // 
-            this.cbShowLang.AutoSize = true;
-            this.cbShowLang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbShowLang.ForeColor = System.Drawing.Color.Green;
-            this.cbShowLang.Location = new System.Drawing.Point(24, 389);
-            this.cbShowLang.Name = "cbShowLang";
-            this.cbShowLang.Size = new System.Drawing.Size(170, 20);
-            this.cbShowLang.TabIndex = 35;
-            this.cbShowLang.Text = "Add language option";
-            this.toolTip1.SetToolTip(this.cbShowLang, "The macro has an HP document that\r\ncan be displayed in a differentlanguage.\r\nChec" +
-        "k the box to add the option of\r\nusing a different language.");
-            this.cbShowLang.UseVisualStyleBackColor = true;
-            this.cbShowLang.Visible = false;
             // 
             // main
             // 

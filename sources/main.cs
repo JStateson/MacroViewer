@@ -1125,14 +1125,15 @@ namespace MacroViewer
 
 
 
-        private void ReloadHP(int r)
+        private int ReloadHP(int r)
         {
+            int iCnt = 0;
             mShowDiff.Visible = false;
             lbRCcopy.Visible = false;
             bHaveHTMLasLOCAL = ReadLastHTTP();
             ShowUneditedRow(r);
             strType = "HP";
-            LoadFromTXT(strType);
+            iCnt = LoadFromTXT(strType);
             if (bHaveHTMLasLOCAL)
             {
                 LookForHTMLfix();
@@ -1142,6 +1143,7 @@ namespace MacroViewer
             }
             ShowUneditedRow(r);
             EnableMacEdits(true);
+            return iCnt;
         }
 
 
@@ -1495,7 +1497,8 @@ namespace MacroViewer
             i += iDir; ;
             if (i < 0) i = n - 1;
             if (i == n) i = 0;
-            SelectFileItem(Utils.LocalMacroPrefix[i]);
+            n = SelectFileItem(Utils.LocalMacroPrefix[i]);
+            if (n > 0) lbName.Focus();
         }
 
         // find next file PC->PRN->HP and repeat back to PC
@@ -1553,14 +1556,15 @@ namespace MacroViewer
             btnNew.Enabled = true; // allow to be created
         }
 
-        private void SelectFileItem(string sPrefix)
+        private int SelectFileItem(string sPrefix)
         {
             bool bIgnore = false;
+            int iCnt = 0;
             if (strType != sPrefix)
             {
                 if (!bPageSaved(ref bIgnore))
                 {
-                    return; // user failed to save edits
+                    return 0; // user failed to save edits
                 }
             }
             strType = sPrefix;
@@ -1568,7 +1572,7 @@ namespace MacroViewer
             if (Utils.NoFileThere(sPrefix))
             {
                 ShowEmpty(sPrefix);
-                return;
+                return 0;
             }
             btnSaveM.Enabled = true;
             lbRCcopy.Visible = false;
@@ -1577,17 +1581,18 @@ namespace MacroViewer
 
             if(sPrefix == "HP")
             {
-                ReloadHP(0);
+                iCnt = ReloadHP(0);
             }
             else
             {
                 AccessDiffBoth(false);
-                LoadFromTXT(strType);
+                iCnt = LoadFromTXT(strType);
                 EnableMacEdits(true);
                 ShowUneditedRow(0);
                 SetVisDiffErr(false);
             }
             AllowMacroMove(true);
+            return iCnt;
         }
 
         private void mShowDiff_Click(object sender, EventArgs e)

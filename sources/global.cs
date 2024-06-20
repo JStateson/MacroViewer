@@ -197,6 +197,15 @@ namespace MacroViewer
         public static string YesButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71238i8585EF0CF97FB353/image-dimensions/50x27?v=v2\">";
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
+        public static string[] sPossibleLanguageOption = { "-16\" target=", "-16?openCLC=true\" target=" };
+        public static string AddLanguageOption(string sIN)
+        {
+            if (sIN.IndexOf(sPossibleLanguageOption[0] ) != -1)
+            {
+                sIN = sIN.Replace(sPossibleLanguageOption[0], sPossibleLanguageOption[1]);
+            }
+            return sIN;
+        }
 
         public static void ShellHTML(string s, bool IsFilename)
         {

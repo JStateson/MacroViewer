@@ -58,7 +58,6 @@ namespace MacroViewer
             }
         }
 
-        private string sLangRef = "?openCLC=true";
         private int SelectedRow = -1;
         private List<cRefURLs> RefUrls = new List<cRefURLs>();
         private List<CFound> cFound = new List<CFound>();
@@ -175,15 +174,7 @@ namespace MacroViewer
             lbNewItems.DataSource = sOut;
             gbMakeNew.Visible = true;       
         }
-        /*
-        <a href="https://support.hp.com/us-en/document/ish_1716406-1413451-16" target="_blank">HP printer setup (HP Smart app)</a>
-        */
-        private string AddLangRef(string sIn)
-        {
-            string t = "-16\" target=";
-            string s = sIn.Replace(t, "-16" + sLangRef + "\" target=");
-            return s;
-        }
+
 
         private string GetRefUrl(string sMacName)
         {
@@ -194,7 +185,7 @@ namespace MacroViewer
                 if(sMacName == cr.sMacN)
                 {
                     i = Convert.ToInt32(cr.nMac) ;
-                    strRtn = cbvAddLangRef.Checked ? AddLangRef(cr.PageOut) : cr.PageOut;
+                    strRtn = cbvAddLangRef.Checked ? Utils.AddLanguageOption(cr.PageOut) : cr.PageOut;
                      break;
                 }
             }

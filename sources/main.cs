@@ -417,6 +417,10 @@ namespace MacroViewer
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
+            if(cbShowLang.Checked)
+            {
+                strTemp = Utils.AddLanguageOption(strTemp);
+            }
             Utils.ShowPageInBrowser(strType, strTemp);
         }
 
@@ -628,6 +632,11 @@ namespace MacroViewer
             btnDelChecked.Enabled = b;
         }
 
+        private void CheckForLanguageOption()
+        {
+            cbShowLang.Visible = tbBody.Text.Contains(Utils.sPossibleLanguageOption[0]);
+        }
+
         private void ShowUneditedRow(int e)
         {
             CurrentRowSelected = e;
@@ -646,6 +655,7 @@ namespace MacroViewer
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
             lbName.ClearSelection();
             lbName.Rows[CurrentRowSelected].Selected = true;
+            CheckForLanguageOption();
             if (cbLaunchPage.Checked)
                 RunBrowser();
         }
@@ -659,10 +669,12 @@ namespace MacroViewer
 
         private void ShowSelectedRow(int e)
         {
-            if (bPageSaved())
+            bool bIgnore = false;
+            if (bPageSaved(ref bIgnore))
             {
                 ShowUneditedRow(e);
             }
+            else lbName.Rows[CurrentRowSelected].Selected = true;
         }
 
         private void lbName_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1204,7 +1216,8 @@ namespace MacroViewer
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (bPageSaved())
+            bool bIgnore = false;
+            if (bPageSaved(ref bIgnore))
             {
                 AddNew(Utils.UnNamedMacro, GetReference());
             }
@@ -1234,8 +1247,9 @@ namespace MacroViewer
 
         //need a copy of the edit box contents in full markup
         private string tbBodyMarked()
-        {
-            string sBody = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
+       {
+            //string sBody = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
+            string sBody = tbBody.Text.Replace(Environment.NewLine, "<br>");
             return sBody;
         }
 
@@ -1258,9 +1272,10 @@ namespace MacroViewer
             return !bEdited;
         }
 
-        private bool bPageSaved()
+        private bool bPageSaved(ref bool bIgnore)
         {
-            string sMsg = "Macro was not saved";
+            string sMsg = "Macro was not saved\r\nEither save, cancel edits or ignore";
+            bIgnore = false;
             if(tbMacName.Text.Trim() == "")
             {
                 NoEmptyMacros();
@@ -1268,11 +1283,13 @@ namespace MacroViewer
             }
             if (bNothingToSave()) return true;
             MustFinishEdit(false);
-            DialogResult Res1 = MessageBox.Show(sMsg, "Either save or cancel edits", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            if (Res1 == DialogResult.OK) // problem with clearing dgv when saving current macro
+            DialogResult Res1 = MessageBox.Show(sMsg, "Click NO to ignore", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.No) // problem with clearing dgv when saving current macro
             {   // error was "operation cannot be performed in this event handler"
                 //SaveCurrentMacros();  // cannot do this as it was called from a row change
                 //return true;
+                bIgnore = true;
+                return false; // need to fix the problem of leading newlines
             }
             return false;
         }
@@ -1538,9 +1555,10 @@ namespace MacroViewer
 
         private void SelectFileItem(string sPrefix)
         {
+            bool bIgnore = false;
             if (strType != sPrefix)
             {
-                if (!bPageSaved())
+                if (!bPageSaved(ref bIgnore))
                 {
                     return; // user failed to save edits
                 }
@@ -2155,11 +2173,12 @@ namespace MacroViewer
 
         private void main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool bIgnore = false;
             if(!bForceClose)
             {
-                if (!bPageSaved())
+                if (!bPageSaved(ref bIgnore))
                 {
-                    e.Cancel = true;
+                    e.Cancel = !bIgnore;
                 }
             }
 

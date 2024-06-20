@@ -51,6 +51,7 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnNoNL = new System.Windows.Forms.Button();
             this.bltnHR = new System.Windows.Forms.Button();
             this.btnColors = new System.Windows.Forms.Button();
             this.tbColorCode = new System.Windows.Forms.TextBox();
@@ -105,6 +106,8 @@
             this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImgSig = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEmoji = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,9 +148,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnNoNL = new System.Windows.Forms.Button();
-            this.mnuImgSig = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEmoji = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbShowLang = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -418,6 +419,19 @@
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
             this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes <BR> for newliens\r\nAvoid using CTRL-V to paste from " +
         "forum\r\nUse \"Pase from clipboard\" instead");
+            // 
+            // btnNoNL
+            // 
+            this.btnNoNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoNL.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnNoNL.Location = new System.Drawing.Point(276, 62);
+            this.btnNoNL.Name = "btnNoNL";
+            this.btnNoNL.Size = new System.Drawing.Size(220, 25);
+            this.btnNoNL.TabIndex = 35;
+            this.btnNoNL.Text = "Remove selected newlines";
+            this.toolTip1.SetToolTip(this.btnNoNL, "Select the text from which you\r\nwant to remove new line characters");
+            this.btnNoNL.UseVisualStyleBackColor = true;
+            this.btnNoNL.Click += new System.EventHandler(this.btnNoNL_Click);
             // 
             // bltnHR
             // 
@@ -933,6 +947,20 @@
             this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
             this.testSignatureToolStripMenuItem.Text = "Images and Signatures";
             // 
+            // mnuImgSig
+            // 
+            this.mnuImgSig.Name = "mnuImgSig";
+            this.mnuImgSig.Size = new System.Drawing.Size(129, 22);
+            this.mnuImgSig.Text = "Image & Sig";
+            this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
+            // 
+            // mnuEmoji
+            // 
+            this.mnuEmoji.Name = "mnuEmoji";
+            this.mnuEmoji.Size = new System.Drawing.Size(129, 22);
+            this.mnuEmoji.Text = "Emoji";
+            this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
+            // 
             // mShowErr
             // 
             this.mShowErr.ForeColor = System.Drawing.Color.Red;
@@ -1072,71 +1100,72 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
             // 
             // specialWordToolStripMenuItem
             // 
             this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.specialWordToolStripMenuItem.Text = "Special Word";
             this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // emailToolStripMenuItem
             // 
             this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.emailToolStripMenuItem.Text = "Email";
             this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // mnuAskQ
             // 
             this.mnuAskQ.Name = "mnuAskQ";
-            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
+            this.mnuAskQ.Size = new System.Drawing.Size(144, 22);
             this.mnuAskQ.Text = "Ask Question";
             this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.cbShowLang);
             this.gpMainEdit.Controls.Add(this.btnHTest);
             this.gpMainEdit.Controls.Add(this.btnSwapBR);
             this.gpMainEdit.Controls.Add(this.label7);
@@ -1326,32 +1355,20 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnNoNL
+            // cbShowLang
             // 
-            this.btnNoNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoNL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnNoNL.Location = new System.Drawing.Point(276, 62);
-            this.btnNoNL.Name = "btnNoNL";
-            this.btnNoNL.Size = new System.Drawing.Size(220, 25);
-            this.btnNoNL.TabIndex = 35;
-            this.btnNoNL.Text = "Remove selected newlines";
-            this.toolTip1.SetToolTip(this.btnNoNL, "Select the text from which you\r\nwant to remove new line characters");
-            this.btnNoNL.UseVisualStyleBackColor = true;
-            this.btnNoNL.Click += new System.EventHandler(this.btnNoNL_Click);
-            // 
-            // mnuImgSig
-            // 
-            this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
-            this.mnuImgSig.Text = "Image & Sig";
-            this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
-            // 
-            // mnuEmoji
-            // 
-            this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
-            this.mnuEmoji.Text = "Emoji";
-            this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
+            this.cbShowLang.AutoSize = true;
+            this.cbShowLang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbShowLang.ForeColor = System.Drawing.Color.Green;
+            this.cbShowLang.Location = new System.Drawing.Point(24, 389);
+            this.cbShowLang.Name = "cbShowLang";
+            this.cbShowLang.Size = new System.Drawing.Size(170, 20);
+            this.cbShowLang.TabIndex = 35;
+            this.cbShowLang.Text = "Add language option";
+            this.toolTip1.SetToolTip(this.cbShowLang, "The macro has an HP document that\r\ncan be displayed in a differentlanguage.\r\nChec" +
+        "k the box to add the option of\r\nusing a different language.");
+            this.cbShowLang.UseVisualStyleBackColor = true;
+            this.cbShowLang.Visible = false;
             // 
             // main
             // 
@@ -1514,6 +1531,7 @@
         private System.Windows.Forms.Button btnNoNL;
         private System.Windows.Forms.ToolStripMenuItem mnuImgSig;
         private System.Windows.Forms.ToolStripMenuItem mnuEmoji;
+        private System.Windows.Forms.CheckBox cbShowLang;
     }
 }
 

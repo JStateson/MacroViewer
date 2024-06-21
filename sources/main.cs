@@ -632,14 +632,15 @@ namespace MacroViewer
             btnDelChecked.Enabled = b;
         }
 
-        private void CheckForLanguageOption()
+        private void CheckForLanguageOption(bool bRowChanged)
         {
             cbShowLang.Visible = tbBody.Text.Contains(Utils.sPossibleLanguageOption[0]);
-            cbShowLang.Checked = false;
+            cbShowLang.Checked = !bRowChanged;
         }
 
         private void ShowUneditedRow(int e)
         {
+            bool bChanged = (CurrentRowSelected != e);
             CurrentRowSelected = e;
             if (lbName.Rows.Count == 0 || e >= lbName.Rows.Count)
             {
@@ -656,7 +657,7 @@ namespace MacroViewer
             tbMacName.Text = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
             lbName.ClearSelection();
             lbName.Rows[CurrentRowSelected].Selected = true;
-            CheckForLanguageOption();
+            CheckForLanguageOption(bChanged);
             if (cbLaunchPage.Checked)
                 RunBrowser();
         }

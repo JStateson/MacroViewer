@@ -967,21 +967,21 @@
             // mnuImgSig
             // 
             this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
+            this.mnuImgSig.Size = new System.Drawing.Size(153, 22);
             this.mnuImgSig.Text = "Image & Sig";
             this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
             // 
             // mnuEmoji
             // 
             this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
+            this.mnuEmoji.Size = new System.Drawing.Size(153, 22);
             this.mnuEmoji.Text = "Emoji";
             this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
             // 
             // mnuCCodes
             // 
             this.mnuCCodes.Name = "mnuCCodes";
-            this.mnuCCodes.Size = new System.Drawing.Size(180, 22);
+            this.mnuCCodes.Size = new System.Drawing.Size(153, 22);
             this.mnuCCodes.Text = "Country Codes";
             this.mnuCCodes.Click += new System.EventHandler(this.mnuCCodes_Click);
             // 

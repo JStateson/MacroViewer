@@ -81,6 +81,15 @@ namespace MacroViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;table border=&apos;1&apos; style=&apos;font-size:32px;&apos;width=&apos;50%&apos;&gt;&lt;tr&gt;&lt;td&gt;&amp;#x1F600;&lt;/td&gt;&lt;td&gt;&amp;#x1F601;&lt;/td&gt;&lt;td&gt;&amp;#x1F602;&lt;/td&gt;&lt;td&gt;&amp;#x1F923;&lt;/td&gt;&lt;td&gt;&amp;#x1F603;&lt;/td&gt;&lt;td&gt;&amp;#x1F604;&lt;/td&gt;&lt;td&gt;&amp;#x1F605;&lt;/td&gt;&lt;td&gt;&amp;#x1F606;&lt;/td&gt;&lt;td&gt;&amp;#x1F609;&lt;/td&gt;&lt;td&gt;&amp;#x1F60A;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;#x1F60B;&lt;/td&gt;&lt;td&gt;&amp;#x1F60E;&lt;/td&gt;&lt;td&gt;&amp;#x1F60D;&lt;/td&gt;&lt;td&gt;&amp;#x1F618;&lt;/td&gt;&lt;td&gt;&amp;#x1F617;&lt;/td&gt;&lt;td&gt;&amp;#x1F619;&lt;/td&gt;&lt;td&gt;&amp;#x1F61A;&lt;/td&gt;&lt;td&gt;&amp;#x263A;&lt;/td&gt;&lt;td&gt;&amp;#x1F642;&lt;/td&gt;&lt;td&gt;&amp;#x1F917;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;#x1F914;&lt;/td&gt;&lt;td&gt;&amp;#x1F610;&lt;/td&gt;&lt;td&gt;&amp;#x1F611;&lt;/td&gt;&lt;td&gt;&amp;#x1F636;&lt;/td&gt;&lt;td&gt;&amp;# [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string emoji {
+            get {
+                return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon favicon {
@@ -91,11 +100,25 @@ namespace MacroViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This file is used by MacroViewer        ///
-        ///Number Countries:68        ///
-        ///Columns wanted:3        ///
-        ///Number Rows:23        ///
-        ///Number slots:69        ///
+        ///   Looks up a localized string similar to &lt;table border=&apos;1&apos; width=&apos;100%&apos;&gt;&lt;tr&gt;&lt;td&gt;#A2M Iceland English &lt;/td&gt;&lt;td&gt;#ABN Norway&lt;/td&gt;&lt;td&gt;#AKG Eastern Europe&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;#A2N Saudi Arabia Arabic&apos;English &lt;/td&gt;&lt;td&gt;#ABP Swiss (German)&lt;/td&gt;&lt;td&gt;#AKJ Hebrew (English)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;#A2Q Ukraine Ukrainian &lt;/td&gt;&lt;td&gt;#ABQ Swiss (French)&lt;/td&gt;&lt;td&gt;#AKL Thailand&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;#AB0 Taiwan&lt;/td&gt;&lt;td&gt;#ABS Sweden&lt;/td&gt;&lt;td&gt;#AKN Slovenia&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;#AB1 Korea&lt;/td&gt;&lt;td&gt;#ABT Hebrew&lt;/td&gt;&lt;td&gt;#AKQ Serbia Serbian &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;#AB2 China&lt;/td&gt;&lt;td&gt;#ABU UK (English)&lt;/ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HP_CountryCodes {
+            get {
+                return ResourceManager.GetString("HP_CountryCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This file is used by MacroViewer
+        ///
+        ///Number Countries:68
+        ///
+        ///Columns wanted:3
+        ///
+        ///Number Rows:23
+        ///
+        ///Number slots:69
+        ///
         ///#A2M - Iceland - English 
         ///#A2N - Saudi Arabia - Arabic&apos;English 
         ///#A2Q - Ukraine - Ukrainian 
@@ -117,7 +140,7 @@ namespace MacroViewer.Properties {
         ///#ABG Australia
         ///#ABH Netherlands
         ///#ABJ Japan
-        ///#ABL Canada engl [rest of string was truncated]&quot;;.
+        ///#ABL Canada [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Sorted_Raw_List {
             get {

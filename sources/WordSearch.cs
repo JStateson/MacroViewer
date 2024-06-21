@@ -141,14 +141,18 @@ namespace MacroViewer
             }
         }
 
+        private void SetLangVisable(bool b)
+        {
+            cbvAddLangRef.Visible = b;
+            cbvAddLangRef.Checked = false;
+        }
 
         private void Btn_Click(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
+                SetLangVisable(false);
                 SelectedFile = button.Text;
-                cbvAddLangRef.Visible = (SelectedFile == "RF");
-                if (SelectedFile != "RF") cbvAddLangRef.Checked = false;
                 dgvSearched.RowEnter -= dgvSearched_RowEnter;
                 SortTable(0);
                 dgvSearched.RowEnter += dgvSearched_RowEnter;
@@ -208,6 +212,10 @@ namespace MacroViewer
                 strTemp = GetRefUrl(MacName);
                 if (strTemp == "") return;
             }
+            else
+            {
+                if(cbvAddLangRef.Checked) strTemp = Utils.AddLanguageOption(strTemp);
+            }
             Utils.ShowPageInBrowser(strType, strTemp);
         }
 
@@ -265,6 +273,8 @@ namespace MacroViewer
             {
                 lbKeyFound.Items.Add(s);
             }
+            List<CFound> bSorted = (List<CFound>)dgvSearched.DataSource as List<CFound>;
+            cbvAddLangRef.Visible = bSorted[SelectedRow].MayHaveLanguage;
         }
 
         private string PerformSearch(string text, string sMacID)
@@ -474,9 +484,20 @@ namespace MacroViewer
                 {
                     n = 0;
                     CFound cf = new CFound();
-                    foreach (int m in KeyCount)
+                    cf.MayHaveLanguage = cb.sBody.IndexOf(Utils.sPossibleLanguageOption[0]) > -1;
+                    if(KeyCount.Length == 1)
                     {
-                        n += m;
+                        foreach (int m in KeyCount)
+                        {
+                            n += m;
+                        }
+                    }
+                    else
+                    {
+                        foreach (int m in KeyCount)
+                        {
+                            n += (m > 0) ? 1 : 0;
+                        }
                     }
                     cAll[i].fKeys = sKeys;
                     SortInx[CFcnt] = CFcnt;

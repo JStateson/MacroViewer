@@ -81,6 +81,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="sources\HTMlColorPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,14 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="sources\SetText.resx">
       <DependentUpon>SetText.cs</DependentUpon>
     </EmbeddedResource>
@@ -276,7 +276,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sorted-Raw-List.txt" />
-    <Content Include="Resources\emoji.html" />
+    <None Include="sources\emoji.html" />
+    <None Include="Resources\HP_CountryCodes.html" />
+    <None Include="sources\HP_CountryCodes.html" />
     <Content Include="sources\SiteMap.html" />
     <None Include="Resources\AddImageAlb.png" />
     <None Include="Resources\AddImageAlb2.png" />

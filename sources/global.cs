@@ -1138,6 +1138,7 @@ internal static class ClipboardFormats
         public string Found { get; set; }    //number of keywords found
         public string Name { get; set; }
         public int WhereFound;
+        public bool MayHaveLanguage;
     }
 
     public class CNewMac

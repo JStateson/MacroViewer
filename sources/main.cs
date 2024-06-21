@@ -635,6 +635,7 @@ namespace MacroViewer
         private void CheckForLanguageOption()
         {
             cbShowLang.Visible = tbBody.Text.Contains(Utils.sPossibleLanguageOption[0]);
+            cbShowLang.Checked = false;
         }
 
         private void ShowUneditedRow(int e)
@@ -2167,8 +2168,7 @@ namespace MacroViewer
 
         private void mnuAskQ_Click(object sender, EventArgs e)
         {
-            string s = Utils.WhereExe + "\\SiteMap.html";
-            Process.Start("explorer.exe", s);
+            Utils.ShellHTML("SiteMap.html", true);
         }
 
         private void loadHardwareMacsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2233,12 +2233,17 @@ namespace MacroViewer
         }
         private void mnuEmoji_Click(object sender, EventArgs e)
         {
-            Utils.ShellHTML("emoji.html",true);
+            Utils.ShellHTML(Properties.Resources.emoji, false);
         }
 
         private void mnuImgSig_Click(object sender, EventArgs e)
         {
             SigImages();
+        }
+
+        private void mnuCCodes_Click(object sender, EventArgs e)
+        {
+            Utils.ShellHTML(Properties.Resources.HP_CountryCodes, false);
         }
     }
     

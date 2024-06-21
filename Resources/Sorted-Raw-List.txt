@@ -1,8 +1,13 @@
-This file is used by MacroViewer
-Number Countries:68
-Columns wanted:3
-Number Rows:23
-Number slots:69
+This file is used by MacroViewer
+
+Number Countries:68
+
+Columns wanted:3
+
+Number Rows:23
+
+Number slots:69
+
 #A2M - Iceland - English 
 #A2N - Saudi Arabia - Arabic'English 
 #A2Q - Ukraine - Ukrainian 

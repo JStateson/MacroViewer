@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbvAddLangRef = new System.Windows.Forms.CheckBox();
             this.btnShowCC = new System.Windows.Forms.Button();
             this.lbDropped = new System.Windows.Forms.Label();
             this.gbSelect = new System.Windows.Forms.GroupBox();
@@ -65,7 +66,6 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cbvAddLangRef = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -98,6 +98,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
             // 
+            // cbvAddLangRef
+            // 
+            this.cbvAddLangRef.AutoSize = true;
+            this.cbvAddLangRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbvAddLangRef.ForeColor = System.Drawing.Color.Green;
+            this.cbvAddLangRef.Location = new System.Drawing.Point(344, 313);
+            this.cbvAddLangRef.Name = "cbvAddLangRef";
+            this.cbvAddLangRef.Size = new System.Drawing.Size(155, 20);
+            this.cbvAddLangRef.TabIndex = 15;
+            this.cbvAddLangRef.Text = "Add Language Ref";
+            this.cbvAddLangRef.UseVisualStyleBackColor = true;
+            this.cbvAddLangRef.Visible = false;
+            // 
             // btnShowCC
             // 
             this.btnShowCC.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -115,7 +128,7 @@
             this.lbDropped.AutoSize = true;
             this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDropped.ForeColor = System.Drawing.Color.Red;
-            this.lbDropped.Location = new System.Drawing.Point(341, 294);
+            this.lbDropped.Location = new System.Drawing.Point(341, 290);
             this.lbDropped.Name = "lbDropped";
             this.lbDropped.Size = new System.Drawing.Size(56, 16);
             this.lbDropped.TabIndex = 13;
@@ -498,18 +511,6 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
-            // 
-            // cbvAddLangRef
-            // 
-            this.cbvAddLangRef.AutoSize = true;
-            this.cbvAddLangRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbvAddLangRef.Location = new System.Drawing.Point(344, 313);
-            this.cbvAddLangRef.Name = "cbvAddLangRef";
-            this.cbvAddLangRef.Size = new System.Drawing.Size(139, 20);
-            this.cbvAddLangRef.TabIndex = 15;
-            this.cbvAddLangRef.Text = "Add Language Ref";
-            this.cbvAddLangRef.UseVisualStyleBackColor = true;
-            this.cbvAddLangRef.Visible = false;
             // 
             // WordSearch
             // 

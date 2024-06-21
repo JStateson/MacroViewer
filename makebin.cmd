@@ -14,8 +14,8 @@ replace /U /S %2..\Release\*.html %1sources
 xcopy /Y /I %1sources\*.rtf %2..\Release
 xcopy /Y /I %1sources\*.rtf %2..\Debug
 xcopy /Y /I %1sources\*.rtf %1temp
-xcopy /Y /I %1sources\*.html %2..\Release
-xcopy /Y /I %1sources\*.html %2..\Debug
+xcopy /Y /I %1sources\SiteMap.html %2..\Release
+xcopy /Y /I %1sources\SiteMap.html %2..\Debug
 xcopy %1sources\*.html %1temp
 xcopy %2signatures.txt %1temp
 xcopy /Y %2signatures.txt %2..\Debug

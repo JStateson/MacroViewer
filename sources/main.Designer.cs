@@ -109,6 +109,7 @@
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImgSig = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEmoji = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCCodes = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
@@ -957,7 +958,8 @@
             // 
             this.testSignatureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuImgSig,
-            this.mnuEmoji});
+            this.mnuEmoji,
+            this.mnuCCodes});
             this.testSignatureToolStripMenuItem.Name = "testSignatureToolStripMenuItem";
             this.testSignatureToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
             this.testSignatureToolStripMenuItem.Text = "Images and Signatures";
@@ -965,16 +967,23 @@
             // mnuImgSig
             // 
             this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(129, 22);
+            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
             this.mnuImgSig.Text = "Image & Sig";
             this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
             // 
             // mnuEmoji
             // 
             this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(129, 22);
+            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
             this.mnuEmoji.Text = "Emoji";
             this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
+            // 
+            // mnuCCodes
+            // 
+            this.mnuCCodes.Name = "mnuCCodes";
+            this.mnuCCodes.Size = new System.Drawing.Size(180, 22);
+            this.mnuCCodes.Text = "Country Codes";
+            this.mnuCCodes.Click += new System.EventHandler(this.mnuCCodes_Click);
             // 
             // mShowErr
             // 
@@ -1532,6 +1541,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuImgSig;
         private System.Windows.Forms.ToolStripMenuItem mnuEmoji;
         private System.Windows.Forms.CheckBox cbShowLang;
+        private System.Windows.Forms.ToolStripMenuItem mnuCCodes;
     }
 }
 

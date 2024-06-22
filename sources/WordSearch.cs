@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media.Media3D;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Diagnostics;
+using System.Windows.Interop;
 
 namespace MacroViewer
 {
@@ -86,6 +87,12 @@ namespace MacroViewer
         private Color RestoreColor;
         private string[] CountryCodes;
         private string CountryCodeResults;
+        //private int ShowBits = 7;   // 3 bits set
+        //private bool bIgnoreSB = false;
+
+        /// </summary>
+        /// <param name="Rcb"></param>
+        /// <param name="bAllowChangeExit"></param>
 
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
@@ -484,6 +491,7 @@ namespace MacroViewer
                 {
                     n = 0;
                     CFound cf = new CFound();
+                    cf.WhichMatch = 0;
                     cf.MayHaveLanguage = cb.sBody.IndexOf(Utils.sPossibleLanguageOption[0]) > -1;
                     if(KeyCount.Length == 1)
                     {
@@ -494,9 +502,15 @@ namespace MacroViewer
                     }
                     else
                     {
+                        int iBit = 1;
                         foreach (int m in KeyCount)
                         {
                             n += (m > 0) ? 1 : 0;
+                            if(m>0)
+                            {
+                                cf.WhichMatch |= iBit;
+                            }
+                            iBit = iBit << 1;
                         }
                     }
                     cAll[i].fKeys = sKeys;
@@ -616,6 +630,7 @@ namespace MacroViewer
             for (i = 0; i < n; i++)
             {
                 j = SortInx[i];
+                //if ((cFound[j].WhichMatch & ShowBits) == ShowBits  || bIgnoreSB)
                 cSorted.Add(cFound[j]);
             }
             dgvSearched.DataSource = cSorted;
@@ -834,6 +849,7 @@ namespace MacroViewer
             lbKeyFound.Items.AddRange(CountryCodeResults.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
         }
 
+        // this is used by the country code lookup
         private void lbKeyFound_DoubleClick(object sender, EventArgs e)
         {
             if(btnShowCC.Visible)
@@ -846,5 +862,7 @@ namespace MacroViewer
                 }
             }
         }
+
+
     }
 }

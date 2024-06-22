@@ -21,6 +21,7 @@ using System.Configuration;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Cryptography;
 
 
 namespace MacroViewer
@@ -65,6 +66,8 @@ namespace MacroViewer
         public CMoveSpace cms;
         public List<CBody> cBodies;  // this is only updated when the program starts
         private string sBadMacroName;
+        private string TextFromClipboardMNUs = "";
+        private bool bTextFromClipboardMNUs; // can text be used as an argument to a search
 
         public main()
         {
@@ -465,13 +468,21 @@ namespace MacroViewer
             SelectFileItem("NET");
         }
 
+
+        /*
+         * kb notebook forum (no search)
+         * https://h30434.www3.hp.com/t5/Notebooks-Knowledge-Base/tkb-p/notebooks-knowledge-base
+         */
         private void FormQueryKB(string sS)
         {
-            string t = Utils.ClipboardGetText();
-            if (t.Length > 64) t = "";  // probably garbage
+            if(!bTextFromClipboardMNUs)
+            {
+                FormGoToKB(sS);
+                return;
+            }
             string s = sS.Substring(0,1).ToLower();
             string w = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message";
-            string f = w + "?filter=location&q=" + t;
+            string f = w + "?filter=location&q=" + TextFromClipboardMNUs;
             string p = f + "&location=tkb-board:";
             string[] KBl = { "printers-knowledge-base", "desktop-knowledge-base",
                     "notebooks-knowledge-base","gaming-knowledge-base" };
@@ -482,7 +493,7 @@ namespace MacroViewer
                 case "d": sQ = p + KBl[1]; break;
                 case "n": sQ = p + KBl[2]; break;
                 case "g": sQ = p + KBl[3]; break;
-                case "a": sQ = w + "?filter=includeTkbs&include_tkbs=true&q=" + t;
+                case "a": sQ = w + "?filter=includeTkbs&include_tkbs=true&q=" + TextFromClipboardMNUs;
                 break;
             }
             if(sQ != "")
@@ -500,14 +511,14 @@ namespace MacroViewer
 
         private void hPYouTubeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utils.LocalBrowser("https://www.youtube.com/@HPSupport/search?query=" + Utils.ClipboardGetText());
+            string sObj = Utils.ClipboardGetText().Replace(" ", "%20");
+            Utils.LocalBrowser("https://www.youtube.com/@HPSupport/search?query=" + sObj);
         }
 
         // this was to look at the clipboard and see if there were keywords
         private string ClipExtractSearchID()
         {
-            string str = Utils.ClipboardGetText();
-            if (str == "") return "";
+            string str = TextFromClipboardMNUs;
             int n = str.Length;
             if (n > 20) return "";  // was not a keyword probably a bunch of junk or url
             string  str0 = "";
@@ -540,8 +551,9 @@ namespace MacroViewer
 
         private string GetSearchKeyword(string s)
         {
+            if (!bTextFromClipboardMNUs) return "";
             string sObj = ClipExtractSearchID();
-            if (s == "" || sObj == "") return sObj;
+            if (s == "" || sObj == "") return "";
             return s + " " + sObj;
         }
 
@@ -557,19 +569,18 @@ namespace MacroViewer
         {
             string sObj = GetSearchKeyword("HP");
             if (sObj == "") return;
-            Utils.LocalBrowser("https://us.driverscollection.com/Search/" + sObj);
+            Utils.LocalBrowser("https://us.driverscollection.com/Search/" + sObj.Replace(" ","%20"));
         }
 
         //https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=ipmmb-fm
         private void mnuSearchComm_Click(object sender, EventArgs e)
         {
-            string s="", sObj = Utils.ClipboardGetText();
-            if (sObj == "")// this is unlikely but not impossible
+            string s = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
+            if (!bTextFromClipboardMNUs)
                 Utils.LocalBrowser("https://h30434.www3.hp.com");
             else
             {
-                s = "https://h30434.www3.hp.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=false&q=";
-                s += sObj;
+                s += TextFromClipboardMNUs.Replace(" ","%20");
             }
             Utils.LocalBrowser(s);
         }
@@ -1461,17 +1472,21 @@ namespace MacroViewer
         private void btnLinkAll_Click(object sender, EventArgs e)
         {
             string sBody = tbBody.Text.ToLower();
+            int i = tbBody.SelectionStart;
+            int j = tbBody.SelectionLength;
             bool bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
             if (!bHasHyper) // do not want to unlink urls
             {
-                sBody = tbBody.Text;
-                Utils.ReplaceUrls(ref sBody, true);
-                tbBody.Text = sBody;
-                return;
+                if(j == 0)
+                {
+                    sBody = tbBody.Text;
+                    Utils.ReplaceUrls(ref sBody, true);
+                    tbBody.Text = sBody;
+                    return;
+                }
             }
             // see if there is a range to link
-            int i = tbBody.SelectionStart;
-            int j = tbBody.SelectionLength;
+
             if (j < 12) return; // http://a.com is smallest
             string strRaw = tbBody.SelectedText;
             sBody = strRaw.ToLower();
@@ -2245,6 +2260,26 @@ namespace MacroViewer
         private void mnuCCodes_Click(object sender, EventArgs e)
         {
             Utils.ShellHTML(Properties.Resources.HP_CountryCodes, false);
+        }
+
+        private void EnableAllWeb(bool b)
+        {
+            mnuSearchComm.Enabled = b;
+            mnuDrvGoog.Enabled = b;
+            mnuHuntDev.Enabled = b;
+
+        }
+
+        private void mnRecDis_Click_1(object sender, EventArgs e)
+        {
+            TextFromClipboardMNUs = Utils.ClipboardGetText();
+            string sL = TextFromClipboardMNUs.ToLower();
+            int n = TextFromClipboardMNUs.Length;
+            bTextFromClipboardMNUs = !(n <= 1 || n > 128);
+            mnuDrvGoog.Enabled = bTextFromClipboardMNUs;
+            mnuDevCol.Enabled = bTextFromClipboardMNUs;
+            hPYouTubeToolStripMenuItem.Enabled = bTextFromClipboardMNUs;
+            mnuHuntDev.Enabled = sL.Contains("dev") && sL.Contains("ven");
         }
     }
     

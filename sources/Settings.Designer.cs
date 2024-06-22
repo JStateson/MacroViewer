@@ -64,6 +64,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -278,7 +279,7 @@
             // 
             this.groupBox4.Controls.Add(this.btnTestPP);
             this.groupBox4.Controls.Add(this.tbPP);
-            this.groupBox4.Location = new System.Drawing.Point(359, 28);
+            this.groupBox4.Location = new System.Drawing.Point(508, 28);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(362, 129);
             this.groupBox4.TabIndex = 9;
@@ -337,7 +338,7 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.tbMSuffix);
-            this.groupBox3.Location = new System.Drawing.Point(359, 213);
+            this.groupBox3.Location = new System.Drawing.Point(508, 213);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(362, 129);
             this.groupBox3.TabIndex = 10;
@@ -375,7 +376,7 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(359, 399);
+            this.groupBox5.Location = new System.Drawing.Point(508, 399);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(412, 129);
             this.groupBox5.TabIndex = 6;
@@ -419,18 +420,32 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Info;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(188, 160);
+            this.label8.Location = new System.Drawing.Point(340, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 65);
             this.label8.TabIndex = 8;
             this.label8.Text = "Browser and User Info\r\nneed to be saved.  Be \r\nsure to click Apply.  No\r\nother it" +
     "ems in this dialog\r\nbox need to be saved";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(204, 147);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(216, 52);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "You need to prevent Edge from switching\r\nhttp to https as many HP documents fail." +
+    "\r\nType \'edge://flags/#edge-automatic-https \'\r\ninto the Edge browser and enable t" +
+    "he option\r\n";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 729);
+            this.ClientSize = new System.Drawing.Size(942, 729);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label8);
@@ -496,5 +511,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tbMSuffix;
+        private System.Windows.Forms.Label label3;
     }
 }

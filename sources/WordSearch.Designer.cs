@@ -93,7 +93,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1025, 733);
+            this.groupBox1.Size = new System.Drawing.Size(1091, 733);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
@@ -428,7 +428,7 @@
             this.groupBox2.Controls.Add(this.lbKeyFound);
             this.groupBox2.Location = new System.Drawing.Point(621, 312);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(377, 330);
+            this.groupBox2.Size = new System.Drawing.Size(418, 330);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Keywords found";
@@ -457,7 +457,7 @@
             this.lbKeyFound.ItemHeight = 20;
             this.lbKeyFound.Location = new System.Drawing.Point(30, 109);
             this.lbKeyFound.Name = "lbKeyFound";
-            this.lbKeyFound.Size = new System.Drawing.Size(291, 204);
+            this.lbKeyFound.Size = new System.Drawing.Size(267, 204);
             this.lbKeyFound.TabIndex = 0;
             this.lbKeyFound.DoubleClick += new System.EventHandler(this.lbKeyFound_DoubleClick);
             // 
@@ -516,7 +516,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 757);
+            this.ClientSize = new System.Drawing.Size(1130, 757);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;

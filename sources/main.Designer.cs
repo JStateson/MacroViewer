@@ -1020,6 +1020,7 @@
             this.mnRecDis.Name = "mnRecDis";
             this.mnRecDis.Size = new System.Drawing.Size(168, 20);
             this.mnRecDis.Text = "Web Search (uses clipboard)";
+            this.mnRecDis.Click += new System.EventHandler(this.mnRecDis_Click_1);
             // 
             // recentToolStripMenuItem
             // 

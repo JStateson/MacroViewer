@@ -26,7 +26,7 @@ namespace MacroViewer
 {
     public class CMoveSpace
     {/// <summary>
-     /// "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
+     /// "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
      /// </summary>
 
         public string[] MacroIDs;
@@ -129,7 +129,7 @@ namespace MacroViewer
     // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
-        private const int iNMacros = 11;
+        private const int iNMacros = 12;
         public const int NumMacros = 50;   // only 30 for the HTML file
         public static int nLongestExpectedURL = 256;
         public static string[] nUse ={ // these must match the button names in WordSearch
@@ -156,13 +156,13 @@ namespace MacroViewer
         private static string[] sUse = // possible new macros
         {
             "PC AIO HW",            //PC
-            "LJ DJ OJ HW",          //PRN
-            "PC AIO LJ DJ OJ",      //DRV
+            "LJ DJ OJ IN HW",          //PRN
+            "PC AIO LJ DJ OJ IN",      //DRV
             "NET OS HW",            //EBY
             "NET OS HW RF NO",      //GOO
-            "PC AIO LJ DJ OJ",      //MAN
-            "LJ DJ OJ NET",         //Youtube
-            "PC AIO LJ DJ OJ OS"    //HP KB
+            "PC AIO LJ DJ OJ IN",      //MAN
+            "LJ DJ OJ IN NET",         //Youtube
+            "PC AIO LJ DJ OJ IN OS"    //HP KB
         };
         public static string sFindUses(string s)
         {
@@ -175,12 +175,12 @@ namespace MacroViewer
             return "";
         }
         // do not change the order of below items and HP must be last!
-        public static string sPrinterTypes = " LJ DJ OJ ";    // must have a space and match below
-        public static string[] LocalMacroPrefix = new string[iNMacros]  { "PC", "AIO", "LJ", "DJ", "OJ", "OS", "NET", "HW", "RF", "NO", "HP" };
+        public static string sPrinterTypes = " LJ DJ OJ IN ";    // must have a space and match below
+        public static string[] LocalMacroPrefix = new string[iNMacros]  { "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "HP" };
         public static string[] LocalMacroFullname = new string[iNMacros] { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
-                "DeskJet(DJ)", "OfficeJet(OJ)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
+                "DeskJet(DJ)", "OfficeJet(OJ)", "Tank-Inkjet(IN)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
         public static string[] LocalMacroRefs = new string[iNMacros] {"PC Reference","PC Reference","LaserJet Reference",
-                "DeskJet Reference","OfficeJet Reference", "", "", "", "","",""};
+                "DeskJet Reference","OfficeJet Reference","Tank-Ink Reference", "", "", "", "","",""};
 
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
@@ -500,6 +500,7 @@ internal static class ClipboardFormats
                     Process.Start("microsoft-edge:" + strUrl);
                     break;
                 case Utils.eBrowserType.eChrome:
+                    //Process.Start("chrome.exe", "--allow-running-insecure-content  " + strUrl);
                     Process.Start("chrome.exe", strUrl);
                     break;
             }
@@ -1138,6 +1139,7 @@ internal static class ClipboardFormats
         public string Found { get; set; }    //number of keywords found
         public string Name { get; set; }
         public int WhereFound;
+        public int WhichMatch; // bit 0 set = first match, bit 1 set = second, etc
         public bool MayHaveLanguage;
     }
 

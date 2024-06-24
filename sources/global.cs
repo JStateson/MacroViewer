@@ -505,7 +505,16 @@ internal static class ClipboardFormats
                     break;
             }
         }
-
+        public static int CountSetBits(int n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                count += n & 1;
+                n >>= 1;
+            }
+            return count;
+        }
         private static string ColorToHtml(Color color)
         {
             return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
@@ -1141,6 +1150,7 @@ internal static class ClipboardFormats
         public int WhereFound;
         public int WhichMatch; // bit 0 set = first match, bit 1 set = second, etc
         public bool MayHaveLanguage;
+        public bool bWanted; // just want to see this file name one
     }
 
     public class CNewMac

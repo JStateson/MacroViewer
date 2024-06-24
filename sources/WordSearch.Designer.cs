@@ -66,6 +66,7 @@
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbSelKey = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
@@ -423,6 +424,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbSelKey);
             this.groupBox2.Controls.Add(this.tbNumMatches);
             this.groupBox2.Controls.Add(this.lbTMinfo);
             this.groupBox2.Controls.Add(this.lbKeyFound);
@@ -435,7 +437,7 @@
             // 
             // tbNumMatches
             // 
-            this.tbNumMatches.Location = new System.Drawing.Point(222, 43);
+            this.tbNumMatches.Location = new System.Drawing.Point(189, 49);
             this.tbNumMatches.Name = "tbNumMatches";
             this.tbNumMatches.ReadOnly = true;
             this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
@@ -444,7 +446,7 @@
             // lbTMinfo
             // 
             this.lbTMinfo.AutoSize = true;
-            this.lbTMinfo.Location = new System.Drawing.Point(65, 48);
+            this.lbTMinfo.Location = new System.Drawing.Point(26, 49);
             this.lbTMinfo.Name = "lbTMinfo";
             this.lbTMinfo.Size = new System.Drawing.Size(109, 20);
             this.lbTMinfo.TabIndex = 4;
@@ -457,7 +459,7 @@
             this.lbKeyFound.ItemHeight = 20;
             this.lbKeyFound.Location = new System.Drawing.Point(30, 109);
             this.lbKeyFound.Name = "lbKeyFound";
-            this.lbKeyFound.Size = new System.Drawing.Size(267, 204);
+            this.lbKeyFound.Size = new System.Drawing.Size(192, 204);
             this.lbKeyFound.TabIndex = 0;
             this.lbKeyFound.DoubleClick += new System.EventHandler(this.lbKeyFound_DoubleClick);
             // 
@@ -482,14 +484,14 @@
             this.dgvSearched.AllowUserToResizeColumns = false;
             this.dgvSearched.AllowUserToResizeRows = false;
             this.dgvSearched.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSearched.Location = new System.Drawing.Point(28, 355);
+            this.dgvSearched.Location = new System.Drawing.Point(19, 355);
             this.dgvSearched.MultiSelect = false;
             this.dgvSearched.Name = "dgvSearched";
             this.dgvSearched.ReadOnly = true;
             this.dgvSearched.RowHeadersVisible = false;
+            this.dgvSearched.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSearched.Size = new System.Drawing.Size(561, 287);
             this.dgvSearched.TabIndex = 3;
-            this.dgvSearched.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             this.dgvSearched.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_CellDoubleClick);
             this.dgvSearched.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             // 
@@ -511,6 +513,17 @@
             this.label1.Size = new System.Drawing.Size(171, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
+            // 
+            // cbSelKey
+            // 
+            this.cbSelKey.FormattingEnabled = true;
+            this.cbSelKey.ItemHeight = 20;
+            this.cbSelKey.Location = new System.Drawing.Point(264, 109);
+            this.cbSelKey.Name = "cbSelKey";
+            this.cbSelKey.Size = new System.Drawing.Size(85, 28);
+            this.cbSelKey.TabIndex = 6;
+            this.cbSelKey.Visible = false;
+            this.cbSelKey.SelectedIndexChanged += new System.EventHandler(this.cbSelKey_SelectedIndexChanged);
             // 
             // WordSearch
             // 
@@ -578,5 +591,6 @@
         private System.Windows.Forms.Label lbDropped;
         private System.Windows.Forms.Button btnShowCC;
         private System.Windows.Forms.CheckBox cbvAddLangRef;
+        private System.Windows.Forms.ComboBox cbSelKey;
     }
 }

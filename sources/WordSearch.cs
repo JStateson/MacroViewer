@@ -23,6 +23,8 @@ using System.Windows.Media.Media3D;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Diagnostics;
 using System.Windows.Interop;
+using System.IO.Ports;
+using System.Reflection;
 
 namespace MacroViewer
 {
@@ -59,11 +61,12 @@ namespace MacroViewer
             }
         }
 
-        private int SelectedRow = -1;
+        private int SelectedRow = 0;
         private List<cRefURLs> RefUrls = new List<cRefURLs>();
         private List<CFound> cFound = new List<CFound>();
         private List<CFound> cSorted = new List<CFound>();
         private List<CFound> aSorted = new List<CFound>();
+        private List<CFound> dSorted = new List<CFound>();
         private List<CBody> cAll;
         List<string> keywords;
         private bool[] KeyPresent;
@@ -83,16 +86,17 @@ namespace MacroViewer
         private Font Reg10;
         private string SelectedFile = "";
         private string HasFiles = "";
+        private string SaveHasFiles = "";
         private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
         private Color RestoreColor;
         private string[] CountryCodes;
         private string CountryCodeResults;
-        //private int ShowBits = 7;   // 3 bits set
-        //private bool bIgnoreSB = false;
-
-        /// </summary>
-        /// <param name="Rcb"></param>
-        /// <param name="bAllowChangeExit"></param>
+        private int ShowBits = 1;   // 3 bits set if 7
+        private bool bIgnoreSB = false;
+        private List<int> WhereInx= new List<int>();
+        private int MaxMatches; // most matches in a macro
+        private int WhichMatch;
+        private string aFilter = "";
 
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
@@ -148,6 +152,15 @@ namespace MacroViewer
             }
         }
 
+        private void FilesHaveMatch()
+        {
+            foreach (Button b in gbSelect.Controls)
+            {
+                string s = b.Text;
+                b.Enabled = FileFound(s);
+            }
+        }
+
         private void SetLangVisable(bool b)
         {
             cbvAddLangRef.Visible = b;
@@ -160,9 +173,8 @@ namespace MacroViewer
             {
                 SetLangVisable(false);
                 SelectedFile = button.Text;
-                dgvSearched.RowEnter -= dgvSearched_RowEnter;
+                aFilter = "";
                 SortTable(0);
-                dgvSearched.RowEnter += dgvSearched_RowEnter;
             }
         }
 
@@ -249,18 +261,54 @@ namespace MacroViewer
                 {
                     n = JustExtract(SelectedFile);
                 }
-                aSorted.Clear();
-                for(int i = 0; i < n; i++)
+                if(aFilter != "key")
                 {
-                    int j = aSort[i];
-                    aSorted.Add(cSorted[j]);
+                    dSorted.Clear();
+                    for (int i = 0; i < n; i++)
+                    {
+                        int j = aSort[i];
+                        if (!cSorted[j].bWanted) continue;
+                        dSorted.Add(cSorted[j]);
+                    }
+                    dgvSearched.DataSource = null;
+                    dgvSearched.Invalidate();
+                    dgvSearched.DataSource = dSorted;
                 }
-                dgvSearched.DataSource = null;
-                dgvSearched.Invalidate();
-                dgvSearched.DataSource = aSorted;
+                else
+                {
+                    aSorted.Clear();
+                    for (int i = 0; i < n; i++)
+                    {
+                        int j = aSort[i];
+                        aSorted.Add(cSorted[j]);
+                    }
+                    dgvSearched.DataSource = null;
+                    dgvSearched.Invalidate();
+                    dgvSearched.DataSource = aSorted;
+                }
                 SetDGVwidth();
                 dgvSearched.Refresh();
             }
+        }
+
+        private int GetLastWhereUsed(int Row)
+        {
+            int n;
+            if (aSorted.Count == 0)
+            {
+                n =  cSorted[Row].WhereFound;
+            }
+            else
+            {
+                n = aSorted[Row].WhereFound;
+            }
+            lbKeyFound.Items.Clear();
+            string[] sEach = cAll[n].fKeys.Trim().Split(new[] { "\n" }, StringSplitOptions.None);
+            foreach (string s in sEach)
+            {
+                lbKeyFound.Items.Add(s);
+            }
+            return n;
         }
 
         private void dgvSearched_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -272,14 +320,7 @@ namespace MacroViewer
                 dgvSearched.Refresh();
                 return;
             }
-            int n = cSorted[SelectedRow].WhereFound;
-            nUseLastViewed = n;
-            string[] sEach = cAll[n].fKeys.Trim().Split(new[] {"\n"}, StringSplitOptions.None);
-            lbKeyFound.Items.Clear();
-            foreach (string s in sEach)
-            {
-                lbKeyFound.Items.Add(s);
-            }
+            nUseLastViewed = GetLastWhereUsed(SelectedRow);
             List<CFound> bSorted = (List<CFound>)dgvSearched.DataSource as List<CFound>;
             cbvAddLangRef.Visible = bSorted[SelectedRow].MayHaveLanguage;
         }
@@ -443,7 +484,9 @@ namespace MacroViewer
             cbvAddLangRef.Checked = false;
             dgvSearched.DataSource = null;
             dgvSearched.Rows.Clear();
-
+            cbSelKey.Visible = !rbEPhrase.Checked;
+            cbSelKey.Items.Clear();
+            WhichMatch = 0;
             TestForCountryCode(tbKeywords.Text.ToLower());
 
             sBetter = FormBetter(tbKeywords.Text.Trim());
@@ -454,7 +497,7 @@ namespace MacroViewer
 
             SplitStringWithQuotedPhrases(sBetter);
 
-
+            MaxMatches = 0;
             int n = keywords.Count;
             int j,i = 0;
             KeyPresent = new bool[n];
@@ -491,6 +534,7 @@ namespace MacroViewer
                 {
                     n = 0;
                     CFound cf = new CFound();
+                    cf.bWanted = true;
                     cf.WhichMatch = 0;
                     cf.MayHaveLanguage = cb.sBody.IndexOf(Utils.sPossibleLanguageOption[0]) > -1;
                     if(KeyCount.Length == 1)
@@ -505,6 +549,10 @@ namespace MacroViewer
                         int iBit = 1;
                         foreach (int m in KeyCount)
                         {
+                            if (KeyCount[1] >0)
+                            {
+                                int xxx = 0;
+                            }
                             n += (m > 0) ? 1 : 0;
                             if(m>0)
                             {
@@ -523,7 +571,9 @@ namespace MacroViewer
                     cf.File = cb.File;
                     CountFile(cb.File);
                     cf.Found = n.ToString();
+                    MaxMatches = Math.Max(n, MaxMatches);
                     cf.WhereFound = i;
+                    WhichMatch |= cf.WhichMatch;
                     cFound.Add(cf);
                 }
                 else
@@ -534,6 +584,32 @@ namespace MacroViewer
             }
             NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);
+            tbNumMatches.Text = cFound.Count.ToString();
+            if(cFound.Count > 0)
+            {
+                cbSelKey.Items.Clear();
+                WhereInx.Clear();
+                cbSelKey.Items.Add("Any");
+                if(MaxMatches == cFound.Count)
+                    cbSelKey.Items.Add("All");
+                else cbSelKey.Items.Add("All " + MaxMatches.ToString());
+                int k = 0;
+                int kbit = 1;
+                foreach (string s in keywords)
+                {
+                    if((WhichMatch & kbit) > 0)
+                    {
+                        cbSelKey.Items.Add(s);
+                        WhereInx.Add(k);
+                    }
+                    k++;
+                    kbit = kbit << 1;
+                }
+                SaveHasFiles = HasFiles;
+                cbSelKey.SelectedIndexChanged -= cbSelKey_SelectedIndexChanged;
+                cbSelKey.SelectedIndex = 0;
+                cbSelKey.SelectedIndexChanged += cbSelKey_SelectedIndexChanged;
+            }
         }
 
         private void NotifyFinding(int cnt)
@@ -622,7 +698,7 @@ namespace MacroViewer
         {
             int i, j, n;
             if (CFcnt == 0) return;
-            dgvSearched.RowEnter -= dgvSearched_RowEnter;
+            //dgvSearched.RowEnter -= dgvSearched_RowEnter;
             cSorted.Clear();
             RunSort(CFcnt, Descending);
             n = cFound.Count;
@@ -638,12 +714,12 @@ namespace MacroViewer
             SetDGVwidth();
             if (TotalMatches > 0)
             {
-                tbNumMatches.Text = TotalMatches.ToString();
+                //tbNumMatches.Text = TotalMatches.ToString();
                 TriedFailed = false;
             }
             else
             {
-                tbNumMatches.Text = "";
+                //tbNumMatches.Text = "";
                 TriedFailed = true;
             }
             gbSelect.Visible = TotalMatches > 0;
@@ -651,7 +727,6 @@ namespace MacroViewer
             {
                 AddSelButtons();
             }
-            dgvSearched.RowEnter += dgvSearched_RowEnter;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -849,20 +924,75 @@ namespace MacroViewer
             lbKeyFound.Items.AddRange(CountryCodeResults.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
         }
 
+        private void FormOnlyThisKey(int inx)
+        {
+            int i, j, n;
+            aSorted.Clear();
+            n = GetLastWhereUsed(SelectedRow);
+            string[] sEach = cAll[n].fKeys.Trim().Split(new[] { "\n" }, StringSplitOptions.None);
+            n = cFound.Count;
+            dgvSearched.DataSource = cSorted;
+            if (inx == 0)
+            {
+                tbNumMatches.Text = cSorted.Count.ToString();
+                HasFiles = SaveHasFiles;
+                return;
+            }
+            inx--;
+            HasFiles = "";
+            for (i = 0; i < n; i++)
+            {
+                j = SortInx[i];
+                cFound[j].bWanted = false;
+                if (inx > 0)
+                {
+                    if ((cFound[j].WhichMatch == (1 << (inx-1))))
+                    {
+                        aSorted.Add(cFound[j]);
+                        cFound[j].bWanted = true;
+                        CountFile(cFound[j].File);
+                    }
+                }
+                else
+                {
+                    int v = Utils.CountSetBits(cFound[j].WhichMatch);
+                    if (v == MaxMatches)
+                    {
+                        aSorted.Add(cFound[j]);
+                        cFound[j].bWanted = true;
+                        CountFile(cFound[j].File);
+                    }
+                }
+            }
+            dgvSearched.RowEnter -= dgvSearched_RowEnter;
+            dgvSearched.DataSource = aSorted;
+            dgvSearched.RowEnter += dgvSearched_RowEnter;
+            tbNumMatches.Text = aSorted.Count.ToString();
+            aFilter = "key";
+        }
+
         // this is used by the country code lookup
         private void lbKeyFound_DoubleClick(object sender, EventArgs e)
         {
-            if(btnShowCC.Visible)
+            int index = lbKeyFound.SelectedIndex;
+            string sCode = lbKeyFound.Items[index].ToString();
+            if (btnShowCC.Visible)
             {
-                int index = lbKeyFound.SelectedIndex;
-                if (index != ListBox.NoMatches)
+                string tCode = lbKeyFound.Items[0].ToString();
+                if(tCode.Contains("Double click"))
                 {
-                    string sCode = lbKeyFound.Items[index].ToString();
                     Clipboard.SetText(sCode.Substring(0, 4));
+                    return;          
                 }
             }
+
         }
 
 
+        private void cbSelKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FormOnlyThisKey(cbSelKey.SelectedIndex);
+            FilesHaveMatch();
+        }
     }
 }

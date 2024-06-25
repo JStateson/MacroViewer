@@ -207,6 +207,32 @@ namespace MacroViewer
             return sIN;
         }
 
+
+        // adjust i and j so that they do not contains any leading or trailing spaces
+        // i is start position, k is length of string
+        public static string AdjustNoTrim(ref int i, ref int k, ref string s)
+        {
+            int j = i + k - 1;
+            char c = s[i];
+            while(c == ' ')
+            {
+                i++;
+                c = s[i];
+            }
+            c = s[j];
+            while(c == ' ')
+            {
+                j--;
+                c = s[j];
+            }
+            k = j - i + 1;
+            if (k > 0)
+            {
+                return s.Substring(i, k);
+            }
+            k = 0;
+            return "";
+        }
         public static void ShellHTML(string s, bool IsFilename)
         {
             string sTemp = WhereExe + "\\";

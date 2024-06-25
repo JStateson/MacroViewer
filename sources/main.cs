@@ -1173,7 +1173,8 @@ namespace MacroViewer
             bool bHaveHTML = false;
             int i = tbBody.SelectionStart;
             int j = tbBody.SelectionLength;
-            string strRaw = tbBody.SelectedText;
+            string sTemp = tbBody.Text;
+            string strRaw = Utils.AdjustNoTrim(ref i, ref j, ref sTemp);
             string strUC = strRaw.ToUpper();
             bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
             if (bHaveHTML)
@@ -1474,6 +1475,7 @@ namespace MacroViewer
             string sBody = tbBody.Text.ToLower();
             int i = tbBody.SelectionStart;
             int j = tbBody.SelectionLength;
+            string strRaw = Utils.AdjustNoTrim(ref i, ref j, ref sBody);
             bool bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
             if (!bHasHyper) // do not want to unlink urls
             {
@@ -1488,12 +1490,48 @@ namespace MacroViewer
             // see if there is a range to link
 
             if (j < 12) return; // http://a.com is smallest
-            string strRaw = tbBody.SelectedText;
             sBody = strRaw.ToLower();
             bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
             if (bHasHyper) return;  // do not want to link anything twice
             Utils.ReplaceUrls(ref strRaw, true);
             ReplaceText(i, j, strRaw);
+        }
+
+        // This code will run when Ctrl+V is pressed.  if url selected then option to make a hyperlink
+        private void tbBody_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            int i, j, k;
+            string sBody, sFromCB, sL;
+            string sText, sS, sE;
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                sBody = tbBody.Text.ToLower();
+                i = tbBody.SelectionStart;
+                j = tbBody.SelectionLength;
+                if (j == 0) return;
+                sFromCB = Clipboard.GetText();
+                sL = sFromCB.ToLower();
+                k = sL.IndexOf("http");
+                if (k != 0) return;
+                sText = Utils.AdjustNoTrim(ref i, ref j, ref sBody);
+                string sOut = Utils.FormUrl(sFromCB, sText);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                /* the following DID NOT WORK!!!!
+
+                 DialogResult dr = MessageBox.Show("Make text into hyperlink? click Yes else Cancel", sText, MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.Cancel)
+                {
+                    e.Handled = false;
+                    e.SuppressKeyPress = false;
+                    return;
+                }
+                */
+                sS = sBody.Substring(0, i);
+                sE = sBody.Substring(i + j);
+                tbBody.Text = sS + sOut + sE;
+            }
         }
 
         private void btnPrev_Click(object sender, EventArgs e)

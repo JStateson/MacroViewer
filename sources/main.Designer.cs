@@ -345,7 +345,7 @@
             // 
             this.btnCleanUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCleanUrl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCleanUrl.Location = new System.Drawing.Point(202, 237);
+            this.btnCleanUrl.Location = new System.Drawing.Point(195, 144);
             this.btnCleanUrl.Name = "btnCleanUrl";
             this.btnCleanUrl.Size = new System.Drawing.Size(194, 32);
             this.btnCleanUrl.TabIndex = 22;
@@ -570,10 +570,9 @@
             this.tbBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbBody.Size = new System.Drawing.Size(531, 324);
             this.tbBody.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.tbBody, "Any HTML can be dropped into here for testing.\r\nFor example if you use ChatGPT to" +
-        " ask for HTML \r\nthe samples provided can be tested here.  Just be\r\nsure NOT to a" +
-        "ccidently save the example");
+            this.toolTip1.SetToolTip(this.tbBody, resources.GetString("tbBody.ToolTip"));
             this.tbBody.Click += new System.EventHandler(this.mnuKnow);
+            this.tbBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbBody_KeyDown);
             // 
             // btnToLower
             // 
@@ -628,7 +627,8 @@
             // btnCleanPaste
             // 
             this.btnCleanPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleanPaste.Location = new System.Drawing.Point(27, 243);
+            this.btnCleanPaste.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCleanPaste.Location = new System.Drawing.Point(255, 183);
             this.btnCleanPaste.Name = "btnCleanPaste";
             this.btnCleanPaste.Size = new System.Drawing.Size(134, 23);
             this.btnCleanPaste.TabIndex = 30;

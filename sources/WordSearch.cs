@@ -499,7 +499,7 @@ namespace MacroViewer
 
             MaxMatches = 0;
             int n = keywords.Count;
-            int j,i = 0;
+            int i = 0;
             KeyPresent = new bool[n];
             KeyCount = new int[n];
             CFcnt = 0;
@@ -549,10 +549,6 @@ namespace MacroViewer
                         int iBit = 1;
                         foreach (int m in KeyCount)
                         {
-                            if (KeyCount[1] >0)
-                            {
-                                int xxx = 0;
-                            }
                             n += (m > 0) ? 1 : 0;
                             if(m>0)
                             {
@@ -819,8 +815,6 @@ namespace MacroViewer
         //https://www.ebay.com/sch/i.html?_nkw=hp+cm1415&_sacat=58058
         private void AltSearch(string sKey)
         {
-            string s = "";
-            string t = "";
             FormCandidateMacros(sKey);
             switch(sKey)
             { 

@@ -2342,7 +2342,13 @@ namespace MacroViewer
         {
             string p = "";
             int i = strIn.IndexOf("<span>");
-            if (i < 0) return "";
+            if (i < 0)
+            {
+                if (strIn.Length == 0) return "";
+                string sLast = strIn;
+                strIn = "";
+                return sLast;
+            }
             if(i > 0)
             {
                 p += strIn.Substring(0, i);
@@ -2366,16 +2372,16 @@ namespace MacroViewer
             return sout;
         }
 
-        private int RemoveStyles(ref string sIn)
+        private int RemoveStylesClasses(string sKey, ref string sIn)
         {
-            int i = sIn.IndexOf(" style=\"");
+            int i = sIn.IndexOf(sKey);
             if (i < 0) return 0;
-            int j = sIn.IndexOf('"', i + 8);
+            int j = sIn.IndexOf('"', i + sKey.Length);
             if(j < 0) return 0;
             int n = j - i + 1;
             string s = sIn.Substring(i, n);
             sIn = sIn.Remove(i, n);
-            return 1 + RemoveStyles(ref sIn);
+            return 1 + RemoveStylesClasses(sKey, ref sIn);
         }
 
         private void CleanSB(ref string s)
@@ -2394,7 +2400,8 @@ namespace MacroViewer
         {
             string strTemp = GetHPclipboard().Trim();
             CleanSB(ref strTemp);
-            int n = RemoveStyles(ref strTemp);
+            int n = RemoveStylesClasses(" style=\"",ref strTemp);
+            n += RemoveStylesClasses(" class=\"", ref strTemp);
             string sOut = "";
             // first check for paragraphs
             while(true)

@@ -150,6 +150,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnFromHP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -305,7 +306,7 @@
             // 
             this.btnCancelEdits.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelEdits.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCancelEdits.Location = new System.Drawing.Point(358, 268);
+            this.btnCancelEdits.Location = new System.Drawing.Point(358, 237);
             this.btnCancelEdits.Name = "btnCancelEdits";
             this.btnCancelEdits.Size = new System.Drawing.Size(121, 32);
             this.btnCancelEdits.TabIndex = 21;
@@ -372,12 +373,12 @@
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopyFrom.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopyFrom.Location = new System.Drawing.Point(285, 315);
+            this.btnCopyFrom.Location = new System.Drawing.Point(299, 280);
             this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(194, 27);
+            this.btnCopyFrom.Size = new System.Drawing.Size(180, 27);
             this.btnCopyFrom.TabIndex = 10;
             this.btnCopyFrom.Text = "Paste from clipboard";
-            this.toolTip1.SetToolTip(this.btnCopyFrom, "This will paste HTML in additon to text");
+            this.toolTip1.SetToolTip(this.btnCopyFrom, "This will paste HTML in additon to text\r\nif any html is present. WUSIWUG");
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
             // 
@@ -414,7 +415,7 @@
             this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.Location = new System.Drawing.Point(484, 21);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(580, 709);
+            this.groupBox6.Size = new System.Drawing.Size(580, 736);
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EDIT BOX:  Enter text or html and click to Show As Page";
@@ -615,9 +616,9 @@
             // 
             this.btnClearEM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearEM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnClearEM.Location = new System.Drawing.Point(403, 213);
+            this.btnClearEM.Location = new System.Drawing.Point(399, 197);
             this.btnClearEM.Name = "btnClearEM";
-            this.btnClearEM.Size = new System.Drawing.Size(75, 32);
+            this.btnClearEM.Size = new System.Drawing.Size(79, 32);
             this.btnClearEM.TabIndex = 8;
             this.btnClearEM.Text = "Clear";
             this.toolTip1.SetToolTip(this.btnClearEM, "Erease the edit box");
@@ -1190,6 +1191,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.btnFromHP);
             this.gpMainEdit.Controls.Add(this.cbShowLang);
             this.gpMainEdit.Controls.Add(this.btnHTest);
             this.gpMainEdit.Controls.Add(this.btnSwapBR);
@@ -1229,7 +1231,7 @@
             this.btnSaveM.Enabled = false;
             this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSaveM.Location = new System.Drawing.Point(399, 166);
+            this.btnSaveM.Location = new System.Drawing.Point(399, 157);
             this.btnSaveM.Name = "btnSaveM";
             this.btnSaveM.Size = new System.Drawing.Size(75, 32);
             this.btnSaveM.TabIndex = 2;
@@ -1249,7 +1251,7 @@
             this.groupBox5.Controls.Add(this.btnCopyTo);
             this.groupBox5.Location = new System.Drawing.Point(24, 440);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(425, 290);
+            this.groupBox5.Size = new System.Drawing.Size(425, 317);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Clipboard and Notepad operations";
@@ -1379,6 +1381,20 @@
             // 
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnFromHP
+            // 
+            this.btnFromHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFromHP.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFromHP.Location = new System.Drawing.Point(244, 313);
+            this.btnFromHP.Name = "btnFromHP";
+            this.btnFromHP.Size = new System.Drawing.Size(230, 27);
+            this.btnFromHP.TabIndex = 33;
+            this.btnFromHP.Text = "Paste from cleaned clipboard";
+            this.toolTip1.SetToolTip(this.btnFromHP, "This will paste HTML in additon to text\r\nUnnecessary HTML will be removed\r\nUse th" +
+        "is to past from any HP community\r\nreply support page with HTML");
+            this.btnFromHP.UseVisualStyleBackColor = true;
+            this.btnFromHP.Click += new System.EventHandler(this.btnFromHP_Click);
             // 
             // main
             // 
@@ -1543,6 +1559,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuEmoji;
         private System.Windows.Forms.CheckBox cbShowLang;
         private System.Windows.Forms.ToolStripMenuItem mnuCCodes;
+        private System.Windows.Forms.Button btnFromHP;
     }
 }
 

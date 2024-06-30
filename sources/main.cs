@@ -22,6 +22,7 @@ using System.Security.Policy;
 using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
+using static System.Windows.Forms.LinkLabel;
 
 
 namespace MacroViewer
@@ -726,6 +727,11 @@ namespace MacroViewer
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
+            tbBody.Text = GetHPclipboard();
+        }
+
+        private string GetHPclipboard()
+        {
             string strTemp = "";
             if (Clipboard.ContainsText(TextDataFormat.Html))
             {
@@ -739,10 +745,8 @@ namespace MacroViewer
                     strTemp = strTemp.Replace("\n", Environment.NewLine);
                 }
             }
-            tbBody.Text = strTemp.Replace("<br>", Environment.NewLine);
+            return strTemp;
         }
-
-
 
         private void PutOnNotepad(string strIn)
         {
@@ -1479,7 +1483,7 @@ namespace MacroViewer
             bool bHasHyper = sBody.Contains("<a ") || sBody.Contains("<img ");
             if (!bHasHyper) // do not want to unlink urls
             {
-                if(j == 0)
+                if(j == 0 || strRaw.Trim().Length == 0)
                 {
                     sBody = tbBody.Text;
                     Utils.ReplaceUrls(ref sBody, true);
@@ -1512,6 +1516,7 @@ namespace MacroViewer
                 if (j == 0) return;
                 sFromCB = Clipboard.GetText();
                 sL = sFromCB.ToLower();
+                if (sL.Trim().Length == 0) return;
                 k = sL.IndexOf("http");
                 if (k != 0) return;
                 sText = Utils.AdjustNoTrim(ref i, ref j, ref sBody);
@@ -2318,6 +2323,99 @@ namespace MacroViewer
             mnuDevCol.Enabled = bTextFromClipboardMNUs;
             hPYouTubeToolStripMenuItem.Enabled = bTextFromClipboardMNUs;
             mnuHuntDev.Enabled = sL.Contains("dev") && sL.Contains("ven");
+        }
+
+        private string GetParagraph(ref string strIn)
+        {
+            string p = "";
+            int i = strIn.IndexOf("<p>");
+            if (i < 0) return "";
+            int j = strIn.IndexOf("</p>", i + 3);
+            if (j < 0) return "";
+            int n = j - i;
+            p = strIn.Substring(i + 3, j - i - 3);
+            strIn = strIn.Remove(i, n).Replace("<p> </p>"," ");
+            return p + "<br>" + GetParagraph(ref strIn);
+        }
+
+        private string GetSpans(ref string strIn)
+        {
+            string p = "";
+            int i = strIn.IndexOf("<span>");
+            if (i < 0) return "";
+            if(i > 0)
+            {
+                p += strIn.Substring(0, i);
+                strIn = strIn.Substring(i);
+                return p + GetSpans(ref strIn);
+            }
+            int j = strIn.IndexOf("</span>", i + 6);
+            if (j < 0) return "";
+            int n = j - i + 7;
+            p = strIn.Substring(i + 6, j - i - 6);
+            strIn = strIn.Remove(i, n);
+            return p + GetSpans(ref strIn);
+        }
+
+        private string sExtractInfo(string sP)
+        {
+            string sout = "";
+            int i = sP.IndexOf("<a href=\"");
+            int j = sP.IndexOf("</a>", i + 9);
+            string s = sP.Substring(i + 9, j - i - 9);
+            return sout;
+        }
+
+        private int RemoveStyles(ref string sIn)
+        {
+            int i = sIn.IndexOf(" style=\"");
+            if (i < 0) return 0;
+            int j = sIn.IndexOf('"', i + 8);
+            if(j < 0) return 0;
+            int n = j - i + 1;
+            string s = sIn.Substring(i, n);
+            sIn = sIn.Remove(i, n);
+            return 1 + RemoveStyles(ref sIn);
+        }
+
+        private void CleanSB(ref string s)
+        {
+            s = s.Replace("<span> </span>", " ");
+            s = s.Replace("<br >", "<br>");
+            s = s.Replace("&nbsp;", " ");
+            s = s.Replace(" rel=\"nofollow noopener noreferrer\"", "");
+            s = s.Replace(" target=\"_self\"", "");
+            s = s.Replace(" target=\"_blank\"", "");
+            s = s.Replace(" data-unlink=\"true\"", "");
+            s = Regex.Replace(s, @"\s+", " ");
+        }
+
+        private void btnFromHP_Click(object sender, EventArgs e)
+        {
+            string strTemp = GetHPclipboard().Trim();
+            CleanSB(ref strTemp);
+            int n = RemoveStyles(ref strTemp);
+            string sOut = "";
+            // first check for paragraphs
+            while(true)
+            {
+                string sPara = GetParagraph(ref strTemp);
+                if(sPara.Length == 0) break;
+                sOut += sPara + "<br>"; // sExtractInfo(sPara);
+            }
+            // if no paragraphs the try spans
+            if(sOut == "")
+            {
+                while(true)
+                {
+                    string sSpan = GetSpans(ref strTemp);
+                    if (sSpan == "") break;
+                    sOut += sSpan + "<br>";
+                }
+
+
+            }
+            tbBody.Text = sOut;
         }
     }
     

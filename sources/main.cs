@@ -1124,7 +1124,7 @@ namespace MacroViewer
                 string sNB =
                     "You may need to reset the printer: video here" + Utils.nBR(3) +
                     "WiFi setup to router:  video here" + Utils.nBR(3) +
-                    "For WiFi direct setup click here.<br>This is useful if there is no modem " + Utils.nBR(3) +
+                    "For WiFi direct setup click here.<br>This is useful if there is no modem or you do not want to give someone access to your modem but you want to let them print something." + Utils.nBR(3) +
                     "Simple push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
                     "Full feature software DEVICE MONTH YEAR" + Utils.nBR(3) +
                     "Printer Reference";
@@ -1512,6 +1512,7 @@ namespace MacroViewer
             string sOut = "";
             if (e.Control && e.KeyCode == Keys.V)
             {
+                if (Properties.Settings.Default.Vdisable) return;
                 string tBody = tbBody.Text;
                 sBody = tBody.ToLower();
                 i = tbBody.SelectionStart;

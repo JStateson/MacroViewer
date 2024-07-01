@@ -202,5 +202,29 @@ namespace MacroViewer.Properties {
                 this["sEmail"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Vdisable {
+            get {
+                return ((bool)(this["Vdisable"]));
+            }
+            set {
+                this["Vdisable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WSrepeat {
+            get {
+                return ((bool)(this["WSrepeat"]));
+            }
+            set {
+                this["WSrepeat"] = value;
+            }
+        }
     }
 }

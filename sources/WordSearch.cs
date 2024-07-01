@@ -32,8 +32,8 @@ namespace MacroViewer
     {
         public class cRefURLs
         {
-            public string PageOut="";
-            public string sFile="", sMacN="", nMac = "";
+            public string PageOut = "";
+            public string sFile = "", sMacN = "", nMac = "";
             public void init(string ssFile, string ssMacN, string sMac)
             {
                 sFile = ssFile;
@@ -41,6 +41,7 @@ namespace MacroViewer
                 nMac = sMac;
                 PageOut = "";
             }
+
             // only look after the _blank>
             public bool LookForUrl(int inx, ref string s)
             {
@@ -50,7 +51,7 @@ namespace MacroViewer
                 Right_a = s.IndexOf("</a>", inx);
                 if (Right_a == -1) return true;
                 Left_a = s.LastIndexOf("<a href", inx);
-                if(Left_a == -1) return true;
+                if (Left_a == -1) return true;
                 string t = s.Substring(Left_a, Right_a - Left_a) + "<br><br>";
                 int i = t.IndexOf(sBlank);
                 inx -= Left_a;
@@ -87,17 +88,18 @@ namespace MacroViewer
         private string SelectedFile = "";
         private string HasFiles = "";
         private string SaveHasFiles = "";
-        private bool [] ColSortDirection = new bool[4] {true,true,true,true}; // true is descending false is ascending
+        private bool[] ColSortDirection = new bool[4] { true, true, true, true }; // true is descending false is ascending
         private Color RestoreColor;
         private string[] CountryCodes;
         private string CountryCodeResults;
         private int ShowBits = 1;   // 3 bits set if 7
         private bool bIgnoreSB = false;
-        private List<int> WhereInx= new List<int>();
+        private List<int> WhereInx = new List<int>();
         private int MaxMatches; // most matches in a macro
         private int WhichMatch;
         private string aFilter = "";
-
+        private static string LastSearchWord = "";
+        private static string LastSearchParam = "";
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
         {
             InitializeComponent();
@@ -112,6 +114,64 @@ namespace MacroViewer
             Reg10 = gbAlltSearch.Font;
             RestoreColor = lbTMinfo.ForeColor;
             CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            InRepeatMode();
+        }
+
+        private void SetLastParm()
+        {
+            foreach(RadioButton rb in gbRB.Controls)
+            {
+                if(rb.Checked)
+                {
+                    LastSearchParam = rb.Name;
+                    return;
+                }
+            }
+        }
+
+        private void SetParamsFromLast()
+        {
+            switch(LastSearchParam)
+            {
+                case "rbExactMatch":
+                    rbExactMatch.Checked = true;
+                    break;
+                case "rbEPhrase":
+                    rbEPhrase.Checked = true;
+                    break;
+                case "rbAnyMatch":
+                    rbAnyMatch.Checked = true;
+                    break;
+            }
+        }
+
+        private void InRepeatMode()
+        {
+            if (Properties.Settings.Default.WSrepeat && LastSearchWord != "")
+            {
+                tbKeywords.Text = LastSearchWord;
+                    SetParamsFromLast();
+            }
+        }
+        private void AreWeRepeating()
+        {
+            if(Properties.Settings.Default.WSrepeat)
+            {
+                if(LastSearchWord == "")
+                {
+                    LastSearchWord = tbKeywords.Text;
+                    SetLastParm();
+                }
+                else
+                {
+                    if(LastSearchWord != tbKeywords.Text)
+                    {
+                        Properties.Settings.Default.WSrepeat = false;
+                        LastSearchWord = "";
+                        Properties.Settings.Default.Save();
+                    }
+                }
+            }
         }
 
         private void CountryLookup(string sLine)
@@ -577,6 +637,10 @@ namespace MacroViewer
                     cAll[i].fKeys = "";
                 }
                 i++;
+            }
+            if(CFcnt > 0)
+            {
+                AreWeRepeating();
             }
             NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);

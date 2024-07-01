@@ -41,6 +41,8 @@ namespace MacroViewer
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             tbEmail.Text = Properties.Settings.Default.sEmail;
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
+            cbDisableVPaste.Checked = Properties.Settings.Default.Vdisable;
+            cbRepeatSearch.Checked = Properties.Settings.Default.WSrepeat;
             lbSaveLoc.Text = Utils.WhereExe + "\\UrlDebug.txt";
             CountUnkUrls();
             bWantsExit = false; 
@@ -82,6 +84,8 @@ namespace MacroViewer
             Properties.Settings.Default.sPPrefix = tbPP.Text;
             Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
             Properties.Settings.Default.LongestExpectedURL = Convert.ToInt32(tbLongAllowed.Text);
+            Properties.Settings.Default.Vdisable = cbDisableVPaste.Checked;
+            Properties.Settings.Default.WSrepeat = cbRepeatSearch.Checked;
             Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")

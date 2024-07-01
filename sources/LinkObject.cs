@@ -24,18 +24,7 @@ namespace MacroViewer
         // ext = "*.png"                       descr = PNG
         */
 
-        private bool IsUrlImage(string aLCase)
-        {
-            string[] ImgExt = new string[11]
-            {".bmp",".dib",".rle",".jpg",".jpeg",".jpe",".jfif",".gif",".tif",".tiff",".png" };
-            if (aLCase.Contains("image/serverpage"))
-                return true; // must be from HP server
-            foreach (string aImg in ImgExt)
-            {
-                if(aLCase.Contains(aImg))return true;
-            }
-            return false;
-        }
+
 
         private void RBsetContext()
         {
@@ -55,7 +44,7 @@ namespace MacroViewer
         public LinkObject(string rstrIn)
         {
             strResultOut = "";
-            bIsImage = IsUrlImage(rstrIn.ToLower());
+            bIsImage = Utils.IsUrlImage(rstrIn.ToLower());
             InitializeComponent();
             rbimage.Checked = bIsImage;
             rbNotImage.Checked = !bIsImage;

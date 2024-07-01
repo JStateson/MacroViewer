@@ -212,6 +212,7 @@ namespace MacroViewer
         // i is start position, k is length of string
         public static string AdjustNoTrim(ref int i, ref int k, ref string s)
         {
+            if (s == "") return "";
             int j = i + k - 1;
             char c = s[i];
             while(c == ' ')
@@ -604,6 +605,7 @@ internal static class ClipboardFormats
             }
             return sS + sFs + s + sFe + sE;
         }
+
         public static string Form1CellTable(string strIn)
         {
             return "<table border=\"1\" width=\"50%\"><tr><td>" + strIn + "</td></tr></table>";
@@ -974,6 +976,9 @@ internal static class ClipboardFormats
 
 
             i = surl.IndexOf("?utm_source=");  // gets bing and google
+            if (i > 0) return sUrl.Substring(0, i);
+
+            i = surl.IndexOf("?gclid=");  // gets crucial
             if (i > 0) return sUrl.Substring(0, i);
 
             //if (surl.Contains("amazon") || surl.Contains("newegg") || surl.Contains("westerndigital"))

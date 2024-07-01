@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
 using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 
 namespace MacroViewer
@@ -1508,9 +1509,11 @@ namespace MacroViewer
             int i, j, k;
             string sBody, sFromCB, sL;
             string sText, sS, sE;
+            string sOut = "";
             if (e.Control && e.KeyCode == Keys.V)
             {
-                sBody = tbBody.Text.ToLower();
+                string tBody = tbBody.Text;
+                sBody = tBody.ToLower();
                 i = tbBody.SelectionStart;
                 j = tbBody.SelectionLength;
                 if (j == 0) return;
@@ -1519,8 +1522,12 @@ namespace MacroViewer
                 if (sL.Trim().Length == 0) return;
                 k = sL.IndexOf("http");
                 if (k != 0) return;
-                sText = Utils.AdjustNoTrim(ref i, ref j, ref sBody);
-                string sOut = Utils.FormUrl(sFromCB, sText);
+                sText = Utils.AdjustNoTrim(ref i, ref j, ref tBody);
+                if(Utils.IsUrlImage(sL))
+                {
+                    sOut = Utils.AssembleIMG(sText);
+                }
+                else sOut = Utils.FormUrl(sFromCB, sText);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
                 /* the following DID NOT WORK!!!!
@@ -2400,10 +2407,25 @@ namespace MacroViewer
         {
             string strTemp = GetHPclipboard().Trim();
             CleanSB(ref strTemp);
-            int n = RemoveStylesClasses(" style=\"",ref strTemp);
-            n += RemoveStylesClasses(" class=\"", ref strTemp);
+            int n = RemoveStylesClasses("style=\"",ref strTemp);
+            n += RemoveStylesClasses("class=\"", ref strTemp);
+            n += RemoveStylesClasses("image-alt=\"", ref strTemp);
+            n += RemoveStylesClasses("role=\"", ref strTemp);
+            n += RemoveStylesClasses("title=\"", ref strTemp);
+            n += RemoveStylesClasses("alt=\"", ref strTemp);
+            n += RemoveStylesClasses("li-bindable=\"", ref strTemp);
+            n += RemoveStylesClasses("li-message-uid=\"", ref strTemp);
+            n += RemoveStylesClasses("li-image-url=\"", ref strTemp);
+            n += RemoveStylesClasses("li-image-display-id=\"", ref strTemp);
+            n += RemoveStylesClasses("li-bypass-lightbox-when-linked=\"", ref strTemp);
+            n += RemoveStylesClasses("tabindex=\"", ref strTemp);
+            n += RemoveStylesClasses("li-use-hover-links=\"", ref strTemp);
+            n += RemoveStylesClasses("li-compiled=\"", ref strTemp);
             string sOut = "";
             // first check for paragraphs
+            strTemp = Regex.Replace(strTemp, @"\s+", " ");
+            strTemp = strTemp.Replace("<span >", "<span>");
+            strTemp = strTemp.Replace("<p >", "<p>");
             while(true)
             {
                 string sPara = GetParagraph(ref strTemp);
@@ -2411,16 +2433,26 @@ namespace MacroViewer
                 sOut += sPara + "<br>"; // sExtractInfo(sPara);
             }
             // if no paragraphs the try spans
-            if(sOut == "")
+            if(sOut != "")
             {
-                while(true)
+                strTemp = sOut;
+                sOut = "";
+            }
+            
+            while (true)
+            {
+                string sSpan = GetSpans(ref strTemp);
+                if (sSpan == "")
                 {
-                    string sSpan = GetSpans(ref strTemp);
-                    if (sSpan == "") break;
-                    sOut += sSpan + "<br>";
+                    if(sOut.Contains("<span>"))
+                    {
+                        strTemp = sOut;
+                        sOut = "";
+                        continue;
+                    }
+                    break;
                 }
-
-
+                sOut += sSpan + "<br>";
             }
             tbBody.Text = sOut;
         }

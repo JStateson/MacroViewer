@@ -212,12 +212,14 @@ namespace MacroViewer
         // i is start position, k is length of string
         public static string AdjustNoTrim(ref int i, ref int k, ref string s)
         {
-            if (s == "") return "";
+            if (s == "" || k == 0) return "";
+            if (i >= s.Length) return "";
             int j = i + k - 1;
             char c = s[i];
             while(c == ' ')
             {
                 i++;
+                if(i >= s.Length) break;
                 c = s[i];
             }
             c = s[j];

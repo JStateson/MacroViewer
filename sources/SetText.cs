@@ -10,7 +10,6 @@ namespace MacroViewer
     {
         private string sLoc;
         private bool bBoxed = false;
-        private bool bBlinking = false;
         private string strBoxed = "";
         private int CurrentDemo = 0, TotalDemos = 4;
         //0: box url, 1: list, 2:image url, 3: image
@@ -83,8 +82,23 @@ namespace MacroViewer
             if(rbNoBox.Checked) tbResult.Text = strResult;
             else
             {
-                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult) : Utils.Form1CellTableP(strResult);
+                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult) : Utils.Form1CellTableP(strResult,GetBoxWidth());
             }
+        }
+
+        private string GetBoxWidth()
+        {
+            string sRtn = "";
+            foreach(RadioButton rb in gbPCTbw.Controls)
+            {
+                if (rb.Checked)
+                {
+                    if (rb.Name != "rb0pct")
+                        sRtn = rb.Text;
+                    break;
+                }
+            }
+            return sRtn;
         }
 
         private void btnApplyText_Click(object sender, EventArgs e)
@@ -102,6 +116,7 @@ namespace MacroViewer
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            FormObject();
             RunBrowser();
         }
 
@@ -131,15 +146,6 @@ namespace MacroViewer
         {
             Properties.Settings.Default.FillAlpha = cbPreFill.Checked;
             Properties.Settings.Default.Save();
-        }
-
-
-        private void PutInBox(bool bSqueeze)
-        {
-            string strUnBoxed = tbResult.Text.Trim();
-            if (strUnBoxed == "") return;
-            strBoxed = rbSqueeze.Checked ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
-            tbResult.Text = strBoxed;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

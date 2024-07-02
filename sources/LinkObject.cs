@@ -11,7 +11,6 @@ namespace MacroViewer
     {
         private string sLoc;
         private bool bBoxed = false;
-        private bool bBlinking = false;
         string strBoxed = "";
         public string strResultOut { get; set; }
         private bool bIsImage = false;
@@ -30,7 +29,7 @@ namespace MacroViewer
         {
             if (rbimage.Checked)
             {
-                pbImage.ImageLocation = tbSelectedItem.Text;
+                pbImage.ImageLocation = tbRawUrl.Text;
                 tbUrlText.Enabled = false; // not used for images
             }
             else
@@ -38,8 +37,7 @@ namespace MacroViewer
                 pbImage.ImageLocation = "";
                 tbUrlText.Enabled = true;
             }
-            StopTimer();
-            tbImageUrl.Text = "";
+            tbResult.Text = "";
         }
         public LinkObject(string rstrIn)
         {
@@ -48,14 +46,14 @@ namespace MacroViewer
             InitializeComponent();
             rbimage.Checked = bIsImage;
             rbNotImage.Checked = !bIsImage;
-            tbSelectedItem.Text = rstrIn;
+            tbRawUrl.Text = rstrIn;
             RBsetContext();
             sLoc = Utils.WhereExe;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            strResultOut = bBoxed ? strBoxed : tbImageUrl.Text;
+            strResultOut = bBoxed ? strBoxed : tbResult.Text;
             this.Close();
         }
 
@@ -65,41 +63,47 @@ namespace MacroViewer
             this.Close();
         }
 
-        private string FormObject()
+
+        private void FormObject()
         {
-            string sTB = tbSelectedItem.Text;   // do not trim as space have be wanted
+            string sTB = tbRawUrl.Text;   // do not trim as space have be wanted
+            string strResult = "";
             if (rbimage.Checked)
             {
                 strImgUrl = Utils.AssembleIMG(sTB);
-                tbImageUrl.Text = strImgUrl;
+                strResult = strImgUrl;
             }
             else
             {
                 string strTmp = tbUrlText.Text;
                 string strUrl = Utils.dRef(sTB);
                 if (strTmp == "") strTmp = strUrl;
-                tbImageUrl.Text = Utils.FormUrl(strUrl, strTmp);
+                strResult = Utils.FormUrl(strUrl, strTmp);
             }
-            return tbImageUrl.Text;
+            if (rbNoBox.Checked) tbResult.Text = strResult;
+            else
+            {
+                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult) : Utils.Form1CellTableP(strResult, GetBoxWidth());
+            }
         }
 
         private void btnApplyText_Click(object sender, EventArgs e)
         {
             FormObject();
-            StopTimer();
         }
 
-        private void RunBrowser(string sLoc)
+        private void RunBrowser()
         {
-            string strTemp = tbImageUrl.Text;
-            if(strTemp == "" || bBoxed)strTemp = strBoxed;
+            string strTemp = tbResult.Text;
+            if (strTemp == "" || bBoxed) strTemp = strBoxed;
             if (strTemp == "") return;
             Utils.ShowPageInBrowser("", strTemp);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            RunBrowser(sLoc);
+            FormObject();
+            RunBrowser();
         }
 
         private void rbNotImage_CheckedChanged(object sender, EventArgs e)
@@ -112,43 +116,8 @@ namespace MacroViewer
             RBsetContext();
         }
 
-
-        private void TimerControl(bool bEnable)
-        {
-            bBlinking = bEnable;
-            BlinkTimer.Enabled = bEnable;
-            if (bEnable) btnBoxIT.Text = "Remove from box";
-            else
-            {
-                btnBoxIT.Text = "Put in box";
-                strBoxed = "";
-            }
-        }
-
-        private void StartTimer()
-        {
-            bBlinking = true;
-            bBoxed = true;
-            btnBoxIT.Text = "Remove from box";
-            BlinkTimer.Enabled = true;
-            Application.DoEvents();
-        }
-
-        private void StopTimer()
-        {
-            BlinkTimer.Enabled = false;
-            Application.DoEvents();
-            bBlinking = false;
-            bBoxed = false;
-            btnBoxIT.Text = "Put in box";
-            strBoxed = "";
-        }
-
-
         private void LinkObject_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BlinkTimer.Enabled = false;
-            BlinkTimer = null;
             if (pbImage.Image != null)
             {
                 pbImage.Image.Dispose();
@@ -156,42 +125,31 @@ namespace MacroViewer
             }
         }
 
-        private void BlinkTimer_Tick(object sender, EventArgs e)
-        {
-            lbBoxed.Visible = bBlinking;
-            bBlinking = !bBlinking;
-        }
 
         private void LinkObject_Shown(object sender, EventArgs e)
         {
-            tbImageUrl.Focus();
+            tbResult.Focus();
         }
 
         private void btnAE_Click(object sender, EventArgs e)
         {
-            strResultOut = bBoxed ? strBoxed : tbImageUrl.Text;
+            strResultOut = tbResult.Text;
             this.Close();
         }
 
-        private void btnSqueeze_Click(object sender, EventArgs e)
+        private string GetBoxWidth()
         {
-            BoxIt(true);
+            string sRtn = "";
+            foreach (RadioButton rb in gbPCTbw.Controls)
+            {
+                if (rb.Checked)
+                {
+                    if (rb.Name != "rb0pct")
+                        sRtn = rb.Text;
+                    break;
+                }
+            }
+            return sRtn;
         }
-
-        private void btnBoxIT_Click(object sender, EventArgs e)
-        {
-            BoxIt(false);
-        }
-
-        private void BoxIt(bool bSqueeze)
-        {
-            string strUnBoxed = tbImageUrl.Text.Trim();
-            if (strUnBoxed == "") strUnBoxed = FormObject();
-            if (strUnBoxed == "") return;
-            strBoxed = bSqueeze ? Utils.Form1CellTable(strUnBoxed) : Utils.Form1CellTableP(strUnBoxed);
-            if (bBoxed) StopTimer();
-            else StartTimer();
-        }
-
     }
 }

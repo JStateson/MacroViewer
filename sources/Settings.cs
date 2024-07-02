@@ -21,7 +21,6 @@ namespace MacroViewer
         public eBrowserType eBrowser {  get; set; }
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
-        private string strEditedSave = "";
 
         public Settings(eBrowserType reBrowser, string ruserid, int NumAttached)
         {

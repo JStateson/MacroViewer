@@ -92,8 +92,6 @@ namespace MacroViewer
         private Color RestoreColor;
         private string[] CountryCodes;
         private string CountryCodeResults;
-        private int ShowBits = 1;   // 3 bits set if 7
-        private bool bIgnoreSB = false;
         private List<int> WhereInx = new List<int>();
         private int MaxMatches; // most matches in a macro
         private int WhichMatch;

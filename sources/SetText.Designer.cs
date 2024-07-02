@@ -33,6 +33,7 @@
             this.gbSelectType = new System.Windows.Forms.GroupBox();
             this.tbSelectedItem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbMakeIMG = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbCleanUrl = new System.Windows.Forms.CheckBox();
             this.tbRawUrl = new System.Windows.Forms.TextBox();
@@ -61,13 +62,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbMakeIMG = new System.Windows.Forms.CheckBox();
+            this.gbPCTbw = new System.Windows.Forms.GroupBox();
+            this.rb0pct = new System.Windows.Forms.RadioButton();
+            this.rb50 = new System.Windows.Forms.RadioButton();
+            this.rb100 = new System.Windows.Forms.RadioButton();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gpTable.SuspendLayout();
+            this.gbPCTbw.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSelectType
@@ -102,6 +107,17 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enter the URL here (if wanted)";
+            // 
+            // cbMakeIMG
+            // 
+            this.cbMakeIMG.AutoSize = true;
+            this.cbMakeIMG.Location = new System.Drawing.Point(19, 144);
+            this.cbMakeIMG.Name = "cbMakeIMG";
+            this.cbMakeIMG.Size = new System.Drawing.Size(117, 20);
+            this.cbMakeIMG.TabIndex = 3;
+            this.cbMakeIMG.Text = "Treat as Image";
+            this.toolTip1.SetToolTip(this.cbMakeIMG, "strip unwanted referals");
+            this.cbMakeIMG.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -200,6 +216,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.gbPCTbw);
             this.groupBox4.Controls.Add(this.btnClear);
             this.groupBox4.Controls.Add(this.rbNoBox);
             this.groupBox4.Controls.Add(this.rbSqueeze);
@@ -211,7 +228,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(15, 396);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(654, 253);
+            this.groupBox4.Size = new System.Drawing.Size(729, 281);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
@@ -220,7 +237,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(533, 78);
+            this.btnClear.Location = new System.Drawing.Point(633, 75);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(79, 36);
             this.btnClear.TabIndex = 11;
@@ -234,7 +251,7 @@
             this.rbNoBox.Checked = true;
             this.rbNoBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbNoBox.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rbNoBox.Location = new System.Drawing.Point(225, 90);
+            this.rbNoBox.Location = new System.Drawing.Point(188, 87);
             this.rbNoBox.Name = "rbNoBox";
             this.rbNoBox.Size = new System.Drawing.Size(82, 24);
             this.rbNoBox.TabIndex = 10;
@@ -247,11 +264,11 @@
             this.rbSqueeze.AutoSize = true;
             this.rbSqueeze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbSqueeze.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rbSqueeze.Location = new System.Drawing.Point(225, 61);
+            this.rbSqueeze.Location = new System.Drawing.Point(188, 58);
             this.rbSqueeze.Name = "rbSqueeze";
-            this.rbSqueeze.Size = new System.Drawing.Size(171, 24);
+            this.rbSqueeze.Size = new System.Drawing.Size(156, 24);
             this.rbSqueeze.TabIndex = 9;
-            this.rbSqueeze.Text = "Squeze into a box";
+            this.rbSqueeze.Text = "Squeze into box";
             this.rbSqueeze.UseVisualStyleBackColor = true;
             // 
             // rbFitBox
@@ -259,7 +276,7 @@
             this.rbFitBox.AutoSize = true;
             this.rbFitBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbFitBox.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rbFitBox.Location = new System.Drawing.Point(225, 31);
+            this.rbFitBox.Location = new System.Drawing.Point(188, 28);
             this.rbFitBox.Name = "rbFitBox";
             this.rbFitBox.Size = new System.Drawing.Size(115, 24);
             this.rbFitBox.TabIndex = 8;
@@ -282,7 +299,7 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(490, 28);
+            this.btnTest.Location = new System.Drawing.Point(590, 25);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(122, 36);
             this.btnTest.TabIndex = 7;
@@ -304,7 +321,7 @@
             // 
             // tbResult
             // 
-            this.tbResult.Location = new System.Drawing.Point(14, 133);
+            this.tbResult.Location = new System.Drawing.Point(22, 162);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
             this.tbResult.Size = new System.Drawing.Size(592, 100);
@@ -400,29 +417,68 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Info;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(686, 408);
+            this.label3.Location = new System.Drawing.Point(782, 409);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(389, 240);
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
             // 
-            // cbMakeIMG
+            // gbPCTbw
             // 
-            this.cbMakeIMG.AutoSize = true;
-            this.cbMakeIMG.Location = new System.Drawing.Point(19, 144);
-            this.cbMakeIMG.Name = "cbMakeIMG";
-            this.cbMakeIMG.Size = new System.Drawing.Size(117, 20);
-            this.cbMakeIMG.TabIndex = 3;
-            this.cbMakeIMG.Text = "Treat as Image";
-            this.toolTip1.SetToolTip(this.cbMakeIMG, "strip unwanted referals");
-            this.cbMakeIMG.UseVisualStyleBackColor = true;
+            this.gbPCTbw.Controls.Add(this.rb0pct);
+            this.gbPCTbw.Controls.Add(this.rb50);
+            this.gbPCTbw.Controls.Add(this.rb100);
+            this.gbPCTbw.Location = new System.Drawing.Point(359, 21);
+            this.gbPCTbw.Name = "gbPCTbw";
+            this.gbPCTbw.Size = new System.Drawing.Size(165, 113);
+            this.gbPCTbw.TabIndex = 12;
+            this.gbPCTbw.TabStop = false;
+            this.gbPCTbw.Text = "Box width (%)";
+            // 
+            // rb0pct
+            // 
+            this.rb0pct.AutoSize = true;
+            this.rb0pct.Checked = true;
+            this.rb0pct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb0pct.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb0pct.Location = new System.Drawing.Point(38, 84);
+            this.rb0pct.Name = "rb0pct";
+            this.rb0pct.Size = new System.Drawing.Size(74, 20);
+            this.rb0pct.TabIndex = 13;
+            this.rb0pct.TabStop = true;
+            this.rb0pct.Text = "Default";
+            this.rb0pct.UseVisualStyleBackColor = true;
+            // 
+            // rb50
+            // 
+            this.rb50.AutoSize = true;
+            this.rb50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb50.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb50.Location = new System.Drawing.Point(38, 55);
+            this.rb50.Name = "rb50";
+            this.rb50.Size = new System.Drawing.Size(41, 20);
+            this.rb50.TabIndex = 12;
+            this.rb50.Text = "50";
+            this.rb50.UseVisualStyleBackColor = true;
+            // 
+            // rb100
+            // 
+            this.rb100.AutoSize = true;
+            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb100.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb100.Location = new System.Drawing.Point(38, 25);
+            this.rb100.Name = "rb100";
+            this.rb100.Size = new System.Drawing.Size(49, 20);
+            this.rb100.TabIndex = 11;
+            this.rb100.Text = "100";
+            this.rb100.UseVisualStyleBackColor = true;
             // 
             // SetText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1087, 667);
+            this.ClientSize = new System.Drawing.Size(1183, 700);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
@@ -451,6 +507,8 @@
             this.groupBox4.PerformLayout();
             this.gpTable.ResumeLayout(false);
             this.gpTable.PerformLayout();
+            this.gbPCTbw.ResumeLayout(false);
+            this.gbPCTbw.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,5 +548,9 @@
         private System.Windows.Forms.Button btnDemo;
         private System.Windows.Forms.Button btnClrDemo;
         private System.Windows.Forms.CheckBox cbMakeIMG;
+        private System.Windows.Forms.GroupBox gbPCTbw;
+        private System.Windows.Forms.RadioButton rb0pct;
+        private System.Windows.Forms.RadioButton rb50;
+        private System.Windows.Forms.RadioButton rb100;
     }
 }

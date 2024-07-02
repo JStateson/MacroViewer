@@ -22,7 +22,9 @@ namespace MacroViewer
     {
         private string sLoc;
         private bool bDoingExample = false;
-        private string sColor = ""; // used with SPECIAL1
+#if SPECIAL1
+        private string sColor = "";
+#endif
         int r30, c30;   // number of rows and columns in that small data grid table
         private int RowsExpected = 0;
         private int ColsExpected = 0;
@@ -412,7 +414,9 @@ namespace MacroViewer
                 int rE = RowsExpected;
                 for (int r = 0; r < RowsExpected; r++)
                 {
+#if SPECIAL1
                     int i = 0;
+#endif
                     sOut += sStrCol;
 #if SPECIAL1
                     sColor = sMyTable[cE - 1][r];

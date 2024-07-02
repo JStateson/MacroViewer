@@ -126,6 +126,9 @@ and Suffix are ignored.  If the URL is an image then
 it can be shown as an image by checking the box.
 Else it must be clicked on to view as an image.</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="label3.Text" xml:space="preserve">
     <value>"URL result is here" is the feature that creates a url that
 optionally has text that can be clicked on.

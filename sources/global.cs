@@ -615,9 +615,13 @@ internal static class ClipboardFormats
 
         // this puts a newline in the table to make it easier to read the text and copy it
         // the <p> does not work at the HP forum and a double newline is needed
-        public static string Form1CellTableP(string strIn)
+        public static string Form1CellTableP(string strIn, string sWidth)
         {
-            return "<table border=\"1\" width=\"50%\"><tr><td><br>" + strIn + "<br><br></td></tr></table>";
+            if (sWidth == "")
+            {
+                return "<table border=\"1\"><tr><td><br>&nbsp;" + strIn + "&nbsp;<br><br></td></tr></table>";
+            }
+            return "<table border=\"1\" width=\"" +sWidth+ "%\"><tr><td><br>&nbsp;" + strIn + "&nbsp;<br><br></td></tr></table>";
         }
         public static void PurgeLocalImages(string strType,  string WhereExe)
         {

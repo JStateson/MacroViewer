@@ -1176,13 +1176,16 @@ namespace MacroViewer
         {
             string strReturn = "";
             bool bHaveHTML = false;
+            bool bHaveImg = false;
             int i = tbBody.SelectionStart;
             int j = tbBody.SelectionLength;
             string sTemp = tbBody.Text;
             string strRaw = Utils.AdjustNoTrim(ref i, ref j, ref sTemp);
-            string strUC = strRaw.ToUpper();
-            bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
-            if (bHaveHTML)
+            string strLC = strRaw.ToLower();
+            bHaveHTML = strLC.Contains("https:") || strLC.Contains("http:");
+            bHaveImg = Utils.IsUrlImage(strLC);
+
+            if (bHaveHTML || bHaveImg)
             {
                 if (j < 12) return; // http://a.com is smallest
                 LinkObject MyLO = new LinkObject(strRaw);

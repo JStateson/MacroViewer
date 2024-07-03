@@ -57,6 +57,9 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tbMSuffix = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
+            this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lbSaveLoc = new System.Windows.Forms.Label();
             this.cbSaveUNK = new System.Windows.Forms.CheckBox();
@@ -65,15 +68,17 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
-            this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
+            this.gbChanged = new System.Windows.Forms.GroupBox();
+            this.cbFileN = new System.Windows.Forms.ComboBox();
+            this.tbMChanged = new System.Windows.Forms.TextBox();
+            this.btnClrM = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.gbChanged.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -370,6 +375,42 @@
             this.tbMSuffix.TabIndex = 1;
             this.tbMSuffix.Text = "Please let me know if this works";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.cbDisableVPaste);
+            this.groupBox6.Controls.Add(this.cbRepeatSearch);
+            this.groupBox6.Location = new System.Drawing.Point(320, 243);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(249, 140);
+            this.groupBox6.TabIndex = 12;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Edit and Search Overrides";
+            this.toolTip1.SetToolTip(this.groupBox6, "Display the previous search settings\r\nand values when bring up the word\r\nsearch. " +
+        " Make any change to disable.");
+            // 
+            // cbDisableVPaste
+            // 
+            this.cbDisableVPaste.AutoSize = true;
+            this.cbDisableVPaste.Location = new System.Drawing.Point(23, 79);
+            this.cbDisableVPaste.Name = "cbDisableVPaste";
+            this.cbDisableVPaste.Size = new System.Drawing.Size(164, 17);
+            this.cbDisableVPaste.TabIndex = 1;
+            this.cbDisableVPaste.Text = "Disable CTRL-V HTML paste";
+            this.toolTip1.SetToolTip(this.cbDisableVPaste, "If user highlights a phrase in the\r\nmain edit box and press CTRL-V\r\nit will be ig" +
+        "nored.  HTML must be\r\ncreated using a dialog box brought\r\nup by clicking a butto" +
+        "n.");
+            this.cbDisableVPaste.UseVisualStyleBackColor = true;
+            // 
+            // cbRepeatSearch
+            // 
+            this.cbRepeatSearch.AutoSize = true;
+            this.cbRepeatSearch.Location = new System.Drawing.Point(23, 38);
+            this.cbRepeatSearch.Name = "cbRepeatSearch";
+            this.cbRepeatSearch.Size = new System.Drawing.Size(122, 17);
+            this.cbRepeatSearch.TabIndex = 0;
+            this.cbRepeatSearch.Text = "Repeat word search";
+            this.cbRepeatSearch.UseVisualStyleBackColor = true;
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label10);
@@ -444,47 +485,56 @@
     "\r\nType \'edge://flags/#edge-automatic-https \'\r\ninto the Edge browser and enable t" +
     "he option\r\n";
             // 
-            // groupBox6
+            // gbChanged
             // 
-            this.groupBox6.Controls.Add(this.cbDisableVPaste);
-            this.groupBox6.Controls.Add(this.cbRepeatSearch);
-            this.groupBox6.Location = new System.Drawing.Point(320, 243);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(249, 422);
-            this.groupBox6.TabIndex = 12;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Edit and Search Overrides";
-            this.toolTip1.SetToolTip(this.groupBox6, "Display the previous search settings\r\nand values when bring up the word\r\nsearch. " +
-        " Make any change to disable.");
+            this.gbChanged.Controls.Add(this.btnClrM);
+            this.gbChanged.Controls.Add(this.tbMChanged);
+            this.gbChanged.Controls.Add(this.cbFileN);
+            this.gbChanged.Location = new System.Drawing.Point(320, 410);
+            this.gbChanged.Name = "gbChanged";
+            this.gbChanged.Size = new System.Drawing.Size(249, 255);
+            this.gbChanged.TabIndex = 13;
+            this.gbChanged.TabStop = false;
+            this.gbChanged.Text = "Changed Macro List";
+            this.toolTip1.SetToolTip(this.gbChanged, "loist of any macros that have been changed");
+            this.gbChanged.Visible = false;
             // 
-            // cbRepeatSearch
+            // cbFileN
             // 
-            this.cbRepeatSearch.AutoSize = true;
-            this.cbRepeatSearch.Location = new System.Drawing.Point(23, 38);
-            this.cbRepeatSearch.Name = "cbRepeatSearch";
-            this.cbRepeatSearch.Size = new System.Drawing.Size(122, 17);
-            this.cbRepeatSearch.TabIndex = 0;
-            this.cbRepeatSearch.Text = "Repeat word search";
-            this.cbRepeatSearch.UseVisualStyleBackColor = true;
+            this.cbFileN.FormattingEnabled = true;
+            this.cbFileN.Location = new System.Drawing.Point(24, 19);
+            this.cbFileN.Name = "cbFileN";
+            this.cbFileN.Size = new System.Drawing.Size(121, 21);
+            this.cbFileN.TabIndex = 0;
+            this.cbFileN.SelectedIndexChanged += new System.EventHandler(this.cbFileN_SelectedIndexChanged);
             // 
-            // cbDisableVPaste
+            // tbMChanged
             // 
-            this.cbDisableVPaste.AutoSize = true;
-            this.cbDisableVPaste.Location = new System.Drawing.Point(23, 79);
-            this.cbDisableVPaste.Name = "cbDisableVPaste";
-            this.cbDisableVPaste.Size = new System.Drawing.Size(164, 17);
-            this.cbDisableVPaste.TabIndex = 1;
-            this.cbDisableVPaste.Text = "Disable CTRL-V HTML paste";
-            this.toolTip1.SetToolTip(this.cbDisableVPaste, "If user highlights a phrase in the\r\nmain edit box and press CTRL-V\r\nit will be ig" +
-        "nored.  HTML must be\r\ncreated using a dialog box brought\r\nup by clicking a butto" +
-        "n.");
-            this.cbDisableVPaste.UseVisualStyleBackColor = true;
+            this.tbMChanged.Location = new System.Drawing.Point(24, 82);
+            this.tbMChanged.Multiline = true;
+            this.tbMChanged.Name = "tbMChanged";
+            this.tbMChanged.ReadOnly = true;
+            this.tbMChanged.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbMChanged.Size = new System.Drawing.Size(200, 150);
+            this.tbMChanged.TabIndex = 1;
+            // 
+            // btnClrM
+            // 
+            this.btnClrM.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClrM.Location = new System.Drawing.Point(172, 19);
+            this.btnClrM.Name = "btnClrM";
+            this.btnClrM.Size = new System.Drawing.Size(52, 23);
+            this.btnClrM.TabIndex = 2;
+            this.btnClrM.Text = "Clear";
+            this.btnClrM.UseVisualStyleBackColor = true;
+            this.btnClrM.Click += new System.EventHandler(this.btnClrM_Click);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 694);
+            this.Controls.Add(this.gbChanged);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
@@ -509,10 +559,12 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.gbChanged.ResumeLayout(false);
+            this.gbChanged.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -558,5 +610,9 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.CheckBox cbDisableVPaste;
         private System.Windows.Forms.CheckBox cbRepeatSearch;
+        private System.Windows.Forms.GroupBox gbChanged;
+        private System.Windows.Forms.TextBox tbMChanged;
+        private System.Windows.Forms.ComboBox cbFileN;
+        private System.Windows.Forms.Button btnClrM;
     }
 }

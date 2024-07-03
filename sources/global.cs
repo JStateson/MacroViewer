@@ -21,6 +21,7 @@ using System.Security.Policy;
 using System.Windows.Automation;
 using System.Net.NetworkInformation;
 using System.Linq.Expressions;
+using static System.Windows.Forms.LinkLabel;
 
 namespace MacroViewer
 {
@@ -126,8 +127,109 @@ namespace MacroViewer
         public bool bDelete;    // if true then just delete the item from the source, no move required
     }
 
-    // to add additional macro pages you need to mod the above cms to add an neXX and the below
-    // and add a specific file opening if desired to have it in the menu dropdown
+    public class cMacroChanges
+    {
+        private List<string> mChanges;
+        private string ChangeList = "";
+        private int ReadLinesIntoList()
+        {
+            mChanges = new List<string>();
+
+            if (File.Exists(ChangeList))
+            {
+                mChanges.AddRange(File.ReadAllLines(ChangeList));
+            }
+            else
+            {
+                return 0;
+            }
+            return mChanges.Count;
+        }
+
+        public int Init()
+        {
+            ChangeList = Utils.WhereExe + "\\MacroChanges.txt";
+            return ReadLinesIntoList();
+        }
+
+        // filename and macro name
+        public void AddChange(string sFN, string sMN)
+        {
+            string sFnMn = sFN + ":" + sMN;
+            if (mChanges.Contains(sFnMn)) return;
+            mChanges.Add(sFnMn);
+        }
+
+        public void ClearChanges()
+        {
+            File.Delete(ChangeList);
+            mChanges.Clear();
+        }
+
+        public void SaveChanges()
+        {
+            if (mChanges.Count > 0)
+            {
+                File.WriteAllLines(ChangeList, mChanges);
+            }
+            else File.Delete(ChangeList);
+        }
+
+        public void TryRemove(string sFN, string sMN)
+        {
+            string sFnMn = sFN + ":" + sMN;
+            mChanges.RemoveAll(line => line == sFnMn);
+        }
+
+        public List<string> GetFNChanges()
+        {
+            List<string> st = new List<string>();
+            foreach (string s in mChanges)
+            {
+                string t = s.Substring(0, 2);
+                if (!st.Contains(t))
+                {
+                    st.Add(t);
+                }
+            }
+            return st;
+        }
+
+        public string GetMNChanges(string sFN)
+        {
+            string st = "";
+            foreach (string s in mChanges)
+            {
+                string t = s.Substring(0, 2);
+                if (t == sFN)
+                {
+                    st += (s.Substring(3)) + Environment.NewLine;
+                }
+            }
+            return st;
+        }
+
+        public int CalculateChecksum(string input)
+        {
+            int checksum = 0;
+            foreach (char character in input)
+            {
+                checksum += character;
+            }
+            return checksum;
+        }
+
+        public void isMacroChanged(int chk, string sFN, string sMN, string sBody)
+        {
+            if (chk != CalculateChecksum(sBody))
+            {
+                AddChange(sFN, sMN);
+            }
+        }
+    }
+
+        // to add additional macro pages you need to mod the above cms to add an neXX and the below
+        // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
         private const int iNMacros = 13;

@@ -70,6 +70,9 @@ namespace MacroViewer
         private string sBadMacroName;
         private string TextFromClipboardMNUs = "";
         private bool bTextFromClipboardMNUs; // can text be used as an argument to a search
+        private cMacroChanges xMacroChanges;
+        private int tbBodyChecksumN = 0;
+        private bool tbBodyChecksumB  = false;
 
         public main()
         {
@@ -95,6 +98,8 @@ namespace MacroViewer
             {
                 timer1.Interval = 500;
             }
+            xMacroChanges = new cMacroChanges();
+            xMacroChanges.Init();
         }
 
         private string IgnoreSupSig(string s)
@@ -685,7 +690,9 @@ namespace MacroViewer
             if (Body[CurrentRowSelected] == null)
                 Body[CurrentRowSelected] = "";
             tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
-        }
+            tbBodyChecksumN = xMacroChanges.CalculateChecksum(tbBody.Text);
+            tbBodyChecksumB = true;
+    }
 
         private void ShowSelectedRow(int e)
         {
@@ -1005,6 +1012,7 @@ namespace MacroViewer
                 lbName.Rows[CurrentRowSelected].Cells[2].Value = "";
                 tbBody.Text = "";
             }
+            xMacroChanges.TryRemove(strType, tbMacName.Text);
             MustFinishEdit(true);
             ReSaveAsTXT(TXTName);
             ShowUneditedRow(CurrentRowSelected);
@@ -1067,6 +1075,8 @@ namespace MacroViewer
             }
             lbName.Rows[CurrentRowSelected].Cells[2].Value = strName;
             Body[CurrentRowSelected] = RemoveNewLine(ref bChanged, Utils.NoTrailingNL(tbBody.Text).Trim());
+            if(tbBodyChecksumB)
+                xMacroChanges.isMacroChanged(tbBodyChecksumN, TXTName, strName, Body[CurrentRowSelected]);
             if (TXTName == "HP")
             {
                 SaveAsTXT(TXTName);
@@ -1249,6 +1259,7 @@ namespace MacroViewer
             if (bPageSaved(ref bIgnore))
             {
                 AddNew(Utils.UnNamedMacro, GetReference());
+                tbBodyChecksumB = false;
             }
         }
 
@@ -1355,7 +1366,7 @@ namespace MacroViewer
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool bMustExit = false;
-            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures);
+            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures, ref xMacroChanges);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
@@ -2264,7 +2275,7 @@ namespace MacroViewer
                     e.Cancel = !bIgnore;
                 }
             }
-
+            xMacroChanges.SaveChanges();
         }
 
         private void mnuRef_Click(object sender, EventArgs e)

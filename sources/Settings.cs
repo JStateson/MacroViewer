@@ -9,20 +9,21 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Media;
 using static MacroViewer.Utils;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
 {
+
     public partial class Settings : Form
     {
         public eBrowserType eBrowser {  get; set; }
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
-
-        public Settings(eBrowserType reBrowser, string ruserid, int NumAttached)
+        private cMacroChanges xMC;
+        public Settings(eBrowserType reBrowser, string ruserid, int NumAttached, ref cMacroChanges RxMC)
         {
             InitializeComponent();
             userid = ruserid;
@@ -44,7 +45,15 @@ namespace MacroViewer
             cbRepeatSearch.Checked = Properties.Settings.Default.WSrepeat;
             lbSaveLoc.Text = Utils.WhereExe + "\\UrlDebug.txt";
             CountUnkUrls();
-            bWantsExit = false; 
+            bWantsExit = false;
+            xMC = RxMC;
+            cbFileN.DataSource = xMC.GetFNChanges();
+            if(cbFileN.Items.Count > 0 )
+            {
+                string s = cbFileN.Items[0].ToString();
+                tbMChanged.Text = xMC.GetMNChanges(s);
+                gbChanged.Visible = true;
+            }
         }
 
      
@@ -124,6 +133,20 @@ namespace MacroViewer
         private void btnTestPP_Click(object sender, EventArgs e)
         {
             ShowText(tbPP.Text);
+        }
+
+        private void btnClrM_Click(object sender, EventArgs e)
+        {
+            tbMChanged.Text = "";
+            xMC.ClearChanges();
+            gbChanged.Visible = false;
+        }
+
+        private void cbFileN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int n = cbFileN.SelectedIndex;
+            string s = cbFileN.Items[n].ToString();
+            tbMChanged.Text = xMC.GetMNChanges(s);
         }
     }
 }

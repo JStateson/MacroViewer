@@ -72,6 +72,7 @@
             this.btnSwapBR = new System.Windows.Forms.Button();
             this.btnHTest = new System.Windows.Forms.Button();
             this.cbShowLang = new System.Windows.Forms.CheckBox();
+            this.btnFromHP = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,7 +151,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnFromHP = new System.Windows.Forms.Button();
+            this.loadINPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -680,6 +681,20 @@
             this.cbShowLang.UseVisualStyleBackColor = true;
             this.cbShowLang.Visible = false;
             // 
+            // btnFromHP
+            // 
+            this.btnFromHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFromHP.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFromHP.Location = new System.Drawing.Point(244, 313);
+            this.btnFromHP.Name = "btnFromHP";
+            this.btnFromHP.Size = new System.Drawing.Size(230, 27);
+            this.btnFromHP.TabIndex = 33;
+            this.btnFromHP.Text = "Paste from cleaned clipboard";
+            this.toolTip1.SetToolTip(this.btnFromHP, "This will paste HTML in additon to text\r\nUnnecessary HTML will be removed\r\nUse th" +
+        "is to past from any HP community\r\nreply support page with HTML");
+            this.btnFromHP.UseVisualStyleBackColor = true;
+            this.btnFromHP.Click += new System.EventHandler(this.btnFromHP_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -709,6 +724,7 @@
             this.mAIOload,
             this.mLJload,
             this.mDJload,
+            this.loadINPrinterMacsToolStripMenuItem,
             this.mOSload,
             this.mnuNet,
             this.loadHardwareMacsToolStripMenuItem,
@@ -1382,19 +1398,12 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnFromHP
+            // loadINPrinterMacsToolStripMenuItem
             // 
-            this.btnFromHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFromHP.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFromHP.Location = new System.Drawing.Point(244, 313);
-            this.btnFromHP.Name = "btnFromHP";
-            this.btnFromHP.Size = new System.Drawing.Size(230, 27);
-            this.btnFromHP.TabIndex = 33;
-            this.btnFromHP.Text = "Paste from cleaned clipboard";
-            this.toolTip1.SetToolTip(this.btnFromHP, "This will paste HTML in additon to text\r\nUnnecessary HTML will be removed\r\nUse th" +
-        "is to past from any HP community\r\nreply support page with HTML");
-            this.btnFromHP.UseVisualStyleBackColor = true;
-            this.btnFromHP.Click += new System.EventHandler(this.btnFromHP_Click);
+            this.loadINPrinterMacsToolStripMenuItem.Name = "loadINPrinterMacsToolStripMenuItem";
+            this.loadINPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadINPrinterMacsToolStripMenuItem.Text = "Load IN printer macs";
+            this.loadINPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mINload);
             // 
             // main
             // 
@@ -1560,6 +1569,7 @@
         private System.Windows.Forms.CheckBox cbShowLang;
         private System.Windows.Forms.ToolStripMenuItem mnuCCodes;
         private System.Windows.Forms.Button btnFromHP;
+        private System.Windows.Forms.ToolStripMenuItem loadINPrinterMacsToolStripMenuItem;
     }
 }
 

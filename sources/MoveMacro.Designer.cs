@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveMacro));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbTotalCnt = new System.Windows.Forms.TextBox();
             this.btnMove = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,6 +41,7 @@
             this.tbNumMoving = new System.Windows.Forms.TextBox();
             this.gbTo = new System.Windows.Forms.GroupBox();
             this.gbFrom = new System.Windows.Forms.GroupBox();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -51,13 +54,16 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(25, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(935, 501);
+            this.groupBox1.Size = new System.Drawing.Size(935, 541);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Move macros to another file";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCopy);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.tbTotalCnt);
             this.groupBox2.Controls.Add(this.btnMove);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
@@ -66,10 +72,29 @@
             this.groupBox2.Controls.Add(this.tbNumMoving);
             this.groupBox2.Location = new System.Drawing.Point(609, 56);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(261, 264);
+            this.groupBox2.Size = new System.Drawing.Size(293, 415);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Action";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Location = new System.Drawing.Point(17, 361);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Total Macro Count";
+            // 
+            // tbTotalCnt
+            // 
+            this.tbTotalCnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTotalCnt.Location = new System.Drawing.Point(155, 358);
+            this.tbTotalCnt.Name = "tbTotalCnt";
+            this.tbTotalCnt.ReadOnly = true;
+            this.tbTotalCnt.Size = new System.Drawing.Size(113, 22);
+            this.tbTotalCnt.TabIndex = 7;
             // 
             // btnMove
             // 
@@ -138,7 +163,7 @@
             // 
             this.gbTo.Location = new System.Drawing.Point(287, 56);
             this.gbTo.Name = "gbTo";
-            this.gbTo.Size = new System.Drawing.Size(254, 398);
+            this.gbTo.Size = new System.Drawing.Size(279, 447);
             this.gbTo.TabIndex = 1;
             this.gbTo.TabStop = false;
             this.gbTo.Text = "To";
@@ -147,10 +172,23 @@
             // 
             this.gbFrom.Location = new System.Drawing.Point(28, 56);
             this.gbFrom.Name = "gbFrom";
-            this.gbFrom.Size = new System.Drawing.Size(193, 398);
+            this.gbFrom.Size = new System.Drawing.Size(227, 447);
             this.gbFrom.TabIndex = 0;
             this.gbFrom.TabStop = false;
             this.gbFrom.Text = "From";
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Enabled = false;
+            this.btnCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopy.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnCopy.Location = new System.Drawing.Point(23, 268);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(112, 37);
+            this.btnCopy.TabIndex = 9;
+            this.btnCopy.Text = "Copy Them";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // MoveMacro
             // 
@@ -183,5 +221,8 @@
         private System.Windows.Forms.TextBox tbNFree;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbTotalCnt;
+        private System.Windows.Forms.Button btnCopy;
     }
 }

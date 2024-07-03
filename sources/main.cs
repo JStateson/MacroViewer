@@ -455,6 +455,11 @@ namespace MacroViewer
             SelectFileItem("LJ");
         }
 
+        private void mINload(object sender, EventArgs e)
+        {
+            SelectFileItem("IN");
+        }
+
         private void mPCload_Click(object sender, EventArgs e)
         {
             SelectFileItem("PC");
@@ -1689,8 +1694,9 @@ namespace MacroViewer
         }
 
 
-        private void LoadAllFiles()
+        private int LoadAllFiles()
         {
+            int nMacroCnt = 0;
             bInitialLoad = true;
             sBadMacroName = "";
             if (cBodies == null)
@@ -1701,6 +1707,7 @@ namespace MacroViewer
                 foreach (string s in Utils.LocalMacroPrefix)
                 {
                     int i, n = LoadFileItem(s);
+                    nMacroCnt += n;
                     for (i = 0; i < n; i++)
                     {
                         CBody cb = new CBody();
@@ -1738,7 +1745,8 @@ namespace MacroViewer
                     strNames, MessageBoxButtons.OK);
                 ReWriteBadFiles();
             }
-            if (strType != "") lbName.ReadOnly = false;                
+            if (strType != "") lbName.ReadOnly = false;
+            return nMacroCnt;
         }
 
         private void ReWriteBadFiles()
@@ -1887,7 +1895,7 @@ namespace MacroViewer
             int i = -1;
 
             if(!cms.bDelete)        // need to move them, not just delete them
-           {
+            {
                 if(cms.strDes != "HP")
                 {
                     AppendTheseRows(cms);
@@ -1897,7 +1905,7 @@ namespace MacroViewer
                     InsertTheseRows(cms);
                 }
             }
-
+            if (cms.bCopy) return;
             //handle the ones left over.  if HP then just blank out the body and save
             //else replace the disk file and reload
             if (cms.strType == "HP")
@@ -2460,6 +2468,7 @@ namespace MacroViewer
             }
             tbBody.Text = sOut;
         }
+
     }
     
 }

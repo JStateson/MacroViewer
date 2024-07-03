@@ -26,7 +26,7 @@ namespace MacroViewer
 {
     public class CMoveSpace
     {/// <summary>
-     /// "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
+     /// "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "TR", "HP"  DO NOT CHANGE ORDER OF BELOW ITEMS
      /// </summary>
 
         public string[] MacroIDs;
@@ -120,6 +120,7 @@ namespace MacroViewer
 
         public int nChecked;    // this many checked
         public bool bRun;       // if true then perform move
+        public bool bCopy;      // do not delete
         public string strType;    // name of the "from" file ie: source
         public string strDes;   // destination
         public bool bDelete;    // if true then just delete the item from the source, no move required
@@ -129,7 +130,7 @@ namespace MacroViewer
     // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
-        private const int iNMacros = 12;
+        private const int iNMacros = 13;
         public const int NumMacros = 50;   // only 30 for the HTML file
         public static int nLongestExpectedURL = 256;
         public static string[] nUse ={ // these must match the button names in WordSearch
@@ -176,11 +177,11 @@ namespace MacroViewer
         }
         // do not change the order of below items and HP must be last!
         public static string sPrinterTypes = " LJ DJ OJ IN ";    // must have a space and match below
-        public static string[] LocalMacroPrefix = new string[iNMacros]  { "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "HP" };
+        public static string[] LocalMacroPrefix = new string[iNMacros]  { "PC", "AIO", "LJ", "DJ", "OJ", "IN", "OS", "NET", "HW", "RF", "NO", "TR", "HP" };
         public static string[] LocalMacroFullname = new string[iNMacros] { "Desktop(PC)", "AIO or Laptop", "LaserJet(LJ)",
-                "DeskJet(DJ)", "OfficeJet(OJ)", "Tank-Inkjet(IN)", "OS related", "Network related", "Hardware", "Reference", "Notes", "HP from HTML" };
+                "DeskJet(DJ)", "OfficeJet(OJ)", "Tank-Inkjet(IN)", "OS related", "Network related", "Hardware", "Reference", "Notes", "Transfer", "HP from HTML" };
         public static string[] LocalMacroRefs = new string[iNMacros] {"PC Reference","PC Reference","LaserJet Reference",
-                "DeskJet Reference","OfficeJet Reference","Tank-Ink Reference", "", "", "", "","",""};
+                "DeskJet Reference","OfficeJet Reference","Tank-Ink Reference", "", "", "", "","","",""};
 
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";

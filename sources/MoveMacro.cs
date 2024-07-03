@@ -17,14 +17,22 @@ namespace MacroViewer
         int x = 30, y = 30;
         CMoveSpace cms;
         CheckBox cbFROMbox;
+        bool bAllowBothButtons = false;
 
         public MoveMacro(ref CMoveSpace rcms)
         {
+            int i, n = 0, m = 0;
             InitializeComponent();
             cms = rcms;
             FillFrom(ref gbFrom);
             FillTo(ref gbTo);
             tbNumMoving.Text = cms.nChecked.ToString();
+            for(i=0; i < cms.nMacsAllowed.Length; i++)
+            {
+                n += cms.nMacsInFile[i];
+                m += cms.nMacsAllowed[i];
+            }
+            tbTotalCnt.Text = n.ToString() + " of " + m.ToString();
         }
 
         private void FillFrom(ref GroupBox gb)
@@ -36,7 +44,7 @@ namespace MacroViewer
                 string s = Utils.LocalMacroPrefix[i];
                 rb = new CheckBox();
                 rb.Text = s + "macro";
-                rb.Name = s + i.ToString();
+                rb.Name = s;
                 rb.Location = new System.Drawing.Point(x, y + (i) * 30);
                 rb.Enabled = (cms.strType == s);
                 rb.CheckedChanged += CheckBox_CheckedChanged;
@@ -50,6 +58,7 @@ namespace MacroViewer
                     if (!cb.Checked)
                         cb.Enabled = false; // do not let use check the box if none were checked originally
                     cbFROMbox = cb;
+                    bAllowBothButtons = (cb.Name == "TR");
                     return;
                 }
             }
@@ -75,6 +84,21 @@ namespace MacroViewer
             }
         }
 
+        private void SetCMbuttons(RadioButton rb)
+        {
+            string s = rb.Name;
+            if(bAllowBothButtons)
+            {
+                btnCopy.Enabled = true;
+                btnMove.Enabled = true;
+            }
+            else
+            {
+                btnCopy.Enabled = (s == "TR");
+                btnMove.Enabled = !btnCopy.Enabled;
+            }
+        }
+
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             int n = -1;
@@ -94,6 +118,7 @@ namespace MacroViewer
                     }
                 }
             }
+            SetCMbuttons(rb);
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -115,8 +140,17 @@ namespace MacroViewer
             this.Close();
         }
 
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            cms.bCopy = true;
+            cms.bRun = true;
+            cms.UpdateCount();
+            this.Close();
+        }
+
         private void btnMove_Click(object sender, EventArgs e)
         {
+            cms.bCopy = false;
             cms.bRun = true;
             cms.UpdateCount();
             this.Close();

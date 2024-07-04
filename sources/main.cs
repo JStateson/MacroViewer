@@ -671,7 +671,8 @@ namespace MacroViewer
                 tbMacName.Text = "";
                 return;
             }
-            if(strType == "RF")
+            tbMNum.Text = (1 + e).ToString();
+            if (strType == "RF")
             {
                 MakeSticky(strType);
             }
@@ -1366,6 +1367,8 @@ namespace MacroViewer
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool bMustExit = false;
+            bool bIgnore = false;
+            int i = 0;
             Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures, ref xMacroChanges);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
@@ -1373,6 +1376,26 @@ namespace MacroViewer
             bMustExit = MySettings.bWantsExit;
             MySettings.Dispose();
             if (bMustExit) this.Close();
+            if(xMacroChanges.sGoTo != "")
+            {
+                if (!bPageSaved(ref bIgnore)) return;
+                string sFN = "";
+                string sMN = "";
+                xMacroChanges.GoToMacro(ref sFN, ref sMN);
+                if(sFN != strType)
+                    LoadFromTXT(sFN);
+                foreach(string s in MacroNames)
+                {
+                    if (s == sMN) break;
+                    i++;
+                    if (i == NumInBody)
+                    {
+                        i = 0;
+                        break;
+                    }
+                }
+                ShowUneditedRow(i);
+            }
         }
 
 

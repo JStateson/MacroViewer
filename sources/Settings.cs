@@ -1,10 +1,12 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using static MacroViewer.Utils;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace MacroViewer
@@ -54,6 +57,8 @@ namespace MacroViewer
                 tbMChanged.Text = xMC.GetMNChanges(s);
                 gbChanged.Visible = true;
             }
+            xMC.nSelectedRowIndex = -1;
+            xMC.sGoTo = "";
         }
 
      
@@ -147,6 +152,29 @@ namespace MacroViewer
             int n = cbFileN.SelectedIndex;
             string s = cbFileN.Items[n].ToString();
             tbMChanged.Text = xMC.GetMNChanges(s);
+            xMC.nSelectedRowIndex = -1;
+        }
+
+        
+
+        private void tbMChanged_MouseDown(object sender, MouseEventArgs e)
+        {
+            int charIndex = tbMChanged.GetCharIndexFromPosition(e.Location);
+            int rowIndex = tbMChanged.GetLineFromCharIndex(charIndex);
+            if (rowIndex >= 0 && rowIndex < tbMChanged.Lines.Length)
+            {
+                xMC.nSelectedRowIndex = rowIndex;
+            }
+        }
+
+        private void btnExitSelect_Click(object sender, EventArgs e)
+        {
+            int n = xMC.nSelectedRowIndex;
+            if(n < 0 || n >= tbMChanged.Lines.Length) { return; }
+            string rowContent = tbMChanged.Lines[n];
+            string sFN = cbFileN.Text;
+            xMC.sGoTo = sFN + ":" + rowContent;
+            this.Close();
         }
     }
 }

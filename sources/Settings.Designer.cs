@@ -60,6 +60,10 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
             this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
+            this.gbChanged = new System.Windows.Forms.GroupBox();
+            this.btnClrM = new System.Windows.Forms.Button();
+            this.tbMChanged = new System.Windows.Forms.TextBox();
+            this.cbFileN = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lbSaveLoc = new System.Windows.Forms.Label();
             this.cbSaveUNK = new System.Windows.Forms.CheckBox();
@@ -68,17 +72,14 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.gbChanged = new System.Windows.Forms.GroupBox();
-            this.cbFileN = new System.Windows.Forms.ComboBox();
-            this.tbMChanged = new System.Windows.Forms.TextBox();
-            this.btnClrM = new System.Windows.Forms.Button();
+            this.btnExitSelect = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.gbChanged.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -381,7 +382,7 @@
             this.groupBox6.Controls.Add(this.cbRepeatSearch);
             this.groupBox6.Location = new System.Drawing.Point(320, 243);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(249, 140);
+            this.groupBox6.Size = new System.Drawing.Size(249, 118);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Edit and Search Overrides";
@@ -410,6 +411,52 @@
             this.cbRepeatSearch.TabIndex = 0;
             this.cbRepeatSearch.Text = "Repeat word search";
             this.cbRepeatSearch.UseVisualStyleBackColor = true;
+            // 
+            // gbChanged
+            // 
+            this.gbChanged.Controls.Add(this.btnExitSelect);
+            this.gbChanged.Controls.Add(this.btnClrM);
+            this.gbChanged.Controls.Add(this.tbMChanged);
+            this.gbChanged.Controls.Add(this.cbFileN);
+            this.gbChanged.Location = new System.Drawing.Point(320, 385);
+            this.gbChanged.Name = "gbChanged";
+            this.gbChanged.Size = new System.Drawing.Size(249, 280);
+            this.gbChanged.TabIndex = 13;
+            this.gbChanged.TabStop = false;
+            this.gbChanged.Text = "Changed Macro List";
+            this.toolTip1.SetToolTip(this.gbChanged, "loist of any macros that have been changed");
+            this.gbChanged.Visible = false;
+            // 
+            // btnClrM
+            // 
+            this.btnClrM.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnClrM.Location = new System.Drawing.Point(172, 19);
+            this.btnClrM.Name = "btnClrM";
+            this.btnClrM.Size = new System.Drawing.Size(52, 23);
+            this.btnClrM.TabIndex = 2;
+            this.btnClrM.Text = "Clear";
+            this.btnClrM.UseVisualStyleBackColor = true;
+            this.btnClrM.Click += new System.EventHandler(this.btnClrM_Click);
+            // 
+            // tbMChanged
+            // 
+            this.tbMChanged.Location = new System.Drawing.Point(23, 110);
+            this.tbMChanged.Multiline = true;
+            this.tbMChanged.Name = "tbMChanged";
+            this.tbMChanged.ReadOnly = true;
+            this.tbMChanged.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbMChanged.Size = new System.Drawing.Size(200, 150);
+            this.tbMChanged.TabIndex = 1;
+            this.tbMChanged.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbMChanged_MouseDown);
+            // 
+            // cbFileN
+            // 
+            this.cbFileN.FormattingEnabled = true;
+            this.cbFileN.Location = new System.Drawing.Point(24, 19);
+            this.cbFileN.Name = "cbFileN";
+            this.cbFileN.Size = new System.Drawing.Size(121, 21);
+            this.cbFileN.TabIndex = 0;
+            this.cbFileN.SelectedIndexChanged += new System.EventHandler(this.cbFileN_SelectedIndexChanged);
             // 
             // groupBox5
             // 
@@ -485,49 +532,18 @@
     "\r\nType \'edge://flags/#edge-automatic-https \'\r\ninto the Edge browser and enable t" +
     "he option\r\n";
             // 
-            // gbChanged
+            // btnExitSelect
             // 
-            this.gbChanged.Controls.Add(this.btnClrM);
-            this.gbChanged.Controls.Add(this.tbMChanged);
-            this.gbChanged.Controls.Add(this.cbFileN);
-            this.gbChanged.Location = new System.Drawing.Point(320, 410);
-            this.gbChanged.Name = "gbChanged";
-            this.gbChanged.Size = new System.Drawing.Size(249, 255);
-            this.gbChanged.TabIndex = 13;
-            this.gbChanged.TabStop = false;
-            this.gbChanged.Text = "Changed Macro List";
-            this.toolTip1.SetToolTip(this.gbChanged, "loist of any macros that have been changed");
-            this.gbChanged.Visible = false;
-            // 
-            // cbFileN
-            // 
-            this.cbFileN.FormattingEnabled = true;
-            this.cbFileN.Location = new System.Drawing.Point(24, 19);
-            this.cbFileN.Name = "cbFileN";
-            this.cbFileN.Size = new System.Drawing.Size(121, 21);
-            this.cbFileN.TabIndex = 0;
-            this.cbFileN.SelectedIndexChanged += new System.EventHandler(this.cbFileN_SelectedIndexChanged);
-            // 
-            // tbMChanged
-            // 
-            this.tbMChanged.Location = new System.Drawing.Point(24, 82);
-            this.tbMChanged.Multiline = true;
-            this.tbMChanged.Name = "tbMChanged";
-            this.tbMChanged.ReadOnly = true;
-            this.tbMChanged.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMChanged.Size = new System.Drawing.Size(200, 150);
-            this.tbMChanged.TabIndex = 1;
-            // 
-            // btnClrM
-            // 
-            this.btnClrM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClrM.Location = new System.Drawing.Point(172, 19);
-            this.btnClrM.Name = "btnClrM";
-            this.btnClrM.Size = new System.Drawing.Size(52, 23);
-            this.btnClrM.TabIndex = 2;
-            this.btnClrM.Text = "Clear";
-            this.btnClrM.UseVisualStyleBackColor = true;
-            this.btnClrM.Click += new System.EventHandler(this.btnClrM_Click);
+            this.btnExitSelect.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnExitSelect.Location = new System.Drawing.Point(130, 58);
+            this.btnExitSelect.Name = "btnExitSelect";
+            this.btnExitSelect.Size = new System.Drawing.Size(93, 23);
+            this.btnExitSelect.TabIndex = 3;
+            this.btnExitSelect.Text = "Exit to macro";
+            this.toolTip1.SetToolTip(this.btnExitSelect, "if possible, settings will exit \r\nand load the selected macro\r\nso so it can be ex" +
+        "amined.\r\nBe sure tos save any setting first");
+            this.btnExitSelect.UseVisualStyleBackColor = true;
+            this.btnExitSelect.Click += new System.EventHandler(this.btnExitSelect_Click);
             // 
             // Settings
             // 
@@ -561,10 +577,10 @@
             this.groupBox3.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.gbChanged.ResumeLayout(false);
             this.gbChanged.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -614,5 +630,6 @@
         private System.Windows.Forms.TextBox tbMChanged;
         private System.Windows.Forms.ComboBox cbFileN;
         private System.Windows.Forms.Button btnClrM;
+        private System.Windows.Forms.Button btnExitSelect;
     }
 }

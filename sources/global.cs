@@ -131,6 +131,8 @@ namespace MacroViewer
     {
         private List<string> mChanges;
         private string ChangeList = "";
+        public string sGoTo = "";
+        public int nSelectedRowIndex;
         private int ReadLinesIntoList()
         {
             mChanges = new List<string>();
@@ -158,6 +160,14 @@ namespace MacroViewer
             string sFnMn = sFN + ":" + sMN;
             if (mChanges.Contains(sFnMn)) return;
             mChanges.Add(sFnMn);
+        }
+
+        public bool GoToMacro(ref string sFN, ref string sMN)
+        {
+            if (sGoTo == "") return false;
+            sFN = sGoTo.Substring(0, 2);
+            sMN = sGoTo.Substring(3);
+            return true;
         }
 
         public void ClearChanges()

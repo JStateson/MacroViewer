@@ -80,6 +80,7 @@
             this.mAIOload = new System.Windows.Forms.ToolStripMenuItem();
             this.mLJload = new System.Windows.Forms.ToolStripMenuItem();
             this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadINPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNet = new System.Windows.Forms.ToolStripMenuItem();
             this.loadHardwareMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +152,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.loadINPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbMNum = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -243,7 +244,7 @@
             // 
             // tbMacName
             // 
-            this.tbMacName.Location = new System.Drawing.Point(18, 48);
+            this.tbMacName.Location = new System.Drawing.Point(18, 52);
             this.tbMacName.Name = "tbMacName";
             this.tbMacName.Size = new System.Drawing.Size(190, 22);
             this.tbMacName.TabIndex = 3;
@@ -773,6 +774,13 @@
             this.mDJload.Size = new System.Drawing.Size(194, 22);
             this.mDJload.Text = "Load DJ printer macs";
             this.mDJload.Click += new System.EventHandler(this.mDJload_Click);
+            // 
+            // loadINPrinterMacsToolStripMenuItem
+            // 
+            this.loadINPrinterMacsToolStripMenuItem.Name = "loadINPrinterMacsToolStripMenuItem";
+            this.loadINPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadINPrinterMacsToolStripMenuItem.Text = "Load IN printer macs";
+            this.loadINPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mINload);
             // 
             // mOSload
             // 
@@ -1307,6 +1315,7 @@
             // 
             // gbSupp
             // 
+            this.gbSupp.Controls.Add(this.tbMNum);
             this.gbSupp.Controls.Add(this.btnDelChecked);
             this.gbSupp.Controls.Add(this.label2);
             this.gbSupp.Controls.Add(this.groupBox3);
@@ -1336,11 +1345,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(45, 27);
+            this.label2.Location = new System.Drawing.Point(45, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.Size = new System.Drawing.Size(114, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Macro Name";
+            this.label2.Text = "Macro Name, Number:";
             // 
             // groupBox3
             // 
@@ -1398,12 +1407,12 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // loadINPrinterMacsToolStripMenuItem
+            // tbMNum
             // 
-            this.loadINPrinterMacsToolStripMenuItem.Name = "loadINPrinterMacsToolStripMenuItem";
-            this.loadINPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadINPrinterMacsToolStripMenuItem.Text = "Load IN printer macs";
-            this.loadINPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mINload);
+            this.tbMNum.Location = new System.Drawing.Point(172, 19);
+            this.tbMNum.Name = "tbMNum";
+            this.tbMNum.Size = new System.Drawing.Size(36, 22);
+            this.tbMNum.TabIndex = 8;
             // 
             // main
             // 
@@ -1570,6 +1579,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuCCodes;
         private System.Windows.Forms.Button btnFromHP;
         private System.Windows.Forms.ToolStripMenuItem loadINPrinterMacsToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbMNum;
     }
 }
 

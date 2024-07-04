@@ -26,6 +26,10 @@ namespace MacroViewer
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
         private cMacroChanges xMC;
+        private List<string> stDataSource = new List<string>();
+        private List<long> stDateTime = new List<long>();
+        private DateTime ThisDT;
+        private List<int> SrtInx;
         public Settings(eBrowserType reBrowser, string ruserid, int NumAttached, ref cMacroChanges RxMC)
         {
             InitializeComponent();
@@ -51,13 +55,14 @@ namespace MacroViewer
             bWantsExit = false;
             xMC = RxMC;
             cbFileN.DataSource = xMC.GetFNChanges();
-            if(cbFileN.Items.Count > 0 )
+            xMC.nSelectedRowIndex = -1;
+            if (cbFileN.Items.Count > 0 )
             {
-                string s = cbFileN.Items[0].ToString();
-                tbMChanged.Text = xMC.GetMNChanges(s);
+                //string s = cbFileN.Items[0].ToString();
+                //SrtInx = xMC.GetMNChanges(s, ref stDataSource, ref stDateTime);
                 gbChanged.Visible = true;
             }
-            xMC.nSelectedRowIndex = -1;
+
             xMC.sGoTo = "";
         }
 
@@ -142,8 +147,8 @@ namespace MacroViewer
 
         private void btnClrM_Click(object sender, EventArgs e)
         {
-            tbMChanged.Text = "";
             xMC.ClearChanges();
+            lbEdited.Items.Clear();
             gbChanged.Visible = false;
         }
 
@@ -151,30 +156,46 @@ namespace MacroViewer
         {
             int n = cbFileN.SelectedIndex;
             string s = cbFileN.Items[n].ToString();
-            tbMChanged.Text = xMC.GetMNChanges(s);
-            xMC.nSelectedRowIndex = -1;
-        }
-
-        
-
-        private void tbMChanged_MouseDown(object sender, MouseEventArgs e)
-        {
-            int charIndex = tbMChanged.GetCharIndexFromPosition(e.Location);
-            int rowIndex = tbMChanged.GetLineFromCharIndex(charIndex);
-            if (rowIndex >= 0 && rowIndex < tbMChanged.Lines.Length)
+            List<string> xstDataSource = new List<string>();
+            List<long> xstDateTime = new List<long>();
+            lbEdited.DataSource = null;
+            lbEdited.Invalidate();
+            SrtInx = xMC.GetMNChanges(s, ref xstDataSource, ref xstDateTime);
+            stDataSource.Clear();
+            stDateTime.Clear();
+            foreach (int i in SrtInx)
             {
-                xMC.nSelectedRowIndex = rowIndex;
+                stDataSource.Add(xstDataSource[i]);
+                stDateTime.Add(xstDateTime[i]); 
             }
+            lbEdited.DataSource = stDataSource;
+            lbEdited.Refresh();
+            xMC.nSelectedRowIndex = 0;
         }
+
 
         private void btnExitSelect_Click(object sender, EventArgs e)
         {
             int n = xMC.nSelectedRowIndex;
-            if(n < 0 || n >= tbMChanged.Lines.Length) { return; }
-            string rowContent = tbMChanged.Lines[n];
+            if(n < 0 || n >= lbEdited.Items.Count) { return; }
+            string rowContent = lbEdited.Items[n].ToString();
             string sFN = cbFileN.Text;
             xMC.sGoTo = sFN + ":" + rowContent;
             this.Close();
+        }
+
+        private void lbEdited_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
+            //  July 04 2024, 01:45 PM
+            xMC.nSelectedRowIndex = lbEdited.SelectedIndex;
+            int n = xMC.nSelectedRowIndex;
+            if (n < 0)
+            {
+                return;
+            }
+            ThisDT = new DateTime(stDateTime[n]);
+            tbDateChg.Text = ThisDT.ToString("MMMM dd yyyy, hh:mm tt");
         }
     }
 }

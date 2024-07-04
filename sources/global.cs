@@ -157,9 +157,15 @@ namespace MacroViewer
         // filename and macro name
         public void AddChange(string sFN, string sMN)
         {
+
+            DateTime date = DateTime.Now;
+            //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
+            //  July 04 2024, 01:45 PM
+            long ticks = date.Ticks;
+            string hexString = ticks.ToString("X16");
             string sFnMn = sFN + ":" + sMN;
-            if (mChanges.Contains(sFnMn)) return;
-            mChanges.Add(sFnMn);
+            if (mChanges.Any(s => s.Contains(sFnMn))) return;
+            mChanges.Add(hexString +":" + sFnMn);
         }
 
         public bool GoToMacro(ref string sFN, ref string sMN)
@@ -196,7 +202,7 @@ namespace MacroViewer
             List<string> st = new List<string>();
             foreach (string s in mChanges)
             {
-                string t = s.Substring(0, 2);
+                string t = s.Substring(17, 2);
                 if (!st.Contains(t))
                 {
                     st.Add(t);
@@ -205,18 +211,33 @@ namespace MacroViewer
             return st;
         }
 
-        public string GetMNChanges(string sFN)
+        public List<int> GetMNChanges(string sFN, ref List<string> stEdit, ref List<long> lDate)
         {
-            string st = "";
+            stEdit.Clear();   // the edit data source
+            lDate.Clear();     // the edit date
+            int n = 0;
             foreach (string s in mChanges)
             {
-                string t = s.Substring(0, 2);
+                string dST = s.Substring(0, 16);    // date string
+                string t = s.Substring(17, 2);
                 if (t == sFN)
                 {
-                    st += (s.Substring(3)) + Environment.NewLine;
+                    stEdit.Add(s.Substring(20));
+                    lDate.Add((long) Convert.ToInt64(dST,16));
+                    n++;
                 }
             }
-            return st;
+            // Create a list of tuples where each tuple contains an integer and its original index
+            var SrtInx = lDate.Select((number, index) => new { Number = number, Index = index }).ToList();
+
+            // Sort the list of tuples based on the integer values
+            var sortedSrtInx = SrtInx.OrderByDescending(x => x.Number).ToList(); //Descending
+            List<int> SrtOut = new List<int>();
+            foreach(var item in sortedSrtInx)
+            {
+                SrtOut.Add(item.Index);
+            }
+            return SrtOut;
         }
 
         public int CalculateChecksum(string input)

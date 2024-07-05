@@ -61,6 +61,9 @@
             this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
             this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
             this.gbChanged = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbDateChg = new System.Windows.Forms.TextBox();
+            this.lbEdited = new System.Windows.Forms.ListBox();
             this.btnExitSelect = new System.Windows.Forms.Button();
             this.btnClrM = new System.Windows.Forms.Button();
             this.cbFileN = new System.Windows.Forms.ComboBox();
@@ -72,9 +75,6 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lbEdited = new System.Windows.Forms.ListBox();
-            this.tbDateChg = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -382,9 +382,9 @@
             // 
             this.groupBox6.Controls.Add(this.cbDisableVPaste);
             this.groupBox6.Controls.Add(this.cbRepeatSearch);
-            this.groupBox6.Location = new System.Drawing.Point(603, 547);
+            this.groupBox6.Location = new System.Drawing.Point(603, 540);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(249, 118);
+            this.groupBox6.Size = new System.Drawing.Size(249, 125);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Edit and Search Overrides";
@@ -431,6 +431,40 @@
             this.toolTip1.SetToolTip(this.gbChanged, "list of any macros that have been changed");
             this.gbChanged.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Window;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Location = new System.Drawing.Point(67, 296);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Date Changed";
+            // 
+            // tbDateChg
+            // 
+            this.tbDateChg.BackColor = System.Drawing.SystemColors.Window;
+            this.tbDateChg.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbDateChg.Location = new System.Drawing.Point(23, 324);
+            this.tbDateChg.Multiline = true;
+            this.tbDateChg.Name = "tbDateChg";
+            this.tbDateChg.ReadOnly = true;
+            this.tbDateChg.Size = new System.Drawing.Size(203, 46);
+            this.tbDateChg.TabIndex = 5;
+            // 
+            // lbEdited
+            // 
+            this.lbEdited.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEdited.FormattingEnabled = true;
+            this.lbEdited.ItemHeight = 16;
+            this.lbEdited.Location = new System.Drawing.Point(19, 110);
+            this.lbEdited.Name = "lbEdited";
+            this.lbEdited.Size = new System.Drawing.Size(214, 148);
+            this.lbEdited.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.lbEdited, "Select a macro then click on\r\n\"Exit to macro\" to view it on\r\nthe main edit page.");
+            this.lbEdited.SelectedIndexChanged += new System.EventHandler(this.lbEdited_SelectedIndexChanged);
+            // 
             // btnExitSelect
             // 
             this.btnExitSelect.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -451,7 +485,7 @@
             this.btnClrM.Name = "btnClrM";
             this.btnClrM.Size = new System.Drawing.Size(52, 23);
             this.btnClrM.TabIndex = 2;
-            this.btnClrM.Text = "Clear";
+            this.btnClrM.Text = "Delete";
             this.toolTip1.SetToolTip(this.btnClrM, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
         "m the display.");
             this.btnClrM.UseVisualStyleBackColor = true;
@@ -462,6 +496,7 @@
             this.cbFileN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFileN.FormattingEnabled = true;
             this.cbFileN.Location = new System.Drawing.Point(24, 19);
+            this.cbFileN.MaxDropDownItems = 4;
             this.cbFileN.Name = "cbFileN";
             this.cbFileN.Size = new System.Drawing.Size(121, 24);
             this.cbFileN.TabIndex = 0;
@@ -540,41 +575,6 @@
             this.label3.Text = "You need to prevent Edge from switching\r\nhttp to https as many HP documents fail." +
     "\r\nType \'edge://flags/#edge-automatic-https \'\r\ninto the Edge browser and enable t" +
     "he option\r\n";
-            // 
-            // lbEdited
-            // 
-            this.lbEdited.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEdited.FormattingEnabled = true;
-            this.lbEdited.ItemHeight = 16;
-            this.lbEdited.Location = new System.Drawing.Point(19, 110);
-            this.lbEdited.Name = "lbEdited";
-            this.lbEdited.Size = new System.Drawing.Size(203, 148);
-            this.lbEdited.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.lbEdited, "Select a macro then click on\r\n\"Exit to macro\" to view it on\r\nthe main edit page.");
-            this.lbEdited.SelectedIndexChanged += new System.EventHandler(this.lbEdited_SelectedIndexChanged);
-            // 
-            // tbDateChg
-            // 
-            this.tbDateChg.BackColor = System.Drawing.SystemColors.Window;
-            this.tbDateChg.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbDateChg.Location = new System.Drawing.Point(23, 324);
-            this.tbDateChg.Multiline = true;
-            this.tbDateChg.Name = "tbDateChg";
-            this.tbDateChg.ReadOnly = true;
-            this.tbDateChg.Size = new System.Drawing.Size(203, 46);
-            this.tbDateChg.TabIndex = 5;
-            this.tbDateChg.Text = "test";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Window;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(67, 296);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Date Changed";
             // 
             // Settings
             // 

@@ -145,6 +145,7 @@
             this.lbBRcopyInfo = new System.Windows.Forms.Label();
             this.btnToNotepad = new System.Windows.Forms.Button();
             this.gbSupp = new System.Windows.Forms.GroupBox();
+            this.tbMNum = new System.Windows.Forms.TextBox();
             this.btnDelChecked = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -152,7 +153,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tbMNum = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -379,7 +379,7 @@
             this.btnCopyFrom.Name = "btnCopyFrom";
             this.btnCopyFrom.Size = new System.Drawing.Size(180, 27);
             this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Paste from clipboard";
+            this.btnCopyFrom.Text = "Insert from clipboard";
             this.toolTip1.SetToolTip(this.btnCopyFrom, "This will paste HTML in additon to text\r\nif any html is present. WUSIWUG");
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
@@ -605,7 +605,7 @@
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnNew.Location = new System.Drawing.Point(399, 117);
+            this.btnNew.Location = new System.Drawing.Point(399, 112);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 32);
             this.btnNew.TabIndex = 18;
@@ -686,11 +686,11 @@
             // 
             this.btnFromHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFromHP.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFromHP.Location = new System.Drawing.Point(244, 313);
+            this.btnFromHP.Location = new System.Drawing.Point(261, 317);
             this.btnFromHP.Name = "btnFromHP";
-            this.btnFromHP.Size = new System.Drawing.Size(230, 27);
+            this.btnFromHP.Size = new System.Drawing.Size(218, 27);
             this.btnFromHP.TabIndex = 33;
-            this.btnFromHP.Text = "Paste from cleaned clipboard";
+            this.btnFromHP.Text = "Insert HTML from clipboard";
             this.toolTip1.SetToolTip(this.btnFromHP, "This will paste HTML in additon to text\r\nUnnecessary HTML will be removed\r\nUse th" +
         "is to past from any HP community\r\nreply support page with HTML");
             this.btnFromHP.UseVisualStyleBackColor = true;
@@ -1255,7 +1255,7 @@
             this.btnSaveM.Enabled = false;
             this.btnSaveM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSaveM.Location = new System.Drawing.Point(399, 157);
+            this.btnSaveM.Location = new System.Drawing.Point(399, 155);
             this.btnSaveM.Name = "btnSaveM";
             this.btnSaveM.Size = new System.Drawing.Size(75, 32);
             this.btnSaveM.TabIndex = 2;
@@ -1327,6 +1327,13 @@
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
+            // 
+            // tbMNum
+            // 
+            this.tbMNum.Location = new System.Drawing.Point(172, 19);
+            this.tbMNum.Name = "tbMNum";
+            this.tbMNum.Size = new System.Drawing.Size(36, 22);
+            this.tbMNum.TabIndex = 8;
             // 
             // btnDelChecked
             // 
@@ -1406,13 +1413,6 @@
             // 
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // tbMNum
-            // 
-            this.tbMNum.Location = new System.Drawing.Point(172, 19);
-            this.tbMNum.Name = "tbMNum";
-            this.tbMNum.Size = new System.Drawing.Size(36, 22);
-            this.tbMNum.TabIndex = 8;
             // 
             // main
             // 

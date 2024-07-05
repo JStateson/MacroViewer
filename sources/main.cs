@@ -741,7 +741,7 @@ namespace MacroViewer
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            tbBody.Text = GetHPclipboard();
+            TbodyInsert(GetHPclipboard());
         }
 
         private string GetHPclipboard()
@@ -1186,6 +1186,13 @@ namespace MacroViewer
             string sPrefix = tbBody.Text.Substring(0, iStart);
             string sSuffix = tbBody.Text.Substring(iStart + iLen);
             tbBody.Text = sPrefix + strText + sSuffix;
+        }
+
+        private void TbodyInsert(string sClip)
+        {
+            int i = tbBody.SelectionStart;
+            int j = tbBody.SelectionLength;
+            ReplaceText(i, j, sClip);
         }
 
         private void btnSetObj_Click(object sender, EventArgs e)
@@ -2500,7 +2507,7 @@ namespace MacroViewer
                 }
                 sOut += sSpan + "<br>";
             }
-            tbBody.Text = sOut;
+            TbodyInsert(sOut);
         }
 
     }

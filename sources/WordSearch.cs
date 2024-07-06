@@ -85,6 +85,9 @@ namespace MacroViewer
         private int CFcnt = 0;
         private Font Reg12;
         private Font Reg10;
+        private Color fBlue;
+        private Color fDark;
+
         private string SelectedFile = "";
         private string HasFiles = "";
         private string SaveHasFiles = "";
@@ -110,6 +113,9 @@ namespace MacroViewer
             NewItemName = "";
             Reg12 = cbHPKB.Font;
             Reg10 = gbAlltSearch.Font;
+            fBlue = btnSearch.ForeColor;
+            //fDark = cbIgnCase.ForeColor;
+
             RestoreColor = lbTMinfo.ForeColor;
             CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             InRepeatMode();
@@ -206,6 +212,7 @@ namespace MacroViewer
                 btn.Enabled = FileFound(s);
                 gbSelect.Controls.Add(btn);
                 btn.Click += Btn_Click;
+                if (i == 0) fDark = btn.ForeColor;
                 i++;
             }
         }
@@ -233,6 +240,11 @@ namespace MacroViewer
                 SelectedFile = button.Text;
                 aFilter = "";
                 SortTable(0);
+                foreach(Button btn in gbSelect.Controls)
+                {
+                    btn.ForeColor = fDark;
+                }
+                button.ForeColor = fBlue;
             }
         }
 

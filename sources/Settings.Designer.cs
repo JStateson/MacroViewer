@@ -495,6 +495,7 @@
             // 
             this.cbFileN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFileN.FormattingEnabled = true;
+            this.cbFileN.IntegralHeight = false;
             this.cbFileN.Location = new System.Drawing.Point(24, 19);
             this.cbFileN.MaxDropDownItems = 4;
             this.cbFileN.Name = "cbFileN";

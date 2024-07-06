@@ -26,11 +26,15 @@ namespace MacroViewer
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
         private cMacroChanges xMC;
+        private cMacroChanges xMV;
         private List<string> stDataSource = new List<string>();
         private List<long> stDateTime = new List<long>();
+        private List<string> VstDataSource = new List<string>();
+        private List<long> VstViewed = new List<long>();
         private DateTime ThisDT;
         private List<int> SrtInx;
-        public Settings(eBrowserType reBrowser, string ruserid, int NumAttached, ref cMacroChanges RxMC)
+        private List<TabPage> disabledTabs = new List<TabPage>();
+        public Settings(eBrowserType reBrowser, string ruserid, int NumAttached, ref cMacroChanges RxMC, ref cMacroChanges RxMV)
         {
             InitializeComponent();
             userid = ruserid;
@@ -54,19 +58,40 @@ namespace MacroViewer
             CountUnkUrls();
             bWantsExit = false;
             xMC = RxMC;
+            xMV = RxMV;
             cbFileN.DataSource = xMC.GetFNChanges();
+            cbViewed.DataSource = xMV.GetFNViews();
             xMC.nSelectedRowIndex = -1;
             if (cbFileN.Items.Count > 0 )
             {
                 //string s = cbFileN.Items[0].ToString();
                 //SrtInx = xMC.GetMNChanges(s, ref stDataSource, ref stDateTime);
-                gbChanged.Visible = true;
+                //gbChanged.Visible = true;
+                //tabMacroInfo.
             }
 
             xMC.sGoTo = "";
         }
 
-     
+
+        private void DisableTab(TabControl tabControl, TabPage tabPage)
+        {
+            if (tabControl.TabPages.Contains(tabPage))
+            {
+                tabControl.TabPages.Remove(tabPage);
+                disabledTabs.Add(tabPage);
+            }
+        }
+
+        private void EnableTab(TabControl tabControl, TabPage tabPage)
+        {
+            if (disabledTabs.Contains(tabPage))
+            {
+                tabControl.TabPages.Add(tabPage);
+                disabledTabs.Remove(tabPage);
+            }
+        }
+
         private void CountUnkUrls()
         {
             if (File.Exists(lbSaveLoc.Text))
@@ -147,14 +172,57 @@ namespace MacroViewer
 
         private void btnClrM_Click(object sender, EventArgs e)
         {
+            lbEdited.DataSource = null;
+            lbEdited.Invalidate();
+            cbFileN.DataSource = null;
+            cbFileN.Invalidate();
             xMC.ClearChanges();
             lbEdited.Items.Clear();
-            gbChanged.Visible = false;
+            cbFileN.Items.Clear();
+            tbDateChg.Text = "";
+        }
+
+        private void btnDelDelViewed_Click(object sender, EventArgs e)
+        {
+            RemoveViewHistory();
+        }
+
+        private void RemoveViewHistory()
+        {
+            lbViewed.DataSource = null;
+            lbViewed.Invalidate();
+            cbViewed.DataSource = null;
+            cbViewed.Invalidate();
+            xMV.ClearChanges();
+            lbViewed.Items.Clear();
+            cbViewed.Items.Clear();
+        }
+
+        private void cbViewed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int n = cbViewed.SelectedIndex;
+            if (n < 0) return;
+            string s = cbViewed.Items[n].ToString();
+            List<string> xstDataSource = new List<string>();
+            List<int> xstViewed = new List<int>();
+            lbViewed.DataSource = null;
+            lbViewed.Invalidate();
+            SrtInx = xMV.GetMNViews(s, ref xstDataSource, ref xstViewed);
+            VstDataSource.Clear();
+            VstViewed.Clear();
+            foreach (int i in SrtInx)
+            {
+                VstDataSource.Add(xstDataSource[i]);
+                VstViewed.Add(xstViewed[i]);
+            }
+            lbViewed.DataSource = VstDataSource;
+            lbViewed.Refresh();
         }
 
         private void cbFileN_SelectedIndexChanged(object sender, EventArgs e)
         {
             int n = cbFileN.SelectedIndex;
+            if (n < 0) return;
             string s = cbFileN.Items[n].ToString();
             List<string> xstDataSource = new List<string>();
             List<long> xstDateTime = new List<long>();
@@ -188,14 +256,46 @@ namespace MacroViewer
         {
             //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
             //  July 04 2024, 01:45 PM
-            xMC.nSelectedRowIndex = lbEdited.SelectedIndex;
-            int n = xMC.nSelectedRowIndex;
-            if (n < 0)
-            {
-                return;
-            }
+            int n = lbEdited.SelectedIndex;
+            if (n < 0) return;
+            xMC.nSelectedRowIndex = n;
             ThisDT = new DateTime(stDateTime[n]);
             tbDateChg.Text = ThisDT.ToString("MMMM dd yyyy, hh:mm tt");
+        }
+
+        private void tabMacroInfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void btnDelSel_Click(object sender, EventArgs e)
+        {
+            if(cbViewed.SelectedItem == null) return;   
+            string sFN = cbViewed.SelectedItem.ToString();
+            bool bAny = false;
+            foreach(string s in lbViewed.SelectedItems)
+            {
+                xMV.RemView(sFN, s);
+                bAny = true;
+            }
+            if(bAny)
+            {
+                if(xMV.bIsEmpty())
+                {
+                    RemoveViewHistory();
+                    return;
+                }
+                cbViewed.DataSource = null;
+                cbViewed.Invalidate();
+                cbViewed.DataSource = xMV.GetFNViews();
+                cbViewed.Refresh();
+            }
+        }
+
+        private void Settings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            xMV.SaveChanges();
+            xMC.SaveChanges();
         }
     }
 }

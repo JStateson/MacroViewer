@@ -101,7 +101,8 @@ namespace MacroViewer
         private string aFilter = "";
         private static string LastSearchWord = "";
         private static string LastSearchParam = "";
-        public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit)
+        private cMacroChanges MViews;
+        public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit, ref cMacroChanges rMViews)
         {
             InitializeComponent();
             cAll = Rcb;
@@ -114,7 +115,7 @@ namespace MacroViewer
             Reg12 = cbHPKB.Font;
             Reg10 = gbAlltSearch.Font;
             fBlue = btnSearch.ForeColor;
-            //fDark = cbIgnCase.ForeColor;
+            MViews = rMViews;
 
             RestoreColor = lbTMinfo.ForeColor;
             CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -294,10 +295,11 @@ namespace MacroViewer
             string strType = bSorted[SelectedRow].File;
             string strTemp = cAll[n].sBody;
             if (strTemp == "") return;
+            string MacName = dgvSearched.Rows[e.RowIndex].Cells[3].Value.ToString();
             nUseLastViewed = n;
             if (dgvSearched.Rows[e.RowIndex].Cells[0].Value.ToString() == "RF")
             {
-                string MacName = dgvSearched.Rows[e.RowIndex].Cells[3].Value.ToString();
+
                 strTemp = GetRefUrl(MacName);
                 if (strTemp == "") return;
             }
@@ -306,6 +308,7 @@ namespace MacroViewer
                 if(cbvAddLangRef.Checked) strTemp = Utils.AddLanguageOption(strTemp);
             }
             Utils.ShowPageInBrowser(strType, strTemp);
+            MViews.AddView(strType, MacName);
         }
 
         private void SortTable(int column)

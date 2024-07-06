@@ -71,6 +71,7 @@ namespace MacroViewer
         private string TextFromClipboardMNUs = "";
         private bool bTextFromClipboardMNUs; // can text be used as an argument to a search
         private cMacroChanges xMacroChanges;
+        private cMacroChanges xMacroViews;
         private int tbBodyChecksumN = 0;
         private bool tbBodyChecksumB  = false;
 
@@ -99,7 +100,9 @@ namespace MacroViewer
                 timer1.Interval = 500;
             }
             xMacroChanges = new cMacroChanges();
-            xMacroChanges.Init();
+            xMacroChanges.Init("MacroChanges.txt");
+            xMacroViews = new cMacroChanges();
+            xMacroViews.Init("MacroViews.txt");
         }
 
         private string IgnoreSupSig(string s)
@@ -427,11 +430,13 @@ namespace MacroViewer
         {
             string strTemp = tbBody.Text;
             if (strTemp == "") return;
-            if(cbShowLang.Checked)
+            string sMacroName = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
+            if (cbShowLang.Checked)
             {
                 strTemp = Utils.AddLanguageOption(strTemp);
             }
             Utils.ShowPageInBrowser(strType, strTemp);
+            xMacroViews.AddView(strType, sMacroName);
         }
 
 
@@ -1376,7 +1381,8 @@ namespace MacroViewer
             bool bMustExit = false;
             bool bIgnore = false;
             int i = 0;
-            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures, ref xMacroChanges);
+            Settings MySettings = new Settings(Utils.BrowserWanted, Utils.VolunteerUserID, NumSupplementalSignatures,
+                ref xMacroChanges, ref xMacroViews);
             MySettings.ShowDialog();
             Utils.BrowserWanted = MySettings.eBrowser;
             Utils.VolunteerUserID = MySettings.userid;
@@ -1816,7 +1822,7 @@ namespace MacroViewer
         private void RaiseSearch()
         {
             bool bFinishedEdits = bNothingToSave();
-            WordSearch ws = new WordSearch(ref cBodies, bFinishedEdits);            
+            WordSearch ws = new WordSearch(ref cBodies, bFinishedEdits, ref xMacroViews);            
             ws.ShowDialog();
             int i, n = ws.LastViewed;
             string NewID = ws.NewItemID;
@@ -2306,6 +2312,7 @@ namespace MacroViewer
                 }
             }
             xMacroChanges.SaveChanges();
+            xMacroViews.SaveChanges();
         }
 
         private void mnuRef_Click(object sender, EventArgs e)

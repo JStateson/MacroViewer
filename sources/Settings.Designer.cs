@@ -60,7 +60,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
             this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
-            this.gbChanged = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbDateChg = new System.Windows.Forms.TextBox();
             this.lbEdited = new System.Windows.Forms.ListBox();
@@ -75,13 +74,22 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabMacroInfo = new System.Windows.Forms.TabControl();
+            this.tabChanged = new System.Windows.Forms.TabPage();
+            this.tabViewed = new System.Windows.Forms.TabPage();
+            this.cbViewed = new System.Windows.Forms.ComboBox();
+            this.lbViewed = new System.Windows.Forms.ListBox();
+            this.btnDelDelViewed = new System.Windows.Forms.Button();
+            this.btnDelSel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.gbChanged.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tabMacroInfo.SuspendLayout();
+            this.tabChanged.SuspendLayout();
+            this.tabViewed.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -291,7 +299,7 @@
             // 
             this.groupBox4.Controls.Add(this.btnTestPP);
             this.groupBox4.Controls.Add(this.tbPP);
-            this.groupBox4.Location = new System.Drawing.Point(653, 45);
+            this.groupBox4.Location = new System.Drawing.Point(701, 45);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(362, 129);
             this.groupBox4.TabIndex = 9;
@@ -350,7 +358,7 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.tbMSuffix);
-            this.groupBox3.Location = new System.Drawing.Point(653, 232);
+            this.groupBox3.Location = new System.Drawing.Point(701, 232);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(362, 129);
             this.groupBox3.TabIndex = 10;
@@ -382,7 +390,7 @@
             // 
             this.groupBox6.Controls.Add(this.cbDisableVPaste);
             this.groupBox6.Controls.Add(this.cbRepeatSearch);
-            this.groupBox6.Location = new System.Drawing.Point(603, 540);
+            this.groupBox6.Location = new System.Drawing.Point(651, 540);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(249, 125);
             this.groupBox6.TabIndex = 12;
@@ -414,29 +422,12 @@
             this.cbRepeatSearch.Text = "Repeat word search";
             this.cbRepeatSearch.UseVisualStyleBackColor = true;
             // 
-            // gbChanged
-            // 
-            this.gbChanged.Controls.Add(this.label4);
-            this.gbChanged.Controls.Add(this.tbDateChg);
-            this.gbChanged.Controls.Add(this.lbEdited);
-            this.gbChanged.Controls.Add(this.btnExitSelect);
-            this.gbChanged.Controls.Add(this.btnClrM);
-            this.gbChanged.Controls.Add(this.cbFileN);
-            this.gbChanged.Location = new System.Drawing.Point(320, 251);
-            this.gbChanged.Name = "gbChanged";
-            this.gbChanged.Size = new System.Drawing.Size(249, 414);
-            this.gbChanged.TabIndex = 13;
-            this.gbChanged.TabStop = false;
-            this.gbChanged.Text = "Changed Macro List";
-            this.toolTip1.SetToolTip(this.gbChanged, "list of any macros that have been changed");
-            this.gbChanged.Visible = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Window;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(67, 296);
+            this.label4.Location = new System.Drawing.Point(76, 289);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 15);
             this.label4.TabIndex = 6;
@@ -446,7 +437,7 @@
             // 
             this.tbDateChg.BackColor = System.Drawing.SystemColors.Window;
             this.tbDateChg.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbDateChg.Location = new System.Drawing.Point(23, 324);
+            this.tbDateChg.Location = new System.Drawing.Point(32, 317);
             this.tbDateChg.Multiline = true;
             this.tbDateChg.Name = "tbDateChg";
             this.tbDateChg.ReadOnly = true;
@@ -458,7 +449,7 @@
             this.lbEdited.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEdited.FormattingEnabled = true;
             this.lbEdited.ItemHeight = 16;
-            this.lbEdited.Location = new System.Drawing.Point(19, 110);
+            this.lbEdited.Location = new System.Drawing.Point(28, 103);
             this.lbEdited.Name = "lbEdited";
             this.lbEdited.Size = new System.Drawing.Size(214, 148);
             this.lbEdited.TabIndex = 4;
@@ -468,7 +459,7 @@
             // btnExitSelect
             // 
             this.btnExitSelect.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnExitSelect.Location = new System.Drawing.Point(140, 58);
+            this.btnExitSelect.Location = new System.Drawing.Point(149, 51);
             this.btnExitSelect.Name = "btnExitSelect";
             this.btnExitSelect.Size = new System.Drawing.Size(93, 23);
             this.btnExitSelect.TabIndex = 3;
@@ -481,7 +472,7 @@
             // btnClrM
             // 
             this.btnClrM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClrM.Location = new System.Drawing.Point(181, 19);
+            this.btnClrM.Location = new System.Drawing.Point(190, 12);
             this.btnClrM.Name = "btnClrM";
             this.btnClrM.Size = new System.Drawing.Size(52, 23);
             this.btnClrM.TabIndex = 2;
@@ -496,7 +487,7 @@
             this.cbFileN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFileN.FormattingEnabled = true;
             this.cbFileN.IntegralHeight = false;
-            this.cbFileN.Location = new System.Drawing.Point(24, 19);
+            this.cbFileN.Location = new System.Drawing.Point(33, 12);
             this.cbFileN.MaxDropDownItems = 4;
             this.cbFileN.Name = "cbFileN";
             this.cbFileN.Size = new System.Drawing.Size(121, 24);
@@ -513,7 +504,7 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(603, 385);
+            this.groupBox5.Location = new System.Drawing.Point(651, 385);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(412, 129);
             this.groupBox5.TabIndex = 6;
@@ -577,12 +568,103 @@
     "\r\nType \'edge://flags/#edge-automatic-https \'\r\ninto the Edge browser and enable t" +
     "he option\r\n";
             // 
+            // tabMacroInfo
+            // 
+            this.tabMacroInfo.Controls.Add(this.tabChanged);
+            this.tabMacroInfo.Controls.Add(this.tabViewed);
+            this.tabMacroInfo.Location = new System.Drawing.Point(317, 251);
+            this.tabMacroInfo.Name = "tabMacroInfo";
+            this.tabMacroInfo.SelectedIndex = 0;
+            this.tabMacroInfo.Size = new System.Drawing.Size(305, 414);
+            this.tabMacroInfo.TabIndex = 14;
+            this.tabMacroInfo.SelectedIndexChanged += new System.EventHandler(this.tabMacroInfo_SelectedIndexChanged);
+            // 
+            // tabChanged
+            // 
+            this.tabChanged.Controls.Add(this.label4);
+            this.tabChanged.Controls.Add(this.cbFileN);
+            this.tabChanged.Controls.Add(this.tbDateChg);
+            this.tabChanged.Controls.Add(this.btnClrM);
+            this.tabChanged.Controls.Add(this.lbEdited);
+            this.tabChanged.Controls.Add(this.btnExitSelect);
+            this.tabChanged.Location = new System.Drawing.Point(4, 22);
+            this.tabChanged.Name = "tabChanged";
+            this.tabChanged.Padding = new System.Windows.Forms.Padding(3);
+            this.tabChanged.Size = new System.Drawing.Size(297, 388);
+            this.tabChanged.TabIndex = 0;
+            this.tabChanged.Text = "Changed";
+            this.tabChanged.UseVisualStyleBackColor = true;
+            // 
+            // tabViewed
+            // 
+            this.tabViewed.Controls.Add(this.btnDelSel);
+            this.tabViewed.Controls.Add(this.cbViewed);
+            this.tabViewed.Controls.Add(this.btnDelDelViewed);
+            this.tabViewed.Controls.Add(this.lbViewed);
+            this.tabViewed.Location = new System.Drawing.Point(4, 22);
+            this.tabViewed.Name = "tabViewed";
+            this.tabViewed.Padding = new System.Windows.Forms.Padding(3);
+            this.tabViewed.Size = new System.Drawing.Size(297, 388);
+            this.tabViewed.TabIndex = 1;
+            this.tabViewed.Text = "Most Viewed";
+            this.tabViewed.UseVisualStyleBackColor = true;
+            // 
+            // cbViewed
+            // 
+            this.cbViewed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbViewed.FormattingEnabled = true;
+            this.cbViewed.IntegralHeight = false;
+            this.cbViewed.Location = new System.Drawing.Point(27, 21);
+            this.cbViewed.MaxDropDownItems = 4;
+            this.cbViewed.Name = "cbViewed";
+            this.cbViewed.Size = new System.Drawing.Size(121, 24);
+            this.cbViewed.TabIndex = 5;
+            this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
+            // 
+            // lbViewed
+            // 
+            this.lbViewed.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbViewed.FormattingEnabled = true;
+            this.lbViewed.ItemHeight = 16;
+            this.lbViewed.Location = new System.Drawing.Point(22, 112);
+            this.lbViewed.Name = "lbViewed";
+            this.lbViewed.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbViewed.Size = new System.Drawing.Size(253, 244);
+            this.lbViewed.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.lbViewed, "Select a macro then click on\r\n\"Exit to macro\" to view it on\r\nthe main edit page.");
+            // 
+            // btnDelDelViewed
+            // 
+            this.btnDelDelViewed.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelDelViewed.Location = new System.Drawing.Point(184, 21);
+            this.btnDelDelViewed.Name = "btnDelDelViewed";
+            this.btnDelDelViewed.Size = new System.Drawing.Size(91, 23);
+            this.btnDelDelViewed.TabIndex = 6;
+            this.btnDelDelViewed.Text = "Delete All";
+            this.toolTip1.SetToolTip(this.btnDelDelViewed, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
+        "m the display.");
+            this.btnDelDelViewed.UseVisualStyleBackColor = true;
+            this.btnDelDelViewed.Click += new System.EventHandler(this.btnDelDelViewed_Click);
+            // 
+            // btnDelSel
+            // 
+            this.btnDelSel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelSel.Location = new System.Drawing.Point(184, 63);
+            this.btnDelSel.Name = "btnDelSel";
+            this.btnDelSel.Size = new System.Drawing.Size(91, 23);
+            this.btnDelSel.TabIndex = 8;
+            this.btnDelSel.Text = "Delete Selected";
+            this.toolTip1.SetToolTip(this.btnDelSel, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
+        "m the display.");
+            this.btnDelSel.UseVisualStyleBackColor = true;
+            this.btnDelSel.Click += new System.EventHandler(this.btnDelSel_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 694);
-            this.Controls.Add(this.gbChanged);
+            this.ClientSize = new System.Drawing.Size(1087, 694);
+            this.Controls.Add(this.tabMacroInfo);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
@@ -599,6 +681,7 @@
             this.MinimizeBox = false;
             this.Name = "Settings";
             this.Text = "Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -609,10 +692,12 @@
             this.groupBox3.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.gbChanged.ResumeLayout(false);
-            this.gbChanged.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabMacroInfo.ResumeLayout(false);
+            this.tabChanged.ResumeLayout(false);
+            this.tabChanged.PerformLayout();
+            this.tabViewed.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -658,12 +743,18 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.CheckBox cbDisableVPaste;
         private System.Windows.Forms.CheckBox cbRepeatSearch;
-        private System.Windows.Forms.GroupBox gbChanged;
         private System.Windows.Forms.ComboBox cbFileN;
         private System.Windows.Forms.Button btnClrM;
         private System.Windows.Forms.Button btnExitSelect;
         private System.Windows.Forms.ListBox lbEdited;
         private System.Windows.Forms.TextBox tbDateChg;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabControl tabMacroInfo;
+        private System.Windows.Forms.TabPage tabChanged;
+        private System.Windows.Forms.TabPage tabViewed;
+        private System.Windows.Forms.ComboBox cbViewed;
+        private System.Windows.Forms.ListBox lbViewed;
+        private System.Windows.Forms.Button btnDelSel;
+        private System.Windows.Forms.Button btnDelDelViewed;
     }
 }

@@ -22,6 +22,7 @@ using System.Windows.Automation;
 using System.Net.NetworkInformation;
 using System.Linq.Expressions;
 using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.AxHost;
 
 namespace MacroViewer
 {
@@ -133,6 +134,10 @@ namespace MacroViewer
         private string ChangeList = "";
         public string sGoTo = "";
         public int nSelectedRowIndex;
+        private int iPadSize = 6;   // 5 integers including a space
+        private int x16 = 17;   // 16 hex chars plus a space
+        private int x4 = 5;     // 4 hex chars plus a space
+        private string cHex;
         private int ReadLinesIntoList()
         {
             mChanges = new List<string>();
@@ -148,9 +153,9 @@ namespace MacroViewer
             return mChanges.Count;
         }
 
-        public int Init()
+        public int Init(string sFileName)
         {
-            ChangeList = Utils.WhereExe + "\\MacroChanges.txt";
+            ChangeList = Utils.WhereExe + "\\" + sFileName;
             return ReadLinesIntoList();
         }
 
@@ -165,7 +170,44 @@ namespace MacroViewer
             string hexString = ticks.ToString("X16");
             string sFnMn = sFN + ":" + sMN;
             if (mChanges.Any(s => s.Contains(sFnMn))) return;
-            mChanges.Add(hexString +":" + sFnMn);
+            mChanges.Add(hexString + ":" + sFnMn);
+        }
+        public void AddView(string sFN, string sMN)
+        {
+
+            DateTime date = DateTime.Now;
+            //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
+            //  July 04 2024, 01:45 PM
+            long ticks = date.Ticks;
+            string hexString = "0001";
+            string sFnMn = sFN + ":" + sMN;
+            Predicate<string> matchPredicate = s => s.Contains(sFnMn);
+            int i = mChanges.FindIndex(matchPredicate);
+            if(i >= 0)
+            {
+                string s = mChanges[i].Substring(0, 4);
+                int n = Convert.ToInt32(s, 16);
+                n++;
+                hexString = n.ToString("X4");
+                mChanges.RemoveAt(i);
+            }
+            mChanges.Add(hexString + ":" + sFnMn);
+        }
+
+        public bool bIsEmpty()
+        {
+            return mChanges.Count <= 0;
+        }
+
+        public void RemView(string sFN, string t)
+        {
+            string sFnMn = sFN + ":" + t.Substring(iPadSize);
+            Predicate<string> matchPredicate = s => s.Contains(sFnMn);
+            int i = mChanges.FindIndex(matchPredicate);
+            if (i >= 0)
+            {
+                mChanges.RemoveAt(i);
+            }
         }
 
         public bool GoToMacro(ref string sFN, ref string sMN)
@@ -191,18 +233,19 @@ namespace MacroViewer
             else File.Delete(ChangeList);
         }
 
+        // sMN is the 2 or 3 character Macro Name
         public void TryRemove(string sFN, string sMN)
         {
             string sFnMn = sFN + ":" + sMN;
             mChanges.RemoveAll(line => line == sFnMn);
         }
 
-        public List<string> GetFNChanges()
+        public List<string> GetFN(int i)
         {
             List<string> st = new List<string>();
             foreach (string s in mChanges)
             {
-                string t = s.Substring(17, 2);
+                string t = sGetFN(s.Substring(i));
                 if (!st.Contains(t))
                 {
                     st.Add(t);
@@ -211,6 +254,52 @@ namespace MacroViewer
             return st;
         }
 
+        public List<string> GetFNChanges()
+        {
+            return GetFN(x16);
+        }
+        public List<string> GetFNViews()
+        {
+            return GetFN(x4);
+        }
+
+        public string sGetFN(string s)
+        {
+            int i = s.IndexOf(":");
+            return s.Substring(0, i);
+        }
+
+        public List<int> GetMNViews(string sFN, ref List<string> stEdit, ref List<int> nViewed)
+        {
+            stEdit.Clear();   // the edit data source
+            nViewed.Clear();     // the edit date
+            int n;
+            foreach (string s in mChanges)
+            {
+                string iView = s.Substring(0, 4);    // times viewed in hex
+                n = Convert.ToInt32(iView, 16);
+                string sn = n.ToString().PadLeft(iPadSize-1) + " ";
+                string t = sGetFN(s.Substring(x4));
+                if (t == sFN)
+                {
+                    stEdit.Add(sn + s.Substring(iPadSize + t.Length)); // there is no :
+                    nViewed.Add((int)Convert.ToInt32(iView, 16));
+                }
+            }
+            // Create a list of tuples where each tuple contains an integer and its original index
+            var SrtInx = nViewed.Select((number, index) => new { Number = number, Index = index }).ToList();
+
+            // Sort the list of tuples based on the integer values
+            var sortedSrtInx = SrtInx.OrderByDescending(x => x.Number).ToList(); //Descending
+            List<int> SrtOut = new List<int>();
+            foreach (var item in sortedSrtInx)
+            {
+                SrtOut.Add(item.Index);
+            }
+            return SrtOut;
+        }
+        //1234567890123456:FileID:Macroname
+        //---hex----------:xx or xxx: 
         public List<int> GetMNChanges(string sFN, ref List<string> stEdit, ref List<long> lDate)
         {
             stEdit.Clear();   // the edit data source
@@ -219,10 +308,10 @@ namespace MacroViewer
             foreach (string s in mChanges)
             {
                 string dST = s.Substring(0, 16);    // date string
-                string t = s.Substring(17, 2);
+                string t = sGetFN(s.Substring(x16));
                 if (t == sFN)
                 {
-                    stEdit.Add(s.Substring(20));
+                    stEdit.Add(s.Substring(x16 + t.Length + 1));
                     lDate.Add((long) Convert.ToInt64(dST,16));
                     n++;
                 }

@@ -40,15 +40,20 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.cbFormBorder = new System.Windows.Forms.CheckBox();
+            this.gbPCTbw = new System.Windows.Forms.GroupBox();
+            this.rb0pct = new System.Windows.Forms.RadioButton();
+            this.rb50 = new System.Windows.Forms.RadioButton();
+            this.rb100 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.gbPCTbw.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCencel
             // 
             this.btnCencel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCencel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCencel.Location = new System.Drawing.Point(51, 435);
+            this.btnCencel.Location = new System.Drawing.Point(27, 462);
             this.btnCencel.Name = "btnCencel";
             this.btnCencel.Size = new System.Drawing.Size(122, 36);
             this.btnCencel.TabIndex = 9;
@@ -61,7 +66,7 @@
             this.btnApply.Enabled = false;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(51, 345);
+            this.btnApply.Location = new System.Drawing.Point(27, 395);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 8;
@@ -129,7 +134,7 @@
             // 
             this.btnPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPaste.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPaste.Location = new System.Drawing.Point(204, 242);
+            this.btnPaste.Location = new System.Drawing.Point(165, 226);
             this.btnPaste.Name = "btnPaste";
             this.btnPaste.Size = new System.Drawing.Size(227, 36);
             this.btnPaste.TabIndex = 5;
@@ -141,7 +146,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(309, 312);
+            this.btnClear.Location = new System.Drawing.Point(27, 307);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(122, 36);
             this.btnClear.TabIndex = 10;
@@ -160,18 +165,69 @@
             this.cbFormBorder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbFormBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFormBorder.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbFormBorder.Location = new System.Drawing.Point(204, 407);
+            this.cbFormBorder.Location = new System.Drawing.Point(237, 307);
             this.cbFormBorder.Name = "cbFormBorder";
-            this.cbFormBorder.Size = new System.Drawing.Size(112, 20);
+            this.cbFormBorder.Size = new System.Drawing.Size(91, 20);
             this.cbFormBorder.TabIndex = 11;
-            this.cbFormBorder.Text = "Form Border";
+            this.cbFormBorder.Text = "Form Box";
             this.cbFormBorder.UseVisualStyleBackColor = true;
+            // 
+            // gbPCTbw
+            // 
+            this.gbPCTbw.Controls.Add(this.rb0pct);
+            this.gbPCTbw.Controls.Add(this.rb50);
+            this.gbPCTbw.Controls.Add(this.rb100);
+            this.gbPCTbw.Location = new System.Drawing.Point(237, 358);
+            this.gbPCTbw.Name = "gbPCTbw";
+            this.gbPCTbw.Size = new System.Drawing.Size(165, 113);
+            this.gbPCTbw.TabIndex = 14;
+            this.gbPCTbw.TabStop = false;
+            this.gbPCTbw.Text = "Box width (%)";
+            // 
+            // rb0pct
+            // 
+            this.rb0pct.AutoSize = true;
+            this.rb0pct.Checked = true;
+            this.rb0pct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb0pct.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb0pct.Location = new System.Drawing.Point(38, 84);
+            this.rb0pct.Name = "rb0pct";
+            this.rb0pct.Size = new System.Drawing.Size(74, 20);
+            this.rb0pct.TabIndex = 13;
+            this.rb0pct.TabStop = true;
+            this.rb0pct.Text = "Default";
+            this.rb0pct.UseVisualStyleBackColor = true;
+            // 
+            // rb50
+            // 
+            this.rb50.AutoSize = true;
+            this.rb50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb50.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb50.Location = new System.Drawing.Point(38, 55);
+            this.rb50.Name = "rb50";
+            this.rb50.Size = new System.Drawing.Size(41, 20);
+            this.rb50.TabIndex = 12;
+            this.rb50.Text = "50";
+            this.rb50.UseVisualStyleBackColor = true;
+            // 
+            // rb100
+            // 
+            this.rb100.AutoSize = true;
+            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb100.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb100.Location = new System.Drawing.Point(38, 25);
+            this.rb100.Name = "rb100";
+            this.rb100.Size = new System.Drawing.Size(49, 20);
+            this.rb100.TabIndex = 11;
+            this.rb100.Text = "100";
+            this.rb100.UseVisualStyleBackColor = true;
             // 
             // CreateMacro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 510);
+            this.Controls.Add(this.gbPCTbw);
             this.Controls.Add(this.cbFormBorder);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnPaste);
@@ -188,6 +244,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbPCTbw.ResumeLayout(false);
+            this.gbPCTbw.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,5 +264,9 @@
         private System.Windows.Forms.Button btnBrowseImg;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.CheckBox cbFormBorder;
+        private System.Windows.Forms.GroupBox gbPCTbw;
+        private System.Windows.Forms.RadioButton rb0pct;
+        private System.Windows.Forms.RadioButton rb50;
+        private System.Windows.Forms.RadioButton rb100;
     }
 }

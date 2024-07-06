@@ -78,7 +78,14 @@ namespace MacroViewer
                 strImageName = tbUrlText.Text;
             }
             string s = Utils.AssembleImage(strImageName, Height, Width);
-            strResultOut = cbFormBorder.Checked ? Utils.Form1CellTable(s) : s;
+            if(cbFormBorder.Checked)
+            {
+                strResultOut = Utils.Form1CellTableP(s, GetBoxWidth());
+            }
+            else
+            {
+                strResultOut = s;
+            }
         }
 
 
@@ -139,6 +146,20 @@ namespace MacroViewer
             }
         }
 
+        private string GetBoxWidth()
+        {
+            string sRtn = "";
+            foreach (RadioButton rb in gbPCTbw.Controls)
+            {
+                if (rb.Checked)
+                {
+                    if (rb.Name != "rb0pct")
+                        sRtn = rb.Text;
+                    break;
+                }
+            }
+            return sRtn;
+        }
         private void tbUrlText_TextChanged(object sender, EventArgs e)
         {
             TryUseImage();

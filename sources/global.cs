@@ -831,9 +831,13 @@ internal static class ClipboardFormats
             return sS + sFs + s + sFe + sE;
         }
 
-        public static string Form1CellTable(string strIn)
+        public static string Form1CellTable(string strIn, string sWidth)
         {
-            return "<table border=\"1\" width=\"50%\"><tr><td>" + strIn + "</td></tr></table>";
+            if (sWidth == "")
+            {
+                return "<table border=\"1\"><tr><td>" + strIn + "</td></tr></table>";
+            }
+            return "<table border=\"1\" width=\"" + sWidth + "%\"><tr><td>" + strIn + "</td></tr></table>";
         }
 
         // this puts a newline in the table to make it easier to read the text and copy it

@@ -83,7 +83,7 @@ namespace MacroViewer
             if (rbNoBox.Checked) tbResult.Text = strResult;
             else
             {
-                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult) : Utils.Form1CellTableP(strResult, GetBoxWidth());
+                tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult, GetBoxWidth()) : Utils.Form1CellTableP(strResult, GetBoxWidth());
             }
         }
 

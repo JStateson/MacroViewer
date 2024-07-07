@@ -672,10 +672,12 @@ namespace MacroViewer
             CurrentRowSelected = e;
             if (lbName.Rows.Count == 0 || e >= lbName.Rows.Count)
             {
-                tbBody.Text = "";
+                tbBody.Text = "Please create a new macro by clicking 'NEW'";
                 tbMacName.Text = "";
+                tbBody.Enabled = false;
                 return;
             }
+            tbBody.Enabled = true;
             tbMNum.Text = (1 + e).ToString();
             if (strType == "RF")
             {
@@ -1046,6 +1048,7 @@ namespace MacroViewer
                 tbMacName.Text = Utils.UnNamedMacro;
                 i++;
             }
+            Debug.Assert(tbBody.Text != null, "Edit body should not be null");
             tbBody.Text = tbBody.Text.Trim();
             if (tbBody.Text == "")
             {
@@ -1695,8 +1698,11 @@ namespace MacroViewer
             if (Utils.NoFileThere(sPrefix))
             {
                 ShowEmpty(sPrefix);
+                tbBody.Enabled = false;
+                tbBody.Text = "Please create a new macro by clicking 'NEW'";
                 return 0;
             }
+            tbBody.Enabled = true;
             btnSaveM.Enabled = true;
             lbRCcopy.Visible = false;
             mMoveMacro.Visible = true;
@@ -2335,6 +2341,7 @@ namespace MacroViewer
             else
             {
                 btnSwapBR.Text = "Show <BR>";
+                tbBody.Text = tbBody.Text.Replace("<br />", "<br>");
                 tbBody.Text = tbBody.Text.Replace("<br>",Environment.NewLine);
             }
         }
@@ -2455,6 +2462,7 @@ namespace MacroViewer
         {
             s = s.Replace("<span> </span>", " ");
             s = s.Replace("<br >", "<br>");
+            s = s.Replace("<br />", "<br>");
             s = s.Replace("&nbsp;", " ");
             s = s.Replace(" rel=\"nofollow noopener noreferrer\"", "");
             s = s.Replace(" target=\"_self\"", "");

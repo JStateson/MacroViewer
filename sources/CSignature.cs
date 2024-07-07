@@ -135,6 +135,7 @@ namespace MacroViewer
 
         private void bltnSaveBack_Click(object sender, EventArgs e)
         {
+            if (tbBody.Text == null) return;
             tbBody.Text = Utils.RemoveNL(tbBody.Text);
             dgvSigList.Rows[CurrentRowSelected].Cells[1].Value = tbBody.Text;
         }
@@ -174,7 +175,7 @@ namespace MacroViewer
         
         private void TestBBC()
         {
-            //btnSaveEdits.Enabled = false;
+            if (tbBody.Text == null) return;
             string strTemp = Utils.RemoveNL(tbBody.Text);
             string strErr = Utils.BBCparse(strTemp);
             if (strErr == "")

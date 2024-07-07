@@ -94,6 +94,7 @@ namespace MacroViewer
 
         private void RunBrowser()
         {
+            if (tbResult.Text == null) return;
             string strTemp = tbResult.Text;
             if (strTemp == "" || bBoxed) strTemp = strBoxed;
             if (strTemp == "") return;

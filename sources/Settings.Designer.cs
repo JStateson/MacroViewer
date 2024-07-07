@@ -60,11 +60,11 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
             this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbDateChg = new System.Windows.Forms.TextBox();
             this.lbEdited = new System.Windows.Forms.ListBox();
             this.btnExitSelect = new System.Windows.Forms.Button();
             this.btnClrM = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbDateChg = new System.Windows.Forms.TextBox();
             this.cbFileN = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lbSaveLoc = new System.Windows.Forms.Label();
@@ -76,11 +76,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabMacroInfo = new System.Windows.Forms.TabControl();
             this.tabChanged = new System.Windows.Forms.TabPage();
-            this.tabViewed = new System.Windows.Forms.TabPage();
-            this.cbViewed = new System.Windows.Forms.ComboBox();
             this.lbViewed = new System.Windows.Forms.ListBox();
             this.btnDelDelViewed = new System.Windows.Forms.Button();
+            this.cbViewed = new System.Windows.Forms.ComboBox();
             this.btnDelSel = new System.Windows.Forms.Button();
+            this.tabViewed = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -422,28 +423,6 @@
             this.cbRepeatSearch.Text = "Repeat word search";
             this.cbRepeatSearch.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Window;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(76, 289);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Date Changed";
-            // 
-            // tbDateChg
-            // 
-            this.tbDateChg.BackColor = System.Drawing.SystemColors.Window;
-            this.tbDateChg.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbDateChg.Location = new System.Drawing.Point(32, 317);
-            this.tbDateChg.Multiline = true;
-            this.tbDateChg.Name = "tbDateChg";
-            this.tbDateChg.ReadOnly = true;
-            this.tbDateChg.Size = new System.Drawing.Size(203, 46);
-            this.tbDateChg.TabIndex = 5;
-            // 
             // lbEdited
             // 
             this.lbEdited.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -481,6 +460,28 @@
         "m the display.");
             this.btnClrM.UseVisualStyleBackColor = true;
             this.btnClrM.Click += new System.EventHandler(this.btnClrM_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Window;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Location = new System.Drawing.Point(76, 289);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Date Changed";
+            // 
+            // tbDateChg
+            // 
+            this.tbDateChg.BackColor = System.Drawing.SystemColors.Window;
+            this.tbDateChg.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbDateChg.Location = new System.Drawing.Point(32, 317);
+            this.tbDateChg.Multiline = true;
+            this.tbDateChg.Name = "tbDateChg";
+            this.tbDateChg.ReadOnly = true;
+            this.tbDateChg.Size = new System.Drawing.Size(203, 46);
+            this.tbDateChg.TabIndex = 5;
             // 
             // cbFileN
             // 
@@ -595,32 +596,6 @@
             this.tabChanged.Text = "Changed";
             this.tabChanged.UseVisualStyleBackColor = true;
             // 
-            // tabViewed
-            // 
-            this.tabViewed.Controls.Add(this.btnDelSel);
-            this.tabViewed.Controls.Add(this.cbViewed);
-            this.tabViewed.Controls.Add(this.btnDelDelViewed);
-            this.tabViewed.Controls.Add(this.lbViewed);
-            this.tabViewed.Location = new System.Drawing.Point(4, 22);
-            this.tabViewed.Name = "tabViewed";
-            this.tabViewed.Padding = new System.Windows.Forms.Padding(3);
-            this.tabViewed.Size = new System.Drawing.Size(297, 388);
-            this.tabViewed.TabIndex = 1;
-            this.tabViewed.Text = "Most Viewed";
-            this.tabViewed.UseVisualStyleBackColor = true;
-            // 
-            // cbViewed
-            // 
-            this.cbViewed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbViewed.FormattingEnabled = true;
-            this.cbViewed.IntegralHeight = false;
-            this.cbViewed.Location = new System.Drawing.Point(27, 21);
-            this.cbViewed.MaxDropDownItems = 4;
-            this.cbViewed.Name = "cbViewed";
-            this.cbViewed.Size = new System.Drawing.Size(121, 24);
-            this.cbViewed.TabIndex = 5;
-            this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
-            // 
             // lbViewed
             // 
             this.lbViewed.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -631,7 +606,8 @@
             this.lbViewed.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbViewed.Size = new System.Drawing.Size(253, 244);
             this.lbViewed.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.lbViewed, "Select a macro then click on\r\n\"Exit to macro\" to view it on\r\nthe main edit page.");
+            this.toolTip1.SetToolTip(this.lbViewed, "Missing search have search ID\r\n(A) - Any match\r\n(P) - Exact Phrase\r\n(W) - Exact W" +
+        "ord\r\nThe numeric value is the number\r\nof times the item was searched for");
             // 
             // btnDelDelViewed
             // 
@@ -646,6 +622,18 @@
             this.btnDelDelViewed.UseVisualStyleBackColor = true;
             this.btnDelDelViewed.Click += new System.EventHandler(this.btnDelDelViewed_Click);
             // 
+            // cbViewed
+            // 
+            this.cbViewed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbViewed.FormattingEnabled = true;
+            this.cbViewed.IntegralHeight = false;
+            this.cbViewed.Location = new System.Drawing.Point(27, 21);
+            this.cbViewed.MaxDropDownItems = 4;
+            this.cbViewed.Name = "cbViewed";
+            this.cbViewed.Size = new System.Drawing.Size(121, 24);
+            this.cbViewed.TabIndex = 5;
+            this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
+            // 
             // btnDelSel
             // 
             this.btnDelSel.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -658,6 +646,32 @@
         "m the display.");
             this.btnDelSel.UseVisualStyleBackColor = true;
             this.btnDelSel.Click += new System.EventHandler(this.btnDelSel_Click);
+            // 
+            // tabViewed
+            // 
+            this.tabViewed.Controls.Add(this.label9);
+            this.tabViewed.Controls.Add(this.btnDelSel);
+            this.tabViewed.Controls.Add(this.cbViewed);
+            this.tabViewed.Controls.Add(this.btnDelDelViewed);
+            this.tabViewed.Controls.Add(this.lbViewed);
+            this.tabViewed.Location = new System.Drawing.Point(4, 22);
+            this.tabViewed.Name = "tabViewed";
+            this.tabViewed.Padding = new System.Windows.Forms.Padding(3);
+            this.tabViewed.Size = new System.Drawing.Size(297, 388);
+            this.tabViewed.TabIndex = 1;
+            this.tabViewed.Text = "Most Viewed";
+            this.tabViewed.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Info;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(34, 63);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(117, 26);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "MI represents searches\r\nthat turned up empty";
             // 
             // Settings
             // 
@@ -698,6 +712,7 @@
             this.tabChanged.ResumeLayout(false);
             this.tabChanged.PerformLayout();
             this.tabViewed.ResumeLayout(false);
+            this.tabViewed.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,9 +767,10 @@
         private System.Windows.Forms.TabControl tabMacroInfo;
         private System.Windows.Forms.TabPage tabChanged;
         private System.Windows.Forms.TabPage tabViewed;
-        private System.Windows.Forms.ComboBox cbViewed;
-        private System.Windows.Forms.ListBox lbViewed;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnDelSel;
+        private System.Windows.Forms.ComboBox cbViewed;
         private System.Windows.Forms.Button btnDelDelViewed;
+        private System.Windows.Forms.ListBox lbViewed;
     }
 }

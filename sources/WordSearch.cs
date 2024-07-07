@@ -73,6 +73,7 @@ namespace MacroViewer
         private bool[] KeyPresent;
         private int[] KeyCount;
         private int TotalMatches = 0;
+        private string SearchCode = "(x)"; // W - P - A for Word, Phrase, Any
         public int LastViewed { get; set; }
         public string NewItemName { get; set; }
         public string NewItemID { get; set; }
@@ -540,6 +541,17 @@ namespace MacroViewer
             return;
         }
 
+        private void SetMatchType()
+        {
+            if (rbExactMatch.Checked)
+                SearchCode = "(E)";
+            else if (rbAnyMatch.Checked)
+                SearchCode = "(A)";
+            else if (rbEPhrase.Checked)
+                SearchCode = "(P)";                
+        }
+
+
         private void RunSearch()
         {
             string sBetter = "";
@@ -592,6 +604,7 @@ namespace MacroViewer
             }
             if(lbDropped.Text != "")lbDropped.Text = "Dropped from search: " + lbDropped.Text;
             lbDropped.Visible = rbExactMatch.Checked || rbAnyMatch.Checked;
+            SetMatchType();
             foreach (CBody cb in cAll)
             {
                 string sPrN = cb.Name + " ";
@@ -654,6 +667,11 @@ namespace MacroViewer
             if(CFcnt > 0)
             {
                 AreWeRepeating();
+            }
+            else
+            {
+                // want to keep track of the how many searches turned up empty
+                MViews.AddView("MI", SearchCode + tbKeywords.Text);
             }
             NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);

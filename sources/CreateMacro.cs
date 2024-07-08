@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -59,15 +60,18 @@ namespace MacroViewer
         }
 
 
-
-
         private void AddImage()
         {
-            string strImageName = "", strImagePath="";
+            strResultOut = GetImage();
+        }
+
+        private string GetImage()
+        {
+            string strImageName = "", strImagePath = "";
             int Width = 200, Height = 200;  //default unless image-size is present
             if (bIsPath) // do not know H or W so default is used
             {
-                strImageName =  Utils.GetNextImageFile(strType, ExeFolder);
+                strImageName = Utils.GetNextImageFile(strType, ExeFolder);
                 strImagePath = ExeFolder + "/" + strImageName;
                 pbImage.Image.Save(strImagePath, ImageFormat.Png);
                 Width = pbImage.Image.Width;
@@ -78,13 +82,13 @@ namespace MacroViewer
                 strImageName = tbUrlText.Text;
             }
             string s = Utils.AssembleImage(strImageName, Height, Width);
-            if(cbFormBorder.Checked)
+            if (cbFormBorder.Checked)
             {
-                strResultOut = Utils.Form1CellTableP(s, GetBoxWidth());
+                return Utils.Form1CellTableP(s, GetBoxWidth());
             }
             else
             {
-                strResultOut = s;
+               return s;
             }
         }
 
@@ -163,6 +167,12 @@ namespace MacroViewer
         private void tbUrlText_TextChanged(object sender, EventArgs e)
         {
             TryUseImage();
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            string strTemp = GetImage();
+            Utils.ShowPageInBrowser("", strTemp);
         }
     }
 }

@@ -190,6 +190,7 @@
             this.lbName.Size = new System.Drawing.Size(360, 639);
             this.lbName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbName, "you must double click a row");
+            this.lbName.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellContentClick);
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
@@ -1290,6 +1291,7 @@
             this.label5.Size = new System.Drawing.Size(191, 20);
             this.label5.TabIndex = 32;
             this.label5.Text = "Copy as shown in edit box";
+            this.toolTip1.SetToolTip(this.label5, "Use the \'Show <BR>\' to\r\nshow newlines or not");
             // 
             // lbBRcopyInfo
             // 
@@ -1298,9 +1300,10 @@
             this.lbBRcopyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbBRcopyInfo.Location = new System.Drawing.Point(198, 100);
             this.lbBRcopyInfo.Name = "lbBRcopyInfo";
-            this.lbBRcopyInfo.Size = new System.Drawing.Size(191, 20);
+            this.lbBRcopyInfo.Size = new System.Drawing.Size(165, 20);
             this.lbBRcopyInfo.TabIndex = 31;
-            this.lbBRcopyInfo.Text = "The COPY will have <BR>";
+            this.lbBRcopyInfo.Text = "This show HTML code";
+            this.toolTip1.SetToolTip(this.lbBRcopyInfo, "This copy is suitable for pasting\r\ninto HPs signature or macro page\r\n");
             // 
             // btnToNotepad
             // 

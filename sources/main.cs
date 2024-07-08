@@ -74,7 +74,8 @@ namespace MacroViewer
         private cMacroChanges xMacroViews;
         private int tbBodyChecksumN = 0;
         private bool tbBodyChecksumB  = false;
-
+        private int NumCheckedMacros = 0;
+        private string LastViewedFN = "";   // last macro file prefix
         public main()
         {
             InitializeComponent();
@@ -644,7 +645,6 @@ namespace MacroViewer
         {
             btnSaveM.Enabled = bVal;
             btnDelM.Enabled = bVal;
-            btnDelChecked.Enabled = bVal;
         }
 
         private void MakeSticky(string s)
@@ -657,13 +657,18 @@ namespace MacroViewer
                     break;
             }
             btnDelM.Enabled = b;
-            btnDelChecked.Enabled = b;
         }
 
         private void CheckForLanguageOption(bool bRowChanged)
         {
             cbShowLang.Visible = tbBody.Text.Contains(Utils.sPossibleLanguageOption[0]);
             cbShowLang.Checked = !bRowChanged;
+        }
+
+        private void AllowTBbody(bool bAccess)
+        {
+            tbBody.Enabled = bAccess;
+            tbBody.ReadOnly = !bAccess;
         }
 
         private void ShowUneditedRow(int e)
@@ -674,10 +679,15 @@ namespace MacroViewer
             {
                 tbBody.Text = "Please create a new macro by clicking 'NEW'";
                 tbMacName.Text = "";
-                tbBody.Enabled = false;
+                AllowTBbody(false);
                 return;
             }
-            tbBody.Enabled = true;
+            if(strType != LastViewedFN)
+            {
+                NumCheckedMacros = 0;
+                LastViewedFN = strType;
+            }
+            AllowTBbody(true);
             tbMNum.Text = (1 + e).ToString();
             if (strType == "RF")
             {
@@ -985,7 +995,6 @@ namespace MacroViewer
         {
             btnDelM.Enabled = enable && CurrentRowSelected >= 0;
             btnSaveM.Enabled = enable && CurrentRowSelected >= 0;
-            btnDelChecked.Enabled = enable && CurrentRowSelected >= 0;
         }
 
 
@@ -1698,11 +1707,16 @@ namespace MacroViewer
             if (Utils.NoFileThere(sPrefix))
             {
                 ShowEmpty(sPrefix);
-                tbBody.Enabled = false;
+                AllowTBbody(false);
                 tbBody.Text = "Please create a new macro by clicking 'NEW'";
                 return 0;
             }
-            tbBody.Enabled = true;
+            if (strType != LastViewedFN)
+            {
+                NumCheckedMacros = 0;
+                LastViewedFN = strType;
+            }
+            AllowTBbody(true);
             btnSaveM.Enabled = true;
             lbRCcopy.Visible = false;
             mMoveMacro.Visible = true;
@@ -1834,6 +1848,7 @@ namespace MacroViewer
             string NewID = ws.NewItemID;
             string NewName = ws.NewItemName;
             ws.Dispose();
+            LastViewedFN = "";  // also sets checked macro count to 0 
             if(n >= 0 && bFinishedEdits)
             {
                 CBody cb = cBodies[n];
@@ -2525,6 +2540,23 @@ namespace MacroViewer
             TbodyInsert(sOut);
         }
 
+        private void lbName_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = sender as DataGridView;
+
+            // Check if the click is on a checkbox cell
+            if (dataGridView.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
+            {
+                // Get the current state of the checkbox
+                bool isChecked = (bool)dataGridView[e.ColumnIndex, e.RowIndex].Value;
+
+                // Toggle the checkbox state
+                dataGridView[e.ColumnIndex, e.RowIndex].Value = !isChecked;
+
+                NumCheckedMacros += isChecked ? -1 : 1;
+                btnDelChecked.Enabled = NumCheckedMacros > 0;
+            }
+        }
     }
     
 }

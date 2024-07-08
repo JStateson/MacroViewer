@@ -44,6 +44,7 @@
             this.rb0pct = new System.Windows.Forms.RadioButton();
             this.rb50 = new System.Windows.Forms.RadioButton();
             this.rb100 = new System.Windows.Forms.RadioButton();
+            this.btnTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbPCTbw.SuspendLayout();
@@ -53,7 +54,7 @@
             // 
             this.btnCencel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCencel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCencel.Location = new System.Drawing.Point(27, 462);
+            this.btnCencel.Location = new System.Drawing.Point(24, 498);
             this.btnCencel.Name = "btnCencel";
             this.btnCencel.Size = new System.Drawing.Size(122, 36);
             this.btnCencel.TabIndex = 9;
@@ -66,7 +67,7 @@
             this.btnApply.Enabled = false;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApply.Location = new System.Drawing.Point(27, 395);
+            this.btnApply.Location = new System.Drawing.Point(24, 431);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(122, 36);
             this.btnApply.TabIndex = 8;
@@ -146,7 +147,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(27, 307);
+            this.btnClear.Location = new System.Drawing.Point(24, 343);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(122, 36);
             this.btnClear.TabIndex = 10;
@@ -165,7 +166,7 @@
             this.cbFormBorder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbFormBorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFormBorder.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cbFormBorder.Location = new System.Drawing.Point(237, 307);
+            this.cbFormBorder.Location = new System.Drawing.Point(226, 371);
             this.cbFormBorder.Name = "cbFormBorder";
             this.cbFormBorder.Size = new System.Drawing.Size(91, 20);
             this.cbFormBorder.TabIndex = 11;
@@ -177,7 +178,7 @@
             this.gbPCTbw.Controls.Add(this.rb0pct);
             this.gbPCTbw.Controls.Add(this.rb50);
             this.gbPCTbw.Controls.Add(this.rb100);
-            this.gbPCTbw.Location = new System.Drawing.Point(237, 358);
+            this.gbPCTbw.Location = new System.Drawing.Point(226, 422);
             this.gbPCTbw.Name = "gbPCTbw";
             this.gbPCTbw.Size = new System.Drawing.Size(165, 113);
             this.gbPCTbw.TabIndex = 14;
@@ -222,11 +223,24 @@
             this.rb100.Text = "100";
             this.rb100.UseVisualStyleBackColor = true;
             // 
+            // btnTest
+            // 
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnTest.Location = new System.Drawing.Point(305, 290);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(87, 36);
+            this.btnTest.TabIndex = 15;
+            this.btnTest.Text = "TEST";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // CreateMacro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 510);
+            this.ClientSize = new System.Drawing.Size(1084, 556);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.gbPCTbw);
             this.Controls.Add(this.cbFormBorder);
             this.Controls.Add(this.btnClear);
@@ -268,5 +282,6 @@
         private System.Windows.Forms.RadioButton rb0pct;
         private System.Windows.Forms.RadioButton rb50;
         private System.Windows.Forms.RadioButton rb100;
+        private System.Windows.Forms.Button btnTest;
     }
 }

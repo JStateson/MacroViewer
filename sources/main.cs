@@ -76,6 +76,9 @@ namespace MacroViewer
         private bool tbBodyChecksumB  = false;
         private int NumCheckedMacros = 0;
         private string LastViewedFN = "";   // last macro file prefix
+        private string UnfinishedFN = "";
+        private string UnfinishedMN = "";
+        private int UnfinishedIndex = -1;
         public main()
         {
             InitializeComponent();
@@ -862,6 +865,8 @@ namespace MacroViewer
 #endif
 
 
+        //xxxx todo to do avoid filling in the data grid view during inital load of files
+
         // HP and HTML can have blank macro names and body but NOT any others
         private int LoadFromTXT(string strFN)
         {
@@ -895,6 +900,9 @@ namespace MacroViewer
                         {
                             sBadMacroName +=
                                 "Macro " + (i + 1).ToString() + " in " + strFN + " is un-named\r\n";
+                            UnfinishedFN = strFN;
+                            UnfinishedMN = line;
+                            UnfinishedIndex = i;
                         }
                     }
                     sBody = sr.ReadLine();
@@ -2477,6 +2485,7 @@ namespace MacroViewer
         {
             s = s.Replace("<span> </span>", " ");
             s = s.Replace("<br >", "<br>");
+            s = s.Replace("<!--EndFragment-->", "");
             s = s.Replace("<br />", "<br>");
             s = s.Replace("&nbsp;", " ");
             s = s.Replace(" rel=\"nofollow noopener noreferrer\"", "");
@@ -2509,7 +2518,8 @@ namespace MacroViewer
             strTemp = Regex.Replace(strTemp, @"\s+", " ");
             strTemp = strTemp.Replace("<span >", "<span>");
             strTemp = strTemp.Replace("<p >", "<p>");
-            while(true)
+            strTemp = strTemp.Replace("<br >", "<br>"); // fixes <br span ----
+            while (true)
             {
                 string sPara = GetParagraph(ref strTemp);
                 if(sPara.Length == 0) break;

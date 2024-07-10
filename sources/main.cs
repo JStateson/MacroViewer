@@ -1,6 +1,6 @@
 ﻿//#define SPECIAL2
 //#define SPECIAL3
-//#define SPECIAL4
+#define SPECIAL4
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -93,6 +93,10 @@ namespace MacroViewer
             string strFilename = Properties.Settings.Default.HTTP_HP;
             this.Text = " HP Macro Editor";
             settingsToolStripMenuItem.ForeColor = (Utils.CountImages() > 20) ? Color.Red : Color.Black;
+            xMacroChanges = new cMacroChanges();
+            xMacroChanges.Init("MacroChanges.txt");
+            xMacroViews = new cMacroChanges();
+            xMacroViews.Init("MacroViews.txt");
             LoadAllFiles();
             cms = new CMoveSpace();
             Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
@@ -103,10 +107,7 @@ namespace MacroViewer
             {
                 timer1.Interval = 500;
             }
-            xMacroChanges = new cMacroChanges();
-            xMacroChanges.Init("MacroChanges.txt");
-            xMacroViews = new cMacroChanges();
-            xMacroViews.Init("MacroViews.txt");
+
         }
 
         private string IgnoreSupSig(string s)
@@ -708,12 +709,16 @@ namespace MacroViewer
 
         private void ShowBodyFromSelected()
         {
+            //Debug.Assert(Body[CurrentRowSelected] != null, "Null edit body");
             if (Body[CurrentRowSelected] == null)
-                Body[CurrentRowSelected] = "";
-            tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
+            {
+                Body[CurrentRowSelected] = ""; // have named macro but not body so create empty one
+                tbBody.Text = "";
+            }
+            else tbBody.Text = Body[CurrentRowSelected].Replace("<br>", Environment.NewLine);
             tbBodyChecksumN = xMacroChanges.CalculateChecksum(tbBody.Text);
             tbBodyChecksumB = true;
-    }
+        }
 
         private void ShowSelectedRow(int e)
         {
@@ -807,7 +812,7 @@ namespace MacroViewer
         private void SetVisDiffErr(bool b)
         {
             mShowDiff.Visible = b;
-            mShowErr.Visible = b;
+            //mShowErr.Visible = b;
         }
 
         // can move macros from all files except the HTML one
@@ -849,30 +854,26 @@ namespace MacroViewer
             LoadHTMLfile();
         }
 
-#if SPECIAL4
-// this needs to check for a table followed by a width followed by NO image before the end of the table
-        private string Has50noPic(string strIn)
+        private void TryDif(ref string str1, ref string str2)
         {
-            string strRtn="";
-            int i;
-            i = strIn.IndexOf("width=\"50%\"");
-            if (i >= 0)
+            int k = 0;
+            for (int i = 0; i < str1.Length; i++)
             {
-                strRtn += "possible '%50' problem at " + i.ToString() + Environment.NewLine;
+                if (str1[i] != str2[i])
+                {
+                    k++;
+                }
             }
-            return strRtn;
         }
-#endif
 
-
-        //xxxx todo to do avoid filling in the data grid view during inital load of files
+      
 
         // HP and HTML can have blank macro names and body but NOT any others
         private int LoadFromTXT(string strFN)
         {
             int i = 0;
             bool bNoEmpty = !(strFN == "HP" || strFN == "" || strFN == "HTML");
-            // 
+             string sErr = "";
             bMacroErrors = false;
             mShowErr.Visible = false;
             TXTName = strFN;
@@ -894,30 +895,33 @@ namespace MacroViewer
                 {
                     lbName.Rows.Add(i + 1, false, line);   // this triggers row enter callback
                     MacroNames[i] = line;
-                    if(bInitialLoad)
-                    {
-                        if(line.Contains(Utils.UnNamedMacro))
-                        {
-                            sBadMacroName +=
-                                "Macro " + (i + 1).ToString() + " in " + strFN + " is un-named\r\n";
-                            UnfinishedFN = strFN;
-                            UnfinishedMN = line;
-                            UnfinishedIndex = i;
-                        }
-                    }
                     sBody = sr.ReadLine();
+                    if (sBody == null) sBody = "";
                     Body[i] = sBody;
-                    sBody = Utils.BBCparse(sBody);
 #if SPECIAL4
+
+                    sErr = "";
+                    string s1 = sBody.ToLower();
+                    //if (s1.Contains("youtube") || s1.Contains("ftp"))
+                    //{
+                    //    if (s1 == sBody)
+                    //    {
+                    //        sErr = "CTRL-V ERROR";
+                    //    }
+                    //}
+                    if (s1.Contains("http:"))
+                        sErr += " http: found";
+                    
+#else
+                    sErr = Utils.BBCparse(sBody);
 #endif
-                    MacroErrors[i] = sBody;
-                    HPerr[i] = (sBody != "");
+                    MacroErrors[i] = sErr;
+                    HPerr[i] = (sErr != "");
                     if (HPerr[i])
                     {
                         bMacroErrors = true;
                         SetErrorRed(i);
                     }
-                    mShowErr.Visible = bMacroErrors;
                     i++;
                     NumInBody++;
                     line = sr.ReadLine();
@@ -945,6 +949,11 @@ namespace MacroViewer
             tbNumMac.Text = i.ToString();
             btnNew.Enabled = lbName.RowCount < Utils.NumMacros;
             if (strFN == "HP") btnNew.Enabled = false;
+            mShowErr.Visible = bMacroErrors;
+            if(bMacroErrors)
+            {
+                return i;
+            }
             return i;
         }
 
@@ -1616,8 +1625,8 @@ namespace MacroViewer
                     return;
                 }
                 */
-                sS = sBody.Substring(0, i);
-                sE = sBody.Substring(i + j);
+                sS = tBody.Substring(0, i);
+                sE = tBody.Substring(i + j);
                 tbBody.Text = sS + sOut + sE;
             }
         }
@@ -1772,36 +1781,73 @@ namespace MacroViewer
         private int LoadAllFiles()
         {
             int nMacroCnt = 0;
-            bInitialLoad = true;
+            bool bNoEmpty;
             sBadMacroName = "";
             if (cBodies == null)
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();
                 cBodies = new List<CBody>();
 
-                foreach (string s in Utils.LocalMacroPrefix)
+                foreach (string strFN in Utils.LocalMacroPrefix)
                 {
-                    int i, n = LoadFileItem(s);
-                    nMacroCnt += n;
-                    for (i = 0; i < n; i++)
+                    int i=0;
+                    bNoEmpty = !(strFN == "HP" || strFN == "" || strFN == "HTML");
+                    string FNpath = Utils.FNtoPath(strFN);
+
+                    if (File.Exists(FNpath))
                     {
-                        CBody cb = new CBody();
-                        cb.File = s;
-                        cb.Number = (i + 1).ToString();
-                        cb.Name = lbName.Rows[i].Cells[2].Value.ToString();
+                        StreamReader sr = new StreamReader(FNpath);
+                        string strMN = sr.ReadLine();
+                        string sBody;
+                        bHaveHTML = false;
+                        while (strMN != null)
+                        {
+                            if (strMN.Contains(Utils.UnNamedMacro))
+                            {
+                                sBadMacroName +=
+                                    "Macro " + (i + 1).ToString() + " in " + strFN + " is un-named\r\n";
+                                UnfinishedFN = strFN;
+                                UnfinishedMN = strMN;
+                                UnfinishedIndex = i;
+                            }
+                            sBody = sr.ReadLine();
+                            CBody cb = new CBody();
+                            cb.File = strFN;
+                            cb.Number = (i + 1).ToString();
+                            cb.Name = strMN;
 #if SPECIAL2
-                        bDebug |= RunBorderFix(s, i+1, cb.Name, ref Body[i]);
+                        bDebug |= RunBorderFix(strFN, i+1, cb.Name, ref sBody);
 #endif
 #if SPECIAL3
-                        bDebug |= RunLookMissingTR(s, i + 1, cb.Name, ref Body[i]);
+                        bDebug |= RunLookMissingTR(strFN, i + 1, cb.Name, ref sBody);
 #endif
 
-                        cb.sBody = Body[i];
-                        cb.fKeys = "";
-                        cBodies.Add(cb);
+                            cb.sBody = (sBody == null) ? "" : sBody; ;
+                            cb.fKeys = "";
+                            cBodies.Add(cb);
+                            sBody = Utils.BBCparse(sBody);
+#if SPECIAL4
+#endif
+                            i++;
+                            nMacroCnt++;
+                            strMN = sr.ReadLine();
+                            if (strMN == null)
+                            {
+                                break;
+                            }
+                            if (strMN == "")
+                            {
+                                // file  HP can have an empty macro unlike any others empty
+                            }
+                            if (strMN == "" & bNoEmpty)
+                            {
+                                strBadEnding.Add(strFN);
+                                break;  // if stop here then file has a trailing newline !!!
+                            }
+                        }
+                        sr.Close();
                     }
-                    if (n != 0) strType = s;
-                }
+                }            
             }
 
             bInitialLoad = false;
@@ -1821,6 +1867,17 @@ namespace MacroViewer
                 ReWriteBadFiles();
             }
             if (strType != "") lbName.ReadOnly = false;
+            
+            if(UnfinishedFN == "")
+            {
+                LoadFromTXT("HP");
+            }
+            else
+            {
+                LoadFromTXT(UnfinishedFN);
+                ShowUneditedRow(UnfinishedIndex);
+            }
+
             return nMacroCnt;
         }
 

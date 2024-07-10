@@ -63,6 +63,9 @@
             this.lbEdited = new System.Windows.Forms.ListBox();
             this.btnExitSelect = new System.Windows.Forms.Button();
             this.btnClrM = new System.Windows.Forms.Button();
+            this.lbViewed = new System.Windows.Forms.ListBox();
+            this.btnDelDelViewed = new System.Windows.Forms.Button();
+            this.btnDelSel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbDateChg = new System.Windows.Forms.TextBox();
             this.cbFileN = new System.Windows.Forms.ComboBox();
@@ -76,12 +79,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabMacroInfo = new System.Windows.Forms.TabControl();
             this.tabChanged = new System.Windows.Forms.TabPage();
-            this.lbViewed = new System.Windows.Forms.ListBox();
-            this.btnDelDelViewed = new System.Windows.Forms.Button();
-            this.cbViewed = new System.Windows.Forms.ComboBox();
-            this.btnDelSel = new System.Windows.Forms.Button();
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
+            this.cbViewed = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -385,7 +385,8 @@
             this.tbMSuffix.Name = "tbMSuffix";
             this.tbMSuffix.Size = new System.Drawing.Size(244, 88);
             this.tbMSuffix.TabIndex = 1;
-            this.tbMSuffix.Text = "Please let me know if this works";
+            this.tbMSuffix.Text = "Let me know if you have a flex system (WiFi boosters or repeaters) as the setup i" +
+    "s more complicated.";
             // 
             // groupBox6
             // 
@@ -460,6 +461,45 @@
         "m the display.");
             this.btnClrM.UseVisualStyleBackColor = true;
             this.btnClrM.Click += new System.EventHandler(this.btnClrM_Click);
+            // 
+            // lbViewed
+            // 
+            this.lbViewed.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbViewed.FormattingEnabled = true;
+            this.lbViewed.ItemHeight = 16;
+            this.lbViewed.Location = new System.Drawing.Point(22, 112);
+            this.lbViewed.Name = "lbViewed";
+            this.lbViewed.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbViewed.Size = new System.Drawing.Size(253, 244);
+            this.lbViewed.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.lbViewed, "Missing search have search ID\r\n(A) - Any match\r\n(P) - Exact Phrase\r\n(W) - Exact W" +
+        "ord\r\nThe numeric value is the number\r\nof times the item was searched for");
+            // 
+            // btnDelDelViewed
+            // 
+            this.btnDelDelViewed.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelDelViewed.Location = new System.Drawing.Point(184, 21);
+            this.btnDelDelViewed.Name = "btnDelDelViewed";
+            this.btnDelDelViewed.Size = new System.Drawing.Size(91, 23);
+            this.btnDelDelViewed.TabIndex = 6;
+            this.btnDelDelViewed.Text = "Delete All";
+            this.toolTip1.SetToolTip(this.btnDelDelViewed, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
+        "m the display.");
+            this.btnDelDelViewed.UseVisualStyleBackColor = true;
+            this.btnDelDelViewed.Click += new System.EventHandler(this.btnDelDelViewed_Click);
+            // 
+            // btnDelSel
+            // 
+            this.btnDelSel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnDelSel.Location = new System.Drawing.Point(184, 63);
+            this.btnDelSel.Name = "btnDelSel";
+            this.btnDelSel.Size = new System.Drawing.Size(91, 23);
+            this.btnDelSel.TabIndex = 8;
+            this.btnDelSel.Text = "Delete Selected";
+            this.toolTip1.SetToolTip(this.btnDelSel, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
+        "m the display.");
+            this.btnDelSel.UseVisualStyleBackColor = true;
+            this.btnDelSel.Click += new System.EventHandler(this.btnDelSel_Click);
             // 
             // label4
             // 
@@ -596,57 +636,6 @@
             this.tabChanged.Text = "Changed";
             this.tabChanged.UseVisualStyleBackColor = true;
             // 
-            // lbViewed
-            // 
-            this.lbViewed.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbViewed.FormattingEnabled = true;
-            this.lbViewed.ItemHeight = 16;
-            this.lbViewed.Location = new System.Drawing.Point(22, 112);
-            this.lbViewed.Name = "lbViewed";
-            this.lbViewed.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbViewed.Size = new System.Drawing.Size(253, 244);
-            this.lbViewed.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.lbViewed, "Missing search have search ID\r\n(A) - Any match\r\n(P) - Exact Phrase\r\n(W) - Exact W" +
-        "ord\r\nThe numeric value is the number\r\nof times the item was searched for");
-            // 
-            // btnDelDelViewed
-            // 
-            this.btnDelDelViewed.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelDelViewed.Location = new System.Drawing.Point(184, 21);
-            this.btnDelDelViewed.Name = "btnDelDelViewed";
-            this.btnDelDelViewed.Size = new System.Drawing.Size(91, 23);
-            this.btnDelDelViewed.TabIndex = 6;
-            this.btnDelDelViewed.Text = "Delete All";
-            this.toolTip1.SetToolTip(this.btnDelDelViewed, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
-        "m the display.");
-            this.btnDelDelViewed.UseVisualStyleBackColor = true;
-            this.btnDelDelViewed.Click += new System.EventHandler(this.btnDelDelViewed_Click);
-            // 
-            // cbViewed
-            // 
-            this.cbViewed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbViewed.FormattingEnabled = true;
-            this.cbViewed.IntegralHeight = false;
-            this.cbViewed.Location = new System.Drawing.Point(27, 21);
-            this.cbViewed.MaxDropDownItems = 4;
-            this.cbViewed.Name = "cbViewed";
-            this.cbViewed.Size = new System.Drawing.Size(121, 24);
-            this.cbViewed.TabIndex = 5;
-            this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
-            // 
-            // btnDelSel
-            // 
-            this.btnDelSel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelSel.Location = new System.Drawing.Point(184, 63);
-            this.btnDelSel.Name = "btnDelSel";
-            this.btnDelSel.Size = new System.Drawing.Size(91, 23);
-            this.btnDelSel.TabIndex = 8;
-            this.btnDelSel.Text = "Delete Selected";
-            this.toolTip1.SetToolTip(this.btnDelSel, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
-        "m the display.");
-            this.btnDelSel.UseVisualStyleBackColor = true;
-            this.btnDelSel.Click += new System.EventHandler(this.btnDelSel_Click);
-            // 
             // tabViewed
             // 
             this.tabViewed.Controls.Add(this.label9);
@@ -672,6 +661,18 @@
             this.label9.Size = new System.Drawing.Size(117, 26);
             this.label9.TabIndex = 9;
             this.label9.Text = "MI represents searches\r\nthat turned up empty";
+            // 
+            // cbViewed
+            // 
+            this.cbViewed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbViewed.FormattingEnabled = true;
+            this.cbViewed.IntegralHeight = false;
+            this.cbViewed.Location = new System.Drawing.Point(27, 21);
+            this.cbViewed.MaxDropDownItems = 4;
+            this.cbViewed.Name = "cbViewed";
+            this.cbViewed.Size = new System.Drawing.Size(121, 24);
+            this.cbViewed.TabIndex = 5;
+            this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
             // 
             // Settings
             // 

@@ -137,7 +137,6 @@ namespace MacroViewer
         private int iPadSize = 6;   // 5 integers including a space
         private int x16 = 17;   // 16 hex chars plus a space
         private int x4 = 5;     // 4 hex chars plus a space
-        private string cHex;
         private int ReadLinesIntoList()
         {
             mChanges = new List<string>();

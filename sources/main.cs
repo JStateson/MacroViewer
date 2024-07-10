@@ -24,6 +24,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.Globalization;
 
 
 namespace MacroViewer
@@ -124,7 +125,7 @@ namespace MacroViewer
         private bool AnyHPdiff()
         {
             bool b = true;
-            for (int i = 0; i < NumInBody; i++)
+            for (int i = 0; i < NumInBody; i++) // was NumInBody NIB
             {
                 if (bHaveHTMLasLOCAL)
                 {
@@ -140,7 +141,7 @@ namespace MacroViewer
         {
             bool b = false;
             bool c = false;
-            for (int i = 0; i < NumInBody; i++)
+            for (int i = 0; i < Utils.NumMacros; i++) // was NIB
             {
                 OriginalColor[i] = 0;
                 bHPcorrected[i] = false;
@@ -172,7 +173,7 @@ namespace MacroViewer
 
         private void BackupHP_HTML()
         {
-            for (int i = 0; i < NumInBody; i++)
+            for (int i = 0; i < Utils.NumMacros; i++) // was NIB
             {
                 Body_HP_HTML[i] = Body[i];
                 Name_HP_HTML[i] = MacroNames[i];
@@ -209,7 +210,7 @@ namespace MacroViewer
 
         private void HighlightDIF()
         {
-            for (int i = 0; i < NumInBody; i++)
+            for (int i = 0; i < NumInBody; i++) // was NIB
             {
                 if (HP_HTML_NO_DIFF[i])
                     SetDefaultCellColor(i);
@@ -299,7 +300,7 @@ namespace MacroViewer
             string strEnd = "<span class=\"html-tag\">";
             int j, k, n;
             bMacroErrors = false;
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Utils.HPmaxNumber; i++)
             {
                 strFind = "<span class=\"html-attribute-value\">profilemacro_" + (i + 1).ToString() + "</span>\"&gt;</span>";
                 j = aPage.Substring(MacBody[i]).IndexOf(strFind);
@@ -339,7 +340,7 @@ namespace MacroViewer
             string strFind = "<span class=\"html-attribute-name\">value</span>=\"<span class=\"html-attribute-value\">";
             lbName.Rows.Clear();
             tbNumMac.Text = "0";
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Utils.HPmaxNumber; i++)
             {
                 j = aPage.Substring(StartMac[i]).IndexOf(strFind);
                 if (j < 0) return false;
@@ -370,18 +371,27 @@ namespace MacroViewer
         {
             int j, k;
             NumInBody = 0;
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Utils.NumMacros; i++)
             {
                 string strFind = "Macro " + (i + 1).ToString();
                 j = aPage.IndexOf(strFind);
-                if (j < 0) return false;
+                if (j < 0)
+                {
+                    Utils.HPmaxNumber = i;
+                    return false;
+                }
                 StartMac[i] = j;
                 j += strFind.Length;
                 k = aPage.Substring(j).IndexOf(strFind);
-                if (k < 0) return false;
+                if (k < 0)
+                {
+                    Utils.HPmaxNumber = i;
+                    return false;
+                }
                 StopMac[i] = k + j;
             }
-            NumInBody = 30;
+            NumInBody = Utils.NumMacros;
+            Utils.HPmaxNumber = NumInBody;
             return true;
         }
 
@@ -948,7 +958,8 @@ namespace MacroViewer
             }
             tbNumMac.Text = i.ToString();
             btnNew.Enabled = lbName.RowCount < Utils.NumMacros;
-            if (strFN == "HP") btnNew.Enabled = false;
+            if (strFN == "HP")
+                btnNew.Enabled = false; // lbName.RowCount < Utils.HPmaxNumber;
             mShowErr.Visible = bMacroErrors;
             if(bMacroErrors)
             {
@@ -1871,6 +1882,13 @@ namespace MacroViewer
             if(UnfinishedFN == "")
             {
                 LoadFromTXT("HP");
+                if (bHaveHTMLasLOCAL)
+                {
+                    LookForHTMLfix();
+                    bHaveBothDIFF = AnyHPdiff();
+                    mShowDiff.Visible = bHaveBothDIFF;
+                    lbRCcopy.Visible = bHaveBothDIFF;
+                }
             }
             else
             {

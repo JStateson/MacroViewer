@@ -42,7 +42,7 @@ namespace MacroViewer
             nMacsAllowed = new int[MacroIDs.Length];
             for (i = 0; i < MacroIDs.Length - 1; i++)
                 nMacsAllowed[i] = Utils.NumMacros;
-            nMacsAllowed[MacroIDs.Length - 1] = 30; // only 30 macros in HP forum original list
+            nMacsAllowed[MacroIDs.Length - 1] = Utils.HPmaxNumber; // only 30 macros in HP forum original list
             // this item has to be "HP" and stay at end of any string list of files
             CountEmpties();
         }
@@ -353,6 +353,7 @@ namespace MacroViewer
     {
         private const int iNMacros = 13;
         public const int NumMacros = 50;   // only 30 for the HTML file
+        public static int HPmaxNumber = 40;  // some users may have more!
         public static int nLongestExpectedURL = 256;
         public static string[] nUse ={ // these must match the button names in WordSearch
             //"PC","Printer","Drivers","EBay","Google","Manuals","YouTube","HP KB"

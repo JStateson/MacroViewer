@@ -1924,6 +1924,7 @@ namespace MacroViewer
 
         private void RaiseSearch()
         {
+            string sFN = strType;
             bool bFinishedEdits = bNothingToSave();
             WordSearch ws = new WordSearch(ref cBodies, bFinishedEdits, ref xMacroViews);            
             ws.ShowDialog();
@@ -1936,16 +1937,24 @@ namespace MacroViewer
             {
                 CBody cb = cBodies[n];
                 LoadFromTXT(cb.File);
+                sFN = cb.File;
                 i = Convert.ToInt32(cb.Number);
                 ShowUneditedRow(i - 1);
             }
             if(NewID != "" &&bFinishedEdits)
             {
                 n = LoadFromTXT(NewID);
+                sFN = NewID;
                 if (n < Utils.NumMacros)
                 {
                     AddNew(NewName, GetReference());
                 }
+            }
+            if(strType != "HP")
+            {
+                AccessDiffBoth(false);
+                EnableMacEdits(true);
+                SetVisDiffErr(false);
             }
         }
 

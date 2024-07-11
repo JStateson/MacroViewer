@@ -908,23 +908,13 @@ namespace MacroViewer
                     sBody = sr.ReadLine();
                     if (sBody == null) sBody = "";
                     Body[i] = sBody;
-#if SPECIAL4
-
                     sErr = "";
-                    string s1 = sBody.ToLower();
-                    //if (s1.Contains("youtube") || s1.Contains("ftp"))
-                    //{
-                    //    if (s1 == sBody)
-                    //    {
-                    //        sErr = "CTRL-V ERROR";
-                    //    }
-                    //}
-                    if (s1.Contains("http:"))
-                        sErr += " http: found";
-                    
-#else
-                    sErr = Utils.BBCparse(sBody);
-#endif
+                    int j = sBody.ToLower().IndexOf("http:");
+                    if(j >= 0)
+                    {
+                        sErr += " http: found(" + (j+1).ToString() + ") ";
+                    }                   
+                    sErr += Utils.BBCparse(sBody);
                     MacroErrors[i] = sErr;
                     HPerr[i] = (sErr != "");
                     if (HPerr[i])
@@ -1932,6 +1922,7 @@ namespace MacroViewer
             string NewID = ws.NewItemID;
             string NewName = ws.NewItemName;
             ws.Dispose();
+            LastViewedFN = "";  // also sets checked macro count to 0 
             LastViewedFN = "";  // also sets checked macro count to 0 
             if(n >= 0 && bFinishedEdits)
             {

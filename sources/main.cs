@@ -485,6 +485,10 @@ namespace MacroViewer
             SelectFileItem("IN");
         }
 
+        private void mOJload(object sender, EventArgs e)
+        {
+            SelectFileItem("OJ");
+        }
         private void mPCload_Click(object sender, EventArgs e)
         {
             SelectFileItem("PC");
@@ -664,13 +668,18 @@ namespace MacroViewer
         private void MakeSticky(string s)
         {
             bool b = true;
-            switch(s)
+            if(Properties.Settings.Default.AllowSTICKYedits == false)
             {
-                case "RF":
-                    b = (CurrentRowSelected >= Utils.RequiredMacrosRF.Length);
-                    break;
+                switch (s)
+                {
+                    case "RF":
+                        b = (CurrentRowSelected >= Utils.RequiredMacrosRF.Length);
+                        break;
+                }
             }
             btnDelM.Enabled = b;
+            btnSaveM.Enabled = b;
+            btnDelChecked.Enabled = b;
         }
 
         private void CheckForLanguageOption(bool bRowChanged)
@@ -1664,7 +1673,7 @@ namespace MacroViewer
         {
             string sOut = "";
             string TXTmacName = Utils.FNtoPath(sFN);
-            DialogResult dr = MessageBox.Show("Reference Macro RFmacros.txt is missing\r\nClick YES to create placeholders or NO to quit",
+            DialogResult dr = MessageBox.Show("Reference Macro RFmacros.txt is missing\r\nPlaceholders or NO to quit",
                 "WARNING",MessageBoxButtons.YesNo);
             if (dr == DialogResult.No)
             {
@@ -1677,22 +1686,6 @@ namespace MacroViewer
             }
             Utils.WriteAllText(TXTmacName, sOut);
             return Utils.RequiredMacrosRF.Length;
-        }
-
-        private int LoadFileItem(string sPrefix)
-        {
-            int n = LoadFromTXT(sPrefix);
-            if(sPrefix != "HP")
-            {
-                SetVisDiffErr(false);
-            }
-            if(n == 0 && sPrefix == "RF")
-            {
-                n = WarnMissing(sPrefix);
-                if(n > 0) return LoadFromTXT(sPrefix);
-                return 0;
-            }
-            return n;
         }
 
         private void ShowEmpty(string sWanted)
@@ -1788,7 +1781,12 @@ namespace MacroViewer
             {
                 bHaveHTMLasLOCAL = ReadLastHTTP();
                 cBodies = new List<CBody>();
-
+                if(!File.Exists(Utils.FNtoPath("RF")))
+                {
+                    int n = WarnMissing("RF");
+                    if (n > 0) return LoadFromTXT("RF");
+                    return 0;
+                }
                 foreach (string strFN in Utils.LocalMacroPrefix)
                 {
                     int i=0;
@@ -1947,11 +1945,6 @@ namespace MacroViewer
                 EnableMacEdits(true);
                 SetVisDiffErr(false);
             }
-        }
-
-        private void WordSearch_Click(object sender, EventArgs e)
-        {
-            RaiseSearch();
         }
 
         private int CountChecks()
@@ -2642,6 +2635,7 @@ namespace MacroViewer
                 btnDelChecked.Enabled = NumCheckedMacros > 0;
             }
         }
+
     }
     
 }

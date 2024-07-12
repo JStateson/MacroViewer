@@ -226,5 +226,17 @@ namespace MacroViewer.Properties {
                 this["WSrepeat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowSTICKYedits {
+            get {
+                return ((bool)(this["AllowSTICKYedits"]));
+            }
+            set {
+                this["AllowSTICKYedits"] = value;
+            }
+        }
     }
 }

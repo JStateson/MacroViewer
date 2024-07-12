@@ -54,6 +54,7 @@ namespace MacroViewer
             cbSaveUNK.Checked = Properties.Settings.Default.SaveUnkUrls;
             cbDisableVPaste.Checked = Properties.Settings.Default.Vdisable;
             cbRepeatSearch.Checked = Properties.Settings.Default.WSrepeat;
+            cbRFsticky.Checked = Properties.Settings.Default.AllowSTICKYedits;
             lbSaveLoc.Text = Utils.WhereExe + "\\UrlDebug.txt";
             CountUnkUrls();
             bWantsExit = false;
@@ -109,7 +110,7 @@ namespace MacroViewer
                 btnShowURL.Enabled = true;
                 btnDelURL.Enabled = true;
             }
-            else tbURLcnt.Text = "No saved urls";
+            else tbURLcnt.Text = "No saved URLs";
         }
 
 
@@ -129,6 +130,7 @@ namespace MacroViewer
             Properties.Settings.Default.LongestExpectedURL = Convert.ToInt32(tbLongAllowed.Text);
             Properties.Settings.Default.Vdisable = cbDisableVPaste.Checked;
             Properties.Settings.Default.WSrepeat = cbRepeatSearch.Checked;
+            Properties.Settings.Default.AllowSTICKYedits = cbRFsticky.Checked;
             Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")
@@ -252,6 +254,13 @@ namespace MacroViewer
             this.Close();
         }
 
+        private string sExtractChange(long l)
+        {
+            string s = xMC.TicksToHex(l);
+            int n = 1 + xMC.GetZ000(s);
+            return "(" + n.ToString() + ")";
+        }
+
         private void lbEdited_SelectedIndexChanged(object sender, EventArgs e)
         {
             //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
@@ -259,8 +268,9 @@ namespace MacroViewer
             int n = lbEdited.SelectedIndex;
             if (n < 0) return;
             xMC.nSelectedRowIndex = n;
+            string sChanges = sExtractChange(stDateTime[n]);
             ThisDT = new DateTime(stDateTime[n]);
-            tbDateChg.Text = ThisDT.ToString("MMMM dd yyyy, hh:mm tt");
+            tbDateChg.Text = ThisDT.ToString("MMMM dd yyyy, hh:mm tt " + sChanges);
         }
 
         private void tabMacroInfo_SelectedIndexChanged(object sender, EventArgs e)

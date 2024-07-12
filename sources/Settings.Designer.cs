@@ -58,6 +58,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tbMSuffix = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cbRFsticky = new System.Windows.Forms.CheckBox();
             this.cbDisableVPaste = new System.Windows.Forms.CheckBox();
             this.cbRepeatSearch = new System.Windows.Forms.CheckBox();
             this.lbEdited = new System.Windows.Forms.ListBox();
@@ -82,6 +83,7 @@
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.cbViewed = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -161,7 +163,7 @@
             this.groupBox2.Controls.Add(this.tbUserID);
             this.groupBox2.Location = new System.Drawing.Point(12, 243);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(274, 422);
+            this.groupBox2.Size = new System.Drawing.Size(274, 439);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User Info";
@@ -300,7 +302,7 @@
             // 
             this.groupBox4.Controls.Add(this.btnTestPP);
             this.groupBox4.Controls.Add(this.tbPP);
-            this.groupBox4.Location = new System.Drawing.Point(701, 45);
+            this.groupBox4.Location = new System.Drawing.Point(651, 206);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(362, 129);
             this.groupBox4.TabIndex = 9;
@@ -334,7 +336,7 @@
             // tbLongAllowed
             // 
             this.tbLongAllowed.BackColor = System.Drawing.SystemColors.Window;
-            this.tbLongAllowed.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbLongAllowed.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.tbLongAllowed.Location = new System.Drawing.Point(170, 61);
             this.tbLongAllowed.Name = "tbLongAllowed";
             this.tbLongAllowed.Size = new System.Drawing.Size(48, 20);
@@ -345,7 +347,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.Window;
+            this.label10.BackColor = System.Drawing.SystemColors.Info;
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label10.Location = new System.Drawing.Point(19, 64);
             this.label10.Name = "label10";
@@ -359,7 +361,7 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.tbMSuffix);
-            this.groupBox3.Location = new System.Drawing.Point(701, 232);
+            this.groupBox3.Location = new System.Drawing.Point(651, 349);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(362, 129);
             this.groupBox3.TabIndex = 10;
@@ -390,16 +392,29 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.cbRFsticky);
             this.groupBox6.Controls.Add(this.cbDisableVPaste);
             this.groupBox6.Controls.Add(this.cbRepeatSearch);
-            this.groupBox6.Location = new System.Drawing.Point(651, 540);
+            this.groupBox6.Location = new System.Drawing.Point(651, 513);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(249, 125);
+            this.groupBox6.Size = new System.Drawing.Size(249, 165);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Edit and Search Overrides";
             this.toolTip1.SetToolTip(this.groupBox6, "Display the previous search settings\r\nand values when bring up the word\r\nsearch. " +
         " Make any change to disable.");
+            // 
+            // cbRFsticky
+            // 
+            this.cbRFsticky.AutoSize = true;
+            this.cbRFsticky.Location = new System.Drawing.Point(23, 123);
+            this.cbRFsticky.Name = "cbRFsticky";
+            this.cbRFsticky.Size = new System.Drawing.Size(123, 17);
+            this.cbRFsticky.TabIndex = 2;
+            this.cbRFsticky.Text = "Allow sticky RF edits";
+            this.toolTip1.SetToolTip(this.cbRFsticky, "The first 2 items of RF are sticky\r\nCheck this box to allow their \r\ndeletion or e" +
+        "dit");
+            this.cbRFsticky.UseVisualStyleBackColor = true;
             // 
             // cbDisableVPaste
             // 
@@ -431,7 +446,8 @@
             this.lbEdited.ItemHeight = 16;
             this.lbEdited.Location = new System.Drawing.Point(28, 103);
             this.lbEdited.Name = "lbEdited";
-            this.lbEdited.Size = new System.Drawing.Size(214, 148);
+            this.lbEdited.ScrollAlwaysVisible = true;
+            this.lbEdited.Size = new System.Drawing.Size(245, 148);
             this.lbEdited.TabIndex = 4;
             this.toolTip1.SetToolTip(this.lbEdited, "Select a macro then click on\r\n\"Exit to macro\" to view it on\r\nthe main edit page.");
             this.lbEdited.SelectedIndexChanged += new System.EventHandler(this.lbEdited_SelectedIndexChanged);
@@ -439,7 +455,7 @@
             // btnExitSelect
             // 
             this.btnExitSelect.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnExitSelect.Location = new System.Drawing.Point(149, 51);
+            this.btnExitSelect.Location = new System.Drawing.Point(180, 58);
             this.btnExitSelect.Name = "btnExitSelect";
             this.btnExitSelect.Size = new System.Drawing.Size(93, 23);
             this.btnExitSelect.TabIndex = 3;
@@ -452,11 +468,11 @@
             // btnClrM
             // 
             this.btnClrM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClrM.Location = new System.Drawing.Point(190, 12);
+            this.btnClrM.Location = new System.Drawing.Point(208, 13);
             this.btnClrM.Name = "btnClrM";
-            this.btnClrM.Size = new System.Drawing.Size(52, 23);
+            this.btnClrM.Size = new System.Drawing.Size(65, 23);
             this.btnClrM.TabIndex = 2;
-            this.btnClrM.Text = "Delete";
+            this.btnClrM.Text = "Delete All";
             this.toolTip1.SetToolTip(this.btnClrM, "This will delete the macro file\r\nfrom the disk drive in addition\r\nto eraseing fro" +
         "m the display.");
             this.btnClrM.UseVisualStyleBackColor = true;
@@ -469,6 +485,7 @@
             this.lbViewed.ItemHeight = 16;
             this.lbViewed.Location = new System.Drawing.Point(22, 112);
             this.lbViewed.Name = "lbViewed";
+            this.lbViewed.ScrollAlwaysVisible = true;
             this.lbViewed.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbViewed.Size = new System.Drawing.Size(253, 244);
             this.lbViewed.TabIndex = 7;
@@ -506,11 +523,11 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Window;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(76, 289);
+            this.label4.Location = new System.Drawing.Point(32, 288);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 15);
+            this.label4.Size = new System.Drawing.Size(159, 15);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Date Changed";
+            this.label4.Text = "Date Changed and (#) changes";
             // 
             // tbDateChg
             // 
@@ -537,6 +554,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label12);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.tbLongAllowed);
             this.groupBox5.Controls.Add(this.btnDelURL);
@@ -545,9 +563,9 @@
             this.groupBox5.Controls.Add(this.btnShowURL);
             this.groupBox5.Controls.Add(this.tbURLcnt);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(651, 385);
+            this.groupBox5.Location = new System.Drawing.Point(529, 17);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(412, 129);
+            this.groupBox5.Size = new System.Drawing.Size(542, 169);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Unscrubbed URL list";
@@ -557,7 +575,7 @@
             this.lbSaveLoc.AutoSize = true;
             this.lbSaveLoc.BackColor = System.Drawing.SystemColors.Window;
             this.lbSaveLoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbSaveLoc.Location = new System.Drawing.Point(19, 99);
+            this.lbSaveLoc.Location = new System.Drawing.Point(13, 130);
             this.lbSaveLoc.Name = "lbSaveLoc";
             this.lbSaveLoc.Size = new System.Drawing.Size(80, 15);
             this.lbSaveLoc.TabIndex = 3;
@@ -575,12 +593,13 @@
             // 
             // tbURLcnt
             // 
-            this.tbURLcnt.BackColor = System.Drawing.SystemColors.Window;
+            this.tbURLcnt.BackColor = System.Drawing.SystemColors.Info;
+            this.tbURLcnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbURLcnt.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbURLcnt.Location = new System.Drawing.Point(247, 96);
+            this.tbURLcnt.Location = new System.Drawing.Point(252, 95);
             this.tbURLcnt.Name = "tbURLcnt";
             this.tbURLcnt.ReadOnly = true;
-            this.tbURLcnt.Size = new System.Drawing.Size(135, 20);
+            this.tbURLcnt.Size = new System.Drawing.Size(119, 20);
             this.tbURLcnt.TabIndex = 0;
             this.tbURLcnt.Text = "test";
             // 
@@ -616,7 +635,7 @@
             this.tabMacroInfo.Location = new System.Drawing.Point(317, 251);
             this.tabMacroInfo.Name = "tabMacroInfo";
             this.tabMacroInfo.SelectedIndex = 0;
-            this.tabMacroInfo.Size = new System.Drawing.Size(305, 414);
+            this.tabMacroInfo.Size = new System.Drawing.Size(305, 431);
             this.tabMacroInfo.TabIndex = 14;
             this.tabMacroInfo.SelectedIndexChanged += new System.EventHandler(this.tabMacroInfo_SelectedIndexChanged);
             // 
@@ -631,7 +650,7 @@
             this.tabChanged.Location = new System.Drawing.Point(4, 22);
             this.tabChanged.Name = "tabChanged";
             this.tabChanged.Padding = new System.Windows.Forms.Padding(3);
-            this.tabChanged.Size = new System.Drawing.Size(297, 388);
+            this.tabChanged.Size = new System.Drawing.Size(297, 405);
             this.tabChanged.TabIndex = 0;
             this.tabChanged.Text = "Changed";
             this.tabChanged.UseVisualStyleBackColor = true;
@@ -674,11 +693,22 @@
             this.cbViewed.TabIndex = 5;
             this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Info;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(16, 107);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Locaction of URLs";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 694);
+            this.ClientSize = new System.Drawing.Size(1132, 694);
             this.Controls.Add(this.tabMacroInfo);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label3);
@@ -773,5 +803,7 @@
         private System.Windows.Forms.ComboBox cbViewed;
         private System.Windows.Forms.Button btnDelDelViewed;
         private System.Windows.Forms.ListBox lbViewed;
+        private System.Windows.Forms.CheckBox cbRFsticky;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -73,6 +73,8 @@
             this.btnHTest = new System.Windows.Forms.Button();
             this.cbShowLang = new System.Windows.Forms.CheckBox();
             this.btnFromHP = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbBRcopyInfo = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +107,6 @@
             this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.WordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,8 +142,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnSaveM = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbBRcopyInfo = new System.Windows.Forms.Label();
             this.btnToNotepad = new System.Windows.Forms.Button();
             this.gbSupp = new System.Windows.Forms.GroupBox();
             this.tbMNum = new System.Windows.Forms.TextBox();
@@ -153,6 +152,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.loadOJPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -697,6 +697,30 @@
             this.btnFromHP.UseVisualStyleBackColor = true;
             this.btnFromHP.Click += new System.EventHandler(this.btnFromHP_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Info;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(198, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 20);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Copy as shown in edit box";
+            this.toolTip1.SetToolTip(this.label5, "Use the \'Show <BR>\' to\r\nshow newlines or not");
+            // 
+            // lbBRcopyInfo
+            // 
+            this.lbBRcopyInfo.AutoSize = true;
+            this.lbBRcopyInfo.BackColor = System.Drawing.SystemColors.Info;
+            this.lbBRcopyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBRcopyInfo.Location = new System.Drawing.Point(198, 100);
+            this.lbBRcopyInfo.Name = "lbBRcopyInfo";
+            this.lbBRcopyInfo.Size = new System.Drawing.Size(165, 20);
+            this.lbBRcopyInfo.TabIndex = 31;
+            this.lbBRcopyInfo.Text = "This show HTML code";
+            this.toolTip1.SetToolTip(this.lbBRcopyInfo, "This copy is suitable for pasting\r\ninto HPs signature or macro page\r\n");
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -704,7 +728,6 @@
             this.helpToolStripMenuItem,
             this.utilsToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.WordSearch,
             this.mMoveMacro,
             this.aboutToolStripMenuItem,
             this.testSignatureToolStripMenuItem,
@@ -725,6 +748,7 @@
             this.mPCload,
             this.mAIOload,
             this.mLJload,
+            this.loadOJPrinterMacsToolStripMenuItem,
             this.mDJload,
             this.loadINPrinterMacsToolStripMenuItem,
             this.mOSload,
@@ -958,13 +982,6 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
-            // WordSearch
-            // 
-            this.WordSearch.Name = "WordSearch";
-            this.WordSearch.Size = new System.Drawing.Size(54, 20);
-            this.WordSearch.Text = "Search";
-            this.WordSearch.Click += new System.EventHandler(this.WordSearch_Click);
             // 
             // mMoveMacro
             // 
@@ -1281,30 +1298,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Clipboard and Notepad operations";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Info;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(198, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(191, 20);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "Copy as shown in edit box";
-            this.toolTip1.SetToolTip(this.label5, "Use the \'Show <BR>\' to\r\nshow newlines or not");
-            // 
-            // lbBRcopyInfo
-            // 
-            this.lbBRcopyInfo.AutoSize = true;
-            this.lbBRcopyInfo.BackColor = System.Drawing.SystemColors.Info;
-            this.lbBRcopyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBRcopyInfo.Location = new System.Drawing.Point(198, 100);
-            this.lbBRcopyInfo.Name = "lbBRcopyInfo";
-            this.lbBRcopyInfo.Size = new System.Drawing.Size(165, 20);
-            this.lbBRcopyInfo.TabIndex = 31;
-            this.lbBRcopyInfo.Text = "This show HTML code";
-            this.toolTip1.SetToolTip(this.lbBRcopyInfo, "This copy is suitable for pasting\r\ninto HPs signature or macro page\r\n");
-            // 
             // btnToNotepad
             // 
             this.btnToNotepad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1417,6 +1410,13 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // loadOJPrinterMacsToolStripMenuItem
+            // 
+            this.loadOJPrinterMacsToolStripMenuItem.Name = "loadOJPrinterMacsToolStripMenuItem";
+            this.loadOJPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadOJPrinterMacsToolStripMenuItem.Text = "Load OJ printer macs";
+            this.loadOJPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mOJload);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1517,7 +1517,6 @@
         private System.Windows.Forms.Button btnLinkAll;
         private System.Windows.Forms.Button btnNextTable;
         private System.Windows.Forms.Button btnCleanUrl;
-        private System.Windows.Forms.ToolStripMenuItem WordSearch;
         private System.Windows.Forms.ToolStripMenuItem helpWithSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mMoveMacro;
         private System.Windows.Forms.ToolStripMenuItem mAIOload;
@@ -1583,6 +1582,7 @@
         private System.Windows.Forms.Button btnFromHP;
         private System.Windows.Forms.ToolStripMenuItem loadINPrinterMacsToolStripMenuItem;
         private System.Windows.Forms.TextBox tbMNum;
+        private System.Windows.Forms.ToolStripMenuItem loadOJPrinterMacsToolStripMenuItem;
     }
 }
 

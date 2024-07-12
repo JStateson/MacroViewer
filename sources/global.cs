@@ -158,6 +158,42 @@ namespace MacroViewer
             return ReadLinesIntoList();
         }
 
+        public int GetZ000(string sHEX)
+        {
+            string s = sHEX.Substring(sHEX.Length - 3);
+            return Convert.ToInt32(s,16);
+        }
+        private string SetZ000(string sHex, int n)
+        {
+            string sRtn = "";
+            if(n == 0)
+            {
+                sRtn = sHex.Substring(0, 13) + "000";
+            }
+            else // add one
+            {
+                n = GetZ000(sHex);
+                n++;
+                sRtn = Convert.ToString(n,16);
+                sRtn =sHex.Substring(0,13) + sRtn.PadLeft(3, '0');
+            }
+            return sRtn;
+        }
+
+        private void IncChange(int i)
+        {
+            string s = mChanges[i];
+            int j = s.IndexOf(":");
+            string t = SetZ000(s.Substring(0,j), 1);
+            t += s.Substring(j);
+            mChanges[i] = t;
+        }
+
+        public string TicksToHex(long ticks)
+        {
+            return ticks.ToString("X16");
+        }
+
         // filename and macro name
         public void AddChange(string sFN, string sMN)
         {
@@ -165,11 +201,17 @@ namespace MacroViewer
             DateTime date = DateTime.Now;
             //string formattedDate = date.ToString("MMMM dd yyyy, hh:mm tt");
             //  July 04 2024, 01:45 PM
-            long ticks = date.Ticks;
-            string hexString = ticks.ToString("X16");
+            string hexString = TicksToHex(date.Ticks);
             string sFnMn = sFN + ":" + sMN;
-            if (mChanges.Any(s => s.Contains(sFnMn))) return;
-            mChanges.Add(hexString + ":" + sFnMn);
+            //if (mChanges.Any(s => s.Contains(sFnMn))) return;
+            Predicate<string> matchPredicate = s => s.Contains(sFnMn);
+            int i = mChanges.FindIndex(matchPredicate);
+            if(i == -1)
+                mChanges.Add(SetZ000(hexString,0) + ":" + sFnMn);
+            else
+            {
+                IncChange(i);
+            }
         }
         public void AddView(string sFN, string sMN)
         {
@@ -569,7 +611,7 @@ internal static class ClipboardFormats
             CopyHTML(strTemp);
         }
 
-        public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents","Printer support documents", "HP-KB-WIKI"};
+        public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents", "Printer support documents" };//, "HP-KB-WIKI"};
 
         public static void WordpadHelp(string sHelp)
         {

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(utils));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCvt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -67,6 +67,9 @@
             this.cbRemE_list = new System.Windows.Forms.CheckBox();
             this.cbAddNLtoHTML = new System.Windows.Forms.CheckBox();
             this.cbFormHL = new System.Windows.Forms.CheckBox();
+            this.btnFillCol = new System.Windows.Forms.Button();
+            this.btnFillRow = new System.Windows.Forms.Button();
+            this.btnLRTD = new System.Windows.Forms.Button();
             this.cbRemE_tab = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -79,8 +82,6 @@
             this.btnShowTab = new System.Windows.Forms.Button();
             this.btnClearTab = new System.Windows.Forms.Button();
             this.cbUseDelims = new System.Windows.Forms.CheckBox();
-            this.btnFillCol = new System.Windows.Forms.Button();
-            this.btnFillRow = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnApplyTab = new System.Windows.Forms.Button();
@@ -110,7 +111,6 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.btnLRTD = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -162,7 +162,7 @@
             this.groupBox1.Size = new System.Drawing.Size(733, 801);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Form URL";
+            this.groupBox1.Text = "change";
             // 
             // groupBox10
             // 
@@ -532,6 +532,46 @@
             this.toolTip1.SetToolTip(this.cbFormHL, "If a url then make it a hyperlink");
             this.cbFormHL.UseVisualStyleBackColor = true;
             // 
+            // btnFillCol
+            // 
+            this.btnFillCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillCol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFillCol.Location = new System.Drawing.Point(15, 21);
+            this.btnFillCol.Name = "btnFillCol";
+            this.btnFillCol.Size = new System.Drawing.Size(176, 23);
+            this.btnFillCol.TabIndex = 7;
+            this.btnFillCol.Text = "Fill COLUMN from clipboard";
+            this.toolTip1.SetToolTip(this.btnFillCol, "Fills column 1 first then remaining columns.\r\nYou must provide the delimeters");
+            this.btnFillCol.UseVisualStyleBackColor = true;
+            this.btnFillCol.Click += new System.EventHandler(this.btnFillCol_Click);
+            // 
+            // btnFillRow
+            // 
+            this.btnFillRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillRow.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFillRow.Location = new System.Drawing.Point(15, 50);
+            this.btnFillRow.Name = "btnFillRow";
+            this.btnFillRow.Size = new System.Drawing.Size(155, 23);
+            this.btnFillRow.TabIndex = 6;
+            this.btnFillRow.Text = "Fill ROW from clipboard";
+            this.toolTip1.SetToolTip(this.btnFillRow, "Fills all of row 1 first before next\r\nrows.  Like LRTD but you must\r\nprovide the " +
+        "delimeters");
+            this.btnFillRow.UseVisualStyleBackColor = true;
+            this.btnFillRow.Click += new System.EventHandler(this.btnFillRow_Click);
+            // 
+            // btnLRTD
+            // 
+            this.btnLRTD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLRTD.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnLRTD.Location = new System.Drawing.Point(195, 51);
+            this.btnLRTD.Name = "btnLRTD";
+            this.btnLRTD.Size = new System.Drawing.Size(81, 22);
+            this.btnLRTD.TabIndex = 20;
+            this.btnLRTD.Text = "Fill LRTD";
+            this.toolTip1.SetToolTip(this.btnLRTD, resources.GetString("btnLRTD.ToolTip"));
+            this.btnLRTD.UseVisualStyleBackColor = true;
+            this.btnLRTD.Click += new System.EventHandler(this.btnLRTD_Click);
+            // 
             // cbRemE_tab
             // 
             this.cbRemE_tab.AutoSize = true;
@@ -694,33 +734,6 @@
             this.cbUseDelims.TabIndex = 8;
             this.cbUseDelims.Text = "Split on comma";
             this.cbUseDelims.UseVisualStyleBackColor = true;
-            // 
-            // btnFillCol
-            // 
-            this.btnFillCol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFillCol.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFillCol.Location = new System.Drawing.Point(15, 21);
-            this.btnFillCol.Name = "btnFillCol";
-            this.btnFillCol.Size = new System.Drawing.Size(176, 23);
-            this.btnFillCol.TabIndex = 7;
-            this.btnFillCol.Text = "Fill COLUMN from clipboard";
-            this.toolTip1.SetToolTip(this.btnFillCol, "Fills column 1 first then remaining columns.\r\nYou must provide the delimeters");
-            this.btnFillCol.UseVisualStyleBackColor = true;
-            this.btnFillCol.Click += new System.EventHandler(this.btnFillCol_Click);
-            // 
-            // btnFillRow
-            // 
-            this.btnFillRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFillRow.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnFillRow.Location = new System.Drawing.Point(15, 50);
-            this.btnFillRow.Name = "btnFillRow";
-            this.btnFillRow.Size = new System.Drawing.Size(155, 23);
-            this.btnFillRow.TabIndex = 6;
-            this.btnFillRow.Text = "Fill ROW from clipboard";
-            this.toolTip1.SetToolTip(this.btnFillRow, "Fills all of row 1 first before next\r\nrows.  Like LRTD but you must\r\nprovide the " +
-        "delimeters");
-            this.btnFillRow.UseVisualStyleBackColor = true;
-            this.btnFillRow.Click += new System.EventHandler(this.btnFillRow_Click);
             // 
             // btnTransfer
             // 
@@ -986,7 +999,7 @@
             this.tbTextToColor.Name = "tbTextToColor";
             this.tbTextToColor.Size = new System.Drawing.Size(393, 75);
             this.tbTextToColor.TabIndex = 4;
-            this.tbTextToColor.Text = "Change Me";
+            this.tbTextToColor.Text = "Change This";
             // 
             // btnSetFont
             // 
@@ -1031,8 +1044,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.HeaderText = "Position";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -1042,8 +1055,8 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.HeaderText = "Contents";
             this.Column2.Name = "Column2";
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -1051,19 +1064,6 @@
             // fontDialog1
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
-            // 
-            // btnLRTD
-            // 
-            this.btnLRTD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLRTD.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnLRTD.Location = new System.Drawing.Point(195, 51);
-            this.btnLRTD.Name = "btnLRTD";
-            this.btnLRTD.Size = new System.Drawing.Size(81, 22);
-            this.btnLRTD.TabIndex = 20;
-            this.btnLRTD.Text = "Fill LRTD";
-            this.toolTip1.SetToolTip(this.btnLRTD, resources.GetString("btnLRTD.ToolTip"));
-            this.btnLRTD.UseVisualStyleBackColor = true;
-            this.btnLRTD.Click += new System.EventHandler(this.btnLRTD_Click);
             // 
             // utils
             // 

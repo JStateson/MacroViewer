@@ -25,6 +25,7 @@ using System.Security.Cryptography;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.Globalization;
+using System.Data;
 
 
 namespace MacroViewer
@@ -1368,7 +1369,7 @@ namespace MacroViewer
         {
             string sMsg = "Macro was not saved\r\nEither save, cancel edits or ignore";
             bIgnore = false;
-            if(tbMacName.Text.Trim() == "")
+            if(tbMacName.Text.Trim() == "" && strType != "HP")
             {
                 NoEmptyMacros();
                 sMsg = "Un-named macro not saved, using " + Utils.UnNamedMacro;
@@ -1673,7 +1674,7 @@ namespace MacroViewer
         {
             string sOut = "";
             string TXTmacName = Utils.FNtoPath(sFN);
-            DialogResult dr = MessageBox.Show("Reference Macro RFmacros.txt is missing\r\nPlaceholders or NO to quit",
+            DialogResult dr = MessageBox.Show("Reference Macro RFmacros.txt is missing\r\nSelect YES to install Placeholders or NO to quit",
                 "WARNING",MessageBoxButtons.YesNo);
             if (dr == DialogResult.No)
             {
@@ -2549,65 +2550,81 @@ namespace MacroViewer
             return 1 + RemoveStylesClasses(sKey, ref sIn);
         }
 
+        //s = s.Replace(" rel=\"nofollow noopener noreferrer\"", ""); or any combination
+        // the HP site will add its referrals as needed
+        private string sRemoveREL(ref string s)
+        {
+            int i = s.IndexOf(" rel=\"");
+            if (i < 0) return s;
+            int j = s.IndexOf('"', i + 6);
+            j++;
+            string t = s.Substring(0,i) + s.Substring(j);
+            return sRemoveREL(ref t);
+        }
+
         private void CleanSB(ref string s)
         {
+            s = sRemoveREL(ref s);
             s = s.Replace("<span> </span>", " ");
             s = s.Replace("<br >", "<br>");
+            s = s.Replace("<strong>", "<b>");
+            s = s.Replace("</strong>", "</b>");
             s = s.Replace("<!--EndFragment-->", "");
             s = s.Replace("<br />", "<br>");
             s = s.Replace("&nbsp;", " ");
-            s = s.Replace(" rel=\"nofollow noopener noreferrer\"", "");
-            s = s.Replace(" target=\"_self\"", "");
-            s = s.Replace(" target=\"_blank\"", "");
+            //s = s.Replace(" target=\"_self\"", "");
+            //s = s.Replace(" target=\"_blank\"", "");
             s = s.Replace(" data-unlink=\"true\"", "");
-            s = Regex.Replace(s, @"\s+", " ");
+            s = Regex.Replace(s, @"\s+", " ");  // replace 1 or more white space with space
         }
 
         private void btnFromHP_Click(object sender, EventArgs e)
         {
-            string strTemp = GetHPclipboard().Trim();
-            CleanSB(ref strTemp);
-            int n = RemoveStylesClasses("style=\"",ref strTemp);
-            n += RemoveStylesClasses("class=\"", ref strTemp);
-            n += RemoveStylesClasses("image-alt=\"", ref strTemp);
-            n += RemoveStylesClasses("role=\"", ref strTemp);
-            n += RemoveStylesClasses("title=\"", ref strTemp);
-            n += RemoveStylesClasses("alt=\"", ref strTemp);
-            n += RemoveStylesClasses("li-bindable=\"", ref strTemp);
-            n += RemoveStylesClasses("li-message-uid=\"", ref strTemp);
-            n += RemoveStylesClasses("li-image-url=\"", ref strTemp);
-            n += RemoveStylesClasses("li-image-display-id=\"", ref strTemp);
-            n += RemoveStylesClasses("li-bypass-lightbox-when-linked=\"", ref strTemp);
-            n += RemoveStylesClasses("tabindex=\"", ref strTemp);
-            n += RemoveStylesClasses("li-use-hover-links=\"", ref strTemp);
-            n += RemoveStylesClasses("li-compiled=\"", ref strTemp);
+            string s = GetHPclipboard().Trim();
+            CleanSB(ref s);
+            int n = RemoveStylesClasses("style=\"",ref s);
+            n += RemoveStylesClasses("class=\"", ref s);
+            n += RemoveStylesClasses("image-alt=\"", ref s);
+            n += RemoveStylesClasses("role=\"", ref s);
+            n += RemoveStylesClasses("title=\"", ref s);
+            n += RemoveStylesClasses("alt=\"", ref s);
+            n += RemoveStylesClasses("li-bindable=\"", ref s);
+            n += RemoveStylesClasses("li-message-uid=\"", ref s);
+            n += RemoveStylesClasses("li-image-url=\"", ref s);
+            n += RemoveStylesClasses("li-image-display-id=\"", ref s);
+            n += RemoveStylesClasses("li-bypass-lightbox-when-linked=\"", ref s);
+            n += RemoveStylesClasses("tabindex=\"", ref s);
+            n += RemoveStylesClasses("li-use-hover-links=\"", ref s);
+            n += RemoveStylesClasses("li-compiled=\"", ref s);
             string sOut = "";
             // first check for paragraphs
-            strTemp = Regex.Replace(strTemp, @"\s+", " ");
-            strTemp = strTemp.Replace("<span >", "<span>");
-            strTemp = strTemp.Replace("<p >", "<p>");
-            strTemp = strTemp.Replace("<br >", "<br>"); // fixes <br span ----
+            s = Regex.Replace(s, @"\s+", " ");
+            s = s.Replace("<span >", "<span>");
+            s = s.Replace("<p >", "<p>");
+            s = s.Replace("<strong >", "<b>"); // unaccountably these are needed again ???
+            s = s.Replace("</strong>", "</b>");
+            s = s.Replace("<br >", "<br>"); // fixes <br span ----
             while (true)
             {
-                string sPara = GetParagraph(ref strTemp);
+                string sPara = GetParagraph(ref s);
                 if(sPara.Length == 0) break;
                 sOut += sPara + "<br>"; // sExtractInfo(sPara);
             }
             // if no paragraphs the try spans
             if(sOut != "")
             {
-                strTemp = sOut;
+                s = sOut;
                 sOut = "";
             }
             
             while (true)
             {
-                string sSpan = GetSpans(ref strTemp);
+                string sSpan = GetSpans(ref s);
                 if (sSpan == "")
                 {
                     if(sOut.Contains("<span>"))
                     {
-                        strTemp = sOut;
+                        s = sOut;
                         sOut = "";
                         continue;
                     }
@@ -2615,7 +2632,7 @@ namespace MacroViewer
                 }
                 sOut += sSpan + "<br>";
             }
-            TbodyInsert(sOut);
+            TbodyInsert(sOut.Trim());
         }
 
         private void lbName_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -12,6 +12,8 @@ namespace MacroViewer
         private bool bBoxed = false;
         private string strBoxed = "";
         private int CurrentDemo = 0, TotalDemos = 4;
+        private string sIsAlbum = "/image/serverpage/image-id";
+        private string sInfoDemo;
         //0: box url, 1: list, 2:image url, 3: image
         public string strResultOut { get; set; }
         public SetText(string strIn)
@@ -25,13 +27,28 @@ namespace MacroViewer
             gpTable.Enabled = (strIn == "");
             sLoc = Utils.WhereExe;
             cbPreFill.Checked = Properties.Settings.Default.FillAlpha;
+            sInfoDemo = lbInfoTest.Text;
         }
 
         private void SetNextDemo()
         {
             CurrentDemo++;
-            if (CurrentDemo == TotalDemos) CurrentDemo = 0;
-            btnDemo.Text = "Click for demo" + (CurrentDemo + 1).ToString();
+            if (CurrentDemo == TotalDemos+1) CurrentDemo = 0;
+            if (CurrentDemo == 0)
+            {
+                btnDemo.Text = "Click for demo";
+                lbInfoTest.Text = sInfoDemo;
+                ClearAll();
+                btnTestD.Visible = false;
+            }
+            else
+            {
+                string s = (CurrentDemo == 4) ? ":click to exit demo" : ": click for demo" + (CurrentDemo + 1).ToString();
+                btnDemo.Text = "Demo " + CurrentDemo.ToString() + s;
+                btnTestD.Visible = true;
+                FormDemo(CurrentDemo - 1);
+                FormObject();
+            }
         }
         private void btnApply_Click(object sender, EventArgs e)
         {
@@ -45,10 +62,24 @@ namespace MacroViewer
             this.Close();
         }
 
+        private string GetFormattedURL(string s)
+        {
+            if(s.Contains(sIsAlbum)) // is an image in an album
+            {
+                int i = cbSizeImage.SelectedIndex;
+                if (i > 0)
+                {
+                    s+= "/image-size/" + cbSizeImage.SelectedItem.ToString();
+                }
+            }
+            return s;
+        }
         private void FormObject()
         {
             string strOut = "";
-            string strTmp = "";
+            string strTmp = tbRawUrl.Text.Trim();
+            string sClean = cbCleanUrl.Checked ? Utils.dRef(strTmp) : strTmp;
+            string sFmtRaw = GetFormattedURL(sClean);
             string strUC = tbRawUrl.Text.ToUpper();
             bool bHaveHTML = strUC.Contains("HTTPS:") || strUC.Contains("HTTP:");
             string strResult = "";
@@ -63,12 +94,11 @@ namespace MacroViewer
             {
                 if (cbMakeIMG.Checked)
                 {
-                    strOut += Utils.AssembleIMG(tbRawUrl.Text);
+                    strOut += Utils.AssembleIMG(sFmtRaw);
                 }
                 else
                 {
-                    strOut += Utils.FormUrl(cbCleanUrl.Checked ? Utils.dRef(tbRawUrl.Text) : tbRawUrl.Text, tbSelectedItem.Text.Trim());
-
+                    strOut += Utils.FormUrl(sFmtRaw, tbSelectedItem.Text.Trim());
                 }
                 strTmp = tbSuffix.Text.Trim();
                 if (strTmp != "")
@@ -84,6 +114,7 @@ namespace MacroViewer
             {
                 tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult, GetBoxWidth()) : Utils.Form1CellTableP(strResult,GetBoxWidth());
             }
+            cbSizeImage.Visible = tbRawUrl.Text.Contains(sIsAlbum);
         }
 
         private string GetBoxWidth()
@@ -116,7 +147,6 @@ namespace MacroViewer
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            FormObject();
             RunBrowser();
         }
 
@@ -153,25 +183,9 @@ namespace MacroViewer
             tbResult.Text = "";
         }
 
-        private int WhichDemo()
-        {
-            int i = 0;
-            string[] sDemos = {"1", "2", "3", "4" };
-            for(i = 0; i < sDemos.Length; i++)
-            {
-                if(btnDemo.Text.Contains(sDemos[i]))
-                {
-                    break;
-                }
-            }
-            SetNextDemo();
-            return i;
-        }
 
-
-        private void RunDemo()
+        private void FormDemo(int i)
         {
-            int i = WhichDemo();
             switch (i)
             {
                 case 0:
@@ -181,6 +195,7 @@ namespace MacroViewer
                     tbRawUrl.Text = "https://www.google.com";
                     rbFitBox.Checked = true;
                     cbMakeIMG.Checked = false;
+                    lbInfoTest.Text = "Click phrase to load google site";
                 break;
                 case 1:
                     tbPrefix.Text = "";
@@ -189,42 +204,60 @@ namespace MacroViewer
                     tbRawUrl.Text = "";
                     rbSqueeze.Checked = true;
                     cbMakeIMG.Checked = false;
+                    lbInfoTest.Text = "Show a small table";
                 break;
                 case 2:
                     tbPrefix.Text = "You can ";
                     tbSuffix.Text = " to see what to do with old Dell systems";
                     tbSelectedItem.Text = "Click Here";
                     tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/368919i27FD57F55C2EC433";
-                    //tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/372002iFA9364C9FF20F330";
                     rbSqueeze.Checked = true;
                     cbMakeIMG.Checked = false;
-                break;
+                    lbInfoTest.Text = "Click the phrase to see the image" +
+                        Environment.NewLine + "You can set image size";
+                    break;
                 case 3:
                     tbPrefix.Text = "This is what linux thinks of Windows XP<br>";
                     tbSuffix.Text = "<br><br>Yes, Linux does suck!";
                     tbSelectedItem.Text = "";
-                    //tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/368919i27FD57F55C2EC433";
                     tbRawUrl.Text = "https://h30434.www3.hp.com/t5/image/serverpage/image-id/372002iFA9364C9FF20F330";
                     rbNoBox.Checked = true;
                     cbMakeIMG.Checked = true;
+                    cbSizeImage.SelectedIndex = 0;
+                    lbInfoTest.Text = "Image is displayed inline with text" +
+                        Environment.NewLine + "You can set image size";
                     break;
             }
-
         }
 
         private void btnDemo_Click(object sender, EventArgs e)
         {
-            RunDemo();
-            FormObject();
+            SetNextDemo();
         }
 
-        private void btnClrDemo_Click(object sender, EventArgs e)
+        private void ClearAll()
         {
             tbPrefix.Text = "";
             tbSuffix.Text = "";
             tbSelectedItem.Text = "";
             tbRawUrl.Text = "";
             cbMakeIMG.Checked = false;
+            cbSizeImage.Visible = false;
+        }
+
+        private void btnTestD_Click(object sender, EventArgs e)
+        {
+            RunBrowser();
+        }
+
+        private void cbSizeImage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FormObject();
+        }
+
+        private void btnClrDemo_Click(object sender, EventArgs e)
+        {
+            ClearAll();
         }
     }
 }

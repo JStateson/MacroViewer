@@ -38,12 +38,17 @@
             this.cbCleanUrl = new System.Windows.Forms.CheckBox();
             this.tbRawUrl = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbPrefix = new System.Windows.Forms.TextBox();
             this.btnClrDemo = new System.Windows.Forms.Button();
             this.btnDemo = new System.Windows.Forms.Button();
-            this.tbPrefix = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbSuffix = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbSizeImage = new System.Windows.Forms.ComboBox();
+            this.gbPCTbw = new System.Windows.Forms.GroupBox();
+            this.rb0pct = new System.Windows.Forms.RadioButton();
+            this.rb50 = new System.Windows.Forms.RadioButton();
+            this.rb100 = new System.Windows.Forms.RadioButton();
             this.btnClear = new System.Windows.Forms.Button();
             this.rbNoBox = new System.Windows.Forms.RadioButton();
             this.rbSqueeze = new System.Windows.Forms.RadioButton();
@@ -62,17 +67,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.gbPCTbw = new System.Windows.Forms.GroupBox();
-            this.rb0pct = new System.Windows.Forms.RadioButton();
-            this.rb50 = new System.Windows.Forms.RadioButton();
-            this.rb100 = new System.Windows.Forms.RadioButton();
+            this.btnTestD = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lbInfoTest = new System.Windows.Forms.Label();
             this.gbSelectType.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.gpTable.SuspendLayout();
             this.gbPCTbw.SuspendLayout();
+            this.gpTable.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSelectType
@@ -116,7 +121,8 @@
             this.cbMakeIMG.Size = new System.Drawing.Size(117, 20);
             this.cbMakeIMG.TabIndex = 3;
             this.cbMakeIMG.Text = "Treat as Image";
-            this.toolTip1.SetToolTip(this.cbMakeIMG, "strip unwanted referals");
+            this.toolTip1.SetToolTip(this.cbMakeIMG, "Url is is an image.  The size of\r\nthe image can be set only if the\r\nimage came fr" +
+        "om an HP album");
             this.cbMakeIMG.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -152,24 +158,30 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnClrDemo);
-            this.groupBox2.Controls.Add(this.btnDemo);
             this.groupBox2.Controls.Add(this.tbPrefix);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(551, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(227, 193);
+            this.groupBox2.Size = new System.Drawing.Size(208, 141);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Prefix (if any and can be empty)";
+            // 
+            // tbPrefix
+            // 
+            this.tbPrefix.Location = new System.Drawing.Point(19, 34);
+            this.tbPrefix.Multiline = true;
+            this.tbPrefix.Name = "tbPrefix";
+            this.tbPrefix.Size = new System.Drawing.Size(174, 68);
+            this.tbPrefix.TabIndex = 0;
             // 
             // btnClrDemo
             // 
             this.btnClrDemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClrDemo.ForeColor = System.Drawing.Color.Green;
-            this.btnClrDemo.Location = new System.Drawing.Point(66, 148);
+            this.btnClrDemo.Location = new System.Drawing.Point(6, 123);
             this.btnClrDemo.Name = "btnClrDemo";
-            this.btnClrDemo.Size = new System.Drawing.Size(127, 26);
+            this.btnClrDemo.Size = new System.Drawing.Size(107, 26);
             this.btnClrDemo.TabIndex = 2;
             this.btnClrDemo.Text = "Clear demo";
             this.btnClrDemo.UseVisualStyleBackColor = true;
@@ -179,43 +191,36 @@
             // 
             this.btnDemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDemo.ForeColor = System.Drawing.Color.Green;
-            this.btnDemo.Location = new System.Drawing.Point(66, 116);
+            this.btnDemo.Location = new System.Drawing.Point(6, 32);
             this.btnDemo.Name = "btnDemo";
-            this.btnDemo.Size = new System.Drawing.Size(127, 26);
+            this.btnDemo.Size = new System.Drawing.Size(208, 26);
             this.btnDemo.TabIndex = 1;
-            this.btnDemo.Text = "Click for demo1";
+            this.btnDemo.Text = "Click for demo";
             this.btnDemo.UseVisualStyleBackColor = true;
             this.btnDemo.Click += new System.EventHandler(this.btnDemo_Click);
-            // 
-            // tbPrefix
-            // 
-            this.tbPrefix.Location = new System.Drawing.Point(19, 25);
-            this.tbPrefix.Multiline = true;
-            this.tbPrefix.Name = "tbPrefix";
-            this.tbPrefix.Size = new System.Drawing.Size(174, 68);
-            this.tbPrefix.TabIndex = 0;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tbSuffix);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(551, 243);
+            this.groupBox3.Location = new System.Drawing.Point(551, 196);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(227, 134);
+            this.groupBox3.Size = new System.Drawing.Size(208, 134);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Suffix (if any and can be empty)";
             // 
             // tbSuffix
             // 
-            this.tbSuffix.Location = new System.Drawing.Point(19, 21);
+            this.tbSuffix.Location = new System.Drawing.Point(19, 32);
             this.tbSuffix.Multiline = true;
             this.tbSuffix.Name = "tbSuffix";
-            this.tbSuffix.Size = new System.Drawing.Size(202, 77);
+            this.tbSuffix.Size = new System.Drawing.Size(174, 77);
             this.tbSuffix.TabIndex = 0;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cbSizeImage);
             this.groupBox4.Controls.Add(this.gbPCTbw);
             this.groupBox4.Controls.Add(this.btnClear);
             this.groupBox4.Controls.Add(this.rbNoBox);
@@ -228,18 +233,87 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(15, 396);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(729, 281);
+            this.groupBox4.Size = new System.Drawing.Size(744, 281);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "URL result is here";
+            // 
+            // cbSizeImage
+            // 
+            this.cbSizeImage.FormattingEnabled = true;
+            this.cbSizeImage.Items.AddRange(new object[] {
+            "Default Image Size",
+            "tiny",
+            "thumb",
+            "small",
+            "medium",
+            "large"});
+            this.cbSizeImage.Location = new System.Drawing.Point(555, 110);
+            this.cbSizeImage.Name = "cbSizeImage";
+            this.cbSizeImage.Size = new System.Drawing.Size(174, 24);
+            this.cbSizeImage.TabIndex = 4;
+            this.cbSizeImage.Text = "Default Image Size";
+            this.toolTip1.SetToolTip(this.cbSizeImage, "This only works on  HP album images");
+            this.cbSizeImage.Visible = false;
+            this.cbSizeImage.SelectedIndexChanged += new System.EventHandler(this.cbSizeImage_SelectedIndexChanged);
+            // 
+            // gbPCTbw
+            // 
+            this.gbPCTbw.Controls.Add(this.rb0pct);
+            this.gbPCTbw.Controls.Add(this.rb50);
+            this.gbPCTbw.Controls.Add(this.rb100);
+            this.gbPCTbw.Location = new System.Drawing.Point(359, 21);
+            this.gbPCTbw.Name = "gbPCTbw";
+            this.gbPCTbw.Size = new System.Drawing.Size(165, 113);
+            this.gbPCTbw.TabIndex = 12;
+            this.gbPCTbw.TabStop = false;
+            this.gbPCTbw.Text = "Box width (%)";
+            // 
+            // rb0pct
+            // 
+            this.rb0pct.AutoSize = true;
+            this.rb0pct.Checked = true;
+            this.rb0pct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb0pct.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb0pct.Location = new System.Drawing.Point(38, 84);
+            this.rb0pct.Name = "rb0pct";
+            this.rb0pct.Size = new System.Drawing.Size(74, 20);
+            this.rb0pct.TabIndex = 13;
+            this.rb0pct.TabStop = true;
+            this.rb0pct.Text = "Default";
+            this.rb0pct.UseVisualStyleBackColor = true;
+            // 
+            // rb50
+            // 
+            this.rb50.AutoSize = true;
+            this.rb50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb50.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb50.Location = new System.Drawing.Point(38, 55);
+            this.rb50.Name = "rb50";
+            this.rb50.Size = new System.Drawing.Size(41, 20);
+            this.rb50.TabIndex = 12;
+            this.rb50.Text = "50";
+            this.rb50.UseVisualStyleBackColor = true;
+            // 
+            // rb100
+            // 
+            this.rb100.AutoSize = true;
+            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb100.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.rb100.Location = new System.Drawing.Point(38, 25);
+            this.rb100.Name = "rb100";
+            this.rb100.Size = new System.Drawing.Size(49, 20);
+            this.rb100.TabIndex = 11;
+            this.rb100.Text = "100";
+            this.rb100.UseVisualStyleBackColor = true;
             // 
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClear.Location = new System.Drawing.Point(633, 75);
+            this.btnClear.Location = new System.Drawing.Point(650, 72);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(79, 36);
+            this.btnClear.Size = new System.Drawing.Size(79, 24);
             this.btnClear.TabIndex = 11;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -299,9 +373,9 @@
             // 
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTest.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTest.Location = new System.Drawing.Point(590, 25);
+            this.btnTest.Location = new System.Drawing.Point(607, 28);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(122, 36);
+            this.btnTest.Size = new System.Drawing.Size(122, 24);
             this.btnTest.TabIndex = 7;
             this.btnTest.Text = "Test Object";
             this.btnTest.UseVisualStyleBackColor = true;
@@ -324,14 +398,14 @@
             this.tbResult.Location = new System.Drawing.Point(22, 162);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(592, 100);
+            this.tbResult.Size = new System.Drawing.Size(707, 100);
             this.tbResult.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCancel.Location = new System.Drawing.Point(940, 12);
+            this.btnCancel.Location = new System.Drawing.Point(1049, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(122, 36);
             this.btnCancel.TabIndex = 7;
@@ -359,9 +433,9 @@
             this.gpTable.Controls.Add(this.label2);
             this.gpTable.Controls.Add(this.label1);
             this.gpTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpTable.Location = new System.Drawing.Point(812, 71);
+            this.gpTable.Location = new System.Drawing.Point(785, 57);
             this.gpTable.Name = "gpTable";
-            this.gpTable.Size = new System.Drawing.Size(250, 224);
+            this.gpTable.Size = new System.Drawing.Size(386, 149);
             this.gpTable.TabIndex = 8;
             this.gpTable.TabStop = false;
             this.gpTable.Text = "Create a table";
@@ -370,7 +444,7 @@
             // 
             this.btnApplyTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplyTab.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnApplyTab.Location = new System.Drawing.Point(23, 156);
+            this.btnApplyTab.Location = new System.Drawing.Point(204, 54);
             this.btnApplyTab.Name = "btnApplyTab";
             this.btnApplyTab.Size = new System.Drawing.Size(122, 36);
             this.btnApplyTab.TabIndex = 4;
@@ -423,55 +497,43 @@
             this.label3.TabIndex = 6;
             this.label3.Text = resources.GetString("label3.Text");
             // 
-            // gbPCTbw
+            // btnTestD
             // 
-            this.gbPCTbw.Controls.Add(this.rb0pct);
-            this.gbPCTbw.Controls.Add(this.rb50);
-            this.gbPCTbw.Controls.Add(this.rb100);
-            this.gbPCTbw.Location = new System.Drawing.Point(359, 21);
-            this.gbPCTbw.Name = "gbPCTbw";
-            this.gbPCTbw.Size = new System.Drawing.Size(165, 113);
-            this.gbPCTbw.TabIndex = 12;
-            this.gbPCTbw.TabStop = false;
-            this.gbPCTbw.Text = "Box width (%)";
+            this.btnTestD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestD.ForeColor = System.Drawing.Color.Green;
+            this.btnTestD.Location = new System.Drawing.Point(6, 76);
+            this.btnTestD.Name = "btnTestD";
+            this.btnTestD.Size = new System.Drawing.Size(107, 26);
+            this.btnTestD.TabIndex = 3;
+            this.btnTestD.Text = "Test Demo";
+            this.btnTestD.UseVisualStyleBackColor = true;
+            this.btnTestD.Visible = false;
+            this.btnTestD.Click += new System.EventHandler(this.btnTestD_Click);
             // 
-            // rb0pct
+            // groupBox5
             // 
-            this.rb0pct.AutoSize = true;
-            this.rb0pct.Checked = true;
-            this.rb0pct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb0pct.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rb0pct.Location = new System.Drawing.Point(38, 84);
-            this.rb0pct.Name = "rb0pct";
-            this.rb0pct.Size = new System.Drawing.Size(74, 20);
-            this.rb0pct.TabIndex = 13;
-            this.rb0pct.TabStop = true;
-            this.rb0pct.Text = "Default";
-            this.rb0pct.UseVisualStyleBackColor = true;
+            this.groupBox5.Controls.Add(this.lbInfoTest);
+            this.groupBox5.Controls.Add(this.btnDemo);
+            this.groupBox5.Controls.Add(this.btnTestD);
+            this.groupBox5.Controls.Add(this.btnClrDemo);
+            this.groupBox5.Location = new System.Drawing.Point(785, 228);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(363, 167);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Demo Tests";
             // 
-            // rb50
+            // lbInfoTest
             // 
-            this.rb50.AutoSize = true;
-            this.rb50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb50.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rb50.Location = new System.Drawing.Point(38, 55);
-            this.rb50.Name = "rb50";
-            this.rb50.Size = new System.Drawing.Size(41, 20);
-            this.rb50.TabIndex = 12;
-            this.rb50.Text = "50";
-            this.rb50.UseVisualStyleBackColor = true;
-            // 
-            // rb100
-            // 
-            this.rb100.AutoSize = true;
-            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb100.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.rb100.Location = new System.Drawing.Point(38, 25);
-            this.rb100.Name = "rb100";
-            this.rb100.Size = new System.Drawing.Size(49, 20);
-            this.rb100.TabIndex = 11;
-            this.rb100.Text = "100";
-            this.rb100.UseVisualStyleBackColor = true;
+            this.lbInfoTest.AutoSize = true;
+            this.lbInfoTest.BackColor = System.Drawing.SystemColors.Info;
+            this.lbInfoTest.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbInfoTest.Location = new System.Drawing.Point(133, 83);
+            this.lbInfoTest.Name = "lbInfoTest";
+            this.lbInfoTest.Size = new System.Drawing.Size(190, 39);
+            this.lbInfoTest.TabIndex = 10;
+            this.lbInfoTest.Text = "Click to run 4 demos of hyperlinks\r\nGoto website, Create table, \r\nClick to see im" +
+    "age, and an inline image";
             // 
             // SetText
             // 
@@ -479,6 +541,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1183, 700);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gpTable);
             this.Controls.Add(this.btnCancel);
@@ -505,10 +568,12 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.gpTable.ResumeLayout(false);
-            this.gpTable.PerformLayout();
             this.gbPCTbw.ResumeLayout(false);
             this.gbPCTbw.PerformLayout();
+            this.gpTable.ResumeLayout(false);
+            this.gpTable.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -552,5 +617,9 @@
         private System.Windows.Forms.RadioButton rb0pct;
         private System.Windows.Forms.RadioButton rb50;
         private System.Windows.Forms.RadioButton rb100;
+        private System.Windows.Forms.Button btnTestD;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox cbSizeImage;
+        private System.Windows.Forms.Label lbInfoTest;
     }
 }

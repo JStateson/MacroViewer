@@ -81,6 +81,7 @@ namespace MacroViewer
         private string UnfinishedFN = "";
         private string UnfinishedMN = "";
         private int UnfinishedIndex = -1;
+        private string vWarning = "";
         public main()
         {
             InitializeComponent();
@@ -110,6 +111,16 @@ namespace MacroViewer
                 timer1.Interval = 500;
             }
 
+            vWarning = lblVurl.Text;
+            if (Properties.Settings.Default.Vdisable)
+            {
+                lblVurl.Text = "CTRL-V behavies as usual" + Environment.NewLine + "No hyperlink shortcut";
+            }
+            else
+            {
+                lblVurl.Text = vWarning;
+            }
+            
         }
 
         private string IgnoreSupSig(string s)
@@ -2442,12 +2453,6 @@ namespace MacroViewer
         {
             SyntaxTest();
         }
-
-        private void btnNoNL_Click(object sender, EventArgs e)
-        {
-            Utils.RemoveSelectedNL(ref tbBody);
-        }
-
 
 
         private void SigImages()

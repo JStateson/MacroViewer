@@ -71,6 +71,7 @@
             this.tbDateChg = new System.Windows.Forms.TextBox();
             this.cbFileN = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.lbSaveLoc = new System.Windows.Forms.Label();
             this.cbSaveUNK = new System.Windows.Forms.CheckBox();
             this.tbURLcnt = new System.Windows.Forms.TextBox();
@@ -83,7 +84,6 @@
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.cbViewed = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -387,8 +387,8 @@
             this.tbMSuffix.Name = "tbMSuffix";
             this.tbMSuffix.Size = new System.Drawing.Size(244, 88);
             this.tbMSuffix.TabIndex = 1;
-            this.tbMSuffix.Text = "Let me know if you have a flex system (WiFi boosters or repeaters) as the setup i" +
-    "s more complicated.";
+            this.tbMSuffix.Text = "Let me know if you have a flex system (WiFi boosters or repeaters)\r\nas the setup " +
+    "is much more complicated.";
             // 
             // groupBox6
             // 
@@ -570,6 +570,17 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Unscrubbed URL list";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Info;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(16, 107);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Locaction of URLs";
+            // 
             // lbSaveLoc
             // 
             this.lbSaveLoc.AutoSize = true;
@@ -665,7 +676,7 @@
             this.tabViewed.Location = new System.Drawing.Point(4, 22);
             this.tabViewed.Name = "tabViewed";
             this.tabViewed.Padding = new System.Windows.Forms.Padding(3);
-            this.tabViewed.Size = new System.Drawing.Size(297, 388);
+            this.tabViewed.Size = new System.Drawing.Size(297, 405);
             this.tabViewed.TabIndex = 1;
             this.tabViewed.Text = "Most Viewed";
             this.tabViewed.UseVisualStyleBackColor = true;
@@ -692,17 +703,6 @@
             this.cbViewed.Size = new System.Drawing.Size(121, 24);
             this.cbViewed.TabIndex = 5;
             this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.SystemColors.Info;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(16, 107);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 13);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Locaction of URLs";
             // 
             // Settings
             // 

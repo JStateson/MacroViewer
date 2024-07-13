@@ -51,7 +51,6 @@
             this.btnCopyFrom = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnNoNL = new System.Windows.Forms.Button();
             this.bltnHR = new System.Windows.Forms.Button();
             this.btnColors = new System.Windows.Forms.Button();
             this.tbColorCode = new System.Windows.Forms.TextBox();
@@ -81,6 +80,7 @@
             this.mPCload = new System.Windows.Forms.ToolStripMenuItem();
             this.mAIOload = new System.Windows.Forms.ToolStripMenuItem();
             this.mLJload = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadOJPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mDJload = new System.Windows.Forms.ToolStripMenuItem();
             this.loadINPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mOSload = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +152,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.loadOJPrinterMacsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblVurl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -404,7 +404,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox6.Controls.Add(this.btnNoNL);
+            this.groupBox6.Controls.Add(this.lblVurl);
             this.groupBox6.Controls.Add(this.bltnHR);
             this.groupBox6.Controls.Add(this.btnColors);
             this.groupBox6.Controls.Add(this.tbColorCode);
@@ -425,24 +425,11 @@
             this.toolTip1.SetToolTip(this.groupBox6, "Switch to markup substitutes <BR> for newliens\r\nAvoid using CTRL-V to paste from " +
         "forum\r\nUse \"Pase from clipboard\" instead");
             // 
-            // btnNoNL
-            // 
-            this.btnNoNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoNL.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnNoNL.Location = new System.Drawing.Point(276, 62);
-            this.btnNoNL.Name = "btnNoNL";
-            this.btnNoNL.Size = new System.Drawing.Size(220, 25);
-            this.btnNoNL.TabIndex = 35;
-            this.btnNoNL.Text = "Remove selected newlines";
-            this.toolTip1.SetToolTip(this.btnNoNL, "Select the text from which you\r\nwant to remove new line characters");
-            this.btnNoNL.UseVisualStyleBackColor = true;
-            this.btnNoNL.Click += new System.EventHandler(this.btnNoNL_Click);
-            // 
             // bltnHR
             // 
             this.bltnHR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bltnHR.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.bltnHR.Location = new System.Drawing.Point(276, 29);
+            this.bltnHR.Location = new System.Drawing.Point(155, 66);
             this.bltnHR.Name = "bltnHR";
             this.bltnHR.Size = new System.Drawing.Size(164, 25);
             this.bltnHR.TabIndex = 34;
@@ -455,7 +442,7 @@
             // 
             this.btnColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnColors.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnColors.Location = new System.Drawing.Point(39, 62);
+            this.btnColors.Location = new System.Drawing.Point(27, 66);
             this.btnColors.Name = "btnColors";
             this.btnColors.Size = new System.Drawing.Size(110, 25);
             this.btnColors.TabIndex = 33;
@@ -467,7 +454,7 @@
             // tbColorCode
             // 
             this.tbColorCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbColorCode.Location = new System.Drawing.Point(29, 32);
+            this.tbColorCode.Location = new System.Drawing.Point(27, 31);
             this.tbColorCode.Name = "tbColorCode";
             this.tbColorCode.Size = new System.Drawing.Size(69, 22);
             this.tbColorCode.TabIndex = 32;
@@ -477,7 +464,7 @@
             // 
             this.btnRed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRed.ForeColor = System.Drawing.Color.Red;
-            this.btnRed.Location = new System.Drawing.Point(104, 31);
+            this.btnRed.Location = new System.Drawing.Point(102, 30);
             this.btnRed.Name = "btnRed";
             this.btnRed.Size = new System.Drawing.Size(57, 25);
             this.btnRed.TabIndex = 31;
@@ -489,7 +476,7 @@
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBold.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnBold.Location = new System.Drawing.Point(180, 46);
+            this.btnBold.Location = new System.Drawing.Point(181, 30);
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(57, 25);
             this.btnBold.TabIndex = 27;
@@ -792,6 +779,13 @@
             this.mLJload.Size = new System.Drawing.Size(194, 22);
             this.mLJload.Text = "Load LJ printer macs";
             this.mLJload.Click += new System.EventHandler(this.mLJload_Click);
+            // 
+            // loadOJPrinterMacsToolStripMenuItem
+            // 
+            this.loadOJPrinterMacsToolStripMenuItem.Name = "loadOJPrinterMacsToolStripMenuItem";
+            this.loadOJPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadOJPrinterMacsToolStripMenuItem.Text = "Load OJ printer macs";
+            this.loadOJPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mOJload);
             // 
             // mDJload
             // 
@@ -1410,12 +1404,19 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // loadOJPrinterMacsToolStripMenuItem
+            // lblVurl
             // 
-            this.loadOJPrinterMacsToolStripMenuItem.Name = "loadOJPrinterMacsToolStripMenuItem";
-            this.loadOJPrinterMacsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadOJPrinterMacsToolStripMenuItem.Text = "Load OJ printer macs";
-            this.loadOJPrinterMacsToolStripMenuItem.Click += new System.EventHandler(this.mOJload);
+            this.lblVurl.AutoSize = true;
+            this.lblVurl.BackColor = System.Drawing.SystemColors.Info;
+            this.lblVurl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVurl.Location = new System.Drawing.Point(377, 36);
+            this.lblVurl.Name = "lblVurl";
+            this.lblVurl.Size = new System.Drawing.Size(166, 52);
+            this.lblVurl.TabIndex = 36;
+            this.lblVurl.Text = "Caution: CTRl-V is enabled and\r\nand expects to create a Hyperlink\r\nfrom the URL i" +
+    "n your clipboard if\r\nany text is selected.";
+            this.toolTip1.SetToolTip(this.lblVurl, "If you select some test and press CTRL-V\r\nthe paste operatoin assumes you have a " +
+        "UTL\r\nin the clipbaord and want to create a  hyperlink");
             // 
             // main
             // 
@@ -1574,7 +1575,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSwapBR;
         private System.Windows.Forms.Button btnHTest;
-        private System.Windows.Forms.Button btnNoNL;
         private System.Windows.Forms.ToolStripMenuItem mnuImgSig;
         private System.Windows.Forms.ToolStripMenuItem mnuEmoji;
         private System.Windows.Forms.CheckBox cbShowLang;
@@ -1583,6 +1583,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadINPrinterMacsToolStripMenuItem;
         private System.Windows.Forms.TextBox tbMNum;
         private System.Windows.Forms.ToolStripMenuItem loadOJPrinterMacsToolStripMenuItem;
+        private System.Windows.Forms.Label lblVurl;
     }
 }
 

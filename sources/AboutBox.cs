@@ -28,8 +28,8 @@ namespace MacroViewer
             dynamicLinkLabel.LinkArea = new LinkArea(0, n);
             dynamicLinkLabel.Links.Add(n, 9, sUrl);
             dynamicLinkLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(LinkedLabelClicked);
-            string strTmp = "This program allows volunteers to create and edit help macros: adding links and images.\r\nSource code is at github/jstateson.  Anyone can use this tool or distribute it.\r\nYou can edit the source code and build the app as long I am attributed as the author.\r\nMarch 4, 2024 build date.  josephy@stateson.net";
-
+            string strTmp = "This program allows volunteers to create and edit help macros: adding links and images.\r\nSource code is at github/jstateson.  Anyone can use this tool or distribute it.\r\nYou can edit the source code and build the app as long I am attributed as the author.\r\nJuly 14, 2024 build date.  josephy@stateson.net";
+            strTmp += " Total Macros for use (" + Utils.TotalNumberMacros.ToString() + ")";
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;

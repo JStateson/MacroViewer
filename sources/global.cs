@@ -397,6 +397,7 @@ namespace MacroViewer
         public const int NumMacros = 50;   // only 30 for the HTML file
         public static int HPmaxNumber = 40;  // some users may have more!
         public static int nLongestExpectedURL = 256;
+        public static int TotalNumberMacros = 0;
         public static string[] nUse ={ // these must match the button names in WordSearch
             //"PC","Printer","Drivers","EBay","Google","Manuals","YouTube","HP KB"
               "PC","PRN",    "DRV",    "EBA", "GOO",   "MAN",    "HPYT",   "HPKB"
@@ -611,6 +612,7 @@ internal static class ClipboardFormats
                 strTemp += "<br><br>" + Properties.Settings.Default.NotPrnSuffix;
             ShellHTML(strTemp, false);
             CopyHTML(strTemp);
+
         }
 
         public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents", "Printer support documents" };//, "HP-KB-WIKI"};

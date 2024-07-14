@@ -34,6 +34,7 @@ namespace MacroViewer
         private DateTime ThisDT;
         private List<int> SrtInx;
         private List<TabPage> disabledTabs = new List<TabPage>();
+
         public Settings(eBrowserType reBrowser, string ruserid, int NumAttached, ref cMacroChanges RxMC, ref cMacroChanges RxMV)
         {
             InitializeComponent();
@@ -46,8 +47,18 @@ namespace MacroViewer
                 case eBrowserType.eFirefox: rbFirefox.Checked = true; break;
                 case eBrowserType.eEdge: rbEdge.Checked = true; break;  
             }
-            string sPP = Properties.Settings.Default.sPPrefix;
-            if (sPP != "init") tbPP.Text = sPP;
+
+            if (Properties.Settings.Default.sPPrefix != "init")
+                tbPP.Text = Properties.Settings.Default.sPPrefix;
+            else
+                Properties.Settings.Default.sPPrefix = tbPP.Text;
+            
+
+            if (Properties.Settings.Default.sMSuffix != "init")
+                tbPP.Text = Properties.Settings.Default.sMSuffix;
+            else
+                Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
+
             tbLongAllowed.Text = Properties.Settings.Default.LongestExpectedURL.ToString();
             tbSpecialWord.Text = Properties.Settings.Default.SpecialWord;
             tbEmail.Text = Properties.Settings.Default.sEmail;
@@ -302,10 +313,28 @@ namespace MacroViewer
             }
         }
 
+        private void btnSavMS_Click(object sender, EventArgs e)
+        {
+            if(cbisPrinter.Checked)
+                Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
+            else
+                Properties.Settings.Default.NotPrnSuffix = tbMSuffix.Text;
+        }
+
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
             xMV.SaveChanges();
             xMC.SaveChanges();
+        }
+
+        private void cbisPrinter_CheckedChanged(object sender, EventArgs e)
+        {
+            tbMSuffix.Text = cbisPrinter.Checked ? Properties.Settings.Default.sMSuffix : Properties.Settings.Default.NotPrnSuffix;
+        }
+
+        private void blnTestS_Click(object sender, EventArgs e)
+        {
+            ShowText(tbMSuffix.Text);
         }
     }
 }

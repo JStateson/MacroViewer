@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="sMSuffix" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Please let me know if this works</Value>
+      <Value Profile="(Default)">init</Value>
     </Setting>
     <Setting Name="IncludeHPKB" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -55,6 +55,9 @@
     </Setting>
     <Setting Name="AllowSTICKYedits" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NotPrnSuffix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Let me know if you need more help</Value>
     </Setting>
   </Settings>
 </SettingsFile>

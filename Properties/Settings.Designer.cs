@@ -73,7 +73,7 @@ namespace MacroViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Please let me know if this works")]
+        [global::System.Configuration.DefaultSettingValueAttribute("init")]
         public string sMSuffix {
             get {
                 return ((string)(this["sMSuffix"]));
@@ -236,6 +236,18 @@ namespace MacroViewer.Properties {
             }
             set {
                 this["AllowSTICKYedits"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Let me know if you need more help")]
+        public string NotPrnSuffix {
+            get {
+                return ((string)(this["NotPrnSuffix"]));
+            }
+            set {
+                this["NotPrnSuffix"] = value;
             }
         }
     }

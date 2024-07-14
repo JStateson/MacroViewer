@@ -604,9 +604,11 @@ internal static class ClipboardFormats
             strTemp = strTemp.Replace(Environment.NewLine, "<br>");
             if (sPP != "init" && strType != "" && Utils.sPrinterTypes.Contains(strType + " "))
             {
-                strTemp ="<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp +
+                strTemp = "<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp +
                     "<br><br>" + Properties.Settings.Default.sMSuffix;
             }
+            else
+                strTemp += "<br><br>" + Properties.Settings.Default.NotPrnSuffix;
             ShellHTML(strTemp, false);
             CopyHTML(strTemp);
         }

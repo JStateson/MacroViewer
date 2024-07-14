@@ -55,7 +55,9 @@
             this.tbLongAllowed = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSavMS = new System.Windows.Forms.Button();
+            this.cbisPrinter = new System.Windows.Forms.CheckBox();
+            this.blnTestS = new System.Windows.Forms.Button();
             this.tbMSuffix = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.cbRFsticky = new System.Windows.Forms.CheckBox();
@@ -304,7 +306,7 @@
             this.groupBox4.Controls.Add(this.tbPP);
             this.groupBox4.Location = new System.Drawing.Point(651, 206);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(362, 129);
+            this.groupBox4.Size = new System.Drawing.Size(420, 129);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Printer Prefix";
@@ -313,7 +315,7 @@
             // btnTestPP
             // 
             this.btnTestPP.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestPP.Location = new System.Drawing.Point(15, 53);
+            this.btnTestPP.Location = new System.Drawing.Point(23, 28);
             this.btnTestPP.Name = "btnTestPP";
             this.btnTestPP.Size = new System.Drawing.Size(51, 23);
             this.btnTestPP.TabIndex = 4;
@@ -324,7 +326,7 @@
             // tbPP
             // 
             this.tbPP.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbPP.Location = new System.Drawing.Point(89, 23);
+            this.tbPP.Location = new System.Drawing.Point(152, 15);
             this.tbPP.Multiline = true;
             this.tbPP.Name = "tbPP";
             this.tbPP.Size = new System.Drawing.Size(244, 88);
@@ -359,30 +361,61 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnSavMS);
+            this.groupBox3.Controls.Add(this.cbisPrinter);
+            this.groupBox3.Controls.Add(this.blnTestS);
             this.groupBox3.Controls.Add(this.tbMSuffix);
             this.groupBox3.Location = new System.Drawing.Point(651, 349);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(362, 129);
+            this.groupBox3.Size = new System.Drawing.Size(420, 146);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Macro Suffix";
             this.toolTip1.SetToolTip(this.groupBox3, "Is put in first line of\r\neach printer macro");
             // 
-            // button1
+            // btnSavMS
             // 
-            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.button1.Location = new System.Drawing.Point(15, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSavMS.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSavMS.Location = new System.Drawing.Point(15, 100);
+            this.btnSavMS.Name = "btnSavMS";
+            this.btnSavMS.Size = new System.Drawing.Size(51, 23);
+            this.btnSavMS.TabIndex = 6;
+            this.btnSavMS.Text = "Save";
+            this.btnSavMS.UseVisualStyleBackColor = true;
+            this.btnSavMS.Click += new System.EventHandler(this.btnSavMS_Click);
+            // 
+            // cbisPrinter
+            // 
+            this.cbisPrinter.AutoSize = true;
+            this.cbisPrinter.CheckAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.cbisPrinter.Checked = true;
+            this.cbisPrinter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbisPrinter.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cbisPrinter.Location = new System.Drawing.Point(15, 61);
+            this.cbisPrinter.Name = "cbisPrinter";
+            this.cbisPrinter.Size = new System.Drawing.Size(82, 17);
+            this.cbisPrinter.TabIndex = 5;
+            this.cbisPrinter.Text = "For a printer";
+            this.toolTip1.SetToolTip(this.cbisPrinter, "This response phrase (suffis)\r\nis for a printer if checked and\r\nwill be added to " +
+        "every post");
+            this.cbisPrinter.UseVisualStyleBackColor = true;
+            this.cbisPrinter.CheckedChanged += new System.EventHandler(this.cbisPrinter_CheckedChanged);
+            // 
+            // blnTestS
+            // 
+            this.blnTestS.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.blnTestS.Location = new System.Drawing.Point(15, 19);
+            this.blnTestS.Name = "blnTestS";
+            this.blnTestS.Size = new System.Drawing.Size(51, 23);
+            this.blnTestS.TabIndex = 4;
+            this.blnTestS.Text = "Test";
+            this.blnTestS.UseVisualStyleBackColor = true;
+            this.blnTestS.Click += new System.EventHandler(this.blnTestS_Click);
             // 
             // tbMSuffix
             // 
             this.tbMSuffix.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.tbMSuffix.Location = new System.Drawing.Point(89, 19);
+            this.tbMSuffix.Location = new System.Drawing.Point(152, 19);
             this.tbMSuffix.Multiline = true;
             this.tbMSuffix.Name = "tbMSuffix";
             this.tbMSuffix.Size = new System.Drawing.Size(244, 88);
@@ -595,6 +628,7 @@
             // cbSaveUNK
             // 
             this.cbSaveUNK.AutoSize = true;
+            this.cbSaveUNK.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
             this.cbSaveUNK.Location = new System.Drawing.Point(19, 31);
             this.cbSaveUNK.Name = "cbSaveUNK";
             this.cbSaveUNK.Size = new System.Drawing.Size(96, 17);
@@ -783,7 +817,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button blnTestS;
         private System.Windows.Forms.TextBox tbMSuffix;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -805,5 +839,7 @@
         private System.Windows.Forms.ListBox lbViewed;
         private System.Windows.Forms.CheckBox cbRFsticky;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox cbisPrinter;
+        private System.Windows.Forms.Button btnSavMS;
     }
 }

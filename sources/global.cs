@@ -419,6 +419,16 @@ namespace MacroViewer
             return s;
         }
 
+        public static string nNL(int n)
+        {
+            string s = "";
+            for (int i = 0; i < n; i++)
+            {
+                s += Environment.NewLine;
+            }
+            return s;
+        }
+
         private static string[] sUse = // possible new macros
         {
             "PC AIO HW",            //PC
@@ -451,6 +461,9 @@ namespace MacroViewer
         // there is an "SI" type which is used for SIgnature images.
         public static string XMLprefix = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" /></head><body style=\"width: 800px; auto;\">";
         public static string XMLsuffix = "</body></html>";
+        public static string sIsAlbum = "/image/serverpage/image-id";
+        public static string sHasSize = "/image-size/";
+        public static string sDifSiz = "tiny,thumb,small,medium,large";
         //public static string XMLdtd = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         public static int HPforumWidth = 825;   // seems like any response "box" never exceeds 825 pixels
         //    <div style="width: 825px; background-color: lightblue; padding: 10px;">
@@ -536,7 +549,7 @@ namespace MacroViewer
         }
 
 
-internal static class ClipboardFormats
+        internal static class ClipboardFormats
         {
             static readonly string HEADER =
                 "Version:0.9\r\n" +
@@ -608,11 +621,25 @@ internal static class ClipboardFormats
                 strTemp = "<br>" + Properties.Settings.Default.sPPrefix + "<br><br>" + strTemp +
                     "<br><br>" + Properties.Settings.Default.sMSuffix;
             }
-            else
+            else 
+            if(strType != "")
                 strTemp += "<br><br>" + Properties.Settings.Default.NotPrnSuffix;
             ShellHTML(strTemp, false);
             CopyHTML(strTemp);
 
+        }
+
+        public static bool SyntaxTest(string s)
+        {
+            string strErr = Utils.BBCparse(s);
+            if (strErr == "") return false;
+            DialogResult Res1 = MessageBox.Show(strErr, "Click OK to see where errors are", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.OK)
+            {
+                ShowParseLocationErrors(s);
+                MessageBox.Show(strErr, "Errors are near locations listed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return true;
         }
 
         public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents", "Printer support documents" };//, "HP-KB-WIKI"};

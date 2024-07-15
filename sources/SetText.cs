@@ -12,7 +12,6 @@ namespace MacroViewer
         private bool bBoxed = false;
         private string strBoxed = "";
         private int CurrentDemo = 0, TotalDemos = 4;
-        private string sIsAlbum = "/image/serverpage/image-id";
         private string sInfoDemo;
         //0: box url, 1: list, 2:image url, 3: image
         public string strResultOut { get; set; }
@@ -64,12 +63,12 @@ namespace MacroViewer
 
         private string GetFormattedURL(string s)
         {
-            if(s.Contains(sIsAlbum)) // is an image in an album
+            if(s.Contains(Utils.sIsAlbum)) // is an image in an album
             {
                 int i = cbSizeImage.SelectedIndex;
                 if (i > 0)
                 {
-                    s+= "/image-size/" + cbSizeImage.SelectedItem.ToString();
+                    s+= Utils.sHasSize + cbSizeImage.SelectedItem.ToString();
                 }
             }
             return s;
@@ -114,7 +113,7 @@ namespace MacroViewer
             {
                 tbResult.Text = rbSqueeze.Checked ? Utils.Form1CellTable(strResult, GetBoxWidth()) : Utils.Form1CellTableP(strResult,GetBoxWidth());
             }
-            cbSizeImage.Visible = tbRawUrl.Text.Contains(sIsAlbum);
+            cbSizeImage.Visible = tbRawUrl.Text.Contains(Utils.sIsAlbum);
         }
 
         private string GetBoxWidth()

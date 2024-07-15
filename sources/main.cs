@@ -26,6 +26,7 @@ using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.Globalization;
 using System.Data;
+using MacroViewer.sources;
 
 
 namespace MacroViewer
@@ -706,6 +707,13 @@ namespace MacroViewer
             tbBody.ReadOnly = !bAccess;
         }
 
+        private bool AnyHyper(string s)
+        {
+            if (s.Contains("href=")) return true;
+            if (s.Contains("<img ")) return true;
+            return false;
+        }
+
         private void ShowUneditedRow(int e)
         {
             bool bChanged = (CurrentRowSelected != e);
@@ -736,6 +744,7 @@ namespace MacroViewer
             CheckForLanguageOption(bChanged);
             if (cbLaunchPage.Checked)
                 RunBrowser();
+            btnShowURLs.Enabled = AnyHyper(tbBody.Text.ToLower());
         }
 
         private void ShowBodyFromSelected()
@@ -1084,7 +1093,7 @@ namespace MacroViewer
         {
             if (HasBadUrl()) return true;
             if (strType == "NO" || strType == "RF") return false;
-            return SyntaxTest();
+            return Utils.SyntaxTest(tbBody.Text);
         }
 
         private bool NoEmptyMacros()
@@ -1242,6 +1251,7 @@ namespace MacroViewer
             string sPrefix = tbBody.Text.Substring(0, iStart);
             string sSuffix = tbBody.Text.Substring(iStart + iLen);
             tbBody.Text = sPrefix + strText + sSuffix;
+            ScrollToCaretPosition(tbBody, iStart + strText.Length);
         }
 
         private void TbodyInsert(string sClip)
@@ -1552,19 +1562,7 @@ namespace MacroViewer
             }
             return false;
         }
-        private bool SyntaxTest()
-        {
-            string strErr = Utils.BBCparse(tbBody.Text);
-            if (strErr == "") return false;
-            DialogResult Res1 = MessageBox.Show(strErr, "Click OK to see where errors are", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            if (Res1 == DialogResult.OK)
-            {
-                Utils.ShowParseLocationErrors(tbBody.Text);
-                MessageBox.Show(strErr, "Errors are near locations listed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return true;
-        }
-      
+
 
         private void lbName_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -1650,6 +1648,7 @@ namespace MacroViewer
                 sS = tBody.Substring(0, i);
                 sE = tBody.Substring(i + j);
                 tbBody.Text = sS + sOut + sE;
+                ScrollToCaretPosition(tbBody, i + sOut.Length);
             }
         }
 
@@ -2451,7 +2450,7 @@ namespace MacroViewer
 
         private void btnHTest_Click(object sender, EventArgs e)
         {
-            SyntaxTest();
+            Utils.SyntaxTest(tbBody.Text);
         }
 
 
@@ -2658,6 +2657,23 @@ namespace MacroViewer
             }
         }
 
+        private void ScrollToCaretPosition(System.Windows.Forms.TextBox textBox, int characterPosition)
+        {
+            textBox.Focus();
+            textBox.SelectionStart = characterPosition;
+            textBox.SelectionLength = 0;
+            textBox.ScrollToCaret();
+        }
+
+        private void btnShowURLs_Click(object sender, EventArgs e)
+        {
+            EditOldUrls UDurl = new EditOldUrls(tbBody.Text);
+            UDurl.ShowDialog();
+            string strReturn = UDurl.strResultOut;
+            if (strReturn == null) return;
+            if (strReturn == "") return;
+            tbBody.Text = strReturn;
+        }
     }
     
 }

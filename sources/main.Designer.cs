@@ -248,7 +248,7 @@
             // 
             this.tbMacName.Location = new System.Drawing.Point(18, 52);
             this.tbMacName.Name = "tbMacName";
-            this.tbMacName.Size = new System.Drawing.Size(190, 22);
+            this.tbMacName.Size = new System.Drawing.Size(177, 22);
             this.tbMacName.TabIndex = 3;
             this.toolTip1.SetToolTip(this.tbMacName, "Name the the macro you are adding or editing");
             // 
@@ -377,11 +377,11 @@
             // 
             this.btnCopyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopyFrom.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnCopyFrom.Location = new System.Drawing.Point(299, 280);
+            this.btnCopyFrom.Location = new System.Drawing.Point(261, 280);
             this.btnCopyFrom.Name = "btnCopyFrom";
-            this.btnCopyFrom.Size = new System.Drawing.Size(180, 27);
+            this.btnCopyFrom.Size = new System.Drawing.Size(218, 27);
             this.btnCopyFrom.TabIndex = 10;
-            this.btnCopyFrom.Text = "Insert from clipboard";
+            this.btnCopyFrom.Text = "Insert TEXT from clipboard";
             this.toolTip1.SetToolTip(this.btnCopyFrom, "This will paste HTML in additon to text\r\nif any html is present. WUSIWUG");
             this.btnCopyFrom.UseVisualStyleBackColor = true;
             this.btnCopyFrom.Click += new System.EventHandler(this.btnCopyFrom_Click);
@@ -662,12 +662,12 @@
             // 
             this.btnSwapBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSwapBR.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSwapBR.Location = new System.Drawing.Point(357, 402);
+            this.btnSwapBR.Location = new System.Drawing.Point(301, 355);
             this.btnSwapBR.Name = "btnSwapBR";
-            this.btnSwapBR.Size = new System.Drawing.Size(121, 32);
+            this.btnSwapBR.Size = new System.Drawing.Size(178, 32);
             this.btnSwapBR.TabIndex = 33;
-            this.btnSwapBR.Text = "Show <BR>";
-            this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline");
+            this.btnSwapBR.Text = "Show / Hide <BR>";
+            this.toolTip1.SetToolTip(this.btnSwapBR, "Exchange <BR> and newline\r\nYou may need to click this twice");
             this.btnSwapBR.UseVisualStyleBackColor = true;
             this.btnSwapBR.Click += new System.EventHandler(this.btnSwapBR_Click);
             // 
@@ -728,12 +728,13 @@
             // 
             this.btnShowURLs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowURLs.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnShowURLs.Location = new System.Drawing.Point(357, 357);
+            this.btnShowURLs.Location = new System.Drawing.Point(322, 417);
             this.btnShowURLs.Name = "btnShowURLs";
-            this.btnShowURLs.Size = new System.Drawing.Size(121, 32);
+            this.btnShowURLs.Size = new System.Drawing.Size(152, 32);
             this.btnShowURLs.TabIndex = 37;
-            this.btnShowURLs.Text = "Update URLs";
-            this.toolTip1.SetToolTip(this.btnShowURLs, "If URL links to old driver then\r\nselect the URL and click EDIT\r\n");
+            this.btnShowURLs.Text = "Update old URLs";
+            this.toolTip1.SetToolTip(this.btnShowURLs, "If URL links to old driver then\r\nselect the URL and click EDIT\r\nSoftware download" +
+        " URLS can\r\npoint to old downloads.");
             this.btnShowURLs.UseVisualStyleBackColor = true;
             this.btnShowURLs.Click += new System.EventHandler(this.btnShowURLs_Click);
             // 
@@ -1033,21 +1034,21 @@
             // mnuImgSig
             // 
             this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(153, 22);
+            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
             this.mnuImgSig.Text = "Image & Sig";
             this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
             // 
             // mnuEmoji
             // 
             this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(153, 22);
+            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
             this.mnuEmoji.Text = "Emoji";
             this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
             // 
             // mnuCCodes
             // 
             this.mnuCCodes.Name = "mnuCCodes";
-            this.mnuCCodes.Size = new System.Drawing.Size(153, 22);
+            this.mnuCCodes.Size = new System.Drawing.Size(180, 22);
             this.mnuCCodes.Text = "Country Codes";
             this.mnuCCodes.Click += new System.EventHandler(this.mnuCCodes_Click);
             // 
@@ -1340,16 +1341,16 @@
             this.gbSupp.Controls.Add(this.groupBox3);
             this.gbSupp.Controls.Add(this.tbMacName);
             this.gbSupp.Controls.Add(this.btnDelM);
-            this.gbSupp.Location = new System.Drawing.Point(30, 38);
+            this.gbSupp.Location = new System.Drawing.Point(24, 38);
             this.gbSupp.Name = "gbSupp";
-            this.gbSupp.Size = new System.Drawing.Size(239, 259);
+            this.gbSupp.Size = new System.Drawing.Size(211, 259);
             this.gbSupp.TabIndex = 13;
             this.gbSupp.TabStop = false;
             this.gbSupp.Text = "Supplemental Table";
             // 
             // tbMNum
             // 
-            this.tbMNum.Location = new System.Drawing.Point(172, 19);
+            this.tbMNum.Location = new System.Drawing.Point(149, 23);
             this.tbMNum.Name = "tbMNum";
             this.tbMNum.Size = new System.Drawing.Size(36, 22);
             this.tbMNum.TabIndex = 8;
@@ -1359,7 +1360,7 @@
             this.btnDelChecked.Enabled = false;
             this.btnDelChecked.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelChecked.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelChecked.Location = new System.Drawing.Point(40, 210);
+            this.btnDelChecked.Location = new System.Drawing.Point(16, 218);
             this.btnDelChecked.Name = "btnDelChecked";
             this.btnDelChecked.Size = new System.Drawing.Size(167, 35);
             this.btnDelChecked.TabIndex = 7;
@@ -1371,7 +1372,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(45, 25);
+            this.label2.Location = new System.Drawing.Point(21, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 13);
             this.label2.TabIndex = 6;
@@ -1392,7 +1393,7 @@
             this.btnDelM.Enabled = false;
             this.btnDelM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelM.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelM.Location = new System.Drawing.Point(40, 158);
+            this.btnDelM.Location = new System.Drawing.Point(16, 160);
             this.btnDelM.Name = "btnDelM";
             this.btnDelM.Size = new System.Drawing.Size(168, 32);
             this.btnDelM.TabIndex = 1;

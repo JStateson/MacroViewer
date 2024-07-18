@@ -412,9 +412,10 @@ namespace MacroViewer
             int j = inx + 1;
             int n = v.Length;
             if (i < 8) return false;
-            if (j >= s.Length) return false;
+            int k = n + j - i;
             string t = "." + v + ".";
-            if (t == s.Substring(i, n+ j - i)) return true;
+            if((k + i) >= s.Length) return false;
+            if (t == s.Substring(i, k)) return true;
             return false;
         }
 

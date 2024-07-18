@@ -25,6 +25,7 @@ using System.Diagnostics;
 using System.Windows.Interop;
 using System.IO.Ports;
 using System.Reflection;
+using System.Windows.Media.Animation;
 
 namespace MacroViewer
 {
@@ -45,15 +46,20 @@ namespace MacroViewer
             // only look after the _blank>
             public bool LookForUrl(int inx, ref string s)
             {
-                // <a href ...blank..whatever.....</a>
+                // <a href ...blank..self..whatever.....</a>
                 string sBlank = "=\"_blank\">";
+                string sSelf = "=\"_self\">";
                 int Left_a, Right_a;
                 Right_a = s.IndexOf("</a>", inx);
                 if (Right_a == -1) return true;
                 Left_a = s.LastIndexOf("<a href", inx);
                 if (Left_a == -1) return true;
-                string t = s.Substring(Left_a, Right_a - Left_a) + "<br><br>";
+                string t = s.Substring(Left_a, Right_a+4 - Left_a) + "<br><br>";
                 int i = t.IndexOf(sBlank);
+                if (i == -1) i = t.IndexOf(sSelf);
+                if (i == -1) i = t.IndexOf(">");
+                Debug.Assert(i >= 0);
+                if (i == -1) return false;
                 inx -= Left_a;
                 if (inx < i) return false;
                 if (PageOut.Contains(t)) return true;
@@ -399,6 +405,19 @@ namespace MacroViewer
             cbvAddLangRef.Visible = bSorted[SelectedRow].MayHaveLanguage;
         }
 
+        private bool InHTTP(string v, int inx, string s)
+        {
+            // minimum of 9 chars t the 'b' http://a.b.c
+            int i = inx - 1;
+            int j = inx + 1;
+            int n = v.Length;
+            if (i < 8) return false;
+            if (j >= s.Length) return false;
+            string t = "." + v + ".";
+            if (t == s.Substring(i, n+ j - i)) return true;
+            return false;
+        }
+
         private string PerformSearch(string text, string sMacID)
         {
             string strRtn = "";
@@ -434,6 +453,8 @@ namespace MacroViewer
                 TotalMatches += allMatches.Count;
                 foreach (Match m in allMatches)
                 {
+                    // ignore any text that is in the http part such as .hp.
+                    if (InHTTP(m.Value.ToLower(), m.Index, text.ToLower())) continue;
                     sTmp = m.Value.ToLower();
                     if(sMacID == "RF")
                     {

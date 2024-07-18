@@ -1155,9 +1155,52 @@ namespace MacroViewer
             ShowUneditedRow(CurrentRowSelected);
         }
 
+        private void RemoveHTML(ref string s)
+        {
+            bool b = true;
+            int i, j;
+            while (b)
+            {
+                i = s.IndexOf("<a href");
+                b = i >= 0;
+                if(b)
+                {
+                    j = s.IndexOf("</a>", i);
+                    j += 4;
+                    s = s.Remove(i, j - i);
+                }
+            }
+            b = true;
+            while(b)
+            {
+                i = s.IndexOf("<img ");
+                b = i >= 0;
+                if (b)
+                {
+                    j = s.IndexOf(">", i);
+                    j++;
+                    s = s.Remove(i, j - i);
+                }
+            }
+        }
+        private bool RefsOnly()
+        {
+            if (strType != "RF") return false;
+            string s = tbBody.Text.ToLower().Replace(Environment.NewLine, "") ;
+            RemoveHTML(ref s);
+            s = s.Trim();
+            return s != "";
+        }
+         
         private void btnSaveM_Click(object sender, EventArgs e)
         {
-            if(NoEmptyMacros())
+            if (RefsOnly())
+            {
+                MessageBox.Show("Macros must contain URLs only, no text");
+                btnCancelEdits.ForeColor = Color.Red;
+                return;
+            }
+            if (NoEmptyMacros())
             {
                 MessageBox.Show("You cannot save an empty macro");
                 return;

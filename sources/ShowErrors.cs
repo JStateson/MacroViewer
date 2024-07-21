@@ -16,42 +16,40 @@ namespace MacroViewer
 {
     public partial class ShowErrors : Form
     {
-        private string[] sErrors;   // length 50
-        private int[] iErrors;      // where in sError the non-blank error message and length 50
-        private int[] BodyFromRow;  // could be as small as 1 or as large as 50 but holds 50
-        private string[] AllBody;   // length 50
+        private string[] sErrors;
+        private int[] iErrors;
+        private int[] BodyFromRow; 
         private string sLoc = "";
+        private List<dgvStruct> DataTable;
 
         //i is the row selected
         private void MakeBodyAvailable(int i)
         {
             if (i < 0) return;
             int j = BodyFromRow[i];
-            //File.WriteAllText(sLoc + "/MyHtml.html", Utils.XMLprefix + AllBody[j] + Utils.XMLsuffix);
-            File.WriteAllText(sLoc + "/MyHtml.txt", AllBody[j]);
+            File.WriteAllText(sLoc + "/MyHtml.txt", DataTable[j].sBody);
         }
 
-        public ShowErrors(ref string[] mName, ref string[] mErrors, ref string[] rAllBody)
+        public ShowErrors(ref List<dgvStruct> rDataTable)
         {
             InitializeComponent();
             sLoc = Utils.WhereExe;
-            AllBody = rAllBody;
+            DataTable = rDataTable;
             lbMacNames.Items.Clear();
             int i = 0, j = 0;
-            sErrors = new string[mErrors.Length];
-            iErrors = new int[mErrors.Length]; 
-            BodyFromRow = new int[mErrors.Length];
-            foreach (string s in mName)
+            int m = rDataTable.Count;
+            sErrors = new string[m];
+            iErrors = new int[m]; 
+            BodyFromRow = new int[m];
+            foreach (dgvStruct row in rDataTable)
             {
-                if (mErrors[i] == null) break;
-                if (mErrors[i] != "")
+                if(row.sErr != "")
                 {
-                    lbMacNames.Items.Add(s);
-                    sErrors[j] = mErrors[i];
+                    lbMacNames.Items.Add(row.MacName);
+                    sErrors[j] = row.sErr;
                     BodyFromRow[j] = i;
                     j++;
                 }
-                i++;
             }
             btnFindErr.Text = lbMacNames.Items[0].ToString();
             MakeBodyAvailable(0);

@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbName = new System.Windows.Forms.DataGridView();
+            this.Inx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MoveM = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.MacName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnGo = new System.Windows.Forms.Button();
             this.tbNumMac = new System.Windows.Forms.TextBox();
@@ -113,6 +116,7 @@
             this.mnuEmoji = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCCodes = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowErr = new System.Windows.Forms.ToolStripMenuItem();
+            this.mShowDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.mnRecDis = new System.Windows.Forms.ToolStripMenuItem();
             this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSearchComm = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +155,6 @@
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -177,6 +180,10 @@
             this.lbName.AllowUserToResizeColumns = false;
             this.lbName.AllowUserToResizeRows = false;
             this.lbName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lbName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Inx,
+            this.MoveM,
+            this.MacName});
             this.lbName.Location = new System.Drawing.Point(23, 102);
             this.lbName.MultiSelect = false;
             this.lbName.Name = "lbName";
@@ -189,6 +196,29 @@
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
+            // 
+            // Inx
+            // 
+            this.Inx.HeaderText = "N";
+            this.Inx.Name = "Inx";
+            this.Inx.ReadOnly = true;
+            this.Inx.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Inx.Width = 32;
+            // 
+            // MoveM
+            // 
+            this.MoveM.HeaderText = "Move";
+            this.MoveM.Name = "MoveM";
+            this.MoveM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MoveM.Width = 48;
+            // 
+            // MacName
+            // 
+            this.MacName.HeaderText = "Name";
+            this.MacName.Name = "MacName";
+            this.MacName.ReadOnly = true;
+            this.MacName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MacName.Width = 312;
             // 
             // btnGo
             // 
@@ -720,6 +750,7 @@
             this.aboutToolStripMenuItem,
             this.testSignatureToolStripMenuItem,
             this.mShowErr,
+            this.mShowDiff,
             this.mnRecDis,
             this.hPWebSitesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1030,6 +1061,15 @@
             this.mShowErr.Text = "ERRORS";
             this.mShowErr.Visible = false;
             this.mShowErr.Click += new System.EventHandler(this.mShowErr_Click);
+            // 
+            // mShowDiff
+            // 
+            this.mShowDiff.ForeColor = System.Drawing.Color.Red;
+            this.mShowDiff.Name = "mShowDiff";
+            this.mShowDiff.Size = new System.Drawing.Size(70, 20);
+            this.mShowDiff.Text = "Show Diff";
+            this.mShowDiff.Visible = false;
+            this.mShowDiff.Click += new System.EventHandler(this.mShowDiff_Click);
             // 
             // mnRecDis
             // 
@@ -1395,12 +1435,6 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Interval = 500;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1495,6 +1529,7 @@
         private System.Windows.Forms.ToolStripMenuItem mShowErr;
         private System.Windows.Forms.ToolStripMenuItem helpWithErrorsToolStripMenuItem;
         private System.Windows.Forms.Label lbRCcopy;
+        private System.Windows.Forms.ToolStripMenuItem mShowDiff;
         private System.Windows.Forms.Button btnCancelEdits;
         private System.Windows.Forms.Button btnLinkAll;
         private System.Windows.Forms.Button btnNextTable;
@@ -1505,6 +1540,9 @@
         private System.Windows.Forms.ToolStripMenuItem mDJload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Inx;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn MoveM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MacName;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ToolStripMenuItem mOSload;
         private System.Windows.Forms.Button btnDelChecked;
@@ -1565,7 +1603,6 @@
         private System.Windows.Forms.Button btnShowURLs;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridView lbName;
-        private System.Windows.Forms.Timer timer2;
     }
 }
 

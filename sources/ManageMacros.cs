@@ -25,6 +25,7 @@ namespace MacroViewer
         private string sBody;
         private string sLoc = "";
         private int iRow, iCol;
+        private List<dgvStruct> DataTable;
         private class CImageItems
         {
             public string ImageLocation { get; set; }
@@ -33,10 +34,10 @@ namespace MacroViewer
 
         List<CImageItems> MyItems;
 
-        public ManageMacros(string rstrType, int nMacros, ref string[] rBody)
+        public ManageMacros(string rstrType, ref List<dgvStruct> rDataTable)
         {
             InitializeComponent();
-            AllBody = rBody;
+            DataTable = rDataTable;
             WhereExe = Utils.WhereExe;
             strType = rstrType;
             MyItems = new List<CImageItems>();
@@ -49,8 +50,8 @@ namespace MacroViewer
             
             while (true)
             {
-                if (i >= nMacros) return;// something wrong can only hold 50
-                sBody = rBody[i];
+                if (i >= rDataTable.Count) return;// something wrong can only hold 50
+                sBody = rDataTable[i].sBody;
                 if (sBody == ""|| sBody == null) break;
                 if (sBody.Contains(Utils.AssignedImageName))
                 {

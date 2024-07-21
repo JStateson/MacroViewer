@@ -394,7 +394,7 @@ namespace MacroViewer
     public static class Utils
     {
         private const int iNMacros = 13;
-        public const int NumMacros = 50;   // only 30 for the HTML file
+        public const int NumMacros = 999;
         public static int HPmaxNumber = 40;  // some users may have more!
         public static int nLongestExpectedURL = 256;
         public static int TotalNumberMacros = 0;
@@ -1477,6 +1477,18 @@ namespace MacroViewer
         public string sBody;    //body of marco
         public string fKeys;    //keywords found separated by a space
         public int nWdsfKey;    //number of words in fKeys is the number of unique hits
+    }
+
+    public class dgvStruct
+    {
+        public int Inx { get; set; }
+        public int HP_HTML_DIF_LOC { get; set; }
+        public bool MoveM { get; set; }
+        public bool HPerr { get; set; }
+        public bool HP_HTML_NO_DIFF { get; set; }
+        public string MacName { get; set; }
+        public string sErr { get; set; }
+        public string sBody { get; set; }
     }
     public class CFound
     {

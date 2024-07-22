@@ -48,7 +48,7 @@
       <Value Profile="(Default)">josephy@stateson.net</Value>
     </Setting>
     <Setting Name="Vdisable" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="WSrepeat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

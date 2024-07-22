@@ -86,6 +86,9 @@
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.cbViewed = new System.Windows.Forms.ComboBox();
+            this.btnForgetM = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
+            this.btnRestoreM = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -738,11 +741,52 @@
             this.cbViewed.TabIndex = 5;
             this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
             // 
+            // btnForgetM
+            // 
+            this.btnForgetM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForgetM.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnForgetM.Location = new System.Drawing.Point(941, 524);
+            this.btnForgetM.Name = "btnForgetM";
+            this.btnForgetM.Size = new System.Drawing.Size(69, 34);
+            this.btnForgetM.TabIndex = 15;
+            this.btnForgetM.Text = "Reset";
+            this.btnForgetM.UseVisualStyleBackColor = true;
+            this.btnForgetM.Click += new System.EventHandler(this.btnForgetM_Click);
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackup.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBackup.Location = new System.Drawing.Point(941, 575);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(130, 34);
+            this.btnBackup.TabIndex = 16;
+            this.btnBackup.Text = "Backup Macros";
+            this.toolTip1.SetToolTip(this.btnBackup, "backup.zip in application folder");
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
+            // 
+            // btnRestoreM
+            // 
+            this.btnRestoreM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestoreM.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRestoreM.Location = new System.Drawing.Point(941, 619);
+            this.btnRestoreM.Name = "btnRestoreM";
+            this.btnRestoreM.Size = new System.Drawing.Size(130, 34);
+            this.btnRestoreM.TabIndex = 17;
+            this.btnRestoreM.Text = "Restore Macros";
+            this.toolTip1.SetToolTip(this.btnRestoreM, "restores the macros into the app folder");
+            this.btnRestoreM.UseVisualStyleBackColor = true;
+            this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1132, 694);
+            this.Controls.Add(this.btnRestoreM);
+            this.Controls.Add(this.btnBackup);
+            this.Controls.Add(this.btnForgetM);
             this.Controls.Add(this.tabMacroInfo);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label3);
@@ -841,5 +885,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbisPrinter;
         private System.Windows.Forms.Button btnSavMS;
+        private System.Windows.Forms.Button btnForgetM;
+        private System.Windows.Forms.Button btnBackup;
+        private System.Windows.Forms.Button btnRestoreM;
     }
 }

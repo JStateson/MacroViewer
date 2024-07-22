@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -22,7 +23,7 @@ namespace MacroViewer
 
     public partial class Settings : Form
     {
-        public eBrowserType eBrowser {  get; set; }
+        public eBrowserType eBrowser { get; set; }
         public bool bWantsExit { get; set; }
         public string userid { get; set; }
         private cMacroChanges xMC;
@@ -45,14 +46,14 @@ namespace MacroViewer
             {
                 case eBrowserType.eChrome: rbChrome.Checked = true; break;
                 case eBrowserType.eFirefox: rbFirefox.Checked = true; break;
-                case eBrowserType.eEdge: rbEdge.Checked = true; break;  
+                case eBrowserType.eEdge: rbEdge.Checked = true; break;
             }
 
             if (Properties.Settings.Default.sPPrefix != "init")
                 tbPP.Text = Properties.Settings.Default.sPPrefix;
             else
                 Properties.Settings.Default.sPPrefix = tbPP.Text;
-            
+
 
             if (Properties.Settings.Default.sMSuffix != "init")
                 tbPP.Text = Properties.Settings.Default.sMSuffix;
@@ -74,7 +75,7 @@ namespace MacroViewer
             cbFileN.DataSource = xMC.GetFNChanges();
             cbViewed.DataSource = xMV.GetFNViews();
             xMC.nSelectedRowIndex = -1;
-            if (cbFileN.Items.Count > 0 )
+            if (cbFileN.Items.Count > 0)
             {
                 //string s = cbFileN.Items[0].ToString();
                 //SrtInx = xMC.GetMNChanges(s, ref stDataSource, ref stDateTime);
@@ -130,7 +131,7 @@ namespace MacroViewer
             this.Close();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void SaveSettings()
         {
             if (rbChrome.Checked) eBrowser = eBrowserType.eChrome;
             if (rbEdge.Checked) eBrowser = eBrowserType.eEdge;
@@ -145,7 +146,7 @@ namespace MacroViewer
             Utils.nLongestExpectedURL = Properties.Settings.Default.LongestExpectedURL;
             Utils.BrowserWanted = eBrowser;
             if (tbUserID.Text != "")
-            { 
+            {
                 userid = tbUserID.Text;
                 Properties.Settings.Default.UserID = userid;
             }
@@ -154,6 +155,11 @@ namespace MacroViewer
             Properties.Settings.Default.SpecialWord = tbSpecialWord.Text;
             Properties.Settings.Default.sEmail = tbEmail.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
             this.Close();
         }
 
@@ -247,7 +253,7 @@ namespace MacroViewer
             foreach (int i in SrtInx)
             {
                 stDataSource.Add(xstDataSource[i]);
-                stDateTime.Add(xstDateTime[i]); 
+                stDateTime.Add(xstDateTime[i]);
             }
             lbEdited.DataSource = stDataSource;
             lbEdited.Refresh();
@@ -258,7 +264,7 @@ namespace MacroViewer
         private void btnExitSelect_Click(object sender, EventArgs e)
         {
             int n = xMC.nSelectedRowIndex;
-            if(n < 0 || n >= lbEdited.Items.Count) { return; }
+            if (n < 0 || n >= lbEdited.Items.Count) { return; }
             string rowContent = lbEdited.Items[n].ToString();
             string sFN = cbFileN.Text;
             xMC.sGoTo = sFN + ":" + rowContent;
@@ -286,22 +292,22 @@ namespace MacroViewer
 
         private void tabMacroInfo_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
+
         }
 
         private void btnDelSel_Click(object sender, EventArgs e)
         {
-            if(cbViewed.SelectedItem == null) return;   
+            if (cbViewed.SelectedItem == null) return;
             string sFN = cbViewed.SelectedItem.ToString();
             bool bAny = false;
-            foreach(string s in lbViewed.SelectedItems)
+            foreach (string s in lbViewed.SelectedItems)
             {
                 xMV.RemView(sFN, s);
                 bAny = true;
             }
-            if(bAny)
+            if (bAny)
             {
-                if(xMV.bIsEmpty())
+                if (xMV.bIsEmpty())
                 {
                     RemoveViewHistory();
                     return;
@@ -315,7 +321,7 @@ namespace MacroViewer
 
         private void btnSavMS_Click(object sender, EventArgs e)
         {
-            if(cbisPrinter.Checked)
+            if (cbisPrinter.Checked)
                 Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
             else
                 Properties.Settings.Default.NotPrnSuffix = tbMSuffix.Text;
@@ -335,6 +341,77 @@ namespace MacroViewer
         private void blnTestS_Click(object sender, EventArgs e)
         {
             ShowText(tbMSuffix.Text);
+        }
+
+
+        private void btnForgetM_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LastFolder = "";
+            Properties.Settings.Default.HTTP_HP = "";
+            Properties.Settings.Default.Save();
+            tbUserID.Text = "";
+            tbSpecialWord.Text = "";
+            tbEmail.Text = "";
+            cbRepeatSearch.Checked = false;
+            cbDisableVPaste.Checked = false;
+            cbRFsticky.Checked = false;
+            cbSaveUNK.Checked = false;
+            tbLongAllowed.Text = "256";
+            SaveSettings();
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            string[] sMisc = { "emoji.html", "HP_CountryCodes.html", "SiteMap.html", "signatures.txt",
+            "MacroChanges.txt", "MacroViews.txt"};
+
+            string zipPath = Utils.WhereExe + "/backup.zip";
+            using (FileStream zipToOpen = new FileStream(zipPath, FileMode.Create))
+            {
+                using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
+                {
+                    foreach (string strFN in Utils.LocalMacroPrefix)
+                    {
+                        string file = Utils.FNtoPath(strFN);
+                        if (File.Exists(file))
+                        {
+                            archive.CreateEntryFromFile(file, Path.GetFileName(file));
+                        }
+                    }
+                    foreach (string strName in sMisc)
+                    {
+                        string file = Utils.WhereExe + "/" + strName;
+                        if (File.Exists(file))
+                        {
+                            archive.CreateEntryFromFile(file, Path.GetFileName(file));
+                        }
+                    }
+                    archive.Dispose();
+                }
+            }
+        }
+
+        private void btnRestoreM_Click(object sender, EventArgs e)
+        {
+            string zipPath = Utils.WhereExe + "\\backup.zip";
+            try
+            {
+                ZipArchive za = ZipFile.OpenRead(zipPath);
+                foreach(ZipArchiveEntry zae in za.Entries)
+                {
+                    string s = Utils.WhereExe + "\\" + zae.FullName.ToString();
+                    if (File.Exists(s))
+                    {
+                        File.Delete(s);
+                    }
+                }
+                ZipFile.ExtractToDirectory(zipPath, Utils.WhereExe);
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

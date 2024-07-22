@@ -32,6 +32,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.Globalization;
 using System.Data;
 using MacroViewer.sources;
+using System.Threading.Tasks;
 
 
 namespace MacroViewer
@@ -55,6 +56,7 @@ namespace MacroViewer
         private bool bInitialLoad = false;  // this is used with the bad ending to look for
         private List<string> strBadEnding = new List<string>();
         private bool bHaveHTML = false; // html macro was read in. this cannot be edited
+        private bool bHaveHP = false;   // have an HPMacro.txt file
         private int NumSupplementalSignatures = 0;
         private Color NormalEditColor;
         public CMoveSpace cms;
@@ -96,10 +98,7 @@ namespace MacroViewer
             xMacroViews.Init("MacroViews.txt");
             DataTable = new List<dgvStruct>();
             HPDataTable = new List<dgvStruct>();
-            Utils.TotalNumberMacros = LoadAllFiles();
             cms = new CMoveSpace();
-            Utils.bRecordUnscrubbedURLs = Properties.Settings.Default.SaveUnkUrls;
-            SpecialUsed(Properties.Settings.Default.SpecialWord != "");
             NormalEditColor = btnCancelEdits.ForeColor;
             SetFGcolor("#FF6600");
             if (bForceClose)
@@ -116,7 +115,14 @@ namespace MacroViewer
             {
                 lblVurl.Text = vWarning;
             }
+            this.Shown += LoadInitialFiles;
         }
+
+        private  void LoadInitialFiles(object sender, EventArgs e)
+        {
+            Utils.TotalNumberMacros = LoadAllFiles();
+        }
+
 
         private string IgnoreSupSig(string s)
         {
@@ -432,11 +438,12 @@ namespace MacroViewer
             return true;
         }
 
+        //jys
         private void RunBrowser()
         {
             string strTemp = tbBody.Text;
-            if (strTemp == "") return;
-            string sMacroName = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
+            if (strTemp == "" || !tbBody.Enabled) return;
+            string sMacroName = tbMacName.Text; //lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
             if (cbShowLang.Checked)
             {
                 strTemp = Utils.AddLanguageOption(strTemp);
@@ -683,7 +690,18 @@ namespace MacroViewer
         {
             tbBody.Enabled = bAccess;
             tbBody.ReadOnly = !bAccess;
+            if(!bAccess)
+            {
+                tbNumMac.Text = "";
+                tbMNum.Text = "";
+            }
         }
+
+        private void AllowTBbody()
+        {
+            AllowTBbody(lbName.Rows.Count > 0);
+        }
+
 
         private bool AnyHyper(string s)
         {
@@ -709,7 +727,7 @@ namespace MacroViewer
                 NumCheckedMacros = 0;
                 LastViewedFN = strType;
             }
-            AllowTBbody(true);
+            //AllowTBbody(true);
             tbMNum.Text = (1 + e).ToString();
             if (strType == "RF")
             {
@@ -834,6 +852,11 @@ namespace MacroViewer
             lbName.ReadOnly = !b;
         }
 
+        private void AllowMacroMove()
+        {
+            AllowMacroMove(DataTable.Count > 0);
+        }
+
         private void LoadHTMLfile()
         {
             AccessDiffBoth(false);
@@ -841,7 +864,6 @@ namespace MacroViewer
             lbRCcopy.Visible = false;
             if (ReadMacroHTML())
             {
-                //lbName.DataSource = HPDataTable;
                 EnableMacEdits(false);
                 strType = "";
                 bHaveHTML = true;
@@ -851,6 +873,14 @@ namespace MacroViewer
                 lbName.Columns[2].HeaderText = "Name HTML";
             }
             else AllowChanges(true);
+            if(bHaveHTML)
+            {
+                if (bHaveHP) return;
+                SaveHTTPasTXT("HP");
+                LoadFromTXT("HP");
+                ShowUneditedRow(0);
+                AllowMacroMove(true);
+            }
         }
 
         private void AllowChanges(bool f)
@@ -879,7 +909,7 @@ namespace MacroViewer
         }
 
       
-        // load file here
+        // load files here
         // HP and HTML can have blank macro names and body but NOT any others
         private int LoadFromTXT(string strFN)
         {
@@ -903,7 +933,7 @@ namespace MacroViewer
             {
                 StreamReader sr = new StreamReader(TXTmacName);
                 string line = sr.ReadLine();
-                string sBody;
+                string sBody, s;
                 bHaveHTML = false;
                 bool bAnyHPdiff = (strFN == "HP") && bHaveHTMLasLOCAL;
                 lbName.RowEnter -= lbName_RowEnter;
@@ -927,7 +957,9 @@ namespace MacroViewer
                     dgv.sErr = sErr;
                     if (bAnyHPdiff)
                     {
-                        dgv.HP_HTML_DIF_LOC = Utils.FirstDifferenceIndex(sBody, HPDataTable[i].sBody);
+                        if (HPDataTable[i].sBody == null) s = "";
+                        else s = HPDataTable[i].sBody;
+                        dgv.HP_HTML_DIF_LOC = Utils.FirstDifferenceIndex(sBody, s);
                         dgv.HP_HTML_NO_DIFF = (dgv.HP_HTML_DIF_LOC == -1);
                         if (!dgv.HP_HTML_NO_DIFF)
                             bMacroDiff = true;
@@ -967,6 +999,7 @@ namespace MacroViewer
                 if (DataTable.Count > 0 && strFN == "HP")
                     bHaveBothHP = bHaveHTMLasLOCAL;
             }
+            else CreateLB(strFN);
             tbNumMac.Text = i.ToString();
             for(i = 0; i < lbName.Rows.Count; i++)
             {
@@ -990,6 +1023,7 @@ namespace MacroViewer
             }
             mShowErr.Visible = bMacroErrors;
             lbRCcopy.Visible = bMacroDiff;
+            AllowTBbody(i>0);
             return i;
         }
 
@@ -1025,14 +1059,33 @@ namespace MacroViewer
             TXTName = strFN;
             strType = strFN;    // TODO need to clean this up todo to do
             string TXTmacName = Utils.FNtoPath(strFN);
-            foreach (DataGridViewRow row in lbName.Rows)
+            foreach (dgvStruct row in DataTable)
             {
-                string strName = row.Cells[2].Value.ToString();
-                string strBody = DataTable[i].sBody;
+                string strName = row.MacName;
+                string strBody = row.sBody;
                 strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
                 i++;
             }
-            if(i > 0)Utils.WriteAllText(TXTmacName, strOut);
+            if (i > 0)Utils.WriteAllText(TXTmacName, strOut);
+            else File.Delete(TXTmacName);
+            NumInBody = i;
+        }
+
+        private void SaveHTTPasTXT(string strFN)
+        {
+            int i = 0;
+            string strOut = "";
+            TXTName = strFN;
+            strType = strFN;    // TODO need to clean this up todo to do
+            string TXTmacName = Utils.FNtoPath(strFN);
+            foreach (dgvStruct row in HPDataTable)
+            {
+                string strName = row.MacName;
+                string strBody = row.sBody;
+                strOut += strName + Environment.NewLine + strBody + Environment.NewLine;
+                i++;
+            }
+            if (i > 0) Utils.WriteAllText(TXTmacName, strOut);
             else File.Delete(TXTmacName);
             NumInBody = i;
         }
@@ -1044,7 +1097,7 @@ namespace MacroViewer
                 "Possible loss of macros", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (Res1 == DialogResult.Yes)
             {
-                SaveAsTXT("HP");
+                SaveHTTPasTXT("HP");
             }
         }
 
@@ -1094,7 +1147,8 @@ namespace MacroViewer
                     return;
                 }
                 DataTable[CurrentRowSelected].sBody = "";
-                lbName.Rows[CurrentRowSelected].Cells[2].Value = "";
+                DataTable[CurrentRowSelected].MacName = "";
+ //               lbName.Rows[CurrentRowSelected].Cells[2].Value = "";
                 tbBody.Text = "";
             }
             xMacroChanges.TryRemove(strType, tbMacName.Text);
@@ -1779,10 +1833,10 @@ namespace MacroViewer
             tbMacName.Text = "";
             strType = sWanted;
             this.Text = " HP Macro Editor";
-            lbName.Columns[2].HeaderText = "Name: " + Utils.FNtoHeader(sWanted);
             NumInBody = 0;
             btnSaveM.Enabled = false;
             btnNew.Enabled = true; // allow to be created
+            lbName.Columns[2].HeaderText = "Name: " + Utils.FNtoHeader(sWanted);
         }
 
         private int SelectFileItem(string sPrefix)
@@ -1802,6 +1856,7 @@ namespace MacroViewer
             {
                 ShowEmpty(sPrefix);
                 AllowTBbody(false);
+                AllowMacroMove(false);
                 tbBody.Text = "Please create a new macro by clicking 'NEW'";
                 return 0;
             }
@@ -1810,7 +1865,7 @@ namespace MacroViewer
                 NumCheckedMacros = 0;
                 LastViewedFN = strType;
             }
-            AllowTBbody(true);
+            //AllowTBbody(true);
             btnSaveM.Enabled = true;
             lbRCcopy.Visible = false;
             mMoveMacro.Visible = true;
@@ -1927,6 +1982,8 @@ namespace MacroViewer
                             }
                         }
                         sr.Close();
+                        if(strFN == "HP" && i > 0)
+                            bHaveHP = true;
                     }
                 }            
             }
@@ -1952,13 +2009,14 @@ namespace MacroViewer
             if(UnfinishedFN == "")
             {
                 LoadFromTXT("HP");
+                ShowUneditedRow(0);
             }
             else
             {
                 LoadFromTXT(UnfinishedFN);
                 ShowUneditedRow(UnfinishedIndex);
             }
-
+            AllowTBbody();
             return nMacroCnt;
         }
 
@@ -2134,8 +2192,10 @@ namespace MacroViewer
                     if ((bool)row.Cells[1].EditedFormattedValue)
                     {
                         DataTable[i].sBody = "";
+                        DataTable[i].MacName = "";
                         row.Cells[2].Value = "";
                         row.Cells[1].Value = false;
+                        if (i == CurrentRowSelected) tbBody.Text = "";
                     }
                 }
                 SaveAsTXT(cms.strType);
@@ -2224,14 +2284,8 @@ namespace MacroViewer
             ri.Dispose();
         }
 
-        private void SpecialUsed(bool b)
-        {
-            btnSpecialWord.Visible = b;
-            timer1.Enabled = b;
-        }
         private void timer1_Tick(object sender, EventArgs e)
-        {
-            SpecialUsed(false);
+        { 
             if (bForceClose)
             {
                 this.Close();
@@ -2239,10 +2293,16 @@ namespace MacroViewer
 
         }
 
+        private void btnCopyEmail_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.sEmail == "") return;
+            Clipboard.SetText(Properties.Settings.Default.sEmail);
+        }
+
         private void btnSpecialWord_Click(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.SpecialWord == "") return;
             Clipboard.SetText(Properties.Settings.Default.SpecialWord);
-            SpecialUsed(false);
         }
 
         private void main_HelpButtonClicked(object sender, CancelEventArgs e)
@@ -2436,13 +2496,6 @@ namespace MacroViewer
                 case "a":
                     sQ = "https://h30434.www3.hp.com/t5/custom/page/page-id/RecentDiscussions";
                     break;
-                case "s":
-                    if (Properties.Settings.Default.SpecialWord == null) return;
-                    Clipboard.SetText(Properties.Settings.Default.SpecialWord);
-                    SpecialUsed(false);
-                    return;
-                case "e": Clipboard.SetText(Properties.Settings.Default.sEmail);
-                    return;
             }
             if (sQ != "")
                 Utils.LocalBrowser(sQ);
@@ -2743,7 +2796,9 @@ namespace MacroViewer
             //ShowHighlights();
             HighlightDIF();
             timer2.Enabled = false;
+            
         }
+
     }
     
 }

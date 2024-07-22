@@ -709,6 +709,11 @@ namespace MacroViewer
             tbBody.ReadOnly = !bAccess;
         }
 
+       private void AllowTBody()
+        {
+            AllowTBbody(lbName.rows.Count > 0);
+        }
+
         private bool AnyHyper(string s)
         {
             if (s.Contains("href=")) return true;
@@ -732,7 +737,7 @@ namespace MacroViewer
                 NumCheckedMacros = 0;
                 LastViewedFN = strType;
             }
-            AllowTBbody(true);
+            //AllowTBbody(true);
             tbMNum.Text = (1 + e).ToString();
             if (strType == "RF")
             {
@@ -909,7 +914,7 @@ namespace MacroViewer
         }
 
       
-
+        // load file
         // HP and HTML can have blank macro names and body but NOT any others
         private int LoadFromTXT(string strFN)
         {
@@ -993,7 +998,8 @@ namespace MacroViewer
             if (strFN == "HP")
                 btnNew.Enabled = false; // lbName.RowCount < Utils.HPmaxNumber;
             mShowErr.Visible = bMacroErrors;
-            if(bMacroErrors)
+            AllowTBbody();
+            if (bMacroErrors)
             {
                 return i;
             }
@@ -1793,7 +1799,7 @@ namespace MacroViewer
                 NumCheckedMacros = 0;
                 LastViewedFN = strType;
             }
-            AllowTBbody(true);
+            //AllowTBbody(true);
             btnSaveM.Enabled = true;
             lbRCcopy.Visible = false;
             mMoveMacro.Visible = true;
@@ -1811,6 +1817,7 @@ namespace MacroViewer
                 ShowUneditedRow(0);
                 SetVisDiffErr(false);
             }
+            AllowMacroMove(true);
             AllowMacroMove(true);
             return iCnt;
         }
@@ -1949,7 +1956,6 @@ namespace MacroViewer
                 LoadFromTXT(UnfinishedFN);
                 ShowUneditedRow(UnfinishedIndex);
             }
-
             return nMacroCnt;
         }
 

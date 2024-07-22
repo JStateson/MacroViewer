@@ -12,10 +12,10 @@ Images that are not URLs must be uploaded to your HP photo album and URLs are cl
 
 You can create macros, signatures, and hyperlinks, assemble images, search extensively thorough the macro collection and easily paste replies to users from the collection.
 
-Supplemental macros files: HP (editable copy of macros.html), HW, OS, NET, LJ, DJ, OJ, IN, PC, AIO.  RF and NO are references and notes. Maximum of 50 macros each except HP which can have only 30. TR is the transfer file for uploading new macros.
+Supplemental macros files: HP (editable copy of macros.html), HW, OS, NET, LJ, DJ, OJ, IN, PC, AIO.  RF and NO are references and notes. Maximum of 999 macros each except HP which can have up to 40. TR is the transfer file for uploading new macros.
 
 If you wish to use your own macros you must: (1) log in and access your macros page.  If using chrome then right click, "view **page source**", and save as "macros.html" with "Webpage, **complete**" to replace the default file.
 
 (2) Run MacroViewer, open "macros.html", and select the option to save as a local file (HP).  All supplemental demo files are unchanged and are loaded immediately.
 
-Feel free to use the ISSUE tool for suggestions or to report bugs. The project "HP Search" is another tool useful for HP forum volunteers. Use the move feature to to copy macros to the transfer file TRmacros.txt to share macros with other users.
+Feel free to use the ISSUE tool for suggestions or to report bugs. The project "HP Search" is another tool useful for HP forum volunteers. Use the move feature to copy macros to the transfer file TRmacros.txt to share macros with other users.

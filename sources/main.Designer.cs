@@ -73,6 +73,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lbBRcopyInfo = new System.Windows.Forms.Label();
             this.btnShowURLs = new System.Windows.Forms.Button();
+            this.btnSpecialWord = new System.Windows.Forms.Button();
+            this.btnCopyEmail = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,8 +135,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.specialWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -148,7 +148,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnDelM = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSpecialWord = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -267,7 +266,7 @@
             this.lbRCcopy.AutoSize = true;
             this.lbRCcopy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRCcopy.ForeColor = System.Drawing.Color.Red;
-            this.lbRCcopy.Location = new System.Drawing.Point(23, 66);
+            this.lbRCcopy.Location = new System.Drawing.Point(254, 77);
             this.lbRCcopy.Name = "lbRCcopy";
             this.lbRCcopy.Size = new System.Drawing.Size(109, 15);
             this.lbRCcopy.TabIndex = 6;
@@ -709,6 +708,32 @@
             this.btnShowURLs.UseVisualStyleBackColor = true;
             this.btnShowURLs.Click += new System.EventHandler(this.btnShowURLs_Click);
             // 
+            // btnSpecialWord
+            // 
+            this.btnSpecialWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSpecialWord.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSpecialWord.Location = new System.Drawing.Point(23, 66);
+            this.btnSpecialWord.Name = "btnSpecialWord";
+            this.btnSpecialWord.Size = new System.Drawing.Size(75, 20);
+            this.btnSpecialWord.TabIndex = 21;
+            this.btnSpecialWord.Text = "Copy PW";
+            this.toolTip1.SetToolTip(this.btnSpecialWord, "This copies your password to the\r\nclipboard so you can paste it login.");
+            this.btnSpecialWord.UseVisualStyleBackColor = true;
+            this.btnSpecialWord.Click += new System.EventHandler(this.btnSpecialWord_Click);
+            // 
+            // btnCopyEmail
+            // 
+            this.btnCopyEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopyEmail.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnCopyEmail.Location = new System.Drawing.Point(110, 67);
+            this.btnCopyEmail.Name = "btnCopyEmail";
+            this.btnCopyEmail.Size = new System.Drawing.Size(75, 20);
+            this.btnCopyEmail.TabIndex = 22;
+            this.btnCopyEmail.Text = "Copy Email";
+            this.toolTip1.SetToolTip(this.btnCopyEmail, "This copies your email to the\r\nclipboard so you can paste it login.\r\n");
+            this.btnCopyEmail.UseVisualStyleBackColor = true;
+            this.btnCopyEmail.Click += new System.EventHandler(this.btnCopyEmail_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1143,8 +1168,6 @@
             this.toolStripSeparator3,
             this.allToolStripMenuItem,
             this.toolStripSeparator4,
-            this.specialWordToolStripMenuItem,
-            this.emailToolStripMenuItem,
             this.mnuAskQ});
             this.hPWebSitesToolStripMenuItem.Name = "hPWebSitesToolStripMenuItem";
             this.hPWebSitesToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
@@ -1194,20 +1217,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
-            // 
-            // specialWordToolStripMenuItem
-            // 
-            this.specialWordToolStripMenuItem.Name = "specialWordToolStripMenuItem";
-            this.specialWordToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.specialWordToolStripMenuItem.Text = "Special Word";
-            this.specialWordToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
-            // 
-            // emailToolStripMenuItem
-            // 
-            this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.emailToolStripMenuItem.Text = "Email";
-            this.emailToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // mnuAskQ
             // 
@@ -1364,6 +1373,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCopyEmail);
             this.groupBox2.Controls.Add(this.btnSpecialWord);
             this.groupBox2.Controls.Add(this.btnPrev);
             this.groupBox2.Controls.Add(this.btnNextTable);
@@ -1378,18 +1388,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Macro List: Click any row to transfer to editor";
             // 
-            // btnSpecialWord
-            // 
-            this.btnSpecialWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSpecialWord.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSpecialWord.Location = new System.Drawing.Point(27, 67);
-            this.btnSpecialWord.Name = "btnSpecialWord";
-            this.btnSpecialWord.Size = new System.Drawing.Size(93, 20);
-            this.btnSpecialWord.TabIndex = 21;
-            this.btnSpecialWord.Text = "Special Word";
-            this.btnSpecialWord.UseVisualStyleBackColor = true;
-            this.btnSpecialWord.Click += new System.EventHandler(this.btnSpecialWord_Click);
-            // 
             // timer1
             // 
             this.timer1.Interval = 10000;
@@ -1398,7 +1396,7 @@
             // timer2
             // 
             this.timer2.Enabled = true;
-            this.timer2.Interval = 500;
+            this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // main
@@ -1542,8 +1540,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem specialWordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem emailToolStripMenuItem;
         private System.Windows.Forms.Button bltnHR;
         private System.Windows.Forms.ToolStripMenuItem mnuAskQ;
         private System.Windows.Forms.ToolStripMenuItem mnuRef;
@@ -1566,6 +1562,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridView lbName;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button btnCopyEmail;
     }
 }
 

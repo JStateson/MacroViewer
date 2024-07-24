@@ -59,5 +59,11 @@
     <Setting Name="NotPrnSuffix" Type="System.String" Scope="User">
       <Value Profile="(Default)">Let me know if you need more help</Value>
     </Setting>
+    <Setting Name="sSplash" Type="System.String" Scope="User">
+      <Value Profile="(Default)">121212</Value>
+    </Setting>
+    <Setting Name="cSplash" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

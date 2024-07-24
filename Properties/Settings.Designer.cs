@@ -250,5 +250,29 @@ namespace MacroViewer.Properties {
                 this["NotPrnSuffix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("121212")]
+        public string sSplash {
+            get {
+                return ((string)(this["sSplash"]));
+            }
+            set {
+                this["sSplash"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cSplash {
+            get {
+                return ((string)(this["cSplash"]));
+            }
+            set {
+                this["cSplash"] = value;
+            }
+        }
     }
 }

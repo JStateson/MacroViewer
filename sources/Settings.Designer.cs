@@ -71,6 +71,7 @@
             this.btnDelSel = new System.Windows.Forms.Button();
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnRestoreM = new System.Windows.Forms.Button();
+            this.btnResetApp = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbDateChg = new System.Windows.Forms.TextBox();
             this.cbFileN = new System.Windows.Forms.ComboBox();
@@ -88,7 +89,7 @@
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.cbViewed = new System.Windows.Forms.ComboBox();
-            this.btnResetApp = new System.Windows.Forms.Button();
+            this.ckShowSplash = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ckShowSplash);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.tbEmail);
             this.groupBox2.Controls.Add(this.label7);
@@ -168,7 +170,7 @@
             this.groupBox2.Controls.Add(this.tbUserID);
             this.groupBox2.Location = new System.Drawing.Point(12, 243);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(274, 439);
+            this.groupBox2.Size = new System.Drawing.Size(274, 459);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User Info";
@@ -578,6 +580,19 @@
             this.btnRestoreM.UseVisualStyleBackColor = true;
             this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
             // 
+            // btnResetApp
+            // 
+            this.btnResetApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetApp.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnResetApp.Location = new System.Drawing.Point(941, 524);
+            this.btnResetApp.Name = "btnResetApp";
+            this.btnResetApp.Size = new System.Drawing.Size(106, 34);
+            this.btnResetApp.TabIndex = 15;
+            this.btnResetApp.Text = "Reset App";
+            this.toolTip1.SetToolTip(this.btnResetApp, "The restores all application settings");
+            this.btnResetApp.UseVisualStyleBackColor = true;
+            this.btnResetApp.Click += new System.EventHandler(this.btnResetApp_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -765,24 +780,23 @@
             this.cbViewed.TabIndex = 5;
             this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
             // 
-            // btnResetApp
+            // ckShowSplash
             // 
-            this.btnResetApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetApp.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnResetApp.Location = new System.Drawing.Point(941, 524);
-            this.btnResetApp.Name = "btnResetApp";
-            this.btnResetApp.Size = new System.Drawing.Size(106, 34);
-            this.btnResetApp.TabIndex = 15;
-            this.btnResetApp.Text = "Reset App";
-            this.toolTip1.SetToolTip(this.btnResetApp, "The restores all application settings");
-            this.btnResetApp.UseVisualStyleBackColor = true;
-            this.btnResetApp.Click += new System.EventHandler(this.btnResetApp_Click);
+            this.ckShowSplash.AutoSize = true;
+            this.ckShowSplash.Checked = true;
+            this.ckShowSplash.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckShowSplash.Location = new System.Drawing.Point(16, 409);
+            this.ckShowSplash.Name = "ckShowSplash";
+            this.ckShowSplash.Size = new System.Drawing.Size(125, 17);
+            this.ckShowSplash.TabIndex = 10;
+            this.ckShowSplash.Text = "Show Splash Screen";
+            this.ckShowSplash.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1132, 694);
+            this.ClientSize = new System.Drawing.Size(1132, 745);
             this.Controls.Add(this.btnRestoreM);
             this.Controls.Add(this.btnBackup);
             this.Controls.Add(this.btnResetApp);
@@ -887,5 +901,6 @@
         private System.Windows.Forms.Button btnResetApp;
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.Button btnRestoreM;
+        private System.Windows.Forms.CheckBox ckShowSplash;
     }
 }

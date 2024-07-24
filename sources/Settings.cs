@@ -84,7 +84,7 @@ namespace MacroViewer
                 //gbChanged.Visible = true;
                 //tabMacroInfo.
             }
-
+            ckShowSplash.Checked = (Properties.Settings.Default.sSplash != Properties.Settings.Default.cSplash) ;
             xMC.sGoTo = "";
         }
 
@@ -156,6 +156,8 @@ namespace MacroViewer
             Properties.Settings.Default.SaveUnkUrls = cbSaveUNK.Checked;
             Properties.Settings.Default.SpecialWord = tbSpecialWord.Text;
             Properties.Settings.Default.sEmail = tbEmail.Text;
+            if (ckShowSplash.Checked)
+                Properties.Settings.Default.cSplash = "";
             Properties.Settings.Default.Save();
         }
 

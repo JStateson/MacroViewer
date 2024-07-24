@@ -118,9 +118,19 @@ namespace MacroViewer
             this.Shown += LoadInitialFiles;
         }
 
+        private void CheckPWE()
+        {
+            btnSpecialWord.Enabled = (Properties.Settings.Default.SpecialWord != "");
+            btnCopyEmail.Enabled = (Properties.Settings.Default.sEmail != "");
+        }
+
         private  void LoadInitialFiles(object sender, EventArgs e)
         {
             Utils.TotalNumberMacros = LoadAllFiles();
+            CheckPWE();
+            if (Properties.Settings.Default.cSplash == Properties.Settings.Default.sSplash) return;
+            splash MySplash = new splash();
+            MySplash.Show();
         }
 
 
@@ -1571,6 +1581,7 @@ namespace MacroViewer
             bMustExit = MySettings.bWantsExit;
             MySettings.Dispose();
             if (bMustExit) this.Close();
+            CheckPWE();
             if(xMacroChanges.sGoTo != "")
             {
                 if (!bPageSaved(ref bIgnore)) return;

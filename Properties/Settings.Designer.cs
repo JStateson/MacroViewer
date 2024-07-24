@@ -193,7 +193,7 @@ namespace MacroViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("josephy@stateson.net")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string sEmail {
             get {
                 return ((string)(this["sEmail"]));

@@ -17,6 +17,8 @@ using static MacroViewer.Utils;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Collections;
+using System.Xml.Linq;
 
 namespace MacroViewer
 {
@@ -56,7 +58,7 @@ namespace MacroViewer
 
 
             if (Properties.Settings.Default.sMSuffix != "init")
-                tbPP.Text = Properties.Settings.Default.sMSuffix;
+                tbMSuffix.Text = Properties.Settings.Default.sMSuffix;
             else
                 Properties.Settings.Default.sMSuffix = tbMSuffix.Text;
 
@@ -343,21 +345,16 @@ namespace MacroViewer
             ShowText(tbMSuffix.Text);
         }
 
-
         private void btnForgetM_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.LastFolder = "";
-            Properties.Settings.Default.HTTP_HP = "";
-            Properties.Settings.Default.Save();
-            tbUserID.Text = "";
-            tbSpecialWord.Text = "";
-            tbEmail.Text = "";
-            cbRepeatSearch.Checked = false;
-            cbDisableVPaste.Checked = false;
-            cbRFsticky.Checked = false;
-            cbSaveUNK.Checked = false;
-            tbLongAllowed.Text = "256";
-            SaveSettings();
+            DialogResult dr = MessageBox.Show("This app must exit for reset to work" + Environment.NewLine +
+                "only internal app settings are changed" + Environment.NewLine + "no macros are affected", "Click OK to Reset", MessageBoxButtons.OKCancel);
+            if(dr == DialogResult.OK)
+            {
+                Properties.Settings.Default.Reset();
+                bWantsExit = true;
+                this.Close();
+            }
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

@@ -69,6 +69,8 @@
             this.lbViewed = new System.Windows.Forms.ListBox();
             this.btnDelDelViewed = new System.Windows.Forms.Button();
             this.btnDelSel = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
+            this.btnRestoreM = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbDateChg = new System.Windows.Forms.TextBox();
             this.cbFileN = new System.Windows.Forms.ComboBox();
@@ -86,9 +88,7 @@
             this.tabViewed = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.cbViewed = new System.Windows.Forms.ComboBox();
-            this.btnForgetM = new System.Windows.Forms.Button();
-            this.btnBackup = new System.Windows.Forms.Button();
-            this.btnRestoreM = new System.Windows.Forms.Button();
+            this.btnResetApp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -196,20 +196,18 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Info;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(13, 281);
+            this.label7.Location = new System.Drawing.Point(23, 260);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(222, 52);
+            this.label7.Size = new System.Drawing.Size(221, 78);
             this.label7.TabIndex = 7;
-            this.label7.Text = "The Special Word can be anything you want.\r\nThe main mage has a button that copie" +
-    "s the\r\nSpecial Word into the Windows Clipboard\r\nfor any use that you want.  Be s" +
-    "ure to \"Apply\"";
+            this.label7.Text = resources.GetString("label7.Text");
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Window;
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(16, 252);
+            this.label6.Location = new System.Drawing.Point(16, 228);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 15);
             this.label6.TabIndex = 6;
@@ -217,7 +215,7 @@
             // 
             // tbSpecialWord
             // 
-            this.tbSpecialWord.Location = new System.Drawing.Point(124, 249);
+            this.tbSpecialWord.Location = new System.Drawing.Point(124, 225);
             this.tbSpecialWord.Name = "tbSpecialWord";
             this.tbSpecialWord.Size = new System.Drawing.Size(108, 20);
             this.tbSpecialWord.TabIndex = 5;
@@ -554,6 +552,32 @@
             this.btnDelSel.UseVisualStyleBackColor = true;
             this.btnDelSel.Click += new System.EventHandler(this.btnDelSel_Click);
             // 
+            // btnBackup
+            // 
+            this.btnBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackup.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBackup.Location = new System.Drawing.Point(941, 575);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(130, 34);
+            this.btnBackup.TabIndex = 16;
+            this.btnBackup.Text = "Backup Macros";
+            this.toolTip1.SetToolTip(this.btnBackup, "backup.zip in application folder");
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
+            // 
+            // btnRestoreM
+            // 
+            this.btnRestoreM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestoreM.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRestoreM.Location = new System.Drawing.Point(941, 619);
+            this.btnRestoreM.Name = "btnRestoreM";
+            this.btnRestoreM.Size = new System.Drawing.Size(130, 34);
+            this.btnRestoreM.TabIndex = 17;
+            this.btnRestoreM.Text = "Restore Macros";
+            this.toolTip1.SetToolTip(this.btnRestoreM, "restores the macros into the app folder");
+            this.btnRestoreM.UseVisualStyleBackColor = true;
+            this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -741,43 +765,18 @@
             this.cbViewed.TabIndex = 5;
             this.cbViewed.SelectedIndexChanged += new System.EventHandler(this.cbViewed_SelectedIndexChanged);
             // 
-            // btnForgetM
+            // btnResetApp
             // 
-            this.btnForgetM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnForgetM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnForgetM.Location = new System.Drawing.Point(941, 524);
-            this.btnForgetM.Name = "btnForgetM";
-            this.btnForgetM.Size = new System.Drawing.Size(69, 34);
-            this.btnForgetM.TabIndex = 15;
-            this.btnForgetM.Text = "Reset";
-            this.btnForgetM.UseVisualStyleBackColor = true;
-            this.btnForgetM.Click += new System.EventHandler(this.btnForgetM_Click);
-            // 
-            // btnBackup
-            // 
-            this.btnBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackup.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnBackup.Location = new System.Drawing.Point(941, 575);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(130, 34);
-            this.btnBackup.TabIndex = 16;
-            this.btnBackup.Text = "Backup Macros";
-            this.toolTip1.SetToolTip(this.btnBackup, "backup.zip in application folder");
-            this.btnBackup.UseVisualStyleBackColor = true;
-            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
-            // 
-            // btnRestoreM
-            // 
-            this.btnRestoreM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestoreM.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnRestoreM.Location = new System.Drawing.Point(941, 619);
-            this.btnRestoreM.Name = "btnRestoreM";
-            this.btnRestoreM.Size = new System.Drawing.Size(130, 34);
-            this.btnRestoreM.TabIndex = 17;
-            this.btnRestoreM.Text = "Restore Macros";
-            this.toolTip1.SetToolTip(this.btnRestoreM, "restores the macros into the app folder");
-            this.btnRestoreM.UseVisualStyleBackColor = true;
-            this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
+            this.btnResetApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetApp.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnResetApp.Location = new System.Drawing.Point(941, 524);
+            this.btnResetApp.Name = "btnResetApp";
+            this.btnResetApp.Size = new System.Drawing.Size(106, 34);
+            this.btnResetApp.TabIndex = 15;
+            this.btnResetApp.Text = "Reset App";
+            this.toolTip1.SetToolTip(this.btnResetApp, "The restores all application settings");
+            this.btnResetApp.UseVisualStyleBackColor = true;
+            this.btnResetApp.Click += new System.EventHandler(this.btnResetApp_Click);
             // 
             // Settings
             // 
@@ -786,7 +785,7 @@
             this.ClientSize = new System.Drawing.Size(1132, 694);
             this.Controls.Add(this.btnRestoreM);
             this.Controls.Add(this.btnBackup);
-            this.Controls.Add(this.btnForgetM);
+            this.Controls.Add(this.btnResetApp);
             this.Controls.Add(this.tabMacroInfo);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label3);
@@ -885,7 +884,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbisPrinter;
         private System.Windows.Forms.Button btnSavMS;
-        private System.Windows.Forms.Button btnForgetM;
+        private System.Windows.Forms.Button btnResetApp;
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.Button btnRestoreM;
     }

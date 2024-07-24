@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label7.Text" xml:space="preserve">
+    <value>The Special Word can be anything you want.
+The main page has a button Copy PW that 
+copies the special word into the Windows
+Clipboard so I can use it to quickly log in.
+Use it for anything you want.  You must
+click 'Apply and Exit' to save.</value>
+  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>The user ID is used to bring up your photo
 album.  This only works if you have logged

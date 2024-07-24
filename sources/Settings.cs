@@ -345,18 +345,6 @@ namespace MacroViewer
             ShowText(tbMSuffix.Text);
         }
 
-        private void btnForgetM_Click(object sender, EventArgs e)
-        {
-            DialogResult dr = MessageBox.Show("This app must exit for reset to work" + Environment.NewLine +
-                "only internal app settings are changed" + Environment.NewLine + "no macros are affected", "Click OK to Reset", MessageBoxButtons.OKCancel);
-            if(dr == DialogResult.OK)
-            {
-                Properties.Settings.Default.Reset();
-                bWantsExit = true;
-                this.Close();
-            }
-        }
-
         private void btnBackup_Click(object sender, EventArgs e)
         {
             string[] sMisc = { "emoji.html", "HP_CountryCodes.html", "SiteMap.html", "signatures.txt",
@@ -405,9 +393,20 @@ namespace MacroViewer
                 ZipFile.ExtractToDirectory(zipPath, Utils.WhereExe);
             }
             catch (Exception ex)
-            {
-                
+            {                
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnResetApp_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("This app must exit for reset to work" + Environment.NewLine +
+                "only internal app settings are changed" + Environment.NewLine + "no macros are affected", "Click OK to Reset", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                Properties.Settings.Default.Reset();
+                bWantsExit = true;
+                this.Close();
             }
         }
     }

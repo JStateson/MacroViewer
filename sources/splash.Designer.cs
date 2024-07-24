@@ -33,8 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbSplashCode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.tbSplashCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,11 +61,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnClose.Location = new System.Drawing.Point(738, 79);
+            this.btnClose.Location = new System.Drawing.Point(775, 79);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.Size = new System.Drawing.Size(95, 47);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "EXIT";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -75,19 +75,12 @@
             // 
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.tbSplashCode);
-            this.groupBox1.Location = new System.Drawing.Point(669, 132);
+            this.groupBox1.Location = new System.Drawing.Point(697, 159);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(246, 176);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Splash Screen Settings";
-            // 
-            // tbSplashCode
-            // 
-            this.tbSplashCode.Location = new System.Drawing.Point(48, 111);
-            this.tbSplashCode.Name = "tbSplashCode";
-            this.tbSplashCode.Size = new System.Drawing.Size(73, 20);
-            this.tbSplashCode.TabIndex = 0;
             // 
             // label8
             // 
@@ -100,6 +93,13 @@
             this.label8.TabIndex = 9;
             this.label8.Text = "Before exiting, enter the numeric value\r\nthat will stop this display from being \r" +
     "\nshown again.  Go to settings to re-enable.";
+            // 
+            // tbSplashCode
+            // 
+            this.tbSplashCode.Location = new System.Drawing.Point(65, 105);
+            this.tbSplashCode.Name = "tbSplashCode";
+            this.tbSplashCode.Size = new System.Drawing.Size(73, 20);
+            this.tbSplashCode.TabIndex = 0;
             // 
             // splash
             // 

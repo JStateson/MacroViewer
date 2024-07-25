@@ -77,6 +77,7 @@ namespace MacroViewer
         public List<dgvStruct> DataTable;   // from reading supplemental files
         public List<dgvStruct> HPDataTable; // from reading the HP HTTP file
         public BindingSource bs = new BindingSource();
+        private bool bHasLocal = false;  // set to true if a local image file path is present in the macro
         public main()
         {
             InitializeComponent();
@@ -926,6 +927,7 @@ namespace MacroViewer
             int i = 0;
             bool bNoEmpty = !(strFN == "HP" || strFN == "" || strFN == "HTML");
             string sErr = "";
+            bHasLocal = false;
             bMacroErrors = false;
             bool bMacroDiff = false;
             mShowErr.Visible = false;
@@ -956,6 +958,8 @@ namespace MacroViewer
                     sBody = sr.ReadLine();
                     if (sBody == null) sBody = "";
                     dgv.sBody = sBody;
+                    if (sBody.Contains(Utils.AssignedImageName))
+                        bHasLocal = true;
                     sErr = "";
                     int j = sBody.ToLower().IndexOf("http:");
                     if(j >= 0)
@@ -1199,7 +1203,8 @@ namespace MacroViewer
             return i == 2;  // both items blank
         }
 
-        private void SaveCurrentMacros()
+        // if UpdateSelected then the macro name and body changed
+        private void SaveCurrentMacros(bool UpdateSelected)
         {
             bool bChanged = false;
             NoEmptyMacros();
@@ -1213,20 +1218,26 @@ namespace MacroViewer
             {
                 return;
             }
-            strOld = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
-            if (strName != strOld && (Utils.UnNamedMacro != strOld))
+
+            if(UpdateSelected)
             {
-                DialogResult Res1 = MessageBox.Show("This will overwrite " + strOld + " with " + strName,
-        "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Res1 != DialogResult.Yes)
+                strOld = lbName.Rows[CurrentRowSelected].Cells[2].Value.ToString();
+                if (strName != strOld && (Utils.UnNamedMacro != strOld))
                 {
-                    return;
+                    DialogResult Res1 = MessageBox.Show("This will overwrite " + strOld + " with " + strName,
+            "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Res1 != DialogResult.Yes)
+                    {
+                        return;
+                    }
                 }
+                lbName.Rows[CurrentRowSelected].Cells[2].Value = strName;
+                DataTable[CurrentRowSelected].sBody = RemoveNewLine(ref bChanged, Utils.NoTrailingNL(tbBody.Text).Trim());
+                if (tbBodyChecksumB)
+                    xMacroChanges.isMacroChanged(tbBodyChecksumN, TXTName, strName, DataTable[CurrentRowSelected].sBody);
+
             }
-            lbName.Rows[CurrentRowSelected].Cells[2].Value = strName;
-            DataTable[CurrentRowSelected].sBody = RemoveNewLine(ref bChanged, Utils.NoTrailingNL(tbBody.Text).Trim());
-            if(tbBodyChecksumB)
-                xMacroChanges.isMacroChanged(tbBodyChecksumN, TXTName, strName, DataTable[CurrentRowSelected].sBody);
+
             if (TXTName == "HP")
             {
                 SaveAsTXT(TXTName);
@@ -1289,7 +1300,7 @@ namespace MacroViewer
                 MessageBox.Show("You cannot save an empty macro");
                 return;
             }
-            SaveCurrentMacros();
+            SaveCurrentMacros(true);
             MustFinishEdit(true);
         }
 
@@ -1541,11 +1552,17 @@ namespace MacroViewer
 
         private void btnChangeUrls_Click(object sender, EventArgs e)
         {
-            ManageMacros MyManageMac = new ManageMacros(strType, ref DataTable);
-            MyManageMac.ShowDialog();
-            tbBody.Text = MyManageMac.AllBody[CurrentRowSelected];
-            SaveCurrentMacros();
-            MyManageMac.Dispose();
+            bool bIgnore = false;
+            if (bPageSaved(ref bIgnore))
+            {
+                ManageMacros MyManageMac = new ManageMacros(strType, ref DataTable);
+                MyManageMac.ShowDialog();
+                if (MyManageMac.nAnyChanges > 0)
+                {
+                    SaveCurrentMacros(false);
+                }
+                MyManageMac.Dispose();
+            }
         }
 
         private void btnAppendMac_Click(object sender, EventArgs e)
@@ -1894,6 +1911,7 @@ namespace MacroViewer
                 ShowUneditedRow(0);
             }
             AllowMacroMove(true);
+            btnChangeUrls.Enabled = bHasLocal;
             return iCnt;
         }
 

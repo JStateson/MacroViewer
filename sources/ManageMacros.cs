@@ -19,17 +19,17 @@ namespace MacroViewer
 {
     public partial class ManageMacros : Form
     { 
-        public string[] AllBody {  get; set; }
         private string WhereExe;
         private string strType;
         private string sBody;
         private string sLoc = "";
         private int iRow, iCol;
+        public int nAnyChanges { get; set; }
         private List<dgvStruct> DataTable;
         private class CImageItems
         {
             public string ImageLocation { get; set; }
-            public int iBody { get; set; }
+            public int MacroNum { get; set; }
         }
 
         List<CImageItems> MyItems;
@@ -37,6 +37,7 @@ namespace MacroViewer
         public ManageMacros(string rstrType, ref List<dgvStruct> rDataTable)
         {
             InitializeComponent();
+            nAnyChanges = 0;
             DataTable = rDataTable;
             WhereExe = Utils.WhereExe;
             strType = rstrType;
@@ -50,7 +51,7 @@ namespace MacroViewer
             
             while (true)
             {
-                if (i >= rDataTable.Count) return;// something wrong can only hold 50
+                if (i >= rDataTable.Count) return;
                 sBody = rDataTable[i].sBody;
                 if (sBody == ""|| sBody == null) break;
                 if (sBody.Contains(Utils.AssignedImageName))
@@ -65,7 +66,7 @@ namespace MacroViewer
         {
             CImageItems c3i = new CImageItems();
             c3i.ImageLocation = strPath;
-            c3i.iBody = r+1;
+            c3i.MacroNum = r+1;
             MyItems.Add(c3i);
         }
 
@@ -88,6 +89,7 @@ namespace MacroViewer
             dgManage.DataSource = MyItems.ToArray();
             dgManage.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgManage.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgManage.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgManage.Refresh();
             dgManage.Rows[0].Selected = true;
             ShowRow(0);
@@ -97,6 +99,7 @@ namespace MacroViewer
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             //https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/all
+            //https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/albums
             string UserID = Utils.VolunteerUserID;
             string PhotoGallery;
             if (UserID == "") PhotoGallery = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/personal-profile:personal-info";
@@ -123,8 +126,9 @@ namespace MacroViewer
             strNew = uUrl.strResult;
             uUrl.Dispose();
             if (strNew == strOld) return;
-            string sBodyEXC = AllBody[r].Replace(strOld, strNew);
-            AllBody[r] = sBodyEXC;
+            string sBodyEXC = DataTable[r].sBody.Replace(strOld, strNew);
+            DataTable[r].sBody = sBodyEXC;
+            nAnyChanges++;
             dgManage.Rows[iRow].Cells[0].Value = "";
         }
 

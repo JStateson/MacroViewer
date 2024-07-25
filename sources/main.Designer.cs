@@ -224,8 +224,9 @@
             // 
             // btnChangeUrls
             // 
+            this.btnChangeUrls.Enabled = false;
             this.btnChangeUrls.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangeUrls.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnChangeUrls.ForeColor = System.Drawing.Color.Red;
             this.btnChangeUrls.Location = new System.Drawing.Point(387, 84);
             this.btnChangeUrls.Name = "btnChangeUrls";
             this.btnChangeUrls.Size = new System.Drawing.Size(138, 30);

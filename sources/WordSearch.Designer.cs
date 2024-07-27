@@ -33,7 +33,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbvAddLangRef = new System.Windows.Forms.CheckBox();
             this.btnShowCC = new System.Windows.Forms.Button();
-            this.lbDropped = new System.Windows.Forms.Label();
             this.gbSelect = new System.Windows.Forms.GroupBox();
             this.gbMakeNew = new System.Windows.Forms.GroupBox();
             this.lbNewItems = new System.Windows.Forms.ListBox();
@@ -50,45 +49,44 @@
             this.cbOfferAlt = new System.Windows.Forms.CheckBox();
             this.cbHPKB = new System.Windows.Forms.CheckBox();
             this.gbParam = new System.Windows.Forms.GroupBox();
+            this.gbRB = new System.Windows.Forms.GroupBox();
             this.rbEPhrase = new System.Windows.Forms.RadioButton();
+            this.rbAnyMatch = new System.Windows.Forms.RadioButton();
+            this.rbExactMatch = new System.Windows.Forms.RadioButton();
             this.btnExitToMac = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.cbIgnCase = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.rbAnyMatch = new System.Windows.Forms.RadioButton();
-            this.rbExactMatch = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbFound = new System.Windows.Forms.GroupBox();
             this.cbSelKey = new System.Windows.Forms.ComboBox();
-            this.tbNumMatches = new System.Windows.Forms.TextBox();
-            this.lbTMinfo = new System.Windows.Forms.Label();
             this.lbKeyFound = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvSearched = new System.Windows.Forms.DataGridView();
             this.tbKeywords = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.gbRB = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbMissing = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbMakeNew.SuspendLayout();
             this.gbAlltSearch.SuspendLayout();
             this.gbParam.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).BeginInit();
             this.gbRB.SuspendLayout();
+            this.gbFound.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cbvAddLangRef);
             this.groupBox1.Controls.Add(this.btnShowCC);
-            this.groupBox1.Controls.Add(this.lbDropped);
             this.groupBox1.Controls.Add(this.gbSelect);
             this.groupBox1.Controls.Add(this.gbMakeNew);
             this.groupBox1.Controls.Add(this.gbAlltSearch);
             this.groupBox1.Controls.Add(this.cbOfferAlt);
             this.groupBox1.Controls.Add(this.cbHPKB);
             this.groupBox1.Controls.Add(this.gbParam);
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.gbFound);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgvSearched);
             this.groupBox1.Controls.Add(this.tbKeywords);
@@ -96,7 +94,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1091, 733);
+            this.groupBox1.Size = new System.Drawing.Size(1091, 781);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keyword match";
@@ -126,21 +124,9 @@
             this.btnShowCC.Visible = false;
             this.btnShowCC.Click += new System.EventHandler(this.btnShowCC_Click);
             // 
-            // lbDropped
-            // 
-            this.lbDropped.AutoSize = true;
-            this.lbDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDropped.ForeColor = System.Drawing.Color.Red;
-            this.lbDropped.Location = new System.Drawing.Point(341, 290);
-            this.lbDropped.Name = "lbDropped";
-            this.lbDropped.Size = new System.Drawing.Size(56, 16);
-            this.lbDropped.TabIndex = 13;
-            this.lbDropped.Text = "Ignored:";
-            this.lbDropped.Visible = false;
-            // 
             // gbSelect
             // 
-            this.gbSelect.Location = new System.Drawing.Point(28, 658);
+            this.gbSelect.Location = new System.Drawing.Point(28, 703);
             this.gbSelect.Name = "gbSelect";
             this.gbSelect.Size = new System.Drawing.Size(970, 57);
             this.gbSelect.TabIndex = 12;
@@ -342,6 +328,19 @@
             this.gbParam.TabStop = false;
             this.gbParam.Text = "Keyword parameters";
             // 
+            // gbRB
+            // 
+            this.gbRB.Controls.Add(this.rbEPhrase);
+            this.gbRB.Controls.Add(this.rbAnyMatch);
+            this.gbRB.Controls.Add(this.rbExactMatch);
+            this.gbRB.ForeColor = System.Drawing.SystemColors.Control;
+            this.gbRB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.gbRB.Location = new System.Drawing.Point(21, 30);
+            this.gbRB.Name = "gbRB";
+            this.gbRB.Size = new System.Drawing.Size(253, 124);
+            this.gbRB.TabIndex = 11;
+            this.gbRB.TabStop = false;
+            // 
             // rbEPhrase
             // 
             this.rbEPhrase.AutoSize = true;
@@ -352,6 +351,30 @@
             this.rbEPhrase.TabIndex = 10;
             this.rbEPhrase.Text = "Exact Phrase (or use quotes)";
             this.rbEPhrase.UseVisualStyleBackColor = true;
+            // 
+            // rbAnyMatch
+            // 
+            this.rbAnyMatch.AutoSize = true;
+            this.rbAnyMatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rbAnyMatch.Location = new System.Drawing.Point(22, 85);
+            this.rbAnyMatch.Name = "rbAnyMatch";
+            this.rbAnyMatch.Size = new System.Drawing.Size(149, 24);
+            this.rbAnyMatch.TabIndex = 1;
+            this.rbAnyMatch.Text = "Any partial match";
+            this.rbAnyMatch.UseVisualStyleBackColor = true;
+            // 
+            // rbExactMatch
+            // 
+            this.rbExactMatch.AutoSize = true;
+            this.rbExactMatch.Checked = true;
+            this.rbExactMatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rbExactMatch.Location = new System.Drawing.Point(22, 20);
+            this.rbExactMatch.Name = "rbExactMatch";
+            this.rbExactMatch.Size = new System.Drawing.Size(134, 24);
+            this.rbExactMatch.TabIndex = 0;
+            this.rbExactMatch.TabStop = true;
+            this.rbExactMatch.Text = "Any exact word";
+            this.rbExactMatch.UseVisualStyleBackColor = true;
             // 
             // btnExitToMac
             // 
@@ -401,79 +424,37 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // rbAnyMatch
+            // gbFound
             // 
-            this.rbAnyMatch.AutoSize = true;
-            this.rbAnyMatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.rbAnyMatch.Location = new System.Drawing.Point(22, 85);
-            this.rbAnyMatch.Name = "rbAnyMatch";
-            this.rbAnyMatch.Size = new System.Drawing.Size(149, 24);
-            this.rbAnyMatch.TabIndex = 1;
-            this.rbAnyMatch.Text = "Any partial match";
-            this.rbAnyMatch.UseVisualStyleBackColor = true;
-            // 
-            // rbExactMatch
-            // 
-            this.rbExactMatch.AutoSize = true;
-            this.rbExactMatch.Checked = true;
-            this.rbExactMatch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.rbExactMatch.Location = new System.Drawing.Point(22, 20);
-            this.rbExactMatch.Name = "rbExactMatch";
-            this.rbExactMatch.Size = new System.Drawing.Size(134, 24);
-            this.rbExactMatch.TabIndex = 0;
-            this.rbExactMatch.TabStop = true;
-            this.rbExactMatch.Text = "Any exact word";
-            this.rbExactMatch.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cbSelKey);
-            this.groupBox2.Controls.Add(this.tbNumMatches);
-            this.groupBox2.Controls.Add(this.lbTMinfo);
-            this.groupBox2.Controls.Add(this.lbKeyFound);
-            this.groupBox2.Location = new System.Drawing.Point(621, 312);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(418, 330);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Keywords found";
+            this.gbFound.Controls.Add(this.tbMissing);
+            this.gbFound.Controls.Add(this.label3);
+            this.gbFound.Controls.Add(this.cbSelKey);
+            this.gbFound.Controls.Add(this.lbKeyFound);
+            this.gbFound.Location = new System.Drawing.Point(621, 312);
+            this.gbFound.Name = "gbFound";
+            this.gbFound.Size = new System.Drawing.Size(418, 385);
+            this.gbFound.TabIndex = 6;
+            this.gbFound.TabStop = false;
+            this.gbFound.Text = "Keywords found";
             // 
             // cbSelKey
             // 
             this.cbSelKey.FormattingEnabled = true;
             this.cbSelKey.ItemHeight = 20;
-            this.cbSelKey.Location = new System.Drawing.Point(264, 109);
+            this.cbSelKey.Location = new System.Drawing.Point(242, 69);
             this.cbSelKey.Name = "cbSelKey";
             this.cbSelKey.Size = new System.Drawing.Size(85, 28);
             this.cbSelKey.TabIndex = 6;
             this.cbSelKey.Visible = false;
-            this.cbSelKey.SelectedIndexChanged += new System.EventHandler(this.cbSelKey_SelectedIndexChanged);
-            // 
-            // tbNumMatches
-            // 
-            this.tbNumMatches.Location = new System.Drawing.Point(189, 49);
-            this.tbNumMatches.Name = "tbNumMatches";
-            this.tbNumMatches.ReadOnly = true;
-            this.tbNumMatches.Size = new System.Drawing.Size(60, 26);
-            this.tbNumMatches.TabIndex = 5;
-            // 
-            // lbTMinfo
-            // 
-            this.lbTMinfo.AutoSize = true;
-            this.lbTMinfo.Location = new System.Drawing.Point(26, 49);
-            this.lbTMinfo.Name = "lbTMinfo";
-            this.lbTMinfo.Size = new System.Drawing.Size(109, 20);
-            this.lbTMinfo.TabIndex = 4;
-            this.lbTMinfo.Text = "Total Matches";
             // 
             // lbKeyFound
             // 
             this.lbKeyFound.FormattingEnabled = true;
             this.lbKeyFound.HorizontalScrollbar = true;
             this.lbKeyFound.ItemHeight = 20;
-            this.lbKeyFound.Location = new System.Drawing.Point(30, 109);
+            this.lbKeyFound.Location = new System.Drawing.Point(21, 69);
             this.lbKeyFound.Name = "lbKeyFound";
-            this.lbKeyFound.Size = new System.Drawing.Size(192, 204);
+            this.lbKeyFound.Size = new System.Drawing.Size(192, 124);
             this.lbKeyFound.TabIndex = 0;
             this.lbKeyFound.DoubleClick += new System.EventHandler(this.lbKeyFound_DoubleClick);
             // 
@@ -504,9 +485,10 @@
             this.dgvSearched.ReadOnly = true;
             this.dgvSearched.RowHeadersVisible = false;
             this.dgvSearched.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSearched.Size = new System.Drawing.Size(561, 287);
+            this.dgvSearched.Size = new System.Drawing.Size(561, 342);
             this.dgvSearched.TabIndex = 3;
             this.dgvSearched.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_CellDoubleClick);
+            this.dgvSearched.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvSearched_ColumnHeaderMouseClick);
             this.dgvSearched.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearched_RowEnter);
             // 
             // tbKeywords
@@ -528,24 +510,29 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Keywords (press enter)";
             // 
-            // gbRB
+            // label3
             // 
-            this.gbRB.Controls.Add(this.rbEPhrase);
-            this.gbRB.Controls.Add(this.rbAnyMatch);
-            this.gbRB.Controls.Add(this.rbExactMatch);
-            this.gbRB.ForeColor = System.Drawing.SystemColors.Control;
-            this.gbRB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gbRB.Location = new System.Drawing.Point(21, 30);
-            this.gbRB.Name = "gbRB";
-            this.gbRB.Size = new System.Drawing.Size(253, 124);
-            this.gbRB.TabIndex = 11;
-            this.gbRB.TabStop = false;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Location = new System.Drawing.Point(17, 283);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(134, 40);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Keywords missing\r\nor (i)gnored";
+            // 
+            // tbMissing
+            // 
+            this.tbMissing.Location = new System.Drawing.Point(213, 264);
+            this.tbMissing.Multiline = true;
+            this.tbMissing.Name = "tbMissing";
+            this.tbMissing.Size = new System.Drawing.Size(128, 86);
+            this.tbMissing.TabIndex = 9;
             // 
             // WordSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1130, 757);
+            this.ClientSize = new System.Drawing.Size(1130, 805);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
@@ -562,11 +549,11 @@
             this.gbAlltSearch.ResumeLayout(false);
             this.gbParam.ResumeLayout(false);
             this.gbParam.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).EndInit();
             this.gbRB.ResumeLayout(false);
             this.gbRB.PerformLayout();
+            this.gbFound.ResumeLayout(false);
+            this.gbFound.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearched)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -578,15 +565,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvSearched;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbFound;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.GroupBox gbParam;
         private System.Windows.Forms.CheckBox cbIgnCase;
         private System.Windows.Forms.RadioButton rbAnyMatch;
         private System.Windows.Forms.RadioButton rbExactMatch;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.TextBox tbNumMatches;
-        private System.Windows.Forms.Label lbTMinfo;
         private System.Windows.Forms.ListBox lbKeyFound;
         private System.Windows.Forms.Button btnExitToMac;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -606,10 +591,11 @@
         private System.Windows.Forms.Button btnMakeNew;
         private System.Windows.Forms.RadioButton rbEPhrase;
         private System.Windows.Forms.GroupBox gbSelect;
-        private System.Windows.Forms.Label lbDropped;
         private System.Windows.Forms.Button btnShowCC;
         private System.Windows.Forms.CheckBox cbvAddLangRef;
         private System.Windows.Forms.ComboBox cbSelKey;
         private System.Windows.Forms.GroupBox gbRB;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbMissing;
     }
 }

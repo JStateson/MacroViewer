@@ -104,11 +104,13 @@ namespace MacroViewer
         private string CountryCodeResults;
         private List<int> WhereInx = new List<int>();
         private int MaxMatches; // most matches in a macro
-        private int WhichMatch;
+        private int WhichMatch=0;
         private string aFilter = "";
         private static string LastSearchWord = "";
         private static string LastSearchParam = "";
         private cMacroChanges MViews;
+        private string lbDroppedText = "";
+
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit, ref cMacroChanges rMViews)
         {
             InitializeComponent();
@@ -124,7 +126,6 @@ namespace MacroViewer
             fBlue = btnSearch.ForeColor;
             MViews = rMViews;
 
-            RestoreColor = lbTMinfo.ForeColor;
             CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             InRepeatMode();
         }
@@ -374,13 +375,14 @@ namespace MacroViewer
         private int GetLastWhereUsed(int Row)
         {
             int n;
-            if (aSorted.Count == 0)
+            List<CFound> cFound = dgvSearched.DataSource as List<CFound>;
+            if(cFound.Count > 0)
             {
-                n =  cSorted[Row].WhereFound;
+                n = cFound[Row].WhereFound;
             }
             else
             {
-                n = aSorted[Row].WhereFound;
+                n = cSorted[Row].WhereFound;
             }
             lbKeyFound.Items.Clear();
             string[] sEach = cAll[n].fKeys.Trim().Split(new[] { "\n" }, StringSplitOptions.None);
@@ -431,8 +433,9 @@ namespace MacroViewer
             i = 0;
             foreach (string keyword in keywords)
             {
-                if (keyword.Length == 1) continue;
-
+                if (keyword.Length > 1)
+                {
+                    
                 if(keyword.Contains(" ") || rbEPhrase.Checked)
                 {
                     sPattern = $@"\b{Regex.Escape(keyword)}\b";
@@ -478,6 +481,8 @@ namespace MacroViewer
                     if (strRtn.Contains(sTmp) || KeyCount[i] == 0) continue;
                     strRtn += sTmp + "\n";
                 }
+                }
+
                 i++;
             }
             return strRtn;
@@ -563,9 +568,20 @@ namespace MacroViewer
                 keywords.Add(input);
                 return;
             }
+            List <string> CandidateItems = new List<string>();
             foreach (Match match in Regex.Matches(input, pattern))
             {
-                keywords.Add(match.Value.Replace("\"",""));
+                CandidateItems.Add(match.Value);
+            }
+            keywords = CandidateItems.Distinct().ToList();
+            if (keywords.Count != CandidateItems.Count)
+            {
+                string sOut = "";
+                foreach (string s in keywords)
+                {
+                    sOut += s + " ";
+                }
+                tbKeywords.Text = sOut;
             }
             return;
         }
@@ -591,7 +607,8 @@ namespace MacroViewer
             TotalMatches = 0;
             TriedFailed = true;
             lbKeyFound.Items.Clear();
-            tbNumMatches.Text = "";
+            gbFound.Text = "Words Found:";
+            tbMissing.Text = "";
             HasFiles = "";
             SelectedFile = "";
             cbvAddLangRef.Visible = false;
@@ -622,17 +639,15 @@ namespace MacroViewer
             SortInx = new int[n];
             if (cbHPKB.Checked)
                 HP_KB_find();
-            lbDropped.Text = "";
+            lbDroppedText = "";
             foreach(string s in keywords)
             {
                 if(s.Length == 1)
                 {
-                    if(!lbDropped.Text.Contains(s))
-                        lbDropped.Text += s + " ";
+                    if (!lbDroppedText.Contains(s))
+                        lbDroppedText +=s + ",";
                 }
             }
-            if(lbDropped.Text != "")lbDropped.Text = "Dropped from search: " + lbDropped.Text;
-            lbDropped.Visible = rbExactMatch.Checked || rbAnyMatch.Checked;
             SetMatchType();
             foreach (CBody cb in cAll)
             {
@@ -704,7 +719,7 @@ namespace MacroViewer
             }
             NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);
-            tbNumMatches.Text = cFound.Count.ToString();
+            gbFound.Text ="Words Found: " + cFound.Count.ToString();
             if(cFound.Count > 0)
             {
                 cbSelKey.Items.Clear();
@@ -734,18 +749,21 @@ namespace MacroViewer
 
         private void NotifyFinding(int cnt)
         {
-            if(cnt == 0)
+            string sMissing = "";
+            int i = 1;
+            int n = 0;
+            foreach(string s in keywords)
             {
-                lbTMinfo.Text = "Nothing found";
-                lbTMinfo.ForeColor = Color.Red;
-                tbNumMatches.Visible = false;
+                if((WhichMatch & i) == 0)
+                {
+                    if(lbDroppedText.Contains(s))
+                        sMissing += "(i) " + s;
+                    else sMissing+= s;
+                    sMissing += Environment.NewLine;
+                }
+                i = i << 1;
             }
-            else
-            {
-                lbTMinfo.Text = "Total Matches";
-                lbTMinfo.ForeColor = RestoreColor;
-                tbNumMatches.Visible = true;
-            }
+            tbMissing.Text = sMissing;
             gbAlltSearch.Visible = cnt==0 && cbOfferAlt.Checked;
             if (gbAlltSearch.Visible) SetFont(Reg10);
             else SetFont(Reg12);
@@ -865,11 +883,6 @@ namespace MacroViewer
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnS1_Click(object sender, EventArgs e)
-        {
-            RunSearch();
         }
 
         private void btnExitToMac_Click(object sender, EventArgs e)
@@ -1045,6 +1058,9 @@ namespace MacroViewer
         private void FormOnlyThisKey(int inx)
         {
             int i, j, n;
+            string sWhichKey = cbSelKey.SelectedItem.ToString();
+            int iFound = keywords.FindIndex(item => item == sWhichKey);
+            int iMask = 1 << iFound;
             aSorted.Clear();
             n = GetLastWhereUsed(SelectedRow);
             string[] sEach = cAll[n].fKeys.Trim().Split(new[] { "\n" }, StringSplitOptions.None);
@@ -1052,8 +1068,13 @@ namespace MacroViewer
             dgvSearched.DataSource = cSorted;
             if (inx == 0)
             {
-                tbNumMatches.Text = cSorted.Count.ToString();
+                gbFound.Text = "Words Found: " + cSorted.Count.ToString();
                 HasFiles = SaveHasFiles;
+                for (i = 0; i < n; i++)
+                {
+                    j = SortInx[i];
+                    cFound[j].bWanted = true;
+                }
                 return;
             }
             inx--;
@@ -1064,7 +1085,8 @@ namespace MacroViewer
                 cFound[j].bWanted = false;
                 if (inx > 0)
                 {
-                    if ((cFound[j].WhichMatch == (1 << (inx-1))))
+
+                    if ((cFound[j].WhichMatch & iMask) > 0)
                     {
                         aSorted.Add(cFound[j]);
                         cFound[j].bWanted = true;
@@ -1085,7 +1107,7 @@ namespace MacroViewer
             dgvSearched.RowEnter -= dgvSearched_RowEnter;
             dgvSearched.DataSource = aSorted;
             dgvSearched.RowEnter += dgvSearched_RowEnter;
-            tbNumMatches.Text = aSorted.Count.ToString();
+            gbFound.Text = "Words Found: " + aSorted.Count.ToString();
             aFilter = "key";
         }
 
@@ -1111,6 +1133,13 @@ namespace MacroViewer
         {
             FormOnlyThisKey(cbSelKey.SelectedIndex);
             FilesHaveMatch();
+        }
+
+        private void dgvSearched_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SortTable(e.ColumnIndex);
+            dgvSearched.Refresh();
+            return;
         }
     }
 }

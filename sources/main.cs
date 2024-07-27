@@ -1123,6 +1123,9 @@ namespace MacroViewer
             bs.Remove(bs.Current);
             bs.ResetBindings(false);
             lbName.RowEnter += lbName_RowEnter;
+            if (j == lbName.RowCount)
+                j--;
+            if (j < 0) j = 0;
             return j;
         }
 

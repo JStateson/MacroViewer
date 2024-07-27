@@ -426,7 +426,7 @@ namespace MacroViewer
             string sPattern = "";
             int i, n = keywords.Count;
             Regex regex;
-            MatchCollection allMatches;
+            MatchCollection allMatches = null ;
             for (i = 0; i < n; i++) KeyCount[i] = 0;
             i = 0;
             foreach (string keyword in keywords)
@@ -449,8 +449,15 @@ namespace MacroViewer
                     }
                 }
                 regex = new Regex(sPattern, cbIgnCase.Checked ? RegexOptions.IgnoreCase : RegexOptions.None);
+                // need to avoid metacharacters in search such as [] or [ 
 
-                allMatches = regex.Matches(text);
+                try
+                {
+                    allMatches = regex.Matches(text);
+                }
+                catch (Exception ex)
+                {
+                }
                 TotalMatches += allMatches.Count;
                 foreach (Match m in allMatches)
                 {

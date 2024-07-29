@@ -19,17 +19,20 @@ namespace MacroViewer.sources
     {
         public class cMyUrls
         {
+            private int n = 0;
             public class cUrls
             {
-                public string sHref;
-                public string sText;
-                public string sOrig;
-                public string sChanged;
-                public bool bChanged;
+                public string sOrigHref;
+                public string sOrigText;
+                public string sProposedH;
+                public string sProposedT;
+                public string sOrigResult;
+                public string sChangedResult;
                 public bool bIsImage;
             }
             public List<cUrls> UrlInfo;
             public string sText;
+            public string oText;
             public bool GetHT(string s, ref string sH, ref string sT)
             {
                 string sLC = s.ToLower();
@@ -49,33 +52,25 @@ namespace MacroViewer.sources
                 sT = s.Substring(i, j - i);
                 return true;
             }
-
-            public int UpdatePage()
+            
+            public string GetUpdated()
             {
-                int i = 0;
+                n = 0;
                 foreach(cUrls cu in UrlInfo)
                 {
-                    if(cu.bChanged)
-                    {
-                        sText = sText.Replace(cu.sOrig, cu.sChanged);
-                        i++;
-                    }
+                    sText = sText.Replace(Utils.strFill(n,8),cu.sChangedResult);
+                    n++;
                 }
-                return i;
+                return sText;
             }
 
-            public bool AnyChange(int n)
-            {
-                bool b = !(UrlInfo[n].sChanged == UrlInfo[n].sOrig);
-                UrlInfo[n].bChanged = b;
-                return b;
-            } 
-
             //<a is done here
+            // use 1111, 2222, etc to use as pattern to replace else might get duplicate replacments
             private void ProcessA(string sLC)
             {
                 int i = 0, j, k;
-
+                string sH = "";
+                string sT = "";
                 while (true)
                 {
                     j = sLC.IndexOf("<a", i);
@@ -84,18 +79,25 @@ namespace MacroViewer.sources
                     k = sLC.IndexOf("</a>", i);
                     Debug.Assert(k > 0);
                     k += 4;
-                    cUrls cu = new cUrls();
                     string t = sText.Substring(j, k - j);
-                    bool b = GetHT(t, ref cu.sHref, ref cu.sText);
+                    bool b = GetHT(t, ref sH, ref sT);
                     if (b)
                     {
-                        cu.sOrig = t;
-                        cu.sChanged = t;
-                        cu.bChanged = false;
+                        cUrls cu = new cUrls();
+                        cu.sOrigResult = t;
+                        cu.sChangedResult = t;
+                        i = sText.IndexOf(t);
+                        sText = Utils.ReplaceStringAtLoc(sText, n, i, t.Length);
+                        n++;
+                        cu.sProposedT = sT;
+                        cu.sOrigText = sT;
+                        cu.sProposedH = sH;
+                        cu.sOrigHref = sH;
                         cu.bIsImage = false;
                         UrlInfo.Add(cu);
                     }
-                    i = k;
+                    sLC = sText.ToLower();
+                    i = 0; // was k
                 }
             }
 
@@ -118,7 +120,8 @@ namespace MacroViewer.sources
             private void ProcessI(string sLC)
             {
                 int i = 0, j, k;
-
+                string sH = "";
+                string sT = "";
                 while (true)
                 {
                     j = sLC.IndexOf("<img ", i);
@@ -127,15 +130,20 @@ namespace MacroViewer.sources
                     k = sLC.IndexOf(">", i);
                     Debug.Assert(k > 0);
                     k++;
-                    cUrls cu = new cUrls();
                     string t = sText.Substring(j, k - j);
-                    cu.sText = "";
-                    bool b = GetSRC(t, ref cu.sHref);
+                    bool b = GetSRC(t, ref sH);
                     if (b)
                     {
-                        cu.sOrig = t;
-                        cu.sChanged = t;
-                        cu.bChanged = false;
+                        cUrls cu = new cUrls();
+                        cu.sOrigResult = t;
+                        cu.sChangedResult = t;
+                        i = sText.IndexOf(t);
+                        sText = Utils.ReplaceStringAtLoc(sText, n, i, t.Length);
+                        n++;
+                        cu.sProposedT = sT;
+                        cu.sOrigText = sT;
+                        cu.sProposedH = sH;
+                        cu.sOrigHref = sH;
                         cu.bIsImage = true;
                         UrlInfo.Add(cu);
                     }
@@ -146,6 +154,7 @@ namespace MacroViewer.sources
             {
                 UrlInfo = new List<cUrls>();
                 sText = s;
+                oText = s;
                 ProcessA(s.ToLower());
                 ProcessI(s.ToLower());
             }
@@ -155,12 +164,14 @@ namespace MacroViewer.sources
         public cMyUrls mU;
         public int nSelectedM = -1;
         string sLBatext;
-        string sLBimage;
+        Color lbFC;
+        string sLBimage = "Image Options";
         string[] sImgOpt;
+        public bool bIsImage = false;
         public EditOldUrls(string rText)
         {
             InitializeComponent();
-            sLBatext = lbText.Text;
+
             sImgOpt = Utils.sDifSiz.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             for(int i = 0; i < sImgOpt.Length; i++)
             {
@@ -175,19 +186,17 @@ namespace MacroViewer.sources
             }
             cbMacroList.SelectedIndex = mU.UrlInfo.Count > 0 ? 0 : -1;
             nSelectedM = cbMacroList.SelectedIndex;
-        }
-
-        private void AnyChange()
-        {
-            lbChanged.Visible = mU.AnyChange(nSelectedM);
+            sLBatext = gbText.Text;
+            lbFC = lbChanged.ForeColor;
         }
 
         private void ShowImgTip()
         {
-            lbText.Text = sLBatext;
+            gbText.Text = sLBatext;
+            bIsImage = false;
             if (mU.UrlInfo[nSelectedM].bIsImage)
             {
-                if (mU.UrlInfo[nSelectedM].sHref.Contains(Utils.sIsAlbum))
+                if (mU.UrlInfo[nSelectedM].sOrigHref.Contains(Utils.sIsAlbum))
                 {
                     string s = "Put just before the quote \" delimiter below" + Environment.NewLine;
                     for (int i = 0; i < sImgOpt.Length; i++)
@@ -195,8 +204,10 @@ namespace MacroViewer.sources
                         s+= sImgOpt[i] + Environment.NewLine;
                     }
                     tbT.Text = s;
-                    lbText.Text = "Image options:";
+                    gbText.Text = "Image options:";
                 }
+                tbT.Text = "No HP options this image";
+                bIsImage = true;
             }
         }
 
@@ -205,15 +216,15 @@ namespace MacroViewer.sources
             nSelectedM = cbMacroList.SelectedIndex;
             if (nSelectedM >= 0)
             {
-                tbT.Text = mU.UrlInfo[nSelectedM].sText;
-                tbH.Text = mU.UrlInfo[nSelectedM].sHref;
-                tbResult.Text = mU.UrlInfo[nSelectedM].sChanged;
+                tbT.Text = mU.UrlInfo[nSelectedM].sProposedT;
+                tbH.Text = mU.UrlInfo[nSelectedM].sProposedH;
+                tbResult.Text = mU.UrlInfo[nSelectedM].sChangedResult;
                 tbT.ReadOnly = mU.UrlInfo[nSelectedM].bIsImage;
                 if(mU.UrlInfo[nSelectedM].bIsImage)
                 {
                     tbT.ReadOnly = true;
                 }
-                AnyChange();
+                ShowChange();
                 ShowImgTip();
             }
         }
@@ -223,48 +234,69 @@ namespace MacroViewer.sources
             Utils.ShowPageInBrowser("",tbResult.Text);
         }
 
+        private void ShowChange()
+        {
+            string sC = mU.UrlInfo[nSelectedM].sChangedResult;
+            string sO = mU.UrlInfo[nSelectedM].sOrigResult;
+            if (tbResult.Text == sO)
+            {
+                lbChanged.Text = "URL not changed";
+                lbChanged.ForeColor = btnCancelExit.ForeColor;
+
+            }
+            else
+            { 
+                if(tbResult.Text == sC) lbChanged.Text = "Changed URL saved";
+                else lbChanged.Text = "URL not saved";
+                lbChanged.ForeColor = lbFC;
+            }
+        }
+
         private void btnCancelChg_Click(object sender, EventArgs e)
         {
             if(nSelectedM >= 0)
             {
-                tbT.Text = mU.UrlInfo[nSelectedM].sText;
-                tbH.Text = mU.UrlInfo[nSelectedM].sHref;
-                tbResult.Text = mU.UrlInfo[nSelectedM].sOrig;
-                mU.UrlInfo[nSelectedM].sChanged = mU.UrlInfo[nSelectedM].sOrig;
-                lbChanged.Visible = false;
+                tbT.Text = mU.UrlInfo[nSelectedM].sOrigText;
+                tbH.Text = mU.UrlInfo[nSelectedM].sOrigHref;
+                tbResult.Text = mU.UrlInfo[nSelectedM].sOrigResult;
+                mU.UrlInfo[nSelectedM].sChangedResult = tbResult.Text;
+                ShowChange();
             }
 
         }
 
-        private void btnFormChg_Click(object sender, EventArgs e)
+        private void FormChange()
         {
-            if(nSelectedM >= 0)
+            if (nSelectedM >= 0)
             {
-                string s = mU.UrlInfo[nSelectedM].sOrig;
-                s = s.Replace(mU.UrlInfo[nSelectedM].sHref, tbH.Text);
-                if (!mU.UrlInfo[nSelectedM].bIsImage)
-                    s = s.Replace(mU.UrlInfo[nSelectedM].sText, tbT.Text);
+                string s = "";
+                if (bIsImage)
+                {
+                    s = Utils.AssembleIMG(tbH.Text);
+                }
+                else
+                {
+                    s = Utils.FormUrl(tbH.Text, tbT.Text);
+                }
                 tbResult.Text = s;
-                Utils.SyntaxTest(s);
-                AnyChange();
             }
+            ShowChange();
+        }
+
+        private void SaveChange()
+        {
+            mU.UrlInfo[nSelectedM].sChangedResult = tbResult.Text;
+            ShowChange();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(nSelectedM >= 0)
-            {
-                mU.UrlInfo[nSelectedM].sChanged = tbResult.Text;
-            }
-            AnyChange();
+            SaveChange();
         }
 
         private void btnApplyExit(object sender, EventArgs e)
         {
-            if(mU.UpdatePage() > 0)
-            {
-                strResultOut = mU.sText;
-            }
+            strResultOut = mU.GetUpdated();
             this.Close();
         }
 
@@ -272,6 +304,32 @@ namespace MacroViewer.sources
         {
             strResultOut = "";
             this.Close();
+        }
+
+
+        private void btnClrH_Click(object sender, EventArgs e)
+        {
+            tbH.Text = "";
+        }
+
+        private void btnCanH_Click(object sender, EventArgs e)
+        {
+            tbH.Text = mU.UrlInfo[nSelectedM].sOrigHref;          
+        }
+
+        private void btnClrT_Click(object sender, EventArgs e)
+        {
+            tbT.Text = "";
+        }
+
+        private void btnCanT_Click(object sender, EventArgs e)
+        {
+            tbT.Text = mU.UrlInfo[nSelectedM].sOrigText;
+        }
+
+        private void btnForm_Click(object sender, EventArgs e)
+        {
+            FormChange();
         }
     }
 }

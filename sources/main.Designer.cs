@@ -151,6 +151,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.mnPhAlbum = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -1030,21 +1031,21 @@
             // mnuImgSig
             // 
             this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(153, 22);
+            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
             this.mnuImgSig.Text = "Image & Sig";
             this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
             // 
             // mnuEmoji
             // 
             this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(153, 22);
+            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
             this.mnuEmoji.Text = "Emoji";
             this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
             // 
             // mnuCCodes
             // 
             this.mnuCCodes.Name = "mnuCCodes";
-            this.mnuCCodes.Size = new System.Drawing.Size(153, 22);
+            this.mnuCCodes.Size = new System.Drawing.Size(180, 22);
             this.mnuCCodes.Text = "Country Codes";
             this.mnuCCodes.Click += new System.EventHandler(this.mnuCCodes_Click);
             // 
@@ -1166,6 +1167,7 @@
             this.desktopKBToolStripMenuItem1,
             this.desktopKBToolStripMenuItem2,
             this.gaminToolStripMenuItem,
+            this.mnPhAlbum,
             this.toolStripSeparator3,
             this.allToolStripMenuItem,
             this.toolStripSeparator4,
@@ -1177,52 +1179,52 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuAskQ
             // 
             this.mnuAskQ.Name = "mnuAskQ";
-            this.mnuAskQ.Size = new System.Drawing.Size(144, 22);
+            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
             this.mnuAskQ.Text = "Ask Question";
             this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
@@ -1400,6 +1402,13 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // mnPhAlbum
+            // 
+            this.mnPhAlbum.Name = "mnPhAlbum";
+            this.mnPhAlbum.Size = new System.Drawing.Size(180, 22);
+            this.mnPhAlbum.Text = "Photo Album";
+            this.mnPhAlbum.Click += new System.EventHandler(this.mnPhAlbum_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1564,6 +1573,7 @@
         private System.Windows.Forms.DataGridView lbName;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button btnCopyEmail;
+        private System.Windows.Forms.ToolStripMenuItem mnPhAlbum;
     }
 }
 

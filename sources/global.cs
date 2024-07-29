@@ -486,6 +486,18 @@ namespace MacroViewer
             return sIN;
         }
 
+        public static string ReplaceStringAtLoc(string original, int iFiller, int startIndex, int length)
+        {
+            if (startIndex < 0 || startIndex >= original.Length || startIndex + length > original.Length)
+            {
+                throw new ArgumentOutOfRangeException("startIndex or length is out of range.");
+            }
+            string replacement = strFill(iFiller, 8);
+            string before = original.Substring(0, startIndex);
+            string after = original.Substring(startIndex + length);
+
+            return before + replacement + after;
+        }
 
         // adjust i and j so that they do not contains any leading or trailing spaces
         // i is start position, k is length of string
@@ -830,6 +842,16 @@ namespace MacroViewer
                     break;
             }
         }
+
+        public static void ShowMyPhotoAlbum()
+        {
+            string UserID = Utils.VolunteerUserID;
+            string PhotoGallery;
+            if (UserID == "") PhotoGallery = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/personal-profile:personal-info";
+            else PhotoGallery = "https://h30434.www3.hp.com/t5/media/gallerypage/user-id/" + UserID + "/tab/albums";
+            LocalBrowser(PhotoGallery);
+        }
+
         public static int CountSetBits(int n)
         {
             int count = 0;

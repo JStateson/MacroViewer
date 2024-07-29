@@ -2831,6 +2831,10 @@ namespace MacroViewer
             
         }
 
+        private void mnPhAlbum_Click(object sender, EventArgs e)
+        {
+            Utils.ShowMyPhotoAlbum();
+        }
     }
     
 }

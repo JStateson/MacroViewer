@@ -98,14 +98,7 @@ namespace MacroViewer
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            //https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/all
-            //https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/albums
-            string UserID = Utils.VolunteerUserID;
-            string PhotoGallery;
-            if (UserID == "") PhotoGallery = "https://h30434.www3.hp.com/t5/user/myprofilepage/tab/personal-profile:personal-info";
-            else PhotoGallery = "https://h30434.www3.hp.com/t5/media/gallerypage/user-id/" + UserID + "/tab/albums";
-            //string PhotoGallery = "https://h30434.www3.hp.com/t5/media/gallerypage/user-id/2126190/tab/albums";
-            Utils.LocalBrowser(PhotoGallery);
+            Utils.ShowMyPhotoAlbum();
         }
 
         private void btnBrowseImage_Click(object sender, EventArgs e)

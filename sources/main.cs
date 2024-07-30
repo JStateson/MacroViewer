@@ -33,6 +33,7 @@ using System.Globalization;
 using System.Data;
 using MacroViewer.sources;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 
 namespace MacroViewer
@@ -78,6 +79,8 @@ namespace MacroViewer
         public List<dgvStruct> HPDataTable; // from reading the HP HTTP file
         public BindingSource bs = new BindingSource();
         private bool bHasLocal = false;  // set to true if a local image file path is present in the macro
+        public cDupHTTP DupHTTP;
+
         public main()
         {
             InitializeComponent();
@@ -757,7 +760,6 @@ namespace MacroViewer
 
         private void ShowBodyFromSelected()
         {
-            //Debug.Assert(Body[CurrentRowSelected] != null, "Null edit body");
             if (DataTable[CurrentRowSelected].sBody == null)
             {
                 DataTable[CurrentRowSelected].sBody = ""; // have named macro but not body so create empty one
@@ -766,6 +768,7 @@ namespace MacroViewer
             else tbBody.Text = DataTable[CurrentRowSelected].sBody.Replace("<br>", Environment.NewLine);
             tbBodyChecksumN = xMacroChanges.CalculateChecksum(tbBody.Text);
             tbBodyChecksumB = true;
+            lbName.Rows[CurrentRowSelected].Selected = true;
         }
 
         private void ShowSelectedRow(int e)
@@ -1118,7 +1121,7 @@ namespace MacroViewer
 
         private int RemoveMacro()
         {
-            int j = CurrentRowSelected;
+           int j = CurrentRowSelected;
             lbName.RowEnter -= lbName_RowEnter;
             bs.Remove(bs.Current);
             bs.ResetBindings(false);
@@ -2834,6 +2837,39 @@ namespace MacroViewer
         private void mnPhAlbum_Click(object sender, EventArgs e)
         {
             Utils.ShowMyPhotoAlbum();
+        }
+
+        private void mnuLShowDups_Click(object sender, EventArgs e)
+        {
+            cDupHTTP DupHTTP = new cDupHTTP();
+            cBodies = null;
+            Utils.TotalNumberMacros = LoadAllFiles();
+            foreach (CBody cb in cBodies)
+            {
+                int n = DupHTTP.AddN(cb.File, cb.Number, cb.sBody);
+                int i = Utils.LocalMacroIndexOf(cb.File);
+                DupHTTP.nHyper[i] += n;
+            }
+            ShowDups sd = new ShowDups(ref DupHTTP, ref cBodies);
+            sd.ShowDialog();
+            if(sd.strFN != "")
+            {
+                LoadFromTXT(sd.strFN);
+                ShowUneditedRow(sd.iMN);
+            }
+            sd.Dispose();
+        }
+
+        private void lbName_SelectionChanged(object sender, EventArgs e)
+        {
+            if (lbName.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = lbName.SelectedRows[0].Index;
+                if (selectedRowIndex >= 0 && selectedRowIndex < bs.Count)
+                {
+                    bs.Position = selectedRowIndex;
+                }
+            }
         }
     }
     

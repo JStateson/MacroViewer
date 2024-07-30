@@ -206,20 +206,24 @@ namespace MacroViewer
                 }
             }
         }
-        private void AddSelButtons()
+
+        private void AddSelButtons(ref GroupBox gb, int iDir)
         {
             int i = 0;
             int x = 2, y = 18;
-            gbSelect.Controls.Clear();
+            gb.Controls.Clear();
             foreach (string s in Utils.LocalMacroPrefix)
             {
                 Button btn = new Button();
                 btn.Text = s;
                 btn.Width = 50;
                 btn.Height = 30;
-                btn.Location = new System.Drawing.Point(x + i*(btn.Width + 10), y);
+                if (iDir == 1)
+                    btn.Location = new System.Drawing.Point(x + i * (btn.Width + 10), y);
+                else
+                    btn.Location = new System.Drawing.Point(x, y + i * (btn.Width + 10));
                 btn.Enabled = FileFound(s);
-                gbSelect.Controls.Add(btn);
+                gb.Controls.Add(btn);
                 btn.Click += Btn_Click;
                 if (i == 0) fDark = btn.ForeColor;
                 i++;
@@ -863,7 +867,7 @@ namespace MacroViewer
             gbSelect.Visible = TotalMatches > 0;
             if(TotalMatches > 0)
             {
-                AddSelButtons();
+                AddSelButtons(ref gbSelect, 1); // +1 is to the right
             }
         }
 

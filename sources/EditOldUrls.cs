@@ -97,7 +97,7 @@ namespace MacroViewer.sources
                         UrlInfo.Add(cu);
                     }
                     sLC = sText.ToLower();
-                    i = 0; // was k
+                    i = 0;
                 }
             }
 
@@ -147,7 +147,8 @@ namespace MacroViewer.sources
                         cu.bIsImage = true;
                         UrlInfo.Add(cu);
                     }
-                    i = k;
+                    sLC = sText.ToLower();
+                    i = 0;
                 }
             }
             public void Init(string s)
@@ -206,7 +207,7 @@ namespace MacroViewer.sources
                     tbT.Text = s;
                     gbText.Text = "Image options:";
                 }
-                tbT.Text = "No HP options this image";
+                else tbT.Text = "No HP options this image";
                 bIsImage = true;
             }
         }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -23,6 +22,7 @@ using System.Net.NetworkInformation;
 using System.Linq.Expressions;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.AxHost;
+using static MacroViewer.main;
 
 namespace MacroViewer
 {
@@ -389,11 +389,13 @@ namespace MacroViewer
         }
     }
 
+
+
         // to add additional macro pages you need to mod the above cms to add an neXX and the below
         // and add a specific file opening if desired to have it in the menu dropdown
     public static class Utils
     {
-        private const int iNMacros = 13;
+        public const int iNMacros = 13;
         public const int NumMacros = 999;
         public static int HPmaxNumber = 40;  // some users may have more!
         public static int nLongestExpectedURL = 256;
@@ -477,6 +479,17 @@ namespace MacroViewer
         public static string SolButton = "<img src=\"https://h30467.www3.hp.com/t5/image/serverpage/image-id/71236i432711946C879F03/image-dimensions/129x32?v=v2\">";
         public static string AllAlphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxya";
         public static string[] sPossibleLanguageOption = { "-16\" target=", "-16?openCLC=true\" target=" };
+        public static int LocalMacroIndexOf(string s)
+        {
+            int n = 0;
+            foreach(string t in LocalMacroPrefix)
+            {
+                if (t == s) break;
+                n++;
+            }
+            return n;
+        }
+
         public static string AddLanguageOption(string sIN)
         {
             if (sIN.IndexOf(sPossibleLanguageOption[0] ) != -1)
@@ -1534,6 +1547,93 @@ namespace MacroViewer
             sBody = sb;
         }
     }
+
+    public class cnDups
+    {
+        public string sFN_N;  // filename and number
+        public string sUrl; // duplicate uri
+    }
+    public class cDupHTTP
+    {
+        public List<cnDups> nDups = new List<cnDups>();
+        public List<string> sUrls = new List<string>();
+        public int[] nHyper = new int[Utils.iNMacros];
+        private List<string> GetHTTP(string sIn)
+        {
+            string sLC = sIn.ToLower();
+            List<string> sOut = new List<string>();
+            int i, j, k;
+            i = sLC.IndexOf("http");
+            if (i == -1) return sOut;
+            i--;
+            while (i >= 0)
+            {
+                string s = sLC.Substring(i, 1);    // terminator character quote, double quote, or >
+                if (s == ">") s = "<";
+                j = sLC.IndexOf(s, i + 1);  // ending terminator
+                                            // <br> may note have an ending < so use endof string
+                if (j == -1)
+                {
+                    s = sIn.Substring(i + 1, sLC.Length - i - 1);
+                    sOut.Add(s);
+                    return sOut;
+                }
+                k = j - i;
+                s = sIn.Substring(i + 1, k - 1);
+                sOut.Add(s);
+                k = i + k;
+                i = sLC.IndexOf("http", k);
+                i--;
+            }
+            return sOut;
+        }
+        public int AddN(string sFN, string sMN, string sBody)
+        {
+            List<string> nList = GetHTTP(sBody);
+            string t = sFN + "-" + sMN;
+            int n = 0;
+            foreach (string s in nList)
+            {
+
+                if (sUrls.Contains(s))
+                {
+                    n++;
+                    if (nDups.Count == 0)
+                    {
+                        cnDups cn = new cnDups();
+                        cn.sFN_N = t;
+                        cn.sUrl = s;
+                        nDups.Add(cn);
+                    }
+                    else
+                    {
+                        cnDups cn;
+                        bool bAdd = true;
+                        for (int i = 0; i < nDups.Count; i++)
+                        {
+                            cn = nDups[i];
+                            if (cn.sUrl == s)
+                            {
+                                cn.sFN_N += " " + t;
+                                bAdd = false;
+                                break;
+                            }
+                        }
+                        if (bAdd)
+                        {
+                            cn = new cnDups();
+                            cn.sFN_N = t;
+                            cn.sUrl = s;
+                            nDups.Add(cn);
+                        }
+                    }
+                }
+                else sUrls.Add(s);
+            }
+            return n;
+        }
+    }
+
 
     internal class CSendCloud
     {

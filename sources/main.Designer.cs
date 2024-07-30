@@ -107,6 +107,7 @@
             this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLCnT = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoveLocalImgs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLShowDups = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mMoveMacro = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,6 +133,7 @@
             this.desktopKBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.desktopKBToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gaminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnPhAlbum = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -151,7 +153,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.mnPhAlbum = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -189,6 +190,7 @@
             this.lbName.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_CellDoubleClick);
             this.lbName.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lbName_CellMouseClick);
             this.lbName.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lbName_RowEnter);
+            this.lbName.SelectionChanged += new System.EventHandler(this.lbName_SelectionChanged);
             // 
             // btnGo
             // 
@@ -978,7 +980,8 @@
             // 
             this.utilsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuLCnT,
-            this.mnuRemoveLocalImgs});
+            this.mnuRemoveLocalImgs,
+            this.mnuLShowDups});
             this.utilsToolStripMenuItem.Name = "utilsToolStripMenuItem";
             this.utilsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.utilsToolStripMenuItem.Text = "Utils";
@@ -996,6 +999,13 @@
             this.mnuRemoveLocalImgs.Size = new System.Drawing.Size(220, 22);
             this.mnuRemoveLocalImgs.Text = "Manage local images";
             this.mnuRemoveLocalImgs.Click += new System.EventHandler(this.mnuRemoveLocalImgs_Click);
+            // 
+            // mnuLShowDups
+            // 
+            this.mnuLShowDups.Name = "mnuLShowDups";
+            this.mnuLShowDups.Size = new System.Drawing.Size(220, 22);
+            this.mnuLShowDups.Text = "Analyze Duplicates";
+            this.mnuLShowDups.Click += new System.EventHandler(this.mnuLShowDups_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1031,21 +1041,21 @@
             // mnuImgSig
             // 
             this.mnuImgSig.Name = "mnuImgSig";
-            this.mnuImgSig.Size = new System.Drawing.Size(180, 22);
+            this.mnuImgSig.Size = new System.Drawing.Size(153, 22);
             this.mnuImgSig.Text = "Image & Sig";
             this.mnuImgSig.Click += new System.EventHandler(this.mnuImgSig_Click);
             // 
             // mnuEmoji
             // 
             this.mnuEmoji.Name = "mnuEmoji";
-            this.mnuEmoji.Size = new System.Drawing.Size(180, 22);
+            this.mnuEmoji.Size = new System.Drawing.Size(153, 22);
             this.mnuEmoji.Text = "Emoji";
             this.mnuEmoji.Click += new System.EventHandler(this.mnuEmoji_Click);
             // 
             // mnuCCodes
             // 
             this.mnuCCodes.Name = "mnuCCodes";
-            this.mnuCCodes.Size = new System.Drawing.Size(180, 22);
+            this.mnuCCodes.Size = new System.Drawing.Size(153, 22);
             this.mnuCCodes.Text = "Country Codes";
             this.mnuCCodes.Click += new System.EventHandler(this.mnuCCodes_Click);
             // 
@@ -1179,52 +1189,59 @@
             // printerKBToolStripMenuItem
             // 
             this.printerKBToolStripMenuItem.Name = "printerKBToolStripMenuItem";
-            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printerKBToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.printerKBToolStripMenuItem.Text = "Printer KB";
             this.printerKBToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem1
             // 
             this.desktopKBToolStripMenuItem1.Name = "desktopKBToolStripMenuItem1";
-            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
             this.desktopKBToolStripMenuItem1.Text = "Notebook KB";
             this.desktopKBToolStripMenuItem1.Click += new System.EventHandler(this.HPWS_click);
             // 
             // desktopKBToolStripMenuItem2
             // 
             this.desktopKBToolStripMenuItem2.Name = "desktopKBToolStripMenuItem2";
-            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.desktopKBToolStripMenuItem2.Size = new System.Drawing.Size(145, 22);
             this.desktopKBToolStripMenuItem2.Text = "Desktop KB";
             this.desktopKBToolStripMenuItem2.Click += new System.EventHandler(this.HPWS_click);
             // 
             // gaminToolStripMenuItem
             // 
             this.gaminToolStripMenuItem.Name = "gaminToolStripMenuItem";
-            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gaminToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.gaminToolStripMenuItem.Text = "Gaming KB";
             this.gaminToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
+            // 
+            // mnPhAlbum
+            // 
+            this.mnPhAlbum.Name = "mnPhAlbum";
+            this.mnPhAlbum.Size = new System.Drawing.Size(145, 22);
+            this.mnPhAlbum.Text = "Photo Album";
+            this.mnPhAlbum.Click += new System.EventHandler(this.mnPhAlbum_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(142, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.allToolStripMenuItem.Text = "All recent";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.HPWS_click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(142, 6);
             // 
             // mnuAskQ
             // 
             this.mnuAskQ.Name = "mnuAskQ";
-            this.mnuAskQ.Size = new System.Drawing.Size(180, 22);
+            this.mnuAskQ.Size = new System.Drawing.Size(145, 22);
             this.mnuAskQ.Text = "Ask Question";
             this.mnuAskQ.Click += new System.EventHandler(this.mnuAskQ_Click);
             // 
@@ -1402,13 +1419,6 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // mnPhAlbum
-            // 
-            this.mnPhAlbum.Name = "mnPhAlbum";
-            this.mnPhAlbum.Size = new System.Drawing.Size(180, 22);
-            this.mnPhAlbum.Text = "Photo Album";
-            this.mnPhAlbum.Click += new System.EventHandler(this.mnPhAlbum_Click);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1574,6 +1584,7 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button btnCopyEmail;
         private System.Windows.Forms.ToolStripMenuItem mnPhAlbum;
+        private System.Windows.Forms.ToolStripMenuItem mnuLShowDups;
     }
 }
 

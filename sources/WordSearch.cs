@@ -68,6 +68,87 @@ namespace MacroViewer
             }
         }
 
+
+
+        private class cTitleInfo
+        {
+            public class cTitleData
+            {
+                public int LocInCBody;
+                public int NumKeys;
+                public string sTitle;
+            }
+            public int[] nSorted;
+            public List<cTitleData> ctd;
+            public void Init()
+            {
+                ctd = new List<cTitleData>();
+                ctd.Clear();
+            }
+            
+            public int DoSort()
+            {
+                int n = ctd.Count;
+                if (n > 0)
+                {
+                    nSorted = new int[n];
+                    int[] nUnsorted = new int[n];
+                    for (int i = 0; i < n; i++)
+                    {
+                        nSorted[i] = i;
+                        nUnsorted[i] = ctd[i].NumKeys;
+                    }
+                    RunSort(n, true, ref nSorted, ref nUnsorted);
+                }
+                return n;
+            }
+            
+            public string GetName(int i)
+            {
+                if(i < ctd.Count)
+                {
+                    return ctd[nSorted[i]].sTitle;
+                }
+                return "";
+            }
+            private void nInsert(int nLocMacro, string s)
+            {
+                cTitleData td;
+                int n = ctd.Count;
+                if (n == 0)
+                {
+                    td = new cTitleData();
+                    td.LocInCBody = nLocMacro;
+                    td.sTitle = s;
+                    td.NumKeys = 1;
+                    ctd.Add(td);
+                    return;
+                }
+                for(int i = 0; i < ctd.Count; i++)
+                {
+                    if (ctd[i].LocInCBody == nLocMacro)
+                    {
+                        ctd[i].NumKeys++;
+                        return;
+                    }
+                }
+                td = new cTitleData();
+                td.LocInCBody = nLocMacro;
+                td.sTitle = s;
+                td.NumKeys = 1;
+                ctd.Add(td);
+            }
+            public void Search( int i, string sName, string sKey)
+            {
+                if(sName.ToLower().Contains(sKey.ToLower()))
+                {
+                    nInsert(i, sName);
+                }
+            }
+
+        }
+
+
         private int SelectedRow = 0;
         private List<cRefURLs> RefUrls = new List<cRefURLs>();
         private List<CFound> cFound = new List<CFound>();
@@ -84,6 +165,7 @@ namespace MacroViewer
         public string NewItemName { get; set; }
         public string NewItemID { get; set; }
         int nUseLastViewed = -1;
+        int mUseLastViewed = -1;
         private bool TriedFailed = false;
         private int[] cWidth = new int[3] { 48, 64, 64 }; // last was 316 but now using fill
         private int[] Unsorted;
@@ -110,6 +192,7 @@ namespace MacroViewer
         private static string LastSearchParam = "";
         private cMacroChanges MViews;
         private string lbDroppedText = "";
+        private cTitleInfo cTI;
 
         public WordSearch(ref List<CBody> Rcb, bool bAllowChangeExit, ref cMacroChanges rMViews)
         {
@@ -125,7 +208,7 @@ namespace MacroViewer
             Reg10 = gbAlltSearch.Font;
             fBlue = btnSearch.ForeColor;
             MViews = rMViews;
-
+            cTI = new cTitleInfo();
             CountryCodes = Properties.Resources.Sorted_Raw_List.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             InRepeatMode();
         }
@@ -157,6 +240,36 @@ namespace MacroViewer
                     break;
             }
         }
+
+        public static void RunSort(int n, bool Descending, ref int[] SI, ref int[] US)
+        {
+            int a, b;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - 1 - i; j++)
+                {
+                    a = SI[j];
+                    b = SI[j + 1];
+                    if (Descending)
+                    {
+                        if (US[a] < US[b])
+                        {
+                            SI[j] = SI[j + 1];
+                            SI[j + 1] = a;
+                        }
+                    }
+                    else
+                    {
+                        if (US[a] > US[b])
+                        {
+                            SI[j] = SI[j + 1];
+                            SI[j + 1] = a;
+                        }
+                    }
+                }
+            }
+        }
+
 
         private void InRepeatMode()
         {
@@ -400,6 +513,8 @@ namespace MacroViewer
         private void dgvSearched_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             SelectedRow = e.RowIndex;
+            btnExitToMac.Enabled = true;
+            btnExitTitle.Enabled = false;
             if (SelectedRow < 0)
             {
                 SortTable(e.ColumnIndex);
@@ -425,8 +540,9 @@ namespace MacroViewer
             return false;
         }
 
-        private string PerformSearch(string text, string sMacID)
+        private string PerformSearch(int iBody, string sName, string sBody, string sMacID)
         {
+            string text = sName + sBody;
             string strRtn = "";
             string sTmp = "";
             string sPattern = "";
@@ -439,7 +555,9 @@ namespace MacroViewer
             {
                 if (keyword.Length > 1)
                 {
-                    
+
+                 cTI.Search(iBody, sName, keyword);
+
                 if(keyword.Contains(" ") || rbEPhrase.Checked)
                 {
                     sPattern = $@"\b{Regex.Escape(keyword)}\b";
@@ -503,33 +621,19 @@ namespace MacroViewer
             return HasFiles.Contains(s) ;
         }
 
-        private void RunSort(int n, bool Descending)
+ 
+        private string RemoveSurroundQuotes(string s)
         {
-            int a,b;
-            for (int i = 0; i < n - 1; i++)
+            int n = s.Length-1;
+            string t = s.Substring(0,1);
+            if(t == "\"" || t == "'")
             {
-                for (int j = 0; j < n - 1 - i; j++)
+                if(t == s.Substring(n,1))
                 {
-                    a = SortInx[j];
-                    b = SortInx[j + 1];
-                    if(Descending)
-                    {
-                        if (Unsorted[a] < Unsorted[b])
-                        {
-                            SortInx[j] = SortInx[j + 1];
-                            SortInx[j + 1] = a;
-                        }
-                    }
-                    else
-                    {
-                        if (Unsorted[a] > Unsorted[b])
-                        {
-                            SortInx[j] = SortInx[j + 1];
-                            SortInx[j + 1] = a;
-                        }
-                    }
+                    return s.Substring(1, n - 1);
                 }
             }
+            return s;
         }
 
 
@@ -575,7 +679,7 @@ namespace MacroViewer
             List <string> CandidateItems = new List<string>();
             foreach (Match match in Regex.Matches(input, pattern))
             {
-                CandidateItems.Add(match.Value);
+                CandidateItems.Add(RemoveSurroundQuotes(match.Value));
             }
             keywords = CandidateItems.Distinct().ToList();
             if (keywords.Count != CandidateItems.Count)
@@ -603,6 +707,7 @@ namespace MacroViewer
 
         private void RunSearch()
         {
+            int iBody = 0;
             string sBetter = "";
             cFound.Clear();
             cSorted.Clear();
@@ -644,7 +749,11 @@ namespace MacroViewer
             if (cbHPKB.Checked)
                 HP_KB_find();
             lbDroppedText = "";
-            foreach(string s in keywords)
+
+            cTI.Init();
+            lbTitleSearch.Items.Clear();
+
+            foreach (string s in keywords)
             {
                 if(s.Length == 1)
                 {
@@ -663,7 +772,8 @@ namespace MacroViewer
                     RefUrls.Add(cr);
                     sPrN = "";  // RF does not need to have the name searched unlike all other macro information.
                 }
-                string sKeys = PerformSearch(sPrN + cb.sBody,cb.File);  // eg: do not include "support" for RF
+                string sKeys = PerformSearch(iBody, sPrN, cb.sBody,cb.File);  // eg: do not include "support" for RF
+                iBody++;
                 if (sKeys != "")
                 {
                     n = 0;
@@ -724,6 +834,7 @@ namespace MacroViewer
             NotifyFinding(CFcnt);
             RunMacSort(CFcnt, true);
             gbFound.Text ="Words Found: " + cFound.Count.ToString();
+            ShowTitles();
             if(cFound.Count > 0)
             {
                 cbSelKey.Items.Clear();
@@ -842,7 +953,7 @@ namespace MacroViewer
             if (CFcnt == 0) return;
             //dgvSearched.RowEnter -= dgvSearched_RowEnter;
             cSorted.Clear();
-            RunSort(CFcnt, Descending);
+            RunSort(CFcnt, Descending, ref SortInx, ref Unsorted);
             n = cFound.Count;
             SelectedFile = "";
             for (i = 0; i < n; i++)
@@ -1144,6 +1255,35 @@ namespace MacroViewer
             SortTable(e.ColumnIndex);
             dgvSearched.Refresh();
             return;
+        }
+
+        private void lbTitleSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnExitToMac.Enabled = false;
+            btnExitTitle.Enabled = true;
+            int n = cTI.nSorted[lbTitleSearch.SelectedIndex];
+            mUseLastViewed = cTI.ctd[n].LocInCBody;
+        }
+
+        private void lbTitleSearch_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string strTemp = cAll[mUseLastViewed].sBody;
+            Utils.ShowPageInBrowser("", strTemp);
+        }
+
+        private void btnExitTitle_Click(object sender, EventArgs e)
+        {
+            LastViewed = mUseLastViewed;
+            this.Close();
+        }
+
+        private void ShowTitles()
+        {
+            int n = cTI.DoSort();
+            for (int i = 0; i <n; i++)
+            {
+                lbTitleSearch.Items.Add(cTI.GetName(i));
+            }
         }
     }
 }

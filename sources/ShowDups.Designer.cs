@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gbDup = new System.Windows.Forms.GroupBox();
+            this.btnExitEdit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbMacroID = new System.Windows.Forms.ListBox();
@@ -40,7 +41,6 @@
             this.tbGoTo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbSelect = new System.Windows.Forms.GroupBox();
-            this.btnExitEdit = new System.Windows.Forms.Button();
             this.btnImage = new System.Windows.Forms.Button();
             this.btnNS = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -62,6 +62,17 @@
             this.gbDup.TabStop = false;
             this.gbDup.Text = "Files Duplicated";
             // 
+            // btnExitEdit
+            // 
+            this.btnExitEdit.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnExitEdit.Location = new System.Drawing.Point(197, 307);
+            this.btnExitEdit.Name = "btnExitEdit";
+            this.btnExitEdit.Size = new System.Drawing.Size(104, 23);
+            this.btnExitEdit.TabIndex = 12;
+            this.btnExitEdit.Text = "Exit to Macro";
+            this.btnExitEdit.UseVisualStyleBackColor = true;
+            this.btnExitEdit.Click += new System.EventHandler(this.btnExitEdit_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -69,11 +80,11 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label3.Location = new System.Drawing.Point(194, 114);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 128);
+            this.label3.Size = new System.Drawing.Size(157, 128);
             this.label3.TabIndex = 11;
             this.label3.Text = "Duplicates in a page are\r\nshown in parenthesis.\r\nDuplicates are counted\r\nin pairs" +
-    " so 3 duplicates\r\nmean there are 3 pairs of\r\nidentical URLs consider\r\nreplacing " +
-    "a URL with a\r\nClick Me text.";
+    " so 3 duplicates\r\nmean there are 3 pairs of\r\nidentical URLs.  Consider\r\nreplacin" +
+    "g a URL with a\r\nClick Me text.";
             // 
             // label2
             // 
@@ -164,17 +175,6 @@
             this.gbSelect.TabIndex = 8;
             this.gbSelect.TabStop = false;
             this.gbSelect.Text = "Select File or all";
-            // 
-            // btnExitEdit
-            // 
-            this.btnExitEdit.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnExitEdit.Location = new System.Drawing.Point(197, 307);
-            this.btnExitEdit.Name = "btnExitEdit";
-            this.btnExitEdit.Size = new System.Drawing.Size(104, 23);
-            this.btnExitEdit.TabIndex = 12;
-            this.btnExitEdit.Text = "Exit to Macro";
-            this.btnExitEdit.UseVisualStyleBackColor = true;
-            this.btnExitEdit.Click += new System.EventHandler(this.btnExitEdit_Click);
             // 
             // btnImage
             // 

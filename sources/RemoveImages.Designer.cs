@@ -35,6 +35,8 @@
             this.dgvUsedImages = new System.Windows.Forms.DataGridView();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbUsedLF = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsedImages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -92,7 +94,7 @@
             // pbImage
             // 
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImage.Location = new System.Drawing.Point(554, 117);
+            this.pbImage.Location = new System.Drawing.Point(489, 144);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(355, 294);
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -104,17 +106,40 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Info;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(633, 42);
+            this.label2.Location = new System.Drawing.Point(563, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 48);
             this.label2.TabIndex = 7;
-            this.label2.Text = "The image you select can\r\nbe examined here. Uncheck\r\nit if yo want to save it.";
+            this.label2.Text = "The image you select can\r\nbe examined here. Uncheck\r\nit if you want to save it.";
+            // 
+            // lbUsedLF
+            // 
+            this.lbUsedLF.FormattingEnabled = true;
+            this.lbUsedLF.Location = new System.Drawing.Point(911, 144);
+            this.lbUsedLF.Name = "lbUsedLF";
+            this.lbUsedLF.Size = new System.Drawing.Size(261, 290);
+            this.lbUsedLF.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(918, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(245, 80);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "These local image files were found in\r\nthe source body. (P) indicartes the file\r\n" +
+    "is Present. (M) means it is Missing on the\r\ndisk drive.  Image files in the sign" +
+    "ature \r\nSI are not listed here.";
             // 
             // RemoveImages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 450);
+            this.ClientSize = new System.Drawing.Size(1213, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbUsedLF);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbImage);
             this.Controls.Add(this.groupBox3);
@@ -142,5 +167,7 @@
         private System.Windows.Forms.PictureBox pbImage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox lbUsedLF;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 using static MacroViewer.Utils;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
@@ -22,11 +23,39 @@ namespace MacroViewer
         private string strTempFilename = "";
         private int iWidth, iHeight;
         private List<string> DelList;
-
-        public RemoveImages()
+        private List<CBody> cBodies;
+        private List<string> sFoundcBody = new List<string>();
+        private List<int> iLocFound = new List<int>();
+        public RemoveImages(ref List<CBody> Rcb)
         {
             InitializeComponent();
             FillLocalImageTable();
+            int iLoc = 0;
+            int jLoc = 0;
+            foreach (CBody cb in Rcb)
+            {
+                List<int> positions = FindPatternPositions(cb.sBody, Utils.AssignedImageName);
+                if (positions.Count == 0) continue;
+                foreach(int i in positions)
+                {
+                    int j = cb.sBody.IndexOf(".png",i);
+                    string e = "";
+                    Debug.Assert(j >= 0);
+                    string t = cb.sBody.Substring(i,j+4-i);
+                    iLocFound.Add(iLoc);
+                    if (File.Exists(Utils.WhereExe + "/" + t))
+                        e = "(P) ";
+                    else
+                        e = "(M) ";
+                    string s = cb.File.ToString() +"-" + cb.Number + " " + e + t; 
+                    sFoundcBody.Add(s);
+                }
+                iLoc++;
+            }
+            foreach(string s in sFoundcBody)
+            {
+                lbUsedLF.Items.Add(s);
+            }
         }
 
         private List<CLocalFiles> NumLocalImageFiles()
@@ -41,6 +70,20 @@ namespace MacroViewer
                 MyImages.Add(cf);
             }
             return MyImages;
+        }
+
+        static List<int> FindPatternPositions(string text, string pattern)
+        {
+            List<int> positions = new List<int>();
+            int position = text.IndexOf(pattern,StringComparison.OrdinalIgnoreCase);
+
+            while (position != -1)
+            {
+                positions.Add(position);
+                position = text.IndexOf(pattern, position + pattern.Length, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return positions;
         }
 
         private void btnDelUnused_Click(object sender, EventArgs e)

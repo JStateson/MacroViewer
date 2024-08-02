@@ -23,6 +23,7 @@ using System.Linq.Expressions;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.AxHost;
 using static MacroViewer.main;
+using System.Windows.Media.Animation;
 
 namespace MacroViewer
 {
@@ -654,17 +655,22 @@ namespace MacroViewer
 
         }
 
-        public static bool SyntaxTest(string s)
+        public static int SyntaxTest(string s)
         {
             string strErr = Utils.BBCparse(s);
-            if (strErr == "") return false;
-            DialogResult Res1 = MessageBox.Show(strErr, "Click OK to see where errors are", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            if (Res1 == DialogResult.OK)
+            if (strErr == "") return 0;
+            DialogResult Res1 = MessageBox.Show(strErr, "Click YES to see errors or NO to ignore", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
+            if (Res1 == DialogResult.Yes)
             {
                 ShowParseLocationErrors(s);
                 MessageBox.Show(strErr, "Errors are near locations listed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 1;
             }
-            return true;
+            if (Res1 == DialogResult.No)
+            {
+                return 2;
+            }
+            return 0;
         }
 
         public static string[] RequiredMacrosRF = { "PC AIO LAPTOP support documents", "Printer support documents" };//, "HP-KB-WIKI"};
@@ -825,16 +831,21 @@ namespace MacroViewer
         {
             if (strUrl.Contains("image-id"))
             {
-                return Utils.AssembleIMG(strUrl);
+                return AssembleIMG(strUrl);
             }
 //return "<img src=\"" + strUrl + "\" border=\"2\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
 
             return "<img src=\"" + strUrl + "\"  height=\"" + Height.ToString() + "\" width=\"" + Width.ToString() + "\">";
         }
 
+        public static string AssembleImage(string strUrl, string sSizeID)
+        {
+            if (sSizeID == "default") return AssembleIMG(strUrl);
+            return "<img src=\"" + strUrl.Trim() +"/image-size/" + sSizeID + "\">";
+        }
+
         public static string AssembleIMG(string strURL)
         {
-//return "<img src=\"" + strURL.Trim() + "\" border=\"2\">";
             return "<img src=\"" + strURL.Trim() + "\">";
         }
         public static eBrowserType BrowserWanted = eBrowserType.eEdge;
@@ -1005,6 +1016,7 @@ namespace MacroViewer
         public static string RemoveOuterQuotes(string strIn)
         {
             string strTmp = strIn.Trim();
+            if (strTmp.Length == 0) return "";
             if (strTmp.Substring(0, 1) == "\"")
             {
                 strTmp = strTmp.Replace("\"", "");
@@ -1025,6 +1037,18 @@ namespace MacroViewer
             {".bmp",".dib",".rle",".jpg",".jpeg",".jpe",".jfif",".gif",".tif",".tiff",".png" };
             if (aLCase.Contains("image/serverpage"))
                 return true; // must be from HP server
+            foreach (string aImg in ImgExt)
+            {
+                if (aLCase.Contains(aImg)) return true;
+            }
+            return false;
+        }
+
+        public static bool IsUrlVideo(string aLCase)
+        {
+            string[] ImgExt = {".mp4",".avi",".mov",".wmv",".flv",".mkv",".webm",".mpeg",".mpg",".3gp",
+                ".m4v",".vob",".ts",".rm",".rmv",".ogv"};
+            if (aLCase.Contains("www.youtube.com/embed/")) return true;
             foreach (string aImg in ImgExt)
             {
                 if (aLCase.Contains(aImg)) return true;

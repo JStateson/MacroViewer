@@ -34,6 +34,7 @@ using System.Data;
 using MacroViewer.sources;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Linq.Expressions;
 
 
 namespace MacroViewer
@@ -1183,10 +1184,10 @@ namespace MacroViewer
             LoadFromTXT(TXTName);
         }
 
-        private bool FailsHTMLparse()
+        private int FailsHTMLparse()
         {
-            if (HasBadUrl()) return true;
-            if (strType == "NO" || strType == "RF") return false;
+            if (HasBadUrl()) return 1;
+            if (strType == "NO" || strType == "RF") return 0;
             return Utils.SyntaxTest(tbBody.Text);
         }
 
@@ -1210,7 +1211,10 @@ namespace MacroViewer
         }
 
         // if UpdateSelected then the macro name and body changed
-        private void SaveCurrentMacros(bool UpdateSelected)
+        // return code 0:ok to save; 1:cannot save;  3: cannot save as do not want to overwrite
+        // code of 2: html error needs to be corrected but could be ignored
+        // 
+        private int SaveCurrentMacros(bool UpdateSelected)
         {
             bool bChanged = false;
             NoEmptyMacros();
@@ -1218,11 +1222,18 @@ namespace MacroViewer
             string strOld = "";
             if (lbName.RowCount == 0)
             {
-                return; // must have wanted to add a row: sorry
+                return 1; // must have wanted to add a row: sorry
             }
-            if (FailsHTMLparse())
+            int r = FailsHTMLparse();
+            if (r > 0)
             {
-                return;
+                switch (r)
+                {
+                    case 1:
+                        return 2;
+                    case 2:
+                        break;
+                }
             }
 
             if(UpdateSelected)
@@ -1234,14 +1245,13 @@ namespace MacroViewer
             "Replaceing a macro", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (Res1 != DialogResult.Yes)
                     {
-                        return;
+                        return 3;
                     }
                 }
                 lbName.Rows[CurrentRowSelected].Cells[2].Value = strName;
                 DataTable[CurrentRowSelected].sBody = RemoveNewLine(ref bChanged, Utils.NoTrailingNL(tbBody.Text).Trim());
                 if (tbBodyChecksumB)
                     xMacroChanges.isMacroChanged(tbBodyChecksumN, TXTName, strName, DataTable[CurrentRowSelected].sBody);
-
             }
 
             if (TXTName == "HP")
@@ -1254,6 +1264,7 @@ namespace MacroViewer
                 ReSaveAsTXT(TXTName);
             }
             ShowUneditedRow(CurrentRowSelected);
+            return 0;
         }
 
         private void RemoveHTML(ref string s)
@@ -1306,7 +1317,7 @@ namespace MacroViewer
                 MessageBox.Show("You cannot save an empty macro");
                 return;
             }
-            SaveCurrentMacros(true);
+            int RtnCode = SaveCurrentMacros(true);
             MustFinishEdit(true);
         }
 
@@ -1536,7 +1547,7 @@ namespace MacroViewer
 
         private bool bPageSaved(ref bool bIgnore)
         {
-            string sMsg = "Macro was not saved\r\nEither save, cancel edits or ignore";
+            string sMsg = "Macro was not saved\r\nEither save, cancel edits or delete";
             bIgnore = false;
             if(tbMacName.Text.Trim() == "" && strType != "HP")
             {
@@ -1545,14 +1556,10 @@ namespace MacroViewer
             }
             if (bNothingToSave()) return true;
             MustFinishEdit(false);
-            DialogResult Res1 = MessageBox.Show(sMsg, "Click NO to ignore", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            if (Res1 == DialogResult.No) // problem with clearing dgv when saving current macro
-            {   // error was "operation cannot be performed in this event handler"
-                //SaveCurrentMacros();  // cannot do this as it was called from a row change
-                //return true;
-                bIgnore = true;
-                return false; // need to fix the problem of leading newlines
-            }
+            DialogResult Res1 = MessageBox.Show(sMsg, "Cannot be ignored", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            // cannot ignore as this procedure was called by an attempted change to a different macro file
+            // and I cannot handle saving during the procedure call. Wish I knew more about these calls as the
+            // error message from the internal handler was strange and was always trap when I try to save.
             return false;
         }
 
@@ -2314,7 +2321,7 @@ namespace MacroViewer
 
         private void mnuRemoveLocalImgs_Click(object sender, EventArgs e)
         {
-            RemoveImages ri = new RemoveImages();
+            RemoveImages ri = new RemoveImages(ref cBodies);
             ri.ShowDialog();
             ri.Dispose();
         }
@@ -2870,6 +2877,38 @@ namespace MacroViewer
                     bs.Position = selectedRowIndex;
                 }
             }
+        }
+
+        private string ConvertToHTML(string sClip)
+        {
+            string strBody = sClip;
+            string[] sHave = {"&amp;","&lt;", "&gt;", "&nbsp;", "%3A", "%2F","%3F", "%3D","<P>","</P>" };
+            string[] sWant = {"&","<", ">", " ", ":", "/", "?","=", "<p>", "</p>" };
+            if (strBody == "") return "";
+            string hCase, wCase;
+            for(int i = 0; i < sHave.Length; i++)
+            {
+                hCase = sHave[i].ToLower();
+                wCase = sWant[i];
+                while (strBody.Contains(hCase))
+                {
+                    strBody = strBody.Replace(hCase, wCase);
+                }
+                hCase = sHave[i].ToUpper();
+                while (strBody.Contains(hCase))
+                {
+                    strBody = strBody.Replace(hCase, wCase);
+                }
+            }
+            return strBody;
+        }
+
+        private void btnPSource_Click(object sender, EventArgs e)
+        {
+            string sClip = Clipboard.GetText();
+            string sHTML = ConvertToHTML(sClip);
+            int r = Utils.SyntaxTest(sHTML);
+            TbodyInsert(sHTML);
         }
     }
     

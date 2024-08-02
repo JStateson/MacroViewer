@@ -135,7 +135,7 @@ namespace MacroViewer
         {
             string strTemp = sLoc + "/" + dgManage.Rows[j].Cells[0].Value.ToString();
             pbImage.ImageLocation = strTemp;
-            for (int i = 0; i < 10; i++) Application.DoEvents();
+            //for (int i = 0; i < 10; i++) Application.DoEvents();
         }
 
 

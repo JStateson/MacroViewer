@@ -153,6 +153,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnPSource = new System.Windows.Forms.Button();
+            this.btnPTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
@@ -162,6 +166,7 @@
             this.gbSupp.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -1247,6 +1252,7 @@
             // 
             // gpMainEdit
             // 
+            this.gpMainEdit.Controls.Add(this.groupBox1);
             this.gpMainEdit.Controls.Add(this.btnShowURLs);
             this.gpMainEdit.Controls.Add(this.btnFromHP);
             this.gpMainEdit.Controls.Add(this.cbShowLang);
@@ -1419,6 +1425,55 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnPSource);
+            this.groupBox1.Controls.Add(this.btnPTest);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(24, 666);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(412, 100);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Parse HTML source";
+            this.groupBox1.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Info;
+            this.label6.Location = new System.Drawing.Point(11, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(190, 64);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "You want to paste source code\r\nfrom a Web Site to the edit box.\r\nClick the paste " +
+    "button and then\r\nclick the HTML syntax text";
+            // 
+            // btnPSource
+            // 
+            this.btnPSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPSource.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnPSource.Location = new System.Drawing.Point(277, 15);
+            this.btnPSource.Name = "btnPSource";
+            this.btnPSource.Size = new System.Drawing.Size(113, 32);
+            this.btnPSource.TabIndex = 10;
+            this.btnPSource.Text = "Paste Source";
+            this.toolTip1.SetToolTip(this.btnPSource, "Parses any clipboard text\r\nand converts to HTML");
+            this.btnPSource.UseVisualStyleBackColor = true;
+            this.btnPSource.Click += new System.EventHandler(this.btnPSource_Click);
+            // 
+            // btnPTest
+            // 
+            this.btnPTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPTest.Location = new System.Drawing.Point(277, 56);
+            this.btnPTest.Name = "btnPTest";
+            this.btnPTest.Size = new System.Drawing.Size(112, 32);
+            this.btnPTest.TabIndex = 11;
+            this.btnPTest.Text = "Syntax Test";
+            this.toolTip1.SetToolTip(this.btnPTest, "tests the html for syntax errors");
+            this.btnPTest.UseVisualStyleBackColor = true;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1456,6 +1511,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1585,6 +1642,10 @@
         private System.Windows.Forms.Button btnCopyEmail;
         private System.Windows.Forms.ToolStripMenuItem mnPhAlbum;
         private System.Windows.Forms.ToolStripMenuItem mnuLShowDups;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnPSource;
+        private System.Windows.Forms.Button btnPTest;
     }
 }
 

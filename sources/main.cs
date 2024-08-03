@@ -1368,7 +1368,7 @@ namespace MacroViewer
                     "For WiFi direct setup see page xx click here.<br>This is useful if there is no modem or you do not want to give someone access to your modem but you want to let them print something." + Utils.nBR(3) +
                     "Simple push button or WPS setup is described on page xx of Users Manual" + Utils.nBR(3) +
                     "Full feature software DEVICE MONTH YEAR" + Utils.nBR(3) +
-                    "Printer Reference ID1 ID2 ";
+                    "Printer Reference ID1 ID2";
                 strBody = sNB;
             }
             dgv.sBody = RemoveNewLine(ref bChanged, strBody);
@@ -1522,7 +1522,7 @@ namespace MacroViewer
        {
             //string sBody = tbBody.Text.Trim().Replace(Environment.NewLine, "<br>");
             string sBody = tbBody.Text.Replace(Environment.NewLine, "<br>");
-            return sBody;
+            return sBody.Trim();
         }
 
 

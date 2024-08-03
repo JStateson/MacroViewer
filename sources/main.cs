@@ -634,17 +634,15 @@ namespace MacroViewer
             Utils.LocalBrowser(s);
         }
 
+        //HID\VID_187C&PID_0526\7&167D68C8&1&0000
         private string sExtract(string s, string sPat)
         {
+            int e = 4;  // length of hex string
             int n = s.IndexOf(sPat);
             int m = sPat.Length;
             if (n < 0) return "";
             n += m;
-            int i = s.IndexOf("&", n);
-            if (i < 0) i = s.IndexOf("\\",n);
-            if (i < 0) return "";
-            if ((i - n) != 4) return "";
-            return s.Substring(n, 4);
+            return s.Substring(n, e);
         }
 
         // "USB\\VID_2EF4&PID_5842&MI_00\\8&1AD5FA5&0&0000";
@@ -653,10 +651,11 @@ namespace MacroViewer
         // devicehunt.com/search/type/usb/vendor/2EF4/device/5842
         private void mnuHuntDev_Click(object sender, EventArgs e)
         {
-            string s = Utils.ClipboardGetText();
+            string s = Utils.ClipboardGetText().ToUpper();
             string sType = "";
-            if (s.Contains("USB")) sType = "/usb";
-            if (s.Contains("PCI")) sType = "/pci";
+            if (s.Contains("USB")) sType = "/USB";
+            if (s.Contains("PCI")) sType = "/PCI";
+            //if (s.Contains("HID")) sType = "/HID";
             if (sType == "") return;
             string sVid = sExtract(s, "\\VID_");
             if (sVid == "") sVid = sExtract(s, "\\VEN_");
@@ -2651,6 +2650,7 @@ namespace MacroViewer
             mnuDevCol.Enabled = bTextFromClipboardMNUs;
             hPYouTubeToolStripMenuItem.Enabled = bTextFromClipboardMNUs;
             mnuHuntDev.Enabled = sL.Contains("dev") && sL.Contains("ven");
+            mnuHuntDev.Enabled |= sL.Contains("vid") && sL.Contains("pid");
         }
 
         private string GetParagraph(ref string strIn)

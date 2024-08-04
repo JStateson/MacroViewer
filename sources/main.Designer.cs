@@ -75,6 +75,8 @@
             this.btnShowURLs = new System.Windows.Forms.Button();
             this.btnSpecialWord = new System.Windows.Forms.Button();
             this.btnCopyEmail = new System.Windows.Forms.Button();
+            this.btnPSource = new System.Windows.Forms.Button();
+            this.btnPTest = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,6 +141,8 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAskQ = new System.Windows.Forms.ToolStripMenuItem();
             this.gpMainEdit = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSaveM = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -153,20 +157,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnPSource = new System.Windows.Forms.Button();
-            this.btnPTest = new System.Windows.Forms.Button();
+            this.mnuBIOSemu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lbName)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.gbManageImages.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gpMainEdit.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.gbSupp.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -743,6 +744,31 @@
             this.btnCopyEmail.UseVisualStyleBackColor = true;
             this.btnCopyEmail.Click += new System.EventHandler(this.btnCopyEmail_Click);
             // 
+            // btnPSource
+            // 
+            this.btnPSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPSource.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnPSource.Location = new System.Drawing.Point(277, 15);
+            this.btnPSource.Name = "btnPSource";
+            this.btnPSource.Size = new System.Drawing.Size(113, 32);
+            this.btnPSource.TabIndex = 10;
+            this.btnPSource.Text = "Paste Source";
+            this.toolTip1.SetToolTip(this.btnPSource, "Parses any clipboard text\r\nand converts to HTML");
+            this.btnPSource.UseVisualStyleBackColor = true;
+            this.btnPSource.Click += new System.EventHandler(this.btnPSource_Click);
+            // 
+            // btnPTest
+            // 
+            this.btnPTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPTest.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPTest.Location = new System.Drawing.Point(277, 56);
+            this.btnPTest.Name = "btnPTest";
+            this.btnPTest.Size = new System.Drawing.Size(112, 32);
+            this.btnPTest.TabIndex = 11;
+            this.btnPTest.Text = "Syntax Test";
+            this.toolTip1.SetToolTip(this.btnPTest, "tests the html for syntax errors");
+            this.btnPTest.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -986,7 +1012,8 @@
             this.utilsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuLCnT,
             this.mnuRemoveLocalImgs,
-            this.mnuLShowDups});
+            this.mnuLShowDups,
+            this.mnuBIOSemu});
             this.utilsToolStripMenuItem.Name = "utilsToolStripMenuItem";
             this.utilsToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.utilsToolStripMenuItem.Text = "Utils";
@@ -1277,6 +1304,30 @@
             this.gpMainEdit.TabStop = false;
             this.gpMainEdit.Text = "Edit Macro";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnPSource);
+            this.groupBox1.Controls.Add(this.btnPTest);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(24, 666);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(412, 100);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Parse HTML source";
+            this.groupBox1.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Info;
+            this.label6.Location = new System.Drawing.Point(11, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(171, 64);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Extracts the HREF and URL\r\nfrom a bing or google \r\npage. Select the hyperlink\r\nan" +
+    "d click Paste Source";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -1425,54 +1476,12 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // groupBox1
+            // mnuBIOSemu
             // 
-            this.groupBox1.Controls.Add(this.btnPSource);
-            this.groupBox1.Controls.Add(this.btnPTest);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(24, 666);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(412, 100);
-            this.groupBox1.TabIndex = 38;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parse HTML source";
-            this.groupBox1.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Info;
-            this.label6.Location = new System.Drawing.Point(11, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(190, 64);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "You want to paste source code\r\nfrom a Web Site to the edit box.\r\nClick the paste " +
-    "button and then\r\nclick the HTML syntax text";
-            // 
-            // btnPSource
-            // 
-            this.btnPSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPSource.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnPSource.Location = new System.Drawing.Point(277, 15);
-            this.btnPSource.Name = "btnPSource";
-            this.btnPSource.Size = new System.Drawing.Size(113, 32);
-            this.btnPSource.TabIndex = 10;
-            this.btnPSource.Text = "Paste Source";
-            this.toolTip1.SetToolTip(this.btnPSource, "Parses any clipboard text\r\nand converts to HTML");
-            this.btnPSource.UseVisualStyleBackColor = true;
-            this.btnPSource.Click += new System.EventHandler(this.btnPSource_Click);
-            // 
-            // btnPTest
-            // 
-            this.btnPTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPTest.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnPTest.Location = new System.Drawing.Point(277, 56);
-            this.btnPTest.Name = "btnPTest";
-            this.btnPTest.Size = new System.Drawing.Size(112, 32);
-            this.btnPTest.TabIndex = 11;
-            this.btnPTest.Text = "Syntax Test";
-            this.toolTip1.SetToolTip(this.btnPTest, "tests the html for syntax errors");
-            this.btnPTest.UseVisualStyleBackColor = true;
+            this.mnuBIOSemu.Name = "mnuBIOSemu";
+            this.mnuBIOSemu.Size = new System.Drawing.Size(220, 22);
+            this.mnuBIOSemu.Text = "BIOS simulator";
+            this.mnuBIOSemu.Click += new System.EventHandler(this.mnuBIOSemu_Click);
             // 
             // main
             // 
@@ -1503,6 +1512,8 @@
             this.menuStrip1.PerformLayout();
             this.gpMainEdit.ResumeLayout(false);
             this.gpMainEdit.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.gbSupp.ResumeLayout(false);
@@ -1511,8 +1522,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1646,6 +1655,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnPSource;
         private System.Windows.Forms.Button btnPTest;
+        private System.Windows.Forms.ToolStripMenuItem mnuBIOSemu;
     }
 }
 

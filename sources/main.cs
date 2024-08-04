@@ -517,7 +517,6 @@ namespace MacroViewer
             SelectFileItem("NET");
         }
 
-
         /*
          * kb notebook forum (no search)
          * https://h30434.www3.hp.com/t5/Notebooks-Knowledge-Base/tkb-p/notebooks-knowledge-base
@@ -805,38 +804,13 @@ namespace MacroViewer
             CopyBodyToClipboard();
         }
 
-        private string RemoveHeaders(string s)
-        {
-            string t = s.Replace("<!--StartFragment-->", "");
-            int i = t.IndexOf("<body>");
-            int j = t.IndexOf("</body>");
-            if(i < 0 || j < 0)return "";
-            i += 6;
-            return t.Substring(i, j - i);
-        }
+
 
         private void btnCopyFrom_Click(object sender, EventArgs e)
         {
-            TbodyInsert(GetHPclipboard());
+            TbodyInsert(Utils.GetHPclipboard());
         }
 
-        private string GetHPclipboard()
-        {
-            string strTemp = "";
-            if (Clipboard.ContainsText(TextDataFormat.Html))
-            {
-                strTemp = RemoveHeaders(Clipboard.GetText(TextDataFormat.Html));
-            }
-            else if (Clipboard.ContainsText(TextDataFormat.Text))
-            {
-                strTemp = Clipboard.GetText(TextDataFormat.Text);
-                if (!strTemp.Contains(Environment.NewLine))
-                {
-                    strTemp = strTemp.Replace("\n", Environment.NewLine);
-                }
-            }
-            return strTemp;
-        }
 
         private void PutOnNotepad(string strIn)
         {
@@ -1011,6 +985,7 @@ namespace MacroViewer
                 lbName.DataSource = bs;
                 bs.ResetBindings(false);
                 CreateLB(strFN);
+                lbName.Columns[2].ReadOnly = true;
                 lbName.RowEnter += lbName_RowEnter;
                 sr.Close();
                 if (DataTable.Count > 0 && strFN == "HP")
@@ -2742,7 +2717,7 @@ namespace MacroViewer
 
         private void btnFromHP_Click(object sender, EventArgs e)
         {
-            string s = GetHPclipboard().Trim();
+            string s = Utils.GetHPclipboard().Trim();
             CleanSB(ref s);
             int n = RemoveStylesClasses("style=\"",ref s);
             n += RemoveStylesClasses("class=\"", ref s);
@@ -2879,6 +2854,14 @@ namespace MacroViewer
             }
         }
 
+        /*
+
+        <a jsname="UWckNb" href="http://h10032.www1.hp.com/ctg/Manual/c06534544.pdf" data-ved="2ahUKEwiOmrfOmduHAxWkN0QIHdlDB-gQFnoECBgQAQ" ping="/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=http://h10032.www1.hp.com/ctg/Manual/c06534544.pdf&amp;ved=2ahUKEwiOmrfOmduHAxWkN0QIHdlDB-gQFnoECBgQAQ" ><h3 >Interactive BIOS simulator HP ProBook 450G6</h3></a>
+
+
+        Let me know if you need more help
+        */
+
         private string ConvertToHTML(string sClip)
         {
             string strBody = sClip;
@@ -2909,6 +2892,13 @@ namespace MacroViewer
             string sHTML = ConvertToHTML(sClip);
             int r = Utils.SyntaxTest(sHTML);
             TbodyInsert(sHTML);
+        }
+
+        private void mnuBIOSemu_Click(object sender, EventArgs e)
+        {
+            BiosEmuSim bes = new  BiosEmuSim();
+            bes.ShowDialog();
+            bes.Dispose();
         }
     }
     

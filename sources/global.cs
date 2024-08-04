@@ -491,6 +491,34 @@ namespace MacroViewer
             return n;
         }
 
+        private static string RemoveHeaders(string s)
+        {
+            string t = s.Replace("<!--StartFragment-->", "");
+            int i = t.IndexOf("<body>");
+            int j = t.IndexOf("</body>");
+            if (i < 0 || j < 0) return "";
+            i += 6;
+            return t.Substring(i, j - i);
+        }
+
+        public static string GetHPclipboard()
+        {
+            string strTemp = "";
+            if (Clipboard.ContainsText(TextDataFormat.Html))
+            {
+                strTemp = RemoveHeaders(Clipboard.GetText(TextDataFormat.Html));
+            }
+            else if (Clipboard.ContainsText(TextDataFormat.Text))
+            {
+                strTemp = Clipboard.GetText(TextDataFormat.Text);
+                if (!strTemp.Contains(Environment.NewLine))
+                {
+                    strTemp = strTemp.Replace("\n", Environment.NewLine);
+                }
+            }
+            return strTemp;
+        }
+
         public static string AddLanguageOption(string sIN)
         {
             if (sIN.IndexOf(sPossibleLanguageOption[0] ) != -1)

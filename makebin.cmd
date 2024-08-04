@@ -7,7 +7,7 @@ if %IS_64% == x64 (
 set PGM=%2%364.exe
 xcopy %2*agil*.dll %1temp
 xcopy %2*macros.txt %1temp
-xcopy %2BiosSimulator.txt %1temp
+xcopy %2BiosSimulators.txt %1temp
 xcopy %2LOCALIMAGEFILE-*.png %1temp
 xcopy /Y /I %2*macros.txt %2..\Debug
 replace /U /S %2..\Release\*.rtf %1sources

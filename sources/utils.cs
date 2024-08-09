@@ -690,17 +690,10 @@ namespace MacroViewer
             FillTable();
         }
 
-        // find number of rows
-        private int MakeDivisible(int nItems,int nColumnsWanted)
-        {
-            int remainder = nItems % nColumnsWanted;
-            if (remainder == 0) return nItems;
-            return nItems + (nColumnsWanted - remainder);
-        }
 
         private void SetRowsFromColumns(int nItems, int nColumnsWanted)
         {
-            int nRows = MakeDivisible(nItems, nColumnsWanted) / nColumnsWanted;
+            int nRows = Utils.MakeDivisible(nItems, nColumnsWanted) / nColumnsWanted;
             Debug.Assert(nRows > 0,"Problem with bean counter");
             tbRows.Text = nRows.ToString();
             tbCols.Text = nColumnsWanted.ToString();

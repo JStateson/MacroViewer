@@ -2862,34 +2862,11 @@ namespace MacroViewer
         Let me know if you need more help
         */
 
-        private string ConvertToHTML(string sClip)
-        {
-            string strBody = sClip;
-            string[] sHave = {"&amp;","&lt;", "&gt;", "&nbsp;", "%3A", "%2F","%3F", "%3D","<P>","</P>" };
-            string[] sWant = {"&","<", ">", " ", ":", "/", "?","=", "<p>", "</p>" };
-            if (strBody == "") return "";
-            string hCase, wCase;
-            for(int i = 0; i < sHave.Length; i++)
-            {
-                hCase = sHave[i].ToLower();
-                wCase = sWant[i];
-                while (strBody.Contains(hCase))
-                {
-                    strBody = strBody.Replace(hCase, wCase);
-                }
-                hCase = sHave[i].ToUpper();
-                while (strBody.Contains(hCase))
-                {
-                    strBody = strBody.Replace(hCase, wCase);
-                }
-            }
-            return strBody;
-        }
 
         private void btnPSource_Click(object sender, EventArgs e)
         {
             string sClip = Clipboard.GetText();
-            string sHTML = ConvertToHTML(sClip);
+            string sHTML = Utils.ConvertToHTML(sClip);
             int r = Utils.SyntaxTest(sHTML);
             TbodyInsert(sHTML);
         }

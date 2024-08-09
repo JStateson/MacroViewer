@@ -501,6 +501,41 @@ namespace MacroViewer
             return t.Substring(i, j - i);
         }
 
+        public static string ConvertToHTML(string sClip)
+        {
+            string strBody = sClip;
+            while(strBody.Contains("%25"))
+                strBody = strBody.Replace("%25", "%");
+
+            string[] sHave = { "%26","&amp;", "&lt;", "&gt;", "&nbsp;", "%3A", "%2F", "%3F", "%3D", "<P>", "</P>" };
+            string[] sWant = { "&"  ,"&"    , "<"   , ">"   , " "     , ":"  , "/"  , "?"  , "="  , "<p>", "</p>" };
+            if (strBody == "") return "";
+            string hCase, wCase;
+            for (int i = 0; i < sHave.Length; i++)
+            {
+                hCase = sHave[i].ToLower();
+                wCase = sWant[i];
+                while (strBody.Contains(hCase))
+                {
+                    strBody = strBody.Replace(hCase, wCase);
+                }
+                hCase = sHave[i].ToUpper();
+                while (strBody.Contains(hCase))
+                {
+                    strBody = strBody.Replace(hCase, wCase);
+                }
+            }
+            return strBody;
+        }
+
+        // find number of rows
+        public static int MakeDivisible(int nItems, int nColumnsWanted)
+        {
+            int remainder = nItems % nColumnsWanted;
+            if (remainder == 0) return nItems;
+            return nItems + (nColumnsWanted - remainder);
+        }
+
         public static string GetHPclipboard()
         {
             string strTemp = "";
@@ -894,7 +929,10 @@ namespace MacroViewer
                     break;
             }
         }
-
+        public static void RunFirefox(string strUrl)
+        {
+                    Process.Start("firefox.exe", "-new-window " + strUrl);
+        }
         public static void ShowMyPhotoAlbum()
         {
             string UserID = Utils.VolunteerUserID;
